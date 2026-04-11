@@ -1,9 +1,10 @@
 {
   "name": "projectc-functions",
   "version": "1.0.0",
-  "description": "Netlify serverless functions for Project C (RSS proxy + LizBot)",
+  "description": "Netlify serverless functions for Project C (RSS proxy, LizBot, community application flow)",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
-    "@supabase/supabase-js": "^2.47.0"
+    "@supabase/supabase-js": "^2.47.0",
+    "stripe": "^17.5.0"
   }
 }

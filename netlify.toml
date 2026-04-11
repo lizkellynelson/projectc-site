@@ -34,11 +34,7 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
 
 # Redirect pages that still live on Squarespace (temporary until rebuilt)
-[[redirects]]
-  from = "/community"
-  to = "https://chrysalis-orchid-ne7e.squarespace.com/community"
-  status = 302
-
+# /community now served from community.html on this site — redirect removed
 [[redirects]]
   from = "/going-solo"
   to = "https://chrysalis-orchid-ne7e.squarespace.com/going-solo"

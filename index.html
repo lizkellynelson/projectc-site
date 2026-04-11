@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project C — The Home of Creator Journalism</title>
+<meta name="description" content="Project C is the research hub, community, and strategic home for journalists building sustainable, audience-driven media ventures. Founded by Liz Kelly Nelson.">
+<meta name="keywords" content="creator journalism, independent journalism, Project C, Liz Kelly Nelson, newsletter, journalism atlas, media, creator economy">
+<meta name="author" content="Liz Kelly Nelson">
+<!-- Open Graph / Social -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://projectc.biz/">
+<meta property="og:title" content="Project C — The Home of Creator Journalism">
+<meta property="og:description" content="Research, community, education, and tools for journalists building sustainable independent media ventures. 200+ community members. 1,100+ creator journalists mapped.">
+<meta property="og:image" content="https://projectc.biz/Project-C_Logo_color.png">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Project C — The Home of Creator Journalism">
+<meta name="twitter:description" content="Research, community, education, and tools for journalists building sustainable independent media ventures.">
+<meta name="twitter:image" content="https://projectc.biz/Project-C_Logo_color.png">
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="Project-C_Logo_color.png">
+<link rel="apple-touch-icon" href="Project-C_Logo_color.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #F4F2EA;
+  --coral: #FE6B41;
+  --pink: #E09AC2;
+  --brown: #360A05;
+  --deep: #200603;
+  --cream-dark: #EBE8DE;
+  --serif: 'Anton', 'Impact', sans-serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--sans);
+  background: var(--cream);
+  color: var(--brown);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+/* GRADIENT BAR */
+.gradient-bar {
+  height: 4px;
+  background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral), var(--pink));
+  background-size: 300% 100%;
+  animation: gradientSlide 8s ease infinite;
+}
+@keyframes gradientSlide {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 4px; left: 0; right: 0; z-index: 1000;
+  background: rgba(244, 242, 234, 0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(54, 10, 5, 0.06);
+  transition: all 0.3s ease;
+}
+nav.scrolled { box-shadow: 0 4px 30px rgba(32, 6, 3, 0.08); }
+.nav-inner {
+  max-width: 1400px; margin: 0 auto; padding: 0 2rem;
+  display: flex; align-items: center; justify-content: space-between; height: 72px;
+}
+.nav-logo { text-decoration: none; display: flex; align-items: center; }
+.nav-logo .logo-img { height: 48px; width: auto; }
+footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+.nav-links a {
+  color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500;
+  padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease;
+}
+.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
+.nav-cta {
+  background: var(--coral) !important; color: white !important;
+  padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important;
+}
+.nav-cta:hover { background: #e55e38 !important; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(254,107,65,0.3); }
+.nav-member { border: 1.5px solid var(--brown) !important; border-radius: 100px !important; padding: 0.5rem 1.25rem !important; margin-left: 0.25rem; }
+.nav-member:hover { background: var(--brown) !important; color: var(--cream) !important; }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--brown); margin: 5px 0; transition: 0.3s; }
+
+/* HERO */
+.hero { padding: 10rem 0 6rem; position: relative; overflow: hidden; min-height: 90vh; display: flex; align-items: center; }
+.hero::before { content: ''; position: absolute; top: -20%; right: -15%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(224,154,194,0.15) 0%, transparent 70%); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(254,107,65,0.08); border: 1px solid rgba(254,107,65,0.15);
+  padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600;
+  color: var(--coral); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem;
+}
+.hero-badge .pulse { width: 8px; height: 8px; background: var(--coral); border-radius: 50%; animation: pulse 2s ease infinite; }
+@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.5); } }
+.hero h1 {
+  font-family: var(--serif); font-size: clamp(2.8rem,5.5vw,4.5rem);
+  line-height: 1.05; color: var(--deep); letter-spacing: 0.02em; margin-bottom: 1.5rem; text-transform: uppercase;
+}
+.hero h1 em { font-style: normal; color: var(--coral); }
+.hero-sub { font-size: 1.15rem; color: rgba(54,10,5,0.7); line-height: 1.7; max-width: 520px; margin-bottom: 2.5rem; }
+.hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: white;
+  padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+  transition: all 0.25s ease; border: none; cursor: pointer;
+}
+.btn-primary:hover { background: #e55e38; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--brown);
+  padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
+  border: 1.5px solid rgba(54,10,5,0.2); transition: all 0.25s ease; cursor: pointer;
+}
+.btn-secondary:hover { border-color: var(--brown); background: var(--brown); color: var(--cream); }
+.hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(54,10,5,0.08); }
+.hero-stat { text-decoration: none; color: inherit; }
+.hero-stat .number { font-family: var(--serif); font-size: 2rem; color: var(--deep); display: block; line-height: 1; text-transform: uppercase; }
+.hero-stat .label { font-size: 0.8rem; color: rgba(54,10,5,0.5); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.35rem; }
+.hero-stat:hover .label { color: var(--coral); }
+
+/* Hero visual — animated face gallery */
+.hero-visual { position: relative; }
+.hero-gallery {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem;
+  position: relative; border-radius: 24px; overflow: hidden;
+  padding: 1.5rem; background: var(--deep);
+  box-shadow: 0 25px 80px rgba(32,6,3,0.15), 0 4px 20px rgba(32,6,3,0.08);
+}
+.hero-gallery::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--coral), var(--pink)); z-index: 2; }
+.hero-face {
+  aspect-ratio: 1; border-radius: 14px; overflow: hidden; position: relative;
+  animation: faceFade 3s ease-in-out infinite alternate;
+}
+.hero-face img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.hero-face:hover img { transform: scale(1.08); }
+/* Staggered subtle animation */
+.hero-face:nth-child(1) { animation-delay: 0s; }
+.hero-face:nth-child(2) { animation-delay: 0.3s; }
+.hero-face:nth-child(3) { animation-delay: 0.6s; }
+.hero-face:nth-child(4) { animation-delay: 0.9s; }
+.hero-face:nth-child(5) { animation-delay: 1.2s; }
+.hero-face:nth-child(6) { animation-delay: 1.5s; }
+.hero-face:nth-child(7) { animation-delay: 1.8s; }
+.hero-face:nth-child(8) { animation-delay: 2.1s; }
+.hero-face:nth-child(9) { animation-delay: 0.4s; }
+.hero-face:nth-child(10) { animation-delay: 0.7s; }
+.hero-face:nth-child(11) { animation-delay: 1.0s; }
+.hero-face:nth-child(12) { animation-delay: 1.3s; }
+/* Crossfade animation for cycling */
+.hero-face .face-next {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center top; opacity: 0;
+  transition: opacity 1s ease;
+}
+.hero-face .face-next.active { opacity: 1; }
+.hero-gallery-label {
+  grid-column: 1 / -1; text-align: center; padding: 0.75rem 0 0.25rem;
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: rgba(244,242,234,0.4); font-weight: 600;
+}
+.hero-gallery-label a { color: var(--coral); text-decoration: none; font-weight: 700; }
+.hero-gallery-label a:hover { text-decoration: underline; }
+.float-element {
+  position: absolute; background: white; border-radius: 16px; padding: 1rem 1.25rem;
+  box-shadow: 0 8px 30px rgba(32,6,3,0.1); font-size: 0.85rem; font-weight: 500;
+  display: flex; align-items: center; gap: 0.5rem; animation: float 6s ease-in-out infinite; z-index: 2;
+}
+.float-element.top-right { top: -20px; right: -30px; z-index: 5; }
+.float-element.bottom-left { bottom: -15px; left: -25px; animation-delay: 3s; z-index: 5; }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.float-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.float-icon.coral { background: rgba(254,107,65,0.1); }
+.float-icon.pink { background: rgba(224,154,194,0.15); }
+.tag { font-size: 0.75rem; font-weight: 500; padding: 0.3rem 0.75rem; border-radius: 100px; background: rgba(254,107,65,0.08); color: var(--coral); }
+.tag.pink { background: rgba(224,154,194,0.15); color: #b5699a; }
+
+/* SOCIAL PROOF */
+.social-proof { padding: 1.5rem 0; border-top: 1px solid rgba(54,10,5,0.06); border-bottom: 1px solid rgba(54,10,5,0.06); }
+.social-proof-inner { text-align: center; }
+.social-proof p { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.35); margin-bottom: 1.5rem; font-weight: 600; }
+.logo-row { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; opacity: 0.55; }
+.logo-row span { font-size: 1rem; font-weight: 600; color: var(--brown); white-space: nowrap; }
+
+/* SHARED */
+.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--coral); }
+.section-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,3rem); line-height: 1.05; color: var(--deep); letter-spacing: 0.02em; margin-bottom: 1.25rem; text-transform: uppercase; }
+.section-desc { font-size: 1.05rem; color: rgba(54,10,5,0.65); line-height: 1.7; margin-bottom: 2rem; max-width: 480px; }
+.link-arrow { font-size: 0.8rem; font-weight: 600; color: var(--coral); display: inline-flex; align-items: center; gap: 0.35rem; transition: gap 0.2s ease; }
+
+/* NEWSLETTER */
+.section-newsletter { padding: 7rem 0; }
+.newsletter-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.nl-card {
+  background: white; border-radius: 16px; padding: 1.75rem; box-shadow: 0 4px 20px rgba(32,6,3,0.06);
+  margin-bottom: 1rem; transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer; border-left: 3px solid transparent;
+  overflow: hidden;
+}
+.nl-card img, .nl-card iframe, .nl-card figure, .nl-card picture, .nl-card video, .nl-card svg, .nl-card source { display: none !important; max-height: 0 !important; max-width: 0 !important; overflow: hidden !important; opacity: 0 !important; position: absolute !important; pointer-events: none !important; }
+.newsletter-stack img, .newsletter-stack iframe, .newsletter-stack figure, .newsletter-stack picture { display: none !important; max-height: 0 !important; opacity: 0 !important; }
+.nl-card * { background-image: none !important; }
+.nl-card:hover { transform: translateX(6px); box-shadow: 0 8px 30px rgba(32,6,3,0.1); border-left-color: var(--coral); }
+.nl-card-date { font-size: 0.75rem; color: rgba(54,10,5,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; font-weight: 500; }
+.nl-card h4 { font-size: 1.05rem; color: var(--deep); margin-bottom: 0.5rem; line-height: 1.3; }
+.nl-card p { font-size: 0.85rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
+.email-form { display: flex; gap: 0.75rem; max-width: 460px; }
+.email-form input { flex: 1; padding: 0.9rem 1.25rem; border: 1.5px solid rgba(54,10,5,0.12); border-radius: 100px; font-family: var(--sans); font-size: 0.9rem; background: white; color: var(--brown); outline: none; }
+.email-form input:focus { border-color: var(--coral); }
+.email-form input::placeholder { color: rgba(54,10,5,0.35); }
+.email-form button { white-space: nowrap; }
+
+/* PILLARS */
+.section-pillars { padding: 7rem 0; background: var(--deep); color: var(--cream); position: relative; overflow: hidden; }
+.section-pillars::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral)); }
+.section-pillars .section-eyebrow { color: var(--coral); }
+.section-pillars .section-eyebrow::before { background: var(--coral); }
+.section-pillars .section-title { color: var(--cream); }
+.section-pillars .section-desc { color: rgba(244,242,234,0.6); }
+.pillars-header { text-align: center; max-width: 640px; margin: 0 auto 4rem; }
+.pillars-header .section-eyebrow { justify-content: center; }
+.pillars-header .section-desc { margin: 0 auto; }
+.pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.pillar-card {
+  background: rgba(244,242,234,0.07); border: 1.5px solid rgba(244,242,234,0.15); border-radius: 20px;
+  padding: 2rem; transition: all 0.3s ease; text-decoration: none; color: var(--cream); display: block;
+  position: relative; overflow: hidden;
+}
+.pillar-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--coral); transform: scaleX(0); transition: transform 0.3s ease; }
+.pillar-card:hover { background: rgba(244,242,234,0.12); border-color: rgba(244,242,234,0.25); transform: translateY(-4px); }
+.pillar-card:hover::after { transform: scaleX(1); }
+.pillar-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.5rem; }
+.pillar-icon.coral { background: linear-gradient(135deg, var(--coral), #ff9a76); }
+.pillar-icon.pink { background: linear-gradient(135deg, var(--pink), #c77dab); }
+.pillar-card h3 { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 0.75rem; line-height: 1.1; text-transform: uppercase; letter-spacing: 0.03em; }
+.pillar-card p { font-size: 0.85rem; color: rgba(244,242,234,0.55); line-height: 1.6; margin-bottom: 1.25rem; }
+.pillar-link { font-size: 0.8rem; font-weight: 600; color: var(--coral); display: flex; align-items: center; gap: 0.35rem; transition: gap 0.2s ease; }
+.pillar-card:hover .pillar-link { gap: 0.6rem; }
+
+/* TOP 50 */
+.section-top50 { padding: 5rem 0; }
+.top50-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.top50-visual { position: relative; }
+.top50-mosaic { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.5rem; }
+.mosaic-cell { aspect-ratio: 1; border-radius: 12px; transition: transform 0.3s ease; overflow: hidden; position: relative; }
+.mosaic-cell:hover { transform: scale(1.08); z-index: 2; }
+.mosaic-cell img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.mosaic-cell.grad-coral { background: linear-gradient(135deg, var(--coral), #ff9a76); }
+.mosaic-cell.grad-pink { background: linear-gradient(135deg, var(--pink), #c77dab); }
+.mosaic-cell.grad-deep { background: linear-gradient(135deg, var(--deep), #5a2a20); }
+.top50-badge-large {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  background: white; border-radius: 24px; padding: 2rem; text-align: center;
+  box-shadow: 0 20px 60px rgba(32,6,3,0.15); z-index: 3;
+}
+.top50-badge-large .number { font-family: var(--serif); font-size: 3.5rem; color: var(--coral); line-height: 1; }
+.top50-badge-large .text { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(54,10,5,0.5); font-weight: 700; margin-top: 0.25rem; }
+.top50-content .section-desc { max-width: 500px; }
+.top50-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(54,10,5,0.08); }
+.top50-stat { text-align: center; }
+.top50-stat .val { font-family: var(--serif); font-size: 1.6rem; color: var(--deep); display: block; }
+.top50-stat .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(54,10,5,0.45); margin-top: 0.2rem; font-weight: 500; }
+
+/* RESEARCH / ATLAS */
+.section-research { padding: 7rem 0; background: white; }
+.research-header { text-align: center; max-width: 640px; margin: 0 auto 4rem; }
+.research-header .section-eyebrow { justify-content: center; }
+.research-header .section-desc { margin: 0 auto; }
+.atlas-hero { display: grid; grid-template-columns: 1fr 1fr; background: var(--deep); border-radius: 24px; overflow: hidden; margin-bottom: 3rem; min-height: 340px; }
+.atlas-hero-content { padding: 3.5rem; display: flex; flex-direction: column; justify-content: center; color: var(--cream); }
+.atlas-hero-content .section-eyebrow { color: var(--coral); }
+.atlas-hero-content .section-eyebrow::before { background: var(--coral); }
+.atlas-logo { width: 280px; height: auto; margin-bottom: 1.5rem; }
+.atlas-hero-content h2 { font-family: var(--serif); font-size: clamp(1.8rem,2.5vw,2.4rem); color: var(--cream); line-height: 1.1; margin-bottom: 1rem; text-transform: uppercase; }
+.atlas-hero-content h2 em { color: var(--coral); font-style: normal; }
+.atlas-hero-content p { font-size: 0.95rem; color: rgba(244,242,234,0.6); line-height: 1.7; margin-bottom: 1.75rem; max-width: 420px; }
+.atlas-stats { display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(244,242,234,0.1); }
+.atlas-stat-val { font-family: var(--serif); font-size: 1.6rem; color: var(--coral); display: block; line-height: 1; text-transform: uppercase; }
+.atlas-stat-lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(244,242,234,0.4); margin-top: 0.3rem; display: block; font-weight: 500; }
+.atlas-hero-visual { background: linear-gradient(135deg, #4a1a10 0%, var(--deep) 100%); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.atlas-hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.9; z-index: 1; transition: opacity 0.4s ease; }
+.atlas-hero-visual img:hover { opacity: 1; }
+.atlas-hero-visual .atlas-placeholder { color: rgba(244,242,234,0.15); font-size: 5rem; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.atlas-hero-visual .atlas-placeholder span { font-size: 0.8rem; color: rgba(244,242,234,0.3); font-family: var(--sans); }
+.partnerships-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.4); font-weight: 700; text-align: center; margin-bottom: 1.5rem; }
+.research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.research-card { border: 1px solid rgba(54,10,5,0.08); border-radius: 16px; padding: 1.75rem; transition: all 0.3s ease; text-decoration: none; color: var(--brown); display: block; position: relative; }
+.research-card:hover { border-color: rgba(254,107,65,0.2); box-shadow: 0 8px 30px rgba(32,6,3,0.08); transform: translateY(-3px); }
+.rc-status { position: absolute; top: 1.25rem; right: 1.25rem; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.25rem 0.6rem; border-radius: 100px; }
+.rc-status.released { background: rgba(46,160,67,0.08); color: #2ea043; }
+.rc-status.new { background: rgba(254,107,65,0.1); color: var(--coral); }
+.rc-status.wip { background: rgba(224,154,194,0.12); color: #b5699a; }
+.rc-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1.25rem; background: rgba(254,107,65,0.08); }
+.rc-icon.pink { background: rgba(224,154,194,0.12); }
+.rc-icon.deep { background: rgba(54,10,5,0.06); }
+.research-card h3 { font-family: var(--sans); font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.3; }
+.research-card p { font-size: 0.82rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
+
+/* COMMUNITY */
+.section-community { padding: 7rem 0; background: var(--deep); color: var(--cream); position: relative; overflow: hidden; }
+.section-community .section-eyebrow { color: var(--coral); }
+.section-community .section-eyebrow::before { background: var(--coral); }
+.section-community .section-title { color: var(--cream); }
+.section-community .section-desc { color: rgba(244,242,234,0.6); }
+.section-community .community-feature h4 { color: var(--cream); }
+.section-community .community-feature p { color: rgba(244,242,234,0.5); }
+.section-community .community-feature:hover { background: rgba(244,242,234,0.04); }
+.section-community .cf-icon { background: rgba(254,107,65,0.12); }
+.section-community .cf-icon.pink { background: rgba(224,154,194,0.12); }
+.section-community .btn-primary { background: var(--coral); }
+.community-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.community-features { display: grid; gap: 1.25rem; }
+.community-feature { display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem; border-radius: 16px; transition: background 0.2s; }
+.community-feature:hover { background: rgba(254,107,65,0.04); }
+.cf-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; background: rgba(254,107,65,0.08); }
+.cf-icon.pink { background: rgba(224,154,194,0.12); }
+.community-feature h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; color: var(--deep); }
+.community-feature p { font-size: 0.85rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
+.community-visual { position: relative; }
+.community-card-main { background: rgba(244,242,234,0.06); border: 1px solid rgba(244,242,234,0.08); color: var(--cream); border-radius: 24px; padding: 3rem; position: relative; overflow: hidden; }
+.community-card-main::before { content: '\201C'; font-family: var(--serif); font-size: 8rem; position: absolute; top: -0.5rem; left: 1.5rem; color: rgba(254,107,65,0.15); line-height: 1; }
+.community-card-main blockquote { font-family: var(--sans); font-size: 1.2rem; line-height: 1.5; margin-bottom: 1.5rem; position: relative; z-index: 1; font-style: italic; font-weight: 300; }
+.community-card-main .attribution { font-family: var(--sans); font-size: 0.85rem; color: rgba(244,242,234,0.5); position: relative; z-index: 1; }
+.community-count { position: absolute; bottom: -15px; right: 30px; background: var(--coral); color: white; border-radius: 16px; padding: 1.25rem 1.75rem; box-shadow: 0 8px 30px rgba(254,107,65,0.3); text-align: center; }
+.community-count .val { font-family: var(--serif); font-size: 1.8rem; display: block; line-height: 1; }
+.community-count .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85; margin-top: 0.2rem; font-weight: 500; }
+
+/* GOING SOLO */
+.section-goingsolo { padding: 5rem 0; background: linear-gradient(180deg, var(--cream) 0%, white 100%); }
+.goingsolo-card { background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(32,6,3,0.06); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
+.goingsolo-content { padding: 4rem; display: flex; flex-direction: column; justify-content: center; }
+.goingsolo-visual { background: linear-gradient(135deg, var(--coral) 0%, var(--pink) 60%, #c77dab 100%); padding: 4rem; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+.gs-week-list { position: relative; z-index: 1; width: 100%; max-width: 280px; }
+.gs-week { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0; color: white; font-size: 0.85rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.12); text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.gs-week:last-child { border: none; }
+.gs-week-num { width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; flex-shrink: 0; }
+
+/* MEMBERS */
+.section-members { padding: 7rem 0; background: var(--deep); color: var(--cream); position: relative; overflow: hidden; }
+.members-header { text-align: center; max-width: 640px; margin: 0 auto 4rem; }
+.members-header .section-title { color: var(--cream); }
+.members-header .section-desc { color: rgba(244,242,234,0.55); margin: 0 auto; }
+.members-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.member-tool-card { background: rgba(244,242,234,0.04); border: 1px solid rgba(244,242,234,0.08); border-radius: 20px; padding: 2rem; transition: all 0.3s ease; position: relative; }
+.member-tool-card:hover { background: rgba(244,242,234,0.08); border-color: rgba(244,242,234,0.15); transform: translateY(-4px); }
+.member-tool-card .lock-badge { position: absolute; top: 1.25rem; right: 1.25rem; font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--pink); display: flex; align-items: center; gap: 0.3rem; }
+.mt-icon { width: 48px; height: 48px; border-radius: 14px; background: rgba(254,107,65,0.12); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 1.25rem; }
+.mt-icon.pink { background: rgba(224,154,194,0.12); }
+.member-tool-card h3 { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--cream); text-transform: uppercase; }
+.member-tool-card p { font-size: 0.85rem; color: rgba(244,242,234,0.5); line-height: 1.6; }
+
+/* ABOUT */
+.section-about { padding: 7rem 0; }
+.about-grid { display: grid; grid-template-columns: 400px 1fr; gap: 4rem; align-items: center; }
+.about-photo { aspect-ratio: 3/4; border-radius: 24px; background: var(--cream-dark); position: relative; overflow: hidden; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.about-badges { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+.about-badge { font-size: 0.75rem; font-weight: 500; padding: 0.4rem 0.9rem; border-radius: 100px; background: rgba(254,107,65,0.06); border: 1px solid rgba(254,107,65,0.12); color: var(--coral); }
+.about-roles { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(54,10,5,0.08); }
+.about-role { display: flex; align-items: center; gap: 0.75rem; }
+.about-role-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--coral); flex-shrink: 0; }
+.about-role-dot.pink { background: var(--pink); }
+.about-role span { font-size: 0.8rem; color: rgba(54,10,5,0.6); line-height: 1.4; }
+
+/* PRESS */
+.section-press { padding: 5rem 0; background: var(--cream-dark); }
+.press-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.press-card { background: white; border-radius: 16px; padding: 1.75rem; transition: all 0.3s ease; text-decoration: none; color: var(--brown); display: block; }
+.press-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(32,6,3,0.08); }
+.press-source { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--coral); font-weight: 700; margin-bottom: 0.75rem; }
+.press-card h4 { font-family: var(--sans); font-size: 0.95rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.75rem; }
+.press-card p { font-size: 0.8rem; color: rgba(54,10,5,0.5); line-height: 1.5; }
+
+/* CTA */
+.section-cta { padding: 8rem 0; text-align: center; position: relative; overflow: hidden; }
+.section-cta::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 800px; height: 800px; background: radial-gradient(circle, rgba(254,107,65,0.06) 0%, transparent 60%); }
+.cta-content { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+.cta-content .section-desc { max-width: 500px; margin: 0 auto 2.5rem; }
+.cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* FOOTER */
+footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 2rem; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand .nav-logo { color: var(--cream); margin-bottom: 1rem; }
+.footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
+.footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
+.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.5); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
+.footer-col a:hover { color: var(--coral); }
+.footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+.footer-social { display: flex; gap: 1rem; }
+.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-social a:hover { color: var(--coral); }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+  .atlas-hero { grid-template-columns: 1fr; }
+  .atlas-hero-visual { min-height: 160px; }
+  .research-grid { grid-template-columns: repeat(2, 1fr); }
+  .members-grid { grid-template-columns: repeat(2, 1fr); }
+  .press-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 300px 1fr; gap: 3rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .lizbot-grid { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 768px) {
+  .hero { padding: 8rem 0 4rem; min-height: auto; }
+  .hero-grid, .newsletter-grid, .pillars-grid, .top50-grid, .community-grid, .lizbot-grid { grid-template-columns: 1fr !important; }
+  .goingsolo-card { grid-template-columns: 1fr; }
+  .goingsolo-visual { min-height: 300px; }
+  .atlas-hero { grid-template-columns: 1fr; }
+  .atlas-hero-visual { min-height: 140px; }
+  .research-grid, .members-grid, .press-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about-photo { max-height: 400px; }
+  .about-roles { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-stats { flex-direction: column; gap: 1.5rem; }
+  .nav-links { display: none; }
+  .nav-toggle { display: block; }
+  .email-form { flex-direction: column; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .float-element { display: none; }
+  .top50-visual { order: -1; }
+  .community-visual { order: -1; }
+  .lizbot-grid { gap: 2rem; display: grid; grid-template-columns: 1fr !important; }
+  .lizbot-chat { width: 100%; min-width: 0; }
+  .lizbot-chat-body { height: 350px; }
+  .lizbot-chat-header { padding: 1rem 1.25rem; }
+  .lizbot-suggestions { gap: 0.4rem; }
+  .lizbot-suggestion { font-size: 0.7rem; padding: 0.4rem 0.75rem; }
+  .section-top50, .section-community, .section-goingsolo, .section-lizbot { padding: 4rem 0; }
+  .atlas-stats { gap: 1rem; }
+  .atlas-logo { width: 200px; }
+  .hero-gallery { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; padding: 1rem; }
+  .hero-face:nth-child(n+10) { display: none; }
+}
+
+/* LIZBOT / ASK LIZ */
+.section-lizbot { padding: 7rem 0; background: white; }
+.lizbot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.lizbot-chat {
+  background: var(--cream); border-radius: 24px; overflow: hidden;
+  box-shadow: 0 25px 80px rgba(32,6,3,0.08), 0 4px 20px rgba(32,6,3,0.04);
+  border: 1px solid rgba(54,10,5,0.06);
+}
+.lizbot-chat-header {
+  background: var(--deep); color: var(--cream); padding: 1.25rem 1.75rem;
+  display: flex; align-items: center; gap: 0.75rem;
+}
+.lizbot-avatar {
+  width: 40px; height: 40px; border-radius: 50%; overflow: hidden; flex-shrink: 0;
+  border: 2px solid var(--coral);
+}
+.lizbot-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.lizbot-chat-header .bot-name { font-weight: 600; font-size: 0.95rem; }
+.lizbot-chat-header .bot-status { font-size: 0.75rem; color: rgba(244,242,234,0.5); display: flex; align-items: center; gap: 0.35rem; }
+.lizbot-chat-header .bot-status .online-dot { width: 6px; height: 6px; border-radius: 50%; background: #2ea043; }
+.lizbot-chat-body { padding: 1.5rem; height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; }
+.chat-msg {
+  max-width: 85%; padding: 1rem 1.25rem; border-radius: 18px; font-size: 0.88rem; line-height: 1.6;
+  animation: chatFadeIn 0.4s ease forwards; opacity: 0;
+}
+.chat-msg.bot {
+  background: white; color: var(--brown); align-self: flex-start;
+  border-bottom-left-radius: 6px; box-shadow: 0 2px 8px rgba(32,6,3,0.04);
+}
+.chat-msg.user {
+  background: var(--coral); color: white; align-self: flex-end;
+  border-bottom-right-radius: 6px;
+}
+.chat-msg:nth-child(1) { animation-delay: 0.2s; }
+.chat-msg:nth-child(2) { animation-delay: 0.8s; }
+.chat-msg:nth-child(3) { animation-delay: 1.6s; }
+.chat-msg:nth-child(4) { animation-delay: 2.4s; }
+@keyframes chatFadeIn { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(8px); } }
+.lizbot-chat-input {
+  border-top: 1px solid rgba(54,10,5,0.06); padding: 1rem 1.5rem;
+  display: flex; align-items: center; gap: 0.75rem; background: white;
+}
+.lizbot-chat-input input {
+  flex: 1; border: none; outline: none; font-family: var(--sans); font-size: 0.88rem;
+  color: var(--brown); background: transparent;
+}
+.lizbot-chat-input input::placeholder { color: rgba(54,10,5,0.3); }
+.lizbot-chat-input button {
+  background: var(--coral); color: white; border: none; border-radius: 50%;
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1.1rem; transition: background 0.2s;
+}
+.lizbot-chat-input button:hover { background: #e55e38; }
+.lizbot-chat-input button:disabled { opacity: 0.5; cursor: not-allowed; }
+.lizbot-chat-input input:disabled { opacity: 0.7; }
+.typing-indicator { display: flex; gap: 0.35rem; padding: 0.75rem 1rem !important; }
+.typing-indicator .dot {
+  width: 8px; height: 8px; border-radius: 50%; background: rgba(244,242,234,0.5);
+  animation: typingBounce 1.4s infinite ease-in-out;
+}
+.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+.lizbot-suggestions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.lizbot-suggestion {
+  font-size: 0.8rem; padding: 0.5rem 1rem; border-radius: 100px;
+  border: 1px solid rgba(54,10,5,0.12); background: rgba(254,107,65,0.04);
+  color: var(--brown); cursor: pointer; transition: all 0.2s; text-decoration: none;
+}
+.lizbot-suggestion:hover { background: var(--coral); color: white; border-color: var(--coral); }
+.lizbot-powered {
+  font-size: 0.7rem; color: rgba(54,10,5,0.35); margin-top: 1.5rem;
+  display: flex; align-items: center; gap: 0.35rem;
+}
+
+/* SCROLL ANIMATIONS */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="gradient-bar"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C — return to homepage">
+    </a>
+    <ul class="nav-links">
+      <li><a href="#newsletter">Newsletter</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#top50">Top 50</a></li>
+      <li><a href="#community">Community</a></li>
+      <li><a href="#goingsolo">Going Solo</a></li>
+      <li><a href="#askliz">Ask Liz</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#newsletter" class="nav-cta">Subscribe Free</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container-wide">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="hero-badge"><span class="pulse"></span> Plot twist</div>
+        <h1>The future of journalism is <em>independent.</em><br>We're powering the movement.</h1>
+        <p class="hero-sub">Project C is the research hub, community, and strategic home for 200+ journalists building sustainable, audience-driven media ventures outside traditional institutions.</p>
+        <div class="hero-actions">
+          <a href="https://newsletter.projectc.biz" target="_blank" class="btn-primary" aria-label="Read the Project C newsletter">Read the Newsletter &rarr;</a>
+          <a href="#community" class="btn-secondary" aria-label="Join the Project C community">Join the Community</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <a href="https://journalismatlas.com" target="_blank" class="float-element top-right" style="text-decoration:none; color:inherit;"><span class="float-icon coral">&#9889;</span> New: 2026 Atlas Data</a>
+        <div class="hero-gallery" id="heroGallery">
+          <div class="hero-face"><img src="top50/kahlil_greene.jpg" alt="Kahlil Greene"></div>
+          <div class="hero-face"><img src="top50/cleo_abram.jpg" alt="Cleo Abram"></div>
+          <div class="hero-face"><img src="top50/mosheh_oinounou.jpg" alt="Mosheh Oinounou"></div>
+          <div class="hero-face"><img src="top50/lisa_remillard.jpg" alt="Lisa Remillard"></div>
+          <div class="hero-face"><img src="top50/marques_brownlee.jpg" alt="Marques Brownlee"></div>
+          <div class="hero-face"><img src="top50/bisan_owda.jpeg" alt="Bisan Owda"></div>
+          <div class="hero-face"><img src="top50/casey_newton.jpg" alt="Casey Newton"></div>
+          <div class="hero-face"><img src="top50/kyla_scanlon.jpeg" alt="Kyla Scanlon"></div>
+          <div class="hero-face"><img src="top50/johnny_harris.jpg" alt="Johnny Harris"></div>
+          <div class="hero-face"><img src="top50/jessica_valenti.jpg" alt="Jessica Valenti"></div>
+          <div class="hero-face"><img src="top50/heather_cox_richardson.jpg" alt="Heather Cox Richardson"></div>
+          <div class="hero-face"><img src="top50/oliver_darcy.jpg" alt="Oliver Darcy"></div>
+          <div class="hero-gallery-label">The faces of creator journalism &middot; <a href="/top50creatorjournalists">See the Top 50 &rarr;</a></div>
+        </div>
+        <a href="/top50creatorjournalists" target="_blank" class="float-element bottom-left" style="text-decoration:none; color:inherit;"><span class="float-icon pink">&#128200;</span> Top 50 List Live</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF -->
+<div class="social-proof">
+  <div class="container-wide social-proof-inner">
+    <p>Featured in &amp; partnered with</p>
+    <div class="logo-row">
+      <span>Nieman Lab</span><span>ASU</span><span>CJR</span><span>ONA</span><span>Medill / Northwestern</span><span>GW University</span><span>Perugia Journalism Festival</span>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<section class="section-newsletter" id="newsletter">
+  <div class="container-wide">
+    <div class="newsletter-grid">
+      <div class="reveal">
+        <div class="section-eyebrow">The Newsletter</div>
+        <h2 class="section-title">Your weekly briefing on the business of independent journalism</h2>
+        <p class="section-desc">Every week, Project C breaks down the trends, strategies, and stories shaping creator journalism. Industry analysis. Revenue deep-dives. Tips and tools to help creator journalists right now. Interviews with the journalists actually doing it.</p>
+        <div style="margin-top:1.5rem;">
+          <a href="https://newsletter.projectc.biz" target="_blank" class="btn-primary" aria-label="Subscribe free to the Project C newsletter">Subscribe Free &rarr;</a>
+        </div>
+        <p style="font-size:0.75rem; color:rgba(54,10,5,0.4); margin-top:0.75rem;">Join thousands of journalists, media leaders, and creators.</p>
+      </div>
+      <div class="newsletter-stack reveal" id="newsletterCards">
+        <!-- These cards will be dynamically replaced by beehiiv RSS feed content -->
+        <div class="nl-card"><div class="nl-card-date">Latest Issue</div><h4>Loading latest issues...</h4><p>Fetching the newest content from the Project C newsletter.</p></div>
+        <div class="nl-card"><div class="nl-card-date">Recent</div><h4>&nbsp;</h4><p>&nbsp;</p></div>
+        <div class="nl-card"><div class="nl-card-date">Recent</div><h4>&nbsp;</h4><p>&nbsp;</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="section-pillars" id="pillars">
+  <div class="container-wide">
+    <div class="pillars-header reveal">
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">A full ecosystem for the creator journalism movement</h2>
+      <p class="section-desc">Project C isn't just a newsletter. It's research, community, education, and tools — everything journalists need to go independent and thrive.</p>
+    </div>
+    <div class="pillars-grid">
+      <a href="#newsletter" class="pillar-card reveal"><div class="pillar-icon coral"></div><h3>Newsletter</h3><p>Weekly analysis of trends, revenue models, platform shifts, and interviews with the journalists leading the creator revolution.</p><span class="pillar-link">Read Latest &rarr;</span></a>
+      <a href="#research" class="pillar-card reveal"><div class="pillar-icon pink"></div><h3>Research &amp; Data</h3><p>Original research including The Independent Journalism Atlas — mapping the full landscape of creator journalism in America.</p><span class="pillar-link">Explore Research &rarr;</span></a>
+      <a href="#community" class="pillar-card reveal"><div class="pillar-icon coral"></div><h3>Community</h3><p>A private network of 200+ innovative creator journalists sharing strategies, wins, and hard-won lessons. Slack, events, coaching.</p><span class="pillar-link">Join Us &rarr;</span></a>
+      <a href="#goingsolo" class="pillar-card reveal"><div class="pillar-icon pink"></div><h3>Going Solo</h3><p>An 8-week workshop that equips journalists with the strategy, skills, and confidence to build a sustainable independent venture.</p><span class="pillar-link">Learn More &rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH / ATLAS -->
+<section class="section-research" id="research">
+  <div class="container">
+    <div class="research-header reveal">
+      <div class="section-eyebrow">Research &amp; Insights</div>
+      <h2 class="section-title">Original research mapping the creator journalism landscape</h2>
+      <p class="section-desc">Partnering with leading institutions to produce the data and analysis the industry needs to understand where independent journalism is heading.</p>
+    </div>
+    <div class="atlas-hero reveal">
+      <div class="atlas-hero-content">
+        <img src="atlas-logo-white.png" alt="The Independent Journalism Atlas" class="atlas-logo">
+        <p>The most comprehensive mapping of the independent journalism ecosystem in America. 1,100+ creator journalists across every platform, revenue model, and beat. Platforms, revenue models, audience patterns, creator demographics, and the infrastructure powering the movement.</p>
+        <div class="atlas-stats">
+          <div class="atlas-stat"><span class="atlas-stat-val">1,100+</span><span class="atlas-stat-lbl">Creators Mapped</span></div>
+          <div class="atlas-stat"><span class="atlas-stat-val">50+</span><span class="atlas-stat-lbl">Platforms Tracked</span></div>
+          <div class="atlas-stat"><span class="atlas-stat-val">2026</span><span class="atlas-stat-lbl">Latest Data</span></div>
+        </div>
+        <a href="https://journalismatlas.com" class="btn-primary" style="align-self:flex-start; background:white; color:var(--deep);" target="_blank">Explore the Atlas &rarr;</a>
+      </div>
+      <div class="atlas-hero-visual">
+        <img src="atlas-screenshot.png" alt="The Independent Journalism Atlas — interactive map of 1,100+ creator journalists" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="atlas-placeholder" style="display:none;">&#127758;<span>Add atlas-screenshot.png</span></div>
+      </div>
+    </div>
+    <p class="partnerships-label reveal">Research Partnerships</p>
+    <div class="research-grid">
+      <div class="research-card reveal"><span class="rc-status new">New</span><div class="rc-icon" aria-hidden="true">&#127942;</div><h3>Knight Center for the Future of Journalism at ASU</h3><p>A new fellowship partnership exploring the infrastructure and future models that will sustain independent journalism at scale.</p></div>
+      <a href="https://localnewsinitiative.northwestern.edu/posts/2026/02/19/chicago-media-ecosystem-project-c/index.html" target="_blank" class="research-card reveal" aria-label="Medill School of Journalism, Northwestern — Released research report"><span class="rc-status released">Released</span><div class="rc-icon pink" aria-hidden="true">&#128218;</div><h3>Medill School of Journalism, Northwestern</h3><p>Collaborative research on the economics, sustainability, and audience dynamics of creator-model journalism ventures.</p></a>
+      <div class="research-card reveal"><span class="rc-status wip">In Progress</span><div class="rc-icon deep" aria-hidden="true">&#127963;</div><h3>Press Forward Chicago</h3><p>Investigating the intersection of local news, philanthropic support, and creator-model journalism in the Chicago media ecosystem.</p></div>
+      <a href="https://videoconsortium.org/member-resources/rise-of-creator-journalist-report" target="_blank" class="research-card reveal" aria-label="Video Consortium — Released research report"><span class="rc-status released">Released</span><div class="rc-icon" aria-hidden="true">&#127909;</div><h3>Video Consortium</h3><p>Research partnership with the nonprofit organization of visual journalists on the role of video in independent creator journalism.</p></a>
+      <div class="research-card reveal"><span class="rc-status wip">In Progress</span><div class="rc-icon pink" aria-hidden="true">&#128161;</div><h3>CNTI</h3><p>Ongoing research collaboration exploring training, technology, and capacity-building for the next generation of independent journalists.</p></div>
+      <div class="research-card reveal"><span class="rc-status wip">In Progress</span><div class="rc-icon deep" aria-hidden="true">&#127760;</div><h3>ICFJ+</h3><p>An international research partnership examining how the creator journalism model is emerging and evolving across global markets.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOP 50 -->
+<section class="section-top50" id="top50">
+  <div class="container-wide">
+    <div class="top50-grid">
+      <div class="top50-visual reveal">
+        <div class="top50-mosaic">
+          <div class="mosaic-cell"><img src="top50/cleo_abram.jpg" alt="Cleo Abram"></div>
+          <div class="mosaic-cell"><img src="top50/casey_newton.jpg" alt="Casey Newton"></div>
+          <div class="mosaic-cell"><img src="top50/heather_cox_richardson.jpg" alt="Heather Cox Richardson"></div>
+          <div class="mosaic-cell"><img src="top50/marques_brownlee.jpg" alt="Marques Brownlee"></div>
+          <div class="mosaic-cell"><img src="top50/taylor_lorenz.jpg" alt="Taylor Lorenz"></div>
+          <div class="mosaic-cell"><img src="top50/johnny_harris.jpg" alt="Johnny Harris"></div>
+          <div class="mosaic-cell"><img src="top50/isaac_saul.jpg" alt="Isaac Saul"></div>
+          <div class="mosaic-cell"><img src="top50/emily_atkin.jpeg" alt="Emily Atkin"></div>
+          <div class="mosaic-cell"><img src="top50/oliver_darcy.jpg" alt="Oliver Darcy"></div>
+          <div class="mosaic-cell"><img src="top50/jessica_valenti.jpg" alt="Jessica Valenti"></div>
+          <div class="mosaic-cell"><img src="top50/eric_newcomer.jpg" alt="Eric Newcomer"></div>
+          <div class="mosaic-cell"><img src="top50/kyla_scanlon.jpeg" alt="Kyla Scanlon"></div>
+          <div class="mosaic-cell"><img src="top50/chris_geidner.jpeg" alt="Chris Geidner"></div>
+          <div class="mosaic-cell"><img src="top50/casey_lewis.jpg" alt="Casey Lewis"></div>
+          <div class="mosaic-cell"><img src="top50/judd_legum.jpg" alt="Judd Legum"></div>
+          <div class="mosaic-cell"><img src="top50/kat_tenbarge.jpg" alt="Kat Tenbarge"></div>
+          <div class="mosaic-cell"><img src="top50/andy_dehnart.jpeg" alt="Andy Dehnart"></div>
+          <div class="mosaic-cell"><img src="top50/hannah_ritchie.jpg" alt="Hannah Ritchie"></div>
+          <div class="mosaic-cell"><img src="top50/seamus_hughes.jpg" alt="Seamus Hughes"></div>
+          <div class="mosaic-cell"><img src="top50/craig_silverman.jpeg" alt="Craig Silverman"></div>
+          <div class="mosaic-cell"><img src="top50/alex_kantrowitz.jpg" alt="Alex Kantrowitz"></div>
+          <div class="mosaic-cell"><img src="top50/mosheh_oinounou.jpg" alt="Mosheh Oinounou"></div>
+          <div class="mosaic-cell"><img src="top50/lisa_remillard.jpg" alt="Lisa Remillard"></div>
+          <div class="mosaic-cell"><img src="top50/ryan_broderick.jpg" alt="Ryan Broderick"></div>
+          <div class="mosaic-cell"><img src="top50/kahlil_greene.jpg" alt="Kahlil Greene"></div>
+        </div>
+      </div>
+      <div class="top50-content reveal">
+        <div class="section-eyebrow">The Definitive List</div>
+        <h2 class="section-title">The Top 50 Creator-Model Journalists</h2>
+        <p class="section-desc">The first-ever ranking of the most influential journalists working independently across Substack, YouTube, TikTok, Instagram, and beyond. These are the people redefining the role of the press — not just with what they cover, but how they reach and engage the public. Stay tuned for the 2026 list coming this fall.</p>
+        <div class="top50-stats">
+          <div class="top50-stat"><span class="val">74%</span><span class="lbl">Use Newsletters</span></div>
+          <div class="top50-stat"><span class="val">60%</span><span class="lbl">Multi-Platform</span></div>
+          <div class="top50-stat"><span class="val">40%</span><span class="lbl">Video-First</span></div>
+        </div>
+        <div class="top50-stats" style="border-top:none; padding-top:0;">
+          <div class="top50-stat"><span class="val">52%</span><span class="lbl">Former Legacy Media</span></div>
+          <div class="top50-stat"><span class="val">22</span><span class="lbl">On Substack</span></div>
+          <div class="top50-stat"><span class="val">8</span><span class="lbl">On YouTube</span></div>
+        </div>
+        <div style="margin-top:2rem;"><a href="/top50creatorjournalists" class="btn-primary">See the Full List &rarr;</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="section-community" id="community">
+  <div class="container-wide">
+    <div class="community-grid">
+      <div class="reveal">
+        <div class="section-eyebrow">The Project C Community</div>
+        <h2 class="section-title">Where creator journalists build together</h2>
+        <p class="section-desc">The active home of 200+ journalists who are serious about building independent media businesses. Strategy sessions, real talk, shared wins, laughs and a few tears — the kind of Slack channel that actually stays at the top of your sidebar.</p>
+        <div class="community-features">
+          <div class="community-feature"><div class="cf-icon" aria-hidden="true">&#128172;</div><div><h4>Private Slack Community</h4><p>Daily conversations on strategy, platform changes, revenue tactics, and the realities of going solo.</p></div></div>
+          <div class="community-feature"><div class="cf-icon pink" aria-hidden="true">&#127902;</div><div><h4>Members-Only Events</h4><p>Monthly sessions with successful creator journalists, media entrepreneurs, and marketing experts.</p></div></div>
+          <div class="community-feature"><div class="cf-icon" aria-hidden="true">&#128218;</div><div><h4>Resource Library</h4><p>The Paid Newsletter Playbook, case studies, templates, and tactical guides you can use today.</p></div></div>
+          <div class="community-feature"><div class="cf-icon pink" aria-hidden="true">&#128640;</div><div><h4>Group Coaching</h4><p>Live coaching calls to work through your specific challenges with peers who get it.</p></div></div>
+        </div>
+        <div style="margin-top:2rem;"><a href="/community" class="btn-primary">Apply to Join &rarr;</a></div>
+      </div>
+      <div class="community-visual reveal">
+        <div class="community-card-main">
+          <blockquote>"The Project C Slack has been a huge win for me. It's now the top Slack channel in my right rail."</blockquote>
+          <div class="attribution">— Bryan Vance, Stumptown Savings</div>
+        </div>
+        <div class="community-card-main" style="margin-top:1.25rem;">
+          <blockquote>"It helps me see that I'm far from alone. And that we're all struggling and succeeding in this weirdly complicated creator economy, even in all stages of growth and monetization."</blockquote>
+          <div class="attribution">— Chris Hutton, TTRPG Insider</div>
+        </div>
+        <div class="community-card-main" style="margin-top:1.25rem;">
+          <blockquote>"Finally hit 100 paid subs! Didn't think I'd be here till sometime next year. This group and trying things Project C has put out, like the indie media drive was huge."</blockquote>
+          <div class="attribution">— Colin Alsheimer, Kineticist</div>
+        </div>
+        <div class="community-count"><span class="val">200+</span><span class="lbl">Active Members</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOING SOLO -->
+<section class="section-goingsolo" id="goingsolo">
+  <div class="container-wide">
+    <div class="goingsolo-card reveal">
+      <div class="goingsolo-content">
+        <div class="section-eyebrow">Workshop</div>
+        <h2 class="section-title">Going Solo</h2>
+        <p class="section-desc">An 8-week intensive workshop for journalists exploring the creator model. Led by industry entrepreneurs, creator journalists, and marketing pros, packed with actionable strategies and proven playbooks.</p>
+        <p class="section-desc" style="margin-bottom:2rem;">From content strategy to monetization, audience growth to brand positioning — everything you need to turn your journalism vision into a sustainable, independent venture.</p>
+        <a href="/going-solo" class="btn-primary">Learn More &amp; Apply &rarr;</a>
+      </div>
+      <div class="goingsolo-visual">
+        <div class="gs-week-list">
+          <div class="gs-week"><span class="gs-week-num">01</span> Your Vision &amp; Value Proposition</div>
+          <div class="gs-week"><span class="gs-week-num">02</span> Audience Strategy</div>
+          <div class="gs-week"><span class="gs-week-num">03</span> Platform &amp; Distribution</div>
+          <div class="gs-week"><span class="gs-week-num">04</span> Content Systems</div>
+          <div class="gs-week"><span class="gs-week-num">05</span> Monetization Models</div>
+          <div class="gs-week"><span class="gs-week-num">06</span> Brand &amp; Marketing</div>
+          <div class="gs-week"><span class="gs-week-num">07</span> Operations &amp; Scale</div>
+          <div class="gs-week"><span class="gs-week-num">08</span> Launch Strategy</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- LIZBOT / ASK LIZ -->
+<section class="section-lizbot" id="askliz">
+  <div class="container-wide">
+    <div class="lizbot-grid">
+      <div class="reveal">
+        <div class="section-eyebrow">New: AI-Powered</div>
+        <h2 class="section-title">Ask Liz anything about creator journalism</h2>
+        <p class="section-desc">An AI assistant trained on Liz's newsletters, published interviews, conference talks, and original research — including the Rise of the Creator Journalist study and the Medill Chicago media ecosystem report.</p>
+        <p class="section-desc">Think of it as having a conversation with the collective knowledge of Project C. Ask about revenue models, platform strategy, audience growth, the creator journalism landscape, or anything else on your mind.</p>
+        <div class="lizbot-suggestions" role="group" aria-label="Suggested questions for LizBot">
+          <button type="button" class="lizbot-suggestion">What revenue models work for independent journalists?</button>
+          <button type="button" class="lizbot-suggestion">How do I grow my newsletter audience?</button>
+          <button type="button" class="lizbot-suggestion">What did the Atlas research find?</button>
+          <button type="button" class="lizbot-suggestion">Should I leave my newsroom job?</button>
+          <button type="button" class="lizbot-suggestion">What platforms are creator journalists using?</button>
+          <button type="button" class="lizbot-suggestion">How do I build a media kit?</button>
+        </div>
+        <div class="lizbot-powered"><span aria-hidden="true">&#9889;</span> Powered by AI &middot; Trained on Liz's newsletters, interviews &amp; research</div>
+      </div>
+      <div class="lizbot-chat reveal">
+        <div class="lizbot-chat-header">
+          <div class="lizbot-avatar"><img src="liz-headshot.jpg" alt="Liz Kelly Nelson"></div>
+          <div>
+            <div class="bot-name">LizBot</div>
+            <div class="bot-status"><span class="online-dot"></span> Ask me anything about creator journalism</div>
+          </div>
+        </div>
+        <div class="lizbot-chat-body" id="lizbotChat">
+          <div class="chat-msg bot" id="lizbotWelcome">Hey! I'm LizBot — an AI trained on Liz's newsletters, published interviews, research reports, and conference talks about creator journalism. Ask me anything about going independent, revenue models, the Atlas findings, or the creator journalism landscape. What's on your mind?</div>
+        </div>
+        <div class="lizbot-chat-input">
+          <input type="text" placeholder="Ask about creator journalism..." id="lizbotInput" aria-label="Ask LizBot a question about creator journalism">
+          <button aria-label="Send message to LizBot" id="lizbotSend">&#10148;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRESS -->
+<section class="section-press" id="press">
+  <div class="container-wide">
+    <div style="text-align:center; margin-bottom:3rem;" class="reveal">
+      <div class="section-eyebrow" style="justify-content:center;">Press &amp; Features</div>
+      <h2 class="section-title">In the conversation</h2>
+    </div>
+    <div class="press-grid">
+      <a href="https://www.cjr.org/the-interview/pivoting-to-creator-liz-kelly-nelson.php" class="press-card reveal" target="_blank"><div class="press-source">Columbia Journalism Review</div><h4>Pivoting to Creator: An Interview with Liz Kelly Nelson</h4><p>CJR sits down with Liz to discuss the rise of creator journalism and what it means for the industry.</p></a>
+      <a href="https://www.niemanlab.org/2025/12/the-creator-infrastructure-gap-will-define-journalisms-next-chapter/" class="press-card reveal" target="_blank"><div class="press-source">Nieman Lab</div><h4>The creator infrastructure gap will define journalism's next chapter</h4><p>Liz's Nieman Lab prediction on the biggest challenge facing independent journalism.</p></a>
+      <a href="https://ijnet.org/en/story/understanding-creator-journalism-liz-kelly-nelson-founder-project-c" class="press-card reveal" target="_blank"><div class="press-source">IJNet</div><h4>Understanding creator journalism with Liz Kelly Nelson</h4><p>An international perspective on the global implications of the creator journalism movement.</p></a>
+      <a href="https://www.journalismfestival.com/programme/2026/creators-and-the-future-of-journalism-insights-on-infrastructure-building-from-the-us-and-south-africa" class="press-card reveal" target="_blank"><div class="press-source">Perugia Journalism Festival</div><h4>Featured Speaker: The Future of Independent Media</h4><p>Liz brings the creator journalism conversation to Europe's premier journalism event.</p></a>
+    </div>
+    <div style="text-align:center; margin-top:2.5rem;" class="reveal">
+      <a href="press.html" class="btn-secondary">See All Press &amp; Features &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-cta" id="subscribe">
+  <div class="container">
+    <div class="cta-content reveal">
+      <img src="Project-C_Logo_color.png" alt="Project C" style="width:100px; height:auto; margin:0 auto 1.5rem; display:block; opacity:0.3;">
+      <h2 class="section-title">Journalism isn't dying.<br>It's going <span style="color:var(--coral);">independent.</span></h2>
+      <p class="section-desc">Join Project C and be part of the movement redefining how journalism works, who it serves, and how it sustains itself.</p>
+      <div class="cta-actions">
+        <a href="#newsletter" class="btn-primary">Subscribe to the Newsletter &rarr;</a>
+        <a href="#community" class="btn-secondary">Join the Community</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container-wide">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img class="logo-img-footer" src="Project-C_Logo_White.png" alt="Project C">
+        </a>
+        <p>Supporting, amplifying, and normalizing independent creator-model journalism.</p>
+      </div>
+      <div class="footer-col"><h5>Explore</h5><a href="https://newsletter.projectc.biz">Newsletter</a><a href="/top50creatorjournalists">Top 50 List</a><a href="https://journalismatlas.com">The Independent Journalism Atlas</a><a href="/going-solo">Going Solo Workshop</a></div>
+      <div class="footer-col"><h5>Community</h5><a href="/community">Join the Community</a><a href="about.html">About Project C</a></div>
+      <div class="footer-col"><h5>Connect</h5><a href="about.html#founder">Team</a><a href="mailto:liz@projectc.biz">Contact</a><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="#press">Press &amp; Speaking</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Project C. All rights reserved.</span>
+      <div class="footer-social"><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="https://newsletter.projectc.biz">Beehiiv</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+const reveals = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+reveals.forEach(el => revealObserver.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const id = this.getAttribute('href'); if (id === '#') return;
+    e.preventDefault(); const target = document.querySelector(id);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// ── DYNAMIC NEWSLETTER from beehiiv RSS ──
+// beehiiv RSS feeds require the publisher to generate a feed URL.
+// Replace the URL below with your actual beehiiv RSS feed URL.
+// It's typically something like: https://rss.beehiiv.com/feeds/xxxxxxxx.xml
+const BEEHIIV_RSS_URL = 'https://rss.beehiiv.com/feeds/3nmhneFY2D.xml';
+
+async function loadNewsletterFeed() {
+  const container = document.getElementById('newsletterCards');
+  if (!BEEHIIV_RSS_URL) {
+    // Show helpful fallback when no RSS URL is configured
+    container.innerHTML = `
+      <div class="nl-card"><div class="nl-card-date">Setup Required</div><h4>Connect your beehiiv RSS feed</h4><p>To show your latest issues dynamically, paste your beehiiv RSS feed URL into the BEEHIIV_RSS_URL variable in the page script. Find it in beehiiv → Settings → RSS.</p></div>
+      <div class="nl-card"><div class="nl-card-date">How It Works</div><h4>Automatic content updates</h4><p>Once connected, the three most recent newsletter issues will appear here automatically every time a visitor loads the page. No manual updates needed.</p></div>
+      <div class="nl-card"><div class="nl-card-date">Tip</div><h4>beehiiv RSS is available on Max &amp; Enterprise plans</h4><p>If you don't see RSS settings in beehiiv, you may need to upgrade your plan. Alternatively, you can manually update the newsletter cards in the HTML.</p></div>
+    `;
+    return;
+  }
+  try {
+    // Try Netlify serverless function first (production), fall back to CORS proxies (local dev)
+    const fetchStrategies = [
+      () => fetch('/.netlify/functions/rss-proxy', { signal: AbortSignal.timeout(8000) }),
+      () => fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(BEEHIIV_RSS_URL), { signal: AbortSignal.timeout(8000) }),
+      () => fetch('https://corsproxy.io/?' + encodeURIComponent(BEEHIIV_RSS_URL), { signal: AbortSignal.timeout(8000) }),
+    ];
+    let text = '';
+    let fetched = false;
+    for (const strategy of fetchStrategies) {
+      try {
+        const response = await strategy();
+        if (response.ok) { text = await response.text(); fetched = true; break; }
+      } catch (e) { continue; }
+    }
+    if (!fetched) throw new Error('All fetch strategies failed');
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(text, 'text/xml');
+    const items = xml.querySelectorAll('item');
+    if (items.length === 0) throw new Error('No items found');
+    // Helper: strip all HTML (especially images) from description text
+    function stripHtml(html) {
+      // Pre-strip: nuke img/iframe/figure tags via regex before DOM parsing
+      let cleaned = html.replace(/<img[^>]*>/gi, '').replace(/<iframe[^>]*>[\s\S]*?<\/iframe>/gi, '').replace(/<figure[^>]*>[\s\S]*?<\/figure>/gi, '').replace(/<picture[^>]*>[\s\S]*?<\/picture>/gi, '').replace(/<video[^>]*>[\s\S]*?<\/video>/gi, '');
+      const tmp = document.createElement('div');
+      tmp.innerHTML = cleaned;
+      // Belt and suspenders: also remove via DOM
+      tmp.querySelectorAll('img, iframe, figure, picture, video, source, svg').forEach(el => el.remove());
+      return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+    }
+    const labels = ['Latest Issue', 'Recent', 'Recent'];
+    // Build cards using DOM methods so no HTML can sneak through
+    container.innerHTML = '';
+    for (let i = 0; i < Math.min(3, items.length); i++) {
+      const title = items[i].querySelector('title')?.textContent || 'Untitled';
+      const descRaw = items[i].querySelector('description')?.textContent || '';
+      const link = items[i].querySelector('link')?.textContent || '#';
+      const pubDate = items[i].querySelector('pubDate')?.textContent;
+      const cleanDesc = stripHtml(descRaw);
+      const truncDesc = cleanDesc.substring(0, 160) + (cleanDesc.length > 160 ? '...' : '');
+      const dateLabel = pubDate ? new Date(pubDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : labels[i];
+      const card = document.createElement('a');
+      card.href = link;
+      card.target = '_blank';
+      card.className = 'nl-card';
+      card.style.cssText = 'text-decoration:none; color:inherit; cursor:pointer; display:block;';
+      const dateDiv = document.createElement('div');
+      dateDiv.className = 'nl-card-date';
+      dateDiv.textContent = labels[i] + ' \u00B7 ' + dateLabel;
+      const h4 = document.createElement('h4');
+      h4.textContent = title;
+      const p = document.createElement('p');
+      p.textContent = truncDesc;
+      card.appendChild(dateDiv);
+      card.appendChild(h4);
+      card.appendChild(p);
+      container.appendChild(card);
+    }
+  } catch (err) {
+    console.warn('Newsletter RSS feed error:', err);
+    // Fallback: link directly to the newsletter so cards aren't dead ends
+    container.innerHTML = `
+      <a href="https://newsletter.projectc.biz" target="_blank" class="nl-card" style="text-decoration:none; color:inherit;"><div class="nl-card-date">Latest Issue</div><h4>Read the latest from Project C &rarr;</h4><p>Weekly analysis of trends, strategies, and stories shaping the creator journalism movement.</p></a>
+      <a href="https://newsletter.projectc.biz" target="_blank" class="nl-card" style="text-decoration:none; color:inherit;"><div class="nl-card-date">Subscribe</div><h4>Never miss an issue &rarr;</h4><p>Join thousands of journalists, media leaders, and creators getting the inside track on independent journalism.</p></a>
+      <a href="https://newsletter.projectc.biz" target="_blank" class="nl-card" style="text-decoration:none; color:inherit;"><div class="nl-card-date">Archive</div><h4>Browse past issues &rarr;</h4><p>Dive into the full archive for deep dives, interviews, and industry analysis.</p></a>
+    `;
+  }
+}
+loadNewsletterFeed();
+
+// ── HERO FACE GALLERY — cycle through creator journalist headshots ──
+(function() {
+  const allFaces = [
+    'top50/heather_cox_richardson.jpg', 'top50/johnny_harris.jpg', 'top50/cleo_abram.jpg',
+    'top50/casey_newton.jpg', 'top50/kyla_scanlon.jpeg', 'top50/marques_brownlee.jpg',
+    'top50/taylor_lorenz.jpg', 'top50/isaac_saul.jpg', 'top50/jessica_valenti.jpg',
+    'top50/oliver_darcy.jpg', 'top50/emily_atkin.jpeg', 'top50/eric_newcomer.jpg',
+    'top50/judd_legum.jpg', 'top50/casey_lewis.jpg', 'top50/kat_tenbarge.jpg',
+    'top50/andy_dehnart.jpeg', 'top50/hannah_ritchie.jpg', 'top50/seamus_hughes.jpg',
+    'top50/craig_silverman.jpeg', 'top50/alex_kantrowitz.jpg', 'top50/mosheh_oinounou.jpg',
+    'top50/lisa_remillard.jpg', 'top50/ryan_broderick.jpg', 'top50/kahlil_greene.jpg',
+    'top50/chris_geidner.jpeg'
+  ];
+  const faces = document.querySelectorAll('.hero-face');
+  if (!faces.length) return;
+
+  // Get current visible images (by filename)
+  function getVisibleImages() {
+    return new Set(Array.from(faces).map(f => {
+      const src = f.querySelector('img:not(.face-next)')?.src || '';
+      return src.split('/').pop();
+    }));
+  }
+
+  // Build pool excluding currently visible faces
+  function getNextFace() {
+    const visible = getVisibleImages();
+    const available = allFaces.filter(f => !visible.has(f.split('/').pop()));
+    if (available.length === 0) return allFaces[Math.floor(Math.random() * allFaces.length)];
+    return available[Math.floor(Math.random() * available.length)];
+  }
+
+  function cycleFace() {
+    const faceIdx = Math.floor(Math.random() * faces.length);
+    const face = faces[faceIdx];
+    const currentImg = face.querySelector('img:not(.face-next)');
+    const nextSrc = getNextFace();
+    // Create crossfade overlay
+    const nextImg = document.createElement('img');
+    nextImg.className = 'face-next';
+    nextImg.src = nextSrc;
+    nextImg.alt = 'Creator journalist';
+    face.appendChild(nextImg);
+    // Trigger fade
+    requestAnimationFrame(() => { nextImg.classList.add('active'); });
+    // After transition, swap and clean up
+    setTimeout(() => {
+      currentImg.src = nextSrc;
+      nextImg.remove();
+    }, 1100);
+  }
+
+  // Cycle one face every 2.5 seconds, pause on hover
+  let paused = false;
+  const gallery = document.getElementById('heroGallery');
+  if (gallery) {
+    gallery.addEventListener('mouseenter', () => { paused = true; });
+    gallery.addEventListener('mouseleave', () => { paused = false; });
+  }
+  setInterval(() => { if (!paused) cycleFace(); }, 2500);
+})();
+
+// ── LIZBOT LIVE CHAT ──
+(function() {
+  const chatBody = document.getElementById('lizbotChat');
+  const chatInput = document.getElementById('lizbotInput');
+  const chatSend = document.getElementById('lizbotSend');
+  const suggestions = document.querySelectorAll('.lizbot-suggestion');
+
+  // Conversation history for multi-turn context
+  let conversationHistory = [];
+
+  function addMessage(text, role) {
+    const msg = document.createElement('div');
+    msg.className = 'chat-msg ' + role;
+    // For bot messages, allow basic formatting
+    if (role === 'bot') {
+      // Convert **bold** to <strong> and newlines to <br>
+      msg.innerHTML = text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>');
+    } else {
+      msg.textContent = text;
+    }
+    // Remove animation delays for dynamically added messages
+    msg.style.animation = 'none';
+    msg.style.opacity = '1';
+    chatBody.appendChild(msg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return msg;
+  }
+
+  function addTypingIndicator() {
+    const indicator = document.createElement('div');
+    indicator.className = 'chat-msg bot typing-indicator';
+    indicator.id = 'typingIndicator';
+    indicator.style.animation = 'none';
+    indicator.style.opacity = '1';
+    indicator.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+    chatBody.appendChild(indicator);
+    chatBody.scrollTop = chatBody.scrollHeight;
+    return indicator;
+  }
+
+  function removeTypingIndicator() {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) indicator.remove();
+  }
+
+  async function sendMessage(text) {
+    if (!text.trim()) return;
+
+    // Clear input
+    chatInput.value = '';
+    chatInput.disabled = true;
+    chatSend.disabled = true;
+
+    // Remove welcome message on first interaction
+    const welcome = document.getElementById('lizbotWelcome');
+    if (welcome && conversationHistory.length === 0) {
+      welcome.id = ''; // Keep it visible but remove ID
+    }
+
+    // Add user message to UI
+    addMessage(text, 'user');
+    conversationHistory.push({ role: 'user', content: text });
+
+    // Show typing indicator
+    addTypingIndicator();
+
+    try {
+      const response = await fetch('/.netlify/functions/lizbot-chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          history: conversationHistory.slice(0, -1), // Send previous turns (current msg is added server-side)
+        }),
+      });
+
+      removeTypingIndicator();
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        if (response.status === 429) {
+          addMessage("I'm getting a lot of questions right now! Give me a moment and try again.", 'bot');
+        } else {
+          addMessage("I'm having a little trouble right now — try asking again in a moment.", 'bot');
+        }
+        return;
+      }
+
+      const data = await response.json();
+      const botResponse = data.response;
+
+      // Add bot response to UI and history
+      addMessage(botResponse, 'bot');
+      conversationHistory.push({ role: 'assistant', content: botResponse });
+
+    } catch (err) {
+      removeTypingIndicator();
+      addMessage("Hmm, I can't connect right now. Check your internet connection and try again.", 'bot');
+      console.error('LizBot error:', err);
+    } finally {
+      chatInput.disabled = false;
+      chatSend.disabled = false;
+      chatInput.focus();
+    }
+  }
+
+  // Send on button click
+  chatSend.addEventListener('click', () => sendMessage(chatInput.value));
+
+  // Send on Enter key
+  chatInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage(chatInput.value);
+    }
+  });
+
+  // Suggestion chips — click to ask
+  suggestions.forEach(chip => {
+    chip.style.cursor = 'pointer';
+    chip.addEventListener('click', () => {
+      sendMessage(chip.textContent);
+    });
+  });
+})();
+</script>
+</body>
+</html>

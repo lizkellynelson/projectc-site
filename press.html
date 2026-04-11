@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Press & Features — Project C</title>
+<meta name="description" content="Project C in the news. Press coverage, features, speaking engagements, and interviews with founder Liz Kelly Nelson.">
+<link rel="icon" type="image/png" href="Project-C_Logo_color.png">
+<link rel="apple-touch-icon" href="Project-C_Logo_color.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --cream: #F4F2EA; --coral: #FE6B41; --pink: #E09AC2;
+  --brown: #360A05; --deep: #200603; --cream-dark: #EBE8DE;
+  --serif: 'Anton', 'Impact', sans-serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--sans); background: var(--cream); color: var(--brown); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+/* GRADIENT BAR */
+.gradient-bar { height: 4px; background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral), var(--pink)); background-size: 300% 100%; animation: gradientSlide 8s ease infinite; }
+@keyframes gradientSlide { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+/* NAV */
+nav { position: fixed; top: 4px; left: 0; right: 0; z-index: 1000; background: rgba(244,242,234,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(54,10,5,0.06); transition: all 0.3s ease; }
+nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
+.nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav-logo { text-decoration: none; display: flex; align-items: center; }
+.nav-logo .logo-img { height: 48px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+.nav-links a { color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease; }
+.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
+.nav-cta { background: var(--coral) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
+.nav-cta:hover { background: #e55e38 !important; }
+.back-link { font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; }
+
+/* PAGE HEADER */
+.page-header { padding: 10rem 0 4rem; text-align: center; }
+.page-header h1 { font-family: var(--serif); font-size: clamp(2.5rem,5vw,4rem); color: var(--deep); text-transform: uppercase; line-height: 1.05; margin-bottom: 1rem; }
+.page-header p { font-size: 1.1rem; color: rgba(54,10,5,0.6); max-width: 560px; margin: 0 auto; line-height: 1.7; }
+
+/* PRESS LIST */
+.press-section { padding: 0 0 6rem; }
+.press-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+.press-item { background: white; border-radius: 16px; padding: 2rem; transition: all 0.3s ease; text-decoration: none; color: var(--brown); display: block; border: 1px solid rgba(54,10,5,0.04); }
+.press-item:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(32,6,3,0.08); border-color: rgba(254,107,65,0.15); }
+.press-source { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--coral); font-weight: 700; margin-bottom: 0.75rem; }
+.press-item h3 { font-family: var(--sans); font-size: 1rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.5rem; }
+.press-type { display: inline-block; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.2rem 0.6rem; border-radius: 100px; margin-top: 0.75rem; }
+.press-type.article { background: rgba(254,107,65,0.08); color: var(--coral); }
+.press-type.speaking { background: rgba(224,154,194,0.12); color: #b5699a; }
+.press-type.mention { background: rgba(54,10,5,0.05); color: rgba(54,10,5,0.5); }
+
+/* FOOTER */
+.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 2rem; }
+footer .nav-logo { text-decoration: none; display: flex; align-items: center; color: var(--cream); margin-bottom: 1rem; }
+footer .logo-img-footer { height: 32px; width: auto; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
+.footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
+.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.5); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
+.footer-col a:hover { color: var(--coral); }
+.footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+.footer-social { display: flex; gap: 1rem; }
+.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-social a:hover { color: var(--coral); }
+
+@media (max-width: 768px) {
+  .press-list { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="gradient-bar"></div>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C"></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="back-link">&larr; Back to Home</a></li>
+      <li><a href="https://newsletter.projectc.biz" class="nav-cta">Subscribe Free</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-header">
+  <div class="container">
+    <h1>Press & Features</h1>
+    <p>Project C and founder Liz Kelly Nelson in the news — interviews, features, speaking engagements, and media coverage.</p>
+  </div>
+</section>
+
+<section class="press-section">
+  <div class="container">
+    <div class="press-list">
+
+      <a href="https://www.niemanlab.org/2025/12/the-creator-infrastructure-gap-will-define-journalisms-next-chapter/" target="_blank" class="press-item">
+        <div class="press-source">Nieman Lab</div>
+        <h3>Creator infrastructure will define journalism's next chapter</h3>
+        <span class="press-type article">Article</span>
+      </a>
+
+      <a href="https://www.cjr.org/the-interview/pivoting-to-creator-liz-kelly-nelson.php" target="_blank" class="press-item">
+        <div class="press-source">Columbia Journalism Review</div>
+        <h3>Pivoting to Creator: An interview with Liz Kelly Nelson</h3>
+        <span class="press-type article">Interview</span>
+      </a>
+
+      <a href="https://margaretsullivan.substack.com/p/trust-in-mainstream-media-is-at-rock" target="_blank" class="press-item">
+        <div class="press-source">American Crisis</div>
+        <h3>Trust in mainstream media is at rock bottom. Can it be fixed?</h3>
+        <span class="press-type article">Article</span>
+      </a>
+
+      <a href="https://www.bostonmagazine.com/news/local-news-influencers-future-of-media/" target="_blank" class="press-item">
+        <div class="press-source">Boston Magazine</div>
+        <h3>Why Influencers Matter to the Future of Local Media</h3>
+        <span class="press-type article">Article</span>
+      </a>
+
+      <a href="https://jsk.stanford.edu/news/jsk-journalism-fellowships-welcomes-three-new-board-members" target="_blank" class="press-item">
+        <div class="press-source">Stanford University</div>
+        <h3>JSK Journalism Fellowship Welcomes Three New Board Members</h3>
+        <span class="press-type mention">Mention</span>
+      </a>
+
+      <a href="https://gwtoday.gwu.edu/new-terker-distinguished-fellows-bring-media-and-strategy-expertise-gw" target="_blank" class="press-item">
+        <div class="press-source">GW Today</div>
+        <h3>New Terker Distinguished Fellows to Bring Media and Strategy Expertise to GW</h3>
+        <span class="press-type mention">Mention</span>
+      </a>
+
+      <a href="https://ijnet.org/en/story/understanding-creator-journalism-liz-kelly-nelson-founder-project-c" target="_blank" class="press-item">
+        <div class="press-source">IJNet</div>
+        <h3>Understanding creator journalism with Liz Kelly Nelson, founder of Project C</h3>
+        <span class="press-type article">Interview</span>
+      </a>
+
+      <a href="https://www.cjr.org/the_media_today/peak_newsletter_substack_beehiiv_ghost.php" target="_blank" class="press-item">
+        <div class="press-source">CJR Media Today</div>
+        <h3>The Long Peak of Newsletters</h3>
+        <span class="press-type mention">Mention</span>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=ZDHSf1pWoic" target="_blank" class="press-item">
+        <div class="press-source">GBH Media Summit 2025</div>
+        <h3>What Legacy Media and Digital Content Creators Can Learn From Each Other</h3>
+        <span class="press-type speaking">Speaking</span>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=J8PxKE342vI&list=PLVlH7ojC02YFex0AMT1tjAuAK_LTKncGM&index=7" target="_blank" class="press-item">
+        <div class="press-source">Rebele Symposium 2025</div>
+        <h3>The New(s) Influencers</h3>
+        <span class="press-type speaking">Speaking</span>
+      </a>
+
+      <a href="https://www.vanityfair.com/news/story/ezra-klein-youtube-dan-abrams-mediaite-new-york-times" target="_blank" class="press-item">
+        <div class="press-source">Vanity Fair</div>
+        <h3>How Ezra Klein's YouTube makeover points to podcasting's TV future</h3>
+        <span class="press-type mention">Mention</span>
+      </a>
+
+      <a href="https://knightcenter.utexas.edu/isoj-panel-explores-evolving-definitions-of-journalists-and-journalism-in-the-era-of-influencers/" target="_blank" class="press-item">
+        <div class="press-source">Knight Center</div>
+        <h3>ISOJ panel explores evolving definitions of journalists and journalism in the era of influencers</h3>
+        <span class="press-type speaking">Speaking</span>
+      </a>
+
+      <a href="https://www.cjr.org/the_media_today/news-organizations-embrace-creator-model-journalists-collaborate-compete-tiktok-instagram-youtube.php" target="_blank" class="press-item">
+        <div class="press-source">Columbia Journalism Review</div>
+        <h3>News Organizations Are Starting to Embrace Creator-Model Journalists</h3>
+        <span class="press-type mention">Mention</span>
+      </a>
+
+      <a href="https://www.editorandpublisher.com/stories/the-new-army-of-journalists-creators-and-influencers-impact-our-industry,254584" target="_blank" class="press-item">
+        <div class="press-source">Editor & Publisher</div>
+        <h3>The new 'army' of journalists: Creators and influencers impact our industry</h3>
+        <span class="press-type article">Article</span>
+      </a>
+
+      <a href="https://mediacat.uk/noosphere-and-reinventing-news-for-the-tiktok-generation/" target="_blank" class="press-item">
+        <div class="press-source">MediaCat</div>
+        <h3>Noosphere and repackaging news for the TikTok generation</h3>
+        <span class="press-type mention">Mention</span>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=J8PxKE342vI&list=PLVlH7ojC02YFex0AMT1tjAuAK_LTKncGM&index=6" target="_blank" class="press-item">
+        <div class="press-source">Knight Media Forum</div>
+        <h3>Who gets to be called a journalist in 2025?</h3>
+        <span class="press-type speaking">Speaking</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container-wide">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img class="logo-img-footer" src="Project-C_Logo_White.png" alt="Project C">
+        </a>
+        <p>Supporting, amplifying, and normalizing independent creator-model journalism.</p>
+      </div>
+      <div class="footer-col"><h5>Explore</h5><a href="https://newsletter.projectc.biz">Newsletter</a><a href="/top50creatorjournalists">Top 50 List</a><a href="https://journalismatlas.com">The Independent Journalism Atlas</a><a href="/going-solo">Going Solo Workshop</a></div>
+      <div class="footer-col"><h5>Community</h5><a href="/community">Join the Community</a><a href="about.html">About Project C</a></div>
+      <div class="footer-col"><h5>Connect</h5><a href="about.html#founder">Team</a><a href="mailto:liz@projectc.biz">Contact</a><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="press.html">Press &amp; Speaking</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Project C. All rights reserved.</span>
+      <div class="footer-social"><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="https://newsletter.projectc.biz">Beehiiv</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+</script>
+</body>
+</html>

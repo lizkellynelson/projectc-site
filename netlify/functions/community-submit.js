@@ -32,6 +32,7 @@ const { createClient } = require('@supabase/supabase-js');
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 const SUPABASE_URL = process.env.SUPABASE_COMMUNITY_URL;
 const SUPABASE_SECRET_KEY = process.env.SUPABASE_COMMUNITY_SECRET_KEY;
+const SLACK_APPLICATIONS_WEBHOOK_URL = process.env.SLACK_APPLICATIONS_WEBHOOK_URL;
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -98,6 +99,108 @@ function fail(statusCode, message) {
     headers: { ...CORS_HEADERS, 'Content-Type': 'application/json' },
     body: JSON.stringify({ error: message }),
   };
+}
+
+// —— Slack notification helper ——
+// Posts a formatted card to the #project-c-applicant-reviews channel
+// whenever a new application lands. Uses Slack's Block Kit for a clean
+// layout. Failures here are logged but never surfaced to the applicant —
+// if Slack is down we don't want to break the submission.
+function escapeSlackText(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+function humanTierLabel(tier, cohortRow) {
+  if (tier === 'cohort') {
+    return cohortRow && cohortRow.name
+      ? `Cohort — ${cohortRow.name}`
+      : 'Cohort';
+  }
+  const map = {
+    solo_monthly: 'Solo — Monthly ($39)',
+    solo_yearly: 'Solo — Yearly ($399)',
+    org_monthly: 'Organizational — Monthly ($59)',
+    org_yearly: 'Organizational — Yearly ($650)',
+  };
+  return map[tier] || tier;
+}
+
+async function postNewApplicationToSlack({
+  applicationId,
+  name,
+  email,
+  workUrl,
+  about,
+  tier,
+  cohortRow,
+}) {
+  if (!SLACK_APPLICATIONS_WEBHOOK_URL) {
+    console.warn('SLACK_APPLICATIONS_WEBHOOK_URL not set — skipping Slack alert');
+    return;
+  }
+
+  // Truncate verbose "about" text so the card stays scannable. Reviewers
+  // can always pull the full row from Supabase if they need more.
+  const aboutTrimmed =
+    about.length > 1200 ? about.slice(0, 1200) + '…' : about;
+
+  const tierLabel = humanTierLabel(tier, cohortRow);
+
+  const blocks = [
+    {
+      type: 'header',
+      text: {
+        type: 'plain_text',
+        text: 'New community application',
+        emoji: false,
+      },
+    },
+    {
+      type: 'section',
+      fields: [
+        { type: 'mrkdwn', text: `*Name*\n${escapeSlackText(name)}` },
+        { type: 'mrkdwn', text: `*Email*\n${escapeSlackText(email)}` },
+        { type: 'mrkdwn', text: `*Tier*\n${escapeSlackText(tierLabel)}` },
+        { type: 'mrkdwn', text: `*Work*\n<${workUrl}|${escapeSlackText(workUrl)}>` },
+      ],
+    },
+    {
+      type: 'section',
+      text: {
+        type: 'mrkdwn',
+        text: `*About*\n${escapeSlackText(aboutTrimmed)}`,
+      },
+    },
+    {
+      type: 'context',
+      elements: [
+        {
+          type: 'mrkdwn',
+          text: `Application \`${applicationId}\` · review in Supabase to approve or reject`,
+        },
+      ],
+    },
+  ];
+
+  try {
+    const res = await fetch(SLACK_APPLICATIONS_WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        text: `New community application from ${name} (${email})`,
+        blocks,
+      }),
+    });
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error(`Slack webhook failed: ${res.status} ${errText}`);
+    }
+  } catch (err) {
+    console.error('Slack webhook error:', err);
+  }
 }
 
 // —— Main handler ——
@@ -272,6 +375,19 @@ exports.handler = async (event) => {
       "We saved your card but couldn't save your application. Please email liz@projectc.biz and we'll sort it out."
     );
   }
+
+  // Ping the review channel. Awaited so the serverless runtime doesn't
+  // terminate before the webhook call completes, but wrapped internally in
+  // try/catch so Slack being down never breaks submission for the applicant.
+  await postNewApplicationToSlack({
+    applicationId: inserted.id,
+    name,
+    email,
+    workUrl,
+    about,
+    tier,
+    cohortRow,
+  });
 
   return {
     statusCode: 200,

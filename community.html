@@ -988,6 +988,8 @@ const cohortToggle = document.getElementById('cohortToggle');
 const cohortPanel = document.getElementById('cohortPanel');
 const cohortCodeInput = document.getElementById('cohortCode');
 const cardField = document.getElementById('cardField');
+const tierLabel = document.querySelector('.tier-label');
+const tierGrid = document.querySelector('.tier-grid');
 
 cohortToggle.addEventListener('click', () => {
   const isOpen = cohortPanel.classList.toggle('is-open');
@@ -1001,12 +1003,14 @@ cohortToggle.addEventListener('click', () => {
   }
 });
 
-// When a cohort code is entered, hide the card field entirely — cohort
-// applicants don't need to provide a payment method. If the code field is
-// cleared, the card field comes back.
+// When a cohort code is entered, hide both the tier selector AND the card
+// field — cohort applicants don't choose a tier or provide payment. If the
+// code is cleared, both come back.
 function updateCardFieldVisibility() {
   const hasCode = cohortCodeInput.value.trim().length > 0;
   cardField.style.display = hasCode ? 'none' : '';
+  tierLabel.style.display = hasCode ? 'none' : '';
+  tierGrid.style.display = hasCode ? 'none' : '';
 }
 cohortCodeInput.addEventListener('input', updateCardFieldVisibility);
 
@@ -1091,7 +1095,7 @@ form.addEventListener('submit', async (e) => {
   const agree = document.getElementById('agree').checked;
   const cohortCode = cohortCodeInput.value.trim();
 
-  if (!tier) { alert('Please pick a membership tier.'); return; }
+  if (!tier && !cohortCode) { alert('Please pick a membership tier.'); return; }
   if (!form.fullName.value.trim()) { alert('Please enter your name.'); return; }
   if (!form.email.value.trim()) { alert('Please enter your email.'); return; }
   if (!form.workLink.value.trim()) { alert('Please share a link to your work.'); return; }
@@ -1139,7 +1143,7 @@ form.addEventListener('submit', async (e) => {
       email: form.email.value.trim(),
       workLink: form.workLink.value.trim(),
       aboutYou: form.aboutYou.value.trim(),
-      tier: tier.value,
+      tier: tier ? tier.value : 'cohort',
       cohortCode: cohortCode || null,
       agree: true,
       setupIntentId: confirmedSetupIntentId,

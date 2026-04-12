@@ -45,6 +45,11 @@
   to = "https://chrysalis-orchid-ne7e.squarespace.com/top50creatorjournalists"
   status = 302
 
+# Scheduled function: daily lifecycle emails (day-3 follow-up, cohort reminders)
+# Runs every day at 2pm UTC (10am Eastern)
+[functions."community-scheduled-emails"]
+schedule = "0 14 * * *"
+
 # Install function-level dependencies automatically
 [[plugins]]
   package = "@netlify/plugin-functions-install-core"

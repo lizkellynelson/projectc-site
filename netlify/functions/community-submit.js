@@ -32,7 +32,8 @@ const { createClient } = require('@supabase/supabase-js');
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 const SUPABASE_URL = process.env.SUPABASE_COMMUNITY_URL;
 const SUPABASE_SECRET_KEY = process.env.SUPABASE_COMMUNITY_SECRET_KEY;
-const SLACK_APPLICATIONS_WEBHOOK_URL = process.env.SLACK_APPLICATIONS_WEBHOOK_URL;
+const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
+const SLACK_REVIEW_CHANNEL_ID = process.env.SLACK_REVIEW_CHANNEL_ID;
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -102,10 +103,10 @@ function fail(statusCode, message) {
 }
 
 // —— Slack notification helper ——
-// Posts a formatted card to the #project-c-applicant-reviews channel
-// whenever a new application lands. Uses Slack's Block Kit for a clean
-// layout. Failures here are logged but never surfaced to the applicant —
-// if Slack is down we don't want to break the submission.
+// Posts a formatted card with Approve / Reject buttons to the review
+// channel via the Slack Web API (bot token). Interactive buttons are
+// handled by community-slack-action.js. Failures here are logged but
+// never surfaced to the applicant.
 function escapeSlackText(s) {
   return String(s || '')
     .replace(/&/g, '&amp;')
@@ -137,13 +138,11 @@ async function postNewApplicationToSlack({
   tier,
   cohortRow,
 }) {
-  if (!SLACK_APPLICATIONS_WEBHOOK_URL) {
-    console.warn('SLACK_APPLICATIONS_WEBHOOK_URL not set — skipping Slack alert');
+  if (!SLACK_BOT_TOKEN || !SLACK_REVIEW_CHANNEL_ID) {
+    console.warn('SLACK_BOT_TOKEN or SLACK_REVIEW_CHANNEL_ID not set — skipping Slack alert');
     return;
   }
 
-  // Truncate verbose "about" text so the card stays scannable. Reviewers
-  // can always pull the full row from Supabase if they need more.
   const aboutTrimmed =
     about.length > 1200 ? about.slice(0, 1200) + '…' : about;
 
@@ -175,31 +174,61 @@ async function postNewApplicationToSlack({
       },
     },
     {
+      type: 'actions',
+      block_id: 'review_actions',
+      elements: [
+        {
+          type: 'button',
+          text: { type: 'plain_text', text: 'Approve', emoji: false },
+          style: 'primary',
+          action_id: 'approve_application',
+          value: applicationId,
+        },
+        {
+          type: 'button',
+          text: { type: 'plain_text', text: 'Reject', emoji: false },
+          style: 'danger',
+          action_id: 'reject_application',
+          value: applicationId,
+          confirm: {
+            title: { type: 'plain_text', text: 'Reject this applicant?' },
+            text: { type: 'plain_text', text: 'This will open a form for the rejection reason.' },
+            confirm: { type: 'plain_text', text: 'Continue' },
+            deny: { type: 'plain_text', text: 'Cancel' },
+          },
+        },
+      ],
+    },
+    {
       type: 'context',
       elements: [
         {
           type: 'mrkdwn',
-          text: `Application \`${applicationId}\` · review in Supabase to approve or reject`,
+          text: `Application \`${applicationId}\``,
         },
       ],
     },
   ];
 
   try {
-    const res = await fetch(SLACK_APPLICATIONS_WEBHOOK_URL, {
+    const res = await fetch('https://slack.com/api/chat.postMessage', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        Authorization: `Bearer ${SLACK_BOT_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({
+        channel: SLACK_REVIEW_CHANNEL_ID,
         text: `New community application from ${name} (${email})`,
         blocks,
       }),
     });
-    if (!res.ok) {
-      const errText = await res.text();
-      console.error(`Slack webhook failed: ${res.status} ${errText}`);
+    const data = await res.json();
+    if (!data.ok) {
+      console.error(`Slack chat.postMessage failed: ${data.error}`);
     }
   } catch (err) {
-    console.error('Slack webhook error:', err);
+    console.error('Slack postMessage error:', err);
   }
 }
 

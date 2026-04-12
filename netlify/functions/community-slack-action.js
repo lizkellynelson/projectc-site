@@ -350,27 +350,24 @@ async function handleApproval({
   }
 
   // 2b. Increment cohort seat count (cohort tier only)
+  // Not perfectly atomic, but fine for low-volume cohort approvals.
+  // The seat_limit check already happens at application time, so
+  // worst case is the count drifts by one — easy manual fix.
   if (app.tier === 'cohort' && app.cohort_id) {
-    await supabase.rpc('increment_cohort_seats', { cohort_id_input: app.cohort_id }).catch((err) => {
-      // Non-fatal — log but continue. Worst case the count is off by one
-      // and Liz can fix it manually.
-      console.error('Cohort seat increment failed:', err);
-    });
-
-    // Fallback if the RPC doesn't exist yet: raw update
-    // (The RPC is cleaner but we haven't added it to the migration yet.)
-    if (!app.cohort_id) {
-      // skip
-    } else {
-      await supabase
+    try {
+      const { data: cohortNow } = await supabase
         .from('cohorts')
-        .update({ seats_used: app.cohort_id ? undefined : undefined })
-        .then(() => {})
-        .catch(() => {});
-      // Actually, let's do a simple increment via SQL. Since Supabase JS
-      // doesn't have a native increment, we'll use an RPC or just skip
-      // and handle seat counting in a future pass. The seat_limit check
-      // already happens at application time, so this is a nice-to-have.
+        .select('seats_used')
+        .eq('id', app.cohort_id)
+        .single();
+      if (cohortNow) {
+        await supabase
+          .from('cohorts')
+          .update({ seats_used: (cohortNow.seats_used || 0) + 1 })
+          .eq('id', app.cohort_id);
+      }
+    } catch (err) {
+      console.error('Cohort seat increment failed (non-fatal):', err);
     }
   }
 

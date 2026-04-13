@@ -1015,12 +1015,11 @@ function updateCardFieldVisibility() {
 }
 cohortCodeInput.addEventListener('input', updateCardFieldVisibility);
 
-// Guidelines link placeholder
+// Guidelines links open Google Doc in new tab
 document.querySelectorAll('#guidelinesLink, #guidelinesLink2').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    alert('The full Project C Community Guidelines will open here. (In the real flow, this links to the PDF or a /guidelines page.)');
-  });
+  link.href = 'https://docs.google.com/document/d/1TmWB0Cf2J7SatMAW-FHh_muAK3IM_vKvQzoIVfOtLaY/edit?usp=sharing';
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
 });
 
 // ============================================================

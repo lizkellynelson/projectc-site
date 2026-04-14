@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>News Ecosystem Map — Project C</title>
+<meta name="description" content="A visual map of the evolving news ecosystem — from legacy outlets to AI-native startups. Explore the full landscape of journalism today.">
+<meta property="og:title" content="News Ecosystem Map — Project C">
+<meta property="og:description" content="A visual map of the evolving news ecosystem — from legacy outlets to AI-native startups.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="Project-C_Logo_color.png">
+<link rel="apple-touch-icon" href="Project-C_Logo_color.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --cream: #F4F2EA; --coral: #FE6B41; --pink: #E09AC2;
+  --brown: #360A05; --deep: #200603; --cream-dark: #EBE8DE;
+  --serif: 'Anton', 'Impact', sans-serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--sans); background: var(--cream); color: var(--brown); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.container-narrow { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+/* GRADIENT BAR */
+.gradient-bar { height: 4px; background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral), var(--pink)); background-size: 300% 100%; animation: gradientSlide 8s ease infinite; }
+@keyframes gradientSlide { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+/* NAV */
+nav { position: fixed; top: 4px; left: 0; right: 0; z-index: 1000; background: rgba(244,242,234,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(54,10,5,0.06); transition: all 0.3s ease; }
+nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
+.nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav-logo { text-decoration: none; display: flex; align-items: center; }
+.nav-logo .logo-img { height: 48px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+.nav-links a { color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease; }
+.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
+.nav-cta { background: var(--coral) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
+.nav-cta:hover { background: #e55e38 !important; }
+
+/* SHARED */
+.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--coral); }
+.section-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,3rem); line-height: 1.05; color: var(--deep); letter-spacing: -0.01em; margin-bottom: 1.25rem; text-transform: uppercase; }
+.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: white; padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.25s ease; border: none; cursor: pointer; }
+.btn-primary:hover { background: #e55e38; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
+.btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--brown); padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 1.5px solid rgba(54,10,5,0.2); transition: all 0.25s ease; }
+.btn-secondary:hover { border-color: var(--brown); background: var(--brown); color: var(--cream); }
+
+/* ===== HERO ===== */
+.eco-hero {
+  background: var(--deep); color: var(--cream);
+  padding: 11rem 0 5rem; position: relative; overflow: hidden;
+}
+.eco-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 60%, rgba(254,107,65,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 30%, rgba(224,154,194,0.06) 0%, transparent 50%);
+}
+.eco-hero-content { position: relative; z-index: 2; max-width: 700px; }
+.eco-hero .section-eyebrow { color: var(--coral); }
+.eco-hero .section-eyebrow::before { background: var(--coral); }
+.eco-hero h1 {
+  font-family: var(--serif); font-size: clamp(3rem,6vw,4.5rem);
+  text-transform: uppercase; line-height: 1.0; margin-bottom: 1.5rem; color: var(--cream);
+}
+.eco-hero h1 em { font-style: normal; color: var(--coral); }
+.eco-hero p { font-size: 1.15rem; color: rgba(244,242,234,0.7); line-height: 1.8; max-width: 580px; }
+.eco-hero p a { color: var(--coral); text-decoration: underline; text-underline-offset: 3px; }
+.eco-hero p a:hover { color: var(--pink); }
+
+/* ===== ACTION BUTTONS ===== */
+.eco-actions { display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; }
+
+/* ===== MAP IMAGE SECTION ===== */
+.section-map { padding: 5rem 0; }
+.map-frame {
+  border-radius: 16px; overflow: hidden;
+  box-shadow: 0 25px 80px rgba(32,6,3,0.12);
+  border: 1px solid rgba(54,10,5,0.06);
+  background: white;
+}
+.map-frame img {
+  width: 100%; display: block; cursor: zoom-in;
+}
+.map-caption {
+  text-align: center; margin-top: 1.5rem;
+  font-size: 0.9rem; color: rgba(54,10,5,0.5); line-height: 1.6;
+}
+.map-caption a { color: var(--coral); text-decoration: underline; text-underline-offset: 3px; }
+.map-caption a:hover { color: #e55e38; }
+
+/* ===== CREDITS ===== */
+.section-credits {
+  padding: 4rem 0 5rem;
+}
+.credits-box {
+  background: white; border-radius: 16px; padding: 2.5rem;
+  border: 1px solid rgba(54,10,5,0.06);
+  max-width: 760px; margin: 0 auto;
+}
+.credits-box h3 {
+  font-family: var(--serif); font-size: 1.5rem; text-transform: uppercase;
+  color: var(--deep); margin-bottom: 1rem; line-height: 1.1;
+}
+.credits-box p {
+  font-size: 1rem; color: rgba(54,10,5,0.65); line-height: 1.8; margin-bottom: 1rem;
+}
+.credits-box p:last-child { margin-bottom: 0; }
+.credits-box a { color: var(--coral); text-decoration: underline; text-underline-offset: 3px; }
+.credits-box a:hover { color: #e55e38; }
+.credits-names { font-weight: 600; color: var(--deep); }
+
+/* ===== FOOTER ===== */
+footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 2rem; }
+footer .nav-logo { text-decoration: none; display: flex; align-items: center; color: var(--cream); margin-bottom: 1rem; }
+footer .logo-img-footer { height: 32px; width: auto; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
+.footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
+.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.5); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
+.footer-col a:hover { color: var(--coral); }
+.footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+.footer-social { display: flex; gap: 1rem; }
+.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-social a:hover { color: var(--coral); }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .eco-hero { padding: 9rem 0 3.5rem; }
+  .eco-hero h1 { font-size: 2.5rem; }
+  .eco-actions { flex-direction: column; }
+  .eco-actions .btn-primary,
+  .eco-actions .btn-secondary { width: 100%; justify-content: center; }
+  .section-map { padding: 3rem 0; }
+  .credits-box { padding: 2rem 1.5rem; }
+  .nav-links { display: none; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="gradient-bar"></div>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C"></a>
+    <ul class="nav-links">
+      <li><a href="index.html">&larr; Home</a></li>
+      <li><a href="index.html#newsletter">Newsletter</a></li>
+      <li><a href="index.html#research">Research</a></li>
+      <li><a href="index.html#community">Community</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="https://newsletter.projectc.biz" class="nav-cta">Subscribe Free</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="eco-hero">
+  <div class="container">
+    <div class="eco-hero-content">
+      <div class="section-eyebrow">Research</div>
+      <h1>The news <em>ecosystem</em></h1>
+      <p>The story starts on the left with the most established and longest-produced sources — including established non- and for-profit news organizations — and continues with newer entrants the further you get to the right side of the graphic.</p>
+      <div class="eco-actions">
+        <a href="https://www.canva.com/design/DAGcSYEJL78/i6YsPbXTbTB-yGtJLNBA3A/view" target="_blank" class="btn-primary">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+          Explore Zoomable Version
+        </a>
+        <a href="news-ecosystem-2025.png" download class="btn-secondary">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PNG
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="section-map">
+  <div class="container">
+    <a href="https://www.canva.com/design/DAGcSYEJL78/i6YsPbXTbTB-yGtJLNBA3A/view" target="_blank">
+      <div class="map-frame">
+        <img src="news-ecosystem-2025.png" alt="The News Ecosystem Map — a visual overview of the journalism landscape from legacy outlets to AI-native startups">
+      </div>
+    </a>
+    <p class="map-caption">Click the image or use the <a href="https://www.canva.com/design/DAGcSYEJL78/i6YsPbXTbTB-yGtJLNBA3A/view" target="_blank">zoomable Canva version</a> to explore in detail.</p>
+  </div>
+</section>
+
+<!-- CREDITS -->
+<section class="section-credits">
+  <div class="container">
+    <div class="credits-box">
+      <h3>About this project</h3>
+      <p>Read more about the thinking behind this map in the newsletter: <a href="https://projectc.beehiiv.com/p/from-trad-news-to-ai-the-evolving-journalism-landscape" target="_blank">From Trad News to AI: The Evolving Journalism Landscape</a>.</p>
+      <p>Huge thanks to <span class="credits-names">Allison Rockey</span>, <span class="credits-names">Justin Bank</span>, and <span class="credits-names">Ryan Kellett</span> for putting your heads together with mine on this.</p>
+      <p>Have thoughts or feedback? Reach out to <a href="mailto:liz@projectc.biz?subject=News%20ecosystem%20map">liz@projectc.biz</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container-wide">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img class="logo-img-footer" src="Project-C_Logo_White.png" alt="Project C">
+        </a>
+        <p>Supporting, amplifying, and normalizing independent creator-model journalism.</p>
+      </div>
+      <div class="footer-col"><h5>Explore</h5><a href="https://newsletter.projectc.biz">Newsletter</a><a href="/top50creatorjournalists">Top 50 List</a><a href="https://journalismatlas.com">The Independent Journalism Atlas</a><a href="news-ecosystem-map.html">News Ecosystem Map</a><a href="/going-solo">Going Solo Workshop</a></div>
+      <div class="footer-col"><h5>Community</h5><a href="/community">Join the Community</a><a href="coaching.html">Coaching</a><a href="about.html">About Project C</a></div>
+      <div class="footer-col"><h5>Connect</h5><a href="about.html#founder">Team</a><a href="mailto:liz@projectc.biz">Contact</a><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="press.html">Press &amp; Speaking</a></div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Project C. All rights reserved.</span>
+      <div class="footer-social"><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="https://newsletter.projectc.biz">Beehiiv</a></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+</script>
+</body>
+</html>

@@ -131,7 +131,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   pointer-events: none;
 }
 .coaching-hero-grid {
-  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; align-items: center;
+  max-width: 760px;
 }
 .coaching-hero h1 {
   font-family: var(--serif);
@@ -418,16 +418,13 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
-  .coaching-hero-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
   .blair-grid { grid-template-columns: 280px 1fr; gap: 2.5rem; }
   .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
   .coaching-hero { padding: 8rem 0 4rem; min-height: auto; }
-  .coaching-hero-grid { grid-template-columns: 1fr; }
-  .coaching-hero-photo { order: -1; max-height: 350px; }
-  .coaching-hero-photo img { height: 350px; object-fit: cover; object-position: center top; }
+  .coaching-hero-grid { max-width: 100%; }
   .coaching-hero-actions { flex-direction: column; align-items: flex-start; }
   .blair-grid { grid-template-columns: 1fr; }
   .blair-photo { max-height: 350px; }
@@ -490,10 +487,6 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
           <a href="#paths" class="btn-primary">See Coaching Options &rarr;</a>
           <a href="#blair" class="btn-secondary">Meet Your Coach</a>
         </div>
-      </div>
-      <div class="coaching-hero-photo reveal">
-        <img src="liz-and-blair.jpg" alt="Blair Hickman and Liz Kelly Nelson">
-        <div class="coaching-hero-photo-caption">Blair Hickman &amp; Liz Kelly Nelson</div>
       </div>
     </div>
   </div>

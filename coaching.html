@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Coaching — Project C</title>
-<meta name="description" content="Strategic coaching for creator journalists. Work 1-on-1 with Blair Hickman or join the Accelerate cohort program. Clarify your goals, grow your business, and stop burning out.">
-<meta name="keywords" content="coaching, creator journalism, Blair Hickman, Accelerate, Project C, independent journalism, media business coaching">
+<meta name="description" content="1-on-1 coaching for creator journalists. Work directly with Blair Hickman to grow your audience, your revenue, and your confidence as an independent.">
+<meta name="keywords" content="coaching, creator journalism, Blair Hickman, Project C, independent journalism, media business coaching">
 <meta name="author" content="Project C">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://projectc.biz/coaching">
-<meta property="og:title" content="Coaching — Project C">
-<meta property="og:description" content="Strategic coaching for creator journalists. Work 1-on-1 with Blair Hickman or join the Accelerate cohort program.">
+<meta property="og:title" content="1-on-1 Coaching — Project C">
+<meta property="og:description" content="Work directly with Blair Hickman to grow your audience, your revenue, and your confidence as an independent.">
 <meta property="og:image" content="https://projectc.biz/Project-C_Logo_color.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Coaching — Project C">
-<meta name="twitter:description" content="Strategic coaching for creator journalists. Work with Blair Hickman to clarify your goals, grow your business, and stop burning out.">
+<meta name="twitter:title" content="1-on-1 Coaching — Project C">
+<meta name="twitter:description" content="Work directly with Blair Hickman to grow your audience, your revenue, and your confidence as an independent.">
 <link rel="icon" type="image/png" href="Project-C_Logo_color.png">
 <link rel="apple-touch-icon" href="Project-C_Logo_color.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -118,11 +118,10 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
    COACHING PAGE
    ═══════════════════════════════════════════════ */
 
-/* HERO */
+/* HERO — two columns */
 .coaching-hero {
-  padding: 10rem 0 6rem;
+  padding: 10rem 0 5rem;
   position: relative; overflow: hidden;
-  min-height: 80vh; display: flex; align-items: center;
 }
 .coaching-hero::before {
   content: ''; position: absolute; top: -20%; right: -15%;
@@ -130,236 +129,213 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   background: radial-gradient(circle, rgba(224,154,194,0.12) 0%, transparent 70%);
   pointer-events: none;
 }
-.coaching-hero-grid {
-  max-width: 760px;
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: center;
 }
 .coaching-hero h1 {
   font-family: var(--serif);
-  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
   line-height: 1.05; color: var(--deep);
   text-transform: uppercase; margin-bottom: 1.5rem;
 }
 .coaching-hero h1 em { font-style: normal; color: var(--coral); }
-.coaching-hero-sub {
-  font-size: 1.15rem; color: rgba(54,10,5,0.7);
-  line-height: 1.7; max-width: 540px; margin-bottom: 1rem;
+.hero-right p {
+  font-size: 1.05rem; color: rgba(54,10,5,0.65);
+  line-height: 1.75; margin-bottom: 1.25rem;
 }
-.coaching-hero-sub-small {
-  font-size: 0.95rem; color: rgba(54,10,5,0.55);
-  line-height: 1.7; max-width: 520px; margin-bottom: 2.5rem;
-}
-.coaching-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-.coaching-hero-photo {
-  position: relative; border-radius: 24px; overflow: hidden;
-  box-shadow: 0 25px 80px rgba(32,6,3,0.12);
-}
-.coaching-hero-photo img { width: 100%; height: auto; display: block; object-fit: cover; }
-.coaching-hero-photo-caption {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  background: linear-gradient(transparent, rgba(32,6,3,0.7));
-  padding: 2rem 1.5rem 1.25rem; color: white;
-  font-size: 0.8rem; font-weight: 500;
-}
+.hero-right .coaching-hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
 
-/* WHO IT'S FOR */
-.section-whoisitfor { padding: 6rem 0; background: white; }
-.whoisitfor-inner { max-width: 760px; margin: 0 auto; text-align: center; }
-.whoisitfor-inner h2 {
+/* PHILOSOPHY — dark section */
+.section-philosophy {
+  padding: 5rem 0;
+  background: var(--deep);
+  color: var(--cream);
+  position: relative; overflow: hidden;
+}
+.section-philosophy::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 4px; background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral));
+}
+.philosophy-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: start;
+}
+.philosophy-headline {
   font-family: var(--serif);
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  line-height: 1.1; text-transform: uppercase;
-  color: var(--deep); margin-bottom: 1.75rem;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 1.05; color: var(--cream);
+  text-transform: uppercase; letter-spacing: 0.02em;
 }
-.whoisitfor-inner h2 em { font-style: normal; color: var(--coral); }
-.whoisitfor-body {
-  font-size: 1.1rem; color: rgba(54,10,5,0.7);
-  line-height: 1.8; text-align: left;
-  max-width: 640px; margin: 0 auto;
+.philosophy-headline em { font-style: normal; color: var(--coral); }
+.philosophy-eyebrow { color: var(--coral); }
+.philosophy-eyebrow::before { background: var(--coral); }
+.philosophy-right p {
+  font-size: 1rem; color: rgba(244,242,234,0.65);
+  line-height: 1.8; margin-bottom: 1.25rem;
 }
-.whoisitfor-body p { margin-bottom: 1.25rem; }
-.whoisitfor-body strong { color: var(--brown); font-weight: 600; }
 
-/* MEET BLAIR */
-.section-blair { padding: 6rem 0; background: var(--cream); }
-.blair-grid {
-  display: grid; grid-template-columns: 340px 1fr;
-  gap: 3.5rem; align-items: center;
+/* COACH — two-column */
+.section-coach { padding: 5rem 0; background: white; }
+.coach-grid {
+  display: grid; grid-template-columns: 300px 1fr;
+  gap: 3rem; align-items: start;
 }
-.blair-photo {
+.coach-photo {
   border-radius: 20px; overflow: hidden;
   box-shadow: 0 15px 50px rgba(32,6,3,0.1);
+  position: sticky; top: 100px;
 }
-.blair-photo img { width: 100%; height: auto; display: block; object-fit: cover; }
-.blair-content h2 {
+.coach-photo img { width: 100%; height: auto; display: block; object-fit: cover; }
+.coach-content h2 {
   font-family: var(--serif);
   font-size: clamp(1.8rem, 3vw, 2.4rem);
   text-transform: uppercase; color: var(--deep);
   margin-bottom: 1rem; line-height: 1.1;
 }
-.blair-content p {
-  font-size: 1rem; color: rgba(54,10,5,0.65);
-  line-height: 1.7; margin-bottom: 1rem; max-width: 540px;
-}
-.blair-creds { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.5rem; }
-.blair-cred {
-  font-size: 0.75rem; font-weight: 500;
-  padding: 0.4rem 0.9rem; border-radius: 100px;
-  background: rgba(254,107,65,0.06);
-  border: 1px solid rgba(254,107,65,0.12); color: var(--coral);
+.coach-content p {
+  font-size: 0.95rem; color: rgba(54,10,5,0.65);
+  line-height: 1.75; margin-bottom: 1rem; max-width: 560px;
 }
 
-/* TWO PATHS */
-.section-paths {
-  padding: 6rem 0; background: var(--deep); color: var(--cream);
+/* GOOD FIT — cards */
+.section-fit {
+  padding: 5rem 0;
+  background: var(--cream);
+}
+.fit-header {
+  margin-bottom: 2.5rem;
+}
+.fit-header h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  text-transform: uppercase; color: var(--deep);
+  line-height: 1.05;
+}
+.fit-header h2 em { font-style: normal; color: var(--coral); }
+.fit-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.fit-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  border-left: 4px solid var(--coral);
+  box-shadow: 0 2px 12px rgba(32,6,3,0.04);
+  transition: all 0.3s ease;
+}
+.fit-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(32,6,3,0.08);
+}
+.fit-card .fit-icon {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.fit-card p {
+  font-size: 0.92rem;
+  color: rgba(54,10,5,0.7);
+  line-height: 1.65;
+}
+
+/* WHAT'S INCLUDED — dark */
+.section-included {
+  padding: 5rem 0; background: var(--deep); color: var(--cream);
   position: relative; overflow: hidden;
 }
-.section-paths::before {
+.section-included::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0;
   height: 4px; background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral));
 }
-.paths-header { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
-.paths-header .section-eyebrow { justify-content: center; color: var(--coral); }
-.paths-header .section-eyebrow::before { background: var(--coral); }
-.paths-header .section-title { color: var(--cream); }
-.paths-header p { color: rgba(244,242,234,0.6); font-size: 1.05rem; line-height: 1.7; }
-.paths-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-.path-card {
-  background: rgba(244,242,234,0.06);
-  border: 1.5px solid rgba(244,242,234,0.12);
-  border-radius: 24px; padding: 2.5rem;
-  transition: all 0.3s ease;
-  display: flex; flex-direction: column;
+.included-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: start;
 }
-.path-card:hover {
-  background: rgba(244,242,234,0.09);
-  border-color: rgba(244,242,234,0.2);
-  transform: translateY(-4px);
-}
-.path-label {
-  font-size: 0.7rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.1em;
-  padding: 0.35rem 0.85rem; border-radius: 100px;
-  display: inline-block; margin-bottom: 1.5rem; width: fit-content;
-}
-.path-label.coral { background: rgba(254,107,65,0.15); color: var(--coral); }
-.path-label.pink { background: rgba(224,154,194,0.15); color: var(--pink); }
-.path-card h3 {
-  font-family: var(--serif); font-size: 1.8rem;
-  text-transform: uppercase; color: var(--cream);
-  margin-bottom: 0.75rem; line-height: 1.1;
-}
-.path-card .path-subtitle {
+.included-left .section-eyebrow { color: var(--coral); }
+.included-left .section-eyebrow::before { background: var(--coral); }
+.included-left .section-title { color: var(--cream); }
+.included-left p {
   font-size: 1rem; color: rgba(244,242,234,0.6);
-  line-height: 1.7; margin-bottom: 1.5rem;
+  line-height: 1.75; max-width: 480px; margin-bottom: 2rem;
 }
-.path-features { list-style: none; margin-bottom: 2rem; flex-grow: 1; }
-.path-features li {
-  font-size: 0.9rem; color: rgba(244,242,234,0.7);
-  padding: 0.6rem 0;
-  border-bottom: 1px solid rgba(244,242,234,0.06);
-  display: flex; align-items: flex-start; gap: 0.75rem; line-height: 1.5;
+.included-list { list-style: none; }
+.included-list li {
+  font-size: 0.9rem; color: rgba(244,242,234,0.75);
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(244,242,234,0.08);
+  display: flex; align-items: flex-start; gap: 0.75rem; line-height: 1.55;
 }
-.path-features li:last-child { border-bottom: none; }
-.path-check { color: var(--coral); font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
-.path-pricing {
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(244,242,234,0.1);
-  margin-bottom: 1.5rem;
+.included-list li:last-child { border-bottom: none; }
+.included-check { color: var(--coral); font-weight: 700; flex-shrink: 0; margin-top: 0.1rem; }
+.included-footer {
+  max-width: 720px; margin-top: 2.5rem;
+  padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.1);
 }
-.path-price {
-  font-family: var(--serif); font-size: 1.6rem;
-  color: var(--cream); text-transform: uppercase;
+.included-footer .price-line {
+  font-size: 1rem; color: rgba(244,242,234,0.85);
+  font-weight: 600; margin-bottom: 0.75rem;
 }
-.path-price-note {
-  font-size: 0.8rem; color: rgba(244,242,234,0.45); margin-top: 0.25rem;
+.included-footer .selectivity-note {
+  font-size: 0.9rem; color: rgba(244,242,234,0.55);
+  line-height: 1.75; margin-bottom: 1.5rem;
 }
 
-/* OUTCOMES */
-.section-outcomes { padding: 6rem 0; background: var(--cream); }
-.outcomes-header { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
-.outcomes-header p { font-size: 1.05rem; color: rgba(54,10,5,0.6); line-height: 1.7; margin-top: 1rem; }
-.outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+/* OUTCOMES — compact cards */
+.section-outcomes { padding: 5rem 0; background: var(--cream); }
+.outcomes-header {
+  max-width: 700px; margin: 0 auto 2.5rem; text-align: center;
+}
+.outcomes-header p { font-size: 0.95rem; color: rgba(54,10,5,0.6); line-height: 1.75; margin-top: 0.75rem; }
+.outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 .outcome-card {
-  background: white; border-radius: 20px; padding: 2rem;
+  background: white; border-radius: 16px; padding: 1.5rem;
   border: 1px solid rgba(54,10,5,0.06); transition: all 0.3s ease;
 }
 .outcome-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(32,6,3,0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(32,6,3,0.07);
   border-color: rgba(254,107,65,0.15);
 }
 .outcome-icon {
-  width: 48px; height: 48px; border-radius: 14px;
+  width: 40px; height: 40px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.3rem; margin-bottom: 1.25rem;
+  font-size: 1.1rem; margin-bottom: 1rem;
   background: rgba(254,107,65,0.08);
 }
 .outcome-icon.pink { background: rgba(224,154,194,0.12); }
 .outcome-card h3 {
-  font-family: var(--serif); font-size: 1.15rem;
-  text-transform: uppercase; margin-bottom: 0.5rem; line-height: 1.15;
+  font-family: var(--serif); font-size: 1.05rem;
+  text-transform: uppercase; margin-bottom: 0.4rem; line-height: 1.15;
 }
-.outcome-card p { font-size: 0.88rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
-
-/* APPROACH / VALUES */
-.section-approach {
-  padding: 5rem 0; background: white;
-}
-.approach-inner {
-  max-width: 900px; margin: 0 auto; text-align: center;
-}
-.approach-inner h2 {
-  font-family: var(--serif);
-  font-size: clamp(1.8rem, 3vw, 2.4rem);
-  text-transform: uppercase; color: var(--deep);
-  line-height: 1.1; margin-bottom: 1rem;
-}
-.approach-inner > p {
-  font-size: 1.05rem; color: rgba(54,10,5,0.6);
-  line-height: 1.7; max-width: 600px; margin: 0 auto 2.5rem;
-}
-.approach-tags {
-  display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem;
-}
-.approach-tag {
-  font-size: 0.85rem; font-weight: 600;
-  padding: 0.6rem 1.25rem; border-radius: 100px;
-  border: 1.5px solid rgba(54,10,5,0.1);
-  color: var(--brown);
-  transition: all 0.2s ease;
-}
-.approach-tag:hover {
-  border-color: var(--coral);
-  background: rgba(254,107,65,0.04);
-  color: var(--coral);
-}
+.outcome-card p { font-size: 0.82rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
 
 /* FAQ */
-.section-faq { padding: 6rem 0; background: var(--cream); }
-.faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+.section-faq { padding: 5rem 0; background: white; }
+.faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 3.5rem; align-items: start; }
 .faq-left h2 {
   font-family: var(--serif);
   font-size: clamp(2rem, 3vw, 2.8rem);
   text-transform: uppercase; color: var(--deep);
   line-height: 1.05; margin-bottom: 1rem;
 }
-.faq-left p { font-size: 0.95rem; color: rgba(54,10,5,0.55); line-height: 1.7; }
+.faq-left p { font-size: 0.9rem; color: rgba(54,10,5,0.55); line-height: 1.7; }
 .faq-item { border-bottom: 1.5px solid rgba(54,10,5,0.1); }
 .faq-item:first-child { border-top: 1.5px solid rgba(54,10,5,0.1); }
 .faq-question {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 1.25rem 0; cursor: pointer;
+  padding: 1.1rem 0; cursor: pointer;
   background: none; border: none; width: 100%; text-align: left;
-  font-family: var(--serif); font-size: 1.1rem;
+  font-family: var(--serif); font-size: 1.05rem;
   text-transform: uppercase; color: var(--deep);
   letter-spacing: 0.02em; line-height: 1.2; gap: 1rem;
 }
 .faq-question:hover { color: var(--coral); }
 .faq-toggle {
-  width: 28px; height: 28px; border-radius: 50%;
+  width: 26px; height: 26px; border-radius: 50%;
   border: 1.5px solid rgba(54,10,5,0.15);
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; flex-shrink: 0;
+  font-size: 1rem; flex-shrink: 0;
   transition: all 0.3s ease; color: var(--brown); font-weight: 300;
 }
 .faq-item.open .faq-toggle {
@@ -368,7 +344,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 }
 .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
 .faq-answer-inner {
-  padding: 0 0 1.5rem; font-size: 0.95rem;
+  padding: 0 0 1.25rem; font-size: 0.9rem;
   color: rgba(54,10,5,0.65); line-height: 1.7;
 }
 .faq-answer-inner a { color: var(--coral); text-decoration: none; font-weight: 500; }
@@ -377,7 +353,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 
 /* FINAL CTA */
 .section-coaching-cta {
-  padding: 7rem 0; background: var(--deep); color: var(--cream);
+  padding: 5rem 0; background: var(--deep); color: var(--cream);
   text-align: center; position: relative; overflow: hidden;
 }
 .section-coaching-cta::before {
@@ -387,19 +363,18 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   background: radial-gradient(circle, rgba(254,107,65,0.08) 0%, transparent 60%);
 }
 .coaching-cta-content {
-  position: relative; z-index: 1; max-width: 680px; margin: 0 auto;
+  position: relative; z-index: 1; max-width: 600px; margin: 0 auto;
 }
 .coaching-cta-content h2 {
   font-family: var(--serif);
-  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-size: clamp(2rem, 3.5vw, 2.8rem);
   text-transform: uppercase; color: var(--cream);
-  line-height: 1.05; margin-bottom: 1.25rem;
+  line-height: 1.05; margin-bottom: 1rem;
 }
 .coaching-cta-content h2 em { font-style: normal; color: var(--coral); }
 .coaching-cta-content p {
-  font-size: 1.05rem; color: rgba(244,242,234,0.6);
-  line-height: 1.7; margin-bottom: 2.5rem;
-  max-width: 500px; margin-left: auto; margin-right: auto;
+  font-size: 1rem; color: rgba(244,242,234,0.6);
+  line-height: 1.7; margin-bottom: 2rem;
 }
 .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
@@ -418,20 +393,23 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
-  .blair-grid { grid-template-columns: 280px 1fr; gap: 2.5rem; }
+  .hero-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .philosophy-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .coach-grid { grid-template-columns: 260px 1fr; gap: 2rem; }
+  .coach-photo { position: static; }
+  .included-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
+  .fit-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
-  .coaching-hero { padding: 8rem 0 4rem; min-height: auto; }
-  .coaching-hero-grid { max-width: 100%; }
-  .coaching-hero-actions { flex-direction: column; align-items: flex-start; }
-  .blair-grid { grid-template-columns: 1fr; }
-  .blair-photo { max-height: 350px; }
-  .blair-photo img { height: 350px; object-fit: cover; object-position: center top; }
-  .paths-grid { grid-template-columns: 1fr; }
+  .coaching-hero { padding: 8rem 0 3.5rem; }
+  .hero-right .coaching-hero-actions { flex-direction: column; align-items: flex-start; }
+  .coach-grid { grid-template-columns: 1fr; }
+  .coach-photo { max-height: 320px; }
+  .coach-photo img { height: 320px; object-fit: cover; object-position: center top; }
   .outcomes-grid { grid-template-columns: 1fr; }
-  .faq-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .faq-layout { grid-template-columns: 1fr; gap: 1.5rem; }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .nav-links { display: none; }
   .nav-toggle { display: block; }
@@ -442,7 +420,6 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     box-shadow: 0 8px 30px rgba(32,6,3,0.1);
     border-bottom: 1px solid rgba(54,10,5,0.06);
   }
-  .approach-tags { gap: 0.5rem; }
 }
 </style>
 </head>
@@ -462,7 +439,6 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
       <li><a href="index.html#community">Community</a></li>
       <li><a href="index.html#goingsolo">Going Solo</a></li>
       <li><a href="coaching.html" style="color:var(--coral); font-weight:600;">Coaching</a></li>
-      <li><a href="news-ecosystem-map.html">News Ecosystem</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="index.html#newsletter" class="nav-cta">Subscribe Free</a></li>
     </ul>
@@ -473,19 +449,20 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 </nav>
 
 <!-- ═══════════════════════════════════════════════
-     HERO — The emotional hook
+     HERO
      ═══════════════════════════════════════════════ -->
 <section class="coaching-hero">
   <div class="container-wide">
-    <div class="coaching-hero-grid">
-      <div class="reveal">
-        <div class="section-eyebrow">Coaching &amp; Advisory</div>
-        <h1>You didn't start a media business because you love <em>sales calls.</em></h1>
-        <p class="coaching-hero-sub">You started this because you love the work — the reporting, the writing, the chance to own your IP and your career. You wanted a business that gave you freedom, energy, and joy.</p>
-        <p class="coaching-hero-sub-small">But if you've done what you set out to do, that also means your responsibilities have grown ten fold. Coaching gives you an experienced media leader in your corner — someone who's been where you are, who'll help you see clearly, and who'll push you to build something sustainable.</p>
+    <div class="hero-grid reveal">
+      <div>
+        <div class="section-eyebrow">1-on-1 Coaching</div>
+        <h1>You've got the journalism. Let's build the business <em>together.</em></h1>
+      </div>
+      <div class="hero-right">
+        <p>1-on-1 coaching with Project C gives you a thought partner to help you take your business to the next level, whether you're just starting out or are a few years in and ready to scale and stop being the bottleneck in your own operation.</p>
         <div class="coaching-hero-actions">
-          <a href="#paths" class="btn-primary">See Coaching Options &rarr;</a>
-          <a href="#blair" class="btn-secondary">Meet Your Coach</a>
+          <a href="https://app.paperbell.com/checkout/packages/212890" class="btn-primary" target="_blank">Book a Discovery Call &rarr;</a>
+          <a href="#coach" class="btn-secondary">Meet Blair</a>
         </div>
       </div>
     </div>
@@ -493,167 +470,152 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     WHO IT'S FOR — The mirror
+     PHILOSOPHY — dark section
      ═══════════════════════════════════════════════ -->
-<section class="section-whoisitfor">
-  <div class="container">
-    <div class="whoisitfor-inner reveal">
-      <h2>You've done the <em>hard part.</em><br>Now do it smarter.</h2>
-      <div class="whoisitfor-body">
-        <p>You're closing deals, making product decisions, leading strategy meetings, hiring, talking to investors, and figuring out how to keep the business growing in a world that seems hell bent on making that growth plateau.</p>
-        <p>You're probably so deep in your business that it's hard to see the small tweaks that can have a significant impact. The biggest benefit of coaching is accountability, support, and an outside eye.</p>
-        <p><strong>Coaching isn't about doing more.</strong> It's about getting clarity on what actually matters, building systems that work without you in the room, and having someone who's seen the patterns before — so you don't have to figure it all out alone.</p>
+<section class="section-philosophy">
+  <div class="container-wide">
+    <div class="philosophy-grid reveal">
+      <div>
+        <div class="section-eyebrow philosophy-eyebrow">How We Work</div>
+        <h2 class="philosophy-headline">Nobody hands you a playbook when you go <em>independent.</em></h2>
+      </div>
+      <div class="philosophy-right">
+        <p>You became a creator journalist because you love the work. You wanted to report, create, do work that matters, own it and feel agency over your own career.</p>
+        <p>But now you're also running a business. Odds are, nobody taught you how to do that part. And now you're exhausted from figuring it all out alone, second-guessing yourself and shouldering everything.</p>
+        <p>Project C's coaching gives you a senior-level thought partner to help you make decisions, gain confidence, learn key skills and figure out how to make it all sustainable. It is the launchpad for you becoming the founder your work deserves.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     MEET BLAIR — The trust builder
+     ABOUT YOUR COACH
      ═══════════════════════════════════════════════ -->
-<section class="section-blair" id="blair">
+<section class="section-coach" id="coach">
   <div class="container-wide">
-    <div class="blair-grid reveal">
-      <div class="blair-photo">
-        <img src="team-blair.webp" alt="Blair Hickman, Project C Lead Coach">
+    <div class="coach-grid reveal">
+      <div class="coach-photo">
+        <img src="team-blair.webp" alt="Blair Hickman, Project C Coach">
       </div>
-      <div class="blair-content">
+      <div class="coach-content">
         <div class="section-eyebrow">Your Coach</div>
         <h2>Blair Hickman</h2>
-        <p>Blair is a media executive who has led business strategy, audience growth, and innovation at places like Vox and ProPublica — and has coached dozens of journalists on how to launch and grow independent media businesses.</p>
-        <p>She combines traditional coaching elements — asking questions, letting you come to the answers — with real-world expertise in newsroom management, creator journalism, human-centered design, data, audience growth, and revenue. We fuse coaching, advising, and teaching, depending on what you need.</p>
-        <p>We create space to ask questions and be gentle around how hard this is — and give you real talk when you need it. Project C co-founder Liz Kelly Nelson is also in the wings for support.</p>
-        <div class="blair-creds">
-          <span class="blair-cred">Former Vox Executive</span>
-          <span class="blair-cred">ProPublica</span>
-          <span class="blair-cred">Business Strategy</span>
-          <span class="blair-cred">Audience Growth</span>
-          <span class="blair-cred">Revenue &amp; Monetization</span>
-          <span class="blair-cred">Human-Centered Design</span>
-        </div>
+        <p>Blair is a people-first media executive, strategist and coach who spent nearly two decades leading innovation, transformation and strategic growth inside fast-growing newsrooms like Vox and ProPublica. She's designed content strategies that reached hundreds of millions of people, led strategic planning and brand refreshes, and built Vox's consumer revenue program from the ground up.</p>
+        <p>She's an expert in design and product thinking, and believes deeply in building a business that can support your life. She's a co-founder of Going Solo, and at this point has coached nearly 100 creator journalists on launching and sustaining independent businesses.</p>
+        <p>You'll also get occasional sessions with Project C founder Liz Kelly Nelson, who led innovation at The Washington Post and Vox before building the 200+ member Project C community and The Independent Journalism Atlas. Her ongoing research into how journalism and the creator economy intersect informs everything we do here.</p>
+        <p>Between the two of them, you're working with people who've actually built the kinds of things you're trying to build.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     TWO PATHS — The choice
+     YOU MIGHT BE A GOOD FIT IF — cards
      ═══════════════════════════════════════════════ -->
-<section class="section-paths" id="paths">
+<section class="section-fit">
   <div class="container-wide">
-    <div class="paths-header reveal">
-      <div class="section-eyebrow">Two Ways to Work With Us</div>
-      <h2 class="section-title">Find the right fit for<br>where you are</h2>
-      <p>Whether you want deep, personalized 1-on-1 guidance or the energy and accountability of a cohort, there's a coaching path for you. Both start with a free conversation to make sure we're a good fit.</p>
+    <div class="fit-header reveal">
+      <div class="section-eyebrow">Is This Right For You?</div>
+      <h2>You might be a good fit <em>if...</em></h2>
     </div>
-    <div class="paths-grid">
-
-      <!-- PATH 1: 1-on-1 Coaching -->
-      <div class="path-card reveal">
-        <span class="path-label coral">Flexible &amp; Personal</span>
-        <h3>1-on-1 Coaching</h3>
-        <p class="path-subtitle">For creator journalists at any stage who want to level up. A mix of coaching, teaching, and thought partnership — tailored to your specific goals and challenges.</p>
-        <ul class="path-features">
-          <li><span class="path-check">&#10003;</span> 90-minute kickoff to identify goals, roadblocks, and build your custom roadmap</li>
-          <li><span class="path-check">&#10003;</span> Two 60-min coaching sessions with Blair per month, with action steps</li>
-          <li><span class="path-check">&#10003;</span> Resilience coaching to sustain you through the hard parts</li>
-          <li><span class="path-check">&#10003;</span> Async Slack + voice note support between sessions</li>
-          <li><span class="path-check">&#10003;</span> Document reviews (pitches, grant proposals, sales copy)</li>
-          <li><span class="path-check">&#10003;</span> Access to resource library, templates, and vetted freelancer network</li>
-        </ul>
-        <div class="path-pricing">
-          <div class="path-price">$1,000/month</div>
-          <div class="path-price-note">4 months. Or $3,800 upfront (save $200). The first step is a free chat.</div>
-        </div>
-        <a href="mailto:info@projectc.biz?subject=1-on-1%20Coaching%20Inquiry" class="btn-primary" style="width:100%; justify-content:center;">Book a Starter Chat &rarr;</a>
+    <div class="fit-grid">
+      <div class="fit-card reveal">
+        <div class="fit-icon">&#128218;</div>
+        <p>You want to figure out how to keep your business running while reclaiming the joy of actually making the work you care about.</p>
       </div>
-
-      <!-- PATH 2: Accelerate -->
-      <div class="path-card reveal">
-        <span class="path-label pink">Cohort Program</span>
-        <h3>Accelerate</h3>
-        <p class="path-subtitle">A transformative 4-month program for seasoned creator journalists making $100K+ in revenue. Combines 1-on-1 coaching with the support of a small mastermind of peers. Next cohort starts summer 2026.</p>
-        <ul class="path-features">
-          <li><span class="path-check">&#10003;</span> 90-minute kickoff + custom roadmap for your business</li>
-          <li><span class="path-check">&#10003;</span> Two 60-min 1-on-1 sessions with Blair per month</li>
-          <li><span class="path-check">&#10003;</span> Monthly facilitated mastermind with your cohort</li>
-          <li><span class="path-check">&#10003;</span> Async Slack + voice note coaching between sessions</li>
-          <li><span class="path-check">&#10003;</span> Document reviews (grant proposals, partnership decks, sales copy)</li>
-          <li><span class="path-check">&#10003;</span> Private Slack room with your cohort</li>
-          <li><span class="path-check">&#10003;</span> Complimentary year in the Project C Community</li>
-          <li><span class="path-check">&#10003;</span> Access to vetted freelancer network + resource library</li>
-        </ul>
-        <div class="path-pricing">
-          <div class="path-price">$1,400/month</div>
-          <div class="path-price-note">4 months. Or $5,300 upfront (save $300). Limited to 6 spots per cohort.</div>
-        </div>
-        <a href="mailto:info@projectc.biz?subject=Accelerate%20Program%20Inquiry" class="btn-primary" style="width:100%; justify-content:center; background:var(--pink);">Book a Starter Chat &rarr;</a>
+      <div class="fit-card reveal">
+        <div class="fit-icon">&#128101;</div>
+        <p>You need to hire, or just did, but have never actually managed anyone before and aren't sure where to start.</p>
+      </div>
+      <div class="fit-card reveal">
+        <div class="fit-icon">&#129300;</div>
+        <p>You're struggling with a lost sense of identity after leaving the newsroom, and it's getting in the way of building what's next.</p>
+      </div>
+      <div class="fit-card reveal">
+        <div class="fit-icon">&#128176;</div>
+        <p>You're making money but have no idea if your business model is sustainable, or how to grow it without burning out.</p>
+      </div>
+      <div class="fit-card reveal">
+        <div class="fit-icon">&#127919;</div>
+        <p>You have too many ideas pulling you in different directions and need help figuring out which one to actually pursue.</p>
+      </div>
+      <div class="fit-card reveal">
+        <div class="fit-icon">&#128640;</div>
+        <p>You're ready to stop winging it. You want real strategy behind the business side of what you're building.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════
-     WHAT WE WORK ON — The outcomes
+     WHAT'S INCLUDED
+     ═══════════════════════════════════════════════ -->
+<section class="section-included" id="included">
+  <div class="container-wide">
+    <div class="included-grid">
+      <div class="included-left reveal">
+        <div class="section-eyebrow">What You Get</div>
+        <h2 class="section-title">Four months of<br>real work together</h2>
+        <p>This isn't a course and it isn't a quick fix. It's four months of working closely with someone who understands what you're building and can help you make real progress on the things that feel stuck.</p>
+      </div>
+      <div class="reveal">
+        <ul class="included-list">
+          <li><span class="included-check">&#10003;</span> Two 60-minute coaching sessions per month</li>
+          <li><span class="included-check">&#10003;</span> A sounding board for the decisions that keep you up at night, from pricing to editorial direction to whether it's time to hire</li>
+          <li><span class="included-check">&#10003;</span> Resilience and capacity coaching for the hard stretches when you're questioning all of it</li>
+          <li><span class="included-check">&#10003;</span> Async support between sessions via Voxer and email, so you're not waiting two weeks when something comes up</li>
+          <li><span class="included-check">&#10003;</span> Access to our resource library and our trusted network of freelancers when you need hands, not just strategy</li>
+        </ul>
+      </div>
+    </div>
+    <div class="included-footer reveal">
+      <p class="price-line">Investment: $1,000/month for four months</p>
+      <p class="selectivity-note">We're selective about who we work with. This is a significant investment, and we want to make sure it's worth your time. The people who get the most out of this are ambitious, self-aware and ready to do the work. The first step is a call to see if we're a good fit for each other.</p>
+      <a href="https://app.paperbell.com/checkout/packages/212890" class="btn-primary" target="_blank">Book a Discovery Call &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     WHAT COACHING LOOKS LIKE — outcomes
      ═══════════════════════════════════════════════ -->
 <section class="section-outcomes" id="outcomes">
   <div class="container-wide">
     <div class="outcomes-header reveal">
-      <div class="section-eyebrow" style="justify-content:center;">Together, We'll</div>
-      <h2 class="section-title">What coaching looks like</h2>
-      <p>Every engagement is different. Here's the kind of work we do together — whether you're in 1-on-1 coaching or Accelerate.</p>
+      <div class="section-eyebrow" style="justify-content:center;">What Coaching Looks Like</div>
+      <h2 class="section-title">What we work on together</h2>
+      <p>Our style blends intuitive coaching, teaching and strategic advisory. You lead the sessions, and we adapt as you grow. We prioritize action, iteration and sustainable progress.</p>
     </div>
     <div class="outcomes-grid">
       <div class="outcome-card reveal">
         <div class="outcome-icon">&#127919;</div>
-        <h3>Clarify your goals &amp; priorities</h3>
-        <p>Cut through the noise and get clear on what matters most for your business right now — not six hypothetical futures, just the one that actually moves you forward.</p>
+        <h3>Ruthlessly prioritize</h3>
+        <p>Stop chasing six different ideas and get clear on the one thing that moves your business forward right now.</p>
       </div>
       <div class="outcome-card reveal">
         <div class="outcome-icon pink">&#128200;</div>
-        <h3>Find growth &amp; revenue opportunities</h3>
-        <p>Review your business model with fresh eyes. Identify the opportunities you're too close to see and build a realistic plan to pursue them.</p>
+        <h3>Grow your audience and revenue</h3>
+        <p>Look at your business model with fresh eyes. Find the opportunities you're too close to see and build a realistic plan to go after them.</p>
       </div>
       <div class="outcome-card reveal">
         <div class="outcome-icon">&#9881;&#65039;</div>
-        <h3>Build systems that run without you</h3>
-        <p>Develop processes and workflows that keep things humming even when you step away. Delegate with confidence, not anxiety.</p>
+        <h3>Build systems that don't depend on you</h3>
+        <p>Create processes that keep things running even when you step away. Get your operations running in a way that's actually sustainable.</p>
       </div>
       <div class="outcome-card reveal">
         <div class="outcome-icon pink">&#128170;</div>
-        <h3>Strengthen your leadership</h3>
-        <p>Whether you're managing a growing team or flying solo, step into the leadership your business needs — and find the capacity you didn't know you had.</p>
+        <h3>Gain confidence to lead</h3>
+        <p>Whether you're managing contractors or doing everything yourself, learn to lead your business instead of just reacting to it.</p>
       </div>
       <div class="outcome-card reveal">
-        <div class="outcome-icon">&#128221;</div>
-        <h3>Get real feedback on your work</h3>
-        <p>From grant proposals to partnership decks to your editorial strategy — get honest, expert feedback that drives audience and business growth.</p>
+        <div class="outcome-icon">&#128161;</div>
+        <h3>Deal with the burnout</h3>
+        <p>Learn to break big ambitions into steps you can actually take. Create space for the parts of your life that aren't work. Stay in this for the long haul.</p>
       </div>
       <div class="outcome-card reveal">
-        <div class="outcome-icon pink">&#128161;</div>
-        <h3>Build resilience &amp; reduce overwhelm</h3>
-        <p>Identify the small shifts that unlock capacity and mental space. This isn't just about growing your business — it's about making the work sustainable and keeping you whole while you do it.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════
-     APPROACH & VALUES
-     ═══════════════════════════════════════════════ -->
-<section class="section-approach">
-  <div class="container">
-    <div class="approach-inner reveal">
-      <div class="section-eyebrow" style="justify-content:center;">Our Approach</div>
-      <h2>Not corporate consultants.<br>Not cheerleaders.</h2>
-      <p>We're practitioners who've built things — alone and with teams. Our coaching is grounded in real experience, not theory. Here's what guides us.</p>
-      <div class="approach-tags">
-        <span class="approach-tag">Data-Informed Intuition</span>
-        <span class="approach-tag">Human-Centered Design</span>
-        <span class="approach-tag">Iterative, Not Perfect</span>
-        <span class="approach-tag">Sustainable Growth</span>
-        <span class="approach-tag">Playful &amp; Honest</span>
-        <span class="approach-tag">Collaborative</span>
+        <div class="outcome-icon pink">&#127912;</div>
+        <h3>Experiment and play</h3>
+        <p>Not every session is about optimizing. Sometimes the most useful thing is permission to try something weird and see what happens.</p>
       </div>
     </div>
   </div>
@@ -667,27 +629,17 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     <div class="faq-layout">
       <div class="faq-left reveal">
         <h2>FAQ</h2>
-        <p>Still have questions? <a href="mailto:info@projectc.biz" style="color:var(--coral); text-decoration:none; font-weight:600;">Email us</a> — we're happy to talk it through.</p>
+        <p>Still have questions? <a href="mailto:info@projectc.biz" style="color:var(--coral); text-decoration:none; font-weight:600;">Email us</a> and we'll talk it through.</p>
       </div>
       <div class="faq-right reveal">
 
         <div class="faq-item">
           <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            What is coaching like?
+            What are the sessions actually like?
             <span class="faq-toggle">+</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Coaching with Project C combines traditional coaching elements — asking questions, letting you come to the answers — with expertise from real-world experience in newsroom management, creator journalism, human-centered design, data, audience growth, and revenue. We fuse coaching, advising, and teaching depending on what you need. We create space to ask questions and be gentle around how hard this is, and give you real talk when you need it.</div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            How much time will this take?
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">You get out of this what you put in. Coaching sessions and mastermind calls (for Accelerate) take about 3 hours per month. Beyond that, it's up to you how much time you spend implementing the changes we identify together. For 1-on-1 coaching, sessions are twice a month plus async support — the rest is on your schedule.</div>
+            <div class="faq-answer-inner">Blair lets you guide the conversation. She has plans and frameworks ready, but she doesn't force a rigid curriculum. If you come in knowing exactly what you need to work on, great. If you come in feeling scattered, she'll help you find the thread. Some weeks you'll work on strategy. Other weeks you'll work through something more personal, like the identity shift of going from newsroom journalist to business owner. It depends on what you need that week.</div>
           </div>
         </div>
 
@@ -697,27 +649,17 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
             <span class="faq-toggle">+</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">Going Solo is a group workshop designed to help journalists launch new ventures — it's for people who haven't started their business yet. Coaching is for creator journalists who are already building and want strategic support to grow. Think of Going Solo as the launchpad and coaching as the flight plan.</div>
+            <div class="faq-answer-inner">Going Solo is a group workshop for journalists who haven't launched yet. Coaching is for people who are already in it. You've started your thing and now you need help growing it, fixing what isn't working, or just getting out of your own way.</div>
           </div>
         </div>
 
         <div class="faq-item">
           <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            I feel like what I really need is more hands. Is this for me?
+            I need more hands, not more advice. Is this for me?
             <span class="faq-toggle">+</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">We focus on strategic foundations — making your support system, processes, and strategies sustainable. This builds your own capacity for transformational change. We also offer personalized feedback on work that drives audience and business growth. If you need tactical support — someone to just <em>do the work</em> of, say, writing a grant proposal — we can connect you to outside contractors.</div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            Which program is right for me?
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">If you want deep, personalized attention and prefer working privately, 1-on-1 coaching is a great fit at any career stage. If you're making $100K+ in revenue and want the added energy and accountability of a peer group, Accelerate gives you both 1-on-1 time and a mastermind community. Not sure? <a href="mailto:info@projectc.biz">Book a free starter chat</a> and we'll figure it out together.</div>
+            <div class="faq-answer-inner">We focus on strategic foundations. The goal is to build your own capacity so you can make better decisions about where to spend your time and money. That said, we also do hands-on document review and feedback on work that drives growth. And if you need someone to just do the work (write a grant proposal, redesign a landing page), we can connect you to freelancers in our network who we trust.</div>
           </div>
         </div>
 
@@ -727,17 +669,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
             <span class="faq-toggle">+</span>
           </button>
           <div class="faq-answer">
-            <div class="faq-answer-inner">1-on-1 Coaching is $1,000/month for four months, or $3,800 upfront (a $200 discount). Accelerate is $1,400/month for four months, or $5,300 upfront (a $300 discount). For a quarter of the price of an entry-level employee, you get an experienced media leader in your corner who has experience building things both alone and with teams.</div>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            How do I get started?
-            <span class="faq-toggle">+</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">The first step is a free starter chat — a short conversation with Blair to make sure coaching is a good fit for where you are and what you need. No pressure, no commitment. <a href="mailto:info@projectc.biz?subject=Coaching%20Inquiry">Reach out</a> and we'll find a time.</div>
+            <div class="faq-answer-inner">$1,000 per month for four months. For a fraction of what you'd pay an employee, you get an experienced media leader in your corner who has built the kinds of things you're building, both independently and with teams.</div>
           </div>
         </div>
 
@@ -752,11 +684,10 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 <section class="section-coaching-cta">
   <div class="container">
     <div class="coaching-cta-content reveal">
-      <h2>The first step is a <em>conversation.</em></h2>
-      <p>Whether you're ready for Accelerate or exploring 1-on-1 coaching, let's talk about where you are and where you want to go. No commitment, no pressure — just a conversation.</p>
+      <h2>The next version of your business starts with <em>one conversation.</em></h2>
+      <p>We'll chat about where you are and where you want to go. Sometimes, it makes sense for us to peek at your work during the call. (We call it a First Impression Audit.) But mostly this is an honest conversation to figure out if we're a good fit for each other.</p>
       <div class="cta-actions">
-        <a href="mailto:info@projectc.biz?subject=Coaching%20Inquiry" class="btn-primary">Book a Free Starter Chat &rarr;</a>
-        <a href="index.html" class="btn-secondary" style="color:var(--cream); border-color:rgba(244,242,234,0.25);">Back to Project C</a>
+        <a href="https://app.paperbell.com/checkout/packages/212890" class="btn-primary" target="_blank">Let's talk &rarr;</a>
       </div>
     </div>
   </div>
@@ -772,7 +703,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
         </a>
         <p>Supporting, amplifying, and normalizing independent creator-model journalism.</p>
       </div>
-      <div class="footer-col"><h5>Explore</h5><a href="https://newsletter.projectc.biz">Newsletter</a><a href="/top50creatorjournalists">Top 50 List</a><a href="https://journalismatlas.com">The Independent Journalism Atlas</a><a href="news-ecosystem-map.html">News Ecosystem Map</a><a href="/going-solo">Going Solo Workshop</a></div>
+      <div class="footer-col"><h5>Explore</h5><a href="https://newsletter.projectc.biz">Newsletter</a><a href="/top50creatorjournalists">Top 50 List</a><a href="https://journalismatlas.com">The Independent Journalism Atlas</a><a href="/going-solo">Going Solo Workshop</a></div>
       <div class="footer-col"><h5>Community</h5><a href="/community">Join the Community</a><a href="coaching.html">Coaching</a><a href="about.html">About Project C</a></div>
       <div class="footer-col"><h5>Connect</h5><a href="about.html#founder">Team</a><a href="mailto:liz@projectc.biz">Contact</a><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="press.html">Press &amp; Speaking</a></div>
     </div>
@@ -784,18 +715,15 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 </footer>
 
 <script>
-// Nav scroll effect
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
 
-// Reveal on scroll
 const reveals = document.querySelectorAll('.reveal');
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 reveals.forEach(el => revealObserver.observe(el));
 
-// Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const id = this.getAttribute('href'); if (id === '#') return;

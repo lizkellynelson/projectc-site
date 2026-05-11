@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Emerging Journalism Creators Lab — Project C x Google News Initiative</title>
-<meta name="description" content="An 8-week training program for early-stage creator journalists, built by Project C in partnership with Google News Initiative and ASU Cronkite School.">
-<meta name="keywords" content="creator journalism, Google News Initiative, journalism training, Project C, emerging journalists, ASU Cronkite, journalism creators lab">
+<title>Journalism Creators Startup Lab — Project C x Google News Initiative</title>
+<meta name="description" content="An 8-week training program for early-stage creator journalists, built by Project C in partnership with Google News Initiative and ASU's Knight Center for the Future of News.">
+<meta name="keywords" content="creator journalism, Google News Initiative, journalism training, Project C, emerging journalists, ASU Cronkite, journalism creators startup lab">
 <meta name="author" content="Project C">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://projectc.biz/emerging-creators-lab">
-<meta property="og:title" content="Emerging Journalism Creators Lab — Project C x Google News Initiative">
-<meta property="og:description" content="An 8-week training program for early-stage creator journalists, built by Project C in partnership with Google News Initiative and ASU Cronkite School.">
+<meta property="og:title" content="Journalism Creators Startup Lab — Project C x Google News Initiative">
+<meta property="og:description" content="An 8-week training program for early-stage creator journalists, built by Project C in partnership with Google News Initiative and ASU's Knight Center for the Future of News.">
 <meta property="og:image" content="https://projectc.biz/project-c_logo_color.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Emerging Journalism Creators Lab — Project C x Google News Initiative">
-<meta name="twitter:description" content="An 8-week training program for early-stage creator journalists, built by Project C in partnership with Google News Initiative.">
+<meta name="twitter:title" content="Journalism Creators Startup Lab — Project C x Google News Initiative">
+<meta name="twitter:description" content="An 8-week training program for early-stage creator journalists, built by Project C in partnership with Google News Initiative and ASU.">
 <link rel="icon" type="image/png" href="project-c_logo_color.png">
 <link rel="apple-touch-icon" href="project-c_logo_color.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -480,15 +480,118 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 .footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
 .footer-social a:hover { color: var(--coral); }
 
+/* OPTIONAL LABS CARD */
+.week-labs {
+  background: transparent;
+  border: 1.5px dashed rgba(244,242,234,0.2);
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.week-labs-label {
+  font-family: var(--mono); font-size: 0.75rem; font-weight: 500;
+  color: var(--pink); text-transform: uppercase; letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.week-labs-items { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.lab-chip {
+  display: inline-block; background: rgba(224,154,194,0.12);
+  border: 1px solid rgba(224,154,194,0.25); border-radius: 100px;
+  padding: 0.3rem 0.9rem; font-size: 0.78rem; color: rgba(244,242,234,0.7);
+  font-weight: 500;
+}
+
+/* ═══════════════════════════════════════════════
+   TRACK RECORD
+   ═══════════════════════════════════════════════ */
+.section-track { padding: 6rem 0; background: white; }
+.track-header { margin-bottom: 3rem; }
+.track-header h2 {
+  font-family: var(--serif); font-size: clamp(2rem, 3vw, 2.6rem);
+  text-transform: uppercase; color: var(--deep); line-height: 1.05;
+  margin-bottom: 0.75rem;
+}
+.track-header h2 em { font-style: normal; color: var(--coral); }
+.track-header p { font-size: 0.95rem; color: rgba(54,10,5,0.6); line-height: 1.75; max-width: 620px; }
+.track-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.track-card {
+  background: var(--cream); border-radius: 20px; padding: 2rem;
+  border-left: 4px solid var(--coral);
+  transition: all 0.3s ease;
+}
+.track-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(32,6,3,0.07); }
+.track-card:nth-child(2) { border-left-color: var(--pink); }
+.track-card:nth-child(3) { border-left-color: var(--brown); }
+.track-card-label {
+  font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--coral); font-weight: 700; margin-bottom: 0.75rem;
+}
+.track-card:nth-child(2) .track-card-label { color: var(--pink); }
+.track-card:nth-child(3) .track-card-label { color: var(--brown); }
+.track-card h3 {
+  font-family: var(--serif); font-size: 1.15rem;
+  text-transform: uppercase; color: var(--deep);
+  line-height: 1.15; margin-bottom: 0.75rem;
+}
+.track-card p { font-size: 0.88rem; color: rgba(54,10,5,0.65); line-height: 1.7; }
+
+/* ═══════════════════════════════════════════════
+   TESTIMONIALS — chat bubbles
+   ═══════════════════════════════════════════════ */
+.section-testimonials { padding: 6rem 0; background: var(--deep); }
+.testimonials-header { margin-bottom: 3rem; }
+.testimonials-header .section-eyebrow { color: var(--coral); }
+.testimonials-header .section-eyebrow::before { background: var(--coral); }
+.testimonials-header h2 {
+  font-family: var(--serif); font-size: clamp(2rem, 3vw, 2.6rem);
+  text-transform: uppercase; color: var(--cream); line-height: 1.05;
+}
+.testimonials-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;
+}
+.testimonial-bubble {
+  border-radius: 20px 20px 20px 4px;
+  padding: 2rem;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.testimonial-bubble:hover { transform: translateY(-3px); }
+.testimonial-bubble:nth-child(even) { border-radius: 20px 20px 4px 20px; margin-top: 1.5rem; }
+.bubble-coral { background: var(--coral); }
+.bubble-pink { background: var(--pink); }
+.bubble-cream { background: var(--cream); }
+.bubble-dark {
+  background: rgba(244,242,234,0.07);
+  border: 1px solid rgba(244,242,234,0.12);
+}
+.testimonial-quote {
+  font-size: 1rem; line-height: 1.75; margin-bottom: 1.25rem;
+  font-style: italic;
+}
+.bubble-coral .testimonial-quote { color: white; }
+.bubble-pink .testimonial-quote { color: var(--deep); }
+.bubble-cream .testimonial-quote { color: var(--deep); }
+.bubble-dark .testimonial-quote { color: rgba(244,242,234,0.8); }
+.testimonial-attribution {
+  font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.bubble-coral .testimonial-attribution { color: rgba(255,255,255,0.7); }
+.bubble-pink .testimonial-attribution { color: rgba(32,6,3,0.55); }
+.bubble-cream .testimonial-attribution { color: rgba(54,10,5,0.5); }
+.bubble-dark .testimonial-attribution { color: rgba(244,242,234,0.4); }
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .cohorts-grid { grid-template-columns: 1fr; }
   .weeks-grid { grid-template-columns: 1fr 1fr; }
   .week-zero { flex-direction: column; gap: 1rem; }
+  .week-labs { flex-direction: column; gap: 1rem; }
   .outcomes-grid { grid-template-columns: repeat(2, 1fr); }
+  .track-grid { grid-template-columns: 1fr 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .testimonial-bubble:nth-child(even) { border-radius: 20px 20px 4px 20px; margin-top: 0; }
   .certificate-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-  .partners-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
@@ -496,7 +599,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
   .hero-stats { gap: 1.5rem; }
   .weeks-grid { grid-template-columns: 1fr; }
   .outcomes-grid { grid-template-columns: 1fr; }
-  .partners-grid { grid-template-columns: 1fr; }
+  .track-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .nav-links { display: none; }
   .nav-toggle { display: block; }
@@ -549,7 +652,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
         <span class="partner-x">×</span>
         <span class="partner-pill">ASU</span>
       </div>
-      <h1>Emerging Journalism <em>Creators Lab</em></h1>
+      <h1>Journalism Creators <em>Startup Lab</em></h1>
       <p class="hero-subtitle">An 8-week training program for early-stage creator journalists — built by Project C in partnership with Google News Initiative and ASU's Knight Center for the Future of News.</p>
       <div class="hero-stats">
         <div>
@@ -561,8 +664,8 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
           <div class="hero-stat-value">Launches August 2026</div>
         </div>
         <div>
-          <div class="hero-stat-label">Format</div>
-          <div class="hero-stat-value">8 Weeks + Coaching</div>
+          <div class="hero-stat-label">Support</div>
+          <div class="hero-stat-value">A Full Year</div>
         </div>
         <div>
           <div class="hero-stat-label">Upon Completion</div>
@@ -589,8 +692,8 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
       </div>
       <div class="intro-right reveal">
         <p>The creator journalism model is real, growing, and working for a generation of journalists who chose to build independent businesses around their work. But the infrastructure to support early-stage creators — real training, real community, real tools — is still catching up.</p>
-        <p>The Emerging Journalism Creators Lab is designed to close that gap. Over eight weeks, participants get structured training across every major dimension of building a sustainable creator journalism business: strategy, editorial systems, audience growth, revenue, trust, data, and safety. Then three months of coaching to put it into practice.</p>
-        <p>No follower minimums. No experience requirements. This program is designed for journalists who are serious about the work, even if they're just getting started.</p>
+        <p>The Journalism Creators Startup Lab is designed to close that gap. Participants sign on for a full year of support: an 8-week workshop covering every major dimension of building a sustainable creator journalism business, three months of post-cohort coaching, and a year-long membership in the Project C community.</p>
+        <p>No follower minimums. No experience requirements. This program is for journalists who are serious about the work, even if they're just getting started.</p>
       </div>
     </div>
   </div>
@@ -652,14 +755,10 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     <div class="weeks-grid">
 
       <!-- Week 0 -->
-      <div class="week-card week-zero reveal">
-        <div class="week-zero-left">
-          <div class="week-number">Week 0</div>
-          <h3>Onboarding</h3>
-        </div>
-        <div class="week-zero-right">
-          <p>Platform orientation, community norms, tooling setup, and a diagnostic workshop to map where you are and where you want to go. Buffer week before formal instruction begins.</p>
-        </div>
+      <div class="week-card reveal">
+        <div class="week-number">Week 0</div>
+        <h3>Onboarding</h3>
+        <p>Platform orientation, community norms, tooling setup, and a diagnostic workshop to map where you are and where you want to go.</p>
       </div>
 
       <!-- Week 1 -->
@@ -719,6 +818,19 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
       </div>
 
     </div>
+
+    <!-- Optional Labs — full width below the grid -->
+    <div class="week-card week-labs reveal">
+      <div class="week-labs-label">+ Optional Labs</div>
+      <div class="week-labs-items">
+        <span class="lab-chip">Building Your Own Site</span>
+        <span class="lab-chip">Vertical Video</span>
+        <span class="lab-chip">Sponsorship Lab</span>
+        <span class="lab-chip">Grant Seeking</span>
+        <span class="lab-chip">Custom Dashboards</span>
+      </div>
+    </div>
+
     <div class="curriculum-footer reveal">
       <p class="curriculum-footer-note">
         <strong>Format:</strong> Each week features async video content plus a live lab at the end of the week. The live sessions are where the real work happens — Q&amp;A, workshopping, and peer learning.
@@ -773,6 +885,71 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 </section>
 
 <!-- ═══════════════════════════════════════════════
+     TRACK RECORD
+     ═══════════════════════════════════════════════ -->
+<section class="section-track" id="track">
+  <div class="container-wide">
+    <div class="track-header reveal">
+      <div class="section-eyebrow">Proven Track Record</div>
+      <h2>We've done this before. <em>Many times.</em></h2>
+      <p>The Journalism Creators Startup Lab is built on years of Project C training programs that have helped journalists clarify their vision, grow their audiences, and build businesses that last.</p>
+    </div>
+    <div class="track-grid">
+      <div class="track-card reveal">
+        <div class="track-card-label">Ongoing Program</div>
+        <h3>Going Solo</h3>
+        <p>A six-session workshop for journalists who haven't launched yet. Graduates have launched newsletters and video channels, sharpened their audience focus, and built peer networks that are still active today.</p>
+      </div>
+      <div class="track-card reveal">
+        <div class="track-card-label">In Partnership with Medill</div>
+        <h3>Local News Accelerator</h3>
+        <p>A one-day intensive for newsroom leaders and solo founders, delivered with Medill's Local News Initiative at Northwestern University. Content strategy and media-kit reviews were the standout modules.</p>
+      </div>
+      <div class="track-card reveal">
+        <div class="track-card-label">Current Cohort</div>
+        <h3>Muslim American Creator Journalism Cohort</h3>
+        <p>An ongoing cohort co-led by the Going Solo team, designed with and for Muslim American creator journalists. Proof that the playbook works across communities, contexts, and regions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     TESTIMONIALS
+     ═══════════════════════════════════════════════ -->
+<section class="section-testimonials" id="testimonials">
+  <div class="container-wide">
+    <div class="testimonials-header reveal">
+      <div class="section-eyebrow">What Participants Say</div>
+      <h2>From the people who've been through it.</h2>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-bubble bubble-coral reveal">
+        <p class="testimonial-quote">"It's the playbook on how to do this — and how to do it sustainably — from the people who actually understand the landscape, the data, and the strategies, with no fluff."</p>
+        <div class="testimonial-attribution">Going Solo Alum, Spring 2025</div>
+      </div>
+
+      <div class="testimonial-bubble bubble-cream reveal">
+        <p class="testimonial-quote">"The feedback from this group has been incredibly helpful and validating. Doing the course homework has helped me make a lot of progress, especially around mapping out my audience and understanding how to pitch my business to others."</p>
+        <div class="testimonial-attribution">Dan Wroclawski, Going Solo Alum</div>
+      </div>
+
+      <div class="testimonial-bubble bubble-dark reveal">
+        <p class="testimonial-quote">"Going Solo helped me let go of a ton of self-doubt and get direct answers on issues I was getting mixed information on during my own research."</p>
+        <div class="testimonial-attribution">Jared Brown, Truth to Power Northwest</div>
+      </div>
+
+      <div class="testimonial-bubble bubble-pink reveal">
+        <p class="testimonial-quote">"I've gained a lot of self-confidence here to stand up for myself and my brand."</p>
+        <div class="testimonial-attribution">Kerstin Hasse, Content Creator Journalist</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
      CERTIFICATE + POST-COHORT
      ═══════════════════════════════════════════════ -->
 <section class="section-certificate" id="certificate">
@@ -781,23 +958,24 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
       <div class="certificate-left reveal">
         <div class="section-eyebrow">After the Program</div>
         <h2>A certificate from ASU + three months of <em>coaching.</em></h2>
-        <p>Completing the Emerging Journalism Creators Lab earns you an ASU Cronkite School professional certificate — issued by one of the top journalism schools in the country, co-branded with Project C.</p>
-        <p>And the program doesn't stop at Week 8. Every participant gets three months of post-cohort coaching calls as part of the commitment.</p>
+        <p>The program is hosted on CronkitePro, ASU's professional development platform. Completing all 8 weeks earns you an official certificate from the Walter Cronkite School of Journalism — one of the most respected journalism schools in the country — co-branded with Project C.</p>
+        <p>That certificate also distinguishes you within Google's Emerging News Voices directory. And the program doesn't stop at Week 8 — participants stay connected through coaching, community, and long-term check-ins.</p>
         <div class="cert-badge">
           <div class="cert-badge-icon">&#127891;</div>
           <div class="cert-badge-text">
-            <strong>ASU Cronkite Professional Certificate</strong>
-            Issued upon completion of all 8 weeks
+            <strong>Walter Cronkite School of Journalism Certificate</strong>
+            Hosted on CronkitePro · Co-branded with Project C
           </div>
         </div>
       </div>
       <div class="certificate-right reveal">
-        <div class="post-cohort-label">Post-Cohort Support Included</div>
+        <div class="post-cohort-label">A Full Year of Support</div>
         <ul class="post-cohort-list">
-          <li><span class="check-coral">&#10003;</span> Three months of group coaching calls — 1 to 2 sessions per month</li>
+          <li><span class="check-coral">&#10003;</span> 8-week workshop with live labs and async video content</li>
+          <li><span class="check-coral">&#10003;</span> Three months of post-cohort coaching calls — 1 to 2 sessions per month</li>
+          <li><span class="check-coral">&#10003;</span> One year of Project C community membership — 200+ journalists sharing resources and collaborating</li>
           <li><span class="check-coral">&#10003;</span> Trust and credibility assessment using the Trusting News framework</li>
           <li><span class="check-coral">&#10003;</span> Eligibility for the Google Emerging News Voices list</li>
-          <li><span class="check-coral">&#10003;</span> Ongoing Slack community access for peer support and networking</li>
           <li><span class="check-coral">&#10003;</span> 90-day and 12-month follow-up check-ins to track your growth</li>
         </ul>
       </div>
@@ -815,7 +993,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
       <h2>Future cohorts are <em>open to all.</em></h2>
       <p>Cohorts 1 and 2 are invitation-based. But this program is designed to grow — future cohorts will open to applicants from across the journalism creator community. Drop us a line and we'll make sure you hear about it first.</p>
       <div class="cta-actions">
-        <a href="mailto:liz@projectc.biz?subject=Emerging%20Journalism%20Creators%20Lab%20Interest" class="btn-primary">Express Interest &rarr;</a>
+        <a href="mailto:liz@projectc.biz?subject=Journalism%20Creators%20Startup%20Lab%20Interest" class="btn-primary">Express Interest &rarr;</a>
         <a href="https://newsletter.projectc.biz" class="btn-secondary" target="_blank">Subscribe to Project C</a>
       </div>
     </div>

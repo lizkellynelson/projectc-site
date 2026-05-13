@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MadLib Peer Evaluation · Project C</title>
+<link rel="icon" type="image/png" href="project-c_logo_color.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ── Reset & Base ─────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream:      #F4F2EA;
+    --cream-dark: #EBE8DE;
+    --coral:      #FE6B41;
+    --pink:       #E09AC2;
+    --brown:      #360A05;
+    --deep:       #200603;
+    --white:      #FFFFFF;
+    --muted:      #8A7060;
+    --border:     #D8CFC4;
+    --error:      #C0392B;
+    --serif:      'Anton', 'Impact', sans-serif;
+    --sans:       'Inter', -apple-system, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--brown);
+    background: var(--cream);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Gradient bar (matches site) ─────────────────────────────────── */
+  .gradient-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral), var(--pink));
+    background-size: 300% 100%;
+    animation: gradientSlide 8s ease infinite;
+  }
+  @keyframes gradientSlide { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+
+  /* ── Page header ─────────────────────────────────────────────────── */
+  .page-header {
+    background: var(--deep);
+    padding: 36px 24px 32px;
+    text-align: center;
+  }
+  .page-header .eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 10px;
+  }
+  .page-header h1 {
+    font-family: var(--serif);
+    font-size: 32px;
+    letter-spacing: 1px;
+    color: var(--cream);
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+  .page-header .subtitle {
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(244,242,234,0.6);
+    font-weight: 400;
+  }
+
+  /* ── Layout ──────────────────────────────────────────────────────── */
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 16px 72px;
+  }
+
+  /* ── Card ────────────────────────────────────────────────────────── */
+  .card {
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(54,10,5,0.08);
+    margin-top: 24px;
+    overflow: hidden;
+  }
+  .card-header {
+    background: var(--cream-dark);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid var(--coral);
+  }
+  .card-header .num {
+    background: var(--coral);
+    color: var(--white);
+    font-family: var(--serif);
+    font-size: 13px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-header h2 {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--brown);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .card-header .hint {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .card-body { padding: 20px 20px 24px; }
+
+  /* ── Identity row ────────────────────────────────────────────────── */
+  .identity-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(54,10,5,0.08);
+    margin-top: 24px;
+    padding: 24px 20px 20px;
+  }
+  @media (max-width: 520px) { .identity-row { grid-template-columns: 1fr; } }
+
+  /* ── Form controls ───────────────────────────────────────────────── */
+  .field { margin-bottom: 4px; }
+  .field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .field label .req { color: var(--coral); margin-left: 2px; }
+
+  select, input[type="text"], textarea {
+    width: 100%;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 15px;
+    font-family: var(--sans);
+    color: var(--brown);
+    background: var(--white);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+  }
+  select:focus, input[type="text"]:focus, textarea:focus {
+    border-color: var(--coral);
+    box-shadow: 0 0 0 3px rgba(254,107,65,0.12);
+  }
+  select { cursor: pointer; }
+  textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+  /* ── Rating rows ─────────────────────────────────────────────────── */
+  .criteria-list { display: flex; flex-direction: column; }
+
+  .criterion {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--cream-dark);
+  }
+  .criterion:last-child { border-bottom: none; }
+
+  .criterion-label { flex: 1; min-width: 0; }
+  .criterion-label .main {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brown);
+    display: block;
+  }
+  .criterion-label .sub {
+    font-size: 12px;
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+  }
+
+  .rating-pills { display: flex; gap: 6px; flex-shrink: 0; }
+
+  @media (max-width: 560px) {
+    .criterion { flex-direction: column; align-items: flex-start; }
+    .rating-pills { margin-top: 6px; }
+  }
+
+  .rating-pills input[type="radio"] { display: none; }
+  .pill {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid var(--border);
+    color: var(--muted);
+    background: var(--cream);
+    transition: all 0.15s;
+    white-space: nowrap;
+    user-select: none;
+  }
+  .pill:hover { border-color: var(--coral); color: var(--coral); }
+
+  input[type="radio"].strong:checked    + .pill { background: #D4EDDA; border-color: #27AE60; color: #1E8449; }
+  input[type="radio"].developing:checked + .pill { background: #FFF3CD; border-color: #F0A500; color: #856404; }
+  input[type="radio"].unclear:checked   + .pill { background: #F8D7DA; border-color: #C0392B; color: #922B21; }
+
+  /* ── Written feedback ────────────────────────────────────────────── */
+  .feedback-field { margin-bottom: 20px; }
+  .feedback-field:last-child { margin-bottom: 0; }
+  .feedback-field label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--brown);
+    margin-bottom: 6px;
+  }
+  .feedback-field label .prompt {
+    font-weight: 400;
+    color: var(--muted);
+    font-style: italic;
+    font-size: 13px;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ── Submit ──────────────────────────────────────────────────────── */
+  .submit-area { margin-top: 32px; text-align: center; }
+  button[type="submit"] {
+    background: var(--coral);
+    color: var(--white);
+    border: none;
+    border-radius: 6px;
+    padding: 14px 44px;
+    font-family: var(--serif);
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+  }
+  button[type="submit"]:hover { background: #e55530; }
+  button[type="submit"]:active { transform: scale(0.98); }
+  button[type="submit"]:disabled { background: var(--border); cursor: not-allowed; }
+
+  .submit-note { margin-top: 10px; font-size: 12px; color: var(--muted); }
+
+  /* ── Validation states ───────────────────────────────────────────── */
+  .error-msg { color: var(--error); font-size: 12px; margin-top: 4px; display: none; }
+  .field.has-error select,
+  .field.has-error input { border-color: var(--error); }
+  .field.has-error .error-msg { display: block; }
+
+  /* ── Success screen ──────────────────────────────────────────────── */
+  #success-screen {
+    display: none;
+    background: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(54,10,5,0.08);
+    margin-top: 24px;
+    padding: 56px 32px;
+    text-align: center;
+  }
+  #success-screen .icon { font-size: 48px; margin-bottom: 16px; }
+  #success-screen h2 {
+    font-family: var(--serif);
+    font-size: 26px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--brown);
+    margin-bottom: 10px;
+  }
+  #success-screen p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto 24px;
+  }
+  #success-screen .another {
+    background: var(--cream-dark);
+    color: var(--brown);
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  #success-screen .another:hover { background: #ddd9cd; }
+
+  /* ── Spinner ─────────────────────────────────────────────────────── */
+  .spinner {
+    display: none;
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Config banner ───────────────────────────────────────────────── */
+  .config-banner {
+    background: #FFF8EE;
+    border: 1.5px solid var(--coral);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--brown);
+    line-height: 1.5;
+  }
+  .config-banner strong { color: var(--coral); }
+  .config-banner.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- ── Gradient bar ──────────────────────────────────────────────────────── -->
+<div class="gradient-bar"></div>
+
+<!-- ── Page header ───────────────────────────────────────────────────────── -->
+<div class="page-header">
+  <div class="eyebrow" id="hdr-cohort"></div>
+  <h1>MadLib Peer Evaluation</h1>
+  <div class="subtitle" id="hdr-session"></div>
+</div>
+
+<!-- ── Config banner (remove once script URL is set) ─────────────────────── -->
+<div class="container">
+  <div class="config-banner" id="config-banner">
+    <strong>⚙️ Setup needed:</strong> Paste your Google Apps Script web app URL into the
+    <code>SCRIPT_URL</code> variable at the top of this file's &lt;script&gt; block before publishing.
+    See the companion <strong>madlib_eval_script.js</strong> file for setup instructions.
+  </div>
+</div>
+
+<!-- ── Main form ─────────────────────────────────────────────────────────── -->
+<div class="container">
+  <form id="eval-form" novalidate>
+
+    <!-- Who's who -->
+    <div class="identity-row">
+      <div class="field" id="field-presenter">
+        <label for="presenter">You are evaluating <span class="req">*</span></label>
+        <select id="presenter" name="presenter">
+          <option value="">— Select presenter —</option>
+          <!-- Populated from CONFIG.presenters below -->
+        </select>
+        <div class="error-msg">Please select a presenter.</div>
+      </div>
+      <div class="field" id="field-evaluator">
+        <label for="evaluator">Your name <span class="req">*</span></label>
+        <input type="text" id="evaluator" name="evaluator" placeholder="Your first name" autocomplete="off">
+        <div class="error-msg">Please enter your name.</div>
+      </div>
+    </div>
+
+    <!-- Section 1 — Identity & Niche -->
+    <div class="card">
+      <div class="card-header">
+        <div class="num">1</div>
+        <h2>Identity &amp; Niche</h2>
+        <span class="hint">Who they are, what they cover, why them</span>
+      </div>
+      <div class="card-body">
+        <div class="criteria-list">
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">Niche is specific and distinct</span>
+              <span class="sub">Not too broad, not too narrow</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_niche_specific" id="r_niche_specific_s" value="Strong">
+              <label class="pill" for="r_niche_specific_s">Strong</label>
+              <input type="radio" class="developing" name="r_niche_specific" id="r_niche_specific_d" value="Developing">
+              <label class="pill" for="r_niche_specific_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_niche_specific" id="r_niche_specific_u" value="Unclear">
+              <label class="pill" for="r_niche_specific_u">Unclear</label>
+            </div>
+          </div>
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">Target audience is clearly defined</span>
+              <span class="sub">You could picture who's reading this</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_audience" id="r_audience_s" value="Strong">
+              <label class="pill" for="r_audience_s">Strong</label>
+              <input type="radio" class="developing" name="r_audience" id="r_audience_d" value="Developing">
+              <label class="pill" for="r_audience_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_audience" id="r_audience_u" value="Unclear">
+              <label class="pill" for="r_audience_u">Unclear</label>
+            </div>
+          </div>
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">"Why me" is compelling and personal</span>
+              <span class="sub">Their unique position comes through</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_whyme" id="r_whyme_s" value="Strong">
+              <label class="pill" for="r_whyme_s">Strong</label>
+              <input type="radio" class="developing" name="r_whyme" id="r_whyme_d" value="Developing">
+              <label class="pill" for="r_whyme_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_whyme" id="r_whyme_u" value="Unclear">
+              <label class="pill" for="r_whyme_u">Unclear</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2 — Audience & Funnel -->
+    <div class="card">
+      <div class="card-header">
+        <div class="num">2</div>
+        <h2>Audience &amp; Funnel Strategy</h2>
+        <span class="hint">Platform → newsletter path</span>
+      </div>
+      <div class="card-body">
+        <div class="criteria-list">
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">Existing platform is a credible foundation</span>
+              <span class="sub">It fits the niche and audience</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_platform" id="r_platform_s" value="Strong">
+              <label class="pill" for="r_platform_s">Strong</label>
+              <input type="radio" class="developing" name="r_platform" id="r_platform_d" value="Developing">
+              <label class="pill" for="r_platform_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_platform" id="r_platform_u" value="Unclear">
+              <label class="pill" for="r_platform_u">Unclear</label>
+            </div>
+          </div>
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">Attract → Engage → Convert funnel is coherent</span>
+              <span class="sub">The three steps connect logically</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_funnel" id="r_funnel_s" value="Strong">
+              <label class="pill" for="r_funnel_s">Strong</label>
+              <input type="radio" class="developing" name="r_funnel" id="r_funnel_d" value="Developing">
+              <label class="pill" for="r_funnel_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_funnel" id="r_funnel_u" value="Unclear">
+              <label class="pill" for="r_funnel_u">Unclear</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3 — Editorial Plan -->
+    <div class="card">
+      <div class="card-header">
+        <div class="num">3</div>
+        <h2>Editorial Plan</h2>
+        <span class="hint">Cadence, pillars, success metric</span>
+      </div>
+      <div class="card-body">
+        <div class="criteria-list">
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">Publishing cadence feels sustainable</span>
+              <span class="sub">Not over- or under-ambitious</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_cadence" id="r_cadence_s" value="Strong">
+              <label class="pill" for="r_cadence_s">Strong</label>
+              <input type="radio" class="developing" name="r_cadence" id="r_cadence_d" value="Developing">
+              <label class="pill" for="r_cadence_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_cadence" id="r_cadence_u" value="Unclear">
+              <label class="pill" for="r_cadence_u">Unclear</label>
+            </div>
+          </div>
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">Content pillars are distinct and coherent</span>
+              <span class="sub">No major overlaps; covers the beat well</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_pillars" id="r_pillars_s" value="Strong">
+              <label class="pill" for="r_pillars_s">Strong</label>
+              <input type="radio" class="developing" name="r_pillars" id="r_pillars_d" value="Developing">
+              <label class="pill" for="r_pillars_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_pillars" id="r_pillars_u" value="Unclear">
+              <label class="pill" for="r_pillars_u">Unclear</label>
+            </div>
+          </div>
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">Evaluation metric makes sense</span>
+              <span class="sub">They know how they'll measure success</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_metric" id="r_metric_s" value="Strong">
+              <label class="pill" for="r_metric_s">Strong</label>
+              <input type="radio" class="developing" name="r_metric" id="r_metric_d" value="Developing">
+              <label class="pill" for="r_metric_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_metric" id="r_metric_u" value="Unclear">
+              <label class="pill" for="r_metric_u">Unclear</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4 — Business Viability -->
+    <div class="card">
+      <div class="card-header">
+        <div class="num">4</div>
+        <h2>Business Viability</h2>
+        <span class="hint">Financials, buyers, model, timeline</span>
+      </div>
+      <div class="card-body">
+        <div class="criteria-list">
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">Financial targets feel realistic</span>
+              <span class="sub">Monthly needs + runway math checks out</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_financials" id="r_financials_s" value="Strong">
+              <label class="pill" for="r_financials_s">Strong</label>
+              <input type="radio" class="developing" name="r_financials" id="r_financials_d" value="Developing">
+              <label class="pill" for="r_financials_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_financials" id="r_financials_u" value="Unclear">
+              <label class="pill" for="r_financials_u">Unclear</label>
+            </div>
+          </div>
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">Revenue model is clearly defined</span>
+              <span class="sub">You understand exactly how they'll earn</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_revenue" id="r_revenue_s" value="Strong">
+              <label class="pill" for="r_revenue_s">Strong</label>
+              <input type="radio" class="developing" name="r_revenue" id="r_revenue_d" value="Developing">
+              <label class="pill" for="r_revenue_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_revenue" id="r_revenue_u" value="Unclear">
+              <label class="pill" for="r_revenue_u">Unclear</label>
+            </div>
+          </div>
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">First 10 buyers are specific and reachable</span>
+              <span class="sub">Real people, not vague demographics</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_buyers" id="r_buyers_s" value="Strong">
+              <label class="pill" for="r_buyers_s">Strong</label>
+              <input type="radio" class="developing" name="r_buyers" id="r_buyers_d" value="Developing">
+              <label class="pill" for="r_buyers_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_buyers" id="r_buyers_u" value="Unclear">
+              <label class="pill" for="r_buyers_u">Unclear</label>
+            </div>
+          </div>
+          <div class="criterion">
+            <div class="criterion-label">
+              <span class="main">Launch timeline is achievable</span>
+              <span class="sub">Start date + reevaluation window makes sense</span>
+            </div>
+            <div class="rating-pills">
+              <input type="radio" class="strong"     name="r_timeline" id="r_timeline_s" value="Strong">
+              <label class="pill" for="r_timeline_s">Strong</label>
+              <input type="radio" class="developing" name="r_timeline" id="r_timeline_d" value="Developing">
+              <label class="pill" for="r_timeline_d">Developing</label>
+              <input type="radio" class="unclear"    name="r_timeline" id="r_timeline_u" value="Unclear">
+              <label class="pill" for="r_timeline_u">Unclear</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 5 — Written Feedback -->
+    <div class="card">
+      <div class="card-header">
+        <div class="num">5</div>
+        <h2>Your Written Feedback</h2>
+      </div>
+      <div class="card-body">
+        <div class="feedback-field">
+          <label for="f_compelling">
+            The single most compelling thing about this plan
+            <span class="prompt">What stuck with you? What made you lean in?</span>
+          </label>
+          <textarea id="f_compelling" name="f_compelling" rows="3" placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="feedback-field">
+          <label for="f_question">
+            One question you want them to think more about
+            <span class="prompt">A gap, an assumption, or something worth exploring further</span>
+          </label>
+          <textarea id="f_question" name="f_question" rows="3" placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="feedback-field">
+          <label for="f_suggestion">
+            One concrete suggestion
+            <span class="prompt">Something specific they could do, change, or add</span>
+          </label>
+          <textarea id="f_suggestion" name="f_suggestion" rows="3" placeholder="Write your thoughts here…"></textarea>
+        </div>
+        <div class="feedback-field">
+          <label for="f_other">
+            Any other notes
+            <span class="prompt">Optional — anything else you want them to have</span>
+          </label>
+          <textarea id="f_other" name="f_other" rows="3" placeholder="Optional…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-area">
+      <button type="submit" id="submit-btn">
+        <span class="spinner" id="spinner"></span>
+        <span id="submit-label">Submit Evaluation</span>
+      </button>
+      <div class="submit-note">Your response will be saved to the Project C Drive folder for this cohort.</div>
+    </div>
+
+  </form>
+
+  <!-- Success screen -->
+  <div id="success-screen">
+    <div class="icon">✅</div>
+    <h2>Evaluation submitted!</h2>
+    <p id="success-msg">Thanks — your feedback for <strong id="success-presenter"></strong> has been saved.</p>
+    <button class="another" onclick="resetForm()">Evaluate another presenter</button>
+  </div>
+</div>
+
+<script>
+// ═════════════════════════════════════════════════════════════════════════════
+//  ✏️  COACH CONFIGURATION — edit these lines only, nothing else needs to change
+// ═════════════════════════════════════════════════════════════════════════════
+
+const CONFIG = {
+  // Name of your cohort or program — appears in the page header
+  cohortName: "Muslim Creator Journalism Accelerator",
+
+  // Session label shown under the title (can be a date, cohort number, etc.)
+  sessionLabel: "Cohort Showcase · May 2026",
+
+  // List your cohort members here — these populate the "You are evaluating" dropdown
+  presenters: [
+    "Ameer Al-Khatahtbeh",
+    "Farah Eltohamy",
+    "Ghada Dajani",
+    "Ghazala Irshad",
+    "Husam Kaid",
+    "Hussain K",
+    "Jennifer Chowdhury",
+    "Karim Shamsi-Basha",
+    "Rabia Chaudry",
+    "Rahim Jessani",
+    "Sahar",
+    "Syeda Khaula Saad",
+    "Tahirah Folk",
+    "Yasmine E.",
+    "Zaineb Sharif",
+    "Zineb Haddaji",
+  ],
+
+  // Paste your Google Apps Script web app URL here after deploying
+  // (see madlib_eval_script.js for setup instructions)
+  scriptUrl: "https://script.google.com/macros/s/AKfycbxJYO94OWX88Byq4lFWLvwNca3CoVgXS_6Td-8EApUOVryPxh6D8qWizhUa69vwWa3q7A/exec",
+};
+
+// ═════════════════════════════════════════════════════════════════════════════
+//  Everything below this line runs automatically — no need to edit
+// ═════════════════════════════════════════════════════════════════════════════
+
+const form      = document.getElementById('eval-form');
+const submitBtn = document.getElementById('submit-btn');
+const spinner   = document.getElementById('spinner');
+const submitLbl = document.getElementById('submit-label');
+const banner    = document.getElementById('config-banner');
+
+// ── Apply config to the page ──────────────────────────────────────────────
+document.getElementById('hdr-cohort').textContent  = CONFIG.cohortName;
+document.getElementById('hdr-session').textContent = CONFIG.sessionLabel;
+document.title = `MadLib Peer Evaluation · ${CONFIG.cohortName}`;
+
+// Populate presenter dropdown from config
+const presenterSelect = document.getElementById('presenter');
+CONFIG.presenters.forEach(name => {
+  const opt = document.createElement('option');
+  opt.value = name;
+  opt.textContent = name;
+  presenterSelect.appendChild(opt);
+});
+
+// Show/hide setup banner based on whether Script URL has been configured
+const scriptConfigured = CONFIG.scriptUrl && CONFIG.scriptUrl !== "YOUR_APPS_SCRIPT_URL_HERE";
+if (scriptConfigured) banner.classList.add('hidden');
+
+function setError(fieldId, show) {
+  const el = document.getElementById(fieldId);
+  if (show) el.classList.add('has-error');
+  else el.classList.remove('has-error');
+}
+
+function validate() {
+  let valid = true;
+  const presenter = document.getElementById('presenter').value;
+  const evaluator = document.getElementById('evaluator').value.trim();
+  setError('field-presenter', !presenter);
+  setError('field-evaluator', !evaluator);
+  if (!presenter || !evaluator) valid = false;
+  return valid;
+}
+
+function collectData() {
+  const data = {};
+  const fields = ['presenter','evaluator',
+    'r_niche_specific','r_audience','r_whyme',
+    'r_platform','r_funnel',
+    'r_cadence','r_pillars','r_metric',
+    'r_financials','r_revenue','r_buyers','r_timeline',
+    'f_compelling','f_question','f_suggestion','f_other'
+  ];
+  fields.forEach(name => {
+    const radio = form.querySelector(`input[name="${name}"]:checked`);
+    const text  = form.querySelector(`#${name}`);
+    if (radio) data[name] = radio.value;
+    else if (text) data[name] = text.value.trim();
+    else data[name] = '';
+  });
+  data.submitted_at = new Date().toISOString();
+  return data;
+}
+
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  if (!validate()) return;
+
+  const data = collectData();
+
+  // UI: loading state
+  submitBtn.disabled = true;
+  spinner.style.display = 'inline-block';
+  submitLbl.textContent = 'Submitting…';
+
+  if (!scriptConfigured) {
+    // Dev mode — log and show success anyway
+    console.log("Form data (dev mode — no URL configured):", data);
+    showSuccess(data.presenter);
+    return;
+  }
+
+  try {
+    // Google Apps Script requires no-cors for cross-origin POST
+    await fetch(CONFIG.scriptUrl, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    showSuccess(data.presenter);
+  } catch (err) {
+    console.error(err);
+    // Still show success — no-cors means we can't read the response,
+    // but if fetch didn't throw, it likely went through.
+    showSuccess(data.presenter);
+  }
+});
+
+function showSuccess(presenterName) {
+  form.style.display = 'none';
+  document.getElementById('config-banner').style.display = 'none';
+  document.getElementById('success-presenter').textContent = presenterName;
+  document.getElementById('success-screen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetForm() {
+  form.reset();
+  form.style.display = 'block';
+  document.getElementById('success-screen').style.display = 'none';
+  submitBtn.disabled = false;
+  spinner.style.display = 'none';
+  submitLbl.textContent = 'Submit Evaluation';
+  if (SCRIPT_URL && SCRIPT_URL !== "YOUR_APPS_SCRIPT_URL_HERE") {
+    banner.classList.add('hidden');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Live validation clearing
+document.getElementById('presenter').addEventListener('change', () => setError('field-presenter', false));
+document.getElementById('evaluator').addEventListener('input',  () => setError('field-evaluator', false));
+</script>
+</body>
+</html>

@@ -86,7 +86,28 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
               radial-gradient(circle at 10% 80%, rgba(224,154,194,0.18), transparent 50%);
   pointer-events: none;
 }
-.hero-content { position: relative; z-index: 2; max-width: 820px; }
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 5rem;
+  align-items: center;
+}
+.hero-content { position: relative; z-index: 2; }
+.hero-logo {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+.hero-logo img {
+  width: 100%;
+  display: block;
+  border-radius: 8%;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.06);
+}
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-logo { max-width: 220px; }
+}
 .hero .section-eyebrow { color: var(--coral); }
 .hero .section-eyebrow::before { background: var(--coral); }
 .hero h1 {
@@ -1002,31 +1023,37 @@ footer .logo-img-footer { height: 32px; width: auto; }
      ═══════════════════════════════════════════════ -->
 <section class="hero">
   <div class="container">
-    <div class="hero-content reveal">
-      <div class="section-eyebrow">The Going Solo Workshop</div>
-      <h1>Eight weeks to launch your <em>own thing.</em></h1>
-      <p class="lead">A virtual workshop for journalists who have the idea and need the plan. Six expert instructors. One small, focused cohort. Every business essential you need to get to launch.</p>
-      <div class="hero-actions">
-        <a href="#waitlist" class="btn-primary">Join the Waitlist &darr;</a>
-        <a href="#curriculum" class="btn-secondary" style="color: rgba(244,242,234,0.8); border-color: rgba(244,242,234,0.2);">See the Curriculum</a>
+    <div class="hero-inner">
+      <div class="hero-content reveal">
+        <div class="section-eyebrow">The Going Solo Workshop</div>
+        <h1>Eight weeks to launch your <em>own thing.</em></h1>
+        <p class="lead">A virtual workshop for journalists who have the idea and need the plan. Six expert instructors. One small, focused cohort. Every business essential you need to get to launch.</p>
+        <div class="hero-actions">
+          <a href="#waitlist" class="btn-primary">Join the Waitlist &darr;</a>
+          <a href="#curriculum" class="btn-secondary" style="color: rgba(244,242,234,0.8); border-color: rgba(244,242,234,0.2);">See the Curriculum</a>
+        </div>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <div class="hero-meta-number">8</div>
+            <div class="hero-meta-label">Weeks, 60 min each</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-number">6</div>
+            <div class="hero-meta-label">Expert instructors</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-number">200+</div>
+            <div class="hero-meta-label">Journalists trained</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hero-meta-number">Small</div>
+            <div class="hero-meta-label">Cohort, by design</div>
+          </div>
+        </div>
       </div>
-      <div class="hero-meta">
-        <div class="hero-meta-item">
-          <div class="hero-meta-number">8</div>
-          <div class="hero-meta-label">Weeks, 60 min each</div>
-        </div>
-        <div class="hero-meta-item">
-          <div class="hero-meta-number">6</div>
-          <div class="hero-meta-label">Expert instructors</div>
-        </div>
-        <div class="hero-meta-item">
-          <div class="hero-meta-number">200+</div>
-          <div class="hero-meta-label">Journalists trained</div>
-        </div>
-        <div class="hero-meta-item">
-          <div class="hero-meta-number">Small</div>
-          <div class="hero-meta-label">Cohort, by design</div>
-        </div>
+
+      <div class="hero-logo reveal">
+        <img src="going-solo-brand.png" alt="Going Solo — a Project C workshop">
       </div>
     </div>
   </div>

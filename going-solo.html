@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Going Solo Workshop — Project C</title>
+<meta name="description" content="An 8-week online workshop for journalists ready to launch an independent venture. Learn the business essentials, build your plan, and go.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://projectc.biz/going-solo">
+<meta property="og:title" content="Going Solo Workshop — Project C">
+<meta property="og:description" content="An 8-week workshop for journalists who want to launch an independent venture and need the plan to get there.">
+<meta property="og:image" content="https://projectc.biz/Project-C_Logo_color.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="Project-C_Logo_color.png">
+<link rel="apple-touch-icon" href="Project-C_Logo_color.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --cream: #F4F2EA;
+  --coral: #FE6B41;
+  --pink: #E09AC2;
+  --brown: #360A05;
+  --deep: #200603;
+  --cream-dark: #EBE8DE;
+  --serif: 'Anton', 'Impact', sans-serif;
+  --sans: 'Inter', -apple-system, sans-serif;
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--sans); background: var(--cream); color: var(--brown); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+.container-narrow { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+
+/* GRADIENT BAR */
+.gradient-bar { height: 4px; background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral), var(--pink)); background-size: 300% 100%; animation: gradientSlide 8s ease infinite; }
+@keyframes gradientSlide { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+/* NAV */
+nav { position: fixed; top: 4px; left: 0; right: 0; z-index: 1000; background: rgba(244,242,234,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(54,10,5,0.06); transition: all 0.3s ease; }
+nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
+.nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 72px; }
+.nav-logo { text-decoration: none; display: flex; align-items: center; }
+.nav-logo .logo-img { height: 48px; width: auto; }
+.nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
+.nav-links a { color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease; }
+.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
+.nav-links a.active { color: var(--coral); font-weight: 600; }
+.nav-cta { background: var(--coral) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
+.nav-cta:hover { background: #e55e38 !important; }
+.nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--brown); margin: 5px 0; }
+
+/* SHARED */
+.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--coral); }
+.section-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,3rem); line-height: 1.05; color: var(--deep); letter-spacing: -0.01em; margin-bottom: 1.25rem; text-transform: uppercase; }
+.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: white; padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.25s ease; border: none; cursor: pointer; }
+.btn-primary:hover { background: #e55e38; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
+.btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--brown); padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 1.5px solid rgba(54,10,5,0.2); transition: all 0.25s ease; }
+.btn-secondary:hover { border-color: var(--brown); background: var(--brown); color: var(--cream); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══════════════════════════════════════════════
+   HERO
+   ═══════════════════════════════════════════════ */
+.hero {
+  background: var(--deep);
+  color: var(--cream);
+  padding: 11rem 0 6rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 25%, rgba(254,107,65,0.22), transparent 45%),
+              radial-gradient(circle at 10% 80%, rgba(224,154,194,0.18), transparent 50%);
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; max-width: 820px; }
+.hero .section-eyebrow { color: var(--coral); }
+.hero .section-eyebrow::before { background: var(--coral); }
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  text-transform: uppercase;
+  line-height: 0.95;
+  margin-bottom: 1.75rem;
+  color: var(--cream);
+  letter-spacing: -0.01em;
+}
+.hero h1 em { font-style: normal; color: var(--coral); }
+.hero p.lead {
+  font-size: 1.2rem;
+  color: rgba(244,242,234,0.75);
+  line-height: 1.7;
+  max-width: 620px;
+  margin-bottom: 2.5rem;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-meta {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(244,242,234,0.1);
+  flex-wrap: wrap;
+}
+.hero-meta-item {}
+.hero-meta-number {
+  font-family: var(--serif);
+  font-size: 2.2rem;
+  color: var(--coral);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.hero-meta-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(244,242,234,0.5);
+  font-weight: 600;
+}
+
+/* ═══════════════════════════════════════════════
+   WHO IT'S FOR
+   ═══════════════════════════════════════════════ */
+.section-who { padding: 5rem 0 4rem; }
+.who-intro { max-width: 680px; margin-bottom: 2.25rem; }
+.who-intro p { font-size: 1.05rem; color: rgba(54,10,5,0.68); line-height: 1.75; margin-top: 1rem; }
+.who-grid-compact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  max-width: 920px;
+}
+.who-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  background: white;
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid rgba(54,10,5,0.07);
+  border-left: 3px solid var(--coral);
+  transition: all 0.2s ease;
+}
+.who-chip:hover { box-shadow: 0 6px 20px rgba(32,6,3,0.07); transform: translateY(-2px); }
+.who-chip .check {
+  color: var(--coral);
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+.who-chip p {
+  font-size: 0.9rem;
+  color: rgba(54,10,5,0.75);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════
+   TESTIMONIALS — pull quotes (used in curriculum / faq sections)
+   ═══════════════════════════════════════════════ */
+.pull-quote {
+  max-width: 620px;
+  margin: 3.5rem auto 0;
+}
+.pull-quote .bubble {
+  position: relative;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 1.6rem 1.9rem;
+  filter: drop-shadow(0 10px 24px rgba(32,6,3,0.10));
+}
+.pull-quote .bubble p {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--deep);
+  font-style: italic;
+}
+.pull-quote .bubble::after {
+  content: '';
+  position: absolute;
+  left: 2.6rem;
+  bottom: -14px;
+  width: 0; height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 16px solid #ffffff;
+}
+.pull-quote .bubble-attrib {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.65rem;
+  padding-left: 2rem;
+}
+.pull-quote .avatar {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--coral);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 12px rgba(254,107,65,0.25);
+}
+.pull-quote .avatar.pink { background: var(--pink); color: var(--deep); }
+.pull-quote .bubble-attrib .who strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--deep);
+  font-weight: 700;
+}
+.pull-quote .bubble-attrib .who span {
+  display: block;
+  font-size: 0.78rem;
+  color: rgba(54,10,5,0.55);
+  margin-top: 0.1rem;
+}
+.pull-quote.on-dark .bubble { background: var(--cream); }
+.pull-quote.on-dark .bubble::after { border-top-color: var(--cream); }
+.pull-quote.on-dark .avatar { background: var(--pink); color: var(--deep); }
+.pull-quote.on-dark .bubble-attrib .who strong { color: var(--cream); }
+.pull-quote.on-dark .bubble-attrib .who span { color: rgba(244,242,234,0.6); }
+
+/* ═══════════════════════════════════════════════
+   SOCIAL PROOF — photos + testimonial editorial layout
+   ═══════════════════════════════════════════════ */
+.section-social-proof {
+  padding: 2rem 0 6rem;
+  background: var(--cream);
+}
+.social-proof-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  align-items: center;
+}
+.proof-photos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.proof-photo-main {
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 12px 40px rgba(32,6,3,0.13);
+}
+.proof-photo-main img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.proof-photo-main:hover img { transform: scale(1.02); }
+.proof-photos-sub {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+.proof-photo-sub {
+  border-radius: 14px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  box-shadow: 0 6px 20px rgba(32,6,3,0.09);
+}
+.proof-photo-sub img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.proof-photo-sub:hover img { transform: scale(1.03); }
+.proof-side {
+  display: flex;
+  flex-direction: column;
+}
+.proof-quote-card {
+  background: rgba(224,154,194,0.18);
+  border-left: 4px solid var(--pink);
+  border-radius: 16px;
+  padding: 1.75rem 1.75rem 1.75rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.proof-quote-mark {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  color: var(--pink);
+  line-height: 0.75;
+  margin-bottom: 1rem;
+  display: block;
+}
+.proof-quote-text {
+  font-size: 1.25rem;
+  line-height: 1.65;
+  color: var(--brown);
+  font-style: italic;
+  margin: 0 0 1.5rem;
+}
+.proof-attrib {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.proof-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--pink);
+  color: var(--deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(224,154,194,0.4);
+}
+.proof-attrib-text strong {
+  display: block;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--brown);
+}
+.proof-attrib-text span {
+  display: block;
+  font-size: 0.78rem;
+  color: rgba(54,10,5,0.55);
+  margin-top: 0.1rem;
+}
+.proof-stat-bar {
+  border-top: 1px solid rgba(54,10,5,0.12);
+  padding-top: 2rem;
+}
+.proof-stat-num {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: var(--coral);
+  line-height: 1;
+  display: block;
+}
+.proof-stat-label {
+  font-size: 0.88rem;
+  color: rgba(54,10,5,0.6);
+  margin-top: 0.4rem;
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .social-proof-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .proof-quote-text { font-size: 1.15rem; }
+  .proof-quote-mark { font-size: 5rem; }
+}
+
+/* ═══════════════════════════════════════════════
+   CURRICULUM
+   ═══════════════════════════════════════════════ */
+.section-curriculum {
+  padding: 6rem 0;
+  background: var(--deep);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+.section-curriculum::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 5% 15%, rgba(254,107,65,0.12), transparent 40%),
+              radial-gradient(circle at 90% 80%, rgba(224,154,194,0.1), transparent 45%);
+  pointer-events: none;
+}
+.curriculum-inner { position: relative; z-index: 2; }
+.curriculum-intro { max-width: 680px; margin-bottom: 3.5rem; }
+.curriculum-intro .section-title { color: var(--cream); }
+.curriculum-intro p { font-size: 1.05rem; color: rgba(244,242,234,0.65); line-height: 1.75; margin-top: 1rem; }
+.curriculum-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+.week-card {
+  background: rgba(244,242,234,0.04);
+  border: 1px solid rgba(244,242,234,0.1);
+  border-radius: 18px;
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  transition: all 0.25s ease;
+}
+.week-card:hover { background: rgba(244,242,234,0.07); border-color: rgba(254,107,65,0.25); }
+.week-number {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  color: var(--coral);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.week-card h4 {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 0.9rem;
+  letter-spacing: 0.01em;
+}
+.week-card ul { list-style: none; margin-bottom: 1rem; }
+.week-card ul li {
+  font-size: 0.88rem;
+  color: rgba(244,242,234,0.65);
+  line-height: 1.6;
+  padding: 0.35rem 0 0.35rem 1.25rem;
+  position: relative;
+}
+.week-card ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: rgba(254,107,65,0.7);
+  font-size: 0.78rem;
+}
+.week-instructor {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(244,242,234,0.08);
+}
+.week-instructor .inst-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: rgba(254,107,65,0.2);
+  color: var(--coral);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.week-instructor .inst-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.week-instructor .inst-info strong {
+  display: block;
+  font-size: 0.78rem;
+  color: rgba(244,242,234,0.85);
+  font-weight: 600;
+}
+.week-instructor .inst-info span {
+  font-size: 0.72rem;
+  color: rgba(244,242,234,0.45);
+}
+.week-card.midpoint { border-color: rgba(224,154,194,0.25); }
+.week-card.midpoint .week-number { color: var(--pink); }
+
+/* ═══════════════════════════════════════════════
+   PHOTO STRIP
+   ═══════════════════════════════════════════════ */
+.section-photos {
+  padding: 0 0 5rem;
+  background: var(--cream);
+}
+.photo-strip {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.photo-strip-item {
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: var(--cream-dark);
+  position: relative;
+}
+.photo-strip-item:first-child {
+  aspect-ratio: 4 / 3;
+  grid-column: span 1;
+}
+.photo-strip-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.photo-strip-item:hover img { transform: scale(1.03); }
+@media (max-width: 768px) {
+  .photo-strip { grid-template-columns: 1fr 1fr; gap: 0.65rem; }
+  .photo-strip-item:first-child { grid-column: span 2; aspect-ratio: 16 / 9; }
+}
+
+/* ═══════════════════════════════════════════════
+   INLINE WAITLIST — compact mid-page form
+   ═══════════════════════════════════════════════ */
+.waitlist-inline {
+  margin-top: 3rem;
+  padding: 2rem 2.25rem;
+  background: rgba(244,242,234,0.05);
+  border: 1px solid rgba(254,107,65,0.25);
+  border-radius: 18px;
+  max-width: 720px;
+}
+.waitlist-inline p {
+  font-size: 0.95rem;
+  color: rgba(244,242,234,0.7);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+.waitlist-inline p strong { color: var(--cream); }
+.waitlist-inline .inline-form-row {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+.waitlist-inline input[type="text"],
+.waitlist-inline input[type="email"] {
+  flex: 1;
+  min-width: 160px;
+  background: rgba(244,242,234,0.09);
+  border: 1.5px solid rgba(244,242,234,0.18);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  color: var(--cream);
+  transition: all 0.2s ease;
+}
+.waitlist-inline input::placeholder { color: rgba(244,242,234,0.38); }
+.waitlist-inline input:focus { outline: none; border-color: var(--coral); background: rgba(244,242,234,0.13); }
+.waitlist-inline .btn-primary { padding: 0.75rem 1.5rem; font-size: 0.9rem; flex-shrink: 0; }
+.waitlist-inline-success {
+  display: none;
+  font-size: 0.9rem;
+  color: var(--coral);
+  font-weight: 600;
+  padding: 0.5rem 0;
+}
+.waitlist-inline-success.is-shown { display: block; }
+
+/* Cream-bg variant for use on light sections */
+.waitlist-inline.on-cream {
+  background: white;
+  border-color: rgba(254,107,65,0.2);
+}
+.waitlist-inline.on-cream p { color: rgba(54,10,5,0.68); }
+.waitlist-inline.on-cream p strong { color: var(--deep); }
+.waitlist-inline.on-cream input[type="text"],
+.waitlist-inline.on-cream input[type="email"] {
+  background: var(--cream);
+  border-color: rgba(54,10,5,0.14);
+  color: var(--deep);
+}
+.waitlist-inline.on-cream input::placeholder { color: rgba(54,10,5,0.38); }
+.waitlist-inline.on-cream input:focus { border-color: var(--coral); background: white; }
+.waitlist-inline.on-cream .waitlist-inline-success { color: var(--coral); }
+
+/* ═══════════════════════════════════════════════
+   INSTRUCTORS
+   ═══════════════════════════════════════════════ */
+.section-instructors { padding: 6rem 0; background: white; }
+.instructors-intro { max-width: 680px; margin-bottom: 3rem; }
+.instructors-intro p { font-size: 1.1rem; color: rgba(54,10,5,0.68); line-height: 1.75; margin-top: 1rem; }
+.instructors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+.instructor-card {
+  background: var(--cream);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(54,10,5,0.07);
+  transition: all 0.25s ease;
+}
+.instructor-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(32,6,3,0.09); border-color: rgba(254,107,65,0.18); }
+.instructor-photo {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background: var(--cream-dark);
+  overflow: hidden;
+  position: relative;
+}
+.instructor-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.instructor-initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 3rem;
+  color: var(--coral);
+  background: linear-gradient(135deg, rgba(254,107,65,0.08), rgba(224,154,194,0.1));
+}
+.instructor-body { padding: 1.5rem; }
+.instructor-body strong {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--deep);
+  margin-bottom: 0.2rem;
+}
+.instructor-role {
+  font-size: 0.78rem;
+  color: var(--coral);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+.instructor-body p {
+  font-size: 0.88rem;
+  color: rgba(54,10,5,0.65);
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════════════
+   WHAT YOU GET
+   ═══════════════════════════════════════════════ */
+.section-deliverables { padding: 6rem 0; background: var(--cream-dark); }
+.deliverables-intro { max-width: 680px; margin-bottom: 3rem; }
+.deliverables-intro p { font-size: 1.1rem; color: rgba(54,10,5,0.68); line-height: 1.75; margin-top: 1rem; }
+.deliverables-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.deliverable-card {
+  background: white;
+  border-radius: 18px;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid rgba(54,10,5,0.06);
+  transition: all 0.25s ease;
+}
+.deliverable-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(32,6,3,0.07); border-color: rgba(254,107,65,0.18); }
+.deliverable-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: rgba(254,107,65,0.1);
+  color: var(--coral);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+.deliverable-icon.pink { background: rgba(224,154,194,0.15); color: var(--pink); }
+.deliverable-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--deep); margin-bottom: 0.5rem; }
+.deliverable-card p { font-size: 0.85rem; color: rgba(54,10,5,0.6); line-height: 1.65; }
+
+/* ═══════════════════════════════════════════════
+   ORIGIN STORY
+   ═══════════════════════════════════════════════ */
+.section-origin { padding: 6rem 0; background: var(--cream); border-top: 1px solid rgba(54,10,5,0.08); }
+.origin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+.origin-photo {
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 3;
+  background: var(--cream-dark);
+  box-shadow: 0 20px 50px rgba(32,6,3,0.14);
+}
+.origin-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.origin-photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, rgba(254,107,65,0.08), rgba(224,154,194,0.12));
+  font-family: var(--serif); font-size: 1rem; color: rgba(54,10,5,0.3);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+.origin-text .section-eyebrow { margin-bottom: 0.75rem; }
+.origin-text .section-title { margin-bottom: 1.25rem; }
+.origin-text p {
+  font-size: 1.02rem;
+  color: rgba(54,10,5,0.72);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.origin-text p:last-child { margin-bottom: 0; }
+
+/* ═══════════════════════════════════════════════
+   FAQ
+   ═══════════════════════════════════════════════ */
+.section-faq { padding: 6rem 0; background: white; }
+.faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+.faq-left h2 {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  text-transform: uppercase;
+  color: var(--deep);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.faq-left p { font-size: 0.9rem; color: rgba(54,10,5,0.55); line-height: 1.7; }
+.faq-left a { color: var(--coral); text-decoration: none; font-weight: 600; }
+.faq-item { border-bottom: 1.5px solid rgba(54,10,5,0.1); }
+.faq-item:first-child { border-top: 1.5px solid rgba(54,10,5,0.1); }
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0;
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--serif);
+  font-size: 1rem;
+  text-transform: uppercase;
+  color: var(--deep);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  gap: 1rem;
+}
+.faq-question:hover { color: var(--coral); }
+.faq-toggle {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(54,10,5,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+  color: var(--brown);
+  font-weight: 300;
+}
+.faq-item.open .faq-toggle {
+  background: var(--coral);
+  border-color: var(--coral);
+  color: white;
+  transform: rotate(45deg);
+}
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-answer-inner {
+  padding: 0 0 1.25rem;
+  font-size: 0.92rem;
+  color: rgba(54,10,5,0.65);
+  line-height: 1.75;
+}
+.faq-answer-inner a { color: var(--coral); text-decoration: none; font-weight: 500; }
+.faq-answer-inner a:hover { text-decoration: underline; }
+.faq-item.open .faq-answer { max-height: 600px; }
+
+/* ═══════════════════════════════════════════════
+   WAITLIST CTA
+   ═══════════════════════════════════════════════ */
+.section-waitlist {
+  padding: 6rem 0;
+  background: var(--deep);
+  color: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+.section-waitlist::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(254,107,65,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+.waitlist-inner { position: relative; z-index: 2; max-width: 640px; }
+.waitlist-inner .section-eyebrow { color: var(--coral); }
+.waitlist-inner .section-eyebrow::before { background: var(--coral); }
+.waitlist-inner h2 {
+  font-family: var(--serif);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  text-transform: uppercase;
+  color: var(--cream);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+.waitlist-inner h2 em { font-style: normal; color: var(--coral); }
+.waitlist-inner p {
+  font-size: 1.05rem;
+  color: rgba(244,242,234,0.65);
+  line-height: 1.75;
+  margin-bottom: 2rem;
+}
+.waitlist-form {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.waitlist-form input[type="text"],
+.waitlist-form input[type="email"] {
+  flex: 1;
+  min-width: 200px;
+  background: rgba(244,242,234,0.08);
+  border: 1.5px solid rgba(244,242,234,0.18);
+  border-radius: 12px;
+  padding: 0.9rem 1.1rem;
+  font-family: var(--sans);
+  font-size: 0.95rem;
+  color: var(--cream);
+  transition: all 0.2s ease;
+}
+.waitlist-form input::placeholder { color: rgba(244,242,234,0.4); }
+.waitlist-form input:focus { outline: none; border-color: var(--coral); background: rgba(244,242,234,0.12); }
+.waitlist-form .btn-primary { flex-shrink: 0; }
+.waitlist-note {
+  margin-top: 1rem;
+  font-size: 0.82rem;
+  color: rgba(244,242,234,0.4);
+  line-height: 1.5;
+}
+.waitlist-success {
+  display: none;
+  background: rgba(254,107,65,0.12);
+  border: 1px solid rgba(254,107,65,0.3);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+}
+.waitlist-success.is-shown { display: block; }
+.waitlist-success strong { color: var(--coral); font-size: 0.95rem; display: block; margin-bottom: 0.4rem; }
+.waitlist-success p { font-size: 0.88rem; color: rgba(244,242,234,0.7); line-height: 1.6; margin: 0; }
+
+/* ═══════════════════════════════════════════════
+   PARTNERSHIPS / CUSTOM COHORTS
+   ═══════════════════════════════════════════════ */
+.section-partnerships {
+  padding: 6rem 0;
+  background: var(--deep);
+  color: var(--cream);
+  position: relative; overflow: hidden;
+}
+.section-partnerships::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 90% 20%, rgba(224,154,194,0.12), transparent 45%),
+              radial-gradient(circle at 10% 80%, rgba(254,107,65,0.1), transparent 40%);
+  pointer-events: none;
+}
+.partnerships-inner { position: relative; z-index: 2; }
+.partnerships-intro { max-width: 680px; margin-bottom: 3rem; }
+.partnerships-intro .section-title { color: var(--cream); }
+.partnerships-intro p {
+  font-size: 1.05rem;
+  color: rgba(244,242,234,0.65);
+  line-height: 1.75;
+  margin-top: 1rem;
+}
+.partnerships-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 2.75rem;
+}
+.partnership-card {
+  background: rgba(244,242,234,0.05);
+  border: 1px solid rgba(244,242,234,0.1);
+  border-radius: 18px;
+  padding: 2rem 1.75rem;
+  transition: all 0.25s ease;
+}
+.partnership-card:hover { background: rgba(244,242,234,0.08); border-color: rgba(254,107,65,0.3); }
+.partnership-icon {
+  font-size: 1.75rem;
+  margin-bottom: 1.1rem;
+  display: block;
+}
+.partnership-card h4 {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.01em;
+}
+.partnership-card p {
+  font-size: 0.88rem;
+  color: rgba(244,242,234,0.6);
+  line-height: 1.7;
+}
+.partnerships-cta-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: rgba(244,242,234,0.04);
+  border: 1px solid rgba(254,107,65,0.2);
+  border-radius: 18px;
+  padding: 2rem 2.25rem;
+}
+.partnerships-cta-bar p {
+  font-size: 1rem;
+  color: rgba(244,242,234,0.7);
+  line-height: 1.65;
+  max-width: 560px;
+}
+.partnerships-cta-bar strong { color: var(--cream); }
+
+/* FOOTER */
+footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 2rem; }
+footer .nav-logo { text-decoration: none; display: flex; align-items: center; color: var(--cream); margin-bottom: 1rem; }
+footer .logo-img-footer { height: 32px; width: auto; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
+.footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
+.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.5); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
+.footer-col a:hover { color: var(--coral); }
+.footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+.footer-social { display: flex; gap: 1rem; }
+.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-social a:hover { color: var(--coral); }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .curriculum-grid { grid-template-columns: 1fr; }
+  .instructors-grid { grid-template-columns: repeat(2, 1fr); }
+  .deliverables-grid { grid-template-columns: repeat(2, 1fr); }
+  .partnerships-grid { grid-template-columns: 1fr 1fr; }
+  .origin-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .faq-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .hero { padding: 9rem 0 4rem; }
+  .hero h1 { font-size: 3.5rem; }
+  .hero-meta { gap: 1.5rem; }
+  .who-grid-compact { grid-template-columns: 1fr; }
+  .instructors-grid { grid-template-columns: 1fr; }
+  .deliverables-grid { grid-template-columns: 1fr; }
+  .partnerships-grid { grid-template-columns: 1fr; }
+  .partnerships-cta-bar { flex-direction: column; align-items: flex-start; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .nav-links li:not(:last-child) { display: none; }
+  .nav-toggle { display: block; }
+  .nav-links.show {
+    display: flex; flex-direction: column;
+    position: absolute; top: 72px; left: 0; right: 0;
+    background: var(--cream); padding: 1.5rem 2rem;
+    box-shadow: 0 8px 30px rgba(32,6,3,0.1);
+    border-bottom: 1px solid rgba(54,10,5,0.06);
+  }
+  .waitlist-form { flex-direction: column; }
+  .waitlist-form .btn-primary { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="gradient-bar"></div>
+
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#newsletter">Newsletter</a></li>
+      <li><a href="index.html#research">Research</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="going-solo.html" class="active">Going Solo</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="https://newsletter.projectc.biz" class="nav-cta">Subscribe Free</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content reveal">
+      <div class="section-eyebrow">The Going Solo Workshop</div>
+      <h1>Eight weeks to launch your <em>own thing.</em></h1>
+      <p class="lead">A virtual workshop for journalists who have the idea and need the plan. Six expert instructors. One small, focused cohort. Every business essential you need to get to launch.</p>
+      <div class="hero-actions">
+        <a href="#waitlist" class="btn-primary">Join the Waitlist &darr;</a>
+        <a href="#curriculum" class="btn-secondary" style="color: rgba(244,242,234,0.8); border-color: rgba(244,242,234,0.2);">See the Curriculum</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="hero-meta-number">8</div>
+          <div class="hero-meta-label">Weeks, 60 min each</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-number">6</div>
+          <div class="hero-meta-label">Expert instructors</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-number">200+</div>
+          <div class="hero-meta-label">Journalists trained</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-number">Small</div>
+          <div class="hero-meta-label">Cohort, by design</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     WHO IT'S FOR
+     ═══════════════════════════════════════════════ -->
+<section class="section-who">
+  <div class="container">
+    <div class="who-intro reveal">
+      <div class="section-eyebrow">Who belongs in this room</div>
+      <h2 class="section-title">Built for journalists with an idea and a deadline</h2>
+      <p>Going Solo is focused on newsletter-based ventures — because growth and revenue strategies vary by medium, and we want everything you learn to be directly applicable to what you're building. Here's who gets the most out of it.</p>
+    </div>
+    <div class="who-grid-compact">
+      <div class="who-chip reveal">
+        <span class="check">✓</span>
+        <p>You have a nugget of an editorial idea. We'll help you vet and sharpen it, but this isn't the right program if you're starting from nothing.</p>
+      </div>
+      <div class="who-chip reveal">
+        <span class="check">✓</span>
+        <p>You want a fast, reliable way to learn the business and growth essentials nobody teaches in journalism school.</p>
+      </div>
+      <div class="who-chip reveal">
+        <span class="check">✓</span>
+        <p>You're tired of the instability in journalism and want to be in the driver's seat of your own career.</p>
+      </div>
+      <div class="who-chip reveal">
+        <span class="check">✓</span>
+        <p>You need an accountability structure to get you over the finish line to launch, with real peers doing the same work alongside you.</p>
+      </div>
+      <div class="who-chip reveal">
+        <span class="check">✓</span>
+        <p>You want an intellectual community. Cohorts stay small on purpose, and enrollment includes a year of access to the Project C Slack.</p>
+      </div>
+      <div class="who-chip reveal">
+        <span class="check">✓</span>
+        <p>You're focused on launching a newsletter-based venture. Growth and revenue strategies vary by medium, so we go deep on what applies to you.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     SOCIAL PROOF — photos + testimonial editorial
+     ═══════════════════════════════════════════════ -->
+<section class="section-social-proof">
+  <div class="social-proof-grid">
+
+    <!-- Left: stacked photos -->
+    <div class="proof-photos reveal">
+      <div class="proof-photo-main">
+        <img src="going-solo-online.png" alt="Going Solo virtual session with participants on Zoom">
+      </div>
+      <div class="proof-photos-sub">
+        <div class="proof-photo-sub">
+          <img src="going-solo-screen.jpg" alt="Going Solo listed on conference program">
+        </div>
+        <div class="proof-photo-sub">
+          <img src="ryan-teaching.jpg" alt="Going Solo instructor teaching a session">
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: testimonial + stat -->
+    <div class="proof-side reveal">
+      <div class="proof-quote-card">
+        <span class="proof-quote-mark">&ldquo;</span>
+        <p class="proof-quote-text">The Going Solo workshop was a crash course in the business realities of becoming a creator journalist.</p>
+        <div class="proof-attrib">
+          <div class="proof-avatar">MK</div>
+          <div class="proof-attrib-text">
+            <strong>Matt Kiser</strong>
+            <span>Founder, WTF Just Happened Today</span>
+          </div>
+        </div>
+      </div>
+      <div class="proof-stat-bar">
+        <span class="proof-stat-num">200+</span>
+        <p class="proof-stat-label">journalists trained across four cohorts — with more on the way.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     CURRICULUM
+     ═══════════════════════════════════════════════ -->
+<section class="section-curriculum" id="curriculum">
+  <div class="container curriculum-inner">
+    <div class="curriculum-intro reveal">
+      <div class="section-eyebrow" style="color:var(--coral);">The Curriculum</div>
+      <h2 class="section-title">Eight weeks, week by week</h2>
+      <p>Every session is 60 minutes, virtual, and recorded so you won't fall behind if life gets in the way. All materials and recordings are yours to keep.</p>
+    </div>
+    <div class="curriculum-grid">
+
+      <div class="week-card reveal">
+        <span class="week-number">Week 01</span>
+        <h4>Charting the Course</h4>
+        <ul>
+          <li>Understand the creator journalism ecosystem</li>
+          <li>Begin crafting your personalized launch plan</li>
+        </ul>
+        <div class="week-instructor">
+          <div class="inst-avatar">
+            <img src="liz-headshot.jpg" alt="Liz Kelly Nelson">
+          </div>
+          <div class="inst-info">
+            <strong>Liz Kelly Nelson</strong>
+            <span>Founder, Project C</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card reveal">
+        <span class="week-number">Week 02</span>
+        <h4>Audience Building</h4>
+        <ul>
+          <li>Kickstart your audience growth with practical tools and strategies</li>
+          <li>Set achievable subscriber goals with expert guidance</li>
+        </ul>
+        <div class="week-instructor">
+          <div class="inst-avatar">
+            <img src="instructor-ryan.jpg" alt="Ryan Kellett">
+          </div>
+          <div class="inst-info">
+            <strong>Ryan Kellett</strong>
+            <span>Independent Journalism Atlas; formerly Axios, Washington Post</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card reveal">
+        <span class="week-number">Week 03</span>
+        <h4>Editorial Planning</h4>
+        <ul>
+          <li>Develop and refine your content concept</li>
+          <li>Create a sustainable editorial calendar</li>
+        </ul>
+        <div class="week-instructor">
+          <div class="inst-avatar" style="background:rgba(224,154,194,0.2); color:var(--pink);">CD</div>
+          <div class="inst-info">
+            <strong>Caitlin Dewey Rainwater</strong>
+            <span>Links I Would G-Chat You</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card midpoint reveal">
+        <span class="week-number">Week 04</span>
+        <h4>Midpoint Q&amp;A</h4>
+        <ul>
+          <li>We take a beat to hear from you: what's working and what feels hard</li>
+          <li>Open Q&amp;A with all instructors</li>
+        </ul>
+        <div class="week-instructor">
+          <div class="inst-avatar" style="background:rgba(224,154,194,0.2); color:var(--pink);">ALL</div>
+          <div class="inst-info">
+            <strong>All instructors</strong>
+            <span>Open Q&amp;A session</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card reveal">
+        <span class="week-number">Week 05</span>
+        <h4>Financial &amp; Emotional Resilience</h4>
+        <ul>
+          <li>Learn the basics of establishing an LLC, managing taxes, and budgeting</li>
+          <li>Strategies for balancing work, health, and personal life</li>
+        </ul>
+        <div class="week-instructor">
+          <div class="inst-avatar">
+            <img src="team-blair.webp" alt="Blair Hickman">
+          </div>
+          <div class="inst-info">
+            <strong>Blair Hickman</strong>
+            <span>Project C Coach; formerly Vox, ProPublica</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card reveal">
+        <span class="week-number">Week 06</span>
+        <h4>Ethics &amp; Standards</h4>
+        <ul>
+          <li>Develop a personal ethics statement and transparency practices</li>
+          <li>How to combat misinformation and build audience trust</li>
+        </ul>
+        <div class="week-instructor">
+          <div class="inst-avatar" style="background:rgba(224,154,194,0.2); color:var(--pink);">LW</div>
+          <div class="inst-info">
+            <strong>Lynn Walsh</strong>
+            <span>Assistant Director, Trusting News</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card reveal">
+        <span class="week-number">Week 07</span>
+        <h4>Revenue 101</h4>
+        <ul>
+          <li>Explore diverse revenue streams, from subscriptions to merchandise</li>
+          <li>Build a roadmap to sustainable income as an independent creator</li>
+        </ul>
+        <div class="week-instructor">
+          <div class="inst-avatar" style="background:rgba(224,154,194,0.2); color:var(--pink);">LR</div>
+          <div class="inst-info">
+            <strong>Lex Roman</strong>
+            <span>Journalists Pay Themselves</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="week-card midpoint reveal">
+        <span class="week-number">Week 08</span>
+        <h4>Wrapping Up Q&amp;A</h4>
+        <ul>
+          <li>We help you put it all together and answer any questions from the revenue exercise</li>
+          <li>You leave with a complete launch plan in hand</li>
+        </ul>
+        <div class="week-instructor">
+          <div class="inst-avatar" style="background:rgba(224,154,194,0.2); color:var(--pink);">ALL</div>
+          <div class="inst-info">
+            <strong>All instructors</strong>
+            <span>Final session</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <blockquote class="pull-quote on-dark reveal" style="margin-top: 3.5rem;">
+      <div class="bubble">
+        <p>&ldquo;One of the best-run digital media workshops I've ever participated in.&rdquo;</p>
+      </div>
+      <div class="bubble-attrib">
+        <div class="avatar">MS</div>
+        <div class="who"><strong>Mark Stencel</strong><span>Founder, Assignment Future</span></div>
+      </div>
+    </blockquote>
+
+    <div class="waitlist-inline reveal">
+      <p><strong>Ready to sign up?</strong> The next cohort isn't open yet, but drop your name and email and you'll be first to hear when it is.</p>
+      <form class="inline-form-row waitlist-form-instance" method="POST">
+        <input type="text" name="name" placeholder="Your name" required autocomplete="name">
+        <input type="email" name="email" placeholder="Your email" required autocomplete="email">
+        <button type="submit" class="btn-primary">Join the waitlist &rarr;</button>
+      </form>
+      <div class="waitlist-inline-success"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     INSTRUCTORS
+     ═══════════════════════════════════════════════ -->
+<section class="section-instructors" id="instructors">
+  <div class="container-wide">
+    <div class="instructors-intro reveal">
+      <div class="section-eyebrow">The People Teaching This</div>
+      <h2 class="section-title">Six instructors, all practitioners</h2>
+      <p>Nobody on this roster is a theorist. They're creator journalists and independent media builders who have done the things they're teaching you to do.</p>
+    </div>
+    <div class="instructors-grid">
+
+      <div class="instructor-card reveal">
+        <div class="instructor-photo">
+          <img src="liz-headshot.jpg" alt="Liz Kelly Nelson" style="object-position: center 30%;">
+        </div>
+        <div class="instructor-body">
+          <strong>Liz Kelly Nelson</strong>
+          <span class="instructor-role">Week 1 — Charting the Course</span>
+          <p>Founder of Project C and co-founder of the Independent Journalism Atlas. Spent years in leadership roles at Vox, The Washington Post, and Gannett before deciding that was enough of that.</p>
+        </div>
+      </div>
+
+      <div class="instructor-card reveal">
+        <div class="instructor-photo">
+          <img src="instructor-ryan.jpg" alt="Ryan Kellett">
+        </div>
+        <div class="instructor-body">
+          <strong>Ryan Kellett</strong>
+          <span class="instructor-role">Week 2 — Audience Building</span>
+          <p>Studied creator journalism at Harvard and co-founded the Independent Journalism Atlas. Previously at Axios and The Washington Post. Has been deep in the audience and growth space for the better part of a decade.</p>
+        </div>
+      </div>
+
+      <div class="instructor-card reveal">
+        <div class="instructor-photo">
+          <img src="instructor-caitlin.jpg" alt="Caitlin Dewey Rainwater">
+        </div>
+        <div class="instructor-body">
+          <strong>Caitlin Dewey Rainwater</strong>
+          <span class="instructor-role">Week 3 — Editorial Planning</span>
+          <p>Journalist, essayist, and cultural commentator. Runs the long-running <em>Links I Would G-Chat You If We Were Friends</em> newsletter, one of the newsletter format's originals.</p>
+        </div>
+      </div>
+
+      <div class="instructor-card reveal">
+        <div class="instructor-photo">
+          <img src="team-blair.webp" alt="Blair Hickman">
+        </div>
+        <div class="instructor-body">
+          <strong>Blair Hickman</strong>
+          <span class="instructor-role">Week 5 — Financial &amp; Emotional Resilience</span>
+          <p>People-first media executive and coach. Spent nearly two decades building audiences, teams, and strategic plans at Vox and ProPublica. Also leads Project C's 1-on-1 coaching program.</p>
+        </div>
+      </div>
+
+      <div class="instructor-card reveal">
+        <div class="instructor-photo">
+          <img src="instructor-lynn.jpg" alt="Lynn Walsh">
+        </div>
+        <div class="instructor-body">
+          <strong>Lynn Walsh</strong>
+          <span class="instructor-role">Week 6 — Ethics &amp; Standards</span>
+          <p>Assistant Director at Trusting News. Has worked in investigative journalism nationally and locally across California, Ohio, Texas, and Florida. Her work centers on trust-building between journalists and their audiences.</p>
+        </div>
+      </div>
+
+      <div class="instructor-card reveal">
+        <div class="instructor-photo">
+          <img src="instructor-lex.jpg" alt="Lex Roman">
+        </div>
+        <div class="instructor-body">
+          <strong>Lex Roman</strong>
+          <span class="instructor-role">Week 7 — Revenue 101</span>
+          <p>Newsletter writer and paid subscription expert. Writes <em>Journalists Pay Themselves</em>, one of the sharpest resources on the business side of independent journalism.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     WHAT YOU GET
+     ═══════════════════════════════════════════════ -->
+<section class="section-deliverables" id="deliverables">
+  <div class="container-wide">
+    <div class="deliverables-intro reveal">
+      <div class="section-eyebrow">What Comes With It</div>
+      <h2 class="section-title">More than just eight sessions</h2>
+      <p>You leave with a full stack of tools and resources built for the first year of running your own thing. Everything is yours to keep.</p>
+    </div>
+    <div class="deliverables-grid">
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-icon">&#128200;</div>
+        <h4>Launch &amp; growth strategy</h4>
+        <p>A detailed launch and growth plan built to last through your first year as an independent creator.</p>
+      </div>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-icon pink">&#128197;</div>
+        <h4>Editorial calendar template</h4>
+        <p>A practical template to help you plan content without losing your mind. Built specifically for newsletter-based ventures.</p>
+      </div>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-icon">&#127919;</div>
+        <h4>Audience development template</h4>
+        <p>A tool to help you zero in on your target audience and identify new audiences who might pay you.</p>
+      </div>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-icon pink">&#128176;</div>
+        <h4>Personal finance worksheet</h4>
+        <p>An annual worksheet that helps you figure out exactly what you need to earn to make your new business work for your life.</p>
+      </div>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-icon">&#128140;</div>
+        <h4>Growth partnership email template</h4>
+        <p>A ready-to-use template to help you negotiate terms of audience growth partnerships on your own terms.</p>
+      </div>
+
+      <div class="deliverable-card reveal">
+        <div class="deliverable-icon pink">&#128172;</div>
+        <h4>One year in the Project C Slack</h4>
+        <p>Access to the 200+ member Project C community of independent creator journalists, included with your enrollment.</p>
+      </div>
+
+    </div>
+
+    <blockquote class="pull-quote reveal" style="margin-top: 3.5rem;">
+      <div class="bubble">
+        <p>&ldquo;The level of detail alone on all the financial stuff was worth the price of admission.&rdquo;</p>
+      </div>
+      <div class="bubble-attrib">
+        <div class="avatar pink">KL</div>
+        <div class="who"><strong>Keren Landman</strong><span>Health reporter</span></div>
+      </div>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ORIGIN STORY
+     ═══════════════════════════════════════════════ -->
+<section class="section-origin">
+  <div class="container">
+    <div class="origin-grid">
+      <div class="origin-photo reveal" style="background:#F8F6EE; display:flex; align-items:stretch;">
+        <svg viewBox="0 0 740 540" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block;" aria-label="Early planning notes for Going Solo, December 2024">
+
+          <!-- Paper background -->
+          <rect width="740" height="540" fill="#F8F6EE"/>
+
+          <!-- Ruled lines every 26px -->
+          <g stroke="#ADC2D4" stroke-width="0.65" opacity="0.38">
+            <line x1="0" y1="44"  x2="740" y2="44"/><line x1="0" y1="70"  x2="740" y2="70"/>
+            <line x1="0" y1="96"  x2="740" y2="96"/><line x1="0" y1="122" x2="740" y2="122"/>
+            <line x1="0" y1="148" x2="740" y2="148"/><line x1="0" y1="174" x2="740" y2="174"/>
+            <line x1="0" y1="200" x2="740" y2="200"/><line x1="0" y1="226" x2="740" y2="226"/>
+            <line x1="0" y1="252" x2="740" y2="252"/><line x1="0" y1="278" x2="740" y2="278"/>
+            <line x1="0" y1="304" x2="740" y2="304"/><line x1="0" y1="330" x2="740" y2="330"/>
+            <line x1="0" y1="356" x2="740" y2="356"/><line x1="0" y1="382" x2="740" y2="382"/>
+            <line x1="0" y1="408" x2="740" y2="408"/><line x1="0" y1="434" x2="740" y2="434"/>
+            <line x1="0" y1="460" x2="740" y2="460"/><line x1="0" y1="486" x2="740" y2="486"/>
+            <line x1="0" y1="512" x2="740" y2="512"/>
+          </g>
+
+          <!-- Red margin line -->
+          <line x1="64" y1="0" x2="64" y2="540" stroke="#C97870" stroke-width="1.3" opacity="0.5"/>
+
+          <!-- Hole punches -->
+          <circle cx="22" cy="86"  r="6.5" fill="#EAE6DB" stroke="#D0CCBf" stroke-width="1"/>
+          <circle cx="22" cy="270" r="6.5" fill="#EAE6DB" stroke="#D0CCBf" stroke-width="1"/>
+          <circle cx="22" cy="454" r="6.5" fill="#EAE6DB" stroke="#D0CCBf" stroke-width="1"/>
+
+          <!-- Date — top right, small, faded -->
+          <text x="722" y="28" font-family="Caveat, cursive" font-size="14" fill="#9A8878" text-anchor="end">12.16.24</text>
+
+          <!-- TITLE -->
+          <text x="76" y="38" font-family="Caveat, cursive" font-size="38" font-weight="700" fill="#2C1810" transform="rotate(-0.4,76,38)">Going Solo?</text>
+          <!-- Hand-drawn underline under title -->
+          <path d="M 76 44 C 105 49,135 42,165 46 C 195 50,225 43,255 46 C 285 49,315 43,340 45" stroke="#2C1810" stroke-width="1.4" fill="none" opacity="0.4"/>
+          <text x="76" y="63" font-family="Caveat, cursive" font-size="17" fill="#4A2820">Creator Journalism Workshop</text>
+
+          <!-- Hairline rule below header -->
+          <line x1="76" y1="72" x2="700" y2="72" stroke="#2C1810" stroke-width="0.7" opacity="0.18"/>
+
+          <!-- Italicized focus note -->
+          <text x="76" y="90" font-family="Caveat, cursive" font-size="14" fill="#5A3830" font-style="italic">★  newsletters first — one medium at a time</text>
+
+          <!-- ── LEFT COLUMN: week outline ── -->
+          <text x="76" y="116" font-family="Caveat, cursive" font-size="15" font-weight="700" fill="#2C1810">The weeks:</text>
+          <line x1="76" y1="119" x2="190" y2="119" stroke="#2C1810" stroke-width="1" opacity="0.5"/>
+
+          <!-- Wk 1 -->
+          <text x="76" y="138" font-family="Caveat, cursive" font-size="14.5" fill="#2C1810">☐  Wk 1: Charting the course</text>
+          <text x="96" y="154" font-family="Caveat, cursive" font-size="12.5" fill="#7A6060">→ Liz (+ Ryan assist)</text>
+          <!-- Wk 2 -->
+          <text x="76" y="172" font-family="Caveat, cursive" font-size="14.5" fill="#2C1810">☐  Wk 2: Editorial planning</text>
+          <text x="96" y="188" font-family="Caveat, cursive" font-size="12.5" fill="#7A6060">→ Caitlin Dewey</text>
+          <!-- Wk 3 -->
+          <text x="76" y="206" font-family="Caveat, cursive" font-size="14.5" fill="#2C1810">☐  Wk 3: Can I afford this??</text>
+          <text x="96" y="222" font-family="Caveat, cursive" font-size="12.5" fill="#7A6060">→ Blair Hickman</text>
+          <!-- Wk 4 -->
+          <text x="76" y="240" font-family="Caveat, cursive" font-size="14.5" fill="#2C1810">☐  Wk 4: Audience building</text>
+          <text x="96" y="256" font-family="Caveat, cursive" font-size="12.5" fill="#7A6060">→ Ryan Kellett</text>
+          <!-- Wk 5 -->
+          <text x="76" y="274" font-family="Caveat, cursive" font-size="14.5" fill="#2C1810">☐  Wk 5: Revenue 101</text>
+          <text x="96" y="290" font-family="Caveat, cursive" font-size="12.5" fill="#7A6060">→ Lex Roman</text>
+          <!-- Wk 6 -->
+          <text x="76" y="308" font-family="Caveat, cursive" font-size="14.5" fill="#2C1810">☐  Wk 6: Ethics &amp; standards</text>
+          <text x="96" y="324" font-family="Caveat, cursive" font-size="12.5" fill="#7A6060">→ Joy + Mollie (Trusting News)</text>
+
+          <!-- Format line -->
+          <text x="76" y="354" font-family="Caveat, cursive" font-size="13.5" fill="#4A3020">6 wks · 90 min · noon ET · Thursdays</text>
+
+          <!-- Bottom left — next steps -->
+          <text x="76" y="394" font-family="Caveat, cursive" font-size="14" font-weight="700" fill="#2C1810">next steps:</text>
+          <line x1="76" y1="397" x2="168" y2="397" stroke="#2C1810" stroke-width="1" opacity="0.5"/>
+          <text x="76" y="414" font-family="Caveat, cursive" font-size="13" fill="#2C1810">•  marketing plan</text>
+          <text x="76" y="430" font-family="Caveat, cursive" font-size="13" fill="#2C1810">•  registration + application ?s</text>
+          <text x="76" y="446" font-family="Caveat, cursive" font-size="13" fill="#2C1810">•  update everyone's LinkedIns (!)</text>
+          <text x="76" y="462" font-family="Caveat, cursive" font-size="13" fill="#2C1810">•  more instructors? Lex, Joy...</text>
+
+          <!-- ── RIGHT COLUMN: misc notes ── -->
+
+          <!-- Circled cohort size note -->
+          <rect x="408" y="98" width="178" height="52" rx="9" fill="none" stroke="#8B4A3A" stroke-width="1.6" stroke-dasharray="3,2.5"/>
+          <text x="420" y="118" font-family="Caveat, cursive" font-size="16" font-weight="700" fill="#8B4A3A">small cohort on purpose</text>
+          <text x="420" y="138" font-family="Caveat, cursive" font-size="14" fill="#8B4A3A">10 people to start</text>
+
+          <!-- Strikethrough: coaching -->
+          <text x="408" y="175" font-family="Caveat, cursive" font-size="13.5" fill="#B09090">1:1 coaching after? (3 months)</text>
+          <line x1="408" y1="170" x2="603" y2="170" stroke="#B09090" stroke-width="1.5"/>
+          <text x="408" y="193" font-family="Caveat, cursive" font-size="12.5" fill="#5A3830" font-style="italic">→ offer discounts instead</text>
+
+          <!-- Discord -->
+          <text x="408" y="220" font-family="Caveat, cursive" font-size="13.5" fill="#2C1810">Discord?? → need to investigate</text>
+
+          <!-- Community -->
+          <text x="408" y="244" font-family="Caveat, cursive" font-size="13.5" fill="#2C1810">community component ← important!</text>
+
+          <!-- Mad Lib — highlighted -->
+          <rect x="405" y="258" width="168" height="30" rx="5" fill="rgba(224,154,194,0.22)"/>
+          <text x="414" y="278" font-family="Caveat, cursive" font-size="17" font-weight="700" fill="#8B3070">★  THE MAD LIB!</text>
+          <line x1="414" y1="281" x2="574" y2="281" stroke="#8B3070" stroke-width="1.3"/>
+          <text x="414" y="298" font-family="Caveat, cursive" font-size="12.5" fill="#5A3830">launch plan template for every participant</text>
+
+          <!-- Video tips note -->
+          <text x="408" y="328" font-family="Caveat, cursive" font-size="13" fill="#2C1810">video tips from working creators</text>
+          <text x="408" y="344" font-family="Caveat, cursive" font-size="12.5" fill="#7A6060" font-style="italic">  sprinkled in btwn sessions — Ryan's idea</text>
+
+          <!-- Pre-work note -->
+          <text x="408" y="376" font-family="Caveat, cursive" font-size="13" fill="#2C1810">homework?? how much?</text>
+          <text x="408" y="394" font-family="Caveat, cursive" font-size="12.5" fill="#7A6060" font-style="italic">  → don't assign what you won't discuss</text>
+
+          <!-- Emcee note -->
+          <text x="408" y="424" font-family="Caveat, cursive" font-size="13" fill="#2C1810">Liz = emcee, front + back each session</text>
+          <text x="408" y="440" font-family="Caveat, cursive" font-size="12.5" fill="#7A6060" font-style="italic">  continuity session to session</text>
+
+          <!-- Start date circled -->
+          <ellipse cx="470" cy="478" rx="62" ry="14" fill="none" stroke="#C97870" stroke-width="1.4"/>
+          <text x="470" y="483" font-family="Caveat, cursive" font-size="14" font-weight="700" fill="#C97870" text-anchor="middle">Feb 20 — launch!</text>
+
+          <!-- Margin stars -->
+          <text x="40" y="118" font-family="Caveat, cursive" font-size="16" fill="#C97870" opacity="0.55">★</text>
+          <text x="40" y="282" font-family="Caveat, cursive" font-size="16" fill="#C97870" opacity="0.55">★</text>
+          <text x="40" y="466" font-family="Caveat, cursive" font-size="16" fill="#C97870" opacity="0.55">→</text>
+
+        </svg>
+      </div>
+      <div class="origin-text reveal">
+        <div class="section-eyebrow">How This Started</div>
+        <h2 class="section-title">The Going Solo origin story</h2>
+        <p>Going Solo started as a conversation among four journalists: Caitlin Dewey, Blair Hickman, Ryan Kellett, and Liz Kelly Nelson. All four were paying close attention to the rise of independent journalism and the gap in support systems for people taking the leap. In summer 2024, Ryan proposed a workshop for the Online News Association conference focused on helping journalists transition to the creator model. The response was immediate and overwhelming.</p>
+        <p>From there, they expanded Going Solo into a multi-week virtual workshop designed to give journalists the practical skills, business knowledge, and emotional resilience to build sustainable solo ventures. What started as a single conference session has grown into a cohort-based program that has trained more than 200 journalists and is now available as a custom offering for foundations, universities, and organizations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PARTNERSHIPS / CUSTOM COHORTS
+     ═══════════════════════════════════════════════ -->
+<section class="section-partnerships">
+  <div class="container partnerships-inner">
+    <div class="partnerships-intro reveal">
+      <div class="section-eyebrow" style="color:var(--coral);">Custom Cohorts &amp; Partnerships</div>
+      <h2 class="section-title">Bring Going Solo to your organization</h2>
+      <p>The Going Solo curriculum is available for private engagements — whether you're a foundation funding creator training, a journalism school looking to build this into your program, or an organization with a specific community of journalists to support.</p>
+    </div>
+    <div class="partnerships-grid">
+
+      <div class="partnership-card reveal">
+        <span class="partnership-icon">&#127775;</span>
+        <h4>Funded Cohorts</h4>
+        <p>Working with a foundation or funder that wants to invest in creator journalism training for a specific community? We'll run a tailored Going Solo cohort just for them. We've done this with communities ranging from Muslim American journalists to civic-focused creators.</p>
+      </div>
+
+      <div class="partnership-card reveal">
+        <span class="partnership-icon">&#127979;</span>
+        <h4>University Partnerships</h4>
+        <p>Looking to build creator journalism skills into your curriculum or bring us in for a workshop? We're actively talking with journalism schools about how to integrate the Going Solo framework into existing programs, whether as a standalone workshop or part of a broader course.</p>
+      </div>
+
+      <div class="partnership-card reveal">
+        <span class="partnership-icon">&#128101;</span>
+        <h4>Organizational Training</h4>
+        <p>Newsrooms, media incubators, and journalism support organizations: if you have a cohort of journalists or emerging creators who need a structured path to independence, we can design something specifically for them. Get in touch and we'll figure out what makes sense.</p>
+      </div>
+
+    </div>
+    <div class="partnerships-cta-bar reveal">
+      <p><strong>Interested in partnering?</strong> We're always open to conversations about new ways to run this program. Whether it's a single workshop or a multi-cohort engagement, reach out and let's talk through what you're trying to build.</p>
+      <a href="mailto:info@projectc.biz?subject=Going Solo Partnership Inquiry" class="btn-primary" style="flex-shrink:0;">Get in touch &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     FAQ
+     ═══════════════════════════════════════════════ -->
+<section class="section-faq" id="faq">
+  <div class="container-wide">
+    <div class="faq-layout">
+      <div class="faq-left reveal">
+        <h2>FAQ</h2>
+        <p>Have a question we didn't answer? <a href="mailto:info@projectc.biz">Email us</a> and we'll talk it through.</p>
+      </div>
+      <div class="faq-right reveal">
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            What are the logistics?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Cohorts run for eight weeks. Sessions are 60 minutes, virtual, and held weekly at Noon ET. Every session is recorded, so if you miss a week you won't fall behind. All recordings and materials are yours to keep forever.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            How much does it cost?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">$1,000 per student, non-refundable after week one. We also offer a 3-month installment payment plan. U.S.-based journalists may be able to <a href="https://www.irs.gov/taxtopics/tc513" target="_blank" rel="noopener">deduct the cost from their taxes</a>, especially if they're self-employed.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            Why does it cost what it costs?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">All six instructors are independent journalists and consultants. The cost reflects the time it took to develop the learnings, presentations, and templates we share with you, plus the hours we spend teaching. We think you'll get your money's worth.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            What if I'm not a trained journalist?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">No problem. If you're looking to launch or grow a newsletter that helps your audience get smarter about any topic, you'll learn how to develop, launch, and grow a newsletter business. We won't teach journalism in this course, but we can point you toward people who can if that interests you.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            How is this different from 1-on-1 coaching?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">Going Solo is a group workshop for journalists who haven't launched yet. It's the foundation: the business knowledge, the plan, the cohort of peers, the accountability. <a href="coaching.html">Coaching</a> is for people who are already in it and want a senior thought partner to help them grow, fix what isn't working, or get out of their own way. Going Solo students get a 20% discount on coaching sessions with our instructors.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            When is the next cohort?
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">We run cohorts a few times a year. Join the waitlist below and you'll be the first to know when registration opens, along with information about any new offerings we're building out.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     WAITLIST CTA
+     ═══════════════════════════════════════════════ -->
+<section class="section-waitlist" id="waitlist">
+  <div class="container">
+    <div class="waitlist-inner reveal">
+      <div class="section-eyebrow">Join the Waitlist</div>
+      <h2>Be first to know when the next cohort <em>opens.</em></h2>
+      <p>Drop your name and email below. We'll reach out when registration opens for the next cohort and let you know about any new offerings we're building.</p>
+
+      <form class="waitlist-form" method="POST" id="waitlistForm" novalidate>
+        <input type="text" name="name" placeholder="Your name" required autocomplete="name">
+        <input type="email" name="email" placeholder="Your email" required autocomplete="email">
+        <button type="submit" class="btn-primary">Join the waitlist &rarr;</button>
+      </form>
+
+      <div class="waitlist-success" id="waitlistSuccess">
+        <strong>✓ You're on the list</strong>
+        <p>Thanks. You'll hear from us when the next cohort opens, and we'll keep you posted on any new Going Solo offerings.</p>
+      </div>
+
+      <p class="waitlist-note">No spam. We'll only reach out about Going Solo and relevant Project C programs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container-wide">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="nav-logo">
+          <img class="logo-img-footer" src="Project-C_Logo_White.png" alt="Project C">
+        </a>
+        <p>Supporting, amplifying, and normalizing independent creator-model journalism.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <a href="https://newsletter.projectc.biz">Newsletter</a>
+        <a href="/top50creatorjournalists">Top 50 List</a>
+        <a href="https://journalismatlas.com">The Independent Journalism Atlas</a>
+        <a href="news-ecosystem-map.html">News Ecosystem Map</a>
+      </div>
+      <div class="footer-col">
+        <h5>Programs</h5>
+        <a href="going-solo.html">Going Solo Workshop</a>
+        <a href="community.html">Join the Community</a>
+        <a href="coaching.html">Coaching</a>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <a href="about.html">About Project C</a>
+        <a href="mailto:info@projectc.biz">Contact</a>
+        <a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a>
+        <a href="press.html">Press &amp; Speaking</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Project C. All rights reserved.</span>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a>
+        <a href="https://newsletter.projectc.biz">Beehiiv</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Nav scroll shadow
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => revealObs.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const id = this.getAttribute('href');
+    if (id === '#') return;
+    e.preventDefault();
+    const target = document.querySelector(id);
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// Waitlist forms — posts to Netlify function → Beehiiv
+async function submitWaitlist(form, onSuccess) {
+  const name  = form.querySelector('input[name="name"]').value.trim();
+  const email = form.querySelector('input[name="email"]').value.trim();
+  if (!name || !email) return;
+
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+
+  try {
+    const res = await fetch('/.netlify/functions/going-solo-waitlist', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && data.ok) {
+      onSuccess();
+    } else {
+      throw new Error(data.error || 'non-ok response');
+    }
+  } catch (err) {
+    console.error('Waitlist submit error:', err);
+    // Fallback: mailto so no one falls through the cracks
+    window.location.href = `mailto:info@projectc.biz?subject=Going Solo Waitlist&body=Name: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}`;
+    submitBtn.disabled = false;
+    submitBtn.textContent = originalText;
+  }
+}
+
+// Bottom full form
+const mainForm = document.getElementById('waitlistForm');
+const mainSuccess = document.getElementById('waitlistSuccess');
+mainForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  submitWaitlist(mainForm, () => {
+    mainForm.style.display = 'none';
+    mainSuccess.classList.add('is-shown');
+  });
+});
+
+// Inline mid-page forms
+document.querySelectorAll('.waitlist-form-instance').forEach(form => {
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const successEl = form.closest('.waitlist-inline').querySelector('.waitlist-inline-success');
+    submitWaitlist(form, () => {
+      form.style.display = 'none';
+      successEl.textContent = '✓ You\'re on the list — we\'ll be in touch when the next cohort opens.';
+      successEl.classList.add('is-shown');
+    });
+  });
+});
+</script>
+</body>
+</html>

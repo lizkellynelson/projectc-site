@@ -18,7 +18,7 @@
   --sans: 'Inter', -apple-system, sans-serif;
 }
 html { scroll-behavior: smooth; font-size: 16px; }
-body { font-family: var(--sans); background: var(--cream); color: var(--brown); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+body { font-family: var(--sans); background: var(--cream); color: var(--brown); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
 .container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
 
@@ -37,6 +37,8 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
 .nav-cta { background: var(--coral) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
 .nav-cta:hover { background: #e55e38 !important; }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--brown); border-radius: 2px; transition: all 0.2s; }
 
 /* PAGE HEADER */
 .page-header {
@@ -691,11 +693,16 @@ footer .logo-img-footer { height: 32px; width: auto; }
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C"></a>
     <ul class="nav-links">
-      <li><a href="index.html">&larr; Back to Home</a></li>
+      <li><a href="index.html#newsletter">Newsletter</a></li>
+      <li><a href="index.html#research">Research</a></li>
+      <li><a href="index.html#top50">Top 50</a></li>
+      <li><a href="index.html#community">Community</a></li>
+      <li><a href="/going-solo">Going Solo</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="news-ecosystem-map.html">News Ecosystem</a></li>
       <li><a href="https://newsletter.projectc.biz" class="nav-cta">Subscribe Free</a></li>
     </ul>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('show')"><span></span><span></span><span></span></button>
   </div>
 </nav>
 

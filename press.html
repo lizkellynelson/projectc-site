@@ -27,7 +27,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--brown); 
 @keyframes gradientSlide { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
 /* NAV */
-nav { position: fixed; top: 4px; left: 0; right: 0; z-index: 1000; background: rgba(244,242,234,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(54,10,5,0.06); transition: all 0.3s ease; }
+nav { position: fixed; top: 4px; left: 0; right: 0; z-index: 1000; background: rgba(244,242,234,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(54,10,5,0.06); transition: all 0.3s ease; transform: translateZ(0); }
 nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 72px; }
 .nav-logo { text-decoration: none; display: flex; align-items: center; }
@@ -43,19 +43,13 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 /* PAGE HEADER */
 .page-header {
   padding: 10.25rem 0 5rem;
-  background: var(--deep);
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(224,154,194,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(254,107,65,0.08) 0%, transparent 60%),
+    var(--deep);
   color: var(--cream);
-  position: relative;
-}
-.page-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(224,154,194,0.12) 0%, transparent 70%),
-              radial-gradient(ellipse 40% 60% at 20% 80%, rgba(254,107,65,0.08) 0%, transparent 60%);
 }
 .page-header-inner {
-  position: relative;
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: end;
@@ -713,11 +707,11 @@ footer .logo-img-footer { height: 32px; width: auto; }
         <p class="page-label">Liz Kelly Nelson &amp; Project C</p>
         <h1>Press,<br>Research<br>&amp; Speaking</h1>
         <p>What we're publishing, where we're showing up, and who's writing about it.</p>
-        <nav class="page-header-nav">
+        <div class="page-header-nav">
           <a href="#research" class="page-nav-pill">Research</a>
           <a href="#press" class="page-nav-pill">Press</a>
           <a href="#speaking" class="page-nav-pill">Speaking</a>
-        </nav>
+        </div>
       </div>
     </div>
   </div>

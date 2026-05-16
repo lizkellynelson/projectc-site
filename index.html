@@ -295,9 +295,9 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .atlas-stats { display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(244,242,234,0.1); }
 .atlas-stat-val { font-family: var(--serif); font-size: 1.6rem; color: var(--coral); display: block; line-height: 1; text-transform: uppercase; }
 .atlas-stat-lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(244,242,234,0.4); margin-top: 0.3rem; display: block; font-weight: 500; }
-.atlas-hero-visual { background: linear-gradient(135deg, #4a1a10 0%, var(--deep) 100%); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.atlas-hero-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.9; z-index: 1; transition: opacity 0.4s ease; }
-.atlas-hero-visual img:hover { opacity: 1; }
+.atlas-hero-visual { background: linear-gradient(135deg, #4a1a10 0%, var(--deep) 100%); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 2rem; }
+.atlas-hero-visual img { width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); opacity: 1; z-index: 1; transition: transform 0.3s ease; }
+.atlas-hero-visual img:hover { transform: scale(1.02); }
 .atlas-hero-visual .atlas-placeholder { color: rgba(244,242,234,0.15); font-size: 5rem; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
 .atlas-hero-visual .atlas-placeholder span { font-size: 0.8rem; color: rgba(244,242,234,0.3); font-family: var(--sans); }
 .partnerships-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.4); font-weight: 700; text-align: center; margin-bottom: 1.5rem; }
@@ -335,8 +335,10 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .community-feature h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; color: var(--deep); }
 .community-feature p { font-size: 0.85rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
 .community-visual { position: relative; }
-.community-card-main { background: rgba(244,242,234,0.06); border: 1px solid rgba(244,242,234,0.08); color: var(--cream); border-radius: 24px; padding: 3rem; position: relative; overflow: hidden; }
+.community-card-main { background: rgba(244,242,234,0.06); border: 1px solid rgba(244,242,234,0.08); border-left: 3px solid var(--coral); color: var(--cream); border-radius: 24px; padding: 3rem; position: relative; overflow: hidden; }
 .community-card-main::before { content: '\201C'; font-family: var(--serif); font-size: 8rem; position: absolute; top: -0.5rem; left: 1.5rem; color: rgba(254,107,65,0.15); line-height: 1; }
+.community-card-main.pink-accent { border-left-color: var(--pink); }
+.community-card-main.pink-accent::before { color: rgba(224,154,194,0.2); }
 .community-card-main blockquote { font-family: var(--sans); font-size: 1.2rem; line-height: 1.5; margin-bottom: 1.5rem; position: relative; z-index: 1; font-style: italic; font-weight: 300; }
 .community-card-main .attribution { font-family: var(--sans); font-size: 0.85rem; color: rgba(244,242,234,0.5); position: relative; z-index: 1; }
 .community-count { position: absolute; bottom: -15px; right: 30px; background: var(--coral); color: white; border-radius: 16px; padding: 1.25rem 1.75rem; box-shadow: 0 8px 30px rgba(254,107,65,0.3); text-align: center; }
@@ -348,10 +350,11 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .goingsolo-card { background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(32,6,3,0.06); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
 .goingsolo-content { padding: 4rem; display: flex; flex-direction: column; justify-content: center; }
 .goingsolo-visual { background: linear-gradient(135deg, var(--coral) 0%, var(--pink) 60%, #c77dab 100%); padding: 4rem; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; }
-.gs-week-list { position: relative; z-index: 1; width: 100%; max-width: 280px; }
-.gs-week { display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0; color: white; font-size: 0.85rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.12); text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.gs-week-list { position: relative; z-index: 1; width: 100%; }
+.gs-week-list-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); font-weight: 700; margin-bottom: 1rem; }
+.gs-week { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 0; color: white; font-size: 0.95rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.12); text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
 .gs-week:last-child { border: none; }
-.gs-week-num { width: 28px; height: 28px; border-radius: 8px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.75rem; flex-shrink: 0; }
+.gs-week-num { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0; }
 
 /* MEMBERS */
 .section-members { padding: 7rem 0; background: var(--deep); color: var(--cream); position: relative; overflow: hidden; }
@@ -381,13 +384,18 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .about-role span { font-size: 0.8rem; color: rgba(54,10,5,0.6); line-height: 1.4; }
 
 /* PRESS */
-.section-press { padding: 5rem 0; background: var(--cream-dark); }
-.press-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-.press-card { background: white; border-radius: 16px; padding: 1.75rem; transition: all 0.3s ease; text-decoration: none; color: var(--brown); display: block; }
-.press-card:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(32,6,3,0.08); }
-.press-source { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--coral); font-weight: 700; margin-bottom: 0.75rem; }
-.press-card h4 { font-family: var(--sans); font-size: 0.95rem; font-weight: 700; line-height: 1.3; margin-bottom: 0.75rem; }
-.press-card p { font-size: 0.8rem; color: rgba(54,10,5,0.5); line-height: 1.5; }
+.section-press { padding: 7rem 0; background: var(--cream-dark); }
+.press-quote-wrap { max-width: 780px; margin: 0 auto; text-align: center; }
+.press-quote-mark { font-family: var(--serif); font-size: 5rem; color: var(--coral); line-height: 0.7; margin-bottom: 1.25rem; display: block; opacity: 0.5; }
+.press-pull-quote { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.1rem); line-height: 1.2; color: var(--deep); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1.5rem; font-style: normal; }
+.press-attribution { font-size: 0.85rem; color: rgba(54,10,5,0.5); margin-bottom: 2.5rem; }
+.press-source-link { color: var(--coral); text-decoration: none; font-weight: 600; }
+.press-source-link:hover { text-decoration: underline; }
+.press-divider { width: 60px; height: 2px; background: rgba(54,10,5,0.1); margin: 0 auto 2.5rem; }
+.press-outlets-row { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+.press-outlets-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.35); font-weight: 700; }
+.press-outlet-names { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+.press-outlet-names span { font-size: 0.85rem; font-weight: 600; color: rgba(54,10,5,0.4); }
 
 /* CTA */
 .section-cta { padding: 8rem 0; text-align: center; position: relative; overflow: hidden; }
@@ -456,7 +464,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 
 /* LIZBOT / ASK LIZ */
 .section-lizbot { padding: 7rem 0; background: white; }
-.lizbot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.lizbot-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
 .lizbot-chat {
   background: var(--cream); border-radius: 24px; overflow: hidden;
   box-shadow: 0 25px 80px rgba(32,6,3,0.08), 0 4px 20px rgba(32,6,3,0.04);
@@ -520,15 +528,17 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
   0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
   40% { transform: scale(1); opacity: 1; }
 }
-.lizbot-suggestions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.lizbot-chips { padding: 0.85rem 1.5rem; display: flex; flex-wrap: wrap; gap: 0.4rem; background: var(--cream); border-top: 1px solid rgba(54,10,5,0.06); }
 .lizbot-suggestion {
-  font-size: 0.8rem; padding: 0.5rem 1rem; border-radius: 100px;
-  border: 1px solid rgba(54,10,5,0.12); background: rgba(254,107,65,0.04);
-  color: var(--brown); cursor: pointer; transition: all 0.2s; text-decoration: none;
+  font-size: 0.75rem; padding: 0.4rem 0.85rem; border-radius: 100px;
+  border: 1px solid rgba(54,10,5,0.12); background: white;
+  color: var(--brown); cursor: pointer; transition: all 0.2s; font-family: var(--sans);
 }
 .lizbot-suggestion:hover { background: var(--coral); color: white; border-color: var(--coral); }
+.lizbot-topics { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem; margin-bottom: 1.75rem; }
+.lizbot-topic { font-size: 0.8rem; padding: 0.45rem 1rem; border-radius: 100px; background: rgba(254,107,65,0.06); border: 1px solid rgba(254,107,65,0.15); color: var(--brown); font-weight: 500; }
 .lizbot-powered {
-  font-size: 0.7rem; color: rgba(54,10,5,0.35); margin-top: 1.5rem;
+  font-size: 0.7rem; color: rgba(54,10,5,0.35); margin-top: 0;
   display: flex; align-items: center; gap: 0.35rem;
 }
 
@@ -592,7 +602,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
           <div class="hero-face"><img src="top50/oliver_darcy.jpg" alt="Oliver Darcy"></div>
           <div class="hero-gallery-label">The faces of creator journalism &middot; <a href="/top50creatorjournalists">See the Top 50 &rarr;</a></div>
         </div>
-        <a href="/top50creatorjournalists" target="_blank" class="float-element bottom-left" style="text-decoration:none; color:inherit;"><span class="float-icon pink">&#128200;</span> Top 50 List Live</a>
+        <a href="https://cnti.org/reports/understanding-us-indie-info-providers/" target="_blank" class="float-element bottom-left" style="text-decoration:none; color:inherit;"><span class="float-icon pink">&#128196;</span> New Research: Indie Info Providers</a>
       </div>
     </div>
   </div>
@@ -631,23 +641,6 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
   </div>
 </section>
 
-<!-- PILLARS -->
-<section class="section-pillars" id="pillars">
-  <div class="container-wide">
-    <div class="pillars-header reveal">
-      <div class="section-eyebrow">What We Do</div>
-      <h2 class="section-title">A full ecosystem for the creator journalism movement</h2>
-      <p class="section-desc">Project C isn't just a newsletter. It's research, community, education, and tools — everything journalists need to go independent and thrive.</p>
-    </div>
-    <div class="pillars-grid">
-      <a href="#newsletter" class="pillar-card reveal"><div class="pillar-icon coral"></div><h3>Newsletter</h3><p>Weekly analysis of trends, revenue models, platform shifts, and interviews with the journalists leading the creator revolution.</p><span class="pillar-link">Read Latest &rarr;</span></a>
-      <a href="#research" class="pillar-card reveal"><div class="pillar-icon pink"></div><h3>Research &amp; Data</h3><p>Original research including The Independent Journalism Atlas — mapping the full landscape of creator journalism in America.</p><span class="pillar-link">Explore Research &rarr;</span></a>
-      <a href="#community" class="pillar-card reveal"><div class="pillar-icon coral"></div><h3>Community</h3><p>A private network of 200+ innovative creator journalists sharing strategies, wins, and hard-won lessons. Slack, events, coaching.</p><span class="pillar-link">Join Us &rarr;</span></a>
-      <a href="#goingsolo" class="pillar-card reveal"><div class="pillar-icon pink"></div><h3>Going Solo</h3><p>An 8-week workshop that equips journalists with the strategy, skills, and confidence to build a sustainable independent venture.</p><span class="pillar-link">Learn More &rarr;</span></a>
-    </div>
-  </div>
-</section>
-
 <!-- RESEARCH / ATLAS -->
 <section class="section-research" id="research">
   <div class="container">
@@ -661,79 +654,18 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
         <img src="atlas-logo-white.png" alt="The Independent Journalism Atlas" class="atlas-logo">
         <p>The most comprehensive mapping of the independent journalism ecosystem in America. 1,100+ creator journalists across every platform, revenue model, and beat. Platforms, revenue models, audience patterns, creator demographics, and the infrastructure powering the movement.</p>
         <div class="atlas-stats">
-          <div class="atlas-stat"><span class="atlas-stat-val">1,100+</span><span class="atlas-stat-lbl">Creators Mapped</span></div>
+          <div class="atlas-stat"><span class="atlas-stat-val">1,400+</span><span class="atlas-stat-lbl">Creators Mapped</span></div>
           <div class="atlas-stat"><span class="atlas-stat-val">50+</span><span class="atlas-stat-lbl">Platforms Tracked</span></div>
           <div class="atlas-stat"><span class="atlas-stat-val">2026</span><span class="atlas-stat-lbl">Latest Data</span></div>
         </div>
         <a href="https://journalismatlas.com" class="btn-primary" style="align-self:flex-start; background:white; color:var(--deep);" target="_blank">Explore the Atlas &rarr;</a>
       </div>
       <div class="atlas-hero-visual">
-        <img src="atlas-screenshot.png" alt="The Independent Journalism Atlas — interactive map of 1,100+ creator journalists" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <img src="atlas-screenshot.png" alt="The Independent Journalism Atlas — interactive map of 1,400+ creator journalists" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
         <div class="atlas-placeholder" style="display:none;">&#127758;<span>Add atlas-screenshot.png</span></div>
       </div>
     </div>
-    <p class="partnerships-label reveal">Research Partnerships</p>
-    <div class="research-grid">
-      <div class="research-card reveal"><span class="rc-status new">New</span><div class="rc-icon" aria-hidden="true">&#127942;</div><h3>Knight Center for the Future of Journalism at ASU</h3><p>A new fellowship partnership exploring the infrastructure and future models that will sustain independent journalism at scale.</p></div>
-      <a href="https://localnewsinitiative.northwestern.edu/posts/2026/02/19/chicago-media-ecosystem-project-c/index.html" target="_blank" class="research-card reveal" aria-label="Medill School of Journalism, Northwestern — Released research report"><span class="rc-status released">Released</span><div class="rc-icon pink" aria-hidden="true">&#128218;</div><h3>Medill School of Journalism, Northwestern</h3><p>Collaborative research on the economics, sustainability, and audience dynamics of creator-model journalism ventures.</p></a>
-      <div class="research-card reveal"><span class="rc-status wip">In Progress</span><div class="rc-icon deep" aria-hidden="true">&#127963;</div><h3>Press Forward Chicago</h3><p>Investigating the intersection of local news, philanthropic support, and creator-model journalism in the Chicago media ecosystem.</p></div>
-      <a href="https://videoconsortium.org/member-resources/rise-of-creator-journalist-report" target="_blank" class="research-card reveal" aria-label="Video Consortium — Released research report"><span class="rc-status released">Released</span><div class="rc-icon" aria-hidden="true">&#127909;</div><h3>Video Consortium</h3><p>Research partnership with the nonprofit organization of visual journalists on the role of video in independent creator journalism.</p></a>
-      <div class="research-card reveal"><span class="rc-status wip">In Progress</span><div class="rc-icon pink" aria-hidden="true">&#128161;</div><h3>CNTI</h3><p>Ongoing research collaboration exploring training, technology, and capacity-building for the next generation of independent journalists.</p></div>
-      <div class="research-card reveal"><span class="rc-status wip">In Progress</span><div class="rc-icon deep" aria-hidden="true">&#127760;</div><h3>ICFJ+</h3><p>An international research partnership examining how the creator journalism model is emerging and evolving across global markets.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- TOP 50 -->
-<section class="section-top50" id="top50">
-  <div class="container-wide">
-    <div class="top50-grid">
-      <div class="top50-visual reveal">
-        <div class="top50-mosaic">
-          <div class="mosaic-cell"><img src="top50/cleo_abram.jpg" alt="Cleo Abram"></div>
-          <div class="mosaic-cell"><img src="top50/casey_newton.jpg" alt="Casey Newton"></div>
-          <div class="mosaic-cell"><img src="top50/heather_cox_richardson.jpg" alt="Heather Cox Richardson"></div>
-          <div class="mosaic-cell"><img src="top50/marques_brownlee.jpg" alt="Marques Brownlee"></div>
-          <div class="mosaic-cell"><img src="top50/taylor_lorenz.jpg" alt="Taylor Lorenz"></div>
-          <div class="mosaic-cell"><img src="top50/johnny_harris.jpg" alt="Johnny Harris"></div>
-          <div class="mosaic-cell"><img src="top50/isaac_saul.jpg" alt="Isaac Saul"></div>
-          <div class="mosaic-cell"><img src="top50/emily_atkin.jpeg" alt="Emily Atkin"></div>
-          <div class="mosaic-cell"><img src="top50/oliver_darcy.jpg" alt="Oliver Darcy"></div>
-          <div class="mosaic-cell"><img src="top50/jessica_valenti.jpg" alt="Jessica Valenti"></div>
-          <div class="mosaic-cell"><img src="top50/eric_newcomer.jpg" alt="Eric Newcomer"></div>
-          <div class="mosaic-cell"><img src="top50/kyla_scanlon.jpeg" alt="Kyla Scanlon"></div>
-          <div class="mosaic-cell"><img src="top50/chris_geidner.jpeg" alt="Chris Geidner"></div>
-          <div class="mosaic-cell"><img src="top50/casey_lewis.jpg" alt="Casey Lewis"></div>
-          <div class="mosaic-cell"><img src="top50/judd_legum.jpg" alt="Judd Legum"></div>
-          <div class="mosaic-cell"><img src="top50/kat_tenbarge.jpg" alt="Kat Tenbarge"></div>
-          <div class="mosaic-cell"><img src="top50/andy_dehnart.jpeg" alt="Andy Dehnart"></div>
-          <div class="mosaic-cell"><img src="top50/hannah_ritchie.jpg" alt="Hannah Ritchie"></div>
-          <div class="mosaic-cell"><img src="top50/seamus_hughes.jpg" alt="Seamus Hughes"></div>
-          <div class="mosaic-cell"><img src="top50/craig_silverman.jpeg" alt="Craig Silverman"></div>
-          <div class="mosaic-cell"><img src="top50/alex_kantrowitz.jpg" alt="Alex Kantrowitz"></div>
-          <div class="mosaic-cell"><img src="top50/mosheh_oinounou.jpg" alt="Mosheh Oinounou"></div>
-          <div class="mosaic-cell"><img src="top50/lisa_remillard.jpg" alt="Lisa Remillard"></div>
-          <div class="mosaic-cell"><img src="top50/ryan_broderick.jpg" alt="Ryan Broderick"></div>
-          <div class="mosaic-cell"><img src="top50/kahlil_greene.jpg" alt="Kahlil Greene"></div>
-        </div>
-      </div>
-      <div class="top50-content reveal">
-        <div class="section-eyebrow">The Definitive List</div>
-        <h2 class="section-title">The Top 50 Creator-Model Journalists</h2>
-        <p class="section-desc">The first-ever ranking of the most influential journalists working independently across Substack, YouTube, TikTok, Instagram, and beyond. These are the people redefining the role of the press — not just with what they cover, but how they reach and engage the public. Stay tuned for the 2026 list coming this fall.</p>
-        <div class="top50-stats">
-          <div class="top50-stat"><span class="val">74%</span><span class="lbl">Use Newsletters</span></div>
-          <div class="top50-stat"><span class="val">60%</span><span class="lbl">Multi-Platform</span></div>
-          <div class="top50-stat"><span class="val">40%</span><span class="lbl">Video-First</span></div>
-        </div>
-        <div class="top50-stats" style="border-top:none; padding-top:0;">
-          <div class="top50-stat"><span class="val">52%</span><span class="lbl">Former Legacy Media</span></div>
-          <div class="top50-stat"><span class="val">22</span><span class="lbl">On Substack</span></div>
-          <div class="top50-stat"><span class="val">8</span><span class="lbl">On YouTube</span></div>
-        </div>
-        <div style="margin-top:2rem;"><a href="/top50creatorjournalists" class="btn-primary">See the Full List &rarr;</a></div>
-      </div>
-    </div>
+    <p class="partnerships-label reveal">The Top 50 Creator-Model Journalists &middot; Six active research partnerships with leading journalism institutions — <a href="press.html" style="color:var(--coral); font-weight:600; text-decoration:none;">See all research &rarr;</a></p>
   </div>
 </section>
 
@@ -744,21 +676,15 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
       <div class="reveal">
         <div class="section-eyebrow">The Project C Community</div>
         <h2 class="section-title">Where creator journalists build together</h2>
-        <p class="section-desc">The active home of 200+ journalists who are serious about building independent media businesses. Strategy sessions, real talk, shared wins, laughs and a few tears — the kind of Slack channel that actually stays at the top of your sidebar.</p>
-        <div class="community-features">
-          <div class="community-feature"><div class="cf-icon" aria-hidden="true">&#128172;</div><div><h4>Private Slack Community</h4><p>Daily conversations on strategy, platform changes, revenue tactics, and the realities of going solo.</p></div></div>
-          <div class="community-feature"><div class="cf-icon pink" aria-hidden="true">&#127902;</div><div><h4>Members-Only Events</h4><p>Monthly sessions with successful creator journalists, media entrepreneurs, and marketing experts.</p></div></div>
-          <div class="community-feature"><div class="cf-icon" aria-hidden="true">&#128218;</div><div><h4>Resource Library</h4><p>Case studies, templates, and tactical guides drawn from journalists who are actually building independent media ventures.</p></div></div>
-          <div class="community-feature"><div class="cf-icon pink" aria-hidden="true">&#128640;</div><div><h4>Group Coaching</h4><p>Live coaching calls to work through your specific challenges with peers who get it.</p></div></div>
-        </div>
-        <div style="margin-top:2rem;"><a href="/community" class="btn-primary">Apply to Join &rarr;</a></div>
+        <p class="section-desc">200+ journalists who are serious about building independent media businesses — sharing strategy, real talk, shared wins, and the occasional collective freakout. The kind of Slack that actually stays at the top of your sidebar.</p>
+        <div style="margin-top:2rem;"><a href="community.html" class="btn-primary">Apply to Join &rarr;</a></div>
       </div>
       <div class="community-visual reveal">
         <div class="community-card-main">
           <blockquote>"The Project C Slack has been a huge win for me. It's now the top Slack channel in my right rail."</blockquote>
           <div class="attribution">— Bryan Vance, Stumptown Savings</div>
         </div>
-        <div class="community-card-main" style="margin-top:1.25rem;">
+        <div class="community-card-main pink-accent" style="margin-top:1.25rem;">
           <blockquote>"It helps me see that I'm far from alone. And that we're all struggling and succeeding in this weirdly complicated creator economy, even in all stages of growth and monetization."</blockquote>
           <div class="attribution">— Chris Hutton, TTRPG Insider</div>
         </div>
@@ -781,10 +707,15 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
         <h2 class="section-title">Going Solo</h2>
         <p class="section-desc">An 8-week intensive workshop for journalists exploring the creator model. Led by industry entrepreneurs, creator journalists, and marketing pros, packed with actionable strategies and proven playbooks.</p>
         <p class="section-desc" style="margin-bottom:2rem;">From content strategy to monetization, audience growth to brand positioning — everything you need to turn your journalism vision into a sustainable, independent venture.</p>
-        <a href="/going-solo" class="btn-primary">Learn More &amp; Apply &rarr;</a>
+        <a href="going-solo.html" class="btn-primary">Learn More &amp; Apply &rarr;</a>
+        <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(54,10,5,0.08);">
+          <p style="font-size:0.8rem; color:rgba(54,10,5,0.45); text-transform:uppercase; letter-spacing:0.08em; font-weight:600; margin-bottom:0.4rem;">Also available for organizations</p>
+          <a href="going-solo.html#organizations" style="font-size:0.9rem; color:var(--brown); text-decoration:none; font-weight:500;">Journalism schools, foundations &amp; private cohorts <span style="color:var(--coral);">→</span></a>
+        </div>
       </div>
       <div class="goingsolo-visual">
         <div class="gs-week-list">
+          <div class="gs-week-list-label">8-Week Curriculum</div>
           <div class="gs-week"><span class="gs-week-num">01</span> Your Vision &amp; Value Proposition</div>
           <div class="gs-week"><span class="gs-week-num">02</span> Audience Strategy</div>
           <div class="gs-week"><span class="gs-week-num">03</span> Platform &amp; Distribution</div>
@@ -807,15 +738,14 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
       <div class="reveal">
         <div class="section-eyebrow">New: AI-Powered</div>
         <h2 class="section-title">Ask Liz anything about creator journalism</h2>
-        <p class="section-desc">An AI assistant trained on Liz's newsletters, published interviews, conference talks, and original research — including the Rise of the Creator Journalist study and the Medill Chicago media ecosystem report.</p>
-        <p class="section-desc">Think of it as having a conversation with the collective knowledge of Project C. Ask about revenue models, platform strategy, audience growth, the creator journalism landscape, or anything else on your mind.</p>
-        <div class="lizbot-suggestions" role="group" aria-label="Suggested questions for LizBot">
-          <button type="button" class="lizbot-suggestion">What revenue models work for independent journalists?</button>
-          <button type="button" class="lizbot-suggestion">How do I grow my newsletter audience?</button>
-          <button type="button" class="lizbot-suggestion">What did the Atlas research find?</button>
-          <button type="button" class="lizbot-suggestion">Should I leave my newsroom job?</button>
-          <button type="button" class="lizbot-suggestion">What platforms are creator journalists using?</button>
-          <button type="button" class="lizbot-suggestion">How do I build a media kit?</button>
+        <p class="section-desc">Trained on years of newsletters, research, and talks — LizBot knows the creator journalism landscape inside out. Think of it as picking Liz's brain, at any hour.</p>
+        <div class="lizbot-topics">
+          <span class="lizbot-topic">Revenue Models</span>
+          <span class="lizbot-topic">Going Independent</span>
+          <span class="lizbot-topic">Platform Strategy</span>
+          <span class="lizbot-topic">Audience Growth</span>
+          <span class="lizbot-topic">The Atlas Research</span>
+          <span class="lizbot-topic">Leaving Your Newsroom</span>
         </div>
         <div class="lizbot-powered"><span aria-hidden="true">&#9889;</span> Powered by AI &middot; Trained on Liz's newsletters, interviews &amp; research</div>
       </div>
@@ -830,6 +760,12 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
         <div class="lizbot-chat-body" id="lizbotChat">
           <div class="chat-msg bot" id="lizbotWelcome">Hey! I'm LizBot — an AI trained on Liz's newsletters, published interviews, research reports, and conference talks about creator journalism. Ask me anything about going independent, revenue models, the Atlas findings, or the creator journalism landscape. What's on your mind?</div>
         </div>
+        <div class="lizbot-chips" role="group" aria-label="Suggested questions">
+          <button type="button" class="lizbot-suggestion">What revenue models work best?</button>
+          <button type="button" class="lizbot-suggestion">How do I grow my newsletter?</button>
+          <button type="button" class="lizbot-suggestion">Should I leave my newsroom?</button>
+          <button type="button" class="lizbot-suggestion">What did the Atlas research find?</button>
+        </div>
         <div class="lizbot-chat-input">
           <input type="text" placeholder="Ask about creator journalism..." id="lizbotInput" aria-label="Ask LizBot a question about creator journalism">
           <button aria-label="Send message to LizBot" id="lizbotSend">&#10148;</button>
@@ -842,19 +778,26 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 
 <!-- PRESS -->
 <section class="section-press" id="press">
-  <div class="container-wide">
-    <div style="text-align:center; margin-bottom:3rem;" class="reveal">
-      <div class="section-eyebrow" style="justify-content:center;">Press &amp; Features</div>
-      <h2 class="section-title">In the conversation</h2>
-    </div>
-    <div class="press-grid">
-      <a href="https://www.cjr.org/the-interview/pivoting-to-creator-liz-kelly-nelson.php" class="press-card reveal" target="_blank"><div class="press-source">Columbia Journalism Review</div><h4>Pivoting to Creator: An Interview with Liz Kelly Nelson</h4><p>CJR sits down with Liz to discuss the rise of creator journalism and what it means for the industry.</p></a>
-      <a href="https://www.niemanlab.org/2025/12/the-creator-infrastructure-gap-will-define-journalisms-next-chapter/" class="press-card reveal" target="_blank"><div class="press-source">Nieman Lab</div><h4>The creator infrastructure gap will define journalism's next chapter</h4><p>Liz's Nieman Lab prediction on the biggest challenge facing independent journalism.</p></a>
-      <a href="https://ijnet.org/en/story/understanding-creator-journalism-liz-kelly-nelson-founder-project-c" class="press-card reveal" target="_blank"><div class="press-source">IJNet</div><h4>Understanding creator journalism with Liz Kelly Nelson</h4><p>An international perspective on the global implications of the creator journalism movement.</p></a>
-      <a href="https://www.journalismfestival.com/programme/2026/creators-and-the-future-of-journalism-insights-on-infrastructure-building-from-the-us-and-south-africa" class="press-card reveal" target="_blank"><div class="press-source">Perugia Journalism Festival</div><h4>Featured Speaker: The Future of Independent Media</h4><p>Liz brings the creator journalism conversation to Europe's premier journalism event.</p></a>
-    </div>
-    <div style="text-align:center; margin-top:2.5rem;" class="reveal">
-      <a href="press.html" class="btn-secondary">See All Press &amp; Features &rarr;</a>
+  <div class="container">
+    <div class="press-quote-wrap reveal">
+      <span class="press-quote-mark" aria-hidden="true">&ldquo;</span>
+      <blockquote class="press-pull-quote">Creator journalism is happening with or without proper infrastructure. Audiences, especially next-generation audiences, have already left legacy institutions. They're not coming back.</blockquote>
+      <div class="press-attribution">
+        Liz Kelly Nelson, writing in <a href="https://www.niemanlab.org/2025/12/the-creator-infrastructure-gap-will-define-journalisms-next-chapter/" target="_blank" class="press-source-link">Nieman Journalism Lab</a> &middot; December 2025
+      </div>
+      <div class="press-divider"></div>
+      <div class="press-outlets-row">
+        <span class="press-outlets-label">Also featured in</span>
+        <div class="press-outlet-names">
+          <span>Columbia Journalism Review</span>
+          <span>Nieman Reports</span>
+          <span>IJNet</span>
+          <span>Perugia Journalism Festival</span>
+        </div>
+      </div>
+      <div style="margin-top:2.5rem;">
+        <a href="press.html" class="btn-secondary">See All Press &amp; Speaking &rarr;</a>
+      </div>
     </div>
   </div>
 </section>
@@ -863,12 +806,12 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 <section class="section-cta" id="subscribe">
   <div class="container">
     <div class="cta-content reveal">
-      <img src="Project-C_Logo_color.png" alt="Project C" style="width:100px; height:auto; margin:0 auto 1.5rem; display:block; opacity:0.3;">
       <h2 class="section-title">Journalism isn't dying.<br>It's going <span style="color:var(--coral);">independent.</span></h2>
-      <p class="section-desc">Join Project C and be part of the movement redefining how journalism works, who it serves, and how it sustains itself.</p>
+      <img src="Project-C_Lockup_color.png" alt="Project C" style="width:220px; height:auto; margin:2rem auto; display:block;">
+      <p class="section-desc">The research, the community, the training — everything you need to build something that lasts.</p>
       <div class="cta-actions">
-        <a href="#newsletter" class="btn-primary">Subscribe to the Newsletter &rarr;</a>
-        <a href="#community" class="btn-secondary">Join the Community</a>
+        <a href="https://newsletter.projectc.biz" target="_blank" class="btn-primary">Subscribe to the Newsletter &rarr;</a>
+        <a href="community.html" class="btn-secondary">Join the Community</a>
       </div>
     </div>
   </div>
@@ -1115,10 +1058,10 @@ loadNewsletterFeed();
     chatInput.disabled = true;
     chatSend.disabled = true;
 
-    // Remove welcome message on first interaction
-    const welcome = document.getElementById('lizbotWelcome');
-    if (welcome && conversationHistory.length === 0) {
-      welcome.id = ''; // Keep it visible but remove ID
+    // Hide suggestion chips on first interaction
+    if (conversationHistory.length === 0) {
+      const chips = document.querySelector('.lizbot-chips');
+      if (chips) chips.style.display = 'none';
     }
 
     // Add user message to UI

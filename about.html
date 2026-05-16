@@ -148,13 +148,31 @@ footer .logo-img-footer { height: 32px; width: auto; }
 .footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
 .footer-social a:hover { color: var(--coral); }
 
+/* ===== WHAT WE DO ===== */
+.section-what-we-do { padding: 5rem 0; background: var(--cream-dark); }
+.what-we-do-header { text-align: center; max-width: 640px; margin: 0 auto 3rem; }
+.what-we-do-header .section-eyebrow { justify-content: center; }
+.what-we-do-header p { font-size: 1.05rem; color: rgba(54,10,5,0.65); line-height: 1.7; }
+.what-we-do-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+.wwd-card {
+  background: white; border-radius: 20px; padding: 2rem;
+  border-left: 3px solid var(--coral); text-decoration: none; color: var(--brown);
+  display: block; transition: all 0.3s ease;
+}
+.wwd-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(32,6,3,0.08); }
+.wwd-card h3 { font-family: var(--serif); font-size: 1.2rem; text-transform: uppercase; color: var(--deep); margin-bottom: 0.75rem; }
+.wwd-card p { font-size: 0.85rem; color: rgba(54,10,5,0.6); line-height: 1.6; margin-bottom: 1.25rem; }
+.wwd-link { font-size: 0.8rem; font-weight: 600; color: var(--coral); }
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
+  .what-we-do-grid { grid-template-columns: repeat(2, 1fr); }
   .team-cards { grid-template-columns: repeat(2, 1fr); }
   .founder-grid { grid-template-columns: 320px 1fr; gap: 3rem; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 768px) {
+  .what-we-do-grid { grid-template-columns: 1fr; }
   .about-hero { padding: 9rem 0 4rem; }
   .about-hero::after { width: 100%; opacity: 0.15; }
   .about-hero h1 { font-size: 2.5rem; }
@@ -193,6 +211,39 @@ footer .logo-img-footer { height: 32px; width: auto; }
       <div class="section-eyebrow">About Project C</div>
       <h1>Journalism isn't dying. It's going <em>independent.</em></h1>
       <p>Project C is the research hub, community, and strategic home for journalists building sustainable, audience-driven media ventures outside traditional institutions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="section-what-we-do">
+  <div class="container">
+    <div class="what-we-do-header">
+      <div class="section-eyebrow">What We Do</div>
+      <h2 class="section-title">A full ecosystem for the creator journalism movement</h2>
+      <p>Project C isn't just a newsletter. It's research, community, education, and tools — everything journalists need to go independent and thrive.</p>
+    </div>
+    <div class="what-we-do-grid">
+      <a href="https://newsletter.projectc.biz" target="_blank" class="wwd-card">
+        <h3>Newsletter</h3>
+        <p>Weekly analysis of trends, revenue models, platform shifts, and interviews with the journalists leading the creator journalism revolution.</p>
+        <span class="wwd-link">Read Latest &rarr;</span>
+      </a>
+      <a href="press.html" class="wwd-card">
+        <h3>Research &amp; Data</h3>
+        <p>Original research including The Independent Journalism Atlas — mapping the full landscape of creator journalism in America across platforms, revenue models, and beats.</p>
+        <span class="wwd-link">Explore Research &rarr;</span>
+      </a>
+      <a href="community.html" class="wwd-card">
+        <h3>Community</h3>
+        <p>A private network of 200+ innovative creator journalists sharing strategies, wins, and hard-won lessons. Slack, events, coaching, and more.</p>
+        <span class="wwd-link">Join Us &rarr;</span>
+      </a>
+      <a href="going-solo.html" class="wwd-card">
+        <h3>Going Solo</h3>
+        <p>An 8-week workshop that equips journalists with the strategy, skills, and confidence to build a sustainable independent venture.</p>
+        <span class="wwd-link">Learn More &rarr;</span>
+      </a>
     </div>
   </div>
 </section>

@@ -345,11 +345,13 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .community-count .val { font-family: var(--serif); font-size: 1.8rem; display: block; line-height: 1; }
 .community-count .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85; margin-top: 0.2rem; font-weight: 500; }
 
-/* GOING SOLO */
+/* GOING SOLO + COACHING */
 .section-goingsolo { padding: 5rem 0; background: linear-gradient(180deg, var(--cream) 0%, white 100%); }
+.goingsolo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .goingsolo-card { background: white; border-radius: 24px; box-shadow: 0 20px 60px rgba(32,6,3,0.06); overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; }
-.goingsolo-content { padding: 4rem; display: flex; flex-direction: column; justify-content: center; }
-.goingsolo-visual { background: linear-gradient(135deg, var(--coral) 0%, var(--pink) 60%, #c77dab 100%); padding: 4rem; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+.goingsolo-content { padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
+.goingsolo-visual { background: linear-gradient(135deg, var(--coral) 0%, var(--pink) 60%, #c77dab 100%); padding: 3rem; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; overflow: hidden; }
+.goingsolo-visual.coaching { background: linear-gradient(135deg, var(--pink) 0%, #c77dab 60%, #9b4d8e 100%); }
 .gs-week-list { position: relative; z-index: 1; width: 100%; }
 .gs-week-list-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); font-weight: 700; margin-bottom: 1rem; }
 .gs-week { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 0; color: white; font-size: 0.95rem; font-weight: 600; border-bottom: 1px solid rgba(255,255,255,0.12); text-shadow: 0 1px 3px rgba(0,0,0,0.2); }
@@ -432,8 +434,9 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 @media (max-width: 768px) {
   .hero { padding: 8rem 0 4rem; min-height: auto; }
   .hero-grid, .newsletter-grid, .pillars-grid, .top50-grid, .community-grid, .lizbot-grid { grid-template-columns: 1fr !important; }
+  .goingsolo-grid { grid-template-columns: 1fr; }
   .goingsolo-card { grid-template-columns: 1fr; }
-  .goingsolo-visual { min-height: 300px; }
+  .goingsolo-visual { min-height: 260px; }
   .atlas-hero { grid-template-columns: 1fr; }
   .atlas-hero-visual { min-height: 140px; }
   .research-grid, .members-grid, .press-grid { grid-template-columns: 1fr; }
@@ -698,32 +701,54 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
   </div>
 </section>
 
-<!-- GOING SOLO -->
+<!-- GOING SOLO + COACHING -->
 <section class="section-goingsolo" id="goingsolo">
   <div class="container-wide">
-    <div class="goingsolo-card reveal">
-      <div class="goingsolo-content">
-        <div class="section-eyebrow">Workshop</div>
-        <h2 class="section-title">Going Solo</h2>
-        <p class="section-desc">An 8-week intensive workshop for journalists exploring the creator model. Led by industry entrepreneurs, creator journalists, and marketing pros, packed with actionable strategies and proven playbooks.</p>
-        <p class="section-desc" style="margin-bottom:2rem;">From content strategy to monetization, audience growth to brand positioning — everything you need to turn your journalism vision into a sustainable, independent venture.</p>
-        <a href="going-solo.html" class="btn-primary">Learn More &amp; Apply &rarr;</a>
-        <div style="margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid rgba(54,10,5,0.08);">
-          <p style="font-size:0.8rem; color:rgba(54,10,5,0.45); text-transform:uppercase; letter-spacing:0.08em; font-weight:600; margin-bottom:0.4rem;">Also available for organizations</p>
-          <a href="going-solo.html#organizations" style="font-size:0.9rem; color:var(--brown); text-decoration:none; font-weight:500;">Journalism schools, foundations &amp; private cohorts <span style="color:var(--coral);">→</span></a>
+    <div class="goingsolo-grid">
+      <!-- Going Solo card -->
+      <div class="goingsolo-card reveal">
+        <div class="goingsolo-content">
+          <div class="section-eyebrow">Workshop</div>
+          <h2 class="section-title">Going Solo</h2>
+          <p class="section-desc" style="margin-bottom:2rem;">An 8-week intensive for journalists exploring the creator model. From content strategy to monetization, everything you need to build a sustainable, independent venture.</p>
+          <a href="going-solo.html" class="btn-primary">Learn More &amp; Apply &rarr;</a>
+          <div style="margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid rgba(54,10,5,0.08);">
+            <p style="font-size:0.75rem; color:rgba(54,10,5,0.45); text-transform:uppercase; letter-spacing:0.08em; font-weight:600; margin-bottom:0.35rem;">Also available for organizations</p>
+            <a href="going-solo.html#organizations" style="font-size:0.85rem; color:var(--brown); text-decoration:none; font-weight:500;">Journalism schools, foundations &amp; private cohorts <span style="color:var(--coral);">→</span></a>
+          </div>
+        </div>
+        <div class="goingsolo-visual">
+          <div class="gs-week-list">
+            <div class="gs-week-list-label">8-Week Curriculum</div>
+            <div class="gs-week"><span class="gs-week-num">01</span> Your Vision &amp; Value Proposition</div>
+            <div class="gs-week"><span class="gs-week-num">02</span> Audience Strategy</div>
+            <div class="gs-week"><span class="gs-week-num">03</span> Platform &amp; Distribution</div>
+            <div class="gs-week"><span class="gs-week-num">04</span> Content Systems</div>
+            <div class="gs-week"><span class="gs-week-num">05</span> Monetization Models</div>
+            <div class="gs-week"><span class="gs-week-num">06</span> Brand &amp; Marketing</div>
+            <div class="gs-week"><span class="gs-week-num">07</span> Operations &amp; Scale</div>
+            <div class="gs-week"><span class="gs-week-num">08</span> Launch Strategy</div>
+          </div>
         </div>
       </div>
-      <div class="goingsolo-visual">
-        <div class="gs-week-list">
-          <div class="gs-week-list-label">8-Week Curriculum</div>
-          <div class="gs-week"><span class="gs-week-num">01</span> Your Vision &amp; Value Proposition</div>
-          <div class="gs-week"><span class="gs-week-num">02</span> Audience Strategy</div>
-          <div class="gs-week"><span class="gs-week-num">03</span> Platform &amp; Distribution</div>
-          <div class="gs-week"><span class="gs-week-num">04</span> Content Systems</div>
-          <div class="gs-week"><span class="gs-week-num">05</span> Monetization Models</div>
-          <div class="gs-week"><span class="gs-week-num">06</span> Brand &amp; Marketing</div>
-          <div class="gs-week"><span class="gs-week-num">07</span> Operations &amp; Scale</div>
-          <div class="gs-week"><span class="gs-week-num">08</span> Launch Strategy</div>
+      <!-- Coaching card -->
+      <div class="goingsolo-card reveal">
+        <div class="goingsolo-content">
+          <div class="section-eyebrow">1-on-1</div>
+          <h2 class="section-title">Coaching</h2>
+          <p class="section-desc" style="margin-bottom:2rem;">Personalized sessions built around where you are in your journey. A clear strategy, real accountability, and a roadmap that fits where you want to go.</p>
+          <a href="coaching.html" class="btn-primary" style="background:var(--pink); color:white;">Work With Blair &rarr;</a>
+        </div>
+        <div class="goingsolo-visual coaching">
+          <div class="gs-week-list">
+            <div class="gs-week-list-label">We'll help you:</div>
+            <div class="gs-week"><span class="gs-week-num">01</span> Ruthlessly Prioritize</div>
+            <div class="gs-week"><span class="gs-week-num">02</span> Grow Your Audience &amp; Revenue</div>
+            <div class="gs-week"><span class="gs-week-num">03</span> Build Systems That Last</div>
+            <div class="gs-week"><span class="gs-week-num">04</span> Gain Confidence to Lead</div>
+            <div class="gs-week"><span class="gs-week-num">05</span> Deal With the Burnout</div>
+            <div class="gs-week"><span class="gs-week-num">06</span> Experiment &amp; Play</div>
+          </div>
         </div>
       </div>
     </div>

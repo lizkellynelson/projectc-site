@@ -358,6 +358,19 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .gs-week:last-child { border: none; }
 .gs-week-num { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; flex-shrink: 0; }
 
+/* COACHING PROMO TESTIMONIAL */
+.promo-testimonial {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(54,10,5,0.08);
+}
+.promo-testimonial blockquote {
+  font-size: 0.88rem;
+  font-style: italic;
+  color: rgba(54,10,5,0.5);
+  line-height: 1.65;
+}
+
 /* MEMBERS */
 .section-members { padding: 7rem 0; background: var(--deep); color: var(--cream); position: relative; overflow: hidden; }
 .members-header { text-align: center; max-width: 640px; margin: 0 auto 4rem; }
@@ -733,11 +746,14 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
       </div>
       <!-- Coaching card -->
       <div class="goingsolo-card reveal">
-        <div class="goingsolo-content">
+        <div class="goingsolo-content" style="justify-content:flex-start;">
           <div class="section-eyebrow">1-on-1</div>
           <h2 class="section-title">Coaching</h2>
           <p class="section-desc" style="margin-bottom:2rem;">Personalized sessions built around where you are in your journey. A clear strategy, real accountability, and a roadmap that fits where you want to go.</p>
           <a href="coaching.html" class="btn-primary" style="background:var(--pink); color:white;">Work With Blair &rarr;</a>
+          <figure class="promo-testimonial">
+            <blockquote>"I really felt she understood where I was coming from, where I wanted to go, and what I was capable of. I looked forward to the positive, encouraging energy I knew she would give during every meeting."</blockquote>
+          </figure>
         </div>
         <div class="goingsolo-visual coaching">
           <div class="gs-week-list">

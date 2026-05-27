@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirm Your Spot — Journalism Creators Startup Lab | Project C</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: #F4F2EA;
+      color: #360A05;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    /* ── Gradient Bar ── */
+    .gradient-bar {
+      height: 5px;
+      background: linear-gradient(90deg, #FE6B41, #E09AC2, #FE6B41, #E09AC2);
+      background-size: 300% 100%;
+      animation: gradientSlide 8s ease infinite;
+    }
+
+    @keyframes gradientSlide {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      background: #F4F2EA;
+      border-bottom: 1px solid rgba(54, 10, 5, 0.1);
+    }
+
+    .nav-logo img { height: 36px; display: block; }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #360A05;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: #FE6B41; }
+
+    /* ── Page Header ── */
+    .page-header {
+      padding: 4rem 2.5rem 2rem;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .kicker {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #FE6B41;
+      margin-bottom: 0.75rem;
+    }
+
+    .page-header h1 {
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      text-transform: uppercase;
+      color: #200603;
+      line-height: 1.05;
+      margin-bottom: 1.25rem;
+    }
+
+    .page-header .intro {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #360A05;
+      max-width: 640px;
+    }
+
+    .deadline-badge {
+      display: inline-block;
+      margin-top: 1.25rem;
+      background: #EBE8DE;
+      border: 1px solid rgba(54,10,5,0.15);
+      border-radius: 100px;
+      padding: 0.4rem 1.1rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #360A05;
+    }
+
+    .deadline-badge span { color: #FE6B41; font-weight: 500; }
+
+    /* ── Form Container ── */
+    .form-container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 1rem 2.5rem 5rem;
+    }
+
+    /* ── Sections ── */
+    .form-section {
+      margin-bottom: 3rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid rgba(54,10,5,0.12);
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #FE6B41;
+      margin-bottom: 0.3rem;
+    }
+
+    .section-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      color: #200603;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-desc {
+      font-size: 0.9rem;
+      color: rgba(54,10,5,0.65);
+      margin-bottom: 2rem;
+    }
+
+    /* ── Form Fields ── */
+    .field-group {
+      margin-bottom: 1.75rem;
+    }
+
+    .field-group.two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-bottom: 0.35rem;
+      color: #360A05;
+    }
+
+    label .required {
+      color: #FE6B41;
+      margin-left: 2px;
+    }
+
+    label .hint {
+      display: block;
+      font-weight: 400;
+      font-size: 0.82rem;
+      color: rgba(54,10,5,0.55);
+      margin-top: 0.15rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1.5px solid rgba(54,10,5,0.2);
+      border-radius: 8px;
+      background: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      color: #360A05;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      appearance: none;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="url"]:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #FE6B41;
+      box-shadow: 0 0 0 3px rgba(254,107,65,0.12);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .word-count {
+      text-align: right;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: rgba(54,10,5,0.45);
+      margin-top: 0.3rem;
+    }
+
+    .word-count.over-limit { color: #FE6B41; font-weight: 500; }
+
+    /* ── Radio & Checkbox ── */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      cursor: pointer;
+    }
+
+    .option-item input[type="radio"],
+    .option-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      margin-top: 2px;
+      accent-color: #FE6B41;
+      cursor: pointer;
+    }
+
+    .option-item span {
+      font-size: 0.95rem;
+      color: #360A05;
+      line-height: 1.5;
+    }
+
+    /* ── Conditional field ── */
+    .conditional-field {
+      display: none;
+      margin-top: 1.75rem;
+    }
+
+    .conditional-field.visible { display: block; }
+
+    /* ── Platform Links ── */
+    .platform-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-top: 0.5rem;
+    }
+
+    .platform-link-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    .platform-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: rgba(54,10,5,0.65);
+      white-space: nowrap;
+    }
+
+    /* ── Learn more link ── */
+    .intro-link {
+      margin-top: 0.85rem;
+    }
+
+    .intro-link a {
+      color: #FE6B41;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .intro-link a:hover { color: #e55e38; }
+
+    /* ── Submit Button ── */
+    .submit-wrap {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(54,10,5,0.12);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: #FE6B41;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 1rem 2.5rem;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.25s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background: #e55e38;
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:disabled {
+      background: rgba(254,107,65,0.4);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .submit-note {
+      margin-top: 0.75rem;
+      font-size: 0.83rem;
+      color: rgba(54,10,5,0.5);
+    }
+
+    /* ── Success State ── */
+    #success-message {
+      display: none;
+      max-width: 760px;
+      margin: 3rem auto;
+      padding: 3rem 2.5rem;
+      text-align: center;
+    }
+
+    .success-icon {
+      width: 56px;
+      height: 56px;
+      background: #FE6B41;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+
+    #success-message h2 {
+      font-family: 'Anton', sans-serif;
+      font-size: 2rem;
+      text-transform: uppercase;
+      color: #200603;
+      margin-bottom: 1rem;
+    }
+
+    #success-message p {
+      font-size: 1rem;
+      color: #360A05;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #200603;
+      color: #F4F2EA;
+      padding: 3.5rem 2.5rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 2rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid rgba(244,242,234,0.1);
+    }
+
+    .footer-logo img { height: 32px; margin-bottom: 1rem; }
+    .footer-logo p {
+      font-size: 0.85rem;
+      color: rgba(244,242,234,0.6);
+      line-height: 1.6;
+    }
+
+    .footer-col h5 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(244,242,234,0.5);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.5rem; }
+    .footer-col a {
+      color: rgba(244,242,234,0.75);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: #FE6B41; }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 1.5rem auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: rgba(244,242,234,0.4);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { gap: 1.25rem; }
+      .page-header, .form-container { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .field-group.two-col { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .platform-link-row { grid-template-columns: 1fr; gap: 0.2rem; }
+      .platform-label { font-size: 0.8rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Gradient Bar -->
+  <div class="gradient-bar"></div>
+
+  <!-- Nav -->
+  <nav>
+    <a class="nav-logo" href="https://projectc.biz/">
+      <img src="https://projectc.biz/project-c_logo_color.png" alt="Project C">
+    </a>
+    <ul class="nav-links">
+      <li><a href="https://projectc.biz/#research">Research</a></li>
+      <li><a href="https://projectc.biz/community">Community</a></li>
+      <li><a href="https://projectc.biz/coaching">Coaching</a></li>
+      <li><a href="https://projectc.biz/about">About</a></li>
+      <li><a href="https://newsletter.projectc.biz">Newsletter</a></li>
+    </ul>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <p class="kicker">Project C × Google News Initiative · Cohort 1</p>
+    <h1>Journalism Creators<br>Startup Lab</h1>
+    <p class="intro">Congratulations — you've been selected for the inaugural cohort. Please complete this form to confirm your spot no later than midnight ET, Friday, June 10. We'll use your answers to finalize the roster, schedule live lab sessions, and tailor the curriculum to where participants actually are in their work.</p>
+    <p class="intro-link"><a href="https://projectc.biz/emerging-creators-lab.html">Learn more about the program →</a></p>
+    <div class="deadline-badge">Deadline to confirm: <span>midnight ET, June 10</span></div>
+  </div>
+
+  <!-- Success Message (hidden until submission) -->
+  <div id="success-message">
+    <div class="success-icon">✓</div>
+    <h2>You're confirmed.</h2>
+    <p>Thanks — we've got your spot locked in. You'll hear from us with next steps before the cohort kicks off in late June. Questions in the meantime? Email <a href="mailto:liz@projectc.biz" style="color:#FE6B41;">liz@projectc.biz</a>.</p>
+  </div>
+
+  <!-- Form -->
+  <div class="form-container">
+    <form id="acceptance-form" novalidate>
+
+      <!-- SECTION 1 -->
+      <div class="form-section">
+        <p class="section-label">Section 1 of 4</p>
+        <h2 class="section-title">Confirm Your Information</h2>
+        <p class="section-desc">Please verify and fill in anything missing.</p>
+
+        <div class="field-group two-col">
+          <div>
+            <label for="firstName">First name <span class="required">*</span></label>
+            <input type="text" id="firstName" name="firstName" required autocomplete="given-name">
+          </div>
+          <div>
+            <label for="lastName">Last name <span class="required">*</span></label>
+            <input type="text" id="lastName" name="lastName" required autocomplete="family-name">
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="email">Email address <span class="required">*</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </div>
+
+        <div class="field-group two-col">
+          <div>
+            <label for="city">City or town <span class="required">*</span></label>
+            <input type="text" id="city" name="city" required>
+          </div>
+          <div>
+            <label for="stateProvince">State or province <span class="required">*</span></label>
+            <input type="text" id="stateProvince" name="stateProvince" required>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="language">Primary language(s) you work in <span class="required">*</span></label>
+          <input type="text" id="language" name="language" required placeholder="e.g. English, Spanish">
+        </div>
+
+        <div class="field-group">
+          <label for="publicationName">Name of your news creator project or publication <span class="required">*</span></label>
+          <input type="text" id="publicationName" name="publicationName" required>
+        </div>
+
+        <div class="field-group">
+          <label for="primaryPlatform">Your primary platform link <span class="required">*</span>
+            <span class="hint">Website, newsletter, YouTube channel, Instagram, etc.</span>
+          </label>
+          <input type="url" id="primaryPlatform" name="primaryPlatform" required placeholder="https://...">
+        </div>
+
+        <div class="field-group">
+          <label>Where are you building your audience? <span class="required">*</span>
+            <span class="hint">Share a direct link for every platform where you're actively publishing. At least one required — leave the rest blank.</span>
+          </label>
+          <div class="platform-links">
+            <div class="platform-link-row">
+              <span class="platform-label">Newsletter</span>
+              <input type="url" name="linkNewsletter" placeholder="https://">
+            </div>
+            <div class="platform-link-row">
+              <span class="platform-label">Website / Blog</span>
+              <input type="url" name="linkWebsite" placeholder="https://">
+            </div>
+            <div class="platform-link-row">
+              <span class="platform-label">YouTube</span>
+              <input type="url" name="linkYouTube" placeholder="https://youtube.com/@...">
+            </div>
+            <div class="platform-link-row">
+              <span class="platform-label">Instagram</span>
+              <input type="url" name="linkInstagram" placeholder="https://instagram.com/...">
+            </div>
+            <div class="platform-link-row">
+              <span class="platform-label">TikTok</span>
+              <input type="url" name="linkTikTok" placeholder="https://tiktok.com/@...">
+            </div>
+            <div class="platform-link-row">
+              <span class="platform-label">X / Twitter</span>
+              <input type="url" name="linkTwitter" placeholder="https://x.com/...">
+            </div>
+            <div class="platform-link-row">
+              <span class="platform-label">Substack</span>
+              <input type="url" name="linkSubstack" placeholder="https://yourname.substack.com">
+            </div>
+            <div class="platform-link-row">
+              <span class="platform-label">Podcast</span>
+              <input type="url" name="linkPodcast" placeholder="https://">
+            </div>
+            <div class="platform-link-row">
+              <span class="platform-label">LinkedIn</span>
+              <input type="url" name="linkLinkedIn" placeholder="https://linkedin.com/in/...">
+            </div>
+            <div class="platform-link-row">
+              <span class="platform-label">Other</span>
+              <input type="url" name="linkOther" placeholder="https://">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2 -->
+      <div class="form-section">
+        <p class="section-label">Section 2 of 4</p>
+        <h2 class="section-title">Your Work</h2>
+        <p class="section-desc">This helps us understand where each cohort member is so we can make the program as useful as possible.</p>
+
+        <div class="field-group">
+          <label for="workDescription">In 1–2 sentences, describe what you cover and who you serve. <span class="required">*</span></label>
+          <textarea id="workDescription" name="workDescription" required rows="3"></textarea>
+        </div>
+
+        <div class="field-group">
+          <label>Approximately how many total followers/subscribers do you have across all platforms? <span class="required">*</span></label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="followerCount" value="Haven't launched yet" required><span>I haven't launched yet</span></label>
+            <label class="option-item"><input type="radio" name="followerCount" value="Under 1,000"><span>Under 1,000</span></label>
+            <label class="option-item"><input type="radio" name="followerCount" value="1,000–5,000"><span>1,000–5,000</span></label>
+            <label class="option-item"><input type="radio" name="followerCount" value="5,000–25,000"><span>5,000–25,000</span></label>
+            <label class="option-item"><input type="radio" name="followerCount" value="25,000–50,000"><span>25,000–50,000</span></label>
+            <label class="option-item"><input type="radio" name="followerCount" value="50,000–100,000"><span>50,000–100,000</span></label>
+            <label class="option-item"><input type="radio" name="followerCount" value="Over 100,000"><span>Over 100,000</span></label>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>When did you launch your creator journalism work? <span class="required">*</span></label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="launchDate" value="Haven't launched yet but actively planning" required><span>I haven't launched yet but am actively planning to</span></label>
+            <label class="option-item"><input type="radio" name="launchDate" value="Less than 6 months ago"><span>Less than 6 months ago</span></label>
+            <label class="option-item"><input type="radio" name="launchDate" value="6–12 months ago"><span>6–12 months ago</span></label>
+            <label class="option-item"><input type="radio" name="launchDate" value="12–18 months ago"><span>12–18 months ago</span></label>
+            <label class="option-item"><input type="radio" name="launchDate" value="18–24 months ago"><span>18–24 months ago</span></label>
+            <label class="option-item"><input type="radio" name="launchDate" value="More than 24 months ago"><span>More than 24 months ago</span></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3 -->
+      <div class="form-section">
+        <p class="section-label">Section 3 of 4</p>
+        <h2 class="section-title">Your Business</h2>
+
+        <div class="field-group">
+          <label>Are you currently earning revenue from your creator journalism work? <span class="required">*</span></label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="earningRevenue" value="No, not yet" required id="rev-no"><span>No, not yet</span></label>
+            <label class="option-item"><input type="radio" name="earningRevenue" value="Yes, but not full-time" id="rev-yes-part"><span>Yes, but it does not yet support me full-time</span></label>
+            <label class="option-item"><input type="radio" name="earningRevenue" value="Yes, primary income" id="rev-yes-full"><span>Yes, it is my primary source of income</span></label>
+          </div>
+        </div>
+
+        <div class="conditional-field" id="revenue-streams-field">
+          <label>What revenue streams are you currently using?
+            <span class="hint">Select all that apply</span>
+          </label>
+          <div class="options-list" style="margin-top:0.5rem;">
+            <label class="option-item"><input type="checkbox" name="revenueStreams" value="Subscriptions / reader revenue"><span>Subscriptions / reader revenue</span></label>
+            <label class="option-item"><input type="checkbox" name="revenueStreams" value="Sponsorships / advertising"><span>Sponsorships / advertising</span></label>
+            <label class="option-item"><input type="checkbox" name="revenueStreams" value="Freelance or consulting"><span>Freelance or consulting</span></label>
+            <label class="option-item"><input type="checkbox" name="revenueStreams" value="Grants or fellowships"><span>Grants or fellowships</span></label>
+            <label class="option-item"><input type="checkbox" name="revenueStreams" value="Events"><span>Events</span></label>
+            <label class="option-item"><input type="checkbox" name="revenueStreams" value="Other"><span>Other</span></label>
+          </div>
+        </div>
+
+        <div class="field-group" style="margin-top:1.75rem;">
+          <label for="biggestChallenge">What is your biggest business challenge right now? <span class="required">*</span></label>
+          <input type="text" id="biggestChallenge" name="biggestChallenge" required>
+        </div>
+      </div>
+
+      <!-- SECTION 4 -->
+      <div class="form-section">
+        <p class="section-label">Section 4 of 4</p>
+        <h2 class="section-title">Program Goals & Logistics</h2>
+
+        <div class="field-group">
+          <label for="skillGoal">What is one specific skill or area you most want to develop through this program? <span class="required">*</span>
+            <span class="hint">100 words max — this helps us shape the curriculum to the cohort's actual needs</span>
+          </label>
+          <textarea id="skillGoal" name="skillGoal" required rows="4" maxlength="800"></textarea>
+          <div class="word-count" id="skillGoal-count">0 / 100 words</div>
+        </div>
+
+        <div class="field-group">
+          <label for="timezone">What time zone are you in? <span class="required">*</span>
+            <span class="hint">We'll use this to schedule the weekly live lab session at a time that works for everyone</span>
+          </label>
+          <input type="text" id="timezone" name="timezone" required placeholder="e.g. ET, CT, PT, MT">
+        </div>
+
+        <div class="field-group">
+          <label for="conflicts">Do you have any scheduling conflicts during late June through late August that we should know about?
+            <span class="hint">Optional</span>
+          </label>
+          <textarea id="conflicts" name="conflicts" rows="3" placeholder="e.g. vacation June 28 – July 5"></textarea>
+        </div>
+
+        <div class="field-group">
+          <label>The program runs approximately 8 weeks beginning in late June, with a weekly one-hour live virtual lab session and 1–2 hours of async work each week. Do you accept your spot and commit to participating? <span class="required">*</span></label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="acceptance" value="Yes — confirmed" required><span>Yes, I'm in — count me confirmed</span></label>
+            <label class="option-item"><input type="radio" name="acceptance" value="Have a question"><span>I have a question before I can commit</span></label>
+            <label class="option-item"><input type="radio" name="acceptance" value="Not able to participate"><span>I'm not able to participate at this time</span></label>
+          </div>
+          <div class="conditional-field" id="question-field">
+            <label for="pendingQuestion">What's your question?
+              <span class="hint">We'll follow up before the cohort begins.</span>
+            </label>
+            <textarea id="pendingQuestion" name="pendingQuestion" rows="3"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="submit-wrap">
+        <button type="submit" class="btn-primary" id="submit-btn">Confirm my spot →</button>
+        <p class="submit-note">By submitting, you confirm that the information above is accurate. Questions? Email <a href="mailto:liz@projectc.biz" style="color:#FE6B41;">liz@projectc.biz</a>.</p>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="https://projectc.biz/project-c_logo_white.png" alt="Project C">
+        <p>Supporting, amplifying, and normalizing independent creator-model journalism.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Explore</h5>
+        <ul>
+          <li><a href="https://newsletter.projectc.biz">Newsletter</a></li>
+          <li><a href="https://projectc.biz/top50creatorjournalists">Top 50 List</a></li>
+          <li><a href="https://journalismatlas.com">Independent Journalism Atlas</a></li>
+          <li><a href="https://projectc.biz/news-ecosystem-map">News Ecosystem Map</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Community</h5>
+        <ul>
+          <li><a href="https://projectc.biz/community">Join the Community</a></li>
+          <li><a href="https://projectc.biz/coaching">Coaching</a></li>
+          <li><a href="https://projectc.biz/about">About Project C</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Connect</h5>
+        <ul>
+          <li><a href="https://projectc.biz/about#founder">Team</a></li>
+          <li><a href="mailto:liz@projectc.biz">Contact</a></li>
+          <li><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Project C. All rights reserved.</span>
+      <span>Journalism Creators Startup Lab is a Project C x Google News Initiative program.</span>
+    </div>
+  </footer>
+
+  <script>
+    // ── Config ──────────────────────────────────────────────────────────────
+    // Paste your deployed Apps Script URL here after setup (see apps_script.gs)
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwuUzCgG0bd_pHtTnNyBkvki283IwXbO2c83r-p5Ut7UJQBVBT5bJ-qCK35UEFicXLNEw/exec';
+
+    // ── Word counter ────────────────────────────────────────────────────────
+    const skillGoalField = document.getElementById('skillGoal');
+    const skillGoalCount = document.getElementById('skillGoal-count');
+
+    skillGoalField.addEventListener('input', () => {
+      const words = skillGoalField.value.trim() === ''
+        ? 0
+        : skillGoalField.value.trim().split(/\s+/).length;
+      skillGoalCount.textContent = `${words} / 100 words`;
+      skillGoalCount.className = words > 100 ? 'word-count over-limit' : 'word-count';
+    });
+
+    // ── Show revenue streams conditionally ─────────────────────────────────
+    document.querySelectorAll('input[name="earningRevenue"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const field = document.getElementById('revenue-streams-field');
+        field.classList.toggle('visible', radio.value !== 'No, not yet');
+      });
+    });
+
+    // ── Show question field when "have a question" is selected ──────────────
+    document.querySelectorAll('input[name="acceptance"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const field = document.getElementById('question-field');
+        field.classList.toggle('visible', radio.value === 'Have a question');
+      });
+    });
+
+    // ── Form submission ─────────────────────────────────────────────────────
+    document.getElementById('acceptance-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const submitBtn = document.getElementById('submit-btn');
+
+      // Basic validation
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(field => {
+        if (field.type === 'radio') {
+          const group = form.querySelectorAll(`[name="${field.name}"]`);
+          const checked = [...group].some(r => r.checked);
+          if (!checked) valid = false;
+        } else if (!field.value.trim()) {
+          valid = false;
+          field.style.borderColor = '#FE6B41';
+        }
+      });
+
+      if (!valid) {
+        alert('Please fill in all required fields before submitting.');
+        return;
+      }
+
+      // Word count check
+      const words = skillGoalField.value.trim().split(/\s+/).length;
+      if (words > 100) {
+        alert('Your answer to the skill development question is over the 100-word limit. Please trim it and resubmit.');
+        skillGoalField.focus();
+        return;
+      }
+
+      // Collect form data
+      const data = {
+        timestamp: new Date().toISOString(),
+        firstName: form.firstName.value,
+        lastName: form.lastName.value,
+        email: form.email.value,
+        city: form.city.value,
+        stateProvince: form.stateProvince.value,
+        language: form.language.value,
+        publicationName: form.publicationName.value,
+        primaryPlatform: form.primaryPlatform.value,
+        linkNewsletter: form.linkNewsletter.value,
+        linkWebsite: form.linkWebsite.value,
+        linkYouTube: form.linkYouTube.value,
+        linkInstagram: form.linkInstagram.value,
+        linkTikTok: form.linkTikTok.value,
+        linkTwitter: form.linkTwitter.value,
+        linkSubstack: form.linkSubstack.value,
+        linkPodcast: form.linkPodcast.value,
+        linkLinkedIn: form.linkLinkedIn.value,
+        linkOther: form.linkOther.value,
+        workDescription: form.workDescription.value,
+        followerCount: form.followerCount.value,
+        launchDate: form.launchDate.value,
+        earningRevenue: form.earningRevenue.value,
+        revenueStreams: [...form.querySelectorAll('input[name="revenueStreams"]:checked')].map(c => c.value).join(', '),
+        biggestChallenge: form.biggestChallenge.value,
+        skillGoal: form.skillGoal.value,
+        timezone: form.timezone.value,
+        conflicts: form.conflicts.value,
+        acceptance: form.acceptance.value,
+        pendingQuestion: form.pendingQuestion ? form.pendingQuestion.value : ''
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+
+      try {
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+
+        // Show success (no-cors means we can't read the response, but if fetch didn't throw, it went through)
+        document.getElementById('acceptance-form').closest('.form-container').style.display = 'none';
+        document.getElementById('success-message').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Confirm my spot →';
+        alert('Something went wrong submitting the form. Please try again or email liz@projectc.biz.');
+      }
+    });
+
+    // Clear red border on input
+    document.querySelectorAll('input, textarea').forEach(el => {
+      el.addEventListener('input', () => el.style.borderColor = '');
+    });
+  </script>
+
+</body>
+</html>

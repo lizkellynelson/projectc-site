@@ -229,7 +229,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32, 6, 3, 0.08); }
   text-transform: uppercase; color: var(--deep); line-height: 1.05;
 }
 .cohorts-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  display: grid; grid-template-columns: 1fr; gap: 1.5rem; max-width: 680px;
 }
 .cohort-card {
   border-radius: 20px; padding: 2.5rem;
@@ -580,6 +580,47 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 .bubble-cream .testimonial-attribution { color: rgba(54,10,5,0.5); }
 .bubble-dark .testimonial-attribution { color: rgba(244,242,234,0.4); }
 
+/* ═══════════════════════════════════════════════
+   INTEREST FORM
+   ═══════════════════════════════════════════════ */
+.interest-form {
+  margin-top: 2rem; text-align: left;
+}
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;
+}
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+.form-group label {
+  font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+  font-weight: 700; color: rgba(54,10,5,0.5);
+}
+.form-group input,
+.form-group select {
+  background: white; border: 1.5px solid rgba(54,10,5,0.12);
+  border-radius: 10px; padding: 0.75rem 1rem;
+  font-family: var(--sans); font-size: 0.9rem; color: var(--brown);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none; appearance: none; -webkit-appearance: none;
+}
+.form-group input::placeholder { color: rgba(54,10,5,0.3); }
+.form-group input:focus,
+.form-group select:focus {
+  border-color: var(--coral);
+  box-shadow: 0 0 0 3px rgba(254,107,65,0.1);
+}
+.form-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23360A05' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+.form-actions {
+  display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-top: 1.25rem;
+}
+.form-success {
+  margin-top: 1.25rem; padding: 1rem 1.5rem;
+  background: rgba(254,107,65,0.08); border: 1.5px solid rgba(254,107,65,0.2);
+  border-radius: 10px; font-size: 0.9rem; color: var(--brown); font-weight: 500;
+}
+@media (max-width: 600px) {
+  .form-row { grid-template-columns: 1fr; }
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -659,10 +700,6 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
           <div class="hero-stat-value">Launches June 2026</div>
         </div>
         <div>
-          <div class="hero-stat-label">Cohort 2 — EMEA</div>
-          <div class="hero-stat-value">Launches August 2026</div>
-        </div>
-        <div>
           <div class="hero-stat-label">Support</div>
           <div class="hero-stat-value">A Full Year</div>
         </div>
@@ -704,8 +741,8 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 <section class="section-cohorts" id="cohorts">
   <div class="container-wide">
     <div class="cohorts-header reveal">
-      <div class="section-eyebrow">Two Cohorts</div>
-      <h2>North America &amp; EMEA</h2>
+      <div class="section-eyebrow">The Cohort</div>
+      <h2>North America</h2>
     </div>
     <div class="cohorts-grid">
 
@@ -718,20 +755,6 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
         <ul class="cohort-detail-list">
           <li><span class="detail-dot">&#9679;</span> ~20 participants</li>
           <li><span class="detail-dot">&#9679;</span> Invitation-based selection</li>
-          <li><span class="detail-dot">&#9679;</span> Hybrid: asynchronous learning with a weekly live lab</li>
-          <li><span class="detail-dot">&#9679;</span> ASU professional certificate upon completion</li>
-        </ul>
-      </div>
-
-      <!-- Cohort 2 -->
-      <div class="cohort-card upcoming reveal">
-        <div class="cohort-badge">Coming August 2026</div>
-        <h3>Cohort 2 — EMEA</h3>
-        <div class="cohort-timing">&#9654; Begins last week of August 2026</div>
-        <p>The second cohort brings the program to English-speaking journalists across Europe, the Middle East, and Africa. Interested in Cohort 2? Express your interest using the link below.</p>
-        <ul class="cohort-detail-list">
-          <li><span class="detail-dot">&#9679;</span> English-language program, EMEA-region participants</li>
-          <li><span class="detail-dot">&#9679;</span> Curriculum localized for EMEA contexts</li>
           <li><span class="detail-dot">&#9679;</span> Hybrid: asynchronous learning with a weekly live lab</li>
           <li><span class="detail-dot">&#9679;</span> ASU professional certificate upon completion</li>
         </ul>
@@ -990,11 +1013,43 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     <div class="cta-inner reveal">
       <div class="section-eyebrow" style="justify-content:center;">Stay in the Loop</div>
       <h2>Future cohorts are <em>open to all.</em></h2>
-      <p>Cohorts 1 and 2 are invitation-based. But this program is designed to grow — future cohorts will open to applicants from across the journalism creator community. Drop us a line and we'll make sure you hear about it first.</p>
-      <div class="cta-actions">
-        <a href="mailto:liz@projectc.biz?subject=Journalism%20Creators%20Startup%20Lab%20Interest" class="btn-primary">Express Interest &rarr;</a>
-        <a href="https://newsletter.projectc.biz" class="btn-secondary" target="_blank">Subscribe to Project C</a>
-      </div>
+      <p>Cohort 1 is invitation-based. But this program is designed to grow — future cohorts will open to applicants from across the journalism creator community. Drop us a line and we'll make sure you hear about it first.</p>
+      <form class="interest-form" id="interestForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fi-name">Name</label>
+            <input type="text" id="fi-name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="fi-email">Email</label>
+            <input type="email" id="fi-email" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fi-pub">Publication / Outlet</label>
+            <input type="text" id="fi-pub" name="publication" placeholder="Where you publish or what you're building">
+          </div>
+          <div class="form-group">
+            <label for="fi-region">Region</label>
+            <select id="fi-region" name="region" required>
+              <option value="" disabled selected>Select your region</option>
+              <option value="North America">North America</option>
+              <option value="EMEA">EMEA (Europe, Middle East, Africa)</option>
+              <option value="Latin America">Latin America</option>
+              <option value="Asia Pacific">Asia Pacific</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-primary" id="fi-submit">Submit Interest &rarr;</button>
+          <a href="https://newsletter.projectc.biz" class="btn-secondary" target="_blank">Subscribe to Project C</a>
+        </div>
+        <div id="fi-success" class="form-success" style="display:none;">
+          ✓ Got it! We'll be in touch when applications open.
+        </div>
+      </form>
     </div>
   </div>
 </section>
@@ -1048,6 +1103,41 @@ const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 reveals.forEach(el => revealObserver.observe(el));
+
+// ── Interest Form ──────────────────────────────
+// Paste your deployed Apps Script URL below after completing setup
+var INTEREST_FORM_URL = 'https://script.google.com/macros/s/AKfycbyf9ej-_oqRdZ2DW6H0phnX0vzrEwYUUxxqASKP2l59aD8VbEYFwzckTUxRJgUZJGMABA/exec';
+
+document.getElementById('interestForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('fi-submit');
+  var success = document.getElementById('fi-success');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  var data = {
+    name:        document.getElementById('fi-name').value,
+    email:       document.getElementById('fi-email').value,
+    publication: document.getElementById('fi-pub').value,
+    region:      document.getElementById('fi-region').value
+  };
+
+  try {
+    await fetch(INTEREST_FORM_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    success.style.display = 'block';
+    this.reset();
+    btn.textContent = 'Submitted ✓';
+  } catch(err) {
+    btn.textContent = 'Submit Interest →';
+    btn.disabled = false;
+    alert('Something went wrong — please email liz@projectc.biz directly.');
+  }
+});
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

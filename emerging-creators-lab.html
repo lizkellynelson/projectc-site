@@ -198,6 +198,36 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32, 6, 3, 0.08); }
 .btn-ghost:hover { border-color: rgba(244,242,234,0.5); color: var(--cream); }
 
 /* ═══════════════════════════════════════════════
+   PARTNER BAR
+   ═══════════════════════════════════════════════ */
+.section-partner-bar {
+  background: white; padding: 1.75rem 0;
+  border-bottom: 1px solid rgba(54,10,5,0.06);
+}
+.partner-bar-inner {
+  display: flex; align-items: center; gap: 2.5rem; flex-wrap: wrap;
+}
+.partner-bar-label {
+  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.14em;
+  font-weight: 700; color: rgba(54,10,5,0.35); white-space: nowrap;
+}
+.partner-bar-logos {
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+}
+.partner-bar-logo-gni {
+  height: 26px; width: auto; display: block;
+}
+.partner-bar-divider {
+  color: rgba(54,10,5,0.15); font-size: 1.1rem; font-weight: 300;
+}
+.partner-bar-text {
+  font-size: 0.82rem; color: rgba(54,10,5,0.45); font-weight: 500; letter-spacing: 0.01em;
+}
+@media (max-width: 600px) {
+  .partner-bar-inner { gap: 1.25rem; }
+}
+
+/* ═══════════════════════════════════════════════
    INTRO — what this is
    ═══════════════════════════════════════════════ */
 .section-intro { padding: 6rem 0; background: var(--cream); }
@@ -612,6 +642,17 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 .form-actions {
   display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-top: 1.25rem;
 }
+.form-checks { margin-top: 0.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+.form-check {
+  display: flex; align-items: flex-start; gap: 0.65rem; cursor: pointer;
+}
+.form-check input[type="checkbox"] {
+  width: 18px; height: 18px; flex-shrink: 0; margin-top: 0.1rem;
+  accent-color: var(--coral); cursor: pointer;
+}
+.form-check-text {
+  font-size: 0.875rem; color: rgba(54,10,5,0.7); line-height: 1.5;
+}
 .form-success {
   margin-top: 1.25rem; padding: 1rem 1.5rem;
   background: rgba(254,107,65,0.08); border: 1.5px solid rgba(254,107,65,0.2);
@@ -711,6 +752,24 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
       <div class="hero-actions">
         <a href="#interest" class="btn-primary-light">Express Interest &rarr;</a>
         <a href="#curriculum" class="btn-ghost">See the Curriculum</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PARTNER BAR
+     ═══════════════════════════════════════════════ -->
+<section class="section-partner-bar">
+  <div class="container-wide">
+    <div class="partner-bar-inner">
+      <span class="partner-bar-label">In Partnership With</span>
+      <div class="partner-bar-logos">
+        <img src="https://storage.googleapis.com/media-newsinitiative/static/images/gni-logo.svg"
+             alt="Google News Initiative"
+             class="partner-bar-logo-gni">
+        <span class="partner-bar-divider">·</span>
+        <span class="partner-bar-text">ASU Knight Center for the Future of News</span>
       </div>
     </div>
   </div>
@@ -981,7 +1040,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
         <div class="section-eyebrow">After the Program</div>
         <h2>A certificate from ASU + three months of <em>coaching.</em></h2>
         <p>The program is hosted on CronkitePro, ASU's professional development platform. Completing all 8 weeks earns you an official certificate from the Walter Cronkite School of Journalism — one of the most respected journalism schools in the country — co-branded with Project C.</p>
-        <p>That certificate also distinguishes you within Google's Emerging News Voices directory. And the program doesn't stop at Week 8 — participants stay connected through coaching, community, and long-term check-ins.</p>
+        <p>That certificate will also help you access the Google News Initiative's programs for emerging news voices. And the program doesn't stop at Week 8 — participants stay connected through coaching, community, and long-term check-ins.</p>
         <div class="cert-badge">
           <div class="cert-badge-icon">&#127891;</div>
           <div class="cert-badge-text">
@@ -1041,6 +1100,16 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
               <option value="Other">Other</option>
             </select>
           </div>
+        </div>
+        <div class="form-checks">
+          <label class="form-check">
+            <input type="checkbox" id="fi-comms" name="comms">
+            <span class="form-check-text">I'm comfortable being mentioned in external communications about this program</span>
+          </label>
+          <label class="form-check">
+            <input type="checkbox" id="fi-google-programs" name="googlePrograms">
+            <span class="form-check-text">I'm interested in learning more about Google's programs and resources for emerging news voices</span>
+          </label>
         </div>
         <div class="form-actions">
           <button type="submit" class="btn-primary" id="fi-submit">Submit Interest &rarr;</button>
@@ -1116,10 +1185,12 @@ document.getElementById('interestForm').addEventListener('submit', async functio
   btn.disabled = true;
 
   var data = {
-    name:        document.getElementById('fi-name').value,
-    email:       document.getElementById('fi-email').value,
-    publication: document.getElementById('fi-pub').value,
-    region:      document.getElementById('fi-region').value
+    name:           document.getElementById('fi-name').value,
+    email:          document.getElementById('fi-email').value,
+    publication:    document.getElementById('fi-pub').value,
+    region:         document.getElementById('fi-region').value,
+    comms:          document.getElementById('fi-comms').checked ? 'Yes' : 'No',
+    googlePrograms: document.getElementById('fi-google-programs').checked ? 'Yes' : 'No'
   };
 
   try {

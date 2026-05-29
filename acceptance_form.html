@@ -692,6 +692,26 @@
             <textarea id="pendingQuestion" name="pendingQuestion" rows="3"></textarea>
           </div>
         </div>
+
+        <div class="field-group">
+          <label>Are you comfortable being mentioned in external communications about this program? <span class="required">*</span>
+            <span class="hint">This includes things like program announcements, case studies, and partner communications.</span>
+          </label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="commsConsent" value="Yes" required><span>Yes, you can mention me</span></label>
+            <label class="option-item"><input type="radio" name="commsConsent" value="No"><span>No, please keep my participation private</span></label>
+            <label class="option-item"><input type="radio" name="commsConsent" value="Case by case"><span>It depends — reach out before mentioning me</span></label>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label>Would you be interested in learning more about Google's programs and resources for emerging news voices? <span class="required">*</span></label>
+          <div class="options-list">
+            <label class="option-item"><input type="radio" name="googleProgramsInterest" value="Yes" required><span>Yes, I'd like to hear more</span></label>
+            <label class="option-item"><input type="radio" name="googleProgramsInterest" value="No"><span>No thanks</span></label>
+          </div>
+        </div>
+
       </div>
 
       <!-- Submit -->
@@ -840,7 +860,9 @@
         timezone: form.timezone.value,
         conflicts: form.conflicts.value,
         acceptance: form.acceptance.value,
-        pendingQuestion: form.pendingQuestion ? form.pendingQuestion.value : ''
+        pendingQuestion: form.pendingQuestion ? form.pendingQuestion.value : '',
+        commsConsent: form.commsConsent ? [...form.querySelectorAll('input[name="commsConsent"]:checked')].map(r => r.value)[0] || '' : '',
+        googleProgramsInterest: form.googleProgramsInterest ? [...form.querySelectorAll('input[name="googleProgramsInterest"]:checked')].map(r => r.value)[0] || '' : ''
       };
 
       submitBtn.disabled = true;

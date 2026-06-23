@@ -27,6 +27,10 @@
 
 const Stripe = require('stripe');
 const { createClient } = require('@supabase/supabase-js');
+// Reuse the exact same Stripe lookup the live-validation endpoint uses, so a
+// code that passed in the browser is re-checked here against Stripe and never
+// trusted blindly.
+const { lookupPromo } = require('./community-validate-promo');
 
 // —— Env vars ——
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
@@ -137,6 +141,8 @@ async function postNewApplicationToSlack({
   about,
   tier,
   cohortRow,
+  promoCodeStr,
+  promoSummary,
 }) {
   if (!SLACK_BOT_TOKEN || !SLACK_REVIEW_CHANNEL_ID) {
     console.warn('SLACK_BOT_TOKEN or SLACK_REVIEW_CHANNEL_ID not set — skipping Slack alert');
@@ -147,6 +153,19 @@ async function postNewApplicationToSlack({
     about.length > 1200 ? about.slice(0, 1200) + '…' : about;
 
   const tierLabel = humanTierLabel(tier, cohortRow);
+
+  const fields = [
+    { type: 'mrkdwn', text: `*Name*\n${escapeSlackText(name)}` },
+    { type: 'mrkdwn', text: `*Email*\n${escapeSlackText(email)}` },
+    { type: 'mrkdwn', text: `*Tier*\n${escapeSlackText(tierLabel)}` },
+    { type: 'mrkdwn', text: `*Work*\n<${workUrl}|${escapeSlackText(workUrl)}>` },
+  ];
+  if (promoCodeStr) {
+    fields.push({
+      type: 'mrkdwn',
+      text: `*Promo*\n${escapeSlackText(promoCodeStr)} — ${escapeSlackText(promoSummary || 'discount')}`,
+    });
+  }
 
   const blocks = [
     {
@@ -159,12 +178,7 @@ async function postNewApplicationToSlack({
     },
     {
       type: 'section',
-      fields: [
-        { type: 'mrkdwn', text: `*Name*\n${escapeSlackText(name)}` },
-        { type: 'mrkdwn', text: `*Email*\n${escapeSlackText(email)}` },
-        { type: 'mrkdwn', text: `*Tier*\n${escapeSlackText(tierLabel)}` },
-        { type: 'mrkdwn', text: `*Work*\n<${workUrl}|${escapeSlackText(workUrl)}>` },
-      ],
+      fields,
     },
     {
       type: 'section',
@@ -270,6 +284,9 @@ exports.handler = async (event) => {
   const about      = cleanString(payload.aboutYou, 5000);
   const rawTier    = payload.tier;
   const cohortCode = cleanString(payload.cohortCode, 100).toUpperCase() || null;
+  // Promo codes are case-sensitive in Stripe lookups (some of Liz's codes are
+  // mixed-case, e.g. "TCA20forthree"), so we keep the applicant's casing.
+  const promoCode  = cleanString(payload.promoCode, 100) || null;
   const agree      = payload.agree === true;
   const setupIntentId = cleanString(payload.setupIntentId, 200) || null;
 
@@ -324,10 +341,58 @@ exports.handler = async (event) => {
   let stripeCustomerId = null;
   let stripePaymentMethodId = null;
   let confirmedSetupIntentId = null;
+  let promoCodeId = null;       // Stripe promotion code id (promo_...)
+  let promoCodeStr = null;      // the code as it lives in Stripe
+  let promoSummary = null;      // human-readable, e.g. "3 months free"
 
   if (tier !== 'cohort') {
     if (!setupIntentId) {
       return fail(400, 'Payment details are missing. Please re-enter your card and try again.');
+    }
+
+    // Re-validate the promo code server-side. The card is still collected and
+    // vaulted exactly as before — the discount is applied later, on approval,
+    // when the subscription is created. A bad code is rejected here so we
+    // never save an application that can't be honored.
+    if (promoCode) {
+      try {
+        const promo = await lookupPromo(stripe, promoCode);
+        if (!promo.valid) {
+          return fail(400, "That promo code isn't valid. Double-check it, or remove it and apply at the regular price.");
+        }
+        promoCodeId = promo.promotionCodeId;
+        promoCodeStr = promo.code;
+        promoSummary = promo.summary;
+      } catch (err) {
+        console.error('Promo validation error:', err);
+        return fail(500, "We couldn't check that promo code right now. Please try again in a moment.");
+      }
+
+      // One use per person, per code. Stripe can't enforce this on a shared
+      // code (its limits are global or locked to one specific customer), so we
+      // do it here by email: if this person already used this same code on an
+      // application that wasn't rejected (i.e. it's pending or was approved),
+      // block the repeat. A previously rejected applicant can still reapply.
+      try {
+        const { data: priorUses, error: priorErr } = await supabase
+          .from('applications')
+          .select('id')
+          .eq('email', email)
+          .ilike('promo_code', promoCodeStr)
+          .in('status', ['pending_review', 'approved'])
+          .limit(1);
+
+        if (priorErr) {
+          console.error('Promo reuse check error:', priorErr);
+          return fail(500, "We couldn't check that promo code right now. Please try again in a moment.");
+        }
+        if (priorUses && priorUses.length > 0) {
+          return fail(400, `It looks like you've already used the code ${promoCodeStr}. Each code can be used once per person — but you're welcome to apply at the regular price.`);
+        }
+      } catch (err) {
+        console.error('Promo reuse check threw:', err);
+        return fail(500, "We couldn't check that promo code right now. Please try again in a moment.");
+      }
     }
 
     try {
@@ -383,6 +448,9 @@ exports.handler = async (event) => {
     stripe_customer_id: stripeCustomerId,
     stripe_payment_method_id: stripePaymentMethodId,
     stripe_setup_intent_id: confirmedSetupIntentId,
+    stripe_promotion_code_id: promoCodeId,
+    promo_code: promoCodeStr,
+    promo_summary: promoSummary,
     status: 'pending_review',
     agreement_accepted_at: new Date().toISOString(),
     source: 'community_page',
@@ -416,6 +484,8 @@ exports.handler = async (event) => {
     about,
     tier,
     cohortRow,
+    promoCodeStr,
+    promoSummary,
   });
 
   return {

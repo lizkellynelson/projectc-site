@@ -122,6 +122,19 @@ function humanTierLabel(tier) {
 
 // Build the updated Slack message blocks (buttons removed, status added)
 function buildResolvedMessageBlocks(app, statusLine) {
+  const fields = [
+    { type: 'mrkdwn', text: `*Name*\n${escapeSlackText(app.name)}` },
+    { type: 'mrkdwn', text: `*Email*\n${escapeSlackText(app.email)}` },
+    { type: 'mrkdwn', text: `*Tier*\n${escapeSlackText(humanTierLabel(app.tier))}` },
+    { type: 'mrkdwn', text: `*Work*\n<${app.work_url}|${escapeSlackText(app.work_url)}>` },
+  ];
+  if (app.promo_code) {
+    fields.push({
+      type: 'mrkdwn',
+      text: `*Promo*\n${escapeSlackText(app.promo_code)} — ${escapeSlackText(app.promo_summary || 'discount')}`,
+    });
+  }
+
   return [
     {
       type: 'header',
@@ -129,12 +142,7 @@ function buildResolvedMessageBlocks(app, statusLine) {
     },
     {
       type: 'section',
-      fields: [
-        { type: 'mrkdwn', text: `*Name*\n${escapeSlackText(app.name)}` },
-        { type: 'mrkdwn', text: `*Email*\n${escapeSlackText(app.email)}` },
-        { type: 'mrkdwn', text: `*Tier*\n${escapeSlackText(humanTierLabel(app.tier))}` },
-        { type: 'mrkdwn', text: `*Work*\n<${app.work_url}|${escapeSlackText(app.work_url)}>` },
-      ],
+      fields,
     },
     {
       type: 'section',
@@ -210,11 +218,22 @@ function buildRejectionModal(applicationId, messageTs, channelId) {
 }
 
 // —— Email templates ——
-function buildWelcomeEmailHtml(name, tier) {
+function buildWelcomeEmailHtml(name, tier, promoSummary) {
   const firstName = name.split(/\s+/)[0];
   const slackLine = SLACK_COMMUNITY_INVITE_LINK
     ? `<p><strong>Join the Slack:</strong> <a href="${SLACK_COMMUNITY_INVITE_LINK}">Click here to join the Project C Slack community</a>. This is where the magic happens — introductions, advice, creative jams, and real talk from people who get it.</p>`
     : '';
+
+  // Billing line varies by path: cohort (free), promo (discount applied,
+  // card on file renews at regular rate), or standard paid.
+  let billingLine;
+  if (tier === 'cohort') {
+    billingLine = "Your cohort membership is fully covered — there's nothing to pay.";
+  } else if (promoSummary) {
+    billingLine = `Your promo code is applied: <strong>${promoSummary}</strong>. Your card stays securely on file and renews automatically at the regular rate once the discount runs out — we'll always email before anything changes.`;
+  } else {
+    billingLine = 'Your first billing cycle starts today.';
+  }
 
   return `
 <!DOCTYPE html>
@@ -226,11 +245,7 @@ function buildWelcomeEmailHtml(name, tier) {
   <p>Great news — your application has been approved. You're in.</p>
   <p>Here's what you need to know to get started:</p>
   ${slackLine}
-  <p><strong>Your membership:</strong> ${humanTierLabel(tier)}. ${
-    tier === 'cohort'
-      ? "Your cohort membership is fully covered — there's nothing to pay."
-      : 'Your first billing cycle starts today.'
-  }</p>
+  <p><strong>Your membership:</strong> ${humanTierLabel(tier)}. ${billingLine}</p>
   <p><strong>The FrieNDA:</strong> A quick reminder that everything shared in Slack is off the record unless the original poster says otherwise. This is what makes Project C a safe space to be candid — please honor it.</p>
   <p>If you have any questions or just want to say hi, reply to this email or ping me in Slack. I'm so glad you're here.</p>
   <p style="margin-top: 2rem;">— Liz</p>
@@ -328,7 +343,7 @@ async function handleApproval({
     }
 
     try {
-      const subscription = await stripe.subscriptions.create({
+      const subParams = {
         customer: app.stripe_customer_id,
         items: [{ price: priceId }],
         default_payment_method: app.stripe_payment_method_id,
@@ -336,7 +351,18 @@ async function handleApproval({
           application_id: applicationId,
           source: 'community_approval',
         },
-      });
+      };
+
+      // If the applicant came in with a valid promo code, attach it as a
+      // discount. Stripe handles the rest: a "100% off for 3 months" coupon
+      // bills $0 for three cycles, then automatically charges the card on
+      // file at the regular rate. A percentage coupon (e.g. 20% off)
+      // discounts each covered invoice and then reverts. No card change.
+      if (app.stripe_promotion_code_id) {
+        subParams.discounts = [{ promotion_code: app.stripe_promotion_code_id }];
+      }
+
+      const subscription = await stripe.subscriptions.create(subParams);
       stripeSubscriptionId = subscription.id;
     } catch (err) {
       console.error('Approval — Stripe subscription failed:', err);
@@ -395,6 +421,8 @@ async function handleApproval({
     status: 'active',
     stripe_customer_id: app.stripe_customer_id || null,
     stripe_subscription_id: stripeSubscriptionId,
+    promo_code: app.promo_code || null,
+    promo_summary: app.promo_summary || null,
     membership_starts_at: new Date().toISOString(),
     membership_ends_at: null, // will be set for cohort tiers later
   };
@@ -426,7 +454,7 @@ async function handleApproval({
     await sendEmail({
       to: app.email,
       subject: 'Welcome to the Project C community!',
-      html: buildWelcomeEmailHtml(app.name, app.tier),
+      html: buildWelcomeEmailHtml(app.name, app.tier, app.promo_summary),
     });
 
     // Mark welcome email as sent on the membership row

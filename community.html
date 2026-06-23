@@ -14,9 +14,15 @@
 :root {
   --cream: #F4F2EA; --coral: #FE6B41; --pink: #E09AC2;
   --brown: #360A05; --deep: #200603; --cream-dark: #EBE8DE;
+  --coral-btn:#C15131; --coral-btn-hover:#A8442A; --coral-text:#B74D2F; --coral-display:#E5603A; --pink-text:#8A3A5E;
   --serif: 'Anton', 'Impact', sans-serif;
   --sans: 'Inter', -apple-system, sans-serif;
 }
+:focus-visible{outline:2px solid var(--deep);outline-offset:2px;}
+.skip-link{position:absolute;left:-999px;top:0;background:var(--deep);color:var(--cream);padding:.6rem 1rem;z-index:2000;}
+.skip-link:focus{left:0;}
+.nav-toggle{display:none;}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}.reveal{opacity:1!important;transform:none!important;}}
 html { scroll-behavior: smooth; font-size: 16px; }
 body { font-family: var(--sans); background: var(--cream); color: var(--brown); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
@@ -68,16 +74,17 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .nav-logo .logo-img { height: 48px; width: auto; }
 .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
 .nav-links a { color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease; }
-.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
-.nav-cta { background: var(--coral) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
-.nav-cta:hover { background: #e55e38 !important; }
+.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral-text); }
+.nav-cta { background: var(--coral-btn) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
+.nav-cta:hover { background: var(--coral-btn-hover) !important; }
+.nav-cta:hover, a.nav-cta:hover { color: white !important; }
 
 /* SHARED */
-.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral-text); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
 .section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--coral); }
 .section-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,3rem); line-height: 1.05; color: var(--deep); letter-spacing: -0.01em; margin-bottom: 1.25rem; text-transform: uppercase; }
-.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: white; padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.25s ease; border: none; cursor: pointer; }
-.btn-primary:hover { background: #e55e38; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
+.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral-btn); color: white; padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.25s ease; border: none; cursor: pointer; }
+.btn-primary:hover { background: var(--coral-btn-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
 .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
 .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--brown); padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 1.5px solid rgba(54,10,5,0.2); transition: all 0.25s ease; }
 .btn-secondary:hover { border-color: var(--brown); background: var(--brown); color: var(--cream); }
@@ -90,7 +97,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   padding: 0.6rem 1rem; text-align: center;
   font-size: 0.8rem; color: var(--deep); font-weight: 500;
 }
-.preview-banner strong { color: var(--coral); font-weight: 700; }
+.preview-banner strong { color: var(--coral-text); font-weight: 700; }
 
 /* ===== HERO ===== */
 .community-hero {
@@ -133,8 +140,8 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   font-family: var(--sans); font-size: 0.8rem; text-transform: uppercase;
   letter-spacing: 0.08em; font-weight: 700; margin-bottom: 1.25rem;
 }
-.who-card.is-for h3 { color: var(--coral); }
-.who-card.is-not-for h3 { color: rgba(54,10,5,0.5); }
+.who-card.is-for h3 { color: var(--coral-text); }
+.who-card.is-not-for h3 { color: rgba(54,10,5,0.6); }
 .who-card ul { list-style: none; }
 .who-card ul li {
   font-size: 0.98rem; color: var(--deep); line-height: 1.6;
@@ -168,7 +175,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   font-size: 1.3rem; margin-bottom: 1.1rem;
 }
 .what-card.pink .what-icon { background: rgba(224,154,194,0.18); color: var(--pink); }
-.what-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--deep); margin-bottom: 0.5rem; }
+.what-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--deep); margin-bottom: 0.5rem; }
 .what-card p { font-size: 0.85rem; color: rgba(54,10,5,0.6); line-height: 1.65; }
 
 /* ===== HOW IT WORKS ===== */
@@ -181,6 +188,8 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .how-inner { position: relative; z-index: 2; }
 .how-intro { max-width: 680px; margin-bottom: 3.5rem; }
 .how-intro .section-title { color: var(--cream); }
+.section-how .section-eyebrow { color: var(--coral); }
+.section-how .section-eyebrow::before { background: var(--coral); }
 .how-intro p { font-size: 1.1rem; color: rgba(244,242,234,0.65); line-height: 1.75; margin-top: 1rem; }
 .how-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
 .how-step {
@@ -191,7 +200,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   font-family: var(--serif); font-size: 2.5rem; color: var(--coral);
   line-height: 1; margin-bottom: 1rem;
 }
-.how-step h4 {
+.how-step h3 {
   font-family: var(--sans); font-size: 1rem; font-weight: 700;
   color: var(--cream); margin-bottom: 0.75rem;
 }
@@ -224,32 +233,33 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 }
 .tier-card:hover { border-color: rgba(254,107,65,0.35); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(32,6,3,0.08); }
 .tier-card input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
-.tier-card.is-selected { border-color: var(--coral); background: rgba(254,107,65,0.03); box-shadow: 0 12px 30px rgba(254,107,65,0.18); }
-.tier-card.is-selected::after {
+.tier-card.is-selected, .tier-card:has(input:checked) { border-color: var(--coral); background: rgba(254,107,65,0.03); box-shadow: 0 12px 30px rgba(254,107,65,0.18); }
+.tier-card.is-selected::after, .tier-card:has(input:checked)::after {
   content: '✓'; position: absolute; top: 1rem; right: 1rem;
-  width: 24px; height: 24px; border-radius: 50%; background: var(--coral); color: white;
+  width: 24px; height: 24px; border-radius: 50%; background: var(--coral-btn); color: white;
   display: flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700;
 }
+.tier-card:has(input:checked) .tier-type { color: var(--coral-text); }
 .tier-flag {
   position: absolute; top: -10px; left: 1.25rem;
-  background: var(--coral); color: white; font-size: 0.65rem;
+  background: var(--coral-btn); color: white; font-size: 0.65rem;
   text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;
   padding: 0.3rem 0.7rem; border-radius: 100px;
 }
 .tier-type {
   font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
-  font-weight: 700; color: rgba(54,10,5,0.5); margin-bottom: 0.5rem;
+  font-weight: 700; color: rgba(54,10,5,0.6); margin-bottom: 0.5rem;
 }
-.tier-card.is-selected .tier-type { color: var(--coral); }
+.tier-card.is-selected .tier-type { color: var(--coral-text); }
 .tier-name {
   font-family: var(--serif); font-size: 1.4rem; color: var(--deep);
   text-transform: uppercase; line-height: 1; margin-bottom: 1rem;
 }
 .tier-price-row { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.75rem; }
 .tier-price { font-family: var(--serif); font-size: 2.2rem; color: var(--deep); line-height: 1; }
-.tier-cadence { font-size: 0.8rem; color: rgba(54,10,5,0.55); font-weight: 500; }
-.tier-note { font-size: 0.78rem; color: rgba(54,10,5,0.55); line-height: 1.5; margin-bottom: 1rem; }
-.tier-seats { font-size: 0.75rem; color: var(--coral); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.tier-cadence { font-size: 0.8rem; color: rgba(54,10,5,0.6); font-weight: 500; }
+.tier-note { font-size: 0.78rem; color: rgba(54,10,5,0.6); line-height: 1.5; margin-bottom: 1rem; }
+.tier-seats { font-size: 0.75rem; color: var(--coral-text); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
 
 /* Form fields */
 .apply-form { max-width: 760px; }
@@ -258,15 +268,19 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   border-radius: 0 12px 12px 0; margin-bottom: 2.5rem;
   font-size: 0.95rem; color: rgba(54,10,5,0.75); line-height: 1.7;
 }
-.form-framing strong { color: var(--coral); font-weight: 700; }
-.form-framing a { color: var(--coral); font-weight: 600; }
+.form-framing strong { color: var(--coral-text); font-weight: 700; }
+.form-framing a { color: var(--coral-text); font-weight: 600; }
 .form-field { margin-bottom: 1.5rem; }
-.form-field label {
+.form-field label, .form-field .field-label {
   display: block; font-size: 0.8rem; text-transform: uppercase;
   letter-spacing: 0.08em; font-weight: 700; color: var(--deep);
   margin-bottom: 0.55rem;
 }
-.form-field label .optional { color: rgba(54,10,5,0.4); font-weight: 500; text-transform: none; letter-spacing: 0; font-size: 0.78rem; margin-left: 0.4rem; }
+.form-field label .optional { color: rgba(54,10,5,0.6); font-weight: 500; text-transform: none; letter-spacing: 0; font-size: 0.78rem; margin-left: 0.4rem; }
+.form-field label .req { color: var(--coral-text); margin-left: 0.25rem; }
+.form-legend { font-size: 0.8rem; color: rgba(54,10,5,0.6); margin-bottom: 1.5rem; }
+.field-error { display: none; margin-top: 0.4rem; }
+.field-error.show { display: block; }
 .form-field input[type="text"],
 .form-field input[type="email"],
 .form-field input[type="url"],
@@ -280,18 +294,19 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   outline: none; border-color: var(--coral); box-shadow: 0 0 0 4px rgba(254,107,65,0.1);
 }
 .form-field textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+.form-field input::placeholder, .form-field textarea::placeholder { color: rgba(54,10,5,0.6); }
 .form-field .help {
-  font-size: 0.8rem; color: rgba(54,10,5,0.5); margin-top: 0.5rem; line-height: 1.5;
+  font-size: 0.8rem; color: rgba(54,10,5,0.6); margin-top: 0.5rem; line-height: 1.5;
 }
 
 /* Cohort toggle */
 .cohort-toggle {
-  background: none; border: none; color: var(--coral);
+  background: none; border: none; color: var(--coral-text);
   font-size: 0.9rem; font-weight: 600; cursor: pointer;
   padding: 0.75rem 0; display: inline-flex; align-items: center; gap: 0.4rem;
   font-family: var(--sans); text-decoration: underline; text-underline-offset: 3px;
 }
-.cohort-toggle:hover { color: #e55e38; }
+.cohort-toggle:hover { color: var(--coral-btn-hover); }
 .cohort-panel {
   display: none; margin-top: 1rem; padding: 1.5rem;
   background: rgba(254,107,65,0.04); border-radius: 14px;
@@ -315,10 +330,10 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .form-agreement label {
   font-size: 0.92rem; color: var(--deep); line-height: 1.6; cursor: pointer;
 }
-.form-agreement label a { color: var(--coral); font-weight: 600; }
+.form-agreement label a { color: var(--coral-text); font-weight: 600; }
 
 .form-submit-wrap { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; }
-.form-submit-wrap .submit-note { font-size: 0.82rem; color: rgba(54,10,5,0.55); line-height: 1.5; max-width: 340px; }
+.form-submit-wrap .submit-note { font-size: 0.82rem; color: rgba(54,10,5,0.6); line-height: 1.5; max-width: 340px; }
 
 /* Success message (preview mode) */
 .success-toast {
@@ -333,17 +348,17 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .success-toast p { font-size: 0.85rem; color: rgba(244,242,234,0.75); line-height: 1.6; }
 
 /* FOOTER */
-footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 2rem; }
+footer { background: var(--deep); color: rgba(244,242,234,0.55); padding: 4rem 0 2rem; }
 footer .nav-logo { text-decoration: none; display: flex; align-items: center; color: var(--cream); margin-bottom: 1rem; }
 footer .logo-img-footer { height: 32px; width: auto; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
 .footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
 .footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
-.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.5); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
+.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.55); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
 .footer-col a:hover { color: var(--coral); }
 .footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
 .footer-social { display: flex; gap: 1rem; }
-.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-social a { color: rgba(244,242,234,0.55); text-decoration: none; transition: color 0.2s; }
 .footer-social a:hover { color: var(--coral); }
 
 /* RESPONSIVE */
@@ -418,7 +433,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 .pull-quote .bubble-attrib .who span {
   display: block;
   font-size: 0.78rem;
-  color: rgba(54,10,5,0.55);
+  color: rgba(54,10,5,0.6);
   margin-top: 0.1rem;
 }
 
@@ -593,7 +608,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 .founder-name span {
   display: block;
   font-size: 0.82rem;
-  color: rgba(54,10,5,0.55);
+  color: rgba(54,10,5,0.6);
 }
 
 @media (max-width: 900px) {
@@ -609,7 +624,10 @@ footer .logo-img-footer { height: 32px; width: auto; }
   .what-grid { grid-template-columns: 1fr; }
   .how-grid { grid-template-columns: 1fr; }
   .tier-grid { grid-template-columns: 1fr; }
-  .nav-links li:not(:last-child) { display: none; }
+  .nav-toggle { display: block; background: none; border: none; cursor: pointer; padding: .5rem; }
+  .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--brown); margin: 5px 0; }
+  .nav-links { display: none; }
+  .nav-links.show { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); padding: 1rem 2rem; gap: .5rem; box-shadow: 0 8px 30px rgba(32,6,3,0.1); }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .preview-banner { font-size: 0.72rem; }
   .section-founders { padding: 4rem 0; }
@@ -623,6 +641,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <div class="gradient-bar"></div>
 <div class="announcement-bar" id="announcementBar">
@@ -633,7 +652,8 @@ footer .logo-img-footer { height: 32px; width: auto; }
 <nav id="mainNav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C"></a>
-    <ul class="nav-links">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
       <li><a href="community.html" style="color:var(--coral); font-weight:600;">Community</a></li>
       <li><a href="going-solo.html">Going Solo</a></li>
@@ -644,6 +664,8 @@ footer .logo-img-footer { height: 32px; width: auto; }
     </ul>
   </div>
 </nav>
+
+<main id="main">
 
 <!-- HERO -->
 <section class="community-hero">
@@ -704,7 +726,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
         <p>&ldquo;It helps me see that I'm far from alone. And that we're all struggling and succeeding in this weirdly complicated creator economy, even in all stages of growth and monetization.&rdquo;</p>
       </div>
       <div class="bubble-attrib">
-        <div class="avatar">CH</div>
+        <div class="avatar" aria-hidden="true">CH</div>
         <div class="who"><strong>Chris Hutton</strong><span>TTRPG Insider</span></div>
       </div>
     </blockquote>
@@ -721,22 +743,22 @@ footer .logo-img-footer { height: 32px; width: auto; }
     <div class="what-grid">
       <div class="what-card">
         <div class="what-icon">&#128172;</div>
-        <h4>Private Slack community</h4>
+        <h3>Private Slack community</h3>
         <p>200+ creator journalists sharing strategy, wins, setbacks, and the real work of building independent media. Everything is off the record by default.</p>
       </div>
       <div class="what-card pink">
         <div class="what-icon">&#127902;</div>
-        <h4>Members-only events</h4>
+        <h3>Members-only events</h3>
         <p>Subscriber drives, co-working sprints, and sessions with creator journalists, media entrepreneurs, and folks from across the industry.</p>
       </div>
       <div class="what-card">
         <div class="what-icon">&#128218;</div>
-        <h4>Resource library</h4>
+        <h3>Resource library</h3>
         <p>A growing collection of case studies, templates, media kits, and tactical guides drawn from journalists who are actually in the work.</p>
       </div>
       <div class="what-card pink">
         <div class="what-icon">&#127919;</div>
-        <h4>Going Solo discount</h4>
+        <h3>Going Solo discount</h3>
         <p>A meaningful price break on our workshop series for journalists going independent — run in cohorts a few times each year.</p>
       </div>
     </div>
@@ -745,7 +767,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
         <p>&ldquo;The Project C Slack has been a huge win for me. It's now the top Slack channel in my right rail.&rdquo;</p>
       </div>
       <div class="bubble-attrib">
-        <div class="avatar">BV</div>
+        <div class="avatar" aria-hidden="true">BV</div>
         <div class="who"><strong>Bryan Vance</strong><span>Stumptown Savings</span></div>
       </div>
     </blockquote>
@@ -791,22 +813,22 @@ footer .logo-img-footer { height: 32px; width: auto; }
     <div class="how-grid">
       <div class="how-step">
         <div class="how-step-number">01</div>
-        <h4>You apply</h4>
+        <h3>You apply</h3>
         <p>Fill out the form below, tell us about your work, and pick your membership tier. Takes about five minutes.</p>
       </div>
       <div class="how-step">
         <div class="how-step-number">02</div>
-        <h4>Card on file, not charged</h4>
+        <h3>Card on file, not charged</h3>
         <p>We vault your payment method through Stripe but don't run it. Think of it like the hold a hotel puts on your card at check-in.</p>
       </div>
       <div class="how-step">
         <div class="how-step-number">03</div>
-        <h4>We review your application</h4>
+        <h3>We review your application</h3>
         <p>Every application gets a real read from a human moderator. We aim to respond within three business days — yes, no, or a quick clarifying question.</p>
       </div>
       <div class="how-step">
         <div class="how-step-number">04</div>
-        <h4>Approved? You're in.</h4>
+        <h3>Approved? You're in.</h3>
         <p>If yes, you're auto-invited to Slack and your card is charged. If no, you hear back gently and your card is never touched.</p>
       </div>
     </div>
@@ -818,7 +840,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
         <p>&ldquo;Finally hit 100 paid subs! Didn't think I'd be here till sometime next year. Honestly this group and trying things Project C has put out, like the indie media drive, was huge.&rdquo;</p>
       </div>
       <div class="bubble-attrib">
-        <div class="avatar">CA</div>
+        <div class="avatar" aria-hidden="true">CA</div>
         <div class="who"><strong>Colin Alsheimer</strong><span>Kineticist</span></div>
       </div>
     </blockquote>
@@ -841,13 +863,15 @@ footer .logo-img-footer { height: 32px; width: auto; }
           <p>&ldquo;If you are a creator who is drowning in a lonely sea of bad blogger advice from girlboss/techbro AI search results, if you are struggling to find your audience or monetize your wonderful content, I highly recommend the anti-slop community at Project C. You will gain confidence, make new friends, and learn the skills you really need to succeed in indie media.&rdquo;</p>
         </div>
         <div class="bubble-attrib">
-          <div class="avatar">RT</div>
+          <div class="avatar" aria-hidden="true">RT</div>
           <div class="who"><strong>Rose Thomas Bannister</strong><span>Founder, Modo di Bere</span></div>
         </div>
       </blockquote>
     </div>
 
     <form class="apply-form" id="applyForm" novalidate>
+
+      <p class="form-legend"><span class="req" aria-hidden="true">*</span> required</p>
 
       <!-- TIER SELECTION -->
       <div class="tier-label">Choose your membership tier</div>
@@ -903,6 +927,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
         </label>
 
       </div>
+      <span class="field-error" id="tierErr" role="alert" style="color:#B0241A;font-size:0.85rem;margin-bottom:1.5rem;"></span>
 
       <!-- AGREEMENT FRAMING -->
       <div class="form-framing">
@@ -911,32 +936,36 @@ footer .logo-img-footer { height: 32px; width: auto; }
 
       <!-- NAME -->
       <div class="form-field">
-        <label for="fullName">Full name</label>
-        <input type="text" id="fullName" name="fullName" required autocomplete="name">
+        <label for="fullName">Full name <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="fullName" name="fullName" required aria-required="true" autocomplete="name">
+        <span class="field-error" id="fullNameErr" role="alert" style="color:#B0241A;font-size:0.85rem;"></span>
       </div>
 
       <!-- EMAIL -->
       <div class="form-field">
-        <label for="email">Email address</label>
-        <input type="email" id="email" name="email" required autocomplete="email">
+        <label for="email">Email address <span class="req" aria-hidden="true">*</span></label>
+        <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
+        <span class="field-error" id="emailErr" role="alert" style="color:#B0241A;font-size:0.85rem;"></span>
       </div>
 
       <!-- WORK LINK -->
       <div class="form-field">
-        <label for="workLink">Link to your work</label>
-        <input type="url" id="workLink" name="workLink" placeholder="https://" required>
+        <label for="workLink">Link to your work <span class="req" aria-hidden="true">*</span></label>
+        <input type="url" id="workLink" name="workLink" placeholder="https://" required aria-required="true">
+        <span class="field-error" id="workLinkErr" role="alert" style="color:#B0241A;font-size:0.85rem;"></span>
         <div class="help">Your newsletter, podcast, YouTube channel, portfolio, or whatever best represents what you're building. One link is fine.</div>
       </div>
 
       <!-- ABOUT YOU -->
       <div class="form-field">
-        <label for="aboutYou">Tell us about what you're building and what brings you to Project&nbsp;C</label>
-        <textarea id="aboutYou" name="aboutYou" required placeholder="A few sentences is plenty. What are you working on? What stage are you at? What would make this community valuable to you?"></textarea>
+        <label for="aboutYou">Tell us about what you're building and what brings you to Project&nbsp;C <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="aboutYou" name="aboutYou" required aria-required="true" placeholder="A few sentences is plenty. What are you working on? What stage are you at? What would make this community valuable to you?"></textarea>
+        <span class="field-error" id="aboutYouErr" role="alert" style="color:#B0241A;font-size:0.85rem;"></span>
         <div class="help">This is how we get to know you. There's no right answer — just be specific and honest.</div>
       </div>
 
       <!-- COHORT TOGGLE -->
-      <button type="button" class="cohort-toggle" id="cohortToggle">
+      <button type="button" class="cohort-toggle" id="cohortToggle" aria-expanded="false" aria-controls="cohortPanel">
         + I'm joining through a partner cohort
       </button>
       <div class="cohort-panel" id="cohortPanel">
@@ -947,10 +976,18 @@ footer .logo-img-footer { height: 32px; width: auto; }
         </div>
       </div>
 
+      <!-- PROMO CODE (paid path only — applies a Stripe discount on approval) -->
+      <div class="form-field" id="promoField" style="margin-top:1.75rem;">
+        <label for="promoCode">Promo code <span style="font-weight:400;color:rgba(54,10,5,0.55);">(optional)</span></label>
+        <input type="text" id="promoCode" name="promoCode" placeholder="Enter a code if you have one" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <div class="help">If someone gave you a promo code, enter it here. The discount is applied to your card when your application is approved — your card stays on file and renews at the regular rate once the discount runs out.</div>
+        <div id="promoStatus" role="status" aria-live="polite" style="font-size:0.85rem;margin-top:0.5rem;min-height:1.15rem;"></div>
+      </div>
+
       <!-- CARD-ON-FILE (Stripe Elements, SetupIntent mode — vaulted, not charged) -->
       <div class="form-field" id="cardField" style="margin-top:2rem;">
-        <label for="card-element">Payment method</label>
-        <div id="card-element" style="background:white; border:1.5px solid rgba(54,10,5,0.18); border-radius:12px; padding:1.15rem 1.25rem; min-height:3.25rem;">
+        <span id="cardLabel" class="field-label">Payment method</span>
+        <div id="card-element" role="group" aria-labelledby="cardLabel" style="background:white; border:1.5px solid rgba(54,10,5,0.18); border-radius:12px; padding:1.15rem 1.25rem; min-height:3.25rem;">
           <!-- Stripe Elements mounts here on page load -->
         </div>
         <div id="card-errors" role="alert" style="color:#d92d20; font-size:0.85rem; margin-top:0.5rem; min-height:1.25rem;"></div>
@@ -964,6 +1001,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
           I've read the <a href="#" id="guidelinesLink2">Project C Community Guidelines</a> and I agree to abide by them, including the <strong>FrieNDA</strong> — the commitment to treat all Slack conversations as off the record unless the original poster says otherwise.
         </span>
       </label>
+      <span class="field-error" id="agreeErr" role="alert" style="color:#B0241A;font-size:0.85rem;margin-top:-1.5rem;margin-bottom:1.5rem;"></span>
 
       <!-- SUBMIT -->
       <div class="form-submit-wrap">
@@ -975,8 +1013,10 @@ footer .logo-img-footer { height: 32px; width: auto; }
   </div>
 </section>
 
+</main>
+
 <!-- SUCCESS TOAST -->
-<div class="success-toast" id="successToast">
+<div class="success-toast" id="successToast" role="status" tabindex="-1">
   <strong>✓ Application received</strong>
   <p>Thanks — we've got it. You'll hear back from us within 3 business days. Check your inbox for a confirmation email in the next few minutes.</p>
 </div>
@@ -1011,16 +1051,20 @@ window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', windo
 
 // Tier card selection
 const tierCards = document.querySelectorAll('.tier-card');
+function syncSelectedTier() {
+  tierCards.forEach(c => {
+    const i = c.querySelector('input[type="radio"]');
+    c.classList.toggle('is-selected', i.checked);
+  });
+}
 tierCards.forEach(card => {
   const input = card.querySelector('input[type="radio"]');
   card.addEventListener('click', () => {
-    tierCards.forEach(c => c.classList.remove('is-selected'));
-    card.classList.add('is-selected');
     input.checked = true;
+    syncSelectedTier();
   });
-  // Also handle keyboard focus for accessibility
-  input.addEventListener('focus', () => card.style.outline = '2px solid rgba(254,107,65,0.35)');
-  input.addEventListener('blur', () => card.style.outline = 'none');
+  // Re-apply selected styling on change so keyboard arrow selection updates the visual
+  input.addEventListener('change', syncSelectedTier);
 });
 
 // Cohort toggle
@@ -1028,11 +1072,15 @@ const cohortToggle = document.getElementById('cohortToggle');
 const cohortPanel = document.getElementById('cohortPanel');
 const cohortCodeInput = document.getElementById('cohortCode');
 const cardField = document.getElementById('cardField');
+const promoField = document.getElementById('promoField');
+const promoCodeInput = document.getElementById('promoCode');
+const promoStatus = document.getElementById('promoStatus');
 const tierLabel = document.querySelector('.tier-label');
 const tierGrid = document.querySelector('.tier-grid');
 
 cohortToggle.addEventListener('click', () => {
   const isOpen = cohortPanel.classList.toggle('is-open');
+  cohortToggle.setAttribute('aria-expanded', isOpen);
   cohortToggle.textContent = isOpen
     ? '− I\'m joining through a partner cohort'
     : '+ I\'m joining through a partner cohort';
@@ -1046,13 +1094,71 @@ cohortToggle.addEventListener('click', () => {
 // When a cohort code is entered, hide both the tier selector AND the card
 // field — cohort applicants don't choose a tier or provide payment. If the
 // code is cleared, both come back.
+// A cohort code also hides the promo field: cohort members are already free
+// and never reach the paid/discount path, so a promo code would do nothing.
 function updateCardFieldVisibility() {
   const hasCode = cohortCodeInput.value.trim().length > 0;
   cardField.style.display = hasCode ? 'none' : '';
   tierLabel.style.display = hasCode ? 'none' : '';
   tierGrid.style.display = hasCode ? 'none' : '';
+  promoField.style.display = hasCode ? 'none' : '';
 }
 cohortCodeInput.addEventListener('input', updateCardFieldVisibility);
+
+// ----- Promo code: live validation against Stripe -----
+// promoState tracks the last checked code so submit can warn on a known-bad
+// code without having to re-check. null = unchecked/empty.
+let promoState = null; // { code, valid, summary }
+let promoDebounce = null;
+
+function setPromoStatus(message, kind) {
+  // kind: 'ok' | 'error' | 'checking' | ''
+  const colors = { ok: '#1B7F4B', error: '#B0241A', checking: 'rgba(54,10,5,0.6)' };
+  promoStatus.textContent = message || '';
+  promoStatus.style.color = colors[kind] || 'rgba(54,10,5,0.6)';
+}
+
+async function checkPromoCode() {
+  const code = promoCodeInput.value.trim();
+  if (!code) {
+    promoState = null;
+    setPromoStatus('', '');
+    return;
+  }
+  setPromoStatus('Checking…', 'checking');
+  try {
+    const res = await fetch('/.netlify/functions/community-validate-promo', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+    const data = await res.json();
+    // Ignore stale responses if the field changed while we were waiting.
+    if (promoCodeInput.value.trim() !== code) return;
+
+    if (data.valid) {
+      promoState = { code, valid: true, summary: data.summary };
+      setPromoStatus(`✓ ${data.summary} — applied when you're approved.`, 'ok');
+    } else {
+      promoState = { code, valid: false };
+      setPromoStatus("That code isn't valid. Double-check it, or leave it blank.", 'error');
+    }
+  } catch (_) {
+    // Network hiccup: don't block the applicant. Server re-validates on submit.
+    promoState = null;
+    setPromoStatus('', '');
+  }
+}
+
+promoCodeInput.addEventListener('input', () => {
+  clearTimeout(promoDebounce);
+  setPromoStatus('', '');
+  promoDebounce = setTimeout(checkPromoCode, 500);
+});
+promoCodeInput.addEventListener('blur', () => {
+  clearTimeout(promoDebounce);
+  checkPromoCode();
+});
 
 // Guidelines links open Google Doc in new tab
 document.querySelectorAll('#guidelinesLink, #guidelinesLink2').forEach(link => {
@@ -1109,7 +1215,7 @@ async function initStripe() {
           fontSize: '16px',
           fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
           color: '#360A05',
-          '::placeholder': { color: 'rgba(54,10,5,0.45)' },
+          '::placeholder': { color: 'rgba(54,10,5,0.6)' },
         },
         invalid: { color: '#d92d20' },
       },
@@ -1133,13 +1239,71 @@ form.addEventListener('submit', async (e) => {
   const tier = form.querySelector('input[name="tier"]:checked');
   const agree = document.getElementById('agree').checked;
   const cohortCode = cohortCodeInput.value.trim();
+  const promoCode = cohortCode ? '' : promoCodeInput.value.trim();
 
-  if (!tier && !cohortCode) { alert('Please pick a membership tier.'); return; }
-  if (!form.fullName.value.trim()) { alert('Please enter your name.'); return; }
-  if (!form.email.value.trim()) { alert('Please enter your email.'); return; }
-  if (!form.workLink.value.trim()) { alert('Please share a link to your work.'); return; }
-  if (!form.aboutYou.value.trim()) { alert("Please tell us a bit about what you're building."); return; }
-  if (!agree) { alert('Please agree to the community guidelines before submitting.'); return; }
+  // Inline validation helpers
+  const fieldErrorIds = ['fullNameErr', 'emailErr', 'workLinkErr', 'aboutYouErr', 'tierErr', 'agreeErr'];
+  function clearFieldErrors() {
+    fieldErrorIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) { el.textContent = ''; el.classList.remove('show'); }
+    });
+    ['fullName', 'email', 'workLink', 'aboutYou'].forEach(name => {
+      const f = form[name];
+      if (f) f.removeAttribute('aria-invalid');
+    });
+    const agreeBox = document.getElementById('agree');
+    if (agreeBox) agreeBox.removeAttribute('aria-invalid');
+  }
+  function setFieldError(fieldName, errId, message) {
+    const el = document.getElementById(errId);
+    const f = form[fieldName];
+    if (el) { el.textContent = message; el.classList.add('show'); }
+    if (f) f.setAttribute('aria-invalid', 'true');
+    return f;
+  }
+
+  clearFieldErrors();
+
+  let firstInvalid = null;
+  if (!form.fullName.value.trim()) {
+    const f = setFieldError('fullName', 'fullNameErr', 'Please enter your name.');
+    firstInvalid = firstInvalid || f;
+  }
+  if (!form.email.value.trim()) {
+    const f = setFieldError('email', 'emailErr', 'Please enter your email.');
+    firstInvalid = firstInvalid || f;
+  }
+  if (!form.workLink.value.trim()) {
+    const f = setFieldError('workLink', 'workLinkErr', 'Please share a link to your work.');
+    firstInvalid = firstInvalid || f;
+  }
+  if (!form.aboutYou.value.trim()) {
+    const f = setFieldError('aboutYou', 'aboutYouErr', "Please tell us a bit about what you're building.");
+    firstInvalid = firstInvalid || f;
+  }
+  if (!tier && !cohortCode) {
+    const el = document.getElementById('tierErr');
+    if (el) { el.textContent = 'Please pick a membership tier.'; el.classList.add('show'); }
+    const radio = form.querySelector('input[name="tier"]');
+    firstInvalid = firstInvalid || radio;
+  }
+  if (!agree) {
+    const el = document.getElementById('agreeErr');
+    if (el) { el.textContent = 'Please agree to the community guidelines before submitting.'; el.classList.add('show'); }
+    const agreeBox = document.getElementById('agree');
+    agreeBox.setAttribute('aria-invalid', 'true');
+    firstInvalid = firstInvalid || agreeBox;
+  }
+  if (firstInvalid) { firstInvalid.focus(); return; }
+
+  // If a promo code was entered and we already know it's invalid, stop here
+  // so we don't confirm a card for a code that will be rejected server-side.
+  if (promoCode && promoState && promoState.code === promoCode && promoState.valid === false) {
+    setPromoStatus("That code isn't valid. Double-check it, or leave it blank.", 'error');
+    promoCodeInput.focus();
+    return;
+  }
 
   submitBtn.disabled = true;
   submitBtn.textContent = 'Submitting…';
@@ -1184,6 +1348,7 @@ form.addEventListener('submit', async (e) => {
       aboutYou: form.aboutYou.value.trim(),
       tier: tier ? tier.value : 'cohort',
       cohortCode: cohortCode || null,
+      promoCode: promoCode || null,
       agree: true,
       setupIntentId: confirmedSetupIntentId,
     };
@@ -1200,9 +1365,10 @@ form.addEventListener('submit', async (e) => {
       throw new Error(result.error || 'Submission failed. Please try again.');
     }
 
-    // Success — show toast, hide form, scroll to top
+    // Success — show toast, hide form, move focus to the status message, scroll to top
     toast.classList.add('is-shown');
     form.style.display = 'none';
+    toast.focus();
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
   } catch (err) {

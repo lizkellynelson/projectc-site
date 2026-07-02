@@ -14,9 +14,17 @@
 :root {
   --cream: #F4F2EA; --coral: #FE6B41; --pink: #E09AC2;
   --brown: #360A05; --deep: #200603; --cream-dark: #EBE8DE;
+  --coral-btn: #C15131; --coral-btn-hover: #A8442A; --coral-text: #B74D2F; --coral-display: #E5603A; --pink-text: #8A3A5E;
   --serif: 'Anton', 'Impact', sans-serif;
   --sans: 'Inter', -apple-system, sans-serif;
 }
+:focus-visible { outline: 2px solid var(--deep); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--deep); color: var(--cream); padding: .6rem 1rem; z-index: 2000; }
+.skip-link:focus { left: 0; }
 html { scroll-behavior: smooth; font-size: 16px; }
 body { font-family: var(--sans); background: var(--cream); color: var(--brown); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
@@ -53,7 +61,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--brown); 
 .announcement-bar a:hover { text-decoration: underline; }
 .announcement-bar .ab-dismiss {
   position: absolute; right: 1.25rem;
-  background: none; border: none; color: rgba(244,242,234,0.5);
+  background: none; border: none; color: rgba(244,242,234,0.55);
   cursor: pointer; font-size: 0.9rem;
   padding: 0.4rem 0.5rem; line-height: 1;
   transition: color 0.2s ease;
@@ -67,9 +75,9 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .nav-logo .logo-img { height: 48px; width: auto; }
 .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
 .nav-links a { color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease; }
-.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
-.nav-cta { background: var(--coral) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
-.nav-cta:hover { background: #e55e38 !important; }
+.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral-text); }
+.nav-cta { background: var(--coral-btn) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
+.nav-cta:hover { background: var(--coral-btn-hover) !important; }
 .nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
 .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--brown); border-radius: 2px; transition: all 0.2s; }
 
@@ -133,7 +141,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .page-nav-pill {
   font-size: 0.8rem;
   font-weight: 600;
-  color: rgba(244,242,234,0.5);
+  color: rgba(244,242,234,0.55);
   text-decoration: none;
   padding: 0.4rem 1rem;
   border: 1px solid rgba(244,242,234,0.12);
@@ -149,11 +157,11 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--coral);
+  color: var(--coral-text);
   margin-bottom: 0.75rem;
 }
-.section-label.pink { color: #b5699a; }
-.section-label.muted { color: rgba(54,10,5,0.4); }
+.section-label.pink { color: var(--pink-text); }
+.section-label.muted { color: rgba(54,10,5,0.6); }
 
 /* REVEAL ANIMATION */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -172,7 +180,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   line-height: 1.05;
   margin-bottom: 0.75rem;
 }
-.research-section-head p { font-size: 1rem; color: rgba(54,10,5,0.55); max-width: 560px; line-height: 1.7; }
+.research-section-head p { font-size: 1rem; color: rgba(54,10,5,0.6); max-width: 560px; line-height: 1.7; }
 
 /* Atlas Feature Card */
 .atlas-card {
@@ -331,16 +339,16 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   margin-bottom: 1.25rem;
   font-size: 1.1rem;
 }
-.research-item h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.3; }
-.research-item .research-item-partner { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(54,10,5,0.35); margin-bottom: 0.5rem; display: block; }
-.research-item p { font-size: 0.875rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
+.research-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.3; }
+.research-item .research-item-partner { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(54,10,5,0.6); margin-bottom: 0.5rem; display: block; }
+.research-item p { font-size: 0.875rem; color: rgba(54,10,5,0.6); line-height: 1.6; }
 .research-item-arrow {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   font-size: 0.78rem;
   font-weight: 700;
-  color: var(--coral);
+  color: var(--coral-text);
   margin-top: 1rem;
   letter-spacing: 0.03em;
 }
@@ -367,14 +375,14 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
     to bottom,
     rgba(32,6,3,0.0) 0%,
     rgba(32,6,3,0.0) 40%,
-    rgba(32,6,3,0.55) 100%
+    rgba(32,6,3,0.75) 100%
   );
 }
 .photo-break-caption {
   position: absolute;
   bottom: 2.5rem;
   left: 2.5rem;
-  color: rgba(244,242,234,0.7);
+  color: rgba(244,242,234,0.95);
   font-size: 0.8rem;
   letter-spacing: 0.04em;
 }
@@ -392,7 +400,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   line-height: 1.05;
   margin-bottom: 0.75rem;
 }
-.press-section-head p { font-size: 1rem; color: rgba(54,10,5,0.55); max-width: 480px; line-height: 1.7; }
+.press-section-head p { font-size: 1rem; color: rgba(54,10,5,0.6); max-width: 480px; line-height: 1.7; }
 
 /* Featured press */
 .featured-press { margin-bottom: 3rem; }
@@ -417,7 +425,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--coral);
+  color: var(--coral-text);
   font-weight: 700;
   margin-bottom: 0.75rem;
 }
@@ -437,7 +445,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   padding: 0.25rem 0.7rem;
   border-radius: 100px;
   background: rgba(254,107,65,0.08);
-  color: var(--coral);
+  color: var(--coral-text);
   align-self: flex-start;
 }
 
@@ -447,7 +455,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(54,10,5,0.35);
+  color: rgba(54,10,5,0.6);
   margin-bottom: 1.25rem;
   margin-top: 0.5rem;
 }
@@ -475,7 +483,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--coral);
+  color: var(--coral-text);
   font-weight: 700;
   margin-bottom: 0.4rem;
 }
@@ -511,13 +519,21 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   object-fit: cover;
   object-position: center 25%;
 }
+.inline-photo-wide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(32,6,3,0.0) 60%, rgba(32,6,3,0.6) 100%);
+}
 .inline-photo-credit {
   position: absolute;
   bottom: 1.25rem;
   right: 1.5rem;
-  font-size: 0.72rem;
-  color: rgba(244,242,234,0.6);
+  font-size: 0.8125rem;
+  color: rgba(244,242,234,0.95);
   letter-spacing: 0.04em;
+  z-index: 1;
 }
 
 /* ============================
@@ -534,7 +550,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   line-height: 1.05;
   margin-bottom: 0.75rem;
 }
-.speaking-section-head p { font-size: 1rem; color: rgba(244,242,234,0.5); max-width: 480px; line-height: 1.7; }
+.speaking-section-head p { font-size: 1rem; color: rgba(244,242,234,0.55); max-width: 480px; line-height: 1.7; }
 
 /* Speaking event grid */
 .speaking-grid {
@@ -594,7 +610,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   gap: 0.4rem;
   font-size: 0.78rem;
   font-weight: 600;
-  color: rgba(244,242,234,0.45);
+  color: rgba(244,242,234,0.55);
   letter-spacing: 0.03em;
   transition: color 0.2s;
 }
@@ -643,7 +659,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 }
 .contact-cta-card p {
   font-size: 0.95rem;
-  color: rgba(54,10,5,0.55);
+  color: rgba(54,10,5,0.6);
   line-height: 1.7;
   margin-bottom: 2rem;
 }
@@ -651,7 +667,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--coral);
+  background: var(--coral-btn);
   color: white;
   text-decoration: none;
   font-size: 0.875rem;
@@ -661,11 +677,11 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   transition: background 0.2s ease, gap 0.2s ease;
   letter-spacing: 0.02em;
 }
-.contact-btn:hover { background: #e55e38; gap: 0.75rem; }
+.contact-btn:hover { background: var(--coral-btn-hover); gap: 0.75rem; }
 .contact-btn.secondary {
   background: transparent;
-  color: var(--coral);
-  border: 2px solid var(--coral);
+  color: var(--coral-text);
+  border: 2px solid var(--coral-text);
 }
 .contact-btn.secondary:hover { background: rgba(254,107,65,0.06); }
 @media (max-width: 768px) {
@@ -675,17 +691,17 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 /* ============================
    FOOTER
    ============================ */
-footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 2rem; border-top: 1px solid rgba(244,242,234,0.06); }
+footer { background: var(--deep); color: rgba(244,242,234,0.55); padding: 4rem 0 2rem; border-top: 1px solid rgba(244,242,234,0.06); }
 footer .nav-logo { text-decoration: none; display: flex; align-items: center; color: var(--cream); margin-bottom: 1rem; }
 footer .logo-img-footer { height: 32px; width: auto; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
 .footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
 .footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
-.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.5); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
+.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.55); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
 .footer-col a:hover { color: var(--coral); }
 .footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
 .footer-social { display: flex; gap: 1rem; }
-.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-social a { color: rgba(244,242,234,0.55); text-decoration: none; transition: color 0.2s; }
 .footer-social a:hover { color: var(--coral); }
 
 /* ============================
@@ -704,6 +720,8 @@ footer .logo-img-footer { height: 32px; width: auto; }
 }
 @media (max-width: 768px) {
   .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links.show { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); padding: 1rem 2rem; gap: .5rem; box-shadow: 0 8px 30px rgba(32,6,3,0.1); }
   .press-grid-small { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .photo-break { height: 300px; }
@@ -712,6 +730,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <div class="gradient-bar"></div>
 <div class="announcement-bar" id="announcementBar">
@@ -722,18 +741,20 @@ footer .logo-img-footer { height: 32px; width: auto; }
 <nav id="mainNav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C"></a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
       <li><a href="community.html">Community</a></li>
       <li><a href="going-solo.html">Going Solo</a></li>
       <li><a href="coaching.html">Coaching</a></li>
-      <li><a href="press.html" style="color:var(--coral); font-weight:600;">Research &amp; Press</a></li>
+      <li><a href="press.html" style="color:var(--coral-text); font-weight:600;">Research &amp; Press</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="community.html" class="nav-cta">Join the Community</a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('show')"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);"><span></span><span></span><span></span></button>
   </div>
 </nav>
+
+<main id="main">
 
 <!-- PAGE HEADER -->
 <section class="page-header">
@@ -768,6 +789,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
     <a href="https://journalismatlas.com" target="_blank" class="atlas-card reveal">
       <div class="atlas-card-content">
         <img src="atlas-logo-white.png" alt="The Independent Journalism Atlas" class="atlas-logo">
+        <h3>The Independent Journalism Atlas</h3>
         <p>A living map and database of 1,400+ verified creator-journalists — organized by beat, platform, and geography. Independent journalism didn't disappear. It's moving. Co-founded with Ryan Darnell.</p>
         <span class="atlas-link">Visit the Atlas &rarr;</span>
       </div>
@@ -794,26 +816,26 @@ footer .logo-img-footer { height: 32px; width: auto; }
       <a href="https://videoconsortium.org/member-resources/rise-of-creator-journalist-report" target="_blank" class="research-item reveal">
         <div class="research-item-icon">🎬</div>
         <span class="research-item-partner">In partnership with the Video Consortium &amp; Fordham University</span>
-        <h4>The Rise of the Creator-Journalist</h4>
+        <h3>The Rise of the Creator-Journalist</h3>
         <p>A 2026 study examining how independent video journalists are making the creator model work — and why they're not just a trend, but an integral part of the future of news.</p>
         <span class="research-item-arrow">Read the report &rarr;</span>
       </a>
       <a href="https://localnewsinitiative.northwestern.edu/posts/2026/02/19/chicago-media-ecosystem-project-c/index.html" target="_blank" class="research-item reveal">
         <div class="research-item-icon">🏙️</div>
         <span class="research-item-partner">In partnership with Medill's Local News Initiative</span>
-        <h4>The Media Ecosystem Chicago</h4>
+        <h3>The Media Ecosystem Chicago</h3>
         <p>A deep dive into Chicago's expansive media landscape, applying Project C's News Ecosystem Framework to a specific market for the first time — and uncovering 100 previously unindexed sources.</p>
         <span class="research-item-arrow">Read the report &rarr;</span>
       </a>
       <a href="/top50creatorjournalists" class="research-item reveal">
         <div class="research-item-icon">📋</div>
-        <h4>The Top 50 Creator Journalists</h4>
+        <h3>The Top 50 Creator Journalists</h3>
         <p>An annual list of the independent journalists doing the most interesting, influential, and sustainable work in the creator model. Our first list launched in 2025.</p>
         <span class="research-item-arrow">See the list &rarr;</span>
       </a>
       <a href="news-ecosystem-map.html" class="research-item reveal">
         <div class="research-item-icon">🗺️</div>
-        <h4>News Ecosystem Map</h4>
+        <h3>News Ecosystem Map</h3>
         <p>An interactive map showing how the current news landscape is structured — who's filling which roles, where the gaps are, and how creator journalism fits in.</p>
         <span class="research-item-arrow">Explore the map &rarr;</span>
       </a>
@@ -865,8 +887,16 @@ footer .logo-img-footer { height: 32px; width: auto; }
     </div>
 
     <!-- Also featured -->
-    <p class="also-featured-label">Also featured in</p>
+    <h3 class="also-featured-label">Also featured in</h3>
     <div class="press-grid-small reveal">
+
+      <a href="https://www.svdj.nl/nieuws/van-traditioneel-journalist-naar-een-eigen-community-liz-kelly-nelson-pleit-voor-meer-journalistieke-creators/" target="_blank" class="press-item-small">
+        <div class="press-type-dot article"></div>
+        <div class="press-item-small-body">
+          <div class="press-source">SVDJ (Dutch Journalism Fund)</div>
+          <h4>Van traditioneel journalist naar een eigen community: Liz Kelly Nelson pleit voor meer journalistieke creators</h4>
+        </div>
+      </a>
 
       <a href="https://ijnet.org/en/story/understanding-creator-journalism-liz-kelly-nelson-founder-project-c" target="_blank" class="press-item-small">
         <div class="press-type-dot article"></div>
@@ -984,7 +1014,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
             <h3>Creators and the Future of Journalism: Insights on Infrastructure Building from the US and South Africa</h3>
             <span class="watch-link">
               <span class="watch-icon">
-                <svg width="8" height="10" viewBox="0 0 8 10" fill="none"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
+                <svg width="8" height="10" viewBox="0 0 8 10" fill="none" aria-hidden="true" focusable="false"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
               </span>
               View the programme
             </span>
@@ -1001,7 +1031,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
             <h3>What Legacy Media and Digital Content Creators Can Learn From Each Other</h3>
             <span class="watch-link">
               <span class="watch-icon">
-                <svg width="8" height="10" viewBox="0 0 8 10" fill="none"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
+                <svg width="8" height="10" viewBox="0 0 8 10" fill="none" aria-hidden="true" focusable="false"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
               </span>
               Watch on YouTube
             </span>
@@ -1018,7 +1048,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
             <h3>Evolving Definitions of Journalists and Journalism in the Era of Influencers</h3>
             <span class="watch-link">
               <span class="watch-icon">
-                <svg width="8" height="10" viewBox="0 0 8 10" fill="none"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
+                <svg width="8" height="10" viewBox="0 0 8 10" fill="none" aria-hidden="true" focusable="false"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
               </span>
               Read the coverage
             </span>
@@ -1035,7 +1065,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
             <h3>Who Gets to Be Called a Journalist in 2025?</h3>
             <span class="watch-link">
               <span class="watch-icon">
-                <svg width="8" height="10" viewBox="0 0 8 10" fill="none"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
+                <svg width="8" height="10" viewBox="0 0 8 10" fill="none" aria-hidden="true" focusable="false"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
               </span>
               Watch on YouTube
             </span>
@@ -1066,6 +1096,8 @@ footer .logo-img-footer { height: 32px; width: auto; }
     </div>
   </div>
 </section>
+
+</main>
 
 <footer>
   <div class="container-wide">
@@ -1102,7 +1134,10 @@ function updateActivePill() {
     if (el && window.scrollY >= el.offsetTop - 200) current = id;
   });
   pills.forEach(p => {
-    p.classList.toggle('active', p.getAttribute('href') === '#' + current);
+    var isActive = p.getAttribute('href') === '#' + current;
+    p.classList.toggle('active', isActive);
+    if (isActive) { p.setAttribute('aria-current', 'true'); }
+    else { p.removeAttribute('aria-current'); }
   });
 }
 window.addEventListener('scroll', updateActivePill, { passive: true });

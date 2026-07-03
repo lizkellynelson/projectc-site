@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Media Kit Builder — Project C</title>
+  <meta name="description" content="Build your media kit in minutes. A free tool from Project C." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --coral: #FF5A2C;
+      --ink: #1A1A1A;
+      --cream: #F5F0E8;
+      --yellow: #F5E642;
+      --pink: #E040A0;
+      --blue: #00BFFF;
+      --border: #E0D8CE;
+      --gray: #666;
+      --sans: 'DM Sans', sans-serif;
+      --display: 'Bebas Neue', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--sans); background: var(--cream); color: var(--ink); }
+
+    /* ---------- Builder chrome ---------- */
+    .site-header { background: var(--coral); padding: 18px 28px 14px; }
+    .site-header .kicker { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; color: var(--ink); margin-bottom: 3px; }
+    .site-header .title { display: flex; align-items: baseline; gap: 10px; }
+    .site-header .title .a { font-family: var(--display); font-size: 34px; color: var(--ink); line-height: 1; }
+    .site-header .title .b { font-family: var(--display); font-size: 34px; color: white; line-height: 1; }
+
+    .tabbar { background: var(--ink); }
+    .tabbar .tabs { display: flex; overflow-x: auto; }
+    .tabbar button {
+      background: none; border: none; cursor: pointer; padding: 10px 14px 8px;
+      border-bottom: 3px solid transparent; color: rgba(255,255,255,0.35);
+      font-size: 9px; font-weight: 700; letter-spacing: 1.5px; font-family: var(--sans);
+      white-space: nowrap; transition: all 0.15s;
+    }
+    .tabbar button.active { border-bottom-color: var(--coral); color: white; }
+    .progress-track { height: 2px; background: rgba(255,255,255,0.06); }
+    .progress-fill { height: 2px; background: var(--coral); transition: width 0.3s; }
+
+    .content { padding: 24px 28px 100px; max-width: 760px; margin: 0 auto; }
+    .part-head { margin-bottom: 24px; }
+    .part-chip { display: inline-block; background: var(--coral); color: white; font-size: 9px; font-weight: 700; letter-spacing: 2px; padding: 4px 10px; margin-bottom: 6px; }
+    .part-title { font-family: var(--display); font-size: 28px; color: var(--ink); letter-spacing: 0.5px; line-height: 1; text-transform: uppercase; }
+    .part-time { font-size: 11px; color: var(--gray); margin-top: 3px; }
+
+    .field { margin-bottom: 18px; }
+    .label { margin-bottom: 6px; }
+    .label .lab { font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--coral); text-transform: uppercase; }
+    .label .hint { font-size: 11px; color: var(--gray); font-style: italic; margin-top: 2px; }
+    input[type="text"], textarea {
+      width: 100%; padding: 9px 12px; border: 1px solid var(--border); background: white;
+      font-size: 13px; font-family: var(--sans); color: var(--ink); outline: none; border-radius: 0;
+    }
+    textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+
+    .note { font-size: 11px; color: var(--gray); font-style: italic; margin-bottom: 12px; }
+    .callout { font-size: 11px; color: var(--gray); font-style: italic; margin-bottom: 20px; border-left: 3px solid var(--coral); padding-left: 12px; }
+    .section-title { font-family: var(--display); font-size: 22px; color: var(--ink); letter-spacing: 0.5px; margin: 24px 0 4px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+    @media (max-width: 560px) { .grid2 { grid-template-columns: 1fr; } }
+
+    .card { border: 1.5px solid var(--border); padding: 18px 20px; margin-bottom: 14px; background: white; }
+    .card.accent { border-color: var(--coral); background: #FFF8F5; }
+    .quote-mark { font-size: 32px; color: var(--border); line-height: 0.8; margin-bottom: 8px; }
+    .check-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .check-box { width: 16px; height: 16px; border: 1.5px solid var(--border); flex-shrink: 0; background: white; }
+    .check-row span { font-size: 13px; color: var(--ink); }
+
+    .tier-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px; }
+    .tier-tag { font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--gray); margin-bottom: 3px; }
+    .tier-tag.hot { color: var(--coral); }
+    .tier-name-input {
+      font-family: var(--display) !important; font-size: 20px !important; padding: 4px 0 !important;
+      border: none !important; border-bottom: 2px solid var(--border) !important; background: transparent !important;
+    }
+    .price-label { font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--coral); margin-bottom: 3px; text-align: right; }
+    .price-row { display: flex; align-items: center; gap: 4px; }
+    .price-row .dollar { font-family: var(--display); font-size: 24px; color: var(--ink); }
+    .price-row input { width: 100px; font-family: var(--display); font-size: 24px; padding: 4px 8px; text-align: center; }
+
+    .bottom-nav {
+      position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid var(--border);
+      padding: 12px 28px; display: flex; justify-content: space-between; align-items: center; z-index: 10;
+    }
+    .btn-back { background: none; border: 1.5px solid var(--ink); color: var(--ink); padding: 8px 22px; font-weight: 700; font-size: 11px; letter-spacing: 1px; cursor: pointer; font-family: var(--sans); }
+    .btn-back:disabled { border-color: var(--border); color: var(--border); cursor: default; }
+    .btn-next { background: var(--coral); border: none; color: white; padding: 9px 24px; font-weight: 700; font-size: 11px; letter-spacing: 1px; cursor: pointer; font-family: var(--sans); }
+    .btn-preview { background: var(--ink); border: none; color: var(--yellow); padding: 10px 26px; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; cursor: pointer; font-family: var(--sans); }
+    .step-count { font-size: 11px; color: var(--gray); }
+
+    /* ---------- Preview ---------- */
+    #preview-view { background: #D8D2C9; min-height: 100vh; padding: 28px 20px 60px; }
+    .preview-toolbar { max-width: 860px; margin: 0 auto 18px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+    .preview-toolbar .hint { font-size: 11px; color: var(--gray); font-style: italic; }
+    .btn-edit { background: none; border: 1.5px solid var(--ink); padding: 7px 20px; font-weight: 700; font-size: 11px; letter-spacing: 1px; cursor: pointer; font-family: var(--sans); }
+    .btn-print { background: var(--ink); border: none; color: var(--yellow); padding: 8px 22px; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; cursor: pointer; font-family: var(--sans); }
+
+    .kit { max-width: 860px; margin: 0 auto; background: white; box-shadow: 0 12px 60px rgba(0,0,0,0.18); }
+    .kit-header { display: grid; grid-template-columns: 1fr 220px; }
+    @media (max-width: 640px) { .kit-header { grid-template-columns: 1fr; } }
+    .kit-header-left { background: var(--coral); padding: 32px 36px 28px; }
+    .kit-kicker { font-size: 9px; font-weight: 700; letter-spacing: 2.5px; color: var(--ink); margin-bottom: 6px; }
+    .kit-name { font-family: var(--display); font-size: 52px; color: var(--ink); line-height: 0.92; margin-bottom: 10px; }
+    .kit-tagline { font-size: 12px; color: var(--ink); opacity: 0.65; font-style: italic; border-left: 3px solid rgba(26,26,26,0.25); padding-left: 10px; }
+    .kit-header-right { background: var(--ink); padding: 24px 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+    .kit-contact-label { font-size: 8px; font-weight: 700; letter-spacing: 2px; color: rgba(245,240,232,0.45); margin-bottom: 8px; }
+    .kit-contact-name { font-size: 12px; color: var(--cream); margin-bottom: 3px; }
+    .kit-contact-title { font-size: 11px; color: rgba(245,240,232,0.6); margin-bottom: 3px; }
+    .kit-contact-email { font-size: 11px; color: var(--coral); margin-bottom: 3px; }
+    .kit-contact-web { font-size: 11px; color: rgba(245,240,232,0.5); }
+    .kit-dots { display: flex; gap: 5px; }
+    .kit-dot { width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .kit-dot .c { font-family: var(--display); font-size: 9px; color: white; line-height: 1; }
+
+    .kit-metrics { background: var(--ink); display: grid; }
+    .kit-metric { padding: 18px 22px; }
+    .kit-metric + .kit-metric { border-left: 1px solid rgba(255,255,255,0.06); }
+    .kit-metric .m-label { font-size: 8px; font-weight: 700; letter-spacing: 2px; color: rgba(245,240,232,0.4); margin-bottom: 6px; text-transform: uppercase; }
+    .kit-metric .m-value { font-family: var(--display); font-size: 36px; color: var(--coral); line-height: 1; }
+
+    .kit-body { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--border); }
+    @media (max-width: 640px) { .kit-body { grid-template-columns: 1fr; } }
+    .kit-body-left { padding: 28px 32px; border-right: 1px solid var(--border); }
+    .kit-body-right { padding: 28px 24px; }
+    .k-eyebrow { font-size: 8px; font-weight: 700; letter-spacing: 2px; color: var(--coral); margin-bottom: 4px; }
+    .k-display { font-family: var(--display); font-size: 20px; margin-bottom: 8px; }
+    .k-display-sm { font-family: var(--display); font-size: 18px; margin-bottom: 10px; }
+    .k-text { font-size: 12px; line-height: 1.7; color: var(--gray); margin-bottom: 20px; }
+    .k-coverage { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .k-story { border: 1px solid var(--border); padding: 10px 12px; }
+    .k-story .s-tag { font-size: 7px; font-weight: 700; letter-spacing: 1.5px; color: var(--coral); margin-bottom: 4px; }
+    .k-story .s-text { font-size: 11px; color: var(--ink); line-height: 1.4; }
+    .k-readerquote { background: var(--cream); padding: 14px 16px; margin-bottom: 20px; }
+    .k-readerquote .rq-text { font-size: 12px; line-height: 1.7; color: var(--ink); font-style: italic; }
+
+    .k-pkg { border: 1.5px solid var(--ink); padding: 14px 16px; margin-bottom: 10px; background: white; }
+    .k-pkg.hot { border-color: var(--coral); background: var(--coral); }
+    .k-pkg-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .k-pkg-name { font-family: var(--display); font-size: 16px; color: var(--ink); letter-spacing: 0.5px; }
+    .k-pkg-price { font-family: var(--display); font-size: 24px; color: var(--coral); }
+    .k-pkg.hot .k-pkg-price { color: var(--ink); }
+    .k-pkg-price .mo { font-size: 10px; font-family: var(--sans); font-weight: 500; opacity: 0.6; }
+    .k-pkg-deliv { font-size: 11px; color: var(--gray); line-height: 1.6; }
+    .k-pkg.hot .k-pkg-deliv { color: var(--ink); opacity: 0.85; }
+
+    .kit-sponsors { padding: 18px 32px; border-bottom: 1px solid var(--border); background: var(--cream); }
+    .kit-sponsors .s-names { font-size: 13px; color: var(--ink); line-height: 1.7; margin-top: 4px; }
+
+    .kit-proof { display: grid; border-bottom: 1px solid var(--border); }
+    .kit-impact { padding: 24px 32px; }
+    .kit-impact .i-row { display: flex; gap: 10px; margin-bottom: 10px; }
+    .kit-impact .i-num { width: 20px; height: 20px; background: var(--coral); color: white; font-family: var(--display); font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .kit-impact .i-text { font-size: 12px; color: var(--gray); line-height: 1.6; }
+    .kit-impact .i-press { font-size: 11px; color: var(--gray); font-style: italic; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 10px; }
+    .kit-testimonials { padding: 24px 24px; }
+    .k-quote { background: var(--cream); padding: 14px 16px; margin-bottom: 10px; }
+    .k-quote .q-mark { font-size: 28px; color: var(--border); line-height: 0.7; margin-bottom: 6px; }
+    .k-quote .q-text { font-size: 12px; line-height: 1.7; color: var(--ink); margin-bottom: 8px; font-style: italic; }
+    .k-quote .q-attr { font-size: 10px; font-weight: 700; color: var(--coral); letter-spacing: 1px; }
+
+    .kit-independence { padding: 18px 32px; border-bottom: 1px solid var(--border); }
+    .kit-independence .ind-text { font-size: 11px; color: var(--gray); line-height: 1.7; font-style: italic; margin-top: 4px; }
+
+    .kit-footer { background: var(--yellow); padding: 16px 32px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .kit-footer .f-name { font-size: 9px; font-weight: 700; letter-spacing: 2px; color: var(--ink); margin-bottom: 3px; }
+    .kit-footer .f-email { font-size: 11px; color: var(--ink); opacity: 0.65; }
+    .kit-footer .f-cta { background: var(--ink); color: var(--yellow); padding: 10px 22px; font-weight: 700; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
+
+    @media print {
+      body { background: white; }
+      #preview-view { background: white; padding: 0; }
+      .preview-toolbar { display: none; }
+      .kit { box-shadow: none; max-width: none; }
+      .kit-header-left, .kit-header-right, .kit-metrics, .k-pkg.hot, .kit-footer, .i-num, .part-chip {
+        -webkit-print-color-adjust: exact; print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="builder-view">
+  <div class="site-header">
+    <div class="kicker">REVENUE STRATEGIES · PROJECT C</div>
+    <div class="title"><span class="a">BUILD YOUR</span><span class="b">MEDIA KIT</span></div>
+  </div>
+  <div class="tabbar">
+    <div class="tabs" id="tabs"></div>
+    <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+  </div>
+  <div class="content">
+    <div class="part-head">
+      <div class="part-chip" id="part-chip"></div>
+      <div class="part-title" id="part-title"></div>
+      <div class="part-time" id="part-time"></div>
+    </div>
+    <div id="part-content"></div>
+  </div>
+  <div class="bottom-nav">
+    <button class="btn-back" id="btn-back">← BACK</button>
+    <span class="step-count" id="step-count"></span>
+    <button class="btn-next" id="btn-forward">NEXT →</button>
+  </div>
+</div>
+
+<div id="preview-view" style="display:none">
+  <div class="preview-toolbar">
+    <button class="btn-edit" onclick="showBuilder()">← EDIT</button>
+    <div class="hint">Screenshot or print this page to save your media kit</div>
+    <button class="btn-print" onclick="window.print()">PRINT / SAVE</button>
+  </div>
+  <div class="kit" id="kit"></div>
+</div>
+
+<script>
+/* ---------------- State ---------------- */
+const PARTS = [
+  { part: "PART 1", title: "Outlet Identity", time: "5 min" },
+  { part: "PART 2", title: "Audience & Reach", time: "8 min" },
+  { part: "PART 3", title: "Impact & Press", time: "8 min" },
+  { part: "PART 4", title: "Visuals & Testimonials", time: "5 min" },
+  { part: "PART 5", title: "Sponsorship Packages", time: "10 min" },
+  { part: "PART 6", title: "Contact & Notes", time: "5 min" }
+];
+
+const INDEPENDENCE_TEMPLATE = "[Publication] accepts sponsorships to sustain independent journalism. Sponsors have no input into what I cover, how I cover it, or what I publish. All paid placements are clearly labeled. I reserve the right to decline any ad, and to end any sponsorship, at any time. Coverage decisions are never for sale.";
+
+const state = {
+  outletName: "", tagline: "", mission: "", whyAdvertise: "",
+  audience: "", subscribers: "", openRate: "", clickRate: "", monthlyReach: "", socialFollowing: "",
+  readerQuote: "",
+  platforms: "", years: "",
+  coverage: ["", "", "", ""],
+  impact: ["", "", ""],
+  press: "",
+  pastSponsors: "",
+  brandColors: "", assetsLink: "",
+  testimonials: [ { quote: "", attribution: "" }, { quote: "", attribution: "" } ],
+  packages: [
+    { name: "Community Partner", price: "", deliverables: "" },
+    { name: "Presenting Sponsor", price: "", deliverables: "" },
+    { name: "Founding Sponsor", price: "", deliverables: "" }
+  ],
+  contactName: "", contactTitle: "", contactEmail: "", website: "", cta: "", wishlist: "",
+  independence: INDEPENDENCE_TEMPLATE
+};
+
+let current = 0;
+
+/* ---------------- Helpers ---------------- */
+const esc = s => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+function labelHTML(lab, hint) {
+  return `<div class="label"><div class="lab">${esc(lab)}</div>${hint ? `<div class="hint">${esc(hint)}</div>` : ""}</div>`;
+}
+
+function fieldHTML(key, lab, opts = {}) {
+  const val = esc(state[key]);
+  const input = opts.textarea
+    ? `<textarea data-key="${key}" placeholder="${esc(opts.placeholder || "")}" style="min-height:${(opts.rows || 3) * 24}px">${val}</textarea>`
+    : `<input type="text" data-key="${key}" value="${val}" placeholder="${esc(opts.placeholder || "")}">`;
+  return `<div class="field">${labelHTML(lab, opts.hint)}${input}</div>`;
+}
+
+function arrFieldHTML(key, idx, lab, opts = {}) {
+  const val = esc(state[key][idx]);
+  const input = opts.textarea
+    ? `<textarea data-arr="${key}" data-idx="${idx}" placeholder="${esc(opts.placeholder || "")}" style="min-height:${opts.minHeight || 60}px">${val}</textarea>`
+    : `<input type="text" data-arr="${key}" data-idx="${idx}" value="${val}" placeholder="${esc(opts.placeholder || "")}">`;
+  return `<div style="margin-bottom:${opts.textarea ? 12 : 10}px">${labelHTML(lab)}${input}</div>`;
+}
+
+/* ---------------- Form parts ---------------- */
+function part1() {
+  return fieldHTML("outletName", "Outlet Name", { placeholder: "e.g. Cicero Independiente" })
+    + fieldHTML("tagline", "One-Line Tagline", {
+        hint: 'What you cover · for whom · why it matters. e.g. "Bilingual accountability journalism for Cicero and Berwyn."',
+        placeholder: "Your tagline here"
+      })
+    + fieldHTML("mission", "Mission (2–3 sentences)", {
+        hint: "Specific beats generic. Avoid 'trusted local news' — what do you actually cover?",
+        textarea: true, rows: 4,
+        placeholder: "Describe what you cover, who your community is, and what gap you fill."
+      })
+    + fieldHTML("whyAdvertise", "Why Advertise With Us", {
+        hint: "This is your positioning statement: your brand, what you make, and who it reaches. If you've done the Project C sponsorship lab, paste yours here.",
+        textarea: true, rows: 3,
+        placeholder: "Tell sponsors why your audience is exactly who they want to reach."
+      });
+}
+
+function part2() {
+  const metrics = [
+    ["Newsletter Subscribers", "subscribers", "e.g. 4,200", ""],
+    ["Avg. Open Rate", "openRate", "e.g. 48%", ""],
+    ["Avg. Click-Through Rate", "clickRate", "e.g. 6%", "Clicks prove action. If your CTR beats industry averages, say so."],
+    ["Monthly Readers / Views", "monthlyReach", "e.g. 12,000", ""],
+    ["Social Following", "socialFollowing", "e.g. 6,800 on Instagram", ""]
+  ];
+  return fieldHTML("audience", "Who Reads / Watches You", {
+      hint: "Demographics, geography, profession, why they trust you. Specific details beat vague claims.",
+      textarea: true, rows: 3,
+      placeholder: "e.g. Chicago's southeast side Latino community, 25–45, politically engaged homeowners..."
+    })
+    + `<div class="section-title">YOUR METRICS</div>`
+    + `<div class="grid2">` + metrics.map(([lab, key, ph, hint]) =>
+        `<div>${labelHTML(lab, hint)}<input type="text" data-key="${key}" value="${esc(state[key])}" placeholder="${esc(ph)}"></div>`
+      ).join("") + `</div>`
+    + fieldHTML("readerQuote", "Reader Survey Pull-Quote", {
+        hint: "One line from a reader survey or email that shows how much your audience trusts you.",
+        textarea: true, rows: 2,
+        placeholder: 'e.g. "This is the only newsletter I actually read all the way through."'
+      })
+    + fieldHTML("platforms", "Primary Platform(s)", {
+        hint: "Newsletter, podcast, YouTube, Instagram, website — wherever your audience lives.",
+        placeholder: "e.g. Substack newsletter + Instagram"
+      })
+    + fieldHTML("years", "Years in Operation / Notable Milestones", { placeholder: "e.g. 3 years, 2022 Illinois Press Award" })
+    + `<div class="section-title">SAMPLE COVERAGE</div>`
+    + `<div class="note">Pick 4 pieces that show range and quality — what would make a sponsor say "I want to be next to that"?</div>`
+    + state.coverage.map((_, i) => arrFieldHTML("coverage", i, `Headline ${i + 1}`, { placeholder: "Story headline or link" })).join("");
+}
+
+function part3() {
+  return `<div class="callout">This is the proof section. Concrete outcomes and third-party validation do more work than anything you say about yourself.</div>`
+    + `<div class="section-title">IMPACT EXAMPLES</div>`
+    + `<div class="note">What changed because of your journalism? e.g. "Our investigation led to a policy change at..." or "Our story reached X people in 48 hours."</div>`
+    + state.impact.map((_, i) => arrFieldHTML("impact", i, `Impact Example ${i + 1}`, { textarea: true, placeholder: "Describe the outcome, not just the story." })).join("")
+    + fieldHTML("press", "Press & Recognition", {
+        hint: "Awards, mentions in other outlets, notable shares, key partnerships — any external validation.",
+        textarea: true, rows: 3,
+        placeholder: "e.g. Featured in Chicago Sun-Times, 2024 Lenfest grantee, cited by Block Club Chicago..."
+      })
+    + fieldHTML("pastSponsors", "Past Sponsors & Partners", {
+        hint: "Even one counts. Past sponsors, advertisers, or brand partners tell a prospect their money is safe with you.",
+        textarea: true, rows: 3,
+        placeholder: "e.g. Cicero Federal Credit Union, Berwyn Farmers Market, local health clinic..."
+      });
+}
+
+function part4() {
+  const checklist = ["Primary logo (full color, PNG)", "Logo on dark background", "Logo on light background", "Headshot(s) of key journalists", "Brand colors (hex codes)", "Brand fonts", "Sample content screenshots"];
+  return `<div class="section-title">ASSETS CHECKLIST</div>`
+    + `<div style="margin-bottom:20px">` + checklist.map(item =>
+        `<div class="check-row"><div class="check-box"></div><span>${esc(item)}</span></div>`
+      ).join("") + `</div>`
+    + fieldHTML("brandColors", "Brand Colors (hex codes)", { placeholder: "e.g. #FF5A2C · #1A1A1A · #F5F0E8" })
+    + fieldHTML("assetsLink", "Where to Access Your Assets", { hint: "Google Drive link, Dropbox, etc.", placeholder: "https://drive.google.com/..." })
+    + `<div class="section-title">TESTIMONIALS</div>`
+    + `<div class="note">Even one strong quote from a reader, community member, or past sponsor adds enormous credibility.</div>`
+    + state.testimonials.map((t, i) => `
+      <div class="card">
+        <div class="quote-mark">"</div>
+        <div style="margin-bottom:10px">
+          ${labelHTML(`Quote ${i + 1}`)}
+          <textarea data-test="${i}" data-field="quote" placeholder="What did they say about your work or your community?" style="min-height:60px">${esc(t.quote)}</textarea>
+        </div>
+        ${labelHTML("Attribution")}
+        <input type="text" data-test="${i}" data-field="attribution" value="${esc(t.attribution)}" placeholder="Name, Title / Affiliation">
+      </div>`).join("");
+}
+
+function part5() {
+  const tierTags = ["TIER 1 — ENTRY", "TIER 2 — MID · MOST POPULAR", "TIER 3 — PREMIUM"];
+  const tierPlaceholders = [
+    "e.g. A clearly labeled sponsored message (about 20 words + your link) in 4 newsletter editions/month",
+    "List what sponsors get at this tier — be specific about placements, frequency, and format.",
+    "e.g. Category exclusivity (you're the only one in your industry), custom content series, event presence"
+  ];
+  return `<div class="callout">You need real prices and real deliverables — a blank rate card is not a media kit. Anchor your prices to your value (audience, engagement, exclusivity), and in conversations, always ask a sponsor's budget before naming a number.</div>`
+    + state.packages.map((p, i) => `
+      <div class="card${i === 1 ? " accent" : ""}">
+        <div class="tier-head">
+          <div>
+            <div class="tier-tag${i === 1 ? " hot" : ""}">${tierTags[i]}</div>
+            <input type="text" class="tier-name-input" data-pkg="${i}" data-field="name" value="${esc(p.name)}">
+          </div>
+          <div>
+            <div class="price-label">PRICE / MONTH</div>
+            <div class="price-row"><span class="dollar">$</span><input type="text" data-pkg="${i}" data-field="price" value="${esc(p.price)}" placeholder="___"></div>
+          </div>
+        </div>
+        ${labelHTML("Deliverables", "What's included? Newsletter placement, social mention, event presence, custom content, etc.")}
+        <textarea data-pkg="${i}" data-field="deliverables" placeholder="${esc(tierPlaceholders[i])}" style="min-height:70px">${esc(p.deliverables)}</textarea>
+      </div>`).join("");
+}
+
+function part6() {
+  return `<div class="section-title" style="margin-top:0">PRIMARY CONTACT</div>`
+    + `<div class="grid2" style="margin-bottom:8px">` + [
+        ["Name", "contactName"], ["Title / Role", "contactTitle"], ["Email", "contactEmail"], ["Website", "website"]
+      ].map(([lab, key]) =>
+        `<div>${labelHTML(lab)}<input type="text" data-key="${key}" value="${esc(state[key])}"></div>`
+      ).join("") + `</div>`
+    + fieldHTML("cta", "Your Call to Action", {
+        hint: "One action only — make it easy. e.g. 'Reply to this email' or 'Schedule a 15-min call at calendly.com/...'",
+        placeholder: "What do you want them to do next?"
+      })
+    + fieldHTML("independence", "Editorial Independence Statement", {
+        hint: "Not friction — the right sponsors read this as proof your audience's trust is real. Adapt the template below to your outlet.",
+        textarea: true, rows: 5
+      })
+    + fieldHTML("wishlist", "Sponsors / Brands on Your Wishlist", {
+        hint: "Who would be a dream fit? List 5–10. You can't pitch who you can't name.",
+        textarea: true, rows: 4,
+        placeholder: "e.g. Local credit union, neighborhood hardware store, regional health system, community foundation..."
+      });
+}
+
+const PART_RENDERERS = [part1, part2, part3, part4, part5, part6];
+
+/* ---------------- Builder rendering ---------------- */
+function renderTabs() {
+  document.getElementById("tabs").innerHTML = PARTS.map((p, i) =>
+    `<button class="${i === current ? "active" : ""}" onclick="goTo(${i})">${p.part}</button>`).join("");
+  document.getElementById("progress").style.width = ((current + 1) / PARTS.length * 100) + "%";
+}
+
+function renderPart() {
+  const p = PARTS[current];
+  document.getElementById("part-chip").textContent = p.part;
+  document.getElementById("part-title").textContent = p.title;
+  document.getElementById("part-time").textContent = "Estimated time: " + p.time;
+  document.getElementById("part-content").innerHTML = PART_RENDERERS[current]();
+  const back = document.getElementById("btn-back");
+  back.disabled = current === 0;
+  document.getElementById("step-count").textContent = (current + 1) + " / " + PARTS.length;
+  const fwd = document.getElementById("btn-forward");
+  if (current < PARTS.length - 1) {
+    fwd.className = "btn-next"; fwd.textContent = "NEXT →";
+  } else {
+    fwd.className = "btn-preview"; fwd.textContent = "PREVIEW MY MEDIA KIT →";
+  }
+  renderTabs();
+  window.scrollTo(0, 0);
+}
+
+function goTo(i) { current = i; renderPart(); }
+
+document.getElementById("btn-back").addEventListener("click", () => { if (current > 0) goTo(current - 1); });
+document.getElementById("btn-forward").addEventListener("click", () => {
+  if (current < PARTS.length - 1) goTo(current + 1); else showPreview();
+});
+
+/* Capture input into state (event delegation) */
+document.getElementById("part-content").addEventListener("input", e => {
+  const t = e.target;
+  if (t.dataset.key) state[t.dataset.key] = t.value;
+  else if (t.dataset.arr) state[t.dataset.arr][+t.dataset.idx] = t.value;
+  else if (t.dataset.test !== undefined && t.dataset.test !== "") state.testimonials[+t.dataset.test][t.dataset.field] = t.value;
+  else if (t.dataset.pkg !== undefined && t.dataset.pkg !== "") state.packages[+t.dataset.pkg][t.dataset.field] = t.value;
+});
+
+/* ---------------- Preview ---------------- */
+function isIndependenceEdited() {
+  return state.independence.trim() && state.independence.trim() !== INDEPENDENCE_TEMPLATE;
+}
+
+function renderKit() {
+  const d = state;
+  const name = d.outletName || "YOUR OUTLET";
+  const metrics = [
+    { label: "Newsletter Subscribers", value: d.subscribers },
+    { label: "Avg. Open Rate", value: d.openRate },
+    { label: "Avg. Click-Through Rate", value: d.clickRate },
+    { label: "Monthly Reach", value: d.monthlyReach },
+    { label: "Social Following", value: d.socialFollowing }
+  ].filter(m => m.value);
+  const dots = ["var(--ink)", "var(--yellow)", "var(--pink)", "var(--blue)"];
+  const hasImpact = d.impact.some(Boolean);
+  const hasTestimonials = d.testimonials.some(t => t.quote);
+  const independence = isIndependenceEdited() ? d.independence : (d.independence.trim() === INDEPENDENCE_TEMPLATE && d.outletName ? d.independence.replace("[Publication]", d.outletName) : d.independence);
+  const showIndependence = independence.trim().length > 0;
+
+  let html = `
+  <div class="kit-header">
+    <div class="kit-header-left">
+      <div class="kit-kicker">MEDIA KIT · ${new Date().getFullYear()}</div>
+      <div class="kit-name">${esc(name)}</div>
+      ${d.tagline ? `<div class="kit-tagline">${esc(d.tagline)}</div>` : ""}
+    </div>
+    <div class="kit-header-right">
+      <div>
+        <div class="kit-contact-label">CONTACT</div>
+        ${d.contactName ? `<div class="kit-contact-name">${esc(d.contactName)}</div>` : ""}
+        ${d.contactTitle ? `<div class="kit-contact-title">${esc(d.contactTitle)}</div>` : ""}
+        ${d.contactEmail ? `<div class="kit-contact-email">${esc(d.contactEmail)}</div>` : ""}
+        ${d.website ? `<div class="kit-contact-web">${esc(d.website)}</div>` : ""}
+      </div>
+      <div class="kit-dots">${dots.map((c, i) =>
+        `<div class="kit-dot" style="background:${c};${i === 0 ? "border:1px solid rgba(255,255,255,0.15)" : ""}">${i === 3 ? '<span class="c">C</span>' : ""}</div>`).join("")}
+      </div>
+    </div>
+  </div>`;
+
+  if (metrics.length) {
+    html += `<div class="kit-metrics" style="grid-template-columns:repeat(${metrics.length},1fr)">`
+      + metrics.map(m => `<div class="kit-metric"><div class="m-label">${esc(m.label)}</div><div class="m-value">${esc(m.value)}</div></div>`).join("")
+      + `</div>`;
+  }
+
+  html += `<div class="kit-body"><div class="kit-body-left">`;
+  if (d.mission) html += `<div class="k-eyebrow">WHO WE ARE</div><div class="k-display">OUR MISSION</div><div class="k-text">${esc(d.mission)}</div>`;
+  if (d.whyAdvertise) html += `<div class="k-eyebrow">WHY ADVERTISE WITH US</div><div class="k-text">${esc(d.whyAdvertise)}</div>`;
+  if (d.audience) html += `<div class="k-eyebrow">OUR AUDIENCE</div><div class="k-text">${esc(d.audience)}</div>`;
+  if (d.readerQuote) html += `<div class="k-eyebrow">FROM OUR READERS</div><div class="k-readerquote"><div class="rq-text">"${esc(d.readerQuote)}"</div></div>`;
+  if (d.coverage.some(Boolean)) {
+    html += `<div class="k-display-sm">SAMPLE COVERAGE</div><div class="k-coverage">`
+      + d.coverage.filter(Boolean).slice(0, 4).map((s, i) =>
+        `<div class="k-story"><div class="s-tag">STORY ${i + 1}</div><div class="s-text">${esc(s)}</div></div>`).join("")
+      + `</div>`;
+  }
+  html += `</div><div class="kit-body-right">
+    <div class="k-eyebrow">SPONSORSHIP OPPORTUNITIES</div>
+    <div class="k-display">PARTNER WITH US</div>`
+    + d.packages.map((p, i) => (p.price || p.deliverables) ? `
+      <div class="k-pkg${i === 1 ? " hot" : ""}">
+        <div class="k-pkg-head">
+          <div class="k-pkg-name">${esc(p.name)}</div>
+          ${p.price ? `<div class="k-pkg-price">$${esc(p.price)}<span class="mo">/mo</span></div>` : ""}
+        </div>
+        ${p.deliverables ? `<div class="k-pkg-deliv">${esc(p.deliverables)}</div>` : ""}
+      </div>` : "").join("")
+    + `</div></div>`;
+
+  if (d.pastSponsors) {
+    html += `<div class="kit-sponsors"><div class="k-eyebrow">PAST SPONSORS &amp; PARTNERS</div><div class="s-names">${esc(d.pastSponsors)}</div></div>`;
+  }
+
+  if (hasImpact || hasTestimonials) {
+    html += `<div class="kit-proof" style="grid-template-columns:${hasImpact && hasTestimonials ? "1fr 1fr" : "1fr"}">`;
+    if (hasImpact) {
+      html += `<div class="kit-impact" style="${hasTestimonials ? "border-right:1px solid var(--border)" : ""}">
+        <div class="k-eyebrow" style="margin-bottom:8px">OUR IMPACT</div>`
+        + d.impact.filter(Boolean).map((t, i) =>
+          `<div class="i-row"><div class="i-num">${i + 1}</div><div class="i-text">${esc(t)}</div></div>`).join("")
+        + (d.press ? `<div class="i-press">${esc(d.press)}</div>` : "")
+        + `</div>`;
+    }
+    if (hasTestimonials) {
+      html += `<div class="kit-testimonials"><div class="k-eyebrow" style="margin-bottom:8px">WHAT PEOPLE SAY</div>`
+        + d.testimonials.filter(t => t.quote).map(t => `
+          <div class="k-quote">
+            <div class="q-mark">"</div>
+            <div class="q-text">${esc(t.quote)}</div>
+            ${t.attribution ? `<div class="q-attr">— ${esc(t.attribution)}</div>` : ""}
+          </div>`).join("")
+        + `</div>`;
+    }
+    html += `</div>`;
+  }
+
+  if (showIndependence) {
+    html += `<div class="kit-independence"><div class="k-eyebrow">EDITORIAL INDEPENDENCE</div><div class="ind-text">${esc(independence)}</div></div>`;
+  }
+
+  html += `<div class="kit-footer">
+    <div>
+      <div class="f-name">${esc(name.toUpperCase())}${d.website ? " · " + esc(d.website) : ""}</div>
+      ${d.contactEmail ? `<div class="f-email">${esc(d.contactEmail)}</div>` : ""}
+    </div>
+    ${d.cta ? `<div class="f-cta">${esc(d.cta.toUpperCase())}</div>` : ""}
+  </div>`;
+
+  document.getElementById("kit").innerHTML = html;
+}
+
+function showPreview() {
+  renderKit();
+  document.getElementById("builder-view").style.display = "none";
+  document.getElementById("preview-view").style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+function showBuilder() {
+  document.getElementById("preview-view").style.display = "none";
+  document.getElementById("builder-view").style.display = "block";
+  renderPart();
+}
+
+/* ---------------- Init ---------------- */
+renderPart();
+</script>
+</body>
+</html>

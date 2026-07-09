@@ -480,6 +480,17 @@ exports.handler = async (event) => {
     return json(200, { ok: false, reason: 'invalid_email' });
   }
 
+  // Team allowlist — folks who run Project C and aren't in the memberships
+  // table. Add teammates here (lowercase) as needed.
+  const TEAM_EMAILS = {
+    'liz@projectc.biz': 'Liz',
+    'blair@idamedia.co': 'Blair',
+    'annaloy04@gmail.com': 'Anna',
+  };
+  if (TEAM_EMAILS[email]) {
+    return json(200, { ok: true, token: makeToken(email), firstName: TEAM_EMAILS[email] });
+  }
+
   try {
     const supabase = createClient(SUPABASE_URL, SUPABASE_SECRET_KEY, {
       auth: { persistSession: false },

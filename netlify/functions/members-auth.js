@@ -67,7 +67,7 @@ const MEMBER_CONTENT = {
             },
             {
               label: 'Slides',
-              url: 'https://project-c-hub.slack.com/files/U08EABKF2N6/F0BCSC6NCHH/_1__step_forward_on_sponsorships__1_.pdf',
+              url: '/slides/sponsorships-session-1.pdf',
             },
           ],
         },
@@ -81,7 +81,7 @@ const MEMBER_CONTENT = {
             },
             {
               label: 'Slides',
-              url: 'https://project-c-hub.slack.com/files/U08EABKF2N6/F0BEA75HXRV/_2__step_forward_on_sponsorships.pdf',
+              url: '/slides/sponsorships-session-2.pdf',
             },
           ],
         },
@@ -95,7 +95,7 @@ const MEMBER_CONTENT = {
             },
             {
               label: 'Slides',
-              url: 'https://project-c-hub.slack.com/files/U08EABKF2N6/F0BG5HJPH7W/_3__step_forward_on_sponsorships.pdf',
+              url: '/slides/sponsorships-session-3.pdf',
             },
           ],
         },
@@ -155,7 +155,7 @@ const MEMBER_CONTENT = {
             },
             {
               label: 'Slides',
-              url: 'https://project-c-hub.slack.com/files/U08DVM8FLR5/F0A7E5EU43Z/project_c_presentation__1__philanthropy_for_content_creators.pdf',
+              url: '/slides/philanthropy-part-1.pdf',
             },
           ],
         },
@@ -169,11 +169,11 @@ const MEMBER_CONTENT = {
             },
             {
               label: 'Slides',
-              url: 'https://project-c-hub.slack.com/files/U08DVM8FLR5/F0ADP4QGQCU/project_c_presentation__2__philanthropy_for_content_creators.pdf',
+              url: '/slides/philanthropy-part-2.pdf',
             },
             {
               label: 'Proposal one-pager template',
-              url: 'https://project-c-hub.slack.com/files/U08DVM8FLR5/F0ADYE5PDRP/nick_swyter_philanthropic_partnerships_proposal_template.docx',
+              url: '/slides/philanthropy-proposal-template.docx',
             },
           ],
         },
@@ -257,7 +257,7 @@ const MEMBER_CONTENT = {
         },
         {
           label: 'Savannah’s slides',
-          url: 'https://docs.google.com/presentation/d/1ZzU8Ujd68sFsi37AIvejq1bR6ectlEWKIV4rrjezVyQ/edit?usp=sharing',
+          url: '/slides/media-training.pdf',
         },
       ],
     },
@@ -291,8 +291,8 @@ const MEMBER_CONTENT = {
     {
       title: 'Philanthropic partnerships proposal template',
       description:
-        'A one-pager for pitching funders, courtesy of Nick Swyter at the NYT.',
-      url: 'https://project-c-hub.slack.com/files/U08DVM8FLR5/F0ADYE5PDRP/nick_swyter_philanthropic_partnerships_proposal_template.docx',
+        'A one-pager for pitching funders, courtesy of Nick Swyter at the NYT. Downloads as a Word doc you can adapt.',
+      url: '/slides/philanthropy-proposal-template.docx',
       image: 'members-thumb-template.jpg',
     },
   ],

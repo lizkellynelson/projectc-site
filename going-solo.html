@@ -21,6 +21,11 @@
 :root {
   --cream: #F4F2EA;
   --coral: #FE6B41;
+  --coral-btn: #C15131;
+  --coral-btn-hover: #A8442A;
+  --coral-text: #B74D2F;
+  --coral-display: #E5603A;
+  --pink-text: #8A3A5E;
   --pink: #E09AC2;
   --brown: #360A05;
   --deep: #200603;
@@ -67,7 +72,7 @@ body { font-family: var(--sans); background: var(--cream); color: var(--brown); 
 .announcement-bar a:hover { text-decoration: underline; }
 .announcement-bar .ab-dismiss {
   position: absolute; right: 1.25rem;
-  background: none; border: none; color: rgba(244,242,234,0.5);
+  background: none; border: none; color: rgba(244,242,234,0.55);
   cursor: pointer; font-size: 0.9rem;
   padding: 0.4rem 0.5rem; line-height: 1;
   transition: color 0.2s ease;
@@ -81,19 +86,19 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .nav-logo .logo-img { height: 48px; width: auto; }
 .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
 .nav-links a { color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease; }
-.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
-.nav-links a.active { color: var(--coral); font-weight: 600; }
-.nav-cta { background: var(--coral) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
-.nav-cta:hover { background: #e55e38 !important; }
+.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral-text); }
+.nav-links a.active { color: var(--coral-text); font-weight: 600; }
+.nav-cta { background: var(--coral-btn) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
+.nav-cta:hover { background: var(--coral-btn-hover) !important; }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
 .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--brown); margin: 5px 0; }
 
 /* SHARED */
-.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral-text); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
 .section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--coral); }
 .section-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,3rem); line-height: 1.05; color: var(--deep); letter-spacing: -0.01em; margin-bottom: 1.25rem; text-transform: uppercase; }
-.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: white; padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.25s ease; border: none; cursor: pointer; }
-.btn-primary:hover { background: #e55e38; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
+.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral-btn); color: white; padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.25s ease; border: none; cursor: pointer; }
+.btn-primary:hover { background: var(--coral-btn-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
 .btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--brown); padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 1.5px solid rgba(54,10,5,0.2); transition: all 0.25s ease; }
 .btn-secondary:hover { border-color: var(--brown); background: var(--brown); color: var(--cream); }
 
@@ -184,7 +189,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: rgba(244,242,234,0.5);
+  color: rgba(244,242,234,0.55);
   font-weight: 600;
 }
 
@@ -213,7 +218,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 }
 .who-chip:hover { box-shadow: 0 6px 20px rgba(32,6,3,0.07); transform: translateY(-2px); }
 .who-chip .check {
-  color: var(--coral);
+  color: var(--coral-text);
   font-weight: 700;
   font-size: 1rem;
   flex-shrink: 0;
@@ -288,7 +293,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .pull-quote .bubble-attrib .who span {
   display: block;
   font-size: 0.78rem;
-  color: rgba(54,10,5,0.55);
+  color: rgba(54,10,5,0.6);
   margin-top: 0.1rem;
 }
 .pull-quote.on-dark .bubble { background: var(--cream); }
@@ -403,7 +408,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .proof-attrib-text span {
   display: block;
   font-size: 0.78rem;
-  color: rgba(54,10,5,0.55);
+  color: rgba(54,10,5,0.6);
   margin-top: 0.1rem;
 }
 .proof-stat-bar {
@@ -413,7 +418,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .proof-stat-num {
   font-family: var(--font-display);
   font-size: 3rem;
-  color: var(--coral);
+  color: var(--coral-display);
   line-height: 1;
   display: block;
 }
@@ -474,7 +479,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   margin-bottom: 0.6rem;
   display: block;
 }
-.week-card h4 {
+.week-card h3 {
   font-family: var(--serif);
   font-size: 1.15rem;
   text-transform: uppercase;
@@ -526,7 +531,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 }
 .week-instructor .inst-info span {
   font-size: 0.72rem;
-  color: rgba(244,242,234,0.45);
+  color: rgba(244,242,234,0.55);
 }
 .week-card.midpoint { border-color: rgba(224,154,194,0.25); }
 .week-card.midpoint .week-number { color: var(--pink); }
@@ -605,7 +610,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   color: var(--cream);
   transition: all 0.2s ease;
 }
-.waitlist-inline input::placeholder { color: rgba(244,242,234,0.38); }
+.waitlist-inline input::placeholder { color: rgba(244,242,234,0.6); }
 .waitlist-inline input:focus { outline: none; border-color: var(--coral); background: rgba(244,242,234,0.13); }
 .waitlist-inline .btn-primary { padding: 0.75rem 1.5rem; font-size: 0.9rem; flex-shrink: 0; }
 .waitlist-inline-success {
@@ -630,9 +635,9 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   border-color: rgba(54,10,5,0.14);
   color: var(--deep);
 }
-.waitlist-inline.on-cream input::placeholder { color: rgba(54,10,5,0.38); }
+.waitlist-inline.on-cream input::placeholder { color: rgba(54,10,5,0.6); }
 .waitlist-inline.on-cream input:focus { border-color: var(--coral); background: white; }
-.waitlist-inline.on-cream .waitlist-inline-success { color: var(--coral); }
+.waitlist-inline.on-cream .waitlist-inline-success { color: var(--coral-text); }
 
 /* ═══════════════════════════════════════════════
    INSTRUCTORS
@@ -682,7 +687,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 }
 .instructor-role {
   font-size: 0.78rem;
-  color: var(--coral);
+  color: var(--coral-text);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -778,8 +783,8 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   line-height: 1.05;
   margin-bottom: 1rem;
 }
-.faq-left p { font-size: 0.9rem; color: rgba(54,10,5,0.55); line-height: 1.7; }
-.faq-left a { color: var(--coral); text-decoration: none; font-weight: 600; }
+.faq-left p { font-size: 0.9rem; color: rgba(54,10,5,0.6); line-height: 1.7; }
+.faq-left a { color: var(--coral-text); text-decoration: none; font-weight: 600; }
 .faq-item { border-bottom: 1.5px solid rgba(54,10,5,0.1); }
 .faq-item:first-child { border-top: 1.5px solid rgba(54,10,5,0.1); }
 .faq-question {
@@ -800,7 +805,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   line-height: 1.2;
   gap: 1rem;
 }
-.faq-question:hover { color: var(--coral); }
+.faq-question:hover { color: var(--coral-text); }
 .faq-toggle {
   width: 26px; height: 26px;
   border-radius: 50%;
@@ -815,8 +820,8 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   font-weight: 300;
 }
 .faq-item.open .faq-toggle {
-  background: var(--coral);
-  border-color: var(--coral);
+  background: var(--coral-btn);
+  border-color: var(--coral-btn);
   color: white;
   transform: rotate(45deg);
 }
@@ -827,7 +832,7 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   color: rgba(54,10,5,0.65);
   line-height: 1.75;
 }
-.faq-answer-inner a { color: var(--coral); text-decoration: none; font-weight: 500; }
+.faq-answer-inner a { color: var(--coral-text); text-decoration: none; font-weight: 500; }
 .faq-answer-inner a:hover { text-decoration: underline; }
 .faq-item.open .faq-answer { max-height: 600px; }
 
@@ -886,13 +891,13 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
   color: var(--cream);
   transition: all 0.2s ease;
 }
-.waitlist-form input::placeholder { color: rgba(244,242,234,0.4); }
+.waitlist-form input::placeholder { color: rgba(244,242,234,0.6); }
 .waitlist-form input:focus { outline: none; border-color: var(--coral); background: rgba(244,242,234,0.12); }
 .waitlist-form .btn-primary { flex-shrink: 0; }
 .waitlist-note {
   margin-top: 1rem;
   font-size: 0.82rem;
-  color: rgba(244,242,234,0.4);
+  color: rgba(244,242,234,0.55);
   line-height: 1.5;
 }
 .waitlist-success {
@@ -983,17 +988,17 @@ nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
 .partnerships-cta-bar strong { color: var(--cream); }
 
 /* FOOTER */
-footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 2rem; }
+footer { background: var(--deep); color: rgba(244,242,234,0.55); padding: 4rem 0 2rem; }
 footer .nav-logo { text-decoration: none; display: flex; align-items: center; color: var(--cream); margin-bottom: 1rem; }
 footer .logo-img-footer { height: 32px; width: auto; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
 .footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
 .footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
-.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.5); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
+.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.55); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
 .footer-col a:hover { color: var(--coral); }
 .footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
 .footer-social { display: flex; gap: 1rem; }
-.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-social a { color: rgba(244,242,234,0.55); text-decoration: none; transition: color 0.2s; }
 .footer-social a:hover { color: var(--coral); }
 
 /* RESPONSIVE */
@@ -1028,9 +1033,27 @@ footer .logo-img-footer { height: 32px; width: auto; }
   .waitlist-form { flex-direction: column; }
   .waitlist-form .btn-primary { width: 100%; justify-content: center; }
 }
+
+/* ACCESSIBILITY */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--deep); color: var(--cream); padding: .6rem 1rem; z-index: 2000; }
+.skip-link:focus { left: 0; }
+:focus-visible { outline: 2px solid var(--deep); outline-offset: 2px; }
+.waitlist-inline input:focus-visible,
+.waitlist-form input:focus-visible { outline: 2px solid var(--deep); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <div class="gradient-bar"></div>
 <div class="announcement-bar" id="announcementBar">
@@ -1043,20 +1066,23 @@ footer .logo-img-footer { height: 32px; width: auto; }
     <a href="index.html" class="nav-logo">
       <img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C">
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
       <li><a href="community.html">Community</a></li>
-      <li><a href="going-solo.html" style="color:var(--coral); font-weight:600;">Going Solo</a></li>
+      <li><a href="going-solo.html" style="color:var(--coral-text); font-weight:600;">Going Solo</a></li>
       <li><a href="coaching.html">Coaching</a></li>
       <li><a href="press.html">Research &amp; Press</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="members.html" style="color:#B74D2F; font-weight:600; display:inline-flex; align-items:center; gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B74D2F" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12" r="4.5"/><path d="M12.5 12h9M18 12v4M21.5 12v3"/></svg>Members</a></li>
       <li><a href="community.html" class="nav-cta">Join the Community</a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
+
+<main id="main">
 
 <!-- ═══════════════════════════════════════════════
      HERO
@@ -1196,7 +1222,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 
       <div class="week-card reveal">
         <span class="week-number">Week 01</span>
-        <h4>Charting the Course</h4>
+        <h3>Charting the Course</h3>
         <ul>
           <li>Understand the creator journalism ecosystem</li>
           <li>Begin crafting your personalized launch plan</li>
@@ -1214,7 +1240,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 
       <div class="week-card reveal">
         <span class="week-number">Week 02</span>
-        <h4>Audience Building</h4>
+        <h3>Audience Building</h3>
         <ul>
           <li>Kickstart your audience growth with practical tools and strategies</li>
           <li>Set achievable subscriber goals with expert guidance</li>
@@ -1232,7 +1258,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 
       <div class="week-card reveal">
         <span class="week-number">Week 03</span>
-        <h4>Editorial Planning</h4>
+        <h3>Editorial Planning</h3>
         <ul>
           <li>Develop and refine your content concept</li>
           <li>Create a sustainable editorial calendar</li>
@@ -1248,7 +1274,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 
       <div class="week-card midpoint reveal">
         <span class="week-number">Week 04</span>
-        <h4>Midpoint Q&amp;A</h4>
+        <h3>Midpoint Q&amp;A</h3>
         <ul>
           <li>We take a beat to hear from you: what's working and what feels hard</li>
           <li>Open Q&amp;A with all instructors</li>
@@ -1264,7 +1290,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 
       <div class="week-card reveal">
         <span class="week-number">Week 05</span>
-        <h4>Financial &amp; Emotional Resilience</h4>
+        <h3>Financial &amp; Emotional Resilience</h3>
         <ul>
           <li>Learn the basics of establishing an LLC, managing taxes, and budgeting</li>
           <li>Strategies for balancing work, health, and personal life</li>
@@ -1282,7 +1308,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 
       <div class="week-card reveal">
         <span class="week-number">Week 06</span>
-        <h4>Ethics &amp; Standards</h4>
+        <h3>Ethics &amp; Standards</h3>
         <ul>
           <li>Develop a personal ethics statement and transparency practices</li>
           <li>How to combat misinformation and build audience trust</li>
@@ -1298,7 +1324,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 
       <div class="week-card reveal">
         <span class="week-number">Week 07</span>
-        <h4>Revenue 101</h4>
+        <h3>Revenue 101</h3>
         <ul>
           <li>Explore diverse revenue streams, from subscriptions to merchandise</li>
           <li>Build a roadmap to sustainable income as an independent creator</li>
@@ -1314,7 +1340,7 @@ footer .logo-img-footer { height: 32px; width: auto; }
 
       <div class="week-card midpoint reveal">
         <span class="week-number">Week 08</span>
-        <h4>Wrapping Up Q&amp;A</h4>
+        <h3>Wrapping Up Q&amp;A</h3>
         <ul>
           <li>We help you put it all together and answer any questions from the revenue exercise</li>
           <li>You leave with a complete launch plan in hand</li>
@@ -1343,11 +1369,13 @@ footer .logo-img-footer { height: 32px; width: auto; }
     <div class="waitlist-inline reveal">
       <p><strong>Ready to sign up?</strong> The next cohort isn't open yet, but drop your name and email and you'll be first to hear when it is.</p>
       <form class="inline-form-row waitlist-form-instance" method="POST">
-        <input type="text" name="name" placeholder="Your name" required autocomplete="name">
-        <input type="email" name="email" placeholder="Your email" required autocomplete="email">
+        <label for="wlInlineName" class="sr-only">Your name</label>
+        <input type="text" id="wlInlineName" name="name" placeholder="Your name" required autocomplete="name">
+        <label for="wlInlineEmail" class="sr-only">Your email</label>
+        <input type="email" id="wlInlineEmail" name="email" placeholder="Your email" required autocomplete="email">
         <button type="submit" class="btn-primary">Join the waitlist &rarr;</button>
       </form>
-      <div class="waitlist-inline-success"></div>
+      <div class="waitlist-inline-success" role="status"></div>
     </div>
   </div>
 </section>
@@ -1687,61 +1715,61 @@ footer .logo-img-footer { height: 32px; width: auto; }
       <div class="faq-right reveal">
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a1" onclick="var o=this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',o);">
             What are the logistics?
-            <span class="faq-toggle">+</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-a1">
             <div class="faq-answer-inner">Cohorts run for eight weeks. Sessions are 60 minutes, virtual, and held weekly at Noon ET. Every session is recorded, so if you miss a week you won't fall behind. All recordings and materials are yours to keep forever.</div>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a2" onclick="var o=this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',o);">
             How much does it cost?
-            <span class="faq-toggle">+</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-a2">
             <div class="faq-answer-inner">$1,000 per student, non-refundable after week one. We also offer a 3-month installment payment plan. U.S.-based journalists may be able to <a href="https://www.irs.gov/taxtopics/tc513" target="_blank" rel="noopener">deduct the cost from their taxes</a>, especially if they're self-employed.</div>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a3" onclick="var o=this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',o);">
             Why does it cost what it costs?
-            <span class="faq-toggle">+</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-a3">
             <div class="faq-answer-inner">All six instructors are independent journalists and consultants. The cost reflects the time it took to develop the learnings, presentations, and templates we share with you, plus the hours we spend teaching. We think you'll get your money's worth.</div>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a4" onclick="var o=this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',o);">
             What if I'm not a trained journalist?
-            <span class="faq-toggle">+</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-a4">
             <div class="faq-answer-inner">No problem. If you're looking to launch or grow a newsletter that helps your audience get smarter about any topic, you'll learn how to develop, launch, and grow a newsletter business. We won't teach journalism in this course, but we can point you toward people who can if that interests you.</div>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a5" onclick="var o=this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',o);">
             How is this different from 1-on-1 coaching?
-            <span class="faq-toggle">+</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-a5">
             <div class="faq-answer-inner">Going Solo is a group workshop for journalists who haven't launched yet. It's the foundation: the business knowledge, the plan, the cohort of peers, the accountability. <a href="coaching.html">Coaching</a> is for people who are already in it and want a senior thought partner to help them grow, fix what isn't working, or get out of their own way. Going Solo students get a 20% discount on coaching sessions with our instructors.</div>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-a6" onclick="var o=this.parentElement.classList.toggle('open');this.setAttribute('aria-expanded',o);">
             When is the next cohort?
-            <span class="faq-toggle">+</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-a6">
             <div class="faq-answer-inner">We run cohorts a few times a year. Join the waitlist below and you'll be the first to know when registration opens, along with information about any new offerings we're building out.</div>
           </div>
         </div>
@@ -1762,12 +1790,14 @@ footer .logo-img-footer { height: 32px; width: auto; }
       <p>Drop your name and email below. We'll reach out when registration opens for the next cohort and let you know about any new offerings we're building.</p>
 
       <form class="waitlist-form" method="POST" id="waitlistForm" novalidate>
-        <input type="text" name="name" placeholder="Your name" required autocomplete="name">
-        <input type="email" name="email" placeholder="Your email" required autocomplete="email">
+        <label for="wlName" class="sr-only">Your name</label>
+        <input type="text" id="wlName" name="name" placeholder="Your name" required autocomplete="name">
+        <label for="wlEmail" class="sr-only">Your email</label>
+        <input type="email" id="wlEmail" name="email" placeholder="Your email" required autocomplete="email">
         <button type="submit" class="btn-primary">Join the waitlist &rarr;</button>
       </form>
 
-      <div class="waitlist-success" id="waitlistSuccess">
+      <div class="waitlist-success" id="waitlistSuccess" role="status">
         <strong>✓ You're on the list</strong>
         <p>Thanks. You'll hear from us when the next cohort opens, and we'll keep you posted on any new Going Solo offerings.</p>
       </div>
@@ -1776,6 +1806,8 @@ footer .logo-img-footer { height: 32px; width: auto; }
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>

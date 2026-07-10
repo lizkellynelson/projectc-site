@@ -25,13 +25,23 @@
 :root {
   --cream: #F4F2EA;
   --coral: #FE6B41;
+  --coral-btn: #C15131;
+  --coral-btn-hover: #A8442A;
+  --coral-text: #B74D2F;
+  --coral-display: #E5603A;
   --pink: #E09AC2;
+  --pink-text: #8A3A5E;
   --brown: #360A05;
   --deep: #200603;
   --cream-dark: #EBE8DE;
   --serif: 'Anton', 'Impact', sans-serif;
   --sans: 'Inter', -apple-system, sans-serif;
 }
+
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--deep); color: var(--cream); padding: .6rem 1rem; z-index: 2000; }
+.skip-link:focus { left: 0; }
+
+:focus-visible { outline: 2px solid var(--deep); outline-offset: 2px; }
 
 html { scroll-behavior: smooth; font-size: 16px; }
 
@@ -60,6 +70,42 @@ body {
   100% { background-position: 0% 50%; }
 }
 
+
+/* ANNOUNCEMENT BAR */
+.announcement-bar {
+  position: fixed;
+  top: 4px;
+  left: 0; right: 0;
+  z-index: 1001;
+  background: var(--brown);
+  color: var(--cream);
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  padding: 0 3rem;
+  transition: top 0.3s ease;
+}
+.announcement-bar a {
+  color: var(--coral);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 0.25em;
+}
+.announcement-bar a:hover { text-decoration: underline; }
+.announcement-bar .ab-dismiss {
+  position: absolute; right: 1.25rem;
+  background: none; border: none; color: rgba(244,242,234,0.55);
+  cursor: pointer; font-size: 0.9rem;
+  padding: 0.4rem 0.5rem; line-height: 1;
+  transition: color 0.2s ease;
+}
+.announcement-bar .ab-dismiss:hover { color: var(--cream); }
+.announcement-bar.hidden { display: none; }
+
 /* NAV */
 nav {
   position: fixed; top: 4px; left: 0; right: 0; z-index: 1000;
@@ -82,22 +128,22 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500;
   padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease;
 }
-.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
+.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral-text); }
 .nav-cta {
-  background: var(--coral) !important; color: white !important;
+  background: var(--coral-btn) !important; color: white !important;
   padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important;
 }
-.nav-cta:hover { background: #e55e38 !important; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(254,107,65,0.3); }
+.nav-cta:hover { background: var(--coral-btn-hover) !important; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(254,107,65,0.3); }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
 .nav-toggle span { display: block; width: 24px; height: 2px; background: var(--brown); margin: 5px 0; transition: 0.3s; }
 
 /* BUTTONS */
 .btn-primary {
-  display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: white;
+  display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral-btn); color: white;
   padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
   transition: all 0.25s ease; border: none; cursor: pointer;
 }
-.btn-primary:hover { background: #e55e38; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
+.btn-primary:hover { background: var(--coral-btn-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--brown);
   padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
@@ -106,7 +152,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .btn-secondary:hover { border-color: var(--brown); background: var(--brown); color: var(--cream); }
 
 /* SHARED */
-.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral-text); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
 .section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--coral); }
 .section-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,3rem); line-height: 1.05; color: var(--deep); letter-spacing: 0.02em; margin-bottom: 1.25rem; text-transform: uppercase; }
 
@@ -139,7 +185,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   line-height: 1.05; color: var(--deep);
   text-transform: uppercase; margin-bottom: 1.5rem;
 }
-.coaching-hero h1 em { font-style: normal; color: var(--coral); }
+.coaching-hero h1 em { font-style: normal; color: var(--coral-display); }
 .hero-right p {
   font-size: 1.05rem; color: rgba(54,10,5,0.65);
   line-height: 1.75; margin-bottom: 1.25rem;
@@ -217,7 +263,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .coach-testimonial figcaption {
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--coral);
+  color: var(--coral-text);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -236,7 +282,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   text-transform: uppercase; color: var(--deep);
   line-height: 1.05;
 }
-.fit-header h2 em { font-style: normal; color: var(--coral); }
+.fit-header h2 em { font-style: normal; color: var(--coral-display); }
 .fit-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
@@ -332,7 +378,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   font-family: var(--serif); font-size: 1.05rem;
   text-transform: uppercase; margin-bottom: 0.4rem; line-height: 1.15;
 }
-.outcome-card p { font-size: 0.82rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
+.outcome-card p { font-size: 0.82rem; color: rgba(54,10,5,0.6); line-height: 1.6; }
 
 /* FAQ */
 .section-faq { padding: 5rem 0; background: white; }
@@ -343,7 +389,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   text-transform: uppercase; color: var(--deep);
   line-height: 1.05; margin-bottom: 1rem;
 }
-.faq-left p { font-size: 0.9rem; color: rgba(54,10,5,0.55); line-height: 1.7; }
+.faq-left p { font-size: 0.9rem; color: rgba(54,10,5,0.6); line-height: 1.7; }
 .faq-item { border-bottom: 1.5px solid rgba(54,10,5,0.1); }
 .faq-item:first-child { border-top: 1.5px solid rgba(54,10,5,0.1); }
 .faq-question {
@@ -354,7 +400,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   text-transform: uppercase; color: var(--deep);
   letter-spacing: 0.02em; line-height: 1.2; gap: 1rem;
 }
-.faq-question:hover { color: var(--coral); }
+.faq-question:hover { color: var(--coral-text); }
 .faq-toggle {
   width: 26px; height: 26px; border-radius: 50%;
   border: 1.5px solid rgba(54,10,5,0.15);
@@ -371,7 +417,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   padding: 0 0 1.25rem; font-size: 0.9rem;
   color: rgba(54,10,5,0.65); line-height: 1.7;
 }
-.faq-answer-inner a { color: var(--coral); text-decoration: none; font-weight: 500; }
+.faq-answer-inner a { color: var(--coral-text); text-decoration: none; font-weight: 500; }
 .faq-answer-inner a:hover { text-decoration: underline; }
 .faq-item.open .faq-answer { max-height: 500px; }
 
@@ -403,16 +449,16 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
 /* FOOTER */
-footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 2rem; }
+footer { background: var(--deep); color: rgba(244,242,234,0.55); padding: 4rem 0 2rem; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
 .footer-brand .nav-logo { color: var(--cream); margin-bottom: 1rem; }
 .footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
 .footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
-.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.5); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
+.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.55); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
 .footer-col a:hover { color: var(--coral); }
 .footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
 .footer-social { display: flex; gap: 1rem; }
-.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-social a { color: rgba(244,242,234,0.55); text-decoration: none; transition: color 0.2s; }
 .footer-social a:hover { color: var(--coral); }
 
 /* RESPONSIVE */
@@ -445,10 +491,22 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     border-bottom: 1px solid rgba(54,10,5,0.06);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 <div class="gradient-bar"></div>
+
 
 <!-- NAV -->
 <nav id="mainNav">
@@ -456,20 +514,23 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     <a href="index.html" class="nav-logo">
       <img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C — return to homepage">
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
       <li><a href="community.html">Community</a></li>
       <li><a href="going-solo.html">Going Solo</a></li>
-      <li><a href="coaching.html" style="color:var(--coral); font-weight:600;">Coaching</a></li>
+      <li><a href="coaching.html" style="color:var(--coral-text); font-weight:600;">Coaching</a></li>
       <li><a href="press.html">Research &amp; Press</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="members.html" style="color:#B74D2F; font-weight:600; display:inline-flex; align-items:center; gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B74D2F" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12" r="4.5"/><path d="M12.5 12h9M18 12v4M21.5 12v3"/></svg>Members</a></li>
       <li><a href="community.html" class="nav-cta">Join the Community</a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
+
+<main id="main">
 
 <!-- ═══════════════════════════════════════════════
      HERO
@@ -547,27 +608,27 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     </div>
     <div class="fit-grid">
       <div class="fit-card reveal">
-        <div class="fit-icon">&#128218;</div>
+        <div class="fit-icon" aria-hidden="true">&#128218;</div>
         <p>You want to figure out how to keep your business running while reclaiming the joy of actually making the work you care about.</p>
       </div>
       <div class="fit-card reveal">
-        <div class="fit-icon">&#128101;</div>
+        <div class="fit-icon" aria-hidden="true">&#128101;</div>
         <p>You need to hire, or just did, but have never actually managed anyone before and aren't sure where to start.</p>
       </div>
       <div class="fit-card reveal">
-        <div class="fit-icon">&#129300;</div>
+        <div class="fit-icon" aria-hidden="true">&#129300;</div>
         <p>You're struggling with a lost sense of identity after leaving the newsroom, and it's getting in the way of building what's next.</p>
       </div>
       <div class="fit-card reveal">
-        <div class="fit-icon">&#128176;</div>
+        <div class="fit-icon" aria-hidden="true">&#128176;</div>
         <p>You're making money but have no idea if your business model is sustainable, or how to grow it without burning out.</p>
       </div>
       <div class="fit-card reveal">
-        <div class="fit-icon">&#127919;</div>
+        <div class="fit-icon" aria-hidden="true">&#127919;</div>
         <p>You have too many ideas pulling you in different directions and need help figuring out which one to actually pursue.</p>
       </div>
       <div class="fit-card reveal">
-        <div class="fit-icon">&#128640;</div>
+        <div class="fit-icon" aria-hidden="true">&#128640;</div>
         <p>You're ready to stop winging it. You want real strategy behind the business side of what you're building.</p>
       </div>
     </div>
@@ -587,11 +648,11 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
       </div>
       <div class="reveal">
         <ul class="included-list">
-          <li><span class="included-check">&#10003;</span> Two 60-minute coaching sessions per month</li>
-          <li><span class="included-check">&#10003;</span> A sounding board for the decisions that keep you up at night, from pricing to editorial direction to whether it's time to hire</li>
-          <li><span class="included-check">&#10003;</span> Resilience and capacity coaching for the hard stretches when you're questioning all of it</li>
-          <li><span class="included-check">&#10003;</span> Async support between sessions via Voxer and email, so you're not waiting two weeks when something comes up</li>
-          <li><span class="included-check">&#10003;</span> Access to our resource library and our trusted network of freelancers when you need hands, not just strategy</li>
+          <li><span class="included-check" aria-hidden="true">&#10003;</span> Two 60-minute coaching sessions per month</li>
+          <li><span class="included-check" aria-hidden="true">&#10003;</span> A sounding board for the decisions that keep you up at night, from pricing to editorial direction to whether it's time to hire</li>
+          <li><span class="included-check" aria-hidden="true">&#10003;</span> Resilience and capacity coaching for the hard stretches when you're questioning all of it</li>
+          <li><span class="included-check" aria-hidden="true">&#10003;</span> Async support between sessions via Voxer and email, so you're not waiting two weeks when something comes up</li>
+          <li><span class="included-check" aria-hidden="true">&#10003;</span> Access to our resource library and our trusted network of freelancers when you need hands, not just strategy</li>
         </ul>
       </div>
     </div>
@@ -615,32 +676,32 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     </div>
     <div class="outcomes-grid">
       <div class="outcome-card reveal">
-        <div class="outcome-icon">&#127919;</div>
+        <div class="outcome-icon" aria-hidden="true">&#127919;</div>
         <h3>Ruthlessly prioritize</h3>
         <p>Stop chasing six different ideas and get clear on the one thing that moves your business forward right now.</p>
       </div>
       <div class="outcome-card reveal">
-        <div class="outcome-icon pink">&#128200;</div>
+        <div class="outcome-icon pink" aria-hidden="true">&#128200;</div>
         <h3>Grow your audience and revenue</h3>
         <p>Look at your business model with fresh eyes. Find the opportunities you're too close to see and build a realistic plan to go after them.</p>
       </div>
       <div class="outcome-card reveal">
-        <div class="outcome-icon">&#9881;&#65039;</div>
+        <div class="outcome-icon" aria-hidden="true">&#9881;&#65039;</div>
         <h3>Build systems that don't depend on you</h3>
         <p>Create processes that keep things running even when you step away. Get your operations running in a way that's actually sustainable.</p>
       </div>
       <div class="outcome-card reveal">
-        <div class="outcome-icon pink">&#128170;</div>
+        <div class="outcome-icon pink" aria-hidden="true">&#128170;</div>
         <h3>Gain confidence to lead</h3>
         <p>Whether you're managing contractors or doing everything yourself, learn to lead your business instead of just reacting to it.</p>
       </div>
       <div class="outcome-card reveal">
-        <div class="outcome-icon">&#128161;</div>
+        <div class="outcome-icon" aria-hidden="true">&#128161;</div>
         <h3>Deal with the burnout</h3>
         <p>Learn to break big ambitions into steps you can actually take. Create space for the parts of your life that aren't work. Stay in this for the long haul.</p>
       </div>
       <div class="outcome-card reveal">
-        <div class="outcome-icon pink">&#127912;</div>
+        <div class="outcome-icon pink" aria-hidden="true">&#127912;</div>
         <h3>Experiment and play</h3>
         <p>Not every session is about optimizing. Sometimes the most useful thing is permission to try something weird and see what happens.</p>
       </div>
@@ -656,46 +717,46 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     <div class="faq-layout">
       <div class="faq-left reveal">
         <h2>FAQ</h2>
-        <p>Still have questions? <a href="mailto:info@projectc.biz" style="color:var(--coral); text-decoration:none; font-weight:600;">Email us</a> and we'll talk it through.</p>
+        <p>Still have questions? <a href="mailto:info@projectc.biz" style="color:var(--coral-text); text-decoration:none; font-weight:600;">Email us</a> and we'll talk it through.</p>
       </div>
       <div class="faq-right reveal">
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1" onclick="toggleFaq(this)">
             What are the sessions actually like?
-            <span class="faq-toggle">+</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-1" hidden>
             <div class="faq-answer-inner">Blair lets you guide the conversation. She has plans and frameworks ready, but she doesn't force a rigid curriculum. If you come in knowing exactly what you need to work on, great. If you come in feeling scattered, she'll help you find the thread. Some weeks you'll work on strategy. Other weeks you'll work through something more personal, like the identity shift of going from newsroom journalist to business owner. It depends on what you need that week.</div>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2" onclick="toggleFaq(this)">
             How is this different from Going Solo?
-            <span class="faq-toggle">+</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-2" hidden>
             <div class="faq-answer-inner">Going Solo is a group workshop for journalists who haven't launched yet. Coaching is for people who are already in it. You've started your thing and now you need help growing it, fixing what isn't working, or just getting out of your own way.</div>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3" onclick="toggleFaq(this)">
             I need more hands, not more advice. Is this for me?
-            <span class="faq-toggle">+</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-3" hidden>
             <div class="faq-answer-inner">We focus on strategic foundations. The goal is to build your own capacity so you can make better decisions about where to spend your time and money. That said, we also do hands-on document review and feedback on work that drives growth. And if you need someone to just do the work (write a grant proposal, redesign a landing page), we can connect you to freelancers in our network who we trust.</div>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4" onclick="toggleFaq(this)">
             What does it cost?
-            <span class="faq-toggle">+</span>
+            <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-4" hidden>
             <div class="faq-answer-inner">$1,000 per month for four months. For a fraction of what you'd pay an employee, you get an experienced media leader in your corner who has built the kinds of things you're building, both independently and with teams.</div>
           </div>
         </div>
@@ -719,6 +780,8 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -755,9 +818,37 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const id = this.getAttribute('href'); if (id === '#') return;
     e.preventDefault(); const target = document.querySelector(id);
-    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (target) target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
   });
 });
+
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const open = item.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+  const answer = document.getElementById(btn.getAttribute('aria-controls'));
+  if (answer) answer.hidden = !open;
+}
 </script>
+
+<script>
+(function() {
+  if (sessionStorage.getItem('coachingBannerDismissed')) {
+    var bar = document.getElementById('announcementBar');
+    var nav = document.getElementById('mainNav');
+    if (bar) bar.style.display = 'none';
+    if (nav) nav.style.top = '4px';
+  }
+})();
+function dismissAnnouncementBar() {
+  var bar = document.getElementById('announcementBar');
+  var nav = document.getElementById('mainNav');
+  if (bar) bar.style.display = 'none';
+  if (nav) nav.style.top = '4px';
+  sessionStorage.setItem('coachingBannerDismissed', '1');
+}
+</script>
+
 </body>
 </html>

@@ -29,6 +29,11 @@
 :root {
   --cream: #F4F2EA;
   --coral: #FE6B41;
+  --coral-btn: #C15131;
+  --coral-btn-hover: #A8442A;
+  --coral-text: #B74D2F;
+  --coral-display: #E5603A;
+  --pink-text: #8A3A5E;
   --pink: #E09AC2;
   --brown: #360A05;
   --deep: #200603;
@@ -122,12 +127,12 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500;
   padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease;
 }
-.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
+.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral-text); }
 .nav-cta {
-  background: var(--coral) !important; color: white !important;
+  background: var(--coral-btn) !important; color: white !important;
   padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important;
 }
-.nav-cta:hover { background: #e55e38 !important; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(254,107,65,0.3); }
+.nav-cta:hover { background: var(--coral-btn-hover) !important; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(254,107,65,0.3); }
 .nav-member { border: 1.5px solid var(--brown) !important; border-radius: 100px !important; padding: 0.5rem 1.25rem !important; margin-left: 0.25rem; }
 .nav-member:hover { background: var(--brown) !important; color: var(--cream) !important; }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 0.5rem; }
@@ -141,7 +146,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   display: inline-flex; align-items: center; gap: 0.5rem;
   background: rgba(254,107,65,0.08); border: 1px solid rgba(254,107,65,0.15);
   padding: 0.4rem 1rem; border-radius: 100px; font-size: 0.8rem; font-weight: 600;
-  color: var(--coral); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem;
+  color: var(--coral-text); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.5rem;
 }
 .hero-badge .pulse { width: 8px; height: 8px; background: var(--coral); border-radius: 50%; animation: pulse 2s ease infinite; }
 @keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.5); } }
@@ -149,15 +154,15 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   font-family: var(--serif); font-size: clamp(2.8rem,5.5vw,4.5rem);
   line-height: 1.05; color: var(--deep); letter-spacing: 0.02em; margin-bottom: 1.5rem; text-transform: uppercase;
 }
-.hero h1 em { font-style: normal; color: var(--coral); }
+.hero h1 em { font-style: normal; color: var(--coral-display); }
 .hero-sub { font-size: 1.15rem; color: rgba(54,10,5,0.7); line-height: 1.7; max-width: 520px; margin-bottom: 2.5rem; }
 .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
 .btn-primary {
-  display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: white;
+  display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral-btn); color: white;
   padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
   transition: all 0.25s ease; border: none; cursor: pointer;
 }
-.btn-primary:hover { background: #e55e38; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
+.btn-primary:hover { background: var(--coral-btn-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
 .btn-secondary {
   display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--brown);
   padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem;
@@ -167,8 +172,8 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .hero-stats { display: flex; gap: 2.5rem; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(54,10,5,0.08); }
 .hero-stat { text-decoration: none; color: inherit; }
 .hero-stat .number { font-family: var(--serif); font-size: 2rem; color: var(--deep); display: block; line-height: 1; text-transform: uppercase; }
-.hero-stat .label { font-size: 0.8rem; color: rgba(54,10,5,0.5); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.35rem; }
-.hero-stat:hover .label { color: var(--coral); }
+.hero-stat .label { font-size: 0.8rem; color: rgba(54,10,5,0.6); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.35rem; }
+.hero-stat:hover .label { color: var(--coral-text); }
 
 /* Hero visual — animated face gallery */
 .hero-visual { position: relative; }
@@ -211,7 +216,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .hero-gallery-label {
   grid-column: 1 / -1; text-align: center; padding: 0.75rem 0 0.25rem;
   font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
-  color: rgba(244,242,234,0.4); font-weight: 600;
+  color: rgba(244,242,234,0.55); font-weight: 600;
 }
 .hero-gallery-label a { color: var(--coral); text-decoration: none; font-weight: 700; }
 .hero-gallery-label a:hover { text-decoration: underline; }
@@ -226,22 +231,22 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .float-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
 .float-icon.coral { background: rgba(254,107,65,0.1); }
 .float-icon.pink { background: rgba(224,154,194,0.15); }
-.tag { font-size: 0.75rem; font-weight: 500; padding: 0.3rem 0.75rem; border-radius: 100px; background: rgba(254,107,65,0.08); color: var(--coral); }
-.tag.pink { background: rgba(224,154,194,0.15); color: #b5699a; }
+.tag { font-size: 0.75rem; font-weight: 500; padding: 0.3rem 0.75rem; border-radius: 100px; background: rgba(254,107,65,0.08); color: var(--coral-text); }
+.tag.pink { background: rgba(224,154,194,0.15); color: var(--pink-text); }
 
 /* SOCIAL PROOF */
 .social-proof { padding: 1.5rem 0; border-top: 1px solid rgba(54,10,5,0.06); border-bottom: 1px solid rgba(54,10,5,0.06); }
 .social-proof-inner { text-align: center; }
-.social-proof p { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.35); margin-bottom: 1.5rem; font-weight: 600; }
-.logo-row { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; opacity: 0.55; }
+.social-proof p { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.6); margin-bottom: 1.5rem; font-weight: 600; }
+.logo-row { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; opacity: 0.85; }
 .logo-row span { font-size: 1rem; font-weight: 600; color: var(--brown); white-space: nowrap; }
 
 /* SHARED */
-.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-.section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--coral); }
+.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral-text); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--coral-text); }
 .section-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,3rem); line-height: 1.05; color: var(--deep); letter-spacing: 0.02em; margin-bottom: 1.25rem; text-transform: uppercase; }
 .section-desc { font-size: 1.05rem; color: rgba(54,10,5,0.65); line-height: 1.7; margin-bottom: 2rem; max-width: 480px; }
-.link-arrow { font-size: 0.8rem; font-weight: 600; color: var(--coral); display: inline-flex; align-items: center; gap: 0.35rem; transition: gap 0.2s ease; }
+.link-arrow { font-size: 0.8rem; font-weight: 600; color: var(--coral-text); display: inline-flex; align-items: center; gap: 0.35rem; transition: gap 0.2s ease; }
 
 /* NEWSLETTER */
 .section-newsletter { padding: 7rem 0; }
@@ -255,13 +260,13 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .newsletter-stack img, .newsletter-stack iframe, .newsletter-stack figure, .newsletter-stack picture { display: none !important; max-height: 0 !important; opacity: 0 !important; }
 .nl-card * { background-image: none !important; }
 .nl-card:hover { transform: translateX(6px); box-shadow: 0 8px 30px rgba(32,6,3,0.1); border-left-color: var(--coral); }
-.nl-card-date { font-size: 0.75rem; color: rgba(54,10,5,0.4); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; font-weight: 500; }
-.nl-card h4 { font-size: 1.05rem; color: var(--deep); margin-bottom: 0.5rem; line-height: 1.3; }
-.nl-card p { font-size: 0.85rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
+.nl-card-date { font-size: 0.75rem; color: rgba(54,10,5,0.6); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.5rem; font-weight: 500; }
+.nl-card h3 { font-size: 1.05rem; color: var(--deep); margin-bottom: 0.5rem; line-height: 1.3; }
+.nl-card p { font-size: 0.85rem; color: rgba(54,10,5,0.6); line-height: 1.6; }
 .email-form { display: flex; gap: 0.75rem; max-width: 460px; }
 .email-form input { flex: 1; padding: 0.9rem 1.25rem; border: 1.5px solid rgba(54,10,5,0.12); border-radius: 100px; font-family: var(--sans); font-size: 0.9rem; background: white; color: var(--brown); outline: none; }
 .email-form input:focus { border-color: var(--coral); }
-.email-form input::placeholder { color: rgba(54,10,5,0.35); }
+.email-form input::placeholder { color: rgba(54,10,5,0.6); }
 .email-form button { white-space: nowrap; }
 
 /* PILLARS */
@@ -308,12 +313,12 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
   box-shadow: 0 20px 60px rgba(32,6,3,0.15); z-index: 3;
 }
 .top50-badge-large .number { font-family: var(--serif); font-size: 3.5rem; color: var(--coral); line-height: 1; }
-.top50-badge-large .text { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(54,10,5,0.5); font-weight: 700; margin-top: 0.25rem; }
+.top50-badge-large .text { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(54,10,5,0.6); font-weight: 700; margin-top: 0.25rem; }
 .top50-content .section-desc { max-width: 500px; }
 .top50-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(54,10,5,0.08); }
 .top50-stat { text-align: center; }
 .top50-stat .val { font-family: var(--serif); font-size: 1.6rem; color: var(--deep); display: block; }
-.top50-stat .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(54,10,5,0.45); margin-top: 0.2rem; font-weight: 500; }
+.top50-stat .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(54,10,5,0.6); margin-top: 0.2rem; font-weight: 500; }
 
 /* RESEARCH / ATLAS */
 .section-research { padding: 7rem 0; background: white; }
@@ -330,25 +335,25 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .atlas-hero-content p { font-size: 0.95rem; color: rgba(244,242,234,0.6); line-height: 1.7; margin-bottom: 1.75rem; max-width: 420px; }
 .atlas-stats { display: flex; gap: 2rem; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(244,242,234,0.1); }
 .atlas-stat-val { font-family: var(--serif); font-size: 1.6rem; color: var(--coral); display: block; line-height: 1; text-transform: uppercase; }
-.atlas-stat-lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(244,242,234,0.4); margin-top: 0.3rem; display: block; font-weight: 500; }
+.atlas-stat-lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(244,242,234,0.55); margin-top: 0.3rem; display: block; font-weight: 500; }
 .atlas-hero-visual { background: linear-gradient(135deg, #4a1a10 0%, var(--deep) 100%); position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 2rem; }
 .atlas-hero-visual img { width: 100%; height: auto; object-fit: contain; border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.4); opacity: 1; z-index: 1; transition: transform 0.3s ease; }
 .atlas-hero-visual img:hover { transform: scale(1.02); }
 .atlas-hero-visual .atlas-placeholder { color: rgba(244,242,234,0.15); font-size: 5rem; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
 .atlas-hero-visual .atlas-placeholder span { font-size: 0.8rem; color: rgba(244,242,234,0.3); font-family: var(--sans); }
-.partnerships-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.4); font-weight: 700; text-align: center; margin-bottom: 1.5rem; }
+.partnerships-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.6); font-weight: 700; text-align: center; margin-bottom: 1.5rem; }
 .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 .research-card { border: 1px solid rgba(54,10,5,0.08); border-radius: 16px; padding: 1.75rem; transition: all 0.3s ease; text-decoration: none; color: var(--brown); display: block; position: relative; }
 .research-card:hover { border-color: rgba(254,107,65,0.2); box-shadow: 0 8px 30px rgba(32,6,3,0.08); transform: translateY(-3px); }
 .rc-status { position: absolute; top: 1.25rem; right: 1.25rem; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.25rem 0.6rem; border-radius: 100px; }
-.rc-status.released { background: rgba(46,160,67,0.08); color: #2ea043; }
-.rc-status.new { background: rgba(254,107,65,0.1); color: var(--coral); }
-.rc-status.wip { background: rgba(224,154,194,0.12); color: #b5699a; }
+.rc-status.released { background: rgba(46,160,67,0.08); color: #1F7A33; }
+.rc-status.new { background: rgba(254,107,65,0.1); color: var(--coral-text); }
+.rc-status.wip { background: rgba(224,154,194,0.12); color: var(--pink-text); }
 .rc-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; margin-bottom: 1.25rem; background: rgba(254,107,65,0.08); }
 .rc-icon.pink { background: rgba(224,154,194,0.12); }
 .rc-icon.deep { background: rgba(54,10,5,0.06); }
 .research-card h3 { font-family: var(--sans); font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; line-height: 1.3; }
-.research-card p { font-size: 0.82rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
+.research-card p { font-size: 0.82rem; color: rgba(54,10,5,0.6); line-height: 1.6; }
 
 /* COMMUNITY */
 .section-community { padding: 7rem 0; background: var(--deep); color: var(--cream); position: relative; overflow: hidden; }
@@ -361,7 +366,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .section-community .community-feature:hover { background: rgba(244,242,234,0.04); }
 .section-community .cf-icon { background: rgba(254,107,65,0.12); }
 .section-community .cf-icon.pink { background: rgba(224,154,194,0.12); }
-.section-community .btn-primary { background: var(--coral); }
+.section-community .btn-primary { background: var(--coral-btn); }
 .community-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .community-features { display: grid; gap: 1.25rem; }
 .community-feature { display: flex; gap: 1rem; align-items: flex-start; padding: 1.25rem; border-radius: 16px; transition: background 0.2s; }
@@ -369,7 +374,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .cf-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; background: rgba(254,107,65,0.08); }
 .cf-icon.pink { background: rgba(224,154,194,0.12); }
 .community-feature h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.25rem; color: var(--deep); }
-.community-feature p { font-size: 0.85rem; color: rgba(54,10,5,0.55); line-height: 1.6; }
+.community-feature p { font-size: 0.85rem; color: rgba(54,10,5,0.6); line-height: 1.6; }
 .community-visual { position: relative; }
 .community-card-main { background: rgba(244,242,234,0.06); border: 1px solid rgba(244,242,234,0.08); border-left: 3px solid var(--coral); color: var(--cream); border-radius: 24px; padding: 3rem; position: relative; overflow: hidden; }
 .community-card-main::before { content: '\201C'; font-family: var(--serif); font-size: 8rem; position: absolute; top: -0.5rem; left: 1.5rem; color: rgba(254,107,65,0.15); line-height: 1; }
@@ -377,7 +382,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .community-card-main.pink-accent::before { color: rgba(224,154,194,0.2); }
 .community-card-main blockquote { font-family: var(--sans); font-size: 1.2rem; line-height: 1.5; margin-bottom: 1.5rem; position: relative; z-index: 1; font-style: italic; font-weight: 300; }
 .community-card-main .attribution { font-family: var(--sans); font-size: 0.85rem; color: rgba(244,242,234,0.5); position: relative; z-index: 1; }
-.community-count { position: absolute; bottom: -15px; right: 30px; background: var(--coral); color: white; border-radius: 16px; padding: 1.25rem 1.75rem; box-shadow: 0 8px 30px rgba(254,107,65,0.3); text-align: center; }
+.community-count { position: absolute; bottom: -15px; right: 30px; background: var(--coral-btn); color: white; border-radius: 16px; padding: 1.25rem 1.75rem; box-shadow: 0 8px 30px rgba(254,107,65,0.3); text-align: center; }
 .community-count .val { font-family: var(--serif); font-size: 1.8rem; display: block; line-height: 1; }
 .community-count .lbl { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.85; margin-top: 0.2rem; font-weight: 500; }
 
@@ -403,7 +408,7 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .promo-testimonial blockquote {
   font-size: 0.88rem;
   font-style: italic;
-  color: rgba(54,10,5,0.5);
+  color: rgba(54,10,5,0.6);
   line-height: 1.65;
 }
 
@@ -439,14 +444,14 @@ footer .nav-logo .logo-img-footer { height: 32px; width: auto; }
 .press-quote-wrap { max-width: 780px; margin: 0 auto; text-align: center; }
 .press-quote-mark { font-family: var(--serif); font-size: 5rem; color: var(--coral); line-height: 0.7; margin-bottom: 1.25rem; display: block; opacity: 0.5; }
 .press-pull-quote { font-family: var(--serif); font-size: clamp(1.5rem, 2.5vw, 2.1rem); line-height: 1.2; color: var(--deep); text-transform: uppercase; letter-spacing: 0.02em; margin-bottom: 1.5rem; font-style: normal; }
-.press-attribution { font-size: 0.85rem; color: rgba(54,10,5,0.5); margin-bottom: 2.5rem; }
-.press-source-link { color: var(--coral); text-decoration: none; font-weight: 600; }
+.press-attribution { font-size: 0.85rem; color: rgba(54,10,5,0.6); margin-bottom: 2.5rem; }
+.press-source-link { color: var(--coral-text); text-decoration: none; font-weight: 600; }
 .press-source-link:hover { text-decoration: underline; }
 .press-divider { width: 60px; height: 2px; background: rgba(54,10,5,0.1); margin: 0 auto 2.5rem; }
 .press-outlets-row { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
-.press-outlets-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.35); font-weight: 700; }
+.press-outlets-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.6); font-weight: 700; }
 .press-outlet-names { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
-.press-outlet-names span { font-size: 0.85rem; font-weight: 600; color: rgba(54,10,5,0.4); }
+.press-outlet-names span { font-size: 0.85rem; font-weight: 600; color: rgba(54,10,5,0.6); }
 
 /* CTA */
 .section-cta { padding: 8rem 0; text-align: center; position: relative; overflow: hidden; }
@@ -465,7 +470,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 .footer-col a:hover { color: var(--coral); }
 .footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
 .footer-social { display: flex; gap: 1rem; }
-.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
+.footer-social a { color: rgba(244,242,234,0.55); text-decoration: none; transition: color 0.2s; }
 .footer-social a:hover { color: var(--coral); }
 
 /* RESPONSIVE */
@@ -495,6 +500,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .hero-stats { flex-direction: column; gap: 1.5rem; }
   .nav-links { display: none; }
+  .nav-links.show{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--cream);padding:1rem 2rem;gap:.5rem;box-shadow:0 8px 30px rgba(32,6,3,0.1);}
   .nav-toggle { display: block; }
   .email-form { flex-direction: column; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
@@ -533,7 +539,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 .lizbot-avatar img { width: 100%; height: 100%; object-fit: cover; }
 .lizbot-chat-header .bot-name { font-weight: 600; font-size: 0.95rem; }
 .lizbot-chat-header .bot-status { font-size: 0.75rem; color: rgba(244,242,234,0.5); display: flex; align-items: center; gap: 0.35rem; }
-.lizbot-chat-header .bot-status .online-dot { width: 6px; height: 6px; border-radius: 50%; background: #2ea043; }
+.lizbot-chat-header .bot-status .online-dot { width: 6px; height: 6px; border-radius: 50%; background: #1F7A33; }
 .lizbot-chat-body { padding: 1.5rem; height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem; }
 .chat-msg {
   max-width: 85%; padding: 1rem 1.25rem; border-radius: 18px; font-size: 0.88rem; line-height: 1.6;
@@ -544,7 +550,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
   border-bottom-left-radius: 6px; box-shadow: 0 2px 8px rgba(32,6,3,0.04);
 }
 .chat-msg.user {
-  background: var(--coral); color: white; align-self: flex-end;
+  background: var(--coral-btn); color: white; align-self: flex-end;
   border-bottom-right-radius: 6px;
 }
 .chat-msg:nth-child(1) { animation-delay: 0.2s; }
@@ -560,13 +566,13 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
   flex: 1; border: none; outline: none; font-family: var(--sans); font-size: 0.88rem;
   color: var(--brown); background: transparent;
 }
-.lizbot-chat-input input::placeholder { color: rgba(54,10,5,0.3); }
+.lizbot-chat-input input::placeholder { color: rgba(54,10,5,0.6); }
 .lizbot-chat-input button {
-  background: var(--coral); color: white; border: none; border-radius: 50%;
+  background: var(--coral-btn); color: white; border: none; border-radius: 50%;
   width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
   cursor: pointer; font-size: 1.1rem; transition: background 0.2s;
 }
-.lizbot-chat-input button:hover { background: #e55e38; }
+.lizbot-chat-input button:hover { background: var(--coral-btn-hover); }
 .lizbot-chat-input button:disabled { opacity: 0.5; cursor: not-allowed; }
 .lizbot-chat-input input:disabled { opacity: 0.7; }
 .typing-indicator { display: flex; gap: 0.35rem; padding: 0.75rem 1rem !important; }
@@ -586,20 +592,28 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
   border: 1px solid rgba(54,10,5,0.12); background: white;
   color: var(--brown); cursor: pointer; transition: all 0.2s; font-family: var(--sans);
 }
-.lizbot-suggestion:hover { background: var(--coral); color: white; border-color: var(--coral); }
+.lizbot-suggestion:hover { background: var(--coral-btn); color: white; border-color: var(--coral-btn); }
 .lizbot-topics { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem; margin-bottom: 1.75rem; }
 .lizbot-topic { font-size: 0.8rem; padding: 0.45rem 1rem; border-radius: 100px; background: rgba(254,107,65,0.06); border: 1px solid rgba(254,107,65,0.15); color: var(--brown); font-weight: 500; }
 .lizbot-powered {
-  font-size: 0.7rem; color: rgba(54,10,5,0.35); margin-top: 0;
+  font-size: 0.7rem; color: rgba(54,10,5,0.6); margin-top: 0;
   display: flex; align-items: center; gap: 0.35rem;
 }
 
 /* SCROLL ANIMATIONS */
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ACCESSIBILITY */
+.skip-link{position:absolute;left:-999px;top:0;background:var(--deep);color:var(--cream);padding:.6rem 1rem;z-index:2000;}
+.skip-link:focus{left:0;}
+:focus-visible{outline:2px solid var(--deep);outline-offset:2px;}
+.email-form input:focus,.lizbot-chat-input input:focus{outline:2px solid var(--deep);outline-offset:1px;}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}.reveal{opacity:1!important;transform:none!important;}}
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
 <div class="gradient-bar"></div>
 <div class="announcement-bar" id="announcementBar">
@@ -614,20 +628,23 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     <a href="index.html" class="nav-logo">
       <img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C — return to homepage">
     </a>
-    <ul class="nav-links">
+    <ul class="nav-links" id="navLinks">
       <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
       <li><a href="community.html">Community</a></li>
       <li><a href="going-solo.html">Going Solo</a></li>
       <li><a href="coaching.html">Coaching</a></li>
       <li><a href="press.html">Research &amp; Press</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="members.html" style="color:#B74D2F; font-weight:600; display:inline-flex; align-items:center; gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B74D2F" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12" r="4.5"/><path d="M12.5 12h9M18 12v4M21.5 12v3"/></svg>Members</a></li>
       <li><a href="community.html" class="nav-cta">Join the Community</a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Menu" onclick="document.querySelector('.nav-links').classList.toggle('show')">
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
+
+<main id="main">
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -686,13 +703,13 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
         <div style="margin-top:1.5rem;">
           <a href="https://newsletter.projectc.biz" target="_blank" class="btn-primary" aria-label="Subscribe free to the Project C newsletter">Subscribe Free &rarr;</a>
         </div>
-        <p style="font-size:0.75rem; color:rgba(54,10,5,0.4); margin-top:0.75rem;">Join thousands of journalists, media leaders, and creators.</p>
+        <p style="font-size:0.75rem; color:rgba(54,10,5,0.6); margin-top:0.75rem;">Join thousands of journalists, media leaders, and creators.</p>
       </div>
       <div class="newsletter-stack reveal" id="newsletterCards">
         <!-- These cards will be dynamically replaced by beehiiv RSS feed content -->
-        <div class="nl-card"><div class="nl-card-date">Latest Issue</div><h4>Loading latest issues...</h4><p>Fetching the newest content from the Project C newsletter.</p></div>
-        <div class="nl-card"><div class="nl-card-date">Recent</div><h4>&nbsp;</h4><p>&nbsp;</p></div>
-        <div class="nl-card"><div class="nl-card-date">Recent</div><h4>&nbsp;</h4><p>&nbsp;</p></div>
+        <div class="nl-card"><div class="nl-card-date">Latest Issue</div><h3>Loading latest issues...</h3><p>Fetching the newest content from the Project C newsletter.</p></div>
+        <div class="nl-card"><div class="nl-card-date">Recent</div><h3>&nbsp;</h3><p>&nbsp;</p></div>
+        <div class="nl-card"><div class="nl-card-date">Recent</div><h3>&nbsp;</h3><p>&nbsp;</p></div>
       </div>
     </div>
   </div>
@@ -722,7 +739,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
         <div class="atlas-placeholder" style="display:none;">&#127758;<span>Add atlas-screenshot.png</span></div>
       </div>
     </div>
-    <p class="partnerships-label reveal">The Top 50 Creator-Model Journalists &middot; Six active research partnerships with leading journalism institutions — <a href="press.html" style="color:var(--coral); font-weight:600; text-decoration:none;">See all research &rarr;</a></p>
+    <p class="partnerships-label reveal">The Top 50 Creator-Model Journalists &middot; Six active research partnerships with leading journalism institutions — <a href="press.html" style="color:var(--coral-text); font-weight:600; text-decoration:none;">See all research &rarr;</a></p>
   </div>
 </section>
 
@@ -767,8 +784,8 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
           <p class="section-desc" style="margin-bottom:2rem;">An 8-week intensive for journalists exploring the creator model. From content strategy to monetization, everything you need to build a sustainable, independent venture.</p>
           <a href="going-solo.html" class="btn-primary">Learn More &amp; Apply &rarr;</a>
           <div style="margin-top:1.25rem; padding-top:1.25rem; border-top:1px solid rgba(54,10,5,0.08);">
-            <p style="font-size:0.75rem; color:rgba(54,10,5,0.45); text-transform:uppercase; letter-spacing:0.08em; font-weight:600; margin-bottom:0.35rem;">Also available for organizations</p>
-            <a href="going-solo.html#organizations" style="font-size:0.85rem; color:var(--brown); text-decoration:none; font-weight:500;">Journalism schools, foundations &amp; private cohorts <span style="color:var(--coral);">→</span></a>
+            <p style="font-size:0.75rem; color:rgba(54,10,5,0.6); text-transform:uppercase; letter-spacing:0.08em; font-weight:600; margin-bottom:0.35rem;">Also available for organizations</p>
+            <a href="going-solo.html#organizations" style="font-size:0.85rem; color:var(--brown); text-decoration:none; font-weight:500;">Journalism schools, foundations &amp; private cohorts <span style="color:var(--coral-text);">→</span></a>
           </div>
         </div>
         <div class="goingsolo-visual">
@@ -839,7 +856,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
             <div class="bot-status"><span class="online-dot"></span> Ask me anything about creator journalism</div>
           </div>
         </div>
-        <div class="lizbot-chat-body" id="lizbotChat">
+        <div class="lizbot-chat-body" id="lizbotChat" role="log" aria-live="polite">
           <div class="chat-msg bot" id="lizbotWelcome">Hey! I'm LizBot — an AI trained on Liz's newsletters, published interviews, research reports, and conference talks about creator journalism. Ask me anything about going independent, revenue models, the Atlas findings, or the creator journalism landscape. What's on your mind?</div>
         </div>
         <div class="lizbot-chips" role="group" aria-label="Suggested questions">
@@ -888,7 +905,7 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 <section class="section-cta" id="subscribe">
   <div class="container">
     <div class="cta-content reveal">
-      <h2 class="section-title">Journalism isn't dying.<br>It's going <span style="color:var(--coral);">independent.</span></h2>
+      <h2 class="section-title">Journalism isn't dying.<br>It's going <span style="color:var(--coral-display);">independent.</span></h2>
       <img src="Project-C_Lockup_color.png" alt="Project C" style="width:220px; height:auto; margin:2rem auto; display:block;">
       <p class="section-desc">The research, the community, the training — everything you need to build something that lasts.</p>
       <div class="cta-actions">
@@ -898,6 +915,8 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
     </div>
   </div>
 </section>
+
+</main>
 
 <!-- FOOTER -->
 <footer>
@@ -947,9 +966,9 @@ async function loadNewsletterFeed() {
   if (!BEEHIIV_RSS_URL) {
     // Show helpful fallback when no RSS URL is configured
     container.innerHTML = `
-      <div class="nl-card"><div class="nl-card-date">Setup Required</div><h4>Connect your beehiiv RSS feed</h4><p>To show your latest issues dynamically, paste your beehiiv RSS feed URL into the BEEHIIV_RSS_URL variable in the page script. Find it in beehiiv → Settings → RSS.</p></div>
-      <div class="nl-card"><div class="nl-card-date">How It Works</div><h4>Automatic content updates</h4><p>Once connected, the three most recent newsletter issues will appear here automatically every time a visitor loads the page. No manual updates needed.</p></div>
-      <div class="nl-card"><div class="nl-card-date">Tip</div><h4>beehiiv RSS is available on Max &amp; Enterprise plans</h4><p>If you don't see RSS settings in beehiiv, you may need to upgrade your plan. Alternatively, you can manually update the newsletter cards in the HTML.</p></div>
+      <div class="nl-card"><div class="nl-card-date">Setup Required</div><h3>Connect your beehiiv RSS feed</h3><p>To show your latest issues dynamically, paste your beehiiv RSS feed URL into the BEEHIIV_RSS_URL variable in the page script. Find it in beehiiv → Settings → RSS.</p></div>
+      <div class="nl-card"><div class="nl-card-date">How It Works</div><h3>Automatic content updates</h3><p>Once connected, the three most recent newsletter issues will appear here automatically every time a visitor loads the page. No manual updates needed.</p></div>
+      <div class="nl-card"><div class="nl-card-date">Tip</div><h3>beehiiv RSS is available on Max &amp; Enterprise plans</h3><p>If you don't see RSS settings in beehiiv, you may need to upgrade your plan. Alternatively, you can manually update the newsletter cards in the HTML.</p></div>
     `;
     return;
   }
@@ -1002,7 +1021,7 @@ async function loadNewsletterFeed() {
       const dateDiv = document.createElement('div');
       dateDiv.className = 'nl-card-date';
       dateDiv.textContent = labels[i] + ' \u00B7 ' + dateLabel;
-      const h4 = document.createElement('h4');
+      const h4 = document.createElement('h3');
       h4.textContent = title;
       const p = document.createElement('p');
       p.textContent = truncDesc;
@@ -1015,9 +1034,9 @@ async function loadNewsletterFeed() {
     console.warn('Newsletter RSS feed error:', err);
     // Fallback: link directly to the newsletter so cards aren't dead ends
     container.innerHTML = `
-      <a href="https://newsletter.projectc.biz" target="_blank" class="nl-card" style="text-decoration:none; color:inherit;"><div class="nl-card-date">Latest Issue</div><h4>Read the latest from Project C &rarr;</h4><p>Weekly analysis of trends, strategies, and stories shaping the creator journalism movement.</p></a>
-      <a href="https://newsletter.projectc.biz" target="_blank" class="nl-card" style="text-decoration:none; color:inherit;"><div class="nl-card-date">Subscribe</div><h4>Never miss an issue &rarr;</h4><p>Join thousands of journalists, media leaders, and creators getting the inside track on independent journalism.</p></a>
-      <a href="https://newsletter.projectc.biz" target="_blank" class="nl-card" style="text-decoration:none; color:inherit;"><div class="nl-card-date">Archive</div><h4>Browse past issues &rarr;</h4><p>Dive into the full archive for deep dives, interviews, and industry analysis.</p></a>
+      <a href="https://newsletter.projectc.biz" target="_blank" class="nl-card" style="text-decoration:none; color:inherit;"><div class="nl-card-date">Latest Issue</div><h3>Read the latest from Project C &rarr;</h3><p>Weekly analysis of trends, strategies, and stories shaping the creator journalism movement.</p></a>
+      <a href="https://newsletter.projectc.biz" target="_blank" class="nl-card" style="text-decoration:none; color:inherit;"><div class="nl-card-date">Subscribe</div><h3>Never miss an issue &rarr;</h3><p>Join thousands of journalists, media leaders, and creators getting the inside track on independent journalism.</p></a>
+      <a href="https://newsletter.projectc.biz" target="_blank" class="nl-card" style="text-decoration:none; color:inherit;"><div class="nl-card-date">Archive</div><h3>Browse past issues &rarr;</h3><p>Dive into the full archive for deep dives, interviews, and industry analysis.</p></a>
     `;
   }
 }
@@ -1082,7 +1101,7 @@ loadNewsletterFeed();
     gallery.addEventListener('mouseenter', () => { paused = true; });
     gallery.addEventListener('mouseleave', () => { paused = false; });
   }
-  setInterval(() => { if (!paused) cycleFace(); }, 2500);
+  if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){ setInterval(() => { if (!paused) cycleFace(); }, 2500); }
 })();
 
 // ── LIZBOT LIVE CHAT ──

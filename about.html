@@ -4,459 +4,334 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About — Project C</title>
-<meta name="description" content="What is Project C? The origin story, the team, and the mission behind the home of creator journalism. Founded by Liz Kelly Nelson.">
-<link rel="icon" type="image/png" href="Project-C_Logo_color.png">
-<link rel="apple-touch-icon" href="Project-C_Logo_color.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="description" content="The origin story, the founder, and the mission behind Project C, the home of creator journalism. Founded by Liz Kelly Nelson.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://projectc.biz/about">
+<meta property="og:title" content="About — Project C">
+<meta property="og:description" content="The origin story, the founder, and the mission behind the home of creator journalism.">
+<meta property="og:image" content="https://projectc.biz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://projectc.biz/og-image.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --cream: #F4F2EA; --coral: #FE6B41; --pink: #E09AC2;
-  --brown: #360A05; --deep: #200603; --cream-dark: #EBE8DE;
-  --coral-btn:#C15131; --coral-btn-hover:#A8442A; --coral-text:#B74D2F; --coral-display:#E5603A; --pink-text:#8A3A5E;
-  --serif: 'Anton', 'Impact', sans-serif;
-  --sans: 'Inter', -apple-system, sans-serif;
-}
-:focus-visible{outline:2px solid var(--deep);outline-offset:2px;}
-.skip-link{position:absolute;left:-999px;top:0;background:var(--deep);color:var(--cream);padding:.6rem 1rem;z-index:2000;}
-.skip-link:focus{left:0;}
-@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important;}.reveal{opacity:1!important;transform:none!important;}}
-html { scroll-behavior: smooth; font-size: 16px; }
-body { font-family: var(--sans); background: var(--cream); color: var(--brown); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-.container-narrow { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+/* ---- About-page-specific layout (uses shared tokens from projectc-ds.css) ---- */
+.ax-head { border-bottom: var(--rule); }
+.ax-head-inner { max-width: var(--maxw); margin: 0 auto; padding: clamp(2.5rem,4.5vw,4rem) 2rem clamp(2rem,3.5vw,3rem); }
+.ax-head h1 { margin: 0.4rem 0 1rem; max-width: 18ch; }
+.ax-head .lede { max-width: 60ch; }
 
-/* GRADIENT BAR */
-.gradient-bar { height: 4px; background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral), var(--pink)); background-size: 300% 100%; animation: gradientSlide 8s ease infinite; }
-@keyframes gradientSlide { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.ax-narrow { max-width: 840px; margin: 0 auto; padding: clamp(3rem,5vw,4.5rem) 2rem; }
+.ax-narrow .lead { font-size: 1.35rem; line-height: 1.6; color: var(--ink); margin: 0.6rem 0 1.6rem; font-weight: 500; }
+.ax-narrow p { font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.3rem; }
+.ax-pullquote { font-family: var(--serif); font-style: italic; font-size: clamp(1.3rem,2.4vw,1.7rem); line-height: 1.42; color: var(--ink); border-left: 4px solid var(--coral); padding: 0.4rem 0 0.4rem 1.6rem; margin: 2.2rem 0; }
 
-/* NAV */
-/* ANNOUNCEMENT BAR */
-.announcement-bar {
-  position: fixed;
-  top: 4px;
-  left: 0; right: 0;
-  z-index: 1001;
-  background: var(--brown);
-  color: var(--cream);
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  padding: 0 3rem;
-}
-.announcement-bar a {
-  color: var(--coral);
-  text-decoration: none;
-  font-weight: 600;
-  margin-left: 0.25em;
-}
-.announcement-bar a:hover { text-decoration: underline; }
-.announcement-bar .ab-dismiss {
-  position: absolute; right: 1.25rem;
-  background: none; border: none; color: rgba(244,242,234,0.5);
-  cursor: pointer; font-size: 0.9rem;
-  padding: 0.4rem 0.5rem; line-height: 1;
-  transition: color 0.2s ease;
-}
-.announcement-bar .ab-dismiss:hover { color: var(--cream); }
+.ax-founder { border-top: var(--rule); border-bottom: var(--rule); }
+.ax-founder-grid { display: grid; grid-template-columns: 430px 1fr; }
+.ax-founder-grid .photo { border-right: var(--rule); overflow: hidden; background: var(--porcelain); }
+.ax-founder-grid .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; min-height: 520px; }
+.ax-founder-grid .bio { padding: clamp(2.5rem,4vw,3.5rem) 2.5rem; }
+.ax-name { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.2rem,4vw,3rem); line-height: 1; margin: 0.5rem 0 0.3rem; color: var(--ink); }
+.ax-role { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--coral-deep); font-weight: 800; margin-bottom: 1.5rem; }
+.ax-founder-grid .bio p { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.1rem; }
+.ax-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.6rem; padding-top: 1.6rem; border-top: var(--rule-thin); }
+.ax-badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.42rem 0.8rem; border: 1.5px solid var(--ink); color: var(--ink); }
 
-nav { position: fixed; top: 48px; left: 0; right: 0; z-index: 1000; background: rgba(244,242,234,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(54,10,5,0.06); transition: all 0.3s ease; }
-nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
-.nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 72px; }
-.nav-logo { text-decoration: none; display: flex; align-items: center; }
-.nav-logo .logo-img { height: 48px; width: auto; }
-.nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
-.nav-links a { color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease; }
-.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral-text); }
-.nav-cta { background: var(--coral-btn) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
-.nav-cta:hover { background: var(--coral-btn-hover) !important; }
-.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.5rem;}
-.nav-toggle span{display:block;width:24px;height:2px;background:var(--brown);margin:5px 0;}
+.ax-team { background: #EDEEF1; border-bottom: var(--rule); }
+.ax-person { display: grid; grid-template-columns: 190px 1fr; max-width: 820px; margin: 0 auto; border: var(--rule); background: var(--white); }
+.ax-person .p-photo { border-right: var(--rule); overflow: hidden; }
+.ax-person .p-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; aspect-ratio: 3/4; }
+.ax-person .p-body { padding: 1.9rem; }
+.ax-person .p-body h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.5rem; line-height: 1; margin-bottom: 0.35rem; }
+.ax-person .p-role { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--coral-deep); font-weight: 800; margin-bottom: 0.9rem; }
+.ax-person .p-body p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
 
-/* SHARED */
-.section-eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--coral-text); font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-.section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--coral); }
-.section-title { font-family: var(--serif); font-size: clamp(2rem,3.5vw,3rem); line-height: 1.05; color: var(--deep); letter-spacing: -0.01em; margin-bottom: 1.25rem; text-transform: uppercase; }
-.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral-btn); color: white; padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.25s ease; border: none; cursor: pointer; }
-.btn-primary:hover { background: var(--coral-btn-hover); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
-.btn-secondary { display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--brown); padding: 1rem 2rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.95rem; border: 1.5px solid rgba(54,10,5,0.2); transition: all 0.25s ease; }
-.btn-secondary:hover { border-color: var(--brown); background: var(--brown); color: var(--cream); }
+.ax-collabs { border-bottom: var(--rule); text-align: center; padding: 2.5rem 2rem; }
+.ax-collabs .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 700; margin-bottom: 1.4rem; }
+.ax-collab-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1rem 2.5rem; max-width: 960px; margin: 0 auto; }
+.ax-collab-row a { font-size: 0.95rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+.ax-collab-row a:hover { color: var(--coral-deep); }
 
-/* ===== HERO — full-bleed dark with photo ===== */
-.about-hero {
-  background: var(--deep); color: var(--cream);
-  padding: 12rem 0 6rem; position: relative; overflow: hidden;
-}
-.about-hero::after {
-  content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 45%;
-  background: url('liz-headshot.jpg') center top / cover no-repeat;
-  opacity: 0.35;
-  mask-image: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.6), transparent);
-}
-.about-hero-content { position: relative; z-index: 2; max-width: 640px; }
-.about-hero .section-eyebrow { color: var(--coral); }
-.about-hero .section-eyebrow::before { background: var(--coral); }
-.about-hero h1 {
-  font-family: var(--serif); font-size: clamp(3rem,6vw,4.5rem);
-  text-transform: uppercase; line-height: 1.0; margin-bottom: 1.5rem; color: var(--cream);
-}
-.about-hero h1 em { font-style: normal; color: var(--coral); }
-.about-hero p { font-size: 1.15rem; color: rgba(244,242,234,0.7); line-height: 1.8; max-width: 540px; }
+.ax-cmyk { background: var(--ink); color: var(--porcelain); border-bottom: var(--rule); }
+.ax-cmyk-grid { display: grid; grid-template-columns: 320px 1fr; max-width: var(--maxw); margin: 0 auto; align-items: center; }
+.ax-cmyk-mark { padding: 2.5rem; display: flex; align-items: center; justify-content: center; border-right: var(--rule); }
+.ax-cmyk-mark svg { width: 210px; height: 210px; }
+.ax-cmyk-mark .spin { transform-origin: center; transform-box: view-box; animation: spin 34s linear infinite; }
+.ax-cmyk-body { padding: clamp(2.5rem,4vw,3.5rem); }
+.ax-cmyk-body h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.8rem,3vw,2.4rem); line-height: 1.02; color: var(--porcelain); margin-bottom: 1.1rem; }
+.ax-cmyk-body p { font-size: 1.02rem; color: rgba(245,246,248,0.72); line-height: 1.8; }
+.ax-cmyk-body .k { color: var(--coral); font-style: normal; }
 
-/* ===== ORIGIN — editorial narrative ===== */
-.section-origin { padding: 5rem 0; }
-.origin-lead { font-size: 1.3rem; color: var(--deep); line-height: 1.7; margin-bottom: 2rem; font-weight: 400; }
-.origin-body p { font-size: 1.05rem; color: rgba(54,10,5,0.65); line-height: 1.85; margin-bottom: 1.5rem; }
-.origin-pullquote {
-  border-left: 4px solid var(--coral); padding: 1.5rem 0 1.5rem 2rem;
-  margin: 2.5rem 0; font-size: 1.25rem; font-style: italic; font-weight: 300;
-  color: var(--deep); line-height: 1.6;
-}
+.ax-contact { padding: clamp(3rem,5vw,4.5rem) 2rem; text-align: center; border-bottom: var(--rule); }
+.ax-contact .eyebrow { justify-content: center; }
+.ax-contact h2 { margin-bottom: 1rem; }
+.ax-contact p { font-size: 1.05rem; color: var(--muted); max-width: 520px; margin: 0 auto 2rem; line-height: 1.7; }
+.ax-contact .row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
-/* ===== FOUNDER — big photo + bio ===== */
-.section-founder { padding: 5rem 0; background: white; }
-.founder-grid { display: grid; grid-template-columns: 400px 1fr; gap: 4rem; align-items: start; }
-.founder-photo { border-radius: 24px; overflow: hidden; position: sticky; top: 100px; }
-.founder-photo img { width: 100%; display: block; }
-.founder-content .section-eyebrow { margin-bottom: 0.5rem; }
-.founder-name { font-family: var(--serif); font-size: 2.8rem; text-transform: uppercase; color: var(--deep); line-height: 1.0; margin-bottom: 0.5rem; }
-.founder-role-label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--coral-text); font-weight: 700; margin-bottom: 2rem; }
-.founder-content p { font-size: 1rem; color: rgba(54,10,5,0.65); line-height: 1.8; margin-bottom: 1.25rem; }
-.founder-badges { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(54,10,5,0.08); }
-.founder-badge { font-size: 0.75rem; font-weight: 500; padding: 0.4rem 0.9rem; border-radius: 100px; background: rgba(254,107,65,0.06); border: 1px solid rgba(254,107,65,0.12); color: var(--coral-text); }
-
-/* ===== TEAM — horizontal cards on dark ===== */
-.section-team { padding: 5rem 0; background: var(--deep); color: var(--cream); }
-.team-intro { text-align: center; max-width: 640px; margin: 0 auto 3rem; }
-.team-intro .section-eyebrow { justify-content: center; color: var(--coral); }
-.team-intro .section-eyebrow::before { background: var(--coral); }
-.team-intro .section-title { color: var(--cream); }
-.team-intro p { font-size: 1rem; color: rgba(244,242,234,0.55); line-height: 1.7; }
-.team-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-.t-card {
-  background: rgba(244,242,234,0.04); border: 1px solid rgba(244,242,234,0.08);
-  border-radius: 20px; padding: 2rem 1.5rem; text-align: center;
-  transition: all 0.3s ease;
-}
-.t-card:hover { background: rgba(244,242,234,0.08); border-color: rgba(244,242,234,0.15); transform: translateY(-4px); }
-.t-card-photo { width: 80px; height: 80px; border-radius: 50%; overflow: hidden; margin: 0 auto 1.25rem; border: 2px solid rgba(244,242,234,0.15); }
-.t-card-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
-.t-card h3 { font-family: var(--sans); font-size: 1rem; font-weight: 700; color: var(--cream); margin-bottom: 0.25rem; }
-.t-card .t-role { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--coral); font-weight: 600; margin-bottom: 1rem; }
-.t-card p { font-size: 0.85rem; color: rgba(244,242,234,0.55); line-height: 1.6; }
-
-/* ===== COLLABORATORS ===== */
-.section-collabs { padding: 3rem 0; border-top: 1px solid rgba(54,10,5,0.06); border-bottom: 1px solid rgba(54,10,5,0.06); }
-.collabs-inner { text-align: center; }
-.collabs-label { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(54,10,5,0.6); font-weight: 600; margin-bottom: 1.25rem; }
-.collab-logos { display: flex; align-items: center; justify-content: center; gap: 3rem; flex-wrap: wrap; }
-.collab-logos a { font-size: 1rem; font-weight: 600; color: var(--brown); white-space: nowrap; text-decoration: none; opacity: 1; transition: opacity 0.2s; }
-.collab-logos a:hover { opacity: 0.7; }
-
-/* ===== CONTACT ===== */
-.section-contact { padding: 5rem 0; text-align: center; }
-.section-contact .section-eyebrow { justify-content: center; }
-.section-contact p { font-size: 1.05rem; color: rgba(54,10,5,0.6); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
-.contact-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-/* ===== CMYK — subtle footer-like section ===== */
-.section-cmyk { padding: 4rem 0; background: var(--cream-dark); }
-.cmyk-inner { display: flex; align-items: center; gap: 2.5rem; max-width: 760px; margin: 0 auto; }
-.cmyk-logo { flex-shrink: 0; }
-.cmyk-logo img { width: 64px; height: auto; }
-.cmyk-text h2 { font-family: var(--sans); font-size: 0.95rem; font-weight: 700; color: var(--deep); margin-bottom: 0.5rem; }
-.cmyk-text p { font-size: 0.85rem; color: rgba(54,10,5,0.6); line-height: 1.7; }
-
-/* FOOTER */
-.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
-footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 2rem; }
-footer .nav-logo { text-decoration: none; display: flex; align-items: center; color: var(--cream); margin-bottom: 1rem; }
-footer .logo-img-footer { height: 32px; width: auto; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-.footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
-.footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
-.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.5); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
-.footer-col a:hover { color: var(--coral); }
-.footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
-.footer-social { display: flex; gap: 1rem; }
-.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
-.footer-social a:hover { color: var(--coral); }
-
-/* ===== WHAT WE DO ===== */
-.section-what-we-do { padding: 5rem 0; background: var(--cream-dark); }
-.what-we-do-header { text-align: center; max-width: 640px; margin: 0 auto 3rem; }
-.what-we-do-header .section-eyebrow { justify-content: center; }
-.what-we-do-header p { font-size: 1.05rem; color: rgba(54,10,5,0.65); line-height: 1.7; }
-.what-we-do-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
-.wwd-card {
-  background: white; border-radius: 20px; padding: 2rem;
-  border-left: 3px solid var(--coral); text-decoration: none; color: var(--brown);
-  display: block; transition: all 0.3s ease;
-}
-.wwd-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(32,6,3,0.08); }
-.wwd-card h3 { font-family: var(--serif); font-size: 1.2rem; text-transform: uppercase; color: var(--deep); margin-bottom: 0.75rem; }
-.wwd-card p { font-size: 0.85rem; color: rgba(54,10,5,0.6); line-height: 1.6; margin-bottom: 1.25rem; }
-.wwd-link { font-size: 0.8rem; font-weight: 600; color: var(--coral-text); }
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .what-we-do-grid { grid-template-columns: repeat(2, 1fr); }
-  .team-cards { grid-template-columns: repeat(2, 1fr); }
-  .founder-grid { grid-template-columns: 320px 1fr; gap: 3rem; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 768px) {
-  .what-we-do-grid { grid-template-columns: 1fr; }
-  .about-hero { padding: 9rem 0 4rem; }
-  .about-hero::after { width: 100%; opacity: 0.15; }
-  .about-hero h1 { font-size: 2.5rem; }
-  .founder-grid { grid-template-columns: 1fr; }
-  .founder-photo { max-height: 450px; position: static; }
-  .team-cards { grid-template-columns: 1fr; }
-  .cmyk-inner { flex-direction: column; text-align: center; }
-  .nav-links { display: none; }
-  .nav-toggle { display: block; }
-  .nav-links.show { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); padding: 1rem 2rem; gap: .5rem; box-shadow: 0 8px 30px rgba(32,6,3,0.1); }
-  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+@media (max-width: 900px) {
+  .ax-founder-grid { grid-template-columns: 1fr; }
+  .ax-founder-grid .photo { border-right: none; border-bottom: var(--rule); }
+  .ax-founder-grid .photo img { min-height: 0; aspect-ratio: 4/5; }
+  .ax-cmyk-grid { grid-template-columns: 1fr; }
+  .ax-cmyk-mark { border-right: none; border-bottom: var(--rule); }
+  .ax-person { grid-template-columns: 1fr; }
+  .ax-person .p-photo { border-right: none; border-bottom: var(--rule); }
+  .ax-person .p-photo img { aspect-ratio: 16/10; }
 }
 </style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
 
-<div class="gradient-bar"></div>
-<div class="announcement-bar" id="announcementBar">
-  <span>Now open: 1-on-1 coaching with Blair Hickman — spots are limited.<a href="/coaching">Book a discovery call →</a></span>
-  <button class="ab-dismiss" onclick="dismissAnnouncementBar()" aria-label="Dismiss">✕</button>
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<div class="announce" id="announcementBar">
+  <span class="live"><span class="blip"></span>Now open</span>
+  <span>1-on-1 coaching with Blair Hickman. Spots are limited. <a href="coaching.html">Book a discovery call &rarr;</a></span>
+  <button class="ab-x" onclick="document.getElementById('announcementBar').classList.add('hidden')" aria-label="Dismiss">&#10005;</button>
 </div>
 
-<nav id="mainNav">
+<nav class="nav" id="mainNav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C"></a>
+    <a href="index.html" class="nav-logo"><img src="project-c_lockup_color.png" alt="Project C — home"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
       <li><a href="community.html">Community</a></li>
       <li><a href="going-solo.html">Going Solo</a></li>
       <li><a href="coaching.html">Coaching</a></li>
       <li><a href="press.html">Research &amp; Press</a></li>
-      <li><a href="about.html" style="color:var(--coral-text); font-weight:600;">About</a></li>
-      <li><a href="members.html" style="color:#B74D2F; font-weight:600; display:inline-flex; align-items:center; gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B74D2F" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12" r="4.5"/><path d="M12.5 12h9M18 12v4M21.5 12v3"/></svg>Members</a></li>
-      <li><a href="community.html" class="nav-cta">Join the Community</a></li>
+      <li><a href="about.html" aria-current="page">About</a></li>
+      <li><a href="members.html" class="nav-member">Member Login</a></li>
+      <li><a href="community.html" class="nav-cta">Join &rarr;</a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
 <main id="main">
 
-<!-- HERO -->
-<section class="about-hero">
-  <div class="container">
-    <div class="about-hero-content">
-      <div class="section-eyebrow">About Project C</div>
-      <h1>Journalism isn't dying. It's going <em>independent.</em></h1>
-      <p>Project C is the research hub, community, and strategic home for journalists building sustainable, audience-driven media ventures outside traditional institutions.</p>
-    </div>
-  </div>
-</section>
-
-<!-- WHAT WE DO -->
-<section class="section-what-we-do">
-  <div class="container">
-    <div class="what-we-do-header">
-      <div class="section-eyebrow">What We Do</div>
-      <h2 class="section-title">A full ecosystem for the creator journalism movement</h2>
-      <p>Project C isn't just a newsletter. It's research, community, education, and tools — everything journalists need to go independent and thrive.</p>
-    </div>
-    <div class="what-we-do-grid">
-      <a href="https://newsletter.projectc.biz" target="_blank" class="wwd-card">
-        <h3>Newsletter</h3>
-        <p>Weekly analysis of trends, revenue models, platform shifts, and interviews with the journalists leading the creator journalism revolution.</p>
-        <span class="wwd-link">Read Latest &rarr;</span>
-      </a>
-      <a href="press.html" class="wwd-card">
-        <h3>Research &amp; Data</h3>
-        <p>Original research including The Independent Journalism Atlas — mapping the full landscape of creator journalism in America across platforms, revenue models, and beats.</p>
-        <span class="wwd-link">Explore Research &rarr;</span>
-      </a>
-      <a href="community.html" class="wwd-card">
-        <h3>Community</h3>
-        <p>A private network of 200+ innovative creator journalists sharing strategies, wins, and hard-won lessons. Slack, events, coaching, and more.</p>
-        <span class="wwd-link">Join Us &rarr;</span>
-      </a>
-      <a href="going-solo.html" class="wwd-card">
-        <h3>Going Solo</h3>
-        <p>An 8-week workshop that equips journalists with the strategy, skills, and confidence to build a sustainable independent venture.</p>
-        <span class="wwd-link">Learn More &rarr;</span>
-      </a>
-    </div>
+<!-- PAGE HEADER -->
+<section class="ax-head">
+  <div class="ax-head-inner">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> About Project C</div>
+    <h1 class="h-display">Building the home for creator journalism.</h1>
+    <p class="lede">What Project C is, why it exists, and the people building it, a research hub, a community, and a strategic home for journalists going independent.</p>
   </div>
 </section>
 
 <!-- ORIGIN STORY -->
-<section class="section-origin">
-  <div class="container-narrow">
-    <p class="origin-lead">The idea for Project C began while Liz Kelly Nelson was at Vox, where she saw firsthand how the news industry was evolving &mdash; sometimes too slowly &mdash; to meet changing audience behaviors.</p>
-    <div class="origin-body">
-      <p>As more people turned to independent journalists on YouTube, TikTok, Substack and other platforms for news, it became clear that the journalism industry wasn't fully embracing this shift. That realization followed her into her time as a Sulzberger Fellow at Columbia Journalism School, where she focused on the challenges and opportunities of independent journalism in the creator economy.</p>
-
-      <div class="origin-pullquote">Journalists are increasingly going solo &mdash; whether by choice or necessity &mdash; yet the industry still lacks dedicated resources to help them build sustainable businesses. Project C was born to fill that gap.</div>
-
-      <p>The traditional media industry is contracting, but journalism itself isn't shrinking &mdash; it's evolving. More people than ever trust individual journalists over institutions, and independent media is proving its ability to thrive. Project C exists to support journalists in this shift, ensuring they have the business acumen, editorial rigor, and audience-building strategies to succeed.</p>
-
-      <p>Through a newsletter, workshops like Going Solo, original research including The Independent Journalism Atlas, and a private community of 200+ creator journalists, Project C provides the insight, resources, and connections that this new generation of journalists needs to build something lasting.</p>
-    </div>
+<section class="sec">
+  <div class="ax-narrow reveal">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Origin</div>
+    <p class="lead">The idea for Project C began while Liz Kelly Nelson was at Vox, where she saw firsthand how the news industry was evolving, sometimes too slowly, to meet changing audience behaviors.</p>
+    <p>As more people turned to independent journalists on YouTube, TikTok, Substack, and other platforms for news, it became clear the journalism industry wasn't fully embracing the shift. That realization followed her into her time as a Sulzberger Fellow at Columbia Journalism School, where she focused on the challenges and opportunities of independent journalism in the creator economy.</p>
+    <div class="ax-pullquote">Journalists are increasingly going solo, whether by choice or necessity, yet the industry still lacks dedicated resources to help them build sustainable businesses. Project C was born to fill that gap.</div>
+    <p>The traditional media industry is contracting, but journalism itself isn't shrinking. It's evolving. More people than ever trust individual journalists over institutions, and independent media is proving its ability to thrive. Project C exists to support journalists through that shift, so they have the business acumen, editorial rigor, and audience-building strategies to succeed.</p>
+    <p>Through the newsletter, workshops like Going Solo, original research and reporting, and a private community of 200+ creator journalists, Project C provides the insight, resources, and connections this new generation of journalists needs to build something lasting.</p>
   </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="sec">
+  <div class="sec-head">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> What We Do</div>
+    <h2 class="h-display">A full ecosystem for the movement</h2>
+    <p class="lede">Project C isn't just a newsletter. It's research, community, education, and tools, everything a journalist needs to go independent and build something that lasts.</p>
+  </div>
+</section>
+<section class="modules reveal">
+  <a class="mod cyan" href="https://newsletter.projectc.biz" target="_blank">
+    <div class="idx">01 / Newsletter</div>
+    <h3>The Newsletter</h3>
+    <p>Weekly analysis of the trends, revenue models, and platform shifts shaping independent journalism, plus interviews with the people doing it.</p>
+    <div class="go">Read the latest &rarr;</div>
+  </a>
+  <a class="mod dark" href="press.html">
+    <div class="idx">02 / Research</div>
+    <h3>Research &amp; Press</h3>
+    <p>Original research and reporting on where independent journalism is heading, in partnership with leading institutions.</p>
+    <div class="go">Explore research &rarr;</div>
+  </a>
+  <a class="mod yellow" href="community.html">
+    <div class="idx">03 / Community</div>
+    <h3>The Community</h3>
+    <p>A private network of 200+ creator journalists trading strategies, wins, and hard-won lessons. By application.</p>
+    <div class="go">Apply to join &rarr;</div>
+  </a>
+  <a class="mod coral" href="going-solo.html">
+    <div class="idx">04 / Education</div>
+    <h3>Going Solo</h3>
+    <p>An 8-week intensive that gives journalists the strategy, skills, and confidence to build a sustainable independent venture.</p>
+    <div class="go">Learn more &rarr;</div>
+  </a>
 </section>
 
 <!-- FOUNDER -->
-<section class="section-founder" id="founder">
-  <div class="container">
-    <div class="founder-grid">
-      <div class="founder-photo">
-        <img src="liz-headshot.jpg" alt="Liz Kelly Nelson, founder of Project C">
-      </div>
-      <div class="founder-content">
-        <div class="section-eyebrow">Meet the Founder</div>
-        <div class="founder-name">Liz Kelly Nelson</div>
-        <div class="founder-role-label">Founder</div>
-        <p>Liz Kelly Nelson is a leader in journalism innovation, dedicated to helping independent journalists and media creators build sustainable careers in a rapidly evolving media landscape. With a background in newsroom leadership, digital media strategy, and creator economy expertise, Liz has worked across the journalism ecosystem &mdash; supporting reporters, advising media startups, and collaborating with major institutions on the future of independent journalism.</p>
-        <p>She developed Project C during her 2024 Sulzberger Fellowship at Columbia University's Graduate School of Journalism, focused on empowering journalists to embrace new models, find sustainable revenue, and create impactful work outside traditional media structures. Alongside Justin Bank and Ryan Kellett, she also co-founded The Independent Journalism Atlas &mdash; a database tracking independent journalism creators across platforms, topics, and geographies.</p>
-        <p>Liz was one of The Washington Post's first bloggers and prior to Project C led teams at Vox, USA Today, Gannett, and AOL. She sits on the Board of Visitors to the John S. Knight Journalism Fellowships at Stanford University and the advisory board for the Beehiiv Media Collective, and is a 2025&ndash;2026 Terker Fellow at George Washington University's School of Media and Public Affairs and a fellow at ASU's Knight Center for the Future of News.</p>
-        <div class="founder-badges">
-          <span class="founder-badge">Sulzberger Fellow, Columbia</span>
-          <span class="founder-badge">Terker Fellow, GW University</span>
-          <span class="founder-badge">Knight Center Fellow, ASU</span>
-          <span class="founder-badge">JSK Board, Stanford</span>
-          <span class="founder-badge">Former: Vox, USA Today, The Washington Post</span>
-        </div>
+<section class="ax-founder" id="founder">
+  <div class="ax-founder-grid">
+    <div class="photo"><img src="liz-headshot.jpg" alt="Liz Kelly Nelson"></div>
+    <div class="bio reveal">
+      <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Meet the Founder</div>
+      <div class="ax-name">Liz Kelly Nelson</div>
+      <div class="ax-role">Founder</div>
+      <p>Liz Kelly Nelson is a leader in journalism innovation, dedicated to helping independent journalists and media creators build sustainable careers in a rapidly evolving media landscape. With a background in newsroom leadership, digital media strategy, and creator-economy expertise, she has worked across the journalism ecosystem, supporting reporters, advising media startups, and collaborating with major institutions on the future of independent journalism.</p>
+      <p>She developed Project C during her 2024 Sulzberger Fellowship at Columbia University's Graduate School of Journalism, focused on empowering journalists to embrace new models, find sustainable revenue, and create impactful work outside traditional media structures.</p>
+      <p>Liz was one of The Washington Post's first bloggers, and prior to Project C she led teams at Vox, USA Today, Gannett, and AOL. She sits on the Board of Visitors to the John S. Knight Journalism Fellowships at Stanford and the advisory board for the Beehiiv Media Collective, and she is a 2025&ndash;2026 Terker Fellow at George Washington University's School of Media and Public Affairs and a fellow at ASU's Knight Center for the Future of News.</p>
+      <div class="ax-badges">
+        <span class="ax-badge">Sulzberger Fellow, Columbia</span>
+        <span class="ax-badge">Terker Fellow, GW</span>
+        <span class="ax-badge">Knight Center Fellow, ASU</span>
+        <span class="ax-badge">JSK Board, Stanford</span>
+        <span class="ax-badge">Former: Vox, USA Today, Washington Post</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TEAM -->
-<section class="section-team">
-  <div class="container">
-    <div class="team-intro">
-      <div class="section-eyebrow">A Coalition for Creator Journalism</div>
-      <h2 class="section-title">The people shaping Project C</h2>
-      <p>Project C has always been unconventional. It's not a newsroom, a nonprofit, or a traditional company. It's an ecosystem &mdash; built with people who believe creator-model journalists deserve real support.</p>
-    </div>
-    <div class="team-cards">
-      <div class="t-card">
-        <div class="t-card-photo"><img src="team-blair.webp" alt="Blair Hickman"></div>
+<!-- TEAM / COALITION -->
+<section class="ax-team">
+  <div class="sec-head">
+    <div class="eyebrow magenta"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> A Coalition for Creator Journalism</div>
+    <h2 class="h-display">The people shaping Project C</h2>
+    <p class="lede">Project C has always been unconventional. It isn't a newsroom, a nonprofit, or a traditional company. It's an ecosystem, built with people who believe creator-model journalists deserve real support.</p>
+  </div>
+  <div class="sec-pad">
+    <div class="ax-person reveal">
+      <div class="p-photo"><img src="team-blair.webp" alt="Blair Hickman"></div>
+      <div class="p-body">
         <h3>Blair Hickman</h3>
-        <div class="t-role">Contributing Strategist</div>
-        <p>A former Vox exec who runs her own consultancy, Blair works with Project C on strategic projects, including the growing training and coaching practice.</p>
-      </div>
-      <div class="t-card">
-        <div class="t-card-photo"><img src="team-justin.png" alt="Justin Bank"></div>
-        <h3>Justin Bank</h3>
-        <div class="t-role">Advisor / Thought Partner</div>
-        <p>A frequent contributor to the Project C newsletter and partner on foundational work with the Top 50 list and News Ecosystem map.</p>
-      </div>
-      <div class="t-card">
-        <div class="t-card-photo"><img src="team-ryan.jpg" alt="Ryan Kellett"></div>
-        <h3>Ryan Kellett</h3>
-        <div class="t-role">Advisor / Thought Partner</div>
-        <p>From the News Ecosystem Map to the Top 50, ONA board member and Harvard Nieman-Berkman Fellow Ryan is a frequent partner on Project C's most ambitious work.</p>
+        <div class="p-role">Contributing Strategist &amp; Coach</div>
+        <p>A former Vox executive who now runs her own consultancy, Blair works with Project C on strategic projects and leads the growing coaching practice, helping journalists turn independence into a durable business.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- COLLABORATORS -->
-<section class="section-collabs">
-  <div class="container collabs-inner">
-    <p class="collabs-label">Our Collaborators</p>
-    <div class="collab-logos">
-      <a href="https://videoconsortium.org/" target="_blank">Video Consortium</a>
-      <a href="https://journalists.org/" target="_blank">ONA</a>
-      <a href="https://trustingnews.org/" target="_blank">Trusting News</a>
-      <a href="https://www.icfj.org/our-work/icfjplus" target="_blank">ICFJ+</a>
-      <a href="https://localnewsinitiative.northwestern.edu/" target="_blank">Northwestern Medill</a>
-      <a href="https://cronkite.asu.edu/knightcenter" target="_blank">ASU Knight Center</a>
-      <a href="https://cnti.org/" target="_blank">CNTI</a>
+<div class="ax-collabs">
+  <div class="lbl">Our Collaborators</div>
+  <div class="ax-collab-row">
+    <a href="https://videoconsortium.org/" target="_blank" rel="noopener">Video Consortium</a>
+    <a href="https://journalists.org/" target="_blank" rel="noopener">ONA</a>
+    <a href="https://trustingnews.org/" target="_blank" rel="noopener">Trusting News</a>
+    <a href="https://www.icfj.org/our-work/icfjplus" target="_blank" rel="noopener">ICFJ+</a>
+    <a href="https://localnewsinitiative.northwestern.edu/" target="_blank" rel="noopener">Northwestern Medill</a>
+    <a href="https://cronkite.asu.edu/knightcenter" target="_blank" rel="noopener">ASU Knight Center</a>
+    <a href="https://cnti.org/" target="_blank" rel="noopener">CNTI</a>
+    <a href="https://newsinitiative.withgoogle.com/" target="_blank" rel="noopener">Google News Initiative</a>
+  </div>
+</div>
+
+<!-- WHY PROJECT C / CMYK -->
+<section class="ax-cmyk">
+  <div class="ax-cmyk-grid">
+    <div class="ax-cmyk-mark">
+      <svg viewBox="0 0 200 200" role="img" aria-label="CMYK registration mark">
+        <g class="spin">
+          <g transform="translate(-4.5,-3.5)">
+            <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+            <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+            <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+            <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+          </g>
+        </g>
+        <circle cx="100" cy="100" r="52" fill="none" stroke="#F5F6F8" stroke-width="3"/>
+        <line x1="100" y1="24" x2="100" y2="176" stroke="#F5F6F8" stroke-width="2.5"/>
+        <line x1="24" y1="100" x2="176" y2="100" stroke="#F5F6F8" stroke-width="2.5"/>
+        <circle cx="100" cy="100" r="22" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+        <text x="100" y="97" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="9" fill="#15171A">EST.</text>
+        <text x="100" y="112" text-anchor="middle" font-family="Anton, Impact, sans-serif" font-size="13" fill="#15171A">2024</text>
+      </svg>
+    </div>
+    <div class="ax-cmyk-body reveal">
+      <h2>Why "Project C"? And what's with the CMYK?</h2>
+      <p>Project C started as a true project, an experiment during Liz's Sulzberger Fellowship, where she learned the design principle of aiming for <span class="k">Point C</span>, the next stage, instead of trying to leap straight to Point Z. The name also stands for <span class="k">Creator</span>.</p>
+      <p>The CMYK mark is a nod to newspaper roots. Registration marks are the alignment targets that kept the four ink plates in register on the printing press. That same tradition of precision now finds a new path with the independent creators shaping the future of journalism.</p>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section class="section-contact">
-  <div class="container">
-    <div class="section-eyebrow" style="justify-content:center;">Get in Touch</div>
-    <h2 class="section-title">Let's work together</h2>
-    <p>Research partnerships, speaking engagements, or just a conversation about the future of independent journalism &mdash; we'd love to hear from you.</p>
-    <div class="contact-actions">
-      <a href="mailto:liz@projectc.biz" class="btn-primary">Email Liz &rarr;</a>
-      <a href="https://www.linkedin.com/in/lizkellynelson/" target="_blank" class="btn-secondary">Connect on LinkedIn</a>
-    </div>
+<section class="ax-contact">
+  <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Get in Touch</div>
+  <h2 class="h-display">Let's work together</h2>
+  <p>Research partnerships, speaking engagements, or just a conversation about the future of independent journalism. We'd love to hear from you.</p>
+  <div class="row">
+    <a href="mailto:liz@projectc.biz" class="btn btn-coral">Email Liz &rarr;</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener" class="btn btn-ghost">Connect on LinkedIn</a>
   </div>
 </section>
 
-<!-- CMYK EXPLANATION — at the bottom, subtle -->
-<section class="section-cmyk">
-  <div class="container">
-    <div class="cmyk-inner">
-      <div class="cmyk-logo">
-        <img src="Project-C_Logo_color.png" alt="Project C CMYK logo">
-      </div>
-      <div class="cmyk-text">
-        <h2>Why "Project C"? And what's with the CMYK logo?</h2>
-        <p>Project C started as a true project &mdash; an experiment during Liz's Sulzberger Fellowship, where she learned the design principle of aiming for Point C, the next stage, instead of trying to leap straight to Point Z. The name also stands for Creator. The CMYK logo is a nod to newspaper roots, where CMYK registration marks ensured precision in printing by aligning the presses. That same continuity and tradition now finds a new path with independent creators shaping the future of journalism.</p>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
 
-<footer>
-  <div class="container-wide">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo">
-          <img class="logo-img-footer" src="Project-C_Logo_White.png" alt="Project C">
-        </a>
-        <p>Supporting, amplifying, and normalizing independent creator-model journalism.</p>
-      </div>
-      <div class="footer-col"><h5>Explore</h5><a href="https://newsletter.projectc.biz">Newsletter</a><a href="/top50creatorjournalists">Top 50 List</a><a href="https://journalismatlas.com">The Independent Journalism Atlas</a><a href="news-ecosystem-map.html">News Ecosystem Map</a><a href="/going-solo">Going Solo Workshop</a></div>
-      <div class="footer-col"><h5>Community</h5><a href="/community">Join the Community</a><a href="coaching.html">Coaching</a><a href="about.html">About Project C</a></div>
-      <div class="footer-col"><h5>Connect</h5><a href="about.html#founder">Team</a><a href="mailto:liz@projectc.biz">Contact</a><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="press.html">Press &amp; Speaking</a><a href="style-guide.html">Brand Style Guide</a></div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Project C. All rights reserved.</span>
-      <div class="footer-social"><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="https://newsletter.projectc.biz">Beehiiv</a></div>
-    </div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href="press.html">Research &amp; Press</a>
+    <a href="news-ecosystem-map.html">News Ecosystem Map</a>
+    <a href="going-solo.html">Going Solo Workshop</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href="community.html">Join the Community</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="members.html">Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href="about.html">About Project C</a>
+    <a href="about.html#founder">Team</a>
+    <a href="mailto:liz@projectc.biz">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href="style-guide.html">Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C — independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
   </div>
 </footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design.</span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
 
 <script>
 const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
-</script>
-<script>
-(function() {
-  if (sessionStorage.getItem('coachingBannerDismissed')) {
-    var bar = document.getElementById('announcementBar');
-    var nav = document.getElementById('mainNav');
-    if (bar) bar.style.display = 'none';
-    if (nav) nav.style.top = '4px';
-  }
-})();
-function dismissAnnouncementBar() {
-  var bar = document.getElementById('announcementBar');
-  var nav = document.getElementById('mainNav');
-  if (bar) bar.style.display = 'none';
-  if (nav) nav.style.top = '4px';
-  sessionStorage.setItem('coachingBannerDismissed', '1');
-}
+window.addEventListener('scroll', () => { nav.style.boxShadow = window.scrollY > 40 ? '0 4px 24px rgba(21,23,26,0.08)' : 'none'; });
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e){
+    const id = this.getAttribute('href'); if (id === '#' || id === '#main') return;
+    const t = document.querySelector(id); if (!t) return;
+    e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
+  });
+});
 </script>
 </body>
 </html>

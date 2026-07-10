@@ -111,6 +111,7 @@ h2.h-display { font-size: clamp(2rem, 3.8vw, 3.2rem); }
 .nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
 .nav-links a { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.5rem 0.85rem; transition: color 0.18s; }
 .nav-links a:hover { color: var(--coral-deep); }
+.nav-links a[aria-current="page"] { color: var(--coral-deep); }
 .nav-cta { border: var(--rule); padding: 0.55rem 1.1rem !important; }
 .nav-cta:hover { background: var(--ink); color: #fff !important; }
 .nav-links a.nav-member { color: var(--coral-deep); }

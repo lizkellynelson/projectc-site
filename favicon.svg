@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- CMYK registration-target favicon -->
+  <path d="M50,50 L50,10 A40,40 0 0,1 90,50 Z" fill="#EC008C"/>
+  <path d="M50,50 L90,50 A40,40 0 0,1 50,90 Z" fill="#15171A"/>
+  <path d="M50,50 L50,90 A40,40 0 0,1 10,50 Z" fill="#FFE800"/>
+  <path d="M50,50 L10,50 A40,40 0 0,1 50,10 Z" fill="#00AEEF"/>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#15171A" stroke-width="4"/>
+  <line x1="50" y1="3" x2="50" y2="97" stroke="#15171A" stroke-width="5"/>
+  <line x1="3" y1="50" x2="97" y2="50" stroke="#15171A" stroke-width="5"/>
+  <circle cx="50" cy="50" r="9" fill="#FFFFFF" stroke="#15171A" stroke-width="2.5"/>
+</svg>

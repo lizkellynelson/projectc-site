@@ -55,11 +55,11 @@ const MEMBER_CONTENT = {
       title: 'Step Forward on Sponsorships',
       date: 'June & July 2026',
       description:
-        'A three-part series with Emily and April on landing sponsors: research your prospects, position your pitch, then price and close the deal.',
+        'A three-part series with media advisors Emily Dresslar and April Hinkle on landing sponsors: research your prospects, position your pitch, then price and close the deal.',
       sessions: [
         {
-          title: 'Session 1',
-          date: 'June 23, 2026',
+          title: 'The Partnership Approach',
+          date: 'June 24, 2026',
           links: [
             {
               label: 'Watch the recording',
@@ -72,7 +72,7 @@ const MEMBER_CONTENT = {
           ],
         },
         {
-          title: 'Session 2',
+          title: 'Identifying the Right Partners',
           date: 'July 1, 2026',
           links: [
             {
@@ -86,7 +86,7 @@ const MEMBER_CONTENT = {
           ],
         },
         {
-          title: 'Session 3: Building the Sponsorship',
+          title: 'Building the Sponsorship',
           date: 'July 8, 2026',
           links: [
             {
@@ -146,7 +146,7 @@ const MEMBER_CONTENT = {
         'Three sessions with The New York Times philanthropic partnerships team, covering the full arc of grant funding: getting started, making the ask, and managing the money once it lands.',
       sessions: [
         {
-          title: 'Part 1: Getting Started With Grants',
+          title: 'Getting Started With Grants',
           date: 'January 2026',
           links: [
             {
@@ -160,7 +160,7 @@ const MEMBER_CONTENT = {
           ],
         },
         {
-          title: 'Part 2: Making the Ask',
+          title: 'Making the Ask',
           date: 'February 2026',
           links: [
             {
@@ -178,7 +178,7 @@ const MEMBER_CONTENT = {
           ],
         },
         {
-          title: 'Part 3: Managing a Grant-Funded Project',
+          title: 'Managing a Grant-Funded Project',
           date: 'March 2026',
           links: [
             {

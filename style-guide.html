@@ -4,1219 +4,466 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Brand Style Guide — Project C</title>
-<meta name="description" content="The visual identity and design system for Project C — colors, typography, logos, and components.">
+<meta name="description" content="The Press Room design system for Project C: logo, CMYK registration language, color, type, icons, components, and voice.">
 <meta name="robots" content="noindex">
-<link rel="icon" type="image/png" href="project-c_logo_color.png">
-<link rel="apple-touch-icon" href="project-c_logo_color.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+/* ---- Style Guide — L3 reference page on the shared system ---- */
+.nav.scrolled { box-shadow: 0 4px 24px rgba(21,23,26,0.08); }
+:root { --doc-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace; }
 
-:root {
-  --cream: #F4F2EA;
-  --coral: #FE6B41;
-  --pink: #E09AC2;
-  --brown: #360A05;
-  --deep: #200603;
-  --cream-dark: #EBE8DE;
-  --serif: 'Anton', 'Impact', sans-serif;
-  --sans: 'Inter', -apple-system, sans-serif;
-  --mono: 'JetBrains Mono', 'Courier New', monospace;
-}
+/* DOC LAYOUT — sticky sidebar + content (a composition unique to this page) */
+.doc { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 232px 1fr; gap: 3.5rem; padding: 0 2rem 5rem; }
+.doc-side { position: sticky; top: 98px; align-self: start; padding-top: 2.5rem; max-height: calc(100vh - 110px); overflow-y: auto; }
+.doc-side .side-intro { font-size: 0.85rem; color: var(--muted); line-height: 1.6; padding-bottom: 1.3rem; margin-bottom: 1.3rem; border-bottom: var(--rule); }
+.doc-side .side-intro a { color: var(--coral-deep); font-weight: 700; }
+.doc-side h6 { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 1.4rem 0 0.5rem; }
+.doc-side a.side-link { display: block; font-size: 0.86rem; font-weight: 500; color: var(--ink); padding: 0.32rem 0; transition: color 0.15s, padding-left 0.15s; }
+.doc-side a.side-link:hover { color: var(--coral-deep); }
+.doc-side a.side-link.active { color: var(--coral-deep); font-weight: 700; padding-left: 0.4rem; box-shadow: inset 3px 0 0 var(--coral); }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+/* HEADER */
+.doc-head { padding: clamp(2.5rem,4.5vw,4rem) 0 2rem; border-bottom: var(--rule); margin-bottom: 2.5rem; }
+.doc-head h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.6rem,5.5vw,4.6rem); line-height: 0.96; letter-spacing: 0.01em; margin: 0.4rem 0 1.1rem; }
+.doc-head .standfirst { font-size: 1.12rem; color: var(--muted); line-height: 1.6; max-width: 60ch; }
+.doc-head .updated { display: inline-block; margin-top: 1.3rem; font-family: var(--doc-mono); font-size: 0.75rem; color: var(--muted); border: var(--rule-thin); padding: 0.3rem 0.7rem; }
 
-body {
-  font-family: var(--sans);
-  background: var(--cream);
-  color: var(--brown);
-  line-height: 1.6;
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
-}
+/* SECTION */
+.sec-block { padding: 2.8rem 0; border-bottom: var(--rule-thin); }
+.sec-block:last-child { border-bottom: none; }
+.sec-block > h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.7rem,3vw,2.4rem); line-height: 1.03; margin-bottom: 0.7rem; }
+.sec-block > .intro { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 64ch; margin-bottom: 2rem; }
+.sub { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); padding-bottom: 0.5rem; border-bottom: var(--rule); margin: 2.2rem 0 1.3rem; }
 
-/* GRADIENT BAR */
-.gradient-bar {
-  height: 4px;
-  background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral), var(--pink));
-  background-size: 300% 100%;
-  animation: gradientSlide 8s ease infinite;
-}
-@keyframes gradientSlide {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+/* LOGO — primary lockup + mark grid */
+.logo-primary { border: var(--rule); margin-bottom: 1.2rem; }
+.logo-primary .lp-stage { background: var(--white); display: flex; align-items: center; justify-content: center; padding: clamp(2.4rem,4vw,3.6rem) 2rem; }
+.logo-primary .lp-stage img { max-height: 128px; width: auto; max-width: 78%; }
+.logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.logo-card { border: var(--rule); }
+.logo-stage { display: flex; align-items: center; justify-content: center; padding: 2.4rem 1.5rem; min-height: 150px; }
+.logo-stage.on-white { background: var(--white); } .logo-stage.on-porcelain { background: var(--porcelain); }
+.logo-stage.on-ink { background: var(--ink); } .logo-stage.on-coral { background: var(--coral); }
+.logo-stage img { max-height: 58px; width: auto; max-width: 100%; }
+.logo-meta { border-top: var(--rule); padding: 0.8rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; }
+.logo-meta .ln { font-size: 0.82rem; font-weight: 700; }
+.logo-meta .lu { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+.logo-dl { font-family: var(--doc-mono); font-size: 0.66rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--coral-deep); border: var(--rule-thin); padding: 0.3rem 0.55rem; white-space: nowrap; flex-shrink: 0; }
+.logo-dl:hover { background: var(--tint); }
 
-/* ANNOUNCEMENT BAR */
-.announcement-bar {
-  position: fixed;
-  top: 4px;
-  left: 0; right: 0;
-  z-index: 1001;
-  background: var(--brown);
-  color: var(--cream);
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  padding: 0 3rem;
-}
-.announcement-bar a {
-  color: var(--coral);
-  text-decoration: none;
-  font-weight: 600;
-  margin-left: 0.25em;
-}
-.announcement-bar a:hover { text-decoration: underline; }
-.announcement-bar .ab-dismiss {
-  position: absolute; right: 1.25rem;
-  background: none; border: none; color: rgba(244,242,234,0.5);
-  cursor: pointer; font-size: 0.9rem;
-  padding: 0.4rem 0.5rem; line-height: 1;
-  transition: color 0.2s ease;
-}
-.announcement-bar .ab-dismiss:hover { color: var(--cream); }
+/* DO / DON'T */
+.rules { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.rule-col { border: var(--rule); padding: 1.3rem 1.5rem; }
+.rule-col h4 { font-family: var(--doc-mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
+.rule-col.do h4 { color: var(--coral-deep); } .rule-col.dont h4 { color: var(--muted); }
+.rule-col ul { list-style: none; }
+.rule-col li { font-size: 0.88rem; color: var(--ink); line-height: 1.5; padding: 0.32rem 0 0.32rem 1.4rem; position: relative; }
+.rule-col.do li::before { content: '＋'; position: absolute; left: 0; color: var(--coral); font-weight: 800; }
+.rule-col.dont li::before { content: '✕'; position: absolute; left: 0; color: var(--muted); font-weight: 800; }
 
-/* NAV */
-nav {
-  position: fixed; top: 48px; left: 0; right: 0; z-index: 1000;
-  background: rgba(244, 242, 234, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(54, 10, 5, 0.06);
-  transition: all 0.3s ease;
-}
-nav.scrolled { box-shadow: 0 4px 30px rgba(32, 6, 3, 0.08); }
-.nav-inner {
-  max-width: 1400px; margin: 0 auto; padding: 0 2rem;
-  display: flex; align-items: center; justify-content: space-between; height: 72px;
-}
-.nav-logo { text-decoration: none; display: flex; align-items: center; }
-.nav-logo .logo-img { height: 48px; width: auto; }
-.nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
-.nav-links a {
-  color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500;
-  padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease;
-}
-.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral); }
-.nav-cta {
-  background: var(--coral) !important; color: white !important;
-  padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important;
-}
-.nav-cta:hover { background: #e55e38 !important; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(254,107,65,0.3); }
-.nav-member { border: 1.5px solid var(--brown) !important; border-radius: 100px !important; padding: 0.5rem 1.25rem !important; margin-left: 0.25rem; }
-.nav-member:hover { background: var(--brown) !important; color: var(--cream) !important; }
+/* MARK SPECIMEN */
+.mark-row { display: grid; grid-template-columns: 260px 1fr; gap: 2.5rem; align-items: center; }
+.mark-stage { border: var(--rule); background: var(--white); display: flex; align-items: center; justify-content: center; padding: 1.5rem; }
+.mark-stage .reg-mark { width: 190px; height: 190px; }
+.mark-mini { display: flex; gap: 1.5rem; align-items: flex-end; margin-top: 1.6rem; }
+.mark-mini figure { text-align: center; }
+.mark-mini img { border: var(--rule-thin); }
+.mark-mini figcaption { font-family: var(--doc-mono); font-size: 0.66rem; color: var(--muted); margin-top: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.mark-row p { font-size: 0.98rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+.mark-row p:last-child { margin-bottom: 0; }
+.mark-row b { color: var(--ink); }
 
-/* PAGE LAYOUT */
-.page-wrapper {
-  display: flex;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  padding-top: 6rem;
-  gap: 4rem;
-  min-height: 100vh;
-}
+/* COLOR SWATCHES */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 0.9rem; }
+.sw { border: var(--rule); cursor: pointer; transition: transform 0.15s; }
+.sw:hover { transform: translateY(-2px); }
+.sw .chip { height: 76px; position: relative; }
+.sw .chip .cp { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--doc-mono); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0; transition: opacity 0.15s; }
+.sw:hover .chip .cp { opacity: 1; }
+.sw .meta { border-top: var(--rule); padding: 0.6rem 0.7rem; background: var(--white); }
+.sw .nm { font-size: 0.78rem; font-weight: 700; }
+.sw .hx { font-family: var(--doc-mono); font-size: 0.7rem; color: var(--muted); margin-top: 0.1rem; }
+.sw .rl { font-size: 0.68rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.4; }
 
-/* SIDEBAR */
-.sidebar {
-  width: 220px;
-  flex-shrink: 0;
-  position: sticky;
-  top: 100px;
-  align-self: flex-start;
-  padding: 2rem 0;
-}
-.sidebar-intro {
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(54,10,5,0.08);
-}
-.sidebar-intro p {
-  font-size: 0.8rem;
-  color: rgba(54,10,5,0.5);
-  line-height: 1.5;
-}
-.sidebar-section { margin-bottom: 1.5rem; }
-.sidebar-section h6 {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(54,10,5,0.4);
-  margin-bottom: 0.5rem;
-}
-.sidebar-section a {
-  display: block;
-  font-size: 0.85rem;
-  color: rgba(54,10,5,0.6);
-  text-decoration: none;
-  padding: 0.3rem 0;
-  transition: color 0.2s ease;
-}
-.sidebar-section a:hover,
-.sidebar-section a.active { color: var(--coral); }
-.sidebar-section a.active { font-weight: 600; }
+/* TYPE SPECIMENS */
+.type-spec { border-top: var(--rule-thin); padding: 1.5rem 0; display: grid; grid-template-columns: 190px 1fr; gap: 2rem; align-items: baseline; }
+.type-spec:first-of-type { border-top: none; }
+.type-spec .tm .tn { font-family: var(--doc-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); font-weight: 600; display: block; margin-bottom: 0.35rem; }
+.type-spec .tm .ts { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+.spec-anton { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.8rem,7vw,5.4rem); line-height: 0.92; }
+.spec-anton .out { -webkit-text-stroke: 2px var(--ink); color: transparent; }
+.spec-h2 { font-family: var(--display); text-transform: uppercase; font-size: 2rem; line-height: 1; }
+.spec-fraunces { font-family: var(--serif); font-style: italic; font-weight: 500; color: var(--coral-deep); font-size: 1.7rem; line-height: 1.15; }
+.spec-lede { font-size: 1.15rem; color: var(--muted); line-height: 1.6; }
+.spec-body { font-size: 1rem; color: var(--ink); line-height: 1.7; }
+.spec-kicker { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); }
 
-/* MAIN CONTENT */
-.main-content {
-  flex: 1;
-  min-width: 0;
-  padding: 2rem 0 6rem;
-}
+/* ICONS */
+.icongrid { display: grid; grid-template-columns: repeat(4, 1fr); border: var(--rule); }
+.iconcell { padding: 1.6rem 1rem; border-right: var(--rule-thin); border-bottom: var(--rule-thin); display: flex; flex-direction: column; align-items: center; gap: 0.7rem; text-align: center; }
+.iconcell:nth-child(4n) { border-right: none; }
+.iconcell:nth-last-child(-n+4) { border-bottom: none; }
+.iconcell svg { width: 44px; height: 44px; }
+.iconcell span { font-size: 0.72rem; color: var(--muted); }
 
-/* PAGE HEADER */
-.page-header {
-  padding-bottom: 3rem;
-  margin-bottom: 3rem;
-  border-bottom: 1px solid rgba(54,10,5,0.08);
-}
-.page-header .eyebrow {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--coral);
-  margin-bottom: 1rem;
-}
-.page-header h1 {
-  font-family: var(--serif);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1.05;
-  color: var(--deep);
-  text-transform: uppercase;
-  margin-bottom: 1.25rem;
-}
-.page-header p {
-  font-size: 1.1rem;
-  color: rgba(54,10,5,0.65);
-  max-width: 600px;
-  line-height: 1.7;
-}
-.last-updated {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: rgba(54,10,5,0.35);
-  margin-top: 1.25rem;
-}
+/* SPECIMEN FRAME (buttons, elements) */
+.frame { border: var(--rule); padding: 1.8rem; display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; background: var(--white); }
+.frame.dark { background: var(--ink); }
+.chiprow { display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; }
 
-/* SECTIONS */
-.guide-section {
-  padding: 3.5rem 0;
-  border-bottom: 1px solid rgba(54,10,5,0.06);
-}
-.guide-section:last-child { border-bottom: none; }
-.section-label {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(54,10,5,0.35);
-  margin-bottom: 0.75rem;
-}
-.section-title {
-  font-family: var(--serif);
-  font-size: clamp(1.6rem, 3vw, 2.25rem);
-  color: var(--deep);
-  text-transform: uppercase;
-  margin-bottom: 1rem;
-  line-height: 1.1;
-}
-.section-body {
-  font-size: 0.95rem;
-  color: rgba(54,10,5,0.65);
-  line-height: 1.75;
-  max-width: 640px;
-  margin-bottom: 2.5rem;
-}
+/* MINI MODULES (CMYK) */
+.mini-mods { display: grid; grid-template-columns: repeat(4, 1fr); border: var(--rule); }
+.mini-mods .mm { padding: 1.3rem 1rem; border-right: var(--rule); min-height: 96px; }
+.mini-mods .mm:last-child { border-right: none; }
+.mini-mods .mm.cyan { background: var(--cyan); } .mini-mods .mm.dark { background: var(--ink); color: var(--porcelain); }
+.mini-mods .mm.yellow { background: var(--yellow); } .mini-mods .mm.coral { background: var(--coral); }
+.mini-mods .mm .mi { font-family: var(--doc-mono); font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; }
+.mini-mods .mm h5 { font-family: var(--display); text-transform: uppercase; font-size: 1.1rem; line-height: 1; margin-top: 0.5rem; }
 
-/* SUBSECTION */
-.subsection { margin-bottom: 2.5rem; }
-.subsection-title {
-  font-size: 0.8rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--brown);
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(54,10,5,0.08);
-}
+/* PATTERN LIST */
+.plist { border: var(--rule); }
+.plist .prow { display: grid; grid-template-columns: 190px 1fr; gap: 1.5rem; padding: 0.95rem 1.3rem; border-top: var(--rule-thin); }
+.plist .prow:first-child { border-top: none; }
+.plist .pn { font-family: var(--doc-mono); font-size: 0.78rem; font-weight: 600; color: var(--coral-deep); text-transform: uppercase; letter-spacing: 0.04em; }
+.plist .pd { font-size: 0.9rem; color: var(--muted); line-height: 1.55; }
 
-/* LOGO GRID */
-.logo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
-.logo-card {
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(54,10,5,0.08);
-}
-.logo-card-display {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2.5rem 2rem;
-  min-height: 160px;
-}
-.logo-card-display.on-cream { background: var(--cream-dark); }
-.logo-card-display.on-dark { background: var(--deep); }
-.logo-card-display.on-coral { background: var(--coral); }
-.logo-card-display img { max-height: 60px; width: auto; max-width: 100%; }
-.logo-card-meta {
-  padding: 0.875rem 1rem;
-  background: white;
-  border-top: 1px solid rgba(54,10,5,0.06);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-.logo-card-meta .logo-name {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--brown);
-  display: block;
-}
-.logo-card-meta .logo-use {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: rgba(54,10,5,0.45);
-  margin-top: 0.25rem;
-}
-.logo-download {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--coral);
-  text-decoration: none;
-  padding: 0.3rem 0.65rem;
-  border: 1px solid rgba(254,107,65,0.25);
-  border-radius: 6px;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-  flex-shrink: 0;
-}
-.logo-download:hover { background: rgba(254,107,65,0.07); border-color: var(--coral); }
+/* HIERARCHY LADDER */
+.ladder { display: grid; grid-template-columns: repeat(3, 1fr); border: var(--rule); }
+.ladder .rung { padding: 1.6rem 1.4rem; border-right: var(--rule); }
+.ladder .rung:last-child { border-right: none; }
+.ladder .rung .lv { font-family: var(--display); text-transform: uppercase; font-size: 1.4rem; }
+.ladder .rung .lv .n { color: var(--coral); }
+.ladder .rung .lp { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0.5rem 0 0.7rem; }
+.ladder .rung p { font-size: 0.86rem; color: var(--muted); line-height: 1.55; }
 
-/* USAGE RULES */
-.usage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
-.usage-block {
-  padding: 1.25rem 1.5rem;
-  border-radius: 10px;
-}
-.usage-block.do { background: rgba(254,107,65,0.06); border: 1px solid rgba(254,107,65,0.15); }
-.usage-block.dont { background: rgba(54,10,5,0.03); border: 1px solid rgba(54,10,5,0.08); }
-.usage-label {
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-}
-.usage-block.do .usage-label { color: var(--coral); }
-.usage-block.dont .usage-label { color: rgba(54,10,5,0.4); }
-.usage-block ul { list-style: none; }
-.usage-block ul li {
-  font-size: 0.85rem;
-  color: rgba(54,10,5,0.7);
-  padding: 0.3rem 0;
-  padding-left: 1rem;
-  position: relative;
-  line-height: 1.5;
-}
-.usage-block.do ul li::before { content: '✓'; position: absolute; left: 0; color: var(--coral); font-weight: 700; }
-.usage-block.dont ul li::before { content: '✗'; position: absolute; left: 0; color: rgba(54,10,5,0.35); }
+/* RULE CALLOUTS */
+.callout { border: var(--rule); border-left: 6px solid var(--coral); padding: 1.2rem 1.4rem; margin-top: 1.2rem; }
+.callout h4 { font-family: var(--display); text-transform: uppercase; font-size: 1.05rem; margin-bottom: 0.4rem; }
+.callout p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
 
-/* TYPOGRAPHY SHOWCASE */
-.type-row {
-  padding: 1.5rem 0;
-  border-bottom: 1px solid rgba(54,10,5,0.06);
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 2rem;
-  align-items: center;
-}
-.type-row:last-child { border-bottom: none; }
-.type-meta {}
-.type-meta .type-name {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(54,10,5,0.4);
-  display: block;
-  margin-bottom: 0.35rem;
-}
-.type-meta .type-spec {
-  font-size: 0.78rem;
-  color: rgba(54,10,5,0.5);
-  line-height: 1.5;
-}
-.type-example {}
+/* CODE */
+.code { background: var(--ink); color: rgba(245,246,248,0.82); font-family: var(--doc-mono); font-size: 0.76rem; padding: 1.1rem 1.3rem; line-height: 1.7; overflow-x: auto; margin-top: 1.1rem; }
+.code .c { color: rgba(245,246,248,0.4); } .code .k { color: #FF8A66; } .code .v { color: var(--cyan); }
 
-.type-display {
-  font-family: var(--serif);
-  font-size: 3rem;
-  color: var(--deep);
-  text-transform: uppercase;
-  line-height: 1;
-}
-.type-headline {
-  font-family: var(--serif);
-  font-size: 1.75rem;
-  color: var(--deep);
-  text-transform: uppercase;
-  line-height: 1.1;
-}
-.type-body-lg {
-  font-family: var(--sans);
-  font-size: 1.1rem;
-  color: var(--brown);
-  font-weight: 400;
-  line-height: 1.7;
-}
-.type-body {
-  font-family: var(--sans);
-  font-size: 0.95rem;
-  color: var(--brown);
-  font-weight: 400;
-  line-height: 1.7;
-}
-.type-body-sm {
-  font-family: var(--sans);
-  font-size: 0.85rem;
-  color: rgba(54,10,5,0.65);
-  line-height: 1.6;
-}
-.type-label {
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--coral);
-}
-.type-caption {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: rgba(54,10,5,0.45);
-  letter-spacing: 0.04em;
-}
+/* toast */
+.toast { position: fixed; bottom: 1.6rem; left: 50%; transform: translateX(-50%) translateY(16px); background: var(--ink); color: var(--porcelain); font-family: var(--doc-mono); font-size: 0.75rem; letter-spacing: 0.05em; padding: 0.6rem 1.2rem; border: var(--rule); opacity: 0; transition: all 0.25s ease; pointer-events: none; z-index: 9999; }
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* HIERARCHY DEMO */
-.hierarchy-demo {
-  background: white;
-  border-radius: 12px;
-  padding: 2.5rem;
-  margin-top: 2rem;
-  border: 1px solid rgba(54,10,5,0.06);
-}
-.hierarchy-demo .demo-eyebrow {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--coral);
-  margin-bottom: 0.75rem;
-}
-.hierarchy-demo .demo-headline {
-  font-family: var(--serif);
-  font-size: 2.25rem;
-  color: var(--deep);
-  text-transform: uppercase;
-  line-height: 1.05;
-  margin-bottom: 0.875rem;
-}
-.hierarchy-demo .demo-dek {
-  font-size: 1rem;
-  color: rgba(54,10,5,0.65);
-  line-height: 1.7;
-  margin-bottom: 1.25rem;
-  max-width: 540px;
-}
-.hierarchy-demo .demo-byline {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(54,10,5,0.4);
-}
-
-/* COLOR PALETTE */
-.color-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
-.color-card {
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(54,10,5,0.06);
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.color-card:hover { transform: translateY(-2px); }
-.color-swatch { height: 80px; position: relative; }
-.color-swatch .copy-hint {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.08);
-  opacity: 0;
-  transition: opacity 0.2s;
-  font-family: var(--mono);
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-}
-.color-card:hover .copy-hint { opacity: 1; }
-.color-meta {
-  padding: 0.75rem;
-  background: white;
-}
-.color-name {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--brown);
-  display: block;
-  margin-bottom: 0.2rem;
-}
-.color-hex {
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  color: rgba(54,10,5,0.45);
-}
-.color-role {
-  font-size: 0.68rem;
-  color: rgba(54,10,5,0.4);
-  margin-top: 0.3rem;
-  line-height: 1.4;
-}
-.copied-toast {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: var(--deep);
-  color: var(--cream);
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
-  padding: 0.6rem 1.25rem;
-  border-radius: 100px;
-  opacity: 0;
-  transition: all 0.3s ease;
-  pointer-events: none;
-  z-index: 9999;
-}
-.copied-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* GRADIENT SHOWCASE */
-.gradient-demo {
-  height: 8px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral), var(--pink));
-  background-size: 300% 100%;
-  animation: gradientSlide 8s ease infinite;
-  margin-bottom: 1rem;
-}
-.gradient-demo-static {
-  height: 8px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, var(--coral), var(--pink));
-  margin-bottom: 1rem;
-}
-
-/* COMPONENTS */
-.component-row {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  flex-wrap: wrap;
-  padding: 1.75rem 0;
-  border-bottom: 1px solid rgba(54,10,5,0.06);
-}
-.component-row:last-child { border-bottom: none; }
-.component-label {
-  width: 140px;
-  flex-shrink: 0;
-  font-family: var(--mono);
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: rgba(54,10,5,0.4);
-}
-
-/* BUTTON STYLES (live) */
-.btn-primary {
-  display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: white;
-  padding: 0.875rem 1.75rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-  transition: all 0.25s ease; border: none; cursor: pointer; font-family: var(--sans);
-}
-.btn-primary:hover { background: #e55e38; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(254,107,65,0.3); }
-
-.btn-secondary {
-  display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--brown);
-  padding: 0.875rem 1.75rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-  border: 1.5px solid rgba(54,10,5,0.2); transition: all 0.25s ease; cursor: pointer; font-family: var(--sans);
-}
-.btn-secondary:hover { border-color: var(--brown); background: var(--brown); color: var(--cream); }
-
-.btn-ghost {
-  display: inline-flex; align-items: center; gap: 0.5rem; background: transparent; color: var(--coral);
-  padding: 0.875rem 1.75rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-  border: 1.5px solid var(--coral); transition: all 0.25s ease; cursor: pointer; font-family: var(--sans);
-}
-.btn-ghost:hover { background: var(--coral); color: white; }
-
-.btn-dark {
-  display: inline-flex; align-items: center; gap: 0.5rem; background: var(--deep); color: var(--cream);
-  padding: 0.875rem 1.75rem; border-radius: 100px; text-decoration: none; font-weight: 600; font-size: 0.9rem;
-  border: none; transition: all 0.25s ease; cursor: pointer; font-family: var(--sans);
-}
-.btn-dark:hover { background: var(--brown); transform: translateY(-2px); }
-
-/* BADGE */
-.badge {
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  background: rgba(254,107,65,0.08); border: 1px solid rgba(254,107,65,0.2);
-  padding: 0.35rem 0.875rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
-  color: var(--coral); text-transform: uppercase; letter-spacing: 0.08em;
-  font-family: var(--mono);
-}
-.badge .pulse { width: 7px; height: 7px; background: var(--coral); border-radius: 50%; animation: pulse 2s ease infinite; }
-@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.5; transform:scale(1.5); } }
-
-.badge-dark {
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  background: rgba(54,10,5,0.06); border: 1px solid rgba(54,10,5,0.1);
-  padding: 0.35rem 0.875rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
-  color: var(--brown); text-transform: uppercase; letter-spacing: 0.08em;
-  font-family: var(--mono);
-}
-
-.badge-pink {
-  display: inline-flex; align-items: center; gap: 0.45rem;
-  background: rgba(224,154,194,0.1); border: 1px solid rgba(224,154,194,0.3);
-  padding: 0.35rem 0.875rem; border-radius: 100px; font-size: 0.75rem; font-weight: 600;
-  color: #a06080; text-transform: uppercase; letter-spacing: 0.08em;
-  font-family: var(--mono);
-}
-
-/* STAT */
-.stat-demo { display: flex; gap: 2.5rem; }
-.stat-item .number {
-  font-family: var(--serif);
-  font-size: 2rem;
-  color: var(--deep);
-  display: block;
-  line-height: 1;
-  text-transform: uppercase;
-}
-.stat-item .stat-label {
-  font-size: 0.75rem;
-  color: rgba(54,10,5,0.45);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-top: 0.35rem;
-}
-
-/* CARD */
-.card-demo {
-  background: white;
-  border-radius: 16px;
-  padding: 1.75rem;
-  border: 1px solid rgba(54,10,5,0.06);
-  max-width: 320px;
-}
-.card-demo .card-eyebrow {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--coral);
-  margin-bottom: 0.65rem;
-}
-.card-demo h4 {
-  font-family: var(--serif);
-  font-size: 1.1rem;
-  color: var(--deep);
-  text-transform: uppercase;
-  line-height: 1.2;
-  margin-bottom: 0.65rem;
-}
-.card-demo p {
-  font-size: 0.85rem;
-  color: rgba(54,10,5,0.6);
-  line-height: 1.6;
-  margin-bottom: 1.25rem;
-}
-
-/* DARK CARD */
-.card-dark {
-  background: var(--deep);
-  border-radius: 16px;
-  padding: 1.75rem;
-  max-width: 320px;
-  position: relative;
-  overflow: hidden;
-}
-.card-dark::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--coral), var(--pink)); }
-.card-dark .card-eyebrow {
-  font-family: var(--mono);
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--coral);
-  margin-bottom: 0.65rem;
-}
-.card-dark h4 {
-  font-family: var(--serif);
-  font-size: 1.1rem;
-  color: var(--cream);
-  text-transform: uppercase;
-  line-height: 1.2;
-  margin-bottom: 0.65rem;
-}
-.card-dark p {
-  font-size: 0.85rem;
-  color: rgba(244,242,234,0.55);
-  line-height: 1.6;
-}
-
-/* DIVIDER */
-.section-divider {
-  height: 1px;
-  background: linear-gradient(90deg, var(--coral), var(--pink), transparent);
-  margin: 3rem 0;
-  opacity: 0.3;
-}
-
-/* INLINE LINK STYLE */
-.link-demo a {
-  color: var(--brown);
-  text-decoration: underline;
-  text-decoration-color: var(--coral);
-  text-underline-offset: 3px;
-  transition: color 0.2s;
-}
-.link-demo a:hover { color: var(--coral); }
-
-/* CODE BLOCK */
-.code-block {
-  background: var(--deep);
-  color: rgba(244,242,234,0.8);
-  font-family: var(--mono);
-  font-size: 0.78rem;
-  padding: 1.25rem 1.5rem;
-  border-radius: 8px;
-  line-height: 1.7;
-  overflow-x: auto;
-  margin-top: 1rem;
-}
-.code-block .code-comment { color: rgba(244,242,234,0.3); }
-.code-block .code-key { color: var(--coral); }
-.code-block .code-val { color: var(--pink); }
-
-/* FOOTER */
-footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 2rem; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-.footer-brand .nav-logo { color: var(--cream); margin-bottom: 1rem; }
-.footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
-.footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
-.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.5); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
-.footer-col a:hover { color: var(--coral); }
-.footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
-.footer-social { display: flex; gap: 1rem; }
-.footer-social a { color: rgba(244,242,234,0.4); text-decoration: none; transition: color 0.2s; }
-.footer-social a:hover { color: var(--coral); }
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .sidebar { display: none; }
-  .page-wrapper { padding-top: 5rem; }
+@media (max-width: 1000px) {
+  .doc { grid-template-columns: 1fr; }
+  .doc-side { display: none; }
   .logo-grid { grid-template-columns: 1fr 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .mark-row { grid-template-columns: 1fr; }
+  .icongrid { grid-template-columns: repeat(2,1fr); }
+  .iconcell:nth-child(4n){ border-right: var(--rule-thin);} .iconcell:nth-child(2n){ border-right:none;}
+  .mini-mods, .ladder { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 640px) {
-  .page-wrapper { padding: 0 1rem; padding-top: 5rem; }
-  .logo-grid { grid-template-columns: 1fr; }
-  .color-grid { grid-template-columns: repeat(2, 1fr); }
-  .usage-grid { grid-template-columns: 1fr; }
-  .type-row { grid-template-columns: 1fr; gap: 0.75rem; }
-  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .stat-demo { gap: 1.5rem; }
+@media (max-width: 620px) {
+  .logo-grid, .rules { grid-template-columns: 1fr; }
+  .type-spec, .plist .prow { grid-template-columns: 1fr; gap: 0.6rem; }
+  .swatches { grid-template-columns: 1fr 1fr; }
+  .mini-mods, .ladder { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
+<a href="#main" class="skip-link">Skip to content</a>
 
-<!-- GRADIENT BAR -->
-<div class="gradient-bar"></div>
-<div class="announcement-bar" id="announcementBar">
-  <span>Now open: 1-on-1 coaching with Blair Hickman — spots are limited.<a href="/coaching">Book a discovery call →</a></span>
-  <button class="ab-dismiss" onclick="dismissAnnouncementBar()" aria-label="Dismiss">✕</button>
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<div class="announce" id="announcementBar">
+  <span class="live"><span class="blip"></span>Now open</span>
+  <span>1-on-1 coaching with Blair Hickman. Spots are limited. <a href="coaching.html">See coaching &rarr;</a></span>
+  <button class="ab-x" onclick="document.getElementById('announcementBar').classList.add('hidden')" aria-label="Dismiss">&#10005;</button>
 </div>
 
-<!-- NAV -->
-<nav id="mainNav">
+<nav class="nav" id="mainNav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo">
-      <img class="logo-img" src="project-c_logo_color.png" alt="Project C">
-    </a>
-    <ul class="nav-links">
-      <li><a href="index.html#research">Research</a></li>
+    <a href="index.html" class="nav-logo"><img src="project-c_lockup_color.png" alt="Project C — home"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
       <li><a href="community.html">Community</a></li>
+      <li><a href="going-solo.html">Going Solo</a></li>
       <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="press.html">Research &amp; Press</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="https://newsletter.projectc.biz" class="nav-cta">Newsletter</a></li>
+      <li><a href="members.html" class="nav-member">Member Login</a></li>
+      <li><a href="community.html" class="nav-cta">Join &rarr;</a></li>
     </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<!-- PAGE WRAPPER -->
-<div class="page-wrapper">
+<div class="doc">
 
-  <!-- SIDEBAR NAV -->
-  <aside class="sidebar">
-    <div class="sidebar-intro">
-      <p>Visual identity and design guidelines for Project C. For questions, contact <a href="mailto:liz@projectc.biz" style="color:var(--coral);text-decoration:none;">liz@projectc.biz</a>.</p>
-    </div>
-    <div class="sidebar-section">
-      <h6>Brand Identity</h6>
-      <a href="#logo">Logo &amp; Identity</a>
-      <a href="#typography">Typography</a>
-      <a href="#color">Color Palette</a>
-    </div>
-    <div class="sidebar-section">
-      <h6>Components</h6>
-      <a href="#components">Buttons &amp; Badges</a>
-      <a href="#cards">Cards &amp; Modules</a>
-      <a href="#links">Links &amp; Navigation</a>
-    </div>
-    <div class="sidebar-section">
-      <h6>Brand Story</h6>
-      <a href="#origin">Why Project C?</a>
-    </div>
+  <!-- SIDEBAR -->
+  <aside class="doc-side">
+    <p class="side-intro">The Project C design system, called <b>Press Room</b>. The source of truth for anyone building our pages, decks, or partner materials. Questions to <a href="mailto:liz@projectc.biz">liz@projectc.biz</a>.</p>
+    <h6>Foundations</h6>
+    <a class="side-link" href="#logo">Logo</a>
+    <a class="side-link" href="#mark">Registration Mark</a>
+    <a class="side-link" href="#color">Color</a>
+    <a class="side-link" href="#type">Typography</a>
+    <a class="side-link" href="#icons">Iconography</a>
+    <h6>Components</h6>
+    <a class="side-link" href="#buttons">Buttons &amp; Elements</a>
+    <a class="side-link" href="#patterns">Layout Patterns</a>
+    <h6>Principles</h6>
+    <a class="side-link" href="#hierarchy">Page Hierarchy</a>
   </aside>
 
-  <!-- MAIN CONTENT -->
-  <main class="main-content">
+  <!-- MAIN -->
+  <main class="main" id="main">
 
-    <!-- HEADER -->
-    <div class="page-header">
-      <div class="eyebrow">Project C Brand System</div>
-      <h1>Style Guide</h1>
-      <p>This guide documents the visual identity and design principles for Project C. It's for designers, developers, and partners working across our digital platforms, branded materials, and media.</p>
-      <div class="last-updated">Last updated May 2026</div>
-    </div>
+    <header class="doc-head">
+      <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Press Room System</div>
+      <h1>Brand Style Guide</h1>
+      <p class="standfirst">Project C looks like a print shop that went independent: white paper, black ink, a deep-orange lead, and the CMYK registration marks of old newspaper presses. This page documents how the pieces fit together so every page reads like the same publication.</p>
+      <span class="updated">Last updated July 2026</span>
+    </header>
 
-    <!-- LOGO SECTION -->
-    <section class="guide-section" id="logo">
-      <div class="section-label">Brand Identity</div>
-      <h2 class="section-title">Logo &amp; Identity</h2>
-      <p class="section-body">The Project C logo is the cornerstone of our brand. It should always be used with care — never stretched, recolored, or placed on a background that reduces legibility.</p>
+    <!-- LOGO -->
+    <section class="sec-block" id="logo">
+      <h2>Logo</h2>
+      <p class="intro">The full logo is the wordmark stacked over the four-dot CMYK "C." Lead with it wherever there's room; drop to the mark alone only when space is tight. Use the approved files, give it clearance, and never rebuild or recolor it.</p>
 
-      <div class="subsection">
-        <div class="subsection-title">Logo Variants</div>
-        <div class="logo-grid">
-          <div class="logo-card">
-            <div class="logo-card-display on-cream">
-              <img src="project-c_logo_color.png" alt="Project C logo — color version">
-            </div>
-            <div class="logo-card-meta">
-              <div>
-                <span class="logo-name">Color Logo</span>
-                <div class="logo-use">Primary — use on cream or white backgrounds</div>
-              </div>
-              <a href="project-c_logo_color.png" download="Project-C-Logo-Color.png" class="logo-download">↓ PNG</a>
-            </div>
-          </div>
-          <div class="logo-card">
-            <div class="logo-card-display on-dark">
-              <img src="project-c_logo_white.png" alt="Project C logo — white version">
-            </div>
-            <div class="logo-card-meta">
-              <div>
-                <span class="logo-name">White Logo</span>
-                <div class="logo-use">Use on dark, deep brown, or photo backgrounds</div>
-              </div>
-              <a href="project-c_logo_white.png" download="Project-C-Logo-White.png" class="logo-download">↓ PNG</a>
-            </div>
-          </div>
-          <div class="logo-card">
-            <div class="logo-card-display on-cream">
-              <img src="project-c_lockup_color.png" alt="Project C lockup — color version">
-            </div>
-            <div class="logo-card-meta">
-              <div>
-                <span class="logo-name">Lockup — Color</span>
-                <div class="logo-use">Extended lockup with wordmark, for partner placements</div>
-              </div>
-              <a href="project-c_lockup_color.png" download="Project-C-Lockup-Color.png" class="logo-download">↓ PNG</a>
-            </div>
-          </div>
-        </div>
+      <div class="sub">Primary logo</div>
+      <div class="logo-primary">
+        <div class="lp-stage"><img src="project-c_lockup_color.png" alt="Project C — full logo lockup"></div>
+        <div class="logo-meta"><div><div class="ln">Full lockup</div><div class="lu">The complete Project C logo: wordmark + CMYK mark. The default.</div></div><a class="logo-dl" href="project-c_lockup_color.png" download>PNG</a></div>
       </div>
 
-      <div class="subsection">
-        <div class="subsection-title">Usage Rules</div>
-        <div class="usage-grid">
-          <div class="usage-block do">
-            <div class="usage-label">Do</div>
-            <ul>
-              <li>Use the color logo on light backgrounds (cream, white)</li>
-              <li>Use the white logo on dark or photographic backgrounds</li>
-              <li>Give the logo breathing room — at minimum, its own height as clear space on all sides</li>
-              <li>Use SVG or high-res PNG at all times for crisp reproduction</li>
-            </ul>
-          </div>
-          <div class="usage-block dont">
-            <div class="usage-label">Don't</div>
-            <ul>
-              <li>Stretch, squish, or distort the logo proportions</li>
-              <li>Recolor the logo outside of approved variants (color, white)</li>
-              <li>Place the logo on a busy or low-contrast background</li>
-              <li>Use low-resolution versions that appear blurry</li>
-            </ul>
-          </div>
+      <div class="sub">The mark alone</div>
+      <div class="logo-grid">
+        <div class="logo-card">
+          <div class="logo-stage on-porcelain"><img src="project-c_logo_color.png" alt="Project C color mark"></div>
+          <div class="logo-meta"><div><div class="ln">Mark</div><div class="lu">On white or porcelain</div></div><a class="logo-dl" href="project-c_logo_color.png" download>PNG</a></div>
+        </div>
+        <div class="logo-card">
+          <div class="logo-stage on-ink"><img src="project-c_logo_white.png" alt="Project C mark reversed"></div>
+          <div class="logo-meta"><div><div class="ln">Mark, reversed</div><div class="lu">White, on ink or photos</div></div><a class="logo-dl" href="project-c_logo_white.png" download>PNG</a></div>
+        </div>
+        <div class="logo-card">
+          <div class="logo-stage on-coral"><img src="project-c_logo_white.png" alt="Project C mark on coral"></div>
+          <div class="logo-meta"><div><div class="ln">Mark, on coral</div><div class="lu">Reversed on the lead color</div></div><a class="logo-dl" href="project-c_logo_white.png" download>PNG</a></div>
+        </div>
+      </div>
+      <div class="rules" style="margin-top:1.2rem;">
+        <div class="rule-col do">
+          <h4>Do</h4>
+          <ul>
+            <li>Keep clear space of at least the mark's own height on every side.</li>
+            <li>Use the color mark on light grounds, the white mark on ink or imagery.</li>
+            <li>Scale proportionally and use the supplied high-resolution files.</li>
+          </ul>
+        </div>
+        <div class="rule-col dont">
+          <h4>Don't</h4>
+          <ul>
+            <li>Stretch, rotate, or recolor the mark outside the approved versions.</li>
+            <li>Add shadows, gradients, or outlines.</li>
+            <li>Place it on a busy or low-contrast background.</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- TYPOGRAPHY SECTION -->
-    <section class="guide-section" id="typography">
-      <div class="section-label">Brand Identity</div>
-      <h2 class="section-title">Typography</h2>
-      <p class="section-body">Typography is the primary way we communicate. Our three-font system gives us the tools for editorial punch, readable body text, and technical precision — each with a clear role.</p>
-
-      <div class="subsection">
-        <div class="subsection-title">Typefaces</div>
-
-        <div class="type-row">
-          <div class="type-meta">
-            <span class="type-name">Anton</span>
-            <div class="type-spec">Display / Headlines<br>All caps<br>Google Fonts — free</div>
+    <!-- REGISTRATION MARK -->
+    <section class="sec-block" id="mark">
+      <h2>Registration Mark</h2>
+      <p class="intro">The signature device is a printer's registration target: a crosshair and ring over four CMYK quadrants, with "EST. 2024" in the white center. It shows up as the favicon, the spinning footer seal, and section ornaments.</p>
+      <div class="mark-row">
+        <div>
+          <div class="mark-stage">
+            <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C registration mark">
+              <defs><path id="sgring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+              <g class="spin">
+                <g transform="translate(-4.5,-3.5)">
+                  <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+                  <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+                  <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+                  <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+                </g>
+                <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#sgring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+              </g>
+              <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+              <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+              <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+              <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+              <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+              <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+            </svg>
           </div>
-          <div class="type-example">
-            <div class="type-display">Creator<br>Journalism</div>
-          </div>
-        </div>
-
-        <div class="type-row">
-          <div class="type-meta">
-            <span class="type-name">Inter</span>
-            <div class="type-spec">Body / UI<br>Weights 300–700<br>Google Fonts — free</div>
-          </div>
-          <div class="type-example">
-            <div class="type-body-lg" style="margin-bottom:0.5rem;">Regular 18px — Supporting the people building independent journalism from scratch.</div>
-            <div class="type-body" style="margin-bottom:0.5rem;">Regular 15px — News about creator journalists and the strategies that are working in the field right now.</div>
-            <div class="type-body-sm"><strong>Semibold</strong> for labels and UI elements that need to stand out within body copy.</div>
-          </div>
-        </div>
-
-        <div class="type-row">
-          <div class="type-meta">
-            <span class="type-name">JetBrains Mono</span>
-            <div class="type-spec">Labels / Kickers / Data<br>Weights 400–500<br>Google Fonts — free</div>
-          </div>
-          <div class="type-example">
-            <div class="type-label" style="margin-bottom:0.5rem;">Research & Insights</div>
-            <div class="type-caption">Last updated May 2026 · 1,100+ journalists mapped</div>
+          <div class="mark-mini">
+            <figure><img src="favicon.svg" alt="Favicon" width="48" height="48"><figcaption>Favicon</figcaption></figure>
+            <figure><span class="cmyk-dots" style="padding:14px 0;"><i></i><i></i><i></i><i></i></span><figcaption>CMYK dots</figcaption></figure>
           </div>
         </div>
-      </div>
-
-      <div class="subsection">
-        <div class="subsection-title">Type Hierarchy in Practice</div>
-        <div class="hierarchy-demo">
-          <div class="demo-eyebrow">Research &amp; Insights</div>
-          <div class="demo-headline">The Creator Journalism Shift</div>
-          <div class="demo-dek">Independent journalists are building sustainable businesses outside legacy media at a pace we've never seen before. Here's what the data shows about who's making it work.</div>
-          <div class="demo-byline">By Liz Kelly Nelson · May 2026</div>
-        </div>
-        <div class="code-block">
-<span class="code-comment">/* Eyebrow / Kicker */</span>
-<span class="code-key">font-family</span>: <span class="code-val">'JetBrains Mono', monospace</span>;
-<span class="code-key">font-size</span>: <span class="code-val">0.7rem</span>; <span class="code-key">text-transform</span>: <span class="code-val">uppercase</span>; <span class="code-key">letter-spacing</span>: <span class="code-val">0.12em</span>;
-
-<span class="code-comment">/* Headline */</span>
-<span class="code-key">font-family</span>: <span class="code-val">'Anton', sans-serif</span>;
-<span class="code-key">font-size</span>: <span class="code-val">clamp(2.5rem, 5vw, 4rem)</span>; <span class="code-key">text-transform</span>: <span class="code-val">uppercase</span>;
-
-<span class="code-comment">/* Body / Dek */</span>
-<span class="code-key">font-family</span>: <span class="code-val">'Inter', sans-serif</span>;
-<span class="code-key">font-size</span>: <span class="code-val">1rem</span>; <span class="code-key">line-height</span>: <span class="code-val">1.7</span>;
-        </div>
-      </div>
-
-      <div class="subsection">
-        <div class="subsection-title">Role Reference</div>
-        <div style="overflow-x:auto;">
-          <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
-            <thead>
-              <tr style="border-bottom:2px solid rgba(54,10,5,0.1);">
-                <th style="text-align:left;padding:0.75rem 1rem 0.75rem 0;font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(54,10,5,0.4);font-weight:600;">Element</th>
-                <th style="text-align:left;padding:0.75rem 1rem;font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(54,10,5,0.4);font-weight:600;">Font</th>
-                <th style="text-align:left;padding:0.75rem 1rem;font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(54,10,5,0.4);font-weight:600;">Weight</th>
-                <th style="text-align:left;padding:0.75rem 0;font-family:var(--mono);font-size:0.65rem;text-transform:uppercase;letter-spacing:0.08em;color:rgba(54,10,5,0.4);font-weight:600;">Notes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:1px solid rgba(54,10,5,0.06);">
-                <td style="padding:0.75rem 1rem 0.75rem 0;color:var(--brown);font-weight:500;">Page headlines, section titles</td>
-                <td style="padding:0.75rem 1rem;font-family:var(--mono);color:rgba(54,10,5,0.5);">Anton</td>
-                <td style="padding:0.75rem 1rem;color:rgba(54,10,5,0.5);">400 (only weight)</td>
-                <td style="padding:0.75rem 0;color:rgba(54,10,5,0.5);">Always uppercase</td>
-              </tr>
-              <tr style="border-bottom:1px solid rgba(54,10,5,0.06);">
-                <td style="padding:0.75rem 1rem 0.75rem 0;color:var(--brown);font-weight:500;">Body copy, deks, descriptions</td>
-                <td style="padding:0.75rem 1rem;font-family:var(--mono);color:rgba(54,10,5,0.5);">Inter</td>
-                <td style="padding:0.75rem 1rem;color:rgba(54,10,5,0.5);">400 Regular</td>
-                <td style="padding:0.75rem 0;color:rgba(54,10,5,0.5);">Line height 1.7</td>
-              </tr>
-              <tr style="border-bottom:1px solid rgba(54,10,5,0.06);">
-                <td style="padding:0.75rem 1rem 0.75rem 0;color:var(--brown);font-weight:500;">Nav links, UI labels, captions</td>
-                <td style="padding:0.75rem 1rem;font-family:var(--mono);color:rgba(54,10,5,0.5);">Inter</td>
-                <td style="padding:0.75rem 1rem;color:rgba(54,10,5,0.5);">500–600</td>
-                <td style="padding:0.75rem 0;color:rgba(54,10,5,0.5);">Sentence case</td>
-              </tr>
-              <tr style="border-bottom:1px solid rgba(54,10,5,0.06);">
-                <td style="padding:0.75rem 1rem 0.75rem 0;color:var(--brown);font-weight:500;">Kickers, eyebrows, tags</td>
-                <td style="padding:0.75rem 1rem;font-family:var(--mono);color:rgba(54,10,5,0.5);">JetBrains Mono</td>
-                <td style="padding:0.75rem 1rem;color:rgba(54,10,5,0.5);">400</td>
-                <td style="padding:0.75rem 0;color:rgba(54,10,5,0.5);">Uppercase + letter-spacing</td>
-              </tr>
-              <tr>
-                <td style="padding:0.75rem 1rem 0.75rem 0;color:var(--brown);font-weight:500;">Stats, data labels, dates</td>
-                <td style="padding:0.75rem 1rem;font-family:var(--mono);color:rgba(54,10,5,0.5);">JetBrains Mono or Anton</td>
-                <td style="padding:0.75rem 1rem;color:rgba(54,10,5,0.5);">400</td>
-                <td style="padding:0.75rem 0;color:rgba(54,10,5,0.5);">Anton for large numbers</td>
-              </tr>
-            </tbody>
-          </table>
+        <div>
+          <p>The four quadrants are the process colors of the logo: <b>cyan, magenta, yellow, and key black</b>. The center holds the founding year the way a press stamp would.</p>
+          <p>The color quadrants sit <b>deliberately misregistered</b>, nudged off-center by a few pixels, the way an old press drifts out of alignment. That intentional imperfection is the point: it signals print, craft, and independence rather than a sterile digital logo.</p>
+          <p>In the footer the quadrants and ring text <b>rotate slowly</b> while the crosshair stays fixed, so the mark reads as a live press plate. Keep the drift and the rotation; don't "clean them up."</p>
         </div>
       </div>
     </section>
 
-    <!-- COLOR SECTION -->
-    <section class="guide-section" id="color">
-      <div class="section-label">Brand Identity</div>
-      <h2 class="section-title">Color Palette</h2>
-      <p class="section-body">Our palette leads with warm neutrals and pops of coral — an editorial feel that's warm rather than corporate. Click any swatch to copy its hex code.</p>
+    <!-- COLOR -->
+    <section class="sec-block" id="color">
+      <h2>Color</h2>
+      <p class="intro">White paper, black ink, one warm lead. The CMYK process colors are pops, not fields. Click any swatch to copy its hex.</p>
 
-      <div class="subsection">
-        <div class="subsection-title">Primary Colors</div>
-        <div class="color-grid">
-          <div class="color-card" onclick="copyColor('#FE6B41', this)">
-            <div class="color-swatch" style="background:#FE6B41;"><div class="copy-hint" style="color:white;">Copy</div></div>
-            <div class="color-meta">
-              <span class="color-name">Coral</span>
-              <div class="color-hex">#FE6B41</div>
-              <div class="color-role">Primary accent — CTAs, highlights, active states</div>
-            </div>
-          </div>
-          <div class="color-card" onclick="copyColor('#F4F2EA', this)">
-            <div class="color-swatch" style="background:#F4F2EA; border-bottom:1px solid rgba(54,10,5,0.06);"><div class="copy-hint" style="color:var(--brown);">Copy</div></div>
-            <div class="color-meta">
-              <span class="color-name">Cream</span>
-              <div class="color-hex">#F4F2EA</div>
-              <div class="color-role">Page background, primary surface</div>
-            </div>
-          </div>
-          <div class="color-card" onclick="copyColor('#E09AC2', this)">
-            <div class="color-swatch" style="background:#E09AC2;"><div class="copy-hint" style="color:white;">Copy</div></div>
-            <div class="color-meta">
-              <span class="color-name">Pink</span>
-              <div class="color-hex">#E09AC2</div>
-              <div class="color-role">Gradient pair with Coral — accents, decorative</div>
-            </div>
-          </div>
-        </div>
+      <div class="sub">Grounds</div>
+      <div class="swatches">
+        <div class="sw" onclick="copyHex('#FFFFFF',this)"><div class="chip" style="background:#FFFFFF;border-bottom:var(--rule-thin);"><div class="cp" style="color:var(--ink);">Copy</div></div><div class="meta"><div class="nm">White</div><div class="hx">#FFFFFF</div><div class="rl">Primary page ground</div></div></div>
+        <div class="sw" onclick="copyHex('#F5F6F8',this)"><div class="chip" style="background:#F5F6F8;border-bottom:var(--rule-thin);"><div class="cp" style="color:var(--ink);">Copy</div></div><div class="meta"><div class="nm">Porcelain</div><div class="hx">#F5F6F8</div><div class="rl">Cool near-white surface</div></div></div>
+        <div class="sw" onclick="copyHex('#EDEEF1',this)"><div class="chip" style="background:#EDEEF1;border-bottom:var(--rule-thin);"><div class="cp" style="color:var(--ink);">Copy</div></div><div class="meta"><div class="nm">Band Gray</div><div class="hx">#EDEEF1</div><div class="rl">Sets a section apart</div></div></div>
+        <div class="sw" onclick="copyHex('#FBEEE9',this)"><div class="chip" style="background:#FBEEE9;border-bottom:var(--rule-thin);"><div class="cp" style="color:var(--ink);">Copy</div></div><div class="meta"><div class="nm">Tint</div><div class="hx">#FBEEE9</div><div class="rl">Faint coral wash</div></div></div>
       </div>
 
-      <div class="subsection">
-        <div class="subsection-title">Text &amp; Dark Tones</div>
-        <div class="color-grid">
-          <div class="color-card" onclick="copyColor('#360A05', this)">
-            <div class="color-swatch" style="background:#360A05;"><div class="copy-hint" style="color:rgba(244,242,234,0.7);">Copy</div></div>
-            <div class="color-meta">
-              <span class="color-name">Brown</span>
-              <div class="color-hex">#360A05</div>
-              <div class="color-role">Primary text color, borders, UI elements</div>
-            </div>
-          </div>
-          <div class="color-card" onclick="copyColor('#200603', this)">
-            <div class="color-swatch" style="background:#200603;"><div class="copy-hint" style="color:rgba(244,242,234,0.7);">Copy</div></div>
-            <div class="color-meta">
-              <span class="color-name">Deep</span>
-              <div class="color-hex">#200603</div>
-              <div class="color-role">Headlines, footer background, darkest use</div>
-            </div>
-          </div>
-          <div class="color-card" onclick="copyColor('#EBE8DE', this)">
-            <div class="color-swatch" style="background:#EBE8DE; border-bottom:1px solid rgba(54,10,5,0.06);"><div class="copy-hint" style="color:var(--brown);">Copy</div></div>
-            <div class="color-meta">
-              <span class="color-name">Cream Dark</span>
-              <div class="color-hex">#EBE8DE</div>
-              <div class="color-role">Subtle surface variation — logo backgrounds, cards</div>
-            </div>
-          </div>
-        </div>
+      <div class="sub">Ink &amp; Lead</div>
+      <div class="swatches">
+        <div class="sw" onclick="copyHex('#15171A',this)"><div class="chip" style="background:#15171A;"><div class="cp" style="color:#fff;">Copy</div></div><div class="meta"><div class="nm">Ink</div><div class="hx">#15171A</div><div class="rl">Text, 2px rules, dark bands</div></div></div>
+        <div class="sw" onclick="copyHex('#3A3A3C',this)"><div class="chip" style="background:#3A3A3C;"><div class="cp" style="color:#fff;">Copy</div></div><div class="meta"><div class="nm">Key Gray</div><div class="hx">#3A3A3C</div><div class="rl">The "K" of CMYK</div></div></div>
+        <div class="sw" onclick="copyHex('#FE6B41',this)"><div class="chip" style="background:#FE6B41;"><div class="cp" style="color:var(--ink);">Copy</div></div><div class="meta"><div class="nm">Coral</div><div class="hx">#FE6B41</div><div class="rl">Lead accent, fills &amp; blocks</div></div></div>
+        <div class="sw" onclick="copyHex('#B74D2F',this)"><div class="chip" style="background:#B74D2F;"><div class="cp" style="color:#fff;">Copy</div></div><div class="meta"><div class="nm">Coral Deep</div><div class="hx">#B74D2F</div><div class="rl">Coral for text/links (AA)</div></div></div>
       </div>
 
-      <div class="subsection">
-        <div class="subsection-title">The Coral–Pink Gradient</div>
-        <p style="font-size:0.85rem;color:rgba(54,10,5,0.6);margin-bottom:1rem;line-height:1.6;">This animated gradient is a signature brand element — used as the top bar on every page and as a decorative accent on dark cards. The animation runs at 8 seconds and cycles smoothly.</p>
-        <div class="gradient-demo"></div>
-        <div class="code-block">
-<span class="code-comment">/* Animated gradient bar */</span>
-<span class="code-key">background</span>: <span class="code-val">linear-gradient(90deg, #FE6B41, #E09AC2, #FE6B41, #E09AC2)</span>;
-<span class="code-key">background-size</span>: <span class="code-val">300% 100%</span>;
-<span class="code-key">animation</span>: <span class="code-val">gradientSlide 8s ease infinite</span>;
-        </div>
+      <div class="sub">CMYK Process Pops</div>
+      <div class="swatches">
+        <div class="sw" onclick="copyHex('#00AEEF',this)"><div class="chip" style="background:#00AEEF;"><div class="cp" style="color:var(--ink);">Copy</div></div><div class="meta"><div class="nm">Cyan</div><div class="hx">#00AEEF</div><div class="rl">Process pop</div></div></div>
+        <div class="sw" onclick="copyHex('#EC008C',this)"><div class="chip" style="background:#EC008C;"><div class="cp" style="color:#fff;">Copy</div></div><div class="meta"><div class="nm">Magenta</div><div class="hx">#EC008C</div><div class="rl">Process pop</div></div></div>
+        <div class="sw" onclick="copyHex('#FFE800',this)"><div class="chip" style="background:#FFE800;"><div class="cp" style="color:var(--ink);">Copy</div></div><div class="meta"><div class="nm">Yellow</div><div class="hx">#FFE800</div><div class="rl">Process pop</div></div></div>
+      </div>
+      <div class="callout">
+        <h4>Contrast rule</h4>
+        <p>On white, coral is a fill or block color, not a text color. For coral type or links use Coral Deep #B74D2F, which clears WCAG AA. Text on cyan, yellow, and coral blocks stays ink; on magenta and ink it goes porcelain.</p>
       </div>
     </section>
 
-    <!-- COMPONENTS SECTION -->
-    <section class="guide-section" id="components">
-      <div class="section-label">Components</div>
-      <h2 class="section-title">Buttons &amp; Badges</h2>
-      <p class="section-body">Buttons and badges are the primary interactive and labeling elements on the site. Use them consistently — Coral is always the primary action color.</p>
+    <!-- TYPOGRAPHY -->
+    <section class="sec-block" id="type">
+      <h2>Typography</h2>
+      <p class="intro">Two workhorses and one accent. Anton shouts, Inter reads, Fraunces adds a human note. The type is becoming the brand, so lean into it.</p>
 
-      <div class="subsection">
-        <div class="subsection-title">Buttons</div>
-        <div class="component-row">
-          <div class="component-label">Primary</div>
-          <button class="btn-primary">Join the Community</button>
-          <span style="font-size:0.78rem;color:rgba(54,10,5,0.4);font-family:var(--mono);">Coral fill · white text · pill shape</span>
-        </div>
-        <div class="component-row">
-          <div class="component-label">Secondary</div>
-          <button class="btn-secondary">Learn More</button>
-          <span style="font-size:0.78rem;color:rgba(54,10,5,0.4);font-family:var(--mono);">Transparent · brown border · hover fills dark</span>
-        </div>
-        <div class="component-row">
-          <div class="component-label">Ghost</div>
-          <button class="btn-ghost">View Research</button>
-          <span style="font-size:0.78rem;color:rgba(54,10,5,0.4);font-family:var(--mono);">Coral border + text · hover fills coral</span>
-        </div>
-        <div class="component-row">
-          <div class="component-label">Dark</div>
-          <button class="btn-dark">Book a Session</button>
-          <span style="font-size:0.78rem;color:rgba(54,10,5,0.4);font-family:var(--mono);">Deep background · cream text · for dark sections</span>
-        </div>
-
-        <div class="code-block" style="margin-top:1.5rem;">
-<span class="code-comment">/* Primary button */</span>
-<span class="code-key">background</span>: <span class="code-val">#FE6B41</span>; <span class="code-key">color</span>: <span class="code-val">white</span>;
-<span class="code-key">padding</span>: <span class="code-val">1rem 2rem</span>; <span class="code-key">border-radius</span>: <span class="code-val">100px</span>;
-<span class="code-key">font-weight</span>: <span class="code-val">600</span>; <span class="code-key">font-size</span>: <span class="code-val">0.95rem</span>;
-<span class="code-key">transition</span>: <span class="code-val">all 0.25s ease</span>;
-
-<span class="code-comment">/* Hover */</span>
-<span class="code-key">background</span>: <span class="code-val">#e55e38</span>; <span class="code-key">transform</span>: <span class="code-val">translateY(-2px)</span>;
-        </div>
+      <div class="type-spec">
+        <div class="tm"><span class="tn">Anton</span><div class="ts">Display &amp; headlines. Always uppercase. One weight. Google Fonts.</div></div>
+        <div><div class="spec-anton"><span class="out">CREATOR</span> JOURNALISM</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="tm"><span class="tn">Anton — Section</span><div class="ts">h2 scale for section titles.</div></div>
+        <div><div class="spec-h2">In the news</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="tm"><span class="tn">Fraunces Italic</span><div class="ts">Serif accent: kickers, pull quotes, ticker. Use sparingly.</div></div>
+        <div><div class="spec-fraunces">Independent by design.</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="tm"><span class="tn">Inter — Lede</span><div class="ts">Standfirsts and intros, ~1.05–1.15rem.</div></div>
+        <div><div class="spec-lede">Project C supports the people building independent journalism from scratch.</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="tm"><span class="tn">Inter — Body</span><div class="ts">Reading copy. Weights 400–800. Line height ~1.6.</div></div>
+        <div><div class="spec-body">Independent journalists are building sustainable businesses outside legacy media. The copy should read like a person wrote it, because one did.</div></div>
+      </div>
+      <div class="type-spec">
+        <div class="tm"><span class="tn">Inter — Kicker</span><div class="ts">Small label above a headline. Uppercase, tracked, Coral Deep. Liz calls it the "kicker."</div></div>
+        <div><div class="spec-kicker">Research &amp; Press</div></div>
       </div>
 
-      <div class="subsection">
-        <div class="subsection-title">Badges &amp; Labels</div>
-        <div class="component-row">
-          <div class="component-label">Live Badge</div>
-          <span class="badge"><span class="pulse"></span> Now Open</span>
-        </div>
-        <div class="component-row">
-          <div class="component-label">Neutral Badge</div>
-          <span class="badge-dark">Research</span>
-        </div>
-        <div class="component-row">
-          <div class="component-label">Pink Badge</div>
-          <span class="badge-pink">Community</span>
-        </div>
-      </div>
-
-      <div class="subsection">
-        <div class="subsection-title">Stats Display</div>
-        <div class="stat-demo">
-          <div class="stat-item">
-            <span class="number">200+</span>
-            <div class="stat-label">Members</div>
-          </div>
-          <div class="stat-item">
-            <span class="number">1,100+</span>
-            <div class="stat-label">Journalists Mapped</div>
-          </div>
-          <div class="stat-item">
-            <span class="number">3</span>
-            <div class="stat-label">Years Running</div>
-          </div>
-        </div>
+      <div class="callout">
+        <h4>Enormous once per page</h4>
+        <p>Let exactly one display headline per page go genuinely huge, roughly 4–6rem or more, magazine scale. Everywhere else stays calm so that one moment lands. The white-fill outline treatment (shown above on "CREATOR") is reserved for the homepage.</p>
       </div>
     </section>
 
-    <!-- CARDS SECTION -->
-    <section class="guide-section" id="cards">
-      <div class="section-label">Components</div>
-      <h2 class="section-title">Cards &amp; Modules</h2>
-      <p class="section-body">Cards are the main content containers across the site. They come in light and dark variants. Dark cards always use the coral–pink gradient top accent.</p>
-
-      <div style="display:flex;gap:1.5rem;flex-wrap:wrap;margin-top:1.5rem;">
-        <div class="card-demo">
-          <div class="card-eyebrow">Research</div>
-          <h4>The Creator Journalism Report</h4>
-          <p>An annual look at how independent journalists are building businesses, finding audiences, and sustaining themselves outside legacy institutions.</p>
-          <a href="#" class="btn-primary" style="font-size:0.85rem;padding:0.7rem 1.5rem;">Read the Report</a>
-        </div>
-        <div class="card-dark">
-          <div class="card-eyebrow">Community</div>
-          <h4>Project C Members</h4>
-          <p>A vetted community of journalists building independent ventures. Monthly calls, resource sharing, and peer support from people who get it.</p>
-        </div>
+    <!-- ICONOGRAPHY -->
+    <section class="sec-block" id="icons">
+      <h2>Iconography</h2>
+      <p class="intro">Custom line icons, never emoji or stock glyphs. Each is drawn on a 40&times;40 grid in ink stroke with round caps, plus one small coral accent for a pop.</p>
+      <div class="icongrid">
+        <div class="iconcell"><svg viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 C20 13 23 16 30 20 C23 24 20 27 20 34 C20 27 17 24 10 20 C17 16 20 13 20 6 Z"/><circle cx="32" cy="8" r="1.8" fill="#FE6B41" stroke="none"/></svg><span>Spark</span></div>
+        <div class="iconcell"><svg viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="15" y="5" width="10" height="8" rx="1.5"/><rect x="4" y="27" width="10" height="8" rx="1.5"/><rect x="26" y="27" width="10" height="8" rx="1.5" stroke="#FE6B41"/><path d="M20 13 V20 M9 20 H31 M9 20 V27 M31 20 V27"/></svg><span>Team</span></div>
+        <div class="iconcell"><svg viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="14"/><path d="M20 20 L27 13 L23 23 L13 27 Z" fill="#FE6B41" stroke="none"/><circle cx="20" cy="20" r="1.6" fill="#15171A" stroke="none"/></svg><span>Compass</span></div>
+        <div class="iconcell"><svg viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 35 V17"/><path d="M20 23 C13 23 9 19 9 12 C16 12 20 16 20 23 Z"/><path d="M20 19 C27 19 31 15 31 8 C24 8 20 12 20 19 Z" stroke="#FE6B41"/><path d="M13 35 H27"/></svg><span>Sprout</span></div>
+        <div class="iconcell"><svg viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round"><circle cx="20" cy="20" r="11"/><line x1="20" y1="3" x2="20" y2="37"/><line x1="3" y1="20" x2="37" y2="20"/><circle cx="20" cy="20" r="4" fill="#FE6B41" stroke="none"/></svg><span>Focus</span></div>
+        <div class="iconcell"><svg viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 33 C9 25 21 27 21 19 C21 11 30 13 30 7" stroke-dasharray="2.5 3.5"/><circle cx="9" cy="33" r="2.4" fill="#15171A" stroke="none"/><path d="M30 7 V17" stroke="#FE6B41"/><path d="M30 7 H38 L35 10 L38 13 H30 Z" fill="#FE6B41" stroke="#FE6B41"/></svg><span>Strategy</span></div>
+        <div class="iconcell"><svg viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 6 V33 H34"/><path d="M11 27 L18 20 L23 24 L31 12" stroke="#FE6B41"/><path d="M26 12 H31 V17" stroke="#FE6B41"/></svg><span>Growth</span></div>
+        <div class="iconcell"><svg viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 6 V14 L8.5 30 A3 3 0 0 0 11.5 34.5 H28.5 A3 3 0 0 0 31.5 30 L24.5 14 V6"/><path d="M13.5 6 H26.5"/><path d="M11.5 26 H28.5"/><circle cx="17" cy="30" r="1.6" fill="#FE6B41" stroke="none"/><circle cx="22.5" cy="28.5" r="1.1" fill="#FE6B41" stroke="none"/></svg><span>Experiment</span></div>
+      </div>
+      <div class="code">
+<span class="c">/* icon recipe */</span>
+<span class="k">viewBox</span> <span class="v">0 0 40 40</span>  <span class="k">fill</span> <span class="v">none</span>  <span class="k">stroke</span> <span class="v">#15171A</span>
+<span class="k">stroke-width</span> <span class="v">2.2</span>  <span class="k">linecap/linejoin</span> <span class="v">round</span>
+<span class="c">/* + one coral #FE6B41 accent element */</span>
       </div>
     </section>
 
-    <!-- LINKS SECTION -->
-    <section class="guide-section" id="links">
-      <div class="section-label">Components</div>
-      <h2 class="section-title">Links &amp; Navigation</h2>
-      <p class="section-body">Inline links are underlined with coral. Navigation links and CTA links in headlines do not need underlines — context and placement carry the affordance.</p>
-
-      <div class="subsection">
-        <div class="subsection-title">Inline Link Style</div>
-        <div class="link-demo" style="font-size:1rem;line-height:1.8;max-width:560px;color:var(--brown);">
-          Project C publishes <a href="#">original research on creator journalism</a> and maintains <a href="#">the Independent Journalism Atlas</a>, the most comprehensive map of independent journalists in the US. Our community is <a href="#">now accepting applications</a> for the 2026 cohort.
-        </div>
+    <!-- BUTTONS -->
+    <section class="sec-block" id="buttons">
+      <h2>Buttons &amp; Elements</h2>
+      <p class="intro">Buttons are square, uppercase, and ink-ruled, never pills. One primary action per view.</p>
+      <div class="frame">
+        <button class="btn btn-coral">Join &rarr;</button>
+        <button class="btn btn-fill">Book a call &rarr;</button>
+        <button class="btn">Read the report</button>
+        <button class="btn btn-ghost">Learn more</button>
+      </div>
+      <div class="code">
+<span class="c">/* .btn base */</span>
+<span class="k">border</span> <span class="v">2px solid #15171A</span>  <span class="k">text-transform</span> <span class="v">uppercase</span>  <span class="k">padding</span> <span class="v">0.9rem 1.5rem</span>
+<span class="c">/* .btn-coral</span> <span class="v">coral fill</span> <span class="c">· .btn-fill</span> <span class="v">ink fill</span> <span class="c">· .btn-ghost</span> <span class="v">tint on hover</span> <span class="c">*/</span>
       </div>
 
-      <div class="subsection">
-        <div class="subsection-title">Navigation Link Style</div>
-        <p style="font-size:0.85rem;color:rgba(54,10,5,0.55);line-height:1.6;">Nav links use Inter 500, no underline by default. Hover adds a coral background tint. The active CTA uses the primary button style (Coral, pill-shaped).</p>
+      <div class="sub">Kicker, dots &amp; strip</div>
+      <div class="frame">
+        <span class="eyebrow" style="margin:0;"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Kicker label</span>
+        <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+        <span class="announce live" style="border:none;padding:0;background:none;color:var(--ink);"><span class="blip"></span> Live blip</span>
+      </div>
+      <div style="border:var(--rule);margin-top:1rem;"><div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div><div style="padding:0.7rem 1rem;font-size:0.8rem;color:var(--muted);">Registration strip &mdash; the 6px C/M/Y/K/coral bar that tops every page.</div></div>
+    </section>
+
+    <!-- PATTERNS -->
+    <section class="sec-block" id="patterns">
+      <h2>Layout Patterns</h2>
+      <p class="intro">Pages are built from full-bleed blocks divided by 2px ink rules on a modular grid. These are the recurring pieces.</p>
+
+      <div class="sub">CMYK modules</div>
+      <div class="mini-mods">
+        <div class="mm cyan"><div class="mi">01</div><h5>Cyan</h5></div>
+        <div class="mm dark"><div class="mi">02</div><h5>Ink</h5></div>
+        <div class="mm yellow"><div class="mi">03</div><h5>Yellow</h5></div>
+        <div class="mm coral"><div class="mi">04</div><h5>Coral</h5></div>
+      </div>
+
+      <div class="sub">The kit</div>
+      <div class="plist">
+        <div class="prow"><div class="pn">Masthead</div><div class="pd">Calm L2 opener: kicker, solid headline, standfirst, one CTA, a facts row.</div></div>
+        <div class="prow"><div class="pn">Modules</div><div class="pd">Four color-blocked tiles for pillars, ruled and full-bleed.</div></div>
+        <div class="prow"><div class="pn">Split</div><div class="pd">Edge-to-edge two columns, one often ink or a photo.</div></div>
+        <div class="prow"><div class="pn">Ledger</div><div class="pd">Print-index list: source column, title, action. Introduced on Research &amp; Press.</div></div>
+        <div class="prow"><div class="pn">Quotes</div><div class="pd">Three testimonials with CMYK top-rules.</div></div>
+        <div class="prow"><div class="pn">Footer seal</div><div class="pd">Link columns plus the spinning registration mark.</div></div>
       </div>
     </section>
 
-    <!-- ORIGIN SECTION -->
-    <section class="guide-section" id="origin">
-      <div class="section-label">Brand Story</div>
-      <h2 class="section-title">Why Project C?</h2>
-
-      <!-- CMYK Logo -->
-      <img src="project-c_logo_color.png" alt="Project C CMYK logo" style="height:80px;width:auto;display:block;margin:0 0 3rem 0;">
-
-      <div style="max-width:620px;">
-        <h3 style="font-size:1.1rem;font-weight:700;color:var(--deep);margin-bottom:1.25rem;line-height:1.4;">What's with the CMYK logo?</h3>
-        <p style="font-size:1rem;color:var(--brown);line-height:1.8;">
-          Project C started as a true project — an experiment during my Sulzberger Fellowship, where we learned the design principle of aiming for Point C, the next stage, instead of trying to leap straight to Point Z. It's about iteration, growth, and taking the next step forward. The name also stands for Creator, reflecting our mission to support journalists navigating the creator economy. And maybe it's even bigger than that — because we all have multiple projects, evolving over time.
-        </p>
-        <p style="font-size:1rem;color:var(--brown);line-height:1.8;margin-top:1.25rem;">
-          The CMYK logo is a nod to my newspaper roots, where CMYK registration marks ensured precision in printing by aligning the presses. That same continuity and tradition now finds a new path with independent creators, who are shaping the future of journalism in their own ways.
-        </p>
+    <!-- HIERARCHY -->
+    <section class="sec-block" id="hierarchy">
+      <h2>Page Hierarchy</h2>
+      <p class="intro">The site is an editorial publication, not a stack of landing pages. The homepage is the loudest. Every level deeper gets calmer and more focused on the reader's task.</p>
+      <div class="ladder">
+        <div class="rung"><div class="lv"><span class="n">L1</span></div><div class="lp">Destination</div><p>Home, Community. Bold: outline-word hero, faces wall, heavy CMYK grid.</p></div>
+        <div class="rung"><div class="lv"><span class="n">L2</span></div><div class="lp">Section</div><p>Coaching, Going Solo, Research &amp; Press, About. Calm editorial masthead, one goal, one CTA.</p></div>
+        <div class="rung"><div class="lv"><span class="n">L3</span></div><div class="lp">Content</div><p>Reports, this guide. Typography-first and minimal. The content is the hero.</p></div>
+      </div>
+      <div class="callout">
+        <h4>One new composition rule</h4>
+        <p>No page uses more than three established patterns without introducing at least one new composition. Every page contributes something fresh, so the system grows instead of repeating.</p>
       </div>
     </section>
 
@@ -1224,80 +471,95 @@ footer { background: var(--deep); color: rgba(244,242,234,0.5); padding: 4rem 0 
 </div>
 
 <!-- FOOTER -->
-<footer>
-  <div class="container-wide" style="max-width:1400px;margin:0 auto;padding:0 2rem;">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo" style="margin-bottom:1rem;display:block;">
-          <img style="height:32px;width:auto;" src="project-c_logo_white.png" alt="Project C">
-        </a>
-        <p>Supporting, amplifying, and normalizing independent creator-model journalism.</p>
-      </div>
-      <div class="footer-col"><h5>Explore</h5><a href="https://newsletter.projectc.biz">Newsletter</a><a href="/top50creatorjournalists">Top 50 List</a><a href="https://journalismatlas.com">The Independent Journalism Atlas</a><a href="news-ecosystem-map.html">News Ecosystem Map</a></div>
-      <div class="footer-col"><h5>Community</h5><a href="/community">Join the Community</a><a href="coaching.html">Coaching</a><a href="about.html">About Project C</a></div>
-      <div class="footer-col"><h5>Connect</h5><a href="about.html#founder">Team</a><a href="mailto:liz@projectc.biz">Contact</a><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a></div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Project C. All rights reserved.</span>
-      <div class="footer-social"><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="https://newsletter.projectc.biz">Beehiiv</a></div>
-    </div>
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href="press.html">Research &amp; Press</a>
+    <a href="news-ecosystem-map.html">News Ecosystem Map</a>
+    <a href="going-solo.html">Going Solo Workshop</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href="community.html">Join the Community</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="members.html">Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href="about.html">About Project C</a>
+    <a href="about.html#founder">Team</a>
+    <a href="mailto:liz@projectc.biz">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href="style-guide.html">Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C — independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
   </div>
 </footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design.</span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
 
-<!-- TOAST NOTIFICATION -->
-<div class="copied-toast" id="copiedToast"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-// Nav scroll behavior
 const nav = document.getElementById('mainNav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 50);
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+// smooth anchor scroll with offset
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e){
+    const id = this.getAttribute('href'); if (id === '#') return;
+    const t = document.querySelector(id); if (!t) return;
+    e.preventDefault();
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 96, behavior: reduce ? 'auto' : 'smooth' });
+  });
 });
 
-// Copy hex color
-function copyColor(hex, card) {
+// copy hex
+function copyHex(hex, el){
   navigator.clipboard.writeText(hex).then(() => {
-    const toast = document.getElementById('copiedToast');
-    toast.textContent = hex + ' copied';
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 2000);
+    const t = document.getElementById('toast');
+    t.textContent = hex + ' copied';
+    t.classList.add('show');
+    clearTimeout(window.__tt);
+    window.__tt = setTimeout(() => t.classList.remove('show'), 1800);
   });
 }
 
-// Active sidebar link tracking
-const sections = document.querySelectorAll('.guide-section');
-const sidebarLinks = document.querySelectorAll('.sidebar-section a');
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      const id = entry.target.id;
-      sidebarLinks.forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-      });
+// active sidebar link
+const blocks = document.querySelectorAll('.sec-block');
+const links = document.querySelectorAll('.doc-side a.side-link');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if (en.isIntersecting) {
+      const id = en.target.id;
+      links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
     }
   });
-}, { threshold: 0.3, rootMargin: '-80px 0px -60% 0px' });
-
-sections.forEach(section => observer.observe(section));
-</script>
-
-<script>
-(function() {
-  if (sessionStorage.getItem('coachingBannerDismissed')) {
-    var bar = document.getElementById('announcementBar');
-    var nav = document.getElementById('mainNav');
-    if (bar) bar.style.display = 'none';
-    if (nav) nav.style.top = '4px';
-  }
-})();
-function dismissAnnouncementBar() {
-  var bar = document.getElementById('announcementBar');
-  var nav = document.getElementById('mainNav');
-  if (bar) bar.style.display = 'none';
-  if (nav) nav.style.top = '4px';
-  sessionStorage.setItem('coachingBannerDismissed', '1');
-}
+}, { threshold: 0.1, rootMargin: '-90px 0px -55% 0px' });
+blocks.forEach(b => obs.observe(b));
 </script>
 </body>
 </html>

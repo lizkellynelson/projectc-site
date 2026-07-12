@@ -3,1169 +3,434 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Press, Research & Speaking — Project C</title>
-<meta name="description" content="Project C and founder Liz Kelly Nelson in the press, on the stage, and publishing research on the future of journalism.">
-<link rel="icon" type="image/png" href="Project-C_Logo_color.png">
-<link rel="apple-touch-icon" href="Project-C_Logo_color.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Research &amp; Press — Project C</title>
+<meta name="description" content="Project C's research on the independent-journalism ecosystem, press coverage of the work, and where founder Liz Kelly Nelson is speaking.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://projectc.biz/press">
+<meta property="og:title" content="Research &amp; Press — Project C">
+<meta property="og:description" content="The research, the coverage, and the stages. Documenting the shift to independent journalism.">
+<meta property="og:image" content="https://projectc.biz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://projectc.biz/og-image.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
 <style>
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-:root {
-  --cream: #F4F2EA; --coral: #FE6B41; --pink: #E09AC2;
-  --brown: #360A05; --deep: #200603; --cream-dark: #EBE8DE;
-  --coral-btn: #C15131; --coral-btn-hover: #A8442A; --coral-text: #B74D2F; --coral-display: #E5603A; --pink-text: #8A3A5E;
-  --serif: 'Anton', 'Impact', sans-serif;
-  --sans: 'Inter', -apple-system, sans-serif;
-}
-:focus-visible { outline: 2px solid var(--deep); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
-  .reveal { opacity: 1 !important; transform: none !important; }
-}
-.skip-link { position: absolute; left: -999px; top: 0; background: var(--deep); color: var(--cream); padding: .6rem 1rem; z-index: 2000; }
-.skip-link:focus { left: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
-body { font-family: var(--sans); background: var(--cream); color: var(--brown); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
-.container-wide { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+/* ---- Research & Press — Level-2 editorial index ---- */
+.nav.scrolled { box-shadow: 0 4px 24px rgba(21,23,26,0.08); }
 
-/* GRADIENT BAR */
-.gradient-bar { height: 4px; background: linear-gradient(90deg, var(--coral), var(--pink), var(--coral), var(--pink)); background-size: 300% 100%; animation: gradientSlide 8s ease infinite; }
-@keyframes gradientSlide { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+/* L2 MASTHEAD (calm opener) */
+.masthead { border-bottom: var(--rule); background: var(--white); }
+.masthead-inner { max-width: 1000px; margin: 0 auto; padding: clamp(1.5rem,3vw,2.4rem) 2rem clamp(1.3rem,2.2vw,1.9rem); }
+.masthead .eyebrow { color: var(--coral-deep); margin-bottom: 0.9rem; }
+.masthead h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.9rem,3.4vw,2.8rem); line-height: 1.06; letter-spacing: 0.01em; color: var(--ink); max-width: 26ch; margin-bottom: 0.9rem; }
+.masthead .standfirst { font-size: 1.08rem; color: var(--muted); line-height: 1.55; max-width: 62ch; margin-bottom: 1.4rem; }
+.masthead .mast-cta { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
+.mast-link { font-weight: 800; color: var(--coral-deep); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.06em; text-decoration: underline; text-underline-offset: 4px; }
+.mast-jump { display: flex; gap: 1.6rem; flex-wrap: wrap; margin-top: 1.5rem; padding-top: 1.1rem; border-top: var(--rule-thin); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 800; }
+.mast-jump a { display: inline-flex; align-items: center; gap: 0.55rem; color: var(--muted); transition: color 0.18s; }
+.mast-jump a::before { content: ''; width: 6px; height: 6px; background: var(--coral); border-radius: 50%; flex-shrink: 0; }
+.mast-jump a:hover { color: var(--coral-deep); }
 
-/* NAV */
-/* ANNOUNCEMENT BAR */
-.announcement-bar {
-  position: fixed;
-  top: 4px;
-  left: 0; right: 0;
-  z-index: 1001;
-  background: var(--brown);
-  color: var(--cream);
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  padding: 0 3rem;
-}
-.announcement-bar a {
-  color: var(--coral);
-  text-decoration: none;
-  font-weight: 600;
-  margin-left: 0.25em;
-}
-.announcement-bar a:hover { text-decoration: underline; }
-.announcement-bar .ab-dismiss {
-  position: absolute; right: 1.25rem;
-  background: none; border: none; color: rgba(244,242,234,0.55);
-  cursor: pointer; font-size: 0.9rem;
-  padding: 0.4rem 0.5rem; line-height: 1;
-  transition: color 0.2s ease;
-}
-.announcement-bar .ab-dismiss:hover { color: var(--cream); }
+/* THE ENORMOUS TYPE MOMENT — page thesis */
+.thesis { max-width: var(--maxw); margin: 0 auto; padding: clamp(3rem,6vw,5.5rem) 2rem; }
+.thesis .big { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.9rem,8vw,6.4rem); line-height: 0.93; letter-spacing: 0.01em; color: var(--ink); max-width: 15ch; }
+.thesis .big .coral { color: var(--coral); }
+.thesis p { margin-top: 1.9rem; max-width: 58ch; font-size: 1.08rem; color: var(--muted); line-height: 1.75; }
 
-nav { position: fixed; top: 48px; left: 0; right: 0; z-index: 1000; background: rgba(244,242,234,0.92); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid rgba(54,10,5,0.06); transition: all 0.3s ease; transform: translateZ(0); }
-nav.scrolled { box-shadow: 0 4px 30px rgba(32,6,3,0.08); }
-.nav-inner { max-width: 1400px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 72px; }
-.nav-logo { text-decoration: none; display: flex; align-items: center; }
-.nav-logo .logo-img { height: 48px; width: auto; }
-.nav-links { display: flex; align-items: center; gap: 0.25rem; list-style: none; }
-.nav-links a { color: var(--brown); text-decoration: none; font-size: 0.875rem; font-weight: 500; padding: 0.5rem 1rem; border-radius: 8px; transition: all 0.2s ease; }
-.nav-links a:hover { background: rgba(254,107,65,0.08); color: var(--coral-text); }
-.nav-cta { background: var(--coral-btn) !important; color: white !important; padding: 0.6rem 1.25rem !important; border-radius: 100px !important; font-weight: 600 !important; }
-.nav-cta:hover { background: var(--coral-btn-hover) !important; }
-.nav-toggle { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
-.nav-toggle span { display: block; width: 22px; height: 2px; background: var(--brown); border-radius: 2px; transition: all 0.2s; }
+/* FEATURED RESEARCH — dark split (image + copy) */
+.feature { display: grid; grid-template-columns: 1fr 1fr; background: var(--ink); color: var(--porcelain); border-top: var(--rule); border-bottom: var(--rule); }
+.feature .fvisual { background: #0c0e10; overflow: hidden; min-height: 340px; }
+.feature .fvisual img { width: 100%; height: 100%; object-fit: cover; }
+.feature .fcopy { padding: clamp(2.5rem,4vw,3.5rem) 2.5rem; display: flex; flex-direction: column; justify-content: center; border-left: 2px solid rgba(245,246,248,0.16); }
+.feature .fpartner { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--magenta); margin-bottom: 1rem; }
+.feature h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.5rem,2.6vw,2.1rem); line-height: 1.08; color: var(--porcelain); margin-bottom: 1.1rem; }
+.feature p { font-size: 0.98rem; color: rgba(245,246,248,0.68); line-height: 1.7; margin-bottom: 1.8rem; max-width: 46ch; }
+.feature .flink { font-weight: 800; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: #FF8A66; }
+.feature .flink:hover { text-decoration: underline; text-underline-offset: 4px; }
 
-/* PAGE HEADER */
-.page-header {
-  padding: 10.25rem 0 5rem;
-  background:
-    radial-gradient(ellipse 60% 80% at 80% 50%, rgba(224,154,194,0.12) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 20% 80%, rgba(254,107,65,0.08) 0%, transparent 60%),
-    var(--deep);
-  color: var(--cream);
-}
-.page-header-inner {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: 3rem;
-}
-.page-header-photo {
-  width: 220px;
-  height: 280px;
-  border-radius: 16px;
-  overflow: hidden;
-  flex-shrink: 0;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-}
-.page-header-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-}
-.page-label {
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--coral);
-  margin-bottom: 1rem;
-}
-.page-header h1 {
-  font-family: var(--serif);
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  line-height: 1;
-  text-transform: uppercase;
-  color: var(--cream);
-  margin-bottom: 1.5rem;
-}
-.page-header p {
-  font-size: 1.1rem;
-  color: rgba(244,242,234,0.65);
-  max-width: 520px;
-  line-height: 1.7;
-}
-.page-header-nav {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2.5rem;
-  flex-wrap: wrap;
-}
-.page-nav-pill {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: rgba(244,242,234,0.55);
-  text-decoration: none;
-  padding: 0.4rem 1rem;
-  border: 1px solid rgba(244,242,234,0.12);
-  border-radius: 100px;
-  transition: all 0.2s ease;
-}
-.page-nav-pill:hover,
-.page-nav-pill.active { color: var(--cream); border-color: rgba(244,242,234,0.4); background: rgba(244,242,234,0.06); }
+/* LEDGER — a print-index / colophon composition (new to the site) */
+.ledger { max-width: var(--maxw); margin: 0 auto; }
+.ledger .row { display: grid; grid-template-columns: 240px 1fr auto; gap: 1.8rem; align-items: baseline; padding: 1.6rem 2rem; border-top: var(--rule-thin); transition: background 0.18s, padding-left 0.18s; }
+.ledger .row:first-child { border-top: none; }
+.ledger a.row:hover { background: var(--tint); padding-left: 2.6rem; }
+.ledger .src { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral-deep); line-height: 1.5; }
+.ledger .ttl { font-size: 1.08rem; font-weight: 600; line-height: 1.35; color: var(--ink); }
+.ledger .ttl .sub { display: block; font-size: 0.88rem; color: var(--muted); font-weight: 400; margin-top: 0.4rem; line-height: 1.55; }
+.ledger .go { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--coral-deep); white-space: nowrap; }
+.ledger.compact .row { grid-template-columns: 240px 1fr; gap: 1.8rem; padding: 1.15rem 2rem; }
+.ledger.compact .ttl { font-size: 0.98rem; font-weight: 500; }
 
-/* SECTION LABELS */
-.section-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--coral-text);
-  margin-bottom: 0.75rem;
-}
-.section-label.pink { color: var(--pink-text); }
-.section-label.muted { color: rgba(54,10,5,0.6); }
+/* EDITORIAL PHOTO BREAK */
+.photobreak { position: relative; width: 100%; height: clamp(280px, 40vw, 460px); overflow: hidden; border-bottom: var(--rule); }
+.photobreak img { width: 100%; height: 100%; object-fit: cover; object-position: center 28%; }
+.photobreak .cap { position: absolute; left: 0; bottom: 0; background: var(--ink); color: var(--porcelain); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.7rem 1.1rem; }
 
-/* REVEAL ANIMATION */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.visible { opacity: 1; transform: none; }
+/* SPEAKING — dark band of event cards */
+.speaking { background: var(--ink); color: var(--porcelain); border-bottom: var(--rule); }
+.speaking .sec-head h2 { color: var(--porcelain); }
+.speaking .sec-head .lede { color: rgba(245,246,248,0.6); }
+.speaking .sec-head .eyebrow { color: #FF8A66; }
+.spk-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: var(--rule); }
+.spk { display: block; border-right: var(--rule); border-bottom: var(--rule); overflow: hidden; transition: background 0.18s; }
+.spk:nth-child(2n) { border-right: none; }
+.spk:nth-last-child(-n+2) { border-bottom: none; }
+.spk:hover { background: #0c0e10; }
+.spk .spk-photo { height: 210px; overflow: hidden; position: relative; border-bottom: var(--rule); }
+.spk .spk-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+.spk:hover .spk-photo img { transform: scale(1.04); }
+.spk .spk-body { padding: 1.6rem 1.7rem; }
+.spk .venue { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.09em; color: var(--coral); margin-bottom: 0.7rem; }
+.spk h3 { font-size: 1rem; font-weight: 600; line-height: 1.35; color: var(--porcelain); margin-bottom: 1rem; }
+.spk .watch { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(245,246,248,0.6); transition: color 0.18s; }
+.spk:hover .watch { color: #FF8A66; }
+.spk .watch svg { width: 9px; height: 11px; }
 
-/* ============================
-   RESEARCH SECTION
-   ============================ */
-.research-section { padding: 6rem 0 0; }
-.research-section-head { margin-bottom: 3.5rem; }
-.research-section-head h2 {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 4vw, 3rem);
-  text-transform: uppercase;
-  color: var(--deep);
-  line-height: 1.05;
-  margin-bottom: 0.75rem;
-}
-.research-section-head p { font-size: 1rem; color: rgba(54,10,5,0.6); max-width: 560px; line-height: 1.7; }
+/* CONTACT SPLIT */
+.contact { display: grid; grid-template-columns: 1fr 1fr; border-bottom: var(--rule); }
+.contact .cc { padding: clamp(2.5rem,4vw,3.5rem) 2.5rem; }
+.contact .cc + .cc { border-left: var(--rule); }
+.contact .cc h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.5rem,2.5vw,2.1rem); line-height: 1.05; color: var(--ink); margin: 0.3rem 0 1rem; }
+.contact .cc p { font-size: 0.98rem; color: var(--muted); line-height: 1.7; margin-bottom: 1.8rem; max-width: 44ch; }
 
-/* Atlas Feature Card */
-.atlas-card {
-  background: var(--deep);
-  border-radius: 24px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 420px;
-  margin-bottom: 1.5rem;
-  text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.atlas-card:hover { transform: translateY(-4px); box-shadow: 0 24px 64px rgba(32,6,3,0.25); }
-.atlas-card-content {
-  padding: 3.5rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-}
-.atlas-logo {
-  height: 180px;
-  width: auto;
-  margin-bottom: 2rem;
-  opacity: 0.9;
-}
-.atlas-card-content h3 {
-  font-family: var(--serif);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
-  text-transform: uppercase;
-  color: var(--cream);
-  line-height: 1.1;
-  margin-bottom: 1.25rem;
-}
-.atlas-card-content p {
-  font-size: 0.95rem;
-  color: rgba(244,242,234,0.6);
-  line-height: 1.7;
-  margin-bottom: 2rem;
-  max-width: 400px;
-}
-.atlas-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--coral);
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  transition: gap 0.2s ease;
-}
-.atlas-link:hover { gap: 0.75rem; }
-.atlas-card-visual {
-  position: relative;
-  overflow: hidden;
-  background: rgba(244,242,234,0.04);
-}
-.atlas-card-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: left center;
-  opacity: 0.85;
-  transition: opacity 0.3s ease, transform 0.5s ease;
-}
-.atlas-card:hover .atlas-card-visual img { opacity: 1; transform: scale(1.02); }
+/* Featured-press 3-up (scoped so DS mobile rules can be overridden cleanly) */
+.modules.mod3 { grid-template-columns: repeat(3, 1fr); }
+.modules.mod3 .mod { border-right: var(--rule); }
+.modules.mod3 .mod:last-child { border-right: none; }
 
-/* CNTI Featured Card */
-.cnti-card {
-  background: var(--deep);
-  border-radius: 24px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 360px;
-  margin-bottom: 1.5rem;
-  text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.cnti-card:hover { transform: translateY(-4px); box-shadow: 0 24px 64px rgba(32,6,3,0.25); }
-.cnti-card-visual {
-  position: relative;
-  overflow: hidden;
-  background: rgba(244,242,234,0.04);
-  order: -1;
-}
-.cnti-card-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0.88;
-  transition: opacity 0.3s ease, transform 0.5s ease;
-}
-.cnti-card:hover .cnti-card-visual img { opacity: 1; transform: scale(1.02); }
-.cnti-card-content {
-  padding: 3rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.research-partner {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--pink);
-  margin-bottom: 1rem;
-  display: block;
-}
-.cnti-card-content h3 {
-  font-family: var(--serif);
-  font-size: clamp(1.15rem, 2vw, 1.55rem);
-  text-transform: uppercase;
-  color: var(--cream);
-  line-height: 1.15;
-  margin-bottom: 1.25rem;
-}
-.cnti-card-content p {
-  font-size: 0.9rem;
-  color: rgba(244,242,234,0.58);
-  line-height: 1.7;
-  margin-bottom: 1.75rem;
-  max-width: 400px;
-}
-
-/* Secondary research items */
-.research-secondary {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 6rem;
-  margin-top: 1.5rem;
-}
-.research-item {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem 2rem 2rem;
-  text-decoration: none;
-  color: var(--brown);
-  border: 1px solid rgba(54,10,5,0.04);
-  transition: all 0.3s ease;
-  display: block;
-}
-.research-item:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(32,6,3,0.08); border-color: rgba(254,107,65,0.12); }
-.research-item-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: rgba(224,154,194,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 1.25rem;
-  font-size: 1.1rem;
-}
-.research-item h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.3; }
-.research-item .research-item-partner { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(54,10,5,0.6); margin-bottom: 0.5rem; display: block; }
-.research-item p { font-size: 0.875rem; color: rgba(54,10,5,0.6); line-height: 1.6; }
-.research-item-arrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--coral-text);
-  margin-top: 1rem;
-  letter-spacing: 0.03em;
-}
-
-/* ============================
-   PHOTO BREAK
-   ============================ */
-.photo-break {
-  width: 100%;
-  height: 480px;
-  position: relative;
-  overflow: hidden;
-}
-.photo-break img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-}
-.photo-break-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(32,6,3,0.0) 0%,
-    rgba(32,6,3,0.0) 40%,
-    rgba(32,6,3,0.75) 100%
-  );
-}
-.photo-break-caption {
-  position: absolute;
-  bottom: 2.5rem;
-  left: 2.5rem;
-  color: rgba(244,242,234,0.95);
-  font-size: 0.8rem;
-  letter-spacing: 0.04em;
-}
-
-/* ============================
-   PRESS SECTION
-   ============================ */
-.press-section { padding: 6rem 0 0; }
-.press-section-head { margin-bottom: 3rem; }
-.press-section-head h2 {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 4vw, 3rem);
-  text-transform: uppercase;
-  color: var(--deep);
-  line-height: 1.05;
-  margin-bottom: 0.75rem;
-}
-.press-section-head p { font-size: 1rem; color: rgba(54,10,5,0.6); max-width: 480px; line-height: 1.7; }
-
-/* Featured press */
-.featured-press { margin-bottom: 3rem; }
-.featured-press-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.25rem;
-}
-.featured-press-item {
-  background: white;
-  border-radius: 16px;
-  padding: 2rem;
-  text-decoration: none;
-  color: var(--brown);
-  border: 1px solid rgba(54,10,5,0.04);
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-.featured-press-item:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(32,6,3,0.1); border-color: rgba(254,107,65,0.15); }
-.featured-press-item .press-source {
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--coral-text);
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-}
-.featured-press-item h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  line-height: 1.35;
-  flex: 1;
-  margin-bottom: 1.25rem;
-}
-.press-badge {
-  display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  padding: 0.25rem 0.7rem;
-  border-radius: 100px;
-  background: rgba(254,107,65,0.08);
-  color: var(--coral-text);
-  align-self: flex-start;
-}
-
-/* Also featured */
-.also-featured-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(54,10,5,0.6);
-  margin-bottom: 1.25rem;
-  margin-top: 0.5rem;
-}
-.press-grid-small {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-bottom: 6rem;
-}
-.press-item-small {
-  background: white;
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-decoration: none;
-  color: var(--brown);
-  border: 1px solid rgba(54,10,5,0.04);
-  transition: all 0.25s ease;
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-}
-.press-item-small:hover { box-shadow: 0 4px 20px rgba(32,6,3,0.07); border-color: rgba(254,107,65,0.1); }
-.press-item-small-body { flex: 1; }
-.press-item-small .press-source {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--coral-text);
-  font-weight: 700;
-  margin-bottom: 0.4rem;
-}
-.press-item-small h4 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  line-height: 1.35;
-}
-.press-type-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  margin-top: 0.35rem;
-  flex-shrink: 0;
-}
-.press-type-dot.article { background: var(--coral); }
-.press-type-dot.mention { background: rgba(54,10,5,0.2); }
-.press-type-dot.speaking { background: var(--pink); }
-
-/* ============================
-   INLINE PHOTO (press section)
-   ============================ */
-.inline-photo-wide {
-  margin: 0 0 4rem;
-  border-radius: 20px;
-  overflow: hidden;
-  height: 400px;
-  position: relative;
-}
-.inline-photo-wide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 25%;
-}
-.inline-photo-wide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(to bottom, rgba(32,6,3,0.0) 60%, rgba(32,6,3,0.6) 100%);
-}
-.inline-photo-credit {
-  position: absolute;
-  bottom: 1.25rem;
-  right: 1.5rem;
-  font-size: 0.8125rem;
-  color: rgba(244,242,234,0.95);
-  letter-spacing: 0.04em;
-  z-index: 1;
-}
-
-/* ============================
-   SPEAKING SECTION
-   ============================ */
-.speaking-section { padding: 6rem 0 0; background: var(--deep); }
-.speaking-section-inner { padding: 6rem 0 6rem; }
-.speaking-section-head { margin-bottom: 4rem; }
-.speaking-section-head h2 {
-  font-family: var(--serif);
-  font-size: clamp(2rem, 4vw, 3rem);
-  text-transform: uppercase;
-  color: var(--cream);
-  line-height: 1.05;
-  margin-bottom: 0.75rem;
-}
-.speaking-section-head p { font-size: 1rem; color: rgba(244,242,234,0.55); max-width: 480px; line-height: 1.7; }
-
-/* Speaking event grid */
-.speaking-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-}
-.speaking-event {
-  background: rgba(244,242,234,0.04);
-  border: 1px solid rgba(244,242,234,0.07);
-  border-radius: 20px;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--cream);
-  transition: all 0.3s ease;
-  display: block;
-}
-.speaking-event:hover { background: rgba(244,242,234,0.07); border-color: rgba(254,107,65,0.25); transform: translateY(-3px); }
-.speaking-event-photo {
-  width: 100%;
-  height: 220px;
-  overflow: hidden;
-  position: relative;
-}
-.speaking-event-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-  transition: transform 0.5s ease;
-}
-.speaking-event:hover .speaking-event-photo img { transform: scale(1.04); }
-.speaking-event-photo-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, transparent 50%, rgba(32,6,3,0.4) 100%);
-}
-.speaking-event-body { padding: 1.75rem; }
-.speaking-venue {
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--coral);
-  margin-bottom: 0.6rem;
-}
-.speaking-event-body h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.35;
-  margin-bottom: 1rem;
-  color: var(--cream);
-}
-.watch-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: rgba(244,242,234,0.55);
-  letter-spacing: 0.03em;
-  transition: color 0.2s;
-}
-.speaking-event:hover .watch-link { color: var(--coral); }
-.watch-icon {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: rgba(254,107,65,0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: background 0.2s;
-}
-.speaking-event:hover .watch-icon { background: rgba(254,107,65,0.25); }
-.watch-icon svg { display: block; }
-
-/* ============================
-   CONTACT CTA
-   ============================ */
-.contact-cta {
-  background: var(--cream-dark);
-  padding: 6rem 0;
-  border-top: 1px solid rgba(54,10,5,0.06);
-}
-.contact-cta-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-.contact-cta-card {
-  background: white;
-  border-radius: 20px;
-  padding: 2.5rem;
-  border: 1px solid rgba(54,10,5,0.05);
-}
-.contact-cta-card .section-label { margin-bottom: 0.75rem; }
-.contact-cta-card h3 {
-  font-family: var(--serif);
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
-  text-transform: uppercase;
-  color: var(--deep);
-  line-height: 1.1;
-  margin-bottom: 1rem;
-}
-.contact-cta-card p {
-  font-size: 0.95rem;
-  color: rgba(54,10,5,0.6);
-  line-height: 1.7;
-  margin-bottom: 2rem;
-}
-.contact-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: var(--coral-btn);
-  color: white;
-  text-decoration: none;
-  font-size: 0.875rem;
-  font-weight: 700;
-  padding: 0.75rem 1.5rem;
-  border-radius: 100px;
-  transition: background 0.2s ease, gap 0.2s ease;
-  letter-spacing: 0.02em;
-}
-.contact-btn:hover { background: var(--coral-btn-hover); gap: 0.75rem; }
-.contact-btn.secondary {
-  background: transparent;
-  color: var(--coral-text);
-  border: 2px solid var(--coral-text);
-}
-.contact-btn.secondary:hover { background: rgba(254,107,65,0.06); }
-@media (max-width: 768px) {
-  .contact-cta-grid { grid-template-columns: 1fr; }
-}
-
-/* ============================
-   FOOTER
-   ============================ */
-footer { background: var(--deep); color: rgba(244,242,234,0.55); padding: 4rem 0 2rem; border-top: 1px solid rgba(244,242,234,0.06); }
-footer .nav-logo { text-decoration: none; display: flex; align-items: center; color: var(--cream); margin-bottom: 1rem; }
-footer .logo-img-footer { height: 32px; width: auto; }
-.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
-.footer-brand p { font-size: 0.85rem; line-height: 1.6; max-width: 280px; }
-.footer-col h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--cream); margin-bottom: 1.25rem; font-weight: 600; }
-.footer-col a { display: block; font-size: 0.85rem; color: rgba(244,242,234,0.55); text-decoration: none; padding: 0.3rem 0; transition: color 0.2s; }
-.footer-col a:hover { color: var(--coral); }
-.footer-bottom { padding-top: 2rem; border-top: 1px solid rgba(244,242,234,0.08); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
-.footer-social { display: flex; gap: 1rem; }
-.footer-social a { color: rgba(244,242,234,0.55); text-decoration: none; transition: color 0.2s; }
-.footer-social a:hover { color: var(--coral); }
-
-/* ============================
-   RESPONSIVE
-   ============================ */
 @media (max-width: 900px) {
-  .atlas-card { grid-template-columns: 1fr; min-height: auto; }
-  .atlas-card-visual { height: 240px; }
-  .cnti-card { grid-template-columns: 1fr; min-height: auto; }
-  .cnti-card-visual { height: 220px; order: 0; }
-  .featured-press-grid { grid-template-columns: 1fr; }
-  .speaking-grid { grid-template-columns: 1fr; }
-  .research-secondary { grid-template-columns: 1fr; }
-  .page-header-inner { grid-template-columns: 1fr; }
-  .page-header-photo { display: none; }
+  .modules.mod3 { grid-template-columns: 1fr; }
+  .modules.mod3 .mod { border-right: none; border-bottom: var(--rule); min-height: 0; }
+  .modules.mod3 .mod:last-child { border-bottom: none; }
+  .feature { grid-template-columns: 1fr; }
+  .feature .fvisual { min-height: 240px; }
+  .feature .fcopy { border-left: none; border-top: var(--rule); }
+  .spk-grid { grid-template-columns: 1fr; }
+  .spk { border-right: none; }
+  .spk:nth-last-child(-n+2):not(:last-child) { border-bottom: var(--rule); }
+  .contact { grid-template-columns: 1fr; }
+  .contact .cc + .cc { border-left: none; border-top: var(--rule); }
 }
-@media (max-width: 768px) {
-  .nav-links { display: none; }
-  .nav-toggle { display: flex; }
-  .nav-links.show { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--cream); padding: 1rem 2rem; gap: .5rem; box-shadow: 0 8px 30px rgba(32,6,3,0.1); }
-  .press-grid-small { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .photo-break { height: 300px; }
-  .inline-photo-wide { height: 260px; }
+@media (max-width: 680px) {
+  .ledger .row, .ledger.compact .row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .ledger .go { display: none; }
 }
 </style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
 
-<div class="gradient-bar"></div>
-<div class="announcement-bar" id="announcementBar">
-  <span>Now open: 1-on-1 coaching with Blair Hickman — spots are limited.<a href="/coaching">Book a discovery call →</a></span>
-  <button class="ab-dismiss" onclick="dismissAnnouncementBar()" aria-label="Dismiss">✕</button>
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<div class="announce" id="announcementBar">
+  <span class="live"><span class="blip"></span>Now open</span>
+  <span>1-on-1 coaching with Blair Hickman. Spots are limited. <a href="coaching.html">See coaching &rarr;</a></span>
+  <button class="ab-x" onclick="document.getElementById('announcementBar').classList.add('hidden')" aria-label="Dismiss">&#10005;</button>
 </div>
 
-<nav id="mainNav">
+<nav class="nav" id="mainNav">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img class="logo-img" src="Project-C_Lockup_color.png" alt="Project C"></a>
+    <a href="index.html" class="nav-logo"><img src="project-c_lockup_color.png" alt="Project C — home"></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
       <li><a href="community.html">Community</a></li>
       <li><a href="going-solo.html">Going Solo</a></li>
       <li><a href="coaching.html">Coaching</a></li>
-      <li><a href="press.html" style="color:var(--coral-text); font-weight:600;">Research &amp; Press</a></li>
+      <li><a href="press.html" aria-current="page">Research &amp; Press</a></li>
       <li><a href="about.html">About</a></li>
-      <li><a href="members.html" style="color:#B74D2F; font-weight:600; display:inline-flex; align-items:center; gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B74D2F" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="8" cy="12" r="4.5"/><path d="M12.5 12h9M18 12v4M21.5 12v3"/></svg>Members</a></li>
-      <li><a href="community.html" class="nav-cta">Join the Community</a></li>
+      <li><a href="members.html" class="nav-member">Member Login</a></li>
+      <li><a href="community.html" class="nav-cta">Join &rarr;</a></li>
     </ul>
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);"><span></span><span></span><span></span></button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
 <main id="main">
 
-<!-- PAGE HEADER -->
-<section class="page-header">
-  <div class="container">
-    <div class="page-header-inner">
-      <div class="page-header-text">
-        <p class="page-label">Liz Kelly Nelson &amp; Project C</p>
-        <h1>Press,<br>Research<br>&amp; Speaking</h1>
-        <p>What we're publishing, where we're showing up, and who's writing about it.</p>
-        <div class="page-header-nav">
-          <a href="#research" class="page-nav-pill">Research</a>
-          <a href="#press" class="page-nav-pill">Press</a>
-          <a href="#speaking" class="page-nav-pill">Speaking</a>
-        </div>
-      </div>
+<!-- MASTHEAD (Level-2 editorial opener) -->
+<section class="masthead">
+  <div class="masthead-inner">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Research &amp; Press</div>
+    <h1>What we&rsquo;re publishing, and who&rsquo;s covering the work.</h1>
+    <p class="standfirst">Project C studies the independent-journalism ecosystem, gets written about for it, and shows up on stages to argue about where news is headed. Here&rsquo;s the research, the coverage, and the talks in one place.</p>
+    <div class="mast-cta">
+      <a href="mailto:info@projectc.biz" class="btn btn-coral">Press inquiries &rarr;</a>
+      <a href="#speaking" class="mast-link">Book Liz to speak</a>
     </div>
+    <nav class="mast-jump" aria-label="On this page">
+      <a href="#research">Research</a>
+      <a href="#press">Press</a>
+      <a href="#speaking">Speaking</a>
+    </nav>
   </div>
 </section>
 
-<!-- ============================
-     RESEARCH SECTION
-     ============================ -->
-<section class="research-section" id="research">
-  <div class="container">
-    <div class="research-section-head reveal">
-      <p class="section-label">Research</p>
-      <h2>What We're Building &amp; Studying</h2>
-      <p>Project C doesn't just teach journalists how to go independent — we're tracking the ecosystem as it grows.</p>
-    </div>
+<!-- THESIS — the one enormous type moment -->
+<section class="sec" id="research">
+  <div class="thesis reveal">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Research</div>
+    <h2 class="big">Independent journalism didn&rsquo;t disappear. <span class="coral">It moved.</span></h2>
+    <p>So we track where it went: who&rsquo;s doing the work, how they&rsquo;re funding it, and what&rsquo;s keeping most of them from breaking even. We partner with researchers and newsrooms to put real numbers behind a shift everyone can feel but few have measured. The reports below are where we show that work.</p>
+  </div>
+</section>
 
-    <!-- Atlas Feature Card -->
-    <a href="https://journalismatlas.com" target="_blank" class="atlas-card reveal">
-      <div class="atlas-card-content">
-        <img src="atlas-logo-white.png" alt="The Independent Journalism Atlas" class="atlas-logo">
-        <h3>The Independent Journalism Atlas</h3>
-        <p>A living map and database of 1,400+ verified creator-journalists — organized by beat, platform, and geography. Independent journalism didn't disappear. It's moving. Co-founded with Ryan Darnell.</p>
-        <span class="atlas-link">Visit the Atlas &rarr;</span>
-      </div>
-      <div class="atlas-card-visual">
-        <img src="atlas-screenshot.png" alt="Independent Journalism Atlas screenshot">
-      </div>
+<!-- FEATURED RESEARCH -->
+<a href="https://cnti.org/reports/understanding-us-indie-info-providers/" target="_blank" rel="noopener" class="feature reveal">
+  <div class="fvisual">
+    <img src="cnti-cover.png" alt="CNTI report cover illustration">
+  </div>
+  <div class="fcopy">
+    <div class="fpartner">With CNTI &middot; April 2026 &middot; The latest</div>
+    <h2>US Indie Info Providers: Professionally Diverse, Mission-Driven, Rarely Earning Profit</h2>
+    <p>A first look at the people shaping independent information in the United States, and the challenges keeping most of them from breaking even. Project C contributed recruitment, field knowledge, and expertise to this landmark study by the Center for News, Technology &amp; Innovation.</p>
+    <span class="flink">Read the report &rarr;</span>
+  </div>
+</a>
+
+<!-- RESEARCH LEDGER -->
+<section class="sec">
+  <div class="ledger reveal">
+    <a href="https://videoconsortium.org/member-resources/rise-of-creator-journalist-report" target="_blank" rel="noopener" class="row">
+      <span class="src">Video Consortium &amp; Fordham</span>
+      <span class="ttl">The Rise of the Creator-Journalist<span class="sub">How independent video journalists are making the creator model work, and why they&rsquo;re an integral part of the future of news.</span></span>
+      <span class="go">Read &rarr;</span>
     </a>
-
-    <!-- CNTI Featured Card -->
-    <a href="https://cnti.org/reports/understanding-us-indie-info-providers/" target="_blank" class="cnti-card reveal">
-      <div class="cnti-card-visual">
-        <img src="cnti-cover.png" alt="CNTI report cover illustration">
-      </div>
-      <div class="cnti-card-content">
-        <span class="research-partner">In partnership with CNTI &middot; April 2026</span>
-        <h3>US Indie Info Providers: Professionally Diverse, Mission-driven, Sometimes Lonely, Rarely Earning Profit</h3>
-        <p>A first look at the people shaping independent information in the United States — and the challenges keeping most of them from breaking even. Project C contributed recruitment, field knowledge, and expertise to this landmark study by the Center for News, Technology &amp; Innovation.</p>
-        <span class="atlas-link">Read the report &rarr;</span>
-      </div>
+    <a href="https://localnewsinitiative.northwestern.edu/posts/2026/02/19/chicago-media-ecosystem-project-c/index.html" target="_blank" rel="noopener" class="row">
+      <span class="src">Medill Local News Initiative</span>
+      <span class="ttl">The Media Ecosystem: Chicago<span class="sub">Applying Project C&rsquo;s News Ecosystem Framework to a single market for the first time, and surfacing 100 previously unindexed sources.</span></span>
+      <span class="go">Read &rarr;</span>
     </a>
-
-    <!-- Secondary research items -->
-    <div class="research-secondary">
-      <a href="https://videoconsortium.org/member-resources/rise-of-creator-journalist-report" target="_blank" class="research-item reveal">
-        <div class="research-item-icon">🎬</div>
-        <span class="research-item-partner">In partnership with the Video Consortium &amp; Fordham University</span>
-        <h3>The Rise of the Creator-Journalist</h3>
-        <p>A 2026 study examining how independent video journalists are making the creator model work — and why they're not just a trend, but an integral part of the future of news.</p>
-        <span class="research-item-arrow">Read the report &rarr;</span>
-      </a>
-      <a href="https://localnewsinitiative.northwestern.edu/posts/2026/02/19/chicago-media-ecosystem-project-c/index.html" target="_blank" class="research-item reveal">
-        <div class="research-item-icon">🏙️</div>
-        <span class="research-item-partner">In partnership with Medill's Local News Initiative</span>
-        <h3>The Media Ecosystem Chicago</h3>
-        <p>A deep dive into Chicago's expansive media landscape, applying Project C's News Ecosystem Framework to a specific market for the first time — and uncovering 100 previously unindexed sources.</p>
-        <span class="research-item-arrow">Read the report &rarr;</span>
-      </a>
-      <a href="/top50creatorjournalists" class="research-item reveal">
-        <div class="research-item-icon">📋</div>
-        <h3>The Top 50 Creator Journalists</h3>
-        <p>An annual list of the independent journalists doing the most interesting, influential, and sustainable work in the creator model. Our first list launched in 2025.</p>
-        <span class="research-item-arrow">See the list &rarr;</span>
-      </a>
-      <a href="news-ecosystem-map.html" class="research-item reveal">
-        <div class="research-item-icon">🗺️</div>
-        <h3>News Ecosystem Map</h3>
-        <p>An interactive map showing how the current news landscape is structured — who's filling which roles, where the gaps are, and how creator journalism fits in.</p>
-        <span class="research-item-arrow">Explore the map &rarr;</span>
-      </a>
-    </div>
+    <a href="/top50creatorjournalists" class="row">
+      <span class="src">Project C &middot; Annual list</span>
+      <span class="ttl">The Top 50 Creator Journalists<span class="sub">The independent journalists doing the most interesting, influential, and sustainable work in the creator model.</span></span>
+      <span class="go">See the list &rarr;</span>
+    </a>
+    <a href="news-ecosystem-map.html" class="row">
+      <span class="src">Project C &middot; Interactive</span>
+      <span class="ttl">The News Ecosystem Map<span class="sub">How the news landscape is structured: who fills which roles, where the gaps are, and how creator journalism fits in.</span></span>
+      <span class="go">Explore &rarr;</span>
+    </a>
   </div>
 </section>
 
 <!-- PHOTO BREAK -->
-<div class="photo-break">
+<div class="photobreak">
   <img src="liz-press-forward-chicago.jpeg" alt="Liz Kelly Nelson at Press Forward Chicago">
-  <div class="photo-break-overlay"></div>
-  <span class="photo-break-caption">Press Forward Chicago</span>
+  <span class="cap">Press Forward &middot; Chicago</span>
 </div>
 
-<!-- ============================
-     PRESS SECTION
-     ============================ -->
-<section class="press-section" id="press">
-  <div class="container">
-    <div class="press-section-head reveal">
-      <p class="section-label">Press</p>
-      <h2>In the News</h2>
-      <p>Interviews, features, and coverage of Project C in the press.</p>
-    </div>
-
-    <!-- Featured press -->
-    <div class="featured-press reveal">
-      <div class="featured-press-grid">
-
-        <a href="https://the1a.org/segments/independent-journalism-in-the-time-of-algorithms/" target="_blank" class="featured-press-item">
-          <div class="press-source">NPR's 1A</div>
-          <h3>Independent Journalism in the Time of Algorithms</h3>
-          <span class="press-badge">Radio</span>
-        </a>
-
-        <a href="https://niemanreports.org/liz-kelly-nelson-project-c-creator-journalists-social-media-gen-z-news-vertical-video/" target="_blank" class="featured-press-item">
-          <div class="press-source">Nieman Reports</div>
-          <h3>How Are Creator Journalists Reaching Audiences Traditional Media Miss?</h3>
-          <span class="press-badge">Interview</span>
-        </a>
-
-        <a href="https://www.cjr.org/the_interview/pivoting-to-creator-liz-kelly-nelson.php" target="_blank" class="featured-press-item">
-          <div class="press-source">Columbia Journalism Review</div>
-          <h3>Pivoting to Creator: An interview with Liz Kelly Nelson</h3>
-          <span class="press-badge">Interview</span>
-        </a>
-
-      </div>
-    </div>
-
-    <!-- Also featured -->
-    <h3 class="also-featured-label">Also featured in</h3>
-    <div class="press-grid-small reveal">
-
-      <a href="https://www.svdj.nl/nieuws/van-traditioneel-journalist-naar-een-eigen-community-liz-kelly-nelson-pleit-voor-meer-journalistieke-creators/" target="_blank" class="press-item-small">
-        <div class="press-type-dot article"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">SVDJ (Dutch Journalism Fund)</div>
-          <h4>Van traditioneel journalist naar een eigen community: Liz Kelly Nelson pleit voor meer journalistieke creators</h4>
-        </div>
-      </a>
-
-      <a href="https://ijnet.org/en/story/understanding-creator-journalism-liz-kelly-nelson-founder-project-c" target="_blank" class="press-item-small">
-        <div class="press-type-dot article"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">IJNet</div>
-          <h4>Understanding creator journalism with Liz Kelly Nelson, founder of Project C</h4>
-        </div>
-      </a>
-
-      <a href="https://www.niemanlab.org/2025/12/the-creator-infrastructure-gap-will-define-journalisms-next-decade/" target="_blank" class="press-item-small">
-        <div class="press-type-dot article"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">Nieman Lab</div>
-          <h4>Creator infrastructure will define journalism's next chapter</h4>
-        </div>
-      </a>
-
-      <a href="https://margaretsullivan.substack.com/p/trust-in-mainstream-media-is-at-rock" target="_blank" class="press-item-small">
-        <div class="press-type-dot article"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">American Crisis</div>
-          <h4>Trust in mainstream media is at rock bottom. Can it be fixed?</h4>
-        </div>
-      </a>
-
-      <a href="https://www.bostonmagazine.com/news/local-news-influencers-future-of-media/" target="_blank" class="press-item-small">
-        <div class="press-type-dot article"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">Boston Magazine</div>
-          <h4>Why Influencers Matter to the Future of Local Media</h4>
-        </div>
-      </a>
-
-      <a href="https://www.editorandpublisher.com/stories/the-new-army-of-journalists-creators-and-influencers-impact-our-industry,254584" target="_blank" class="press-item-small">
-        <div class="press-type-dot article"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">Editor &amp; Publisher</div>
-          <h4>The new 'army' of journalists: Creators and influencers impact our industry</h4>
-        </div>
-      </a>
-
-      <a href="https://jsk.stanford.edu/news/jsk-journalism-fellowships-welcomes-three-new-board-members" target="_blank" class="press-item-small">
-        <div class="press-type-dot mention"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">Stanford University</div>
-          <h4>JSK Journalism Fellowship Welcomes Three New Board Members</h4>
-        </div>
-      </a>
-
-      <a href="https://gwtoday.gwu.edu/new-terker-distinguished-fellows-bring-media-and-strategy-expertise-gw" target="_blank" class="press-item-small">
-        <div class="press-type-dot mention"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">GW Today</div>
-          <h4>New Terker Distinguished Fellows to Bring Media and Strategy Expertise to GW</h4>
-        </div>
-      </a>
-
-      <a href="https://www.cjr.org/the_media_today/peak_newsletter_substack_beehiiv_ghost.php" target="_blank" class="press-item-small">
-        <div class="press-type-dot mention"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">CJR Media Today</div>
-          <h4>The Long Peak of Newsletters</h4>
-        </div>
-      </a>
-
-      <a href="https://www.vanityfair.com/news/story/ezra-klein-youtube-dan-abrams-mediaite-new-york-times" target="_blank" class="press-item-small">
-        <div class="press-type-dot mention"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">Vanity Fair</div>
-          <h4>How Ezra Klein's YouTube makeover points to podcasting's TV future</h4>
-        </div>
-      </a>
-
-      <a href="https://www.cjr.org/the_media_today/news-organizations-embrace-creator-model-journalists-collaborate-compete-tiktok-instagram-youtube.php" target="_blank" class="press-item-small">
-        <div class="press-type-dot mention"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">Columbia Journalism Review</div>
-          <h4>News Organizations Are Starting to Embrace Creator-Model Journalists</h4>
-        </div>
-      </a>
-
-      <a href="https://mediacat.uk/noosphere-and-reinventing-news-for-the-tiktok-generation/" target="_blank" class="press-item-small">
-        <div class="press-type-dot mention"></div>
-        <div class="press-item-small-body">
-          <div class="press-source">MediaCat</div>
-          <h4>Noosphere and repackaging news for the TikTok generation</h4>
-        </div>
-      </a>
-
-    </div>
+<!-- PRESS -->
+<section class="sec" id="press">
+  <div class="sec-head">
+    <div class="eyebrow magenta"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Press</div>
+    <h2 class="h-display">In the news</h2>
+    <p class="lede">Interviews, features, and coverage of Project C and the creator-journalism shift.</p>
   </div>
 </section>
 
-<!-- ============================
-     SPEAKING SECTION
-     ============================ -->
-<section class="speaking-section" id="speaking">
-  <div class="speaking-section-inner">
-    <div class="container">
-      <div class="speaking-section-head reveal">
-        <p class="section-label" style="color: var(--pink);">Speaking</p>
-        <h2>On the Stage</h2>
-        <p>Panels, keynotes, and symposia on the future of journalism, creator media, and independent news.</p>
-      </div>
+<!-- Featured press — three cards -->
+<section class="modules" style="grid-template-columns:repeat(3,1fr);">
+  <a href="https://the1a.org/segments/independent-journalism-in-the-time-of-algorithms/" target="_blank" rel="noopener" class="mod cyan">
+    <span class="idx">NPR&rsquo;s 1A &middot; Radio</span>
+    <h3>Independent Journalism in the Time of Algorithms</h3>
+    <p>Liz on the forces reshaping who makes the news and how audiences find it.</p>
+    <span class="go">Listen &rarr;</span>
+  </a>
+  <a href="https://niemanreports.org/liz-kelly-nelson-project-c-creator-journalists-social-media-gen-z-news-vertical-video/" target="_blank" rel="noopener" class="mod dark">
+    <span class="idx">Nieman Reports &middot; Interview</span>
+    <h3>How Are Creator Journalists Reaching Audiences Traditional Media Miss?</h3>
+    <p>On vertical video, Gen Z news habits, and meeting audiences where they already are.</p>
+    <span class="go">Read &rarr;</span>
+  </a>
+  <a href="https://www.cjr.org/the_interview/pivoting-to-creator-liz-kelly-nelson.php" target="_blank" rel="noopener" class="mod yellow">
+    <span class="idx">Columbia Journalism Review &middot; Interview</span>
+    <h3>Pivoting to Creator: An Interview with Liz Kelly Nelson</h3>
+    <p>Why she left the newsroom to build the infrastructure independents were missing.</p>
+    <span class="go">Read &rarr;</span>
+  </a>
+</section>
 
-      <div class="speaking-grid">
-
-        <a href="https://www.journalismfestival.com/programme/2026/creators-and-the-future-of-journalism-insights-on-infrastructure-building-from-the-us-and-south-africa" target="_blank" class="speaking-event reveal">
-          <div class="speaking-event-photo">
-            <img src="perugia-panel.jpeg" alt="Liz Kelly Nelson at the International Journalism Festival" style="object-position: center 30%;">
-            <div class="speaking-event-photo-overlay"></div>
-          </div>
-          <div class="speaking-event-body">
-            <div class="speaking-venue">International Journalism Festival 2026 · Perugia</div>
-            <h3>Creators and the Future of Journalism: Insights on Infrastructure Building from the US and South Africa</h3>
-            <span class="watch-link">
-              <span class="watch-icon">
-                <svg width="8" height="10" viewBox="0 0 8 10" fill="none" aria-hidden="true" focusable="false"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
-              </span>
-              View the programme
-            </span>
-          </div>
-        </a>
-
-        <a href="https://www.youtube.com/watch?v=ZDHSf1pWoic" target="_blank" class="speaking-event reveal">
-          <div class="speaking-event-photo">
-            <img src="liz-gbh.jpeg" alt="Liz Kelly Nelson at GBH Media Summit">
-            <div class="speaking-event-photo-overlay"></div>
-          </div>
-          <div class="speaking-event-body">
-            <div class="speaking-venue">GBH Media Summit 2025</div>
-            <h3>What Legacy Media and Digital Content Creators Can Learn From Each Other</h3>
-            <span class="watch-link">
-              <span class="watch-icon">
-                <svg width="8" height="10" viewBox="0 0 8 10" fill="none" aria-hidden="true" focusable="false"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
-              </span>
-              Watch on YouTube
-            </span>
-          </div>
-        </a>
-
-        <a href="https://knightcenter.utexas.edu/isoj-panel-explores-evolving-definitions-of-journalists-and-journalism-in-the-era-of-influencers/" target="_blank" class="speaking-event reveal">
-          <div class="speaking-event-photo">
-            <img src="liz-at-podium.jpg" alt="Liz Kelly Nelson at ISOJ" style="object-position: center 20%;">
-            <div class="speaking-event-photo-overlay"></div>
-          </div>
-          <div class="speaking-event-body">
-            <div class="speaking-venue">ISOJ / Knight Center 2025</div>
-            <h3>Evolving Definitions of Journalists and Journalism in the Era of Influencers</h3>
-            <span class="watch-link">
-              <span class="watch-icon">
-                <svg width="8" height="10" viewBox="0 0 8 10" fill="none" aria-hidden="true" focusable="false"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
-              </span>
-              Read the coverage
-            </span>
-          </div>
-        </a>
-
-        <a href="https://www.youtube.com/watch?v=J8PxKE342vI&list=PLVlH7ojC02YFex0AMT1tjAuAK_LTKncGM&index=6" target="_blank" class="speaking-event reveal">
-          <div class="speaking-event-photo">
-            <img src="kmf-2025.png" alt="Liz Kelly Nelson at the Knight Media Forum" style="object-position: center 10%;">
-            <div class="speaking-event-photo-overlay"></div>
-          </div>
-          <div class="speaking-event-body">
-            <div class="speaking-venue">Knight Media Forum 2025</div>
-            <h3>Who Gets to Be Called a Journalist in 2025?</h3>
-            <span class="watch-link">
-              <span class="watch-icon">
-                <svg width="8" height="10" viewBox="0 0 8 10" fill="none" aria-hidden="true" focusable="false"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg>
-              </span>
-              Watch on YouTube
-            </span>
-          </div>
-        </a>
-
-      </div>
-    </div>
+<!-- Also featured — compact ledger -->
+<section class="sec">
+  <div class="sec-head" style="padding-bottom:0.5rem;">
+    <div class="eyebrow ink">Also featured in</div>
+  </div>
+  <div class="ledger compact reveal">
+    <a href="https://www.svdj.nl/nieuws/van-traditioneel-journalist-naar-een-eigen-community-liz-kelly-nelson-pleit-voor-meer-journalistieke-creators/" target="_blank" rel="noopener" class="row">
+      <span class="src">SVDJ &middot; NL</span>
+      <span class="ttl">Van traditioneel journalist naar een eigen community</span>
+    </a>
+    <a href="https://ijnet.org/en/story/understanding-creator-journalism-liz-kelly-nelson-founder-project-c" target="_blank" rel="noopener" class="row">
+      <span class="src">IJNet</span>
+      <span class="ttl">Understanding creator journalism with Liz Kelly Nelson</span>
+    </a>
+    <a href="https://www.niemanlab.org/2025/12/the-creator-infrastructure-gap-will-define-journalisms-next-decade/" target="_blank" rel="noopener" class="row">
+      <span class="src">Nieman Lab</span>
+      <span class="ttl">Creator infrastructure will define journalism&rsquo;s next chapter</span>
+    </a>
+    <a href="https://margaretsullivan.substack.com/p/trust-in-mainstream-media-is-at-rock" target="_blank" rel="noopener" class="row">
+      <span class="src">American Crisis</span>
+      <span class="ttl">Trust in mainstream media is at rock bottom. Can it be fixed?</span>
+    </a>
+    <a href="https://www.bostonmagazine.com/news/local-news-influencers-future-of-media/" target="_blank" rel="noopener" class="row">
+      <span class="src">Boston Magazine</span>
+      <span class="ttl">Why Influencers Matter to the Future of Local Media</span>
+    </a>
+    <a href="https://www.editorandpublisher.com/stories/the-new-army-of-journalists-creators-and-influencers-impact-our-industry,254584" target="_blank" rel="noopener" class="row">
+      <span class="src">Editor &amp; Publisher</span>
+      <span class="ttl">The new &lsquo;army&rsquo; of journalists: Creators and influencers impact our industry</span>
+    </a>
+    <a href="https://www.cjr.org/the_media_today/peak_newsletter_substack_beehiiv_ghost.php" target="_blank" rel="noopener" class="row">
+      <span class="src">CJR Media Today</span>
+      <span class="ttl">The Long Peak of Newsletters</span>
+    </a>
+    <a href="https://www.vanityfair.com/news/story/ezra-klein-youtube-dan-abrams-mediaite-new-york-times" target="_blank" rel="noopener" class="row">
+      <span class="src">Vanity Fair</span>
+      <span class="ttl">How Ezra Klein&rsquo;s YouTube makeover points to podcasting&rsquo;s TV future</span>
+    </a>
+    <a href="https://www.cjr.org/the_media_today/news-organizations-embrace-creator-model-journalists-collaborate-compete-tiktok-instagram-youtube.php" target="_blank" rel="noopener" class="row">
+      <span class="src">Columbia Journalism Review</span>
+      <span class="ttl">News Organizations Are Starting to Embrace Creator-Model Journalists</span>
+    </a>
+    <a href="https://mediacat.uk/noosphere-and-reinventing-news-for-the-tiktok-generation/" target="_blank" rel="noopener" class="row">
+      <span class="src">MediaCat</span>
+      <span class="ttl">Noosphere and repackaging news for the TikTok generation</span>
+    </a>
   </div>
 </section>
 
-<!-- CONTACT CTA -->
-<section class="contact-cta">
-  <div class="container">
-    <div class="contact-cta-grid">
-      <div class="contact-cta-card reveal">
-        <p class="section-label">Press</p>
-        <h3>Working on a Story?</h3>
-        <p>Liz is available for interviews, expert commentary, and background conversations on creator journalism, independent media, and the future of news.</p>
-        <a href="mailto:info@projectc.biz" class="contact-btn">Get in touch &rarr;</a>
+<!-- SPEAKING -->
+<section class="speaking" id="speaking">
+  <div class="sec-head">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Speaking</div>
+    <h2 class="h-display">On the stage</h2>
+    <p class="lede">Keynotes, panels, and symposia on the future of journalism, creator media, and independent news.</p>
+  </div>
+  <div class="spk-grid">
+    <a href="https://www.journalismfestival.com/programme/2026/creators-and-the-future-of-journalism-insights-on-infrastructure-building-from-the-us-and-south-africa" target="_blank" rel="noopener" class="spk">
+      <div class="spk-photo"><img src="perugia-panel.jpeg" alt="Liz Kelly Nelson at the International Journalism Festival" style="object-position:center 56%;"></div>
+      <div class="spk-body">
+        <div class="venue">Int&rsquo;l Journalism Festival 2026 &middot; Perugia</div>
+        <h3>Creators and the Future of Journalism: Infrastructure Building from the US and South Africa</h3>
+        <span class="watch"><svg viewBox="0 0 8 10" fill="none" aria-hidden="true"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg> View the programme</span>
       </div>
-      <div class="contact-cta-card reveal">
-        <p class="section-label pink">Speaking</p>
-        <h3>Book Liz to Speak</h3>
-        <p>Keynotes, panels, and symposia on the creator economy, independent journalism, and what the future of news actually looks like. Reach out to discuss your event.</p>
-        <a href="mailto:info@projectc.biz" class="contact-btn secondary">Send a booking inquiry &rarr;</a>
+    </a>
+    <a href="https://www.youtube.com/watch?v=ZDHSf1pWoic" target="_blank" rel="noopener" class="spk">
+      <div class="spk-photo"><img src="liz-gbh.jpeg" alt="Liz Kelly Nelson at the GBH Media Summit" style="object-position:center 30%;"></div>
+      <div class="spk-body">
+        <div class="venue">GBH Media Summit 2025</div>
+        <h3>What Legacy Media and Digital Content Creators Can Learn From Each Other</h3>
+        <span class="watch"><svg viewBox="0 0 8 10" fill="none" aria-hidden="true"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg> Watch on YouTube</span>
       </div>
-    </div>
+    </a>
+    <a href="https://knightcenter.utexas.edu/isoj-panel-explores-evolving-definitions-of-journalists-and-journalism-in-the-era-of-influencers/" target="_blank" rel="noopener" class="spk">
+      <div class="spk-photo"><img src="liz-at-podium.jpg" alt="Liz Kelly Nelson at ISOJ" style="object-position:center 20%;"></div>
+      <div class="spk-body">
+        <div class="venue">ISOJ / Knight Center 2025</div>
+        <h3>Evolving Definitions of Journalists and Journalism in the Era of Influencers</h3>
+        <span class="watch"><svg viewBox="0 0 8 10" fill="none" aria-hidden="true"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg> Read the coverage</span>
+      </div>
+    </a>
+    <a href="https://www.youtube.com/watch?v=J8PxKE342vI&list=PLVlH7ojC02YFex0AMT1tjAuAK_LTKncGM&index=6" target="_blank" rel="noopener" class="spk">
+      <div class="spk-photo"><img src="kmf-2025.png" alt="Liz Kelly Nelson at the Knight Media Forum" style="object-position:center 50%;"></div>
+      <div class="spk-body">
+        <div class="venue">Knight Media Forum 2025</div>
+        <h3>Who Gets to Be Called a Journalist in 2025?</h3>
+        <span class="watch"><svg viewBox="0 0 8 10" fill="none" aria-hidden="true"><path d="M1 1l6 4-6 4V1z" fill="#FE6B41"/></svg> Watch on YouTube</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <div class="cc">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> For journalists</div>
+    <h3>Working on a story?</h3>
+    <p>Liz is available for interviews, expert commentary, and background conversations on creator journalism, independent media, and the future of news.</p>
+    <a href="mailto:info@projectc.biz" class="btn btn-fill">Get in touch &rarr;</a>
+  </div>
+  <div class="cc">
+    <div class="eyebrow magenta"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> For event organizers</div>
+    <h3>Book Liz to speak</h3>
+    <p>Keynotes, panels, and symposia on the creator economy, independent journalism, and what the future of news actually looks like. Reach out to talk through your event.</p>
+    <a href="mailto:info@projectc.biz" class="btn btn-coral">Send a booking inquiry &rarr;</a>
   </div>
 </section>
 
 </main>
 
-<footer>
-  <div class="container-wide">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="nav-logo">
-          <img class="logo-img-footer" src="Project-C_Logo_White.png" alt="Project C">
-        </a>
-        <p>Supporting, amplifying, and normalizing independent creator-model journalism.</p>
-      </div>
-      <div class="footer-col"><h5>Explore</h5><a href="https://newsletter.projectc.biz">Newsletter</a><a href="/top50creatorjournalists">Top 50 List</a><a href="https://journalismatlas.com">The Independent Journalism Atlas</a><a href="news-ecosystem-map.html">News Ecosystem Map</a><a href="/going-solo">Going Solo Workshop</a></div>
-      <div class="footer-col"><h5>Community</h5><a href="/community">Join the Community</a><a href="about.html">About Project C</a></div>
-      <div class="footer-col"><h5>Connect</h5><a href="about.html#founder">Team</a><a href="mailto:liz@projectc.biz">Contact</a><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="press.html">Press &amp; Speaking</a><a href="style-guide.html">Brand Style Guide</a></div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Project C. All rights reserved.</span>
-      <div class="footer-social"><a href="https://www.linkedin.com/in/lizkellynelson/">LinkedIn</a><a href="https://newsletter.projectc.biz">Beehiiv</a></div>
-    </div>
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href="press.html">Research &amp; Press</a>
+    <a href="news-ecosystem-map.html">News Ecosystem Map</a>
+    <a href="going-solo.html">Going Solo Workshop</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href="community.html">Join the Community</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="members.html">Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href="about.html">About Project C</a>
+    <a href="about.html#founder">Team</a>
+    <a href="mailto:liz@projectc.biz">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href="style-guide.html">Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C — independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
   </div>
 </footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design.</span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
 
 <script>
-// Nav scroll behavior
 const nav = document.getElementById('mainNav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
 
-// Active nav pill based on scroll position
-const sections = ['research', 'press', 'speaking'];
-const pills = document.querySelectorAll('.page-nav-pill');
-function updateActivePill() {
-  let current = '';
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && window.scrollY >= el.offsetTop - 200) current = id;
-  });
-  pills.forEach(p => {
-    var isActive = p.getAttribute('href') === '#' + current;
-    p.classList.toggle('active', isActive);
-    if (isActive) { p.setAttribute('aria-current', 'true'); }
-    else { p.removeAttribute('aria-current'); }
-  });
-}
-window.addEventListener('scroll', updateActivePill, { passive: true });
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-// Reveal animation
-const observer = new IntersectionObserver(
-  entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
-  { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-);
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-</script>
-<script>
-(function() {
-  if (sessionStorage.getItem('coachingBannerDismissed')) {
-    var bar = document.getElementById('announcementBar');
-    var nav = document.getElementById('mainNav');
-    if (bar) bar.style.display = 'none';
-    if (nav) nav.style.top = '4px';
-  }
-})();
-function dismissAnnouncementBar() {
-  var bar = document.getElementById('announcementBar');
-  var nav = document.getElementById('mainNav');
-  if (bar) bar.style.display = 'none';
-  if (nav) nav.style.top = '4px';
-  sessionStorage.setItem('coachingBannerDismissed', '1');
-}
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const id = this.getAttribute('href'); if (id === '#') return;
+    const target = document.querySelector(id); if (!target) return;
+    e.preventDefault();
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior: reduce ? 'auto' : 'smooth' });
+  });
+});
 </script>
 </body>
 </html>

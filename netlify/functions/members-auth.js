@@ -289,6 +289,27 @@ const MEMBER_CONTENT = {
       image: 'members-thumb-credential.jpg',
     },
     {
+      title: 'Tip Sheet: Effective Presentations',
+      description:
+        'A one-sheet on presenting well, from prep to delivery. Useful any time you have the mic, the camera, or the room.',
+      url: '/slides/presentation-tips.pdf',
+      image: 'members-art-tipsheet.jpg',
+    },
+    {
+      title: 'Pitch Slam Exercise',
+      description:
+        'A fill-in-the-blanks workout for honing your project pitch, with examples and inspiration. Open the doc and make your own copy.',
+      url: 'https://docs.google.com/document/d/1hga78KqeDKcVUcLuxWC35lkpauk9T3xosqSLIZGeQEA/edit',
+      image: 'members-art-pitchslam.jpg',
+    },
+    {
+      title: 'Chicago Creator Journalism Toolkit',
+      description:
+        'Practical business resources for independent creators, built with Press Forward Chicago and The Independent Journalism Atlas. Chicago-flavored but useful anywhere.',
+      url: 'https://www.cct.org/wp-content/uploads/2026/06/Chicago-Creator-Journalism-Toolkit-Press-Forward-Chicago-and-The-Independent-Journalism-Atlas.pdf',
+      image: 'members-thumb-chicago.jpg',
+    },
+    {
       title: 'Philanthropic partnerships proposal template',
       description:
         'A one-pager for pitching funders, courtesy of Nick Swyter at the NYT. Downloads as a Word doc you can adapt.',

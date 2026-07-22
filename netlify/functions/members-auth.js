@@ -507,6 +507,8 @@ exports.handler = async (event) => {
     'liz@projectc.biz': 'Liz',
     'blair@idamedia.co': 'Blair',
     'annaloy04@gmail.com': 'Anna',
+    'aprilbrumleyhinkle@gmail.com': 'April',
+    'edresslar@gmail.com': 'Emily',
   };
   if (TEAM_EMAILS[email]) {
     return json(200, { ok: true, token: makeToken(email), firstName: TEAM_EMAILS[email] });

@@ -28,7 +28,7 @@
 /* MASTHEAD — L2 opener with the page's one enormous type moment */
 .show-mast { border-bottom: var(--rule); background: var(--white); }
 .show-mast-inner { max-width: var(--maxw); margin: 0 auto; padding: clamp(2.2rem,6vw,4rem) 1.25rem clamp(1.6rem,4vw,2.6rem); }
-.show-mast h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.7rem, 11vw, 6rem); line-height: 0.93; letter-spacing: 0.01em; color: var(--ink); max-width: 12ch; margin: 0.5rem 0 1.4rem; }
+.show-mast h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.3rem, 9.5vw, 5rem); line-height: 0.95; letter-spacing: 0.01em; color: var(--ink); max-width: 16ch; margin: 0.5rem 0 1.4rem; }
 .show-mast h1 .coral { color: var(--coral); }
 .show-mast .standfirst { font-size: 1.05rem; color: var(--muted); line-height: 1.65; max-width: 58ch; }
 .mast-facts { display: flex; flex-wrap: wrap; gap: 0.55rem 1.6rem; margin-top: 1.6rem; padding-top: 1.1rem; border-top: var(--rule); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
@@ -74,14 +74,22 @@
 .lbtn.primary { background: var(--coral); }
 .lbtn.primary:hover, .lbtn.primary:active { background: var(--coral-deep); color: #fff; }
 
-/* CLOSING BAND — ink */
+/* CLOSING BAND — ink, two-column split */
 .close-band { background: var(--ink); color: var(--porcelain); }
-.close-band-inner { max-width: var(--maxw); margin: 0 auto; padding: clamp(2.4rem,6vw,3.6rem) 1.4rem; }
+.close-cols { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; }
+.close-col { padding: clamp(2.4rem,5vw,3.4rem) 1.4rem; }
+.close-col + .close-col { border-left: 2px solid rgba(245,246,248,0.18); }
 .close-band .eyebrow { color: #FF8A66; }
-.close-band h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.7rem,5vw,2.6rem); line-height: 1.04; margin-bottom: 1rem; }
+.close-band h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.6rem,4vw,2.3rem); line-height: 1.05; margin-bottom: 1rem; }
 .close-band h2 .coral { color: var(--coral); }
-.close-band p { font-size: 0.98rem; color: rgba(245,246,248,0.68); line-height: 1.7; max-width: 52ch; margin-bottom: 1.7rem; }
+.close-band p { font-size: 0.95rem; color: rgba(245,246,248,0.68); line-height: 1.7; max-width: 46ch; margin-bottom: 1.7rem; }
 .close-band .btn-coral { border-color: var(--coral); }
+.btn-inv { background: transparent; color: var(--porcelain); border-color: var(--porcelain); }
+.btn-inv:hover { background: var(--porcelain); color: var(--ink); }
+@media (max-width: 760px) {
+  .close-cols { grid-template-columns: 1fr; }
+  .close-col + .close-col { border-left: none; border-top: 2px solid rgba(245,246,248,0.18); }
+}
 
 /* FOOTER — registration seal + legal strip */
 .seal-foot { border-top: var(--rule); display: flex; align-items: center; justify-content: center; padding: 1.9rem 1.25rem; background: var(--white); }
@@ -118,8 +126,8 @@
 <!-- MASTHEAD -->
 <section class="show-mast crops">
   <div class="show-mast-inner">
-    <div class="eyebrow">Muslim Creator Journalism Accelerator &middot; Spring 2026</div>
-    <h1>Meet the <span class="coral">cohort.</span></h1>
+    <div class="eyebrow">Meet the cohort</div>
+    <h1>Muslim Creator Journalism Accelerator <span class="coral">Spring 2026</span></h1>
     <p class="standfirst">Sixteen Muslim creator-journalists from across the U.S., building sustainable, audience-supported journalism on their own platforms. They are the Spring 2026 cohort of the Muslim Creator Journalism Accelerator. Tap any link below to follow their work, and save this page to reconnect after the event.</p>
     <div class="mast-facts">
       <span class="fc"><i></i>Spring 2026 Cohort</span>
@@ -339,11 +347,19 @@
 
 <!-- CLOSING BAND -->
 <section class="close-band">
-  <div class="close-band-inner">
-    <div class="eyebrow">For funders &amp; evaluators</div>
-    <h2>Follow the work. <span class="coral">Fund the future.</span></h2>
-    <p>These sixteen journalists are building the next generation of independent, audience-supported news. If you want to talk about supporting this cohort or creator journalism more broadly, we would love to hear from you.</p>
-    <a href="mailto:liz@projectc.biz" class="btn btn-coral">Get in touch &rarr;</a>
+  <div class="close-cols">
+    <div class="close-col">
+      <div class="eyebrow">For funders &amp; evaluators</div>
+      <h2>Follow the work. <span class="coral">Fund the future.</span></h2>
+      <p>These sixteen journalists are building the next generation of independent, audience-supported news. If you want to talk about supporting this cohort or creator journalism more broadly, we would love to hear from you.</p>
+      <a href="mailto:liz@projectc.biz" class="btn btn-coral">Get in touch &rarr;</a>
+    </div>
+    <div class="close-col">
+      <div class="eyebrow">About Project C</div>
+      <h2>Learn more about <span class="coral">Project C.</span></h2>
+      <p>Project C is building the infrastructure of independent journalism, from original research on the creator-news ecosystem to coaching, training, and a working community of creator journalists.</p>
+      <a href="https://projectc.biz" class="btn btn-inv">Visit projectc.biz &rarr;</a>
+    </div>
   </div>
 </section>
 

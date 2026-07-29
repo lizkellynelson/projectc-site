@@ -21,6 +21,23 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="projectc-ds.css">
+<style>
+/* MUSLIM CREATOR SHOWCASE SPOTLIGHT — added 2026-07-28, time-limited feature.
+   To remove later: delete this <style> block, the #showcase-spotlight section below,
+   the second .announce-msg in the announcement bar, and the announcement rotator script. */
+.spotlight-showcase { background: var(--tint); border-top: var(--rule); border-bottom: var(--rule); }
+/* Poster strip — full, uncropped posters butted edge to edge, separated only by ink rules.
+   Shows each poster complete (same treatment as the showcase page's own .poster component)
+   instead of cropping into the artwork, which reads as intentional rather than accidental. */
+.poster-rail { display: flex; align-items: flex-end; gap: 0; overflow-x: auto; border-top: var(--rule); border-bottom: var(--rule); -webkit-overflow-scrolling: touch; }
+.poster-rail::-webkit-scrollbar { height: 8px; }
+.poster-rail::-webkit-scrollbar-track { background: transparent; }
+.poster-rail::-webkit-scrollbar-thumb { background: var(--ink); }
+.poster-card { position: relative; flex: 0 0 clamp(92px, 13vw, 128px); border-right: var(--rule); text-decoration: none; color: var(--ink); overflow: hidden; }
+.poster-card:last-child { border-right: none; }
+.poster-card img { display: block; width: 100%; height: auto; background: var(--white); transition: transform 0.25s ease; }
+.poster-card:hover img, .poster-card:focus-visible img { transform: scale(1.045); }
+</style>
 </head>
 <body>
 <a href="#main" class="skip-link">Skip to content</a>
@@ -28,10 +45,11 @@
 <!-- TOP REGISTRATION STRIP (C M Y K + deep orange) -->
 <div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
 
-<!-- ANNOUNCEMENT -->
+<!-- ANNOUNCEMENT — promotes the showcase spotlight. Time-limited: swap back to the coaching
+     promo (or anything else) whenever this is retired — see [[project_homepage_showcase_spotlight]]. -->
 <div class="announce" id="announcementBar">
-  <span class="live"><span class="blip"></span>Now open</span>
-  <span>1-on-1 coaching with Blair Hickman — spots are limited. <a href="coaching.html">Book a discovery call &rarr;</a></span>
+  <span class="live"><span class="blip"></span>Cohort spotlight</span>
+  <span>Meet the Muslim Creator Journalism Accelerator. <a href="muslim-creator-showcase/">See the showcase &rarr;</a></span>
   <button class="ab-x" onclick="document.getElementById('announcementBar').classList.add('hidden')" aria-label="Dismiss">&#10005;</button>
 </div>
 
@@ -168,6 +186,38 @@
       <div class="nl-card"><div class="nl-card-date">Recent</div><h3>&nbsp;</h3><p>&nbsp;</p></div>
     </div>
   </div>
+</section>
+
+<!-- MUSLIM CREATOR SHOWCASE SPOTLIGHT — time-limited feature, added 2026-07-28.
+     Safe to remove later: delete this whole <section id="showcase-spotlight">…</section> and
+     the .spotlight-showcase/.poster-rail CSS in <head>. The announcement bar above also currently
+     promotes the showcase — swap its message back to whatever's current (e.g. the coaching promo)
+     when this is retired. -->
+<section class="sec reveal spotlight-showcase" id="showcase-spotlight">
+  <div class="sec-head">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Cohort Spotlight</div>
+    <h2 class="h-display">Meet the Muslim Creator Journalism Accelerator</h2>
+    <p class="lede">Sixteen Muslim creator-journalists from across the U.S. — covering everything from immigration and foreign policy to sports and parenting wellness — building sustainable, audience-supported journalism on their own platforms.</p>
+  </div>
+  <div class="poster-rail" id="posterRail">
+    <a class="poster-card" href="muslim-creator-showcase/#ameer-al-khatahtbeh"><img src="muslim-creator-showcase/posters/ameer-al-khatahtbeh.jpg" alt="Ameer Al-Khatahtbeh" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#rabia-chaudry"><img src="muslim-creator-showcase/posters/rabia-chaudry.jpg" alt="Rabia Chaudry" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#jennifer-chowdhury"><img src="muslim-creator-showcase/posters/jennifer-chowdhury.jpg" alt="Jennifer Chowdhury" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#ghada-dajani"><img src="muslim-creator-showcase/posters/ghada-dajani.jpg" alt="Ghada Dajani" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#yasmine-el-sabawi"><img src="muslim-creator-showcase/posters/yasmine-el-sabawi.jpg" alt="Yasmine El-Sabawi" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#farah-eltohamy"><img src="muslim-creator-showcase/posters/farah-eltohamy.jpg" alt="Farah Eltohamy" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#tahirah-folk"><img src="muslim-creator-showcase/posters/tahirah-folk.jpg" alt="Tahirah Folk" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#sahar-habib-ghazi"><img src="muslim-creator-showcase/posters/sahar-habib-ghazi.jpg" alt="Sahar Habib Ghazi" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#zineb-haddaji"><img src="muslim-creator-showcase/posters/zineb-haddaji.jpg" alt="Zineb Haddaji" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#ghazala-irshad"><img src="muslim-creator-showcase/posters/ghazala-irshad.jpg" alt="Ghazala Irshad" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#rahim-jessani"><img src="muslim-creator-showcase/posters/rahim-jessani.jpg" alt="Rahim Jessani" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#husam-kaid"><img src="muslim-creator-showcase/posters/husam-kaid.jpg" alt="Husam Kaid" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#hussain-khan"><img src="muslim-creator-showcase/posters/hussain-khan.jpg" alt="Hussain Khan" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#syeda-khaula-saad"><img src="muslim-creator-showcase/posters/syeda-khaula-saad.jpg" alt="Syeda Khaula Saad" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#karim-shamsi-basha"><img src="muslim-creator-showcase/posters/karim-shamsi-basha.jpg" alt="Karim Shamsi-Basha" loading="lazy"></a>
+    <a class="poster-card" href="muslim-creator-showcase/#zaineb-sharif"><img src="muslim-creator-showcase/posters/zaineb-sharif.jpg" alt="Zaineb Sharif" loading="lazy"></a>
+  </div>
+  <div class="sec-pad" style="padding-top:0.4rem;"><a href="muslim-creator-showcase/" class="btn btn-fill">Meet the Full Cohort &rarr;</a></div>
 </section>
 
 <!-- COMMUNITY -->

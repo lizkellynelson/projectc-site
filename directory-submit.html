@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Your Listing — Member Directory — Project C</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Add or update your listing in the Project C Member Directory.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
+<style>
+.nav.scrolled { box-shadow: 0 4px 24px rgba(21,23,26,0.08); }
+
+.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--coral); color: var(--ink); border: var(--rule); font-weight: 700; font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase; padding: 0.85rem 1.6rem; cursor: pointer; transition: background 0.18s, color 0.18s, transform 0.18s; }
+.btn-primary:hover { background: var(--coral-deep); color: #fff; transform: translateY(-2px); }
+.btn-primary:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+/* MASTHEAD — compact, L2 */
+.chero { border-bottom: var(--rule); background: var(--white); }
+.chero-inner { max-width: 900px; margin: 0 auto; padding: clamp(2.2rem,4vw,3.2rem) 2rem clamp(1.6rem,3vw,2rem); }
+.chero h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem,4.2vw,3rem); line-height: 1; letter-spacing: 0.01em; color: var(--ink); margin: 0.3rem 0 1rem; max-width: 20ch; }
+.chero p.lead { font-size: 1.02rem; color: var(--muted); line-height: 1.7; max-width: 60ch; }
+
+/* FORM SECTION */
+.section-form { padding: clamp(2rem,4vw,3rem) 0 5rem; }
+.form-body { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+
+.form-field { margin-bottom: 1.5rem; }
+.form-field label, .form-field .field-label { display: block; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; color: var(--ink); margin-bottom: 0.55rem; }
+.form-field label .req { color: var(--coral-deep); margin-left: 0.25rem; }
+.form-field label .opt { font-weight: 400; color: rgba(21,23,26,0.55); text-transform: none; letter-spacing: 0; }
+.form-field input[type="text"], .form-field input[type="email"], .form-field input[type="url"], .form-field textarea {
+  width: 100%; font-family: var(--sans); font-size: 0.98rem; padding: 0.85rem 1rem; border: 1.5px solid rgba(21,23,26,0.24); background: var(--white); color: var(--ink); transition: border-color 0.15s, box-shadow 0.15s;
+}
+.form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--coral); box-shadow: 0 0 0 3px rgba(254,107,65,0.18); }
+.form-field textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+.form-field input::placeholder, .form-field textarea::placeholder { color: rgba(21,23,26,0.4); }
+.form-field .help { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; line-height: 1.5; }
+.field-error { display: none; margin-top: 0.4rem; color: #B0241A; font-size: 0.85rem; }
+.field-error.show { display: block; }
+.char-count { font-size: 0.75rem; color: var(--muted); text-align: right; margin-top: 0.4rem; }
+.char-count.over { color: #B0241A; font-weight: 700; }
+
+/* TOPIC CHECKBOX GRID (max 3) */
+.topic-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem 1rem; }
+.topic-check { display: flex; align-items: center; gap: 0.55rem; border: 1.5px solid rgba(21,23,26,0.22); padding: 0.6rem 0.8rem; font-size: 0.86rem; cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+.topic-check:hover { background: var(--tint); }
+.topic-check.checked { border-color: var(--ink); background: var(--tint); font-weight: 600; }
+.topic-check input { width: 15px; height: 15px; flex-shrink: 0; accent-color: var(--coral-deep); }
+.topic-note { font-size: 0.8rem; color: var(--muted); margin-top: 0.6rem; }
+@media (max-width: 560px) { .topic-grid { grid-template-columns: 1fr; } }
+
+.links-section { border: var(--rule); padding: 1.5rem 1.5rem 0.5rem; margin-bottom: 1.5rem; }
+.links-section .form-field:last-of-type { margin-bottom: 1rem; }
+
+/* PHOTO / LOGO UPLOAD */
+.photo-row { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+.photo-frame { width: 88px; height: 88px; border: var(--rule); background: var(--porcelain); display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden; }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.photo-frame .ph-empty { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); text-align: center; padding: 0 0.4rem; }
+.photo-actions { display: flex; flex-direction: column; gap: 0.5rem; }
+.photo-pick-btn { display: inline-flex; align-items: center; gap: 0.5rem; border: 1.5px solid var(--ink); background: var(--white); color: var(--ink); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.55rem 0.9rem; cursor: pointer; width: fit-content; transition: background 0.15s, color 0.15s; }
+.photo-pick-btn:hover { background: var(--ink); color: var(--white); }
+.photo-remove-btn { display: none; background: none; border: none; padding: 0; font-size: 0.75rem; color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; width: fit-content; }
+.photo-remove-btn.show { display: block; }
+.photo-status { font-size: 0.78rem; color: var(--muted); }
+
+/* CONSENT AGREEMENT */
+.form-agreement { display: flex; gap: 0.9rem; align-items: flex-start; padding: 1.2rem; background: var(--white); border: 1.5px solid rgba(21,23,26,0.2); margin-bottom: 1.5rem; cursor: pointer; transition: border-color 0.18s; }
+.form-agreement:hover { border-color: var(--coral); }
+.form-agreement input[type="checkbox"] { width: 20px; height: 20px; margin-top: 0.15rem; accent-color: var(--coral); flex-shrink: 0; cursor: pointer; }
+.form-agreement span { font-size: 0.92rem; color: var(--ink); line-height: 1.6; cursor: pointer; }
+
+.form-submit-wrap { display: flex; align-items: center; gap: 1.25rem; flex-wrap: wrap; margin-top: 2rem; }
+.form-submit-wrap .submit-note { font-size: 0.82rem; color: var(--muted); line-height: 1.5; max-width: 340px; }
+
+.form-banner { border: var(--rule); background: var(--porcelain); padding: 1.1rem 1.3rem; font-size: 0.92rem; line-height: 1.6; margin-bottom: 2rem; display: none; }
+.form-banner.show { display: block; }
+.form-banner.error { border-color: #B0241A; background: #FBECEA; color: #7A190F; }
+.form-banner.success { border-color: var(--ink); }
+
+/* SUCCESS STATE */
+.success-state { display: none; text-align: center; padding: 2rem 0; }
+.success-state.show { display: block; }
+.success-state h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.6rem,3vw,2.2rem); margin: 1rem 0; }
+.success-state p { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 48ch; margin: 0 auto 1.6rem; }
+.success-check { width: 56px; height: 56px; margin: 0 auto; border: var(--rule); display: flex; align-items: center; justify-content: center; background: var(--coral); }
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="project-c_lockup_color.png" alt="Project C — home"></a>
+    <ul class="nav-links" id="navLinks">
+      <!-- No "Directory" nav link yet on purpose: directory.html isn't deployed
+           during the sign-up-collection phase. Add it back in when that page goes live. -->
+      <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="going-solo.html">Going Solo</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="press.html">Research &amp; Press</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="members.html" class="nav-member">Member Login</a></li>
+      <li><a href="community.html" class="nav-cta">Join &rarr;</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<section class="chero">
+  <div class="chero-inner">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Member Directory</div>
+    <h1>Add your listing.</h1>
+    <p class="lead">Enter the email you joined Project C with. That's the only credential we check: no password, no account. Submit again any time to update your entry; it just overwrites what's already there.</p>
+  </div>
+</section>
+
+<section class="section-form">
+  <div class="form-body">
+
+    <div class="form-banner" id="formBanner"></div>
+
+    <form id="directoryForm" novalidate>
+
+      <div class="form-field">
+        <label for="email">The email you joined Project C with <span class="req" aria-hidden="true">*</span></label>
+        <input type="email" id="email" name="email" required autocomplete="email">
+        <span class="field-error" id="emailErr" role="alert"></span>
+        <div class="help">We check this against your membership record. If it doesn't match, we'll let you know so you can try a different address.</div>
+      </div>
+
+      <div class="form-field">
+        <label for="displayName">Your name <span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="displayName" name="displayName" required autocomplete="name">
+        <span class="field-error" id="displayNameErr" role="alert"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="brandName">Your brand or project <span class="opt">(optional)</span></label>
+        <input type="text" id="brandName" name="brandName" placeholder="e.g. Port of Entry, Arab in Alabama, The Brown Line">
+        <div class="help">Leave this blank if you publish under your own name.</div>
+      </div>
+
+      <div class="form-field">
+        <label>Photo or logo <span class="opt">(optional)</span></label>
+        <div class="photo-row">
+          <div class="photo-frame" id="photoFrame"><span class="ph-empty">No photo</span></div>
+          <div class="photo-actions">
+            <label class="photo-pick-btn" for="photoInput">Choose image</label>
+            <input type="file" id="photoInput" accept="image/jpeg,image/png,image/webp" style="position:absolute; width:1px; height:1px; opacity:0; overflow:hidden;">
+            <button type="button" class="photo-remove-btn" id="photoRemoveBtn">Remove photo</button>
+            <div class="photo-status" id="photoStatus">A headshot or your logo. Square images work best.</div>
+          </div>
+        </div>
+        <span class="field-error" id="photoErr" role="alert"></span>
+      </div>
+
+      <div class="form-field">
+        <label for="blurb">A short blurb about your work <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="blurb" name="blurb" maxlength="400" placeholder="A sentence or two on what you cover and who it's for. This is what shows on your card in the directory." required></textarea>
+        <div class="char-count" id="blurbCount">0 / 400</div>
+        <span class="field-error" id="blurbErr" role="alert"></span>
+      </div>
+
+      <div class="form-field">
+        <label>Topics <span class="opt">(pick up to 3)</span></label>
+        <div class="topic-grid" id="topicGrid"></div>
+        <div class="topic-note" id="topicNote">Choose up to 3.</div>
+      </div>
+
+      <div class="links-section">
+        <div class="form-field">
+          <label>Links <span class="req" aria-hidden="true">*</span> <span class="opt">(at least one)</span></label>
+        </div>
+        <div class="form-field"><label for="website">Website</label><input type="url" id="website" name="website" placeholder="https://"></div>
+        <div class="form-field"><label for="substack">Newsletter</label><input type="url" id="substack" name="substack" placeholder="https://"></div>
+        <div class="form-field"><label for="instagram">Instagram</label><input type="url" id="instagram" name="instagram" placeholder="https://instagram.com/…"></div>
+        <div class="form-field"><label for="tiktok">TikTok</label><input type="url" id="tiktok" name="tiktok" placeholder="https://tiktok.com/@…"></div>
+        <div class="form-field"><label for="youtube">YouTube</label><input type="url" id="youtube" name="youtube" placeholder="https://youtube.com/@…"></div>
+        <div class="form-field"><label for="x">X</label><input type="url" id="x" name="x" placeholder="https://x.com/…"></div>
+        <div class="form-field"><label for="linkedin">LinkedIn</label><input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/…"></div>
+        <div class="form-field">
+          <label for="otherLabel">Something else? <span class="opt">(label + link)</span></label>
+          <input type="text" id="otherLabel" name="otherLabel" placeholder="e.g. Podcast, Bluesky" style="margin-bottom:0.6rem;">
+          <input type="url" id="otherUrl" name="otherUrl" placeholder="https://">
+        </div>
+        <span class="field-error" id="linksErr" role="alert"></span>
+      </div>
+
+      <label class="form-agreement">
+        <input type="checkbox" id="agreement" name="agreement" required>
+        <span>I agree Project C can use this information, including any photo or logo I add, on the website and in marketing materials.</span>
+      </label>
+      <span class="field-error" id="agreementErr" role="alert" style="margin-top:-1rem; margin-bottom:1.5rem;"></span>
+
+      <div class="form-submit-wrap">
+        <button type="submit" class="btn-primary" id="submitBtn">Add my listing &rarr;</button>
+        <div class="submit-note">Your listing goes live right away. No review queue.</div>
+      </div>
+
+    </form>
+
+    <!-- PRE-LAUNCH COPY: directory.html isn't public yet during the
+         sign-up-collection phase, so this doesn't promise a live page or
+         link to one. Once directory.html is deployed, swap the h2/p/link
+         below back to the "You're in the directory." version (see git
+         history or ask Claude) and add the nav link back in above. -->
+    <div class="success-state" id="successState">
+      <div class="success-check">
+        <svg viewBox="0 0 24 24" fill="none" width="26" height="26"><path d="M4 12.5L9.5 18L20 6" stroke="#15171A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2>You're on the list.</h2>
+      <p>Your listing is saved. The full Member Directory isn't public yet; we're collecting entries first so it launches with real people in it, not an empty page. We'll let the whole community know the moment it's live. Come back and submit this form again any time to update your blurb, photo, or links.</p>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href="press.html">Research &amp; Press</a>
+    <a href="news-ecosystem-map.html">News Ecosystem Map</a>
+    <a href="going-solo.html">Going Solo Workshop</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href="community.html">Join the Community</a>
+    <!-- Member Directory footer link comes back once directory.html is live -->
+    <a href="coaching.html">Coaching</a>
+    <a href="members.html">Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href="about.html">About Project C</a>
+    <a href="about.html#founder">Team</a>
+    <a href="mailto:liz@projectc.biz">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href="style-guide.html">Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C — independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
+  </div>
+</footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design.</span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+// Kept in sync by hand with TOPIC_OPTIONS in netlify/functions/directory-submit.js
+const TOPIC_OPTIONS = [
+  'Politics & Policy', 'Culture & Identity', 'Local News', 'Business & Money',
+  'Food & Lifestyle', 'Health & Wellness', 'Sports', 'Climate & Environment',
+  'Media & Trust', 'Immigration', 'LGBTQ+', 'Parenting & Family',
+  'Entertainment & TV', 'International',
+];
+const MAX_TOPICS = 3;
+
+const topicGrid = document.getElementById('topicGrid');
+topicGrid.innerHTML = TOPIC_OPTIONS.map((t, i) => `
+  <label class="topic-check" data-topic="${t}">
+    <input type="checkbox" value="${t}" id="topic-${i}">
+    <span>${t}</span>
+  </label>`).join('');
+
+function selectedTopics() {
+  return [...topicGrid.querySelectorAll('input:checked')].map((el) => el.value);
+}
+
+topicGrid.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+  cb.addEventListener('change', () => {
+    const label = cb.closest('.topic-check');
+    if (cb.checked && selectedTopics().length > MAX_TOPICS) {
+      cb.checked = false;
+      document.getElementById('topicNote').textContent = `You can choose up to ${MAX_TOPICS}. Uncheck one first.`;
+      return;
+    }
+    label.classList.toggle('checked', cb.checked);
+    document.getElementById('topicNote').textContent = `Choose up to ${MAX_TOPICS}. (${selectedTopics().length}/${MAX_TOPICS} selected)`;
+  });
+});
+
+const blurbEl = document.getElementById('blurb');
+const blurbCount = document.getElementById('blurbCount');
+blurbEl.addEventListener('input', () => {
+  const n = blurbEl.value.length;
+  blurbCount.textContent = `${n} / 400`;
+  blurbCount.classList.toggle('over', n >= 400);
+});
+
+// ---- Photo / logo picker: resize client-side before it ever leaves the
+// browser, so a 12MB phone photo doesn't turn into a 12MB+ request. PNGs
+// (usually logos, often with transparency) stay PNG; everything else gets
+// re-encoded as JPEG. Longest edge capped at 800px. ----
+const MAX_PHOTO_DIM = 800;
+let photoDataUrl = null; // what actually gets submitted
+
+const photoInput = document.getElementById('photoInput');
+const photoFrame = document.getElementById('photoFrame');
+const photoRemoveBtn = document.getElementById('photoRemoveBtn');
+const photoStatus = document.getElementById('photoStatus');
+
+function resizeImageFile(file) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('read failed'));
+    reader.onload = () => {
+      img.onerror = () => reject(new Error('decode failed'));
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > MAX_PHOTO_DIM || height > MAX_PHOTO_DIM) {
+          const scale = MAX_PHOTO_DIM / Math.max(width, height);
+          width = Math.round(width * scale);
+          height = Math.round(height * scale);
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        const isPng = file.type === 'image/png';
+        resolve(canvas.toDataURL(isPng ? 'image/png' : 'image/jpeg', 0.85));
+      };
+      img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+photoInput.addEventListener('change', async () => {
+  const file = photoInput.files && photoInput.files[0];
+  if (!file) return;
+  showError('photoErr', '');
+  if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+    showError('photoErr', 'Please choose a JPEG, PNG, or WebP image.');
+    photoInput.value = '';
+    return;
+  }
+  photoStatus.textContent = 'Processing image…';
+  try {
+    photoDataUrl = await resizeImageFile(file);
+    photoFrame.innerHTML = `<img src="${photoDataUrl}" alt="Selected photo preview">`;
+    photoRemoveBtn.classList.add('show');
+    photoStatus.textContent = 'Looks good.';
+  } catch (err) {
+    console.error('photo resize failed:', err);
+    showError('photoErr', "That image didn't load right. Try a different file.");
+    photoDataUrl = null;
+    photoInput.value = '';
+    photoStatus.textContent = 'A headshot or your logo. Square images work best.';
+  }
+});
+
+photoRemoveBtn.addEventListener('click', () => {
+  photoDataUrl = null;
+  photoInput.value = '';
+  photoFrame.innerHTML = '<span class="ph-empty">No photo</span>';
+  photoRemoveBtn.classList.remove('show');
+  photoStatus.textContent = 'A headshot or your logo. Square images work best.';
+  showError('photoErr', '');
+});
+
+function showError(id, msg) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.toggle('show', !!msg);
+}
+
+function clearErrors() {
+  ['emailErr', 'displayNameErr', 'blurbErr', 'linksErr', 'agreementErr'].forEach((id) => showError(id, ''));
+}
+
+function showBanner(kind, html) {
+  const el = document.getElementById('formBanner');
+  el.className = `form-banner show ${kind}`;
+  el.innerHTML = html;
+}
+
+document.getElementById('directoryForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  clearErrors();
+
+  const email = document.getElementById('email').value.trim();
+  const displayName = document.getElementById('displayName').value.trim();
+  const brandName = document.getElementById('brandName').value.trim();
+  const blurb = blurbEl.value.trim();
+  const topics = selectedTopics();
+  const links = {
+    website: document.getElementById('website').value.trim(),
+    substack: document.getElementById('substack').value.trim(),
+    instagram: document.getElementById('instagram').value.trim(),
+    tiktok: document.getElementById('tiktok').value.trim(),
+    youtube: document.getElementById('youtube').value.trim(),
+    x: document.getElementById('x').value.trim(),
+    linkedin: document.getElementById('linkedin').value.trim(),
+    otherLabel: document.getElementById('otherLabel').value.trim(),
+    otherUrl: document.getElementById('otherUrl').value.trim(),
+  };
+
+  const agreement = document.getElementById('agreement').checked;
+
+  let hasError = false;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('emailErr', 'Please enter a valid email address.'); hasError = true; }
+  if (!displayName) { showError('displayNameErr', 'Please enter your name.'); hasError = true; }
+  if (!blurb) { showError('blurbErr', 'Please add a short blurb.'); hasError = true; }
+  const hasLink = Object.entries(links).some(([k, v]) => v && k !== 'otherLabel');
+  if (!hasLink) { showError('linksErr', 'Please add at least one link.'); hasError = true; }
+  if (!agreement) { showError('agreementErr', 'Please check the box above before submitting.'); hasError = true; }
+  if (hasError) return;
+
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Submitting…';
+
+  try {
+    const res = await fetch('/.netlify/functions/directory-submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, displayName, brandName, blurb, topics, agreement, photoDataUrl, ...links }),
+    });
+    const data = await res.json();
+
+    if (!res.ok || data.ok === false) {
+      showBanner('error', data.error || 'Something went wrong. Please try again.');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Add my listing →';
+      return;
+    }
+
+    document.getElementById('directoryForm').style.display = 'none';
+    document.getElementById('formBanner').classList.remove('show');
+    document.getElementById('successState').classList.add('show');
+  } catch (err) {
+    console.error('directory-submit error:', err);
+    showBanner('error', "We couldn't reach the server. Please check your connection and try again.");
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Add my listing →';
+  }
+});
+</script>
+</body>
+</html>

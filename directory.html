@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Directory — Project C</title>
+<meta name="description" content="Meet the 245+ independent creator journalists of Project C. Search by name, brand, or beat, and follow their work directly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://projectc.biz/directory">
+<meta property="og:title" content="Member Directory — Project C">
+<meta property="og:description" content="Meet the independent creator journalists of Project C. Search by name, brand, or beat, and follow their work directly.">
+<meta property="og:image" content="https://projectc.biz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://projectc.biz/og-image.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
+<style>
+/* ---- Member Directory — searchable/filterable public roster ----
+   New composition for the site: a live, filterable directory grid.
+   Press Room language throughout: 2px ink rules, CMYK cycling top-rule,
+   square ink-ruled buttons, crop marks, registration dots. ---- */
+.nav.scrolled { box-shadow: 0 4px 24px rgba(21,23,26,0.08); }
+
+/* MASTHEAD — L2 editorial opener */
+.dhero { border-bottom: var(--rule); background: var(--white); }
+.dhero-inner { max-width: var(--maxw); margin: 0 auto; padding: clamp(2.5rem,4.5vw,4rem) 2rem clamp(1.8rem,3vw,2.4rem); }
+.dhero h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.4rem,4.8vw,4.2rem); line-height: 0.98; letter-spacing: 0.01em; color: var(--ink); margin: 0.3rem 0 1rem; max-width: 18ch; }
+.dhero p.lead { font-size: 1.08rem; color: var(--muted); line-height: 1.7; max-width: 62ch; margin-bottom: 1.6rem; }
+.dhero-facts { display: flex; flex-wrap: wrap; gap: 0.55rem 1.6rem; padding-top: 1.4rem; border-top: var(--rule-thin); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+.dhero-facts span { display: inline-flex; align-items: center; gap: 0.55rem; }
+.dhero-facts i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.dhero-facts .fc i { background: var(--cyan); } .dhero-facts .fm i { background: var(--magenta); } .dhero-facts .fy i { background: var(--yellow); border: 1px solid rgba(21,23,26,0.25); } .dhero-facts .fo i { background: var(--coral); }
+.dhero-facts a { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+/* PROGRESS CALLOUT — encourages members to add themselves while the list fills in */
+.dprogress { border-bottom: var(--rule); background: var(--tint); }
+.dprogress-inner { max-width: var(--maxw); margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.dprogress p { font-size: 0.88rem; color: var(--ink); }
+.dprogress strong { color: var(--coral-deep); }
+.dprogress .btn { flex-shrink: 0; }
+
+/* CONTROLS — search + topic filter chips, ruled bar */
+.dcontrols { border-bottom: var(--rule); background: var(--porcelain); position: sticky; top: 76px; z-index: 90; }
+.dcontrols-inner { max-width: var(--maxw); margin: 0 auto; padding: 1.4rem 2rem; }
+.dsearch { display: flex; align-items: center; gap: 0.75rem; border: var(--rule); background: var(--white); padding: 0.2rem 0.2rem 0.2rem 1rem; margin-bottom: 1rem; }
+.dsearch svg { width: 18px; height: 18px; flex-shrink: 0; color: var(--muted); }
+.dsearch input { flex: 1; border: none; outline: none; background: transparent; font-family: var(--sans); font-size: 1rem; padding: 0.85rem 0.5rem; color: var(--ink); }
+.dsearch input::placeholder { color: rgba(21,23,26,0.38); }
+.dsearch .dclear { border: none; background: var(--porcelain); border-left: var(--rule); align-self: stretch; padding: 0 1rem; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; cursor: pointer; color: var(--muted); display: none; }
+.dsearch .dclear:hover { background: var(--ink); color: #fff; }
+.dsearch.has-value .dclear { display: block; }
+
+.dchips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.dchip { border: 1.5px solid var(--ink); background: var(--white); color: var(--ink); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.5rem 0.85rem; cursor: pointer; transition: background 0.15s, color 0.15s; }
+.dchip:hover { background: var(--tint); }
+.dchip.active { background: var(--ink); color: var(--white); }
+
+.dcount-row { display: flex; align-items: center; justify-content: space-between; max-width: var(--maxw); margin: 0 auto; padding: 1rem 2rem 0; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+.dcount-row a { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; text-transform: none; letter-spacing: normal; font-weight: 600; }
+
+/* DIRECTORY GRID */
+.mdir { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: var(--rule); }
+.mcard { position: relative; padding: 1.7rem 1.5rem 1.9rem; border-right: var(--rule); border-bottom: var(--rule); background: var(--white); }
+.mcard:nth-child(3n) { border-right: none; }
+.mcard:nth-child(4n+1) { box-shadow: inset 0 5px 0 var(--cyan); }
+.mcard:nth-child(4n+2) { box-shadow: inset 0 5px 0 var(--magenta); }
+.mcard:nth-child(4n+3) { box-shadow: inset 0 5px 0 var(--yellow); }
+.mcard:nth-child(4n+4) { box-shadow: inset 0 5px 0 var(--coral); }
+.mcard .chead { display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 0.8rem; }
+.mcard .cphoto { width: 54px; height: 54px; border: var(--rule); flex-shrink: 0; overflow: hidden; background: var(--porcelain); }
+.mcard .cphoto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mcard h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.2rem,2vw,1.4rem); line-height: 1.05; letter-spacing: 0.01em; color: var(--ink); margin-bottom: 0.3rem; }
+.mcard .cbrand { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--coral-deep); }
+.mcard .ctags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.8rem; }
+.ctag { display: inline-block; border: 1px solid rgba(21,23,26,0.3); color: var(--muted); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 0.18rem 0.5rem; }
+.mcard .cbio { font-size: 0.88rem; line-height: 1.55; color: var(--ink); margin-bottom: 1.1rem; }
+.mcard .clinks { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.clbtn { display: inline-flex; align-items: center; gap: 0.4rem; min-height: 38px; padding: 0.45rem 0.75rem; border: 1.5px solid var(--ink); background: var(--white); color: var(--ink); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; transition: background 0.15s, color 0.15s; }
+.clbtn:hover { background: var(--ink); color: var(--white); }
+.clbtn svg { width: 9px; height: 9px; flex-shrink: 0; }
+.clbtn.primary { background: var(--coral); border-color: var(--ink); }
+.clbtn.primary:hover { background: var(--coral-deep); color: #fff; }
+
+/* Empty / loading / no-results states */
+.dstate { max-width: 640px; margin: 0 auto; padding: clamp(3rem,6vw,4.5rem) 2rem; text-align: center; }
+.dstate h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.5rem,3vw,2rem); margin-bottom: 0.9rem; }
+.dstate p { font-size: 0.98rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.6rem; }
+
+/* CLOSING CTA BAND */
+.dclose { background: var(--ink); color: var(--porcelain); border-bottom: var(--rule); }
+.dclose-inner { max-width: 760px; margin: 0 auto; padding: clamp(3rem,6vw,4.5rem) 2rem; text-align: center; }
+.dclose .eyebrow { color: #FF8A66; justify-content: center; }
+.dclose h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.9rem,4vw,2.8rem); line-height: 1.05; margin-bottom: 1.1rem; }
+.dclose h2 .coral { color: var(--coral); }
+.dclose p { font-size: 1rem; color: rgba(245,246,248,0.7); line-height: 1.7; margin-bottom: 1.8rem; }
+
+@media (max-width: 1000px) {
+  .mdir { grid-template-columns: 1fr 1fr; }
+  .mcard:nth-child(3n) { border-right: var(--rule); }
+  .mcard:nth-child(2n) { border-right: none; }
+  .dcontrols { position: static; }
+}
+@media (max-width: 640px) {
+  .mdir { grid-template-columns: 1fr; }
+  .mcard { border-right: none !important; }
+  .dchips { gap: 0.4rem; }
+  .dchip { font-size: 0.64rem; padding: 0.45rem 0.7rem; }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="project-c_lockup_color.png" alt="Project C — home"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="directory.html" aria-current="page">Directory</a></li>
+      <li><a href="going-solo.html">Going Solo</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="press.html">Research &amp; Press</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="members.html" class="nav-member">Member Login</a></li>
+      <li><a href="community.html" class="nav-cta">Join &rarr;</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- MASTHEAD -->
+<section class="dhero crops">
+  <div class="dhero-inner">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Project C Directory</div>
+    <h1>Meet the members <span style="-webkit-text-stroke: 2px var(--ink); color: transparent;">of Project C.</span></h1>
+    <p class="lead">Two hundred and forty-five independent creator journalists make up this community, each building their own outlet, newsletter, podcast, or channel. Search below by name, brand, or beat, then follow their work directly. Every link goes straight to them, not to us.</p>
+    <div class="dhero-facts">
+      <span class="fc"><i></i>245 Members</span>
+      <span class="fm"><i></i>Self-reported, updated live</span>
+      <span class="fy"><i></i>Search by name, brand, or beat</span>
+      <span class="fo"><i></i><a href="directory-submit.html">Add your listing &rarr;</a></span>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRESS CALLOUT -->
+<section class="dprogress">
+  <div class="dprogress-inner">
+    <p id="progressText">Loading the directory&hellip;</p>
+    <a href="directory-submit.html" class="btn btn-coral">Add your listing &rarr;</a>
+  </div>
+</section>
+
+<!-- CONTROLS -->
+<section class="dcontrols">
+  <div class="dcontrols-inner">
+    <div class="dsearch" id="dsearchWrap">
+      <svg viewBox="0 0 18 18" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.6"/><path d="M12.5 12.5L16 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <input type="text" id="dsearchInput" placeholder="Search by name, brand, or keyword&hellip;" aria-label="Search the member directory">
+      <button class="dclear" id="dclearBtn" type="button">Clear</button>
+    </div>
+    <div class="dchips" id="dchips" role="group" aria-label="Filter by topic"></div>
+  </div>
+</section>
+
+<div class="dcount-row">
+  <span id="dcountText">Loading&hellip;</span>
+  <a href="#" id="dclearAll" style="display:none;">Clear all filters</a>
+</div>
+
+<!-- DIRECTORY GRID (rendered by JS from directory-list.js) -->
+<div class="mdir" id="mdirGrid"></div>
+
+<div class="dstate" id="dstateEmpty" style="display:none;">
+  <h2>No matches yet</h2>
+  <p>Nobody in the directory matches that search or filter combination right now. Try clearing a filter, or check back soon. New members are added every week.</p>
+</div>
+
+<div class="dstate" id="dstateError" style="display:none;">
+  <h2>Couldn&rsquo;t load the directory</h2>
+  <p>Something went wrong loading member listings. Try refreshing the page, or check back in a bit.</p>
+</div>
+
+<!-- CLOSING CTA -->
+<section class="dclose">
+  <div class="dclose-inner">
+    <div class="eyebrow">Are you a Project C member?</div>
+    <h2>Get listed in <span class="coral">two minutes.</span></h2>
+    <p>Add your brand name and a short blurb, then link out to your work. Submit the form again any time with the same email and your entry just updates in place.</p>
+    <a href="directory-submit.html" class="btn btn-coral">Add your listing &rarr;</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href="press.html">Research &amp; Press</a>
+    <a href="news-ecosystem-map.html">News Ecosystem Map</a>
+    <a href="going-solo.html">Going Solo Workshop</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href="community.html">Join the Community</a>
+    <a href="directory.html">Member Directory</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="members.html">Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href="about.html">About Project C</a>
+    <a href="about.html#founder">Team</a>
+    <a href="mailto:liz@projectc.biz">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href="style-guide.html">Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C — independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
+  </div>
+</footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design.</span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+// ---- Member Directory: fetch, search, filter ----
+// Kept in sync by hand with TOPIC_OPTIONS in netlify/functions/directory-submit.js
+const TOPIC_OPTIONS = [
+  'Politics & Policy', 'Culture & Identity', 'Local News', 'Business & Money',
+  'Food & Lifestyle', 'Health & Wellness', 'Sports', 'Climate & Environment',
+  'Media & Trust', 'Immigration', 'LGBTQ+', 'Parenting & Family',
+  'Entertainment & TV', 'International',
+];
+const TOTAL_MEMBERS = 245; // Slack member count as of 2026-07-30; update if that changes materially.
+
+const state = { all: [], query: '', activeTopics: new Set() };
+
+function arrowSvg() {
+  return '<svg viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M4 2h6v6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+}
+
+const LINK_FIELDS = [
+  { key: 'website_url', label: 'Website', primary: true },
+  { key: 'substack_url', label: 'Newsletter' },
+  { key: 'instagram_url', label: 'Instagram' },
+  { key: 'tiktok_url', label: 'TikTok' },
+  { key: 'youtube_url', label: 'YouTube' },
+  { key: 'x_url', label: 'X' },
+  { key: 'linkedin_url', label: 'LinkedIn' },
+];
+
+function renderChips() {
+  const wrap = document.getElementById('dchips');
+  wrap.innerHTML = TOPIC_OPTIONS.map((t) =>
+    `<button type="button" class="dchip" data-topic="${t}">${t}</button>`
+  ).join('');
+  wrap.querySelectorAll('.dchip').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const topic = btn.dataset.topic;
+      if (state.activeTopics.has(topic)) { state.activeTopics.delete(topic); btn.classList.remove('active'); }
+      else { state.activeTopics.add(topic); btn.classList.add('active'); }
+      renderGrid();
+    });
+  });
+}
+
+function escapeHtml(s) {
+  return String(s || '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+}
+
+function cardHtml(m) {
+  const links = LINK_FIELDS
+    .map((f) => (m[f.key] ? `<a class="clbtn${f.primary ? ' primary' : ''}" href="${escapeHtml(m[f.key])}" target="_blank" rel="noopener">${f.label} ${arrowSvg()}</a>` : ''))
+    .join('');
+  const other = (m.other_label && m.other_url) ? `<a class="clbtn" href="${escapeHtml(m.other_url)}" target="_blank" rel="noopener">${escapeHtml(m.other_label)} ${arrowSvg()}</a>` : '';
+  const tags = (m.topics || []).map((t) => `<span class="ctag">${escapeHtml(t)}</span>`).join('');
+  const photo = m.photo_url ? `<div class="cphoto"><img src="${escapeHtml(m.photo_url)}" alt="" loading="lazy"></div>` : '';
+  return `
+    <article class="mcard">
+      <div class="chead">
+        ${photo}
+        <div>
+          <h3>${escapeHtml(m.display_name)}</h3>
+          ${m.brand_name ? `<div class="cbrand">${escapeHtml(m.brand_name)}</div>` : ''}
+        </div>
+      </div>
+      ${tags ? `<div class="ctags">${tags}</div>` : ''}
+      <p class="cbio">${escapeHtml(m.blurb)}</p>
+      <div class="clinks">${links}${other}</div>
+    </article>`;
+}
+
+function matches(m) {
+  const q = state.query.trim().toLowerCase();
+  if (q) {
+    const hay = `${m.display_name} ${m.brand_name || ''} ${m.blurb} ${(m.topics || []).join(' ')}`.toLowerCase();
+    if (!hay.includes(q)) return false;
+  }
+  if (state.activeTopics.size > 0) {
+    const topics = m.topics || [];
+    const hit = [...state.activeTopics].some((t) => topics.includes(t));
+    if (!hit) return false;
+  }
+  return true;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('mdirGrid');
+  const filtered = state.all.filter(matches);
+  grid.innerHTML = filtered.map(cardHtml).join('');
+  document.getElementById('dcountText').textContent =
+    `Showing ${filtered.length} of ${state.all.length} member${state.all.length === 1 ? '' : 's'}`;
+  document.getElementById('dstateEmpty').style.display = (state.all.length > 0 && filtered.length === 0) ? 'block' : 'none';
+  const hasFilters = state.query.trim() || state.activeTopics.size > 0;
+  document.getElementById('dclearAll').style.display = hasFilters ? 'inline' : 'none';
+}
+
+document.getElementById('dsearchInput').addEventListener('input', (e) => {
+  state.query = e.target.value;
+  document.getElementById('dsearchWrap').classList.toggle('has-value', !!state.query);
+  renderGrid();
+});
+document.getElementById('dclearBtn').addEventListener('click', () => {
+  state.query = '';
+  document.getElementById('dsearchInput').value = '';
+  document.getElementById('dsearchWrap').classList.remove('has-value');
+  renderGrid();
+});
+document.getElementById('dclearAll').addEventListener('click', (e) => {
+  e.preventDefault();
+  state.query = ''; state.activeTopics.clear();
+  document.getElementById('dsearchInput').value = '';
+  document.getElementById('dsearchWrap').classList.remove('has-value');
+  document.querySelectorAll('.dchip.active').forEach((b) => b.classList.remove('active'));
+  renderGrid();
+});
+
+renderChips();
+
+fetch('/.netlify/functions/directory-list')
+  .then((r) => r.json())
+  .then((data) => {
+    if (!data.ok) throw new Error(data.error || 'directory-list failed');
+    state.all = data.members || [];
+    renderGrid();
+    const n = state.all.length;
+    document.getElementById('progressText').innerHTML =
+      n === 0
+        ? `Nobody has added their listing yet. Be the first of ${TOTAL_MEMBERS} members to show up here.`
+        : `<strong>${n} of ${TOTAL_MEMBERS}</strong> members have added their listing so far.`;
+  })
+  .catch((err) => {
+    console.error('directory-list fetch failed:', err);
+    document.getElementById('dstateError').style.display = 'block';
+    document.getElementById('dcountText').textContent = '';
+    document.getElementById('progressText').textContent = 'Directory data is temporarily unavailable.';
+  });
+</script>
+</body>
+</html>

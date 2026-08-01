@@ -40,13 +40,23 @@
 .ax-badge { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 0.42rem 0.8rem; border: 1.5px solid var(--ink); color: var(--ink); }
 
 .ax-team { background: #EDEEF1; border-bottom: var(--rule); }
-.ax-person { display: grid; grid-template-columns: 190px 1fr; max-width: 820px; margin: 0 auto; border: var(--rule); background: var(--white); }
-.ax-person .p-photo { border-right: var(--rule); overflow: hidden; }
-.ax-person .p-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; aspect-ratio: 3/4; }
-.ax-person .p-body { padding: 1.9rem; }
-.ax-person .p-body h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.5rem; line-height: 1; margin-bottom: 0.35rem; }
-.ax-person .p-role { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--coral-deep); font-weight: 800; margin-bottom: 0.9rem; }
-.ax-person .p-body p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
+.ax-team-wrap { max-width: 980px; margin: 0 auto; border: var(--rule); background: var(--white); }
+.ax-team-lead { display: grid; grid-template-columns: 260px 1fr; border-bottom: var(--rule); }
+.ax-team-lead .p-photo { border-right: var(--rule); overflow: hidden; }
+.ax-team-lead .p-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; aspect-ratio: 4/5; }
+.ax-team-lead .p-body { padding: clamp(1.8rem,3vw,2.6rem) clamp(1.8rem,3vw,2.4rem); display: flex; flex-direction: column; justify-content: center; }
+.ax-team-lead .p-body h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.8rem,3vw,2.3rem); line-height: 1; margin-bottom: 0.45rem; }
+.ax-team-lead .p-role { font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--coral-deep); font-weight: 800; margin-bottom: 1rem; }
+.ax-team-lead .p-body p { font-size: 1rem; color: var(--muted); line-height: 1.7; max-width: 56ch; }
+.ax-team-row { display: grid; grid-template-columns: repeat(2, 1fr); }
+.ax-team-row .ax-p { display: grid; grid-template-columns: 170px 1fr; border-right: var(--rule); }
+.ax-team-row .ax-p:last-child { border-right: none; }
+.ax-team-row .p-photo { overflow: hidden; align-self: stretch; }
+.ax-team-row .p-photo img { width: 100%; height: 100%; min-height: 100%; object-fit: cover; object-position: center 30%; display: block; }
+.ax-team-row .p-body { padding: 1.4rem 1.5rem; border-left: var(--rule); align-self: stretch; }
+.ax-team-row .p-body h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.1rem; line-height: 1.05; margin-bottom: 0.35rem; }
+.ax-team-row .p-role { font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--coral-deep); font-weight: 800; margin-bottom: 0.7rem; }
+.ax-team-row .p-body p { font-size: 0.85rem; color: var(--muted); line-height: 1.55; }
 
 .ax-collabs { border-bottom: var(--rule); text-align: center; padding: 2.5rem 2rem; }
 .ax-collabs .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 700; margin-bottom: 1.4rem; }
@@ -63,6 +73,9 @@
 .ax-cmyk-body h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.8rem,3vw,2.4rem); line-height: 1.02; color: var(--porcelain); margin-bottom: 1.1rem; }
 .ax-cmyk-body p { font-size: 1.02rem; color: rgba(245,246,248,0.72); line-height: 1.8; }
 .ax-cmyk-body .k { color: var(--coral); font-style: normal; }
+.ax-cmyk-body a { color: var(--coral); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(254,107,65,0.5); transition: color 0.15s, text-decoration-color 0.15s; }
+.ax-cmyk-body a:hover { color: var(--porcelain); text-decoration-color: var(--porcelain); }
+.ax-cmyk-body a.k { color: var(--coral); }
 
 .ax-contact { padding: clamp(3rem,5vw,4.5rem) 2rem; text-align: center; border-bottom: var(--rule); }
 .ax-contact .eyebrow { justify-content: center; }
@@ -76,9 +89,11 @@
   .ax-founder-grid .photo img { min-height: 0; aspect-ratio: 4/5; }
   .ax-cmyk-grid { grid-template-columns: 1fr; }
   .ax-cmyk-mark { border-right: none; border-bottom: var(--rule); }
-  .ax-person { grid-template-columns: 1fr; }
-  .ax-person .p-photo { border-right: none; border-bottom: var(--rule); }
-  .ax-person .p-photo img { aspect-ratio: 16/10; }
+  .ax-team-lead { grid-template-columns: 1fr; }
+  .ax-team-lead .p-photo { border-right: none; border-bottom: var(--rule); aspect-ratio: 16/10; }
+  .ax-team-row { grid-template-columns: 1fr; }
+  .ax-team-row .ax-p { border-right: none; border-bottom: var(--rule); }
+  .ax-team-row .ax-p:last-child { border-bottom: none; }
 }
 </style>
 </head>
@@ -200,12 +215,32 @@
     <p class="lede">Project C has always been unconventional. It isn't a newsroom, a nonprofit, or a traditional company. It's an ecosystem, built with people who believe creator-model journalists deserve real support.</p>
   </div>
   <div class="sec-pad">
-    <div class="ax-person reveal">
-      <div class="p-photo"><img src="team-blair.webp" alt="Blair Hickman"></div>
-      <div class="p-body">
-        <h3>Blair Hickman</h3>
-        <div class="p-role">Contributing Strategist &amp; Coach</div>
-        <p>A former Vox executive who now runs her own consultancy, Blair works with Project C on strategic projects and leads the growing coaching practice, helping journalists turn independence into a durable business.</p>
+    <div class="ax-team-wrap">
+      <div class="ax-team-lead reveal">
+        <div class="p-photo"><img src="team-blair.webp" alt="Blair Hickman"></div>
+        <div class="p-body">
+          <h3>Blair Hickman</h3>
+          <div class="p-role">Contributing Strategist &amp; Coach</div>
+          <p>A former Vox executive who now runs her own consultancy, Blair works with Project C on strategic projects and leads the growing coaching practice, helping journalists turn independence into a durable business.</p>
+        </div>
+      </div>
+      <div class="ax-team-row">
+        <div class="ax-p reveal">
+          <div class="p-photo"><img src="team-april-brumley-hinkle.jpg" alt="April Brumley Hinkle"></div>
+          <div class="p-body">
+            <h3>April Brumley Hinkle</h3>
+            <div class="p-role">Specialist-in-Residence, Sponsorships</div>
+            <p>A specialist-in-residence at Project C, April spent 15 years as Chief Revenue Officer at The Texas Tribune, where the Local Media Association named her Revenue Innovator of the Year. She now advises journalists and newsrooms on growth strategy, revenue readiness, and corporate partnerships.</p>
+          </div>
+        </div>
+        <div class="ax-p reveal">
+          <div class="p-photo"><img src="team-emily-dresslar.jpg" alt="Emily Dresslar"></div>
+          <div class="p-body">
+            <h3>Emily Dresslar</h3>
+            <div class="p-role">Specialist-in-Residence, Sponsorships</div>
+            <p>A specialist-in-residence at Project C, Emily advises newsrooms on growth strategy and the partnerships that build revenue resiliency. She previously directed the RevLab at The Texas Tribune and held business leadership roles at McClatchy and Calkins Media.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -249,8 +284,10 @@
     </div>
     <div class="ax-cmyk-body reveal">
       <h2>Why "Project C"? And what's with the CMYK?</h2>
-      <p>Project C started as a true project, an experiment during Liz's Sulzberger Fellowship, where she learned the design principle of aiming for <span class="k">Point C</span>, the next stage, instead of trying to leap straight to Point Z. The name also stands for <span class="k">Creator</span>.</p>
-      <p>The CMYK mark is a nod to newspaper roots. Registration marks are the alignment targets that kept the four ink plates in register on the printing press. That same tradition of precision now finds a new path with the independent creators shaping the future of journalism.</p>
+      <p>Project C started as a true project, an experiment during Liz's <a href="https://journalism.columbia.edu/sulzberger-program" target="_blank" rel="noopener">Sulzberger Fellowship</a>, where she learned from Sulzberger director <a href="https://pointc.co/" target="_blank" rel="noopener">Corey Ford</a> the design principle of aiming for <a class="k" href="https://pointc.co/pointc/" target="_blank" rel="noopener">Point C</a>, the next stage, instead of trying to leap straight to the finale: Point Z.</p>
+      <p>The name also stands for <span class="k">Creator</span>. <span class="k">Community</span>. <span class="k">Collaboration</span>. <span class="k">Coaching</span>. All of the things that this project exists to foster.</p>
+      <p>The CMYK mark is a nod to Liz&rsquo;s own start as a newspaper journalist and her family&rsquo;s journalism tradition &ndash; her grandfather was a linotype operator at The Philadelphia Inquirer while her grandmother worked there as a copy editor. It's also a nod to journalistic creators' newspaper roots and deep ties to the multiplicity of voices and perspectives that made up the earliest newspapers in the United States, as captured beautifully by Alex Wright in <a href="https://www.hachettebookgroup.com/titles/alex-wright/empire-of-ink/9781541606791/?lens=basic-books" target="_blank" rel="noopener"><em>Empire of Ink</em></a>.</p>
+      <p>The CMYK registration marks are the alignment targets that kept the four ink plates in register on the printing press. That same tradition of precision now finds a new path with the independent creators aligning to shape the future of journalism.</p>
     </div>
   </div>
 </section>

@@ -143,6 +143,7 @@
         <input type="email" id="email" name="email" required autocomplete="email">
         <span class="field-error" id="emailErr" role="alert"></span>
         <div class="help">We check this against your membership record. If it doesn't match, we'll let you know so you can try a different address.</div>
+        <div class="help" id="emailLookupStatus" style="display:none; margin-top:0.4rem; font-weight:600;"></div>
       </div>
 
       <div class="form-field">
@@ -211,7 +212,7 @@
 
       <div class="form-submit-wrap">
         <button type="submit" class="btn-primary" id="submitBtn">Add my listing &rarr;</button>
-        <div class="submit-note">Your listing goes live right away. No review queue.</div>
+        <div class="submit-note" id="submitNote">Your listing goes live right away. No review queue.</div>
       </div>
 
     </form>
@@ -335,6 +336,7 @@ blurbEl.addEventListener('input', () => {
 // re-encoded as JPEG. Longest edge capped at 800px. ----
 const MAX_PHOTO_DIM = 800;
 let photoDataUrl = null; // what actually gets submitted
+let existingPhotoUrl = null; // set when an existing listing's photo is loaded in; not resubmitted unless replaced
 
 const photoInput = document.getElementById('photoInput');
 const photoFrame = document.getElementById('photoFrame');
@@ -393,11 +395,20 @@ photoInput.addEventListener('change', async () => {
 });
 
 photoRemoveBtn.addEventListener('click', () => {
+  // This only ever undoes a newly-picked replacement image (the button is
+  // hidden whenever the frame is just showing an existing on-file photo —
+  // see fillFieldsFromEntry). So on cancel, fall back to that existing photo
+  // if there is one, rather than clearing the frame to empty.
   photoDataUrl = null;
   photoInput.value = '';
-  photoFrame.innerHTML = '<span class="ph-empty">No photo</span>';
+  if (existingPhotoUrl) {
+    photoFrame.innerHTML = `<img src="${existingPhotoUrl}" alt="Your current photo">`;
+    photoStatus.textContent = 'Current photo on file. Choose a new image to replace it.';
+  } else {
+    photoFrame.innerHTML = '<span class="ph-empty">No photo</span>';
+    photoStatus.textContent = 'A headshot or your logo. Square images work best.';
+  }
   photoRemoveBtn.classList.remove('show');
-  photoStatus.textContent = 'A headshot or your logo. Square images work best.';
   showError('photoErr', '');
 });
 
@@ -417,6 +428,117 @@ function showBanner(kind, html) {
   el.className = `form-banner show ${kind}`;
   el.innerHTML = html;
 }
+
+// ---- Look up an existing listing as soon as someone enters their email, so
+// coming back to "edit" doesn't mean facing a blank form again. This is
+// progressive enhancement only: if the lookup fails or is skipped, the form
+// still works exactly as it did before, and directory-submit.js's own
+// membership check on submit is still the real gate, not this. ----
+const emailInput = document.getElementById('email');
+const emailLookupStatus = document.getElementById('emailLookupStatus');
+const submitBtn = document.getElementById('submitBtn');
+const submitNote = document.getElementById('submitNote');
+let isEditingExisting = false;
+let lastLookedUpEmail = '';
+
+function setEmailStatus(text, isError) {
+  emailLookupStatus.textContent = text;
+  emailLookupStatus.style.display = text ? 'block' : 'none';
+  emailLookupStatus.style.color = isError ? '#B0241A' : 'var(--muted)';
+}
+
+function currentSubmitLabel() {
+  return isEditingExisting ? 'Update my listing →' : 'Add my listing →';
+}
+
+function fillFieldsFromEntry(entry) {
+  document.getElementById('displayName').value = entry.display_name || '';
+  document.getElementById('brandName').value = entry.brand_name || '';
+  blurbEl.value = entry.blurb || '';
+  blurbEl.dispatchEvent(new Event('input'));
+
+  const topics = Array.isArray(entry.topics) ? entry.topics : [];
+  topicGrid.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+    const shouldCheck = topics.includes(cb.value);
+    cb.checked = shouldCheck;
+    cb.closest('.topic-check').classList.toggle('checked', shouldCheck);
+  });
+  document.getElementById('topicNote').textContent = `Choose up to ${MAX_TOPICS}. (${selectedTopics().length}/${MAX_TOPICS} selected)`;
+
+  document.getElementById('website').value = entry.website_url || '';
+  document.getElementById('substack').value = entry.substack_url || '';
+  document.getElementById('instagram').value = entry.instagram_url || '';
+  document.getElementById('tiktok').value = entry.tiktok_url || '';
+  document.getElementById('youtube').value = entry.youtube_url || '';
+  document.getElementById('x').value = entry.x_url || '';
+  document.getElementById('linkedin').value = entry.linkedin_url || '';
+  document.getElementById('otherLabel').value = entry.other_label || '';
+  document.getElementById('otherUrl').value = entry.other_url || '';
+
+  if (entry.photo_url) {
+    existingPhotoUrl = entry.photo_url;
+    photoFrame.innerHTML = `<img src="${entry.photo_url}" alt="Your current photo">`;
+    photoStatus.textContent = 'Current photo on file. Choose a new image to replace it.';
+    // Not shown for an existing server-side photo: there's no "clear my
+    // photo" support on submit yet, only "replace it with a new one" via
+    // Choose image. Showing Remove here would promise something that
+    // doesn't actually happen when the form is submitted.
+    photoRemoveBtn.classList.remove('show');
+  }
+
+  isEditingExisting = true;
+  submitBtn.textContent = currentSubmitLabel();
+  submitNote.textContent = 'Updating your existing listing. Changes go live right away.';
+}
+
+function resetToBlankState() {
+  isEditingExisting = false;
+  existingPhotoUrl = null;
+  submitBtn.textContent = currentSubmitLabel();
+  submitNote.textContent = 'Your listing goes live right away. No review queue.';
+}
+
+async function lookupEmail() {
+  const email = emailInput.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+  if (email.toLowerCase() === lastLookedUpEmail) return; // don't re-fetch on a repeat blur with the same address
+  lastLookedUpEmail = email.toLowerCase();
+
+  setEmailStatus('Checking…', false);
+  try {
+    const res = await fetch('/.netlify/functions/directory-lookup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+
+    if (!res.ok || !data.ok) {
+      setEmailStatus('', false);
+      return;
+    }
+    if (!data.member) {
+      setEmailStatus(data.error || "We couldn't find an active Project C membership for that email.", true);
+      resetToBlankState();
+      return;
+    }
+    if (data.found) {
+      setEmailStatus('Welcome back — we found your listing below. Update anything and resubmit to save your changes.', false);
+      fillFieldsFromEntry(data.entry);
+    } else {
+      setEmailStatus("You're a member, but there's no listing yet for this email. Fill out the form below to add one.", false);
+      resetToBlankState();
+    }
+  } catch (err) {
+    console.error('directory-lookup fetch failed:', err);
+    setEmailStatus('', false); // fail silently -- the form still works without this
+  }
+}
+
+emailInput.addEventListener('blur', lookupEmail);
+emailInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); lookupEmail(); }
+});
 
 document.getElementById('directoryForm').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -450,7 +572,6 @@ document.getElementById('directoryForm').addEventListener('submit', async (e) =>
   if (!agreement) { showError('agreementErr', 'Please check the box above before submitting.'); hasError = true; }
   if (hasError) return;
 
-  const submitBtn = document.getElementById('submitBtn');
   submitBtn.disabled = true;
   submitBtn.textContent = 'Submitting…';
 
@@ -465,7 +586,7 @@ document.getElementById('directoryForm').addEventListener('submit', async (e) =>
     if (!res.ok || data.ok === false) {
       showBanner('error', data.error || 'Something went wrong. Please try again.');
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Add my listing →';
+      submitBtn.textContent = currentSubmitLabel();
       return;
     }
 
@@ -476,7 +597,7 @@ document.getElementById('directoryForm').addEventListener('submit', async (e) =>
     console.error('directory-submit error:', err);
     showBanner('error', "We couldn't reach the server. Please check your connection and try again.");
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Add my listing →';
+    submitBtn.textContent = currentSubmitLabel();
   }
 });
 </script>

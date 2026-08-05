@@ -192,6 +192,23 @@ const MEMBER_CONTENT = {
   ],
   replays: [
     {
+      title: 'Work Origin Story',
+      date: 'August 5, 2026',
+      guest: 'Megan Finnerty',
+      description:
+        'Why you do what you do. A storytelling exercise for finding the narrative arc in your own career — the problem that pulled you in, the moment help or inspiration arrived, and what it taught you about your values.',
+      links: [
+        {
+          label: 'Watch the recording',
+          url: 'https://us06web.zoom.us/rec/share/4bH8PS7BP-BUu-S9uBCT2wwjgFjovcAd5BbZ-HMHTbg5tcG1Vdy7_1vFq6PfsA8w.bXYIsEmN_MaAXcfC',
+        },
+        {
+          label: 'Worksheet',
+          url: '/slides/work-origin-story-worksheet.pdf',
+        },
+      ],
+    },
+    {
       title: 'Small Talk & Sparking Curiosity',
       date: 'July 29, 2026',
       guest: 'Megan Finnerty',

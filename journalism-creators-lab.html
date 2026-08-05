@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journalism Creators Startup Lab — Project C x Google News Initiative</title>
+<meta name="description" content="A free 8-week program for early-stage creator journalists, built by Project C in partnership with the Google News Initiative — with elective training from YouTube and Google's AI tools, three months of coaching, and a year in the Project C community.">
+<meta name="keywords" content="creator journalism, Google News Initiative, journalism training, Project C, emerging journalists, YouTube training, Google AI tools, journalism creators startup lab">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://projectc.biz/journalism-creators-lab">
+<meta property="og:title" content="Journalism Creators Startup Lab — Project C x Google News Initiative">
+<meta property="og:description" content="A free 8-week program for early-stage creator journalists, built by Project C in partnership with the Google News Initiative — with elective training from YouTube and Google's AI tools.">
+<meta property="og:image" content="https://projectc.biz/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Journalism Creators Startup Lab — Project C x Google News Initiative">
+<meta name="twitter:description" content="An 8-week training program for early-stage creator journalists, built by Project C in partnership with the Google News Initiative.">
+<meta name="twitter:image" content="https://projectc.biz/og-image.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
+<style>
+
+/* ============================================================
+   JOURNALISM CREATORS STARTUP LAB — page-specific
+   Built on top of projectc-ds.css (Press Room design system)
+   ============================================================ */
+
+.nav.scrolled { box-shadow: 0 4px 24px rgba(21,23,26,0.08); }
+
+/* L2 EDITORIAL MASTHEAD — calmer, typography-first opener */
+.masthead { border-bottom: var(--rule); background: var(--white); }
+.masthead-inner { max-width: 900px; margin: 0 auto; padding: clamp(3rem,6vw,5rem) 2rem clamp(2.4rem,4vw,3.4rem); }
+.masthead .eyebrow { color: var(--coral-deep); margin-bottom: 1.3rem; }
+.masthead h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.9rem,3.6vw,3.1rem); line-height: 1.04; letter-spacing: 0.01em; color: var(--ink); max-width: 21ch; margin-bottom: 1.2rem; }
+.masthead .standfirst { font-size: 1.15rem; color: var(--muted); line-height: 1.65; max-width: 60ch; margin-bottom: 2rem; }
+.masthead .mast-cta { display: flex; align-items: center; gap: 1.6rem; flex-wrap: wrap; }
+.mast-link { font-weight: 800; color: var(--coral-deep); text-transform: uppercase; font-size: 0.78rem; letter-spacing: 0.06em; text-decoration: underline; text-underline-offset: 4px; }
+.mast-meta { display: flex; gap: 1.6rem; flex-wrap: wrap; margin-top: 2.2rem; padding-top: 1.4rem; border-top: var(--rule-thin); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 800; }
+.mast-meta span { display: inline-flex; align-items: center; gap: 0.55rem; }
+.mast-meta span::before { content: ''; width: 6px; height: 6px; background: var(--coral); border-radius: 50%; flex-shrink: 0; }
+
+/* Partner bar */
+.partner-bar { border-bottom: var(--rule); background: var(--porcelain); padding: 1.3rem 2rem; }
+.partner-bar-inner { max-width: var(--maxw); margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 1.3rem; flex-wrap: wrap; }
+.partner-bar-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.partner-bar img { height: 26px; width: auto; }
+
+/* Quiet editorial narrative + one enormous type moment */
+.narrative { max-width: 820px; margin: 0 auto; padding: clamp(2.5rem,4.5vw,4rem) 2rem; }
+.narrative .big-line { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.4rem,6vw,4.6rem); line-height: 0.99; letter-spacing: 0.005em; color: var(--ink); margin: 0.6rem 0 2rem; max-width: 17ch; }
+.narrative .big-line em { font-style: normal; color: var(--coral-deep); }
+.narrative p:not(.big-line) { font-size: 1.05rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.2rem; }
+.narrative p:last-child { margin-bottom: 0; }
+
+/* Cohorts — two-card status grid (new composition for this page) */
+.cohort-grid { display: grid; grid-template-columns: 1fr 1fr; border-top: var(--rule); }
+.cohort-card { padding: clamp(2rem,3.5vw,2.6rem); border-right: var(--rule); }
+.cohort-card:last-child { border-right: none; }
+.cohort-badge { display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.4rem 0.75rem; border: var(--rule); margin-bottom: 1.1rem; }
+.cohort-badge.open { background: var(--coral); color: var(--ink); }
+.cohort-badge.session { background: var(--ink); color: var(--white); }
+.cohort-card h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.3rem,2vw,1.7rem); line-height: 1.05; color: var(--ink); margin-bottom: 0.5rem; }
+.cohort-timing { font-size: 0.78rem; font-weight: 700; color: var(--coral-deep); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 1rem; }
+.cohort-card > p { font-size: 0.95rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.1rem; }
+.cohort-detail-list { list-style: none; margin-bottom: 1.4rem; }
+.cohort-detail-list li { font-size: 0.88rem; color: var(--ink); padding: 0.5rem 0; border-top: var(--rule-thin); display: flex; gap: 0.6rem; line-height: 1.5; }
+.cohort-detail-list li:first-child { border-top: none; }
+.detail-dot { color: var(--coral); flex-shrink: 0; }
+
+/* Curriculum */
+.weekgrid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: var(--rule); }
+.week-card { padding: 1.8rem 1.6rem; border-right: var(--rule); border-bottom: var(--rule); }
+.week-card:nth-child(3n) { border-right: none; }
+.week-card:nth-last-child(-n+3) { border-bottom: none; }
+.week-number { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.6rem; }
+.week-card h4 { font-family: var(--display); text-transform: uppercase; font-size: 1.05rem; line-height: 1.08; margin-bottom: 0.5rem; color: var(--ink); }
+.week-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.55; }
+.electives-wrap { border-top: var(--rule); padding: clamp(1.8rem,3vw,2.4rem); background: var(--porcelain); }
+.electives-label { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.5rem; }
+.electives-note { font-size: 0.9rem; color: var(--muted); line-height: 1.6; max-width: 68ch; margin-bottom: 1.1rem; }
+.elective-items { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.elective-chip { border: 1.5px solid rgba(21,23,26,0.28); background: var(--white); padding: 0.55rem 0.95rem; font-size: 0.78rem; font-weight: 700; color: var(--ink); }
+.elective-chip.g { border-color: var(--ink); background: var(--tint); }
+.curriculum-footer-note { max-width: var(--maxw); margin: 0 auto; padding: 1.6rem 2rem 0; font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+.curriculum-footer-note strong { color: var(--ink); }
+
+/* Card grids (outcomes / track record), full-bleed and ruled */
+.cardgrid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: var(--rule); }
+.cardgrid .card { padding: 2rem 1.7rem; border-right: var(--rule); border-bottom: var(--rule); }
+.cardgrid .card:nth-child(3n) { border-right: none; }
+.cardgrid .card:nth-last-child(-n+3) { border-bottom: none; }
+.cardgrid .card .ficon { width: 42px; height: 42px; margin-bottom: 1rem; display: block; }
+.cardgrid .card h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.1rem; line-height: 1.08; margin-bottom: 0.5rem; color: var(--ink); }
+.cardgrid .card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+.cardgrid.on-gray { background: #EDEEF1; }
+.cardgrid.two { grid-template-columns: repeat(2, 1fr); }
+.cardgrid .card-label { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.6rem; }
+
+/* Quotes — reuses shared .quotes/.quote c/m/y, adds a 4th coral variant */
+.quotes.four { grid-template-columns: repeat(4, 1fr); }
+.quote.o { box-shadow: inset 0 4px 0 var(--coral); }
+@media (max-width: 900px) { .quotes.four { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .quotes.four { grid-template-columns: 1fr; } }
+
+/* Dark band + dark split (after the program) */
+.dband { background: var(--ink); color: var(--porcelain); border-bottom: var(--rule); }
+.dsplit { display: grid; grid-template-columns: 1fr 1fr; }
+.dsplit .dcol { padding: clamp(2.5rem,4vw,3.5rem) 2.5rem; }
+.dsplit .dcol + .dcol { border-left: 2px solid rgba(245,246,248,0.16); }
+.dsplit .eyebrow { color: #FF8A66; }
+.dsplit h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.8rem,3.2vw,2.6rem); line-height: 1.04; color: var(--porcelain); }
+.dsplit .dcol > p { font-size: 1rem; color: rgba(245,246,248,0.68); line-height: 1.75; margin-bottom: 1.1rem; }
+.dsplit .dcol > p:last-child { margin-bottom: 0; }
+.included-list { list-style: none; }
+.included-list li { font-size: 0.92rem; color: rgba(245,246,248,0.78); padding: 0.75rem 0; border-top: 2px solid rgba(245,246,248,0.1); display: flex; gap: 0.75rem; line-height: 1.55; }
+.included-list li:first-child { border-top: none; }
+.included-check { color: var(--coral); font-weight: 800; flex-shrink: 0; }
+
+/* FAQ */
+.faq-wrap { max-width: var(--maxw); margin: 0 auto; padding: clamp(2.5rem,4vw,3.5rem) 2rem; }
+.faq-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 3.5rem; align-items: start; }
+.faq-left h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem,3vw,2.6rem); color: var(--ink); margin-bottom: 0.8rem; }
+.faq-left p { font-size: 0.92rem; color: var(--muted); line-height: 1.7; }
+.faq-left p a { color: var(--coral-deep); font-weight: 700; }
+.faq-item { border-bottom: var(--rule-thin); }
+.faq-item:first-child { border-top: var(--rule-thin); }
+.faq-question { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 0; cursor: pointer; background: none; border: none; width: 100%; text-align: left; font-family: var(--display); font-size: 1.02rem; text-transform: uppercase; color: var(--ink); line-height: 1.2; gap: 1rem; }
+.faq-question:hover { color: var(--coral-deep); }
+.faq-toggle { width: 26px; height: 26px; border: 1.5px solid rgba(21,23,26,0.2); display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; transition: all 0.3s ease; color: var(--ink); }
+.faq-item.open .faq-toggle { background: var(--coral); border-color: var(--coral); color: var(--ink); transform: rotate(45deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+.faq-answer-inner { padding: 0 0 1.25rem; font-size: 0.92rem; color: var(--muted); line-height: 1.7; }
+.faq-item.open .faq-answer { max-height: 500px; }
+
+/* Final CTA band */
+.cta-band { background: var(--ink); color: var(--porcelain); border-bottom: var(--rule); text-align: center; padding: clamp(3rem,5vw,4.5rem) 2rem; }
+.cta-band .inner { max-width: 680px; margin: 0 auto; }
+.cta-band h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.9rem,3.4vw,2.7rem); line-height: 1.05; color: var(--porcelain); margin-bottom: 1rem; }
+.cta-band h2 .coral { color: var(--coral); }
+.cta-band p { color: rgba(245,246,248,0.65); line-height: 1.7; margin-bottom: 1.9rem; }
+.cta-band .cta-actions { display: flex; align-items: center; justify-content: center; gap: 1.4rem; flex-wrap: wrap; }
+.cta-band .mast-link { color: #FF8A66; }
+
+/* Interest form (secondary — for people outside the current open cohort) */
+.interest-wrap { max-width: 720px; margin: 0 auto; padding: clamp(2.5rem,4vw,3.5rem) 2rem; }
+.interest-head { margin-bottom: 1.8rem; }
+.interest-head h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.6rem,2.6vw,2.1rem); color: var(--ink); margin-bottom: 0.6rem; }
+.interest-head p { font-size: 0.95rem; color: var(--muted); line-height: 1.65; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.1rem; }
+.form-group label { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 800; color: var(--ink); margin-bottom: 0.45rem; }
+.form-group input, .form-group select {
+  width: 100%; font-family: var(--sans); font-size: 0.95rem; padding: 0.8rem 0.95rem; border: 1.5px solid rgba(21,23,26,0.24); background: var(--white); color: var(--ink);
+}
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--coral); box-shadow: 0 0 0 3px rgba(254,107,65,0.18); }
+.form-checks { margin-bottom: 1.3rem; }
+.form-check { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.6rem 0; cursor: pointer; }
+.form-check input { width: 18px; height: 18px; flex-shrink: 0; margin-top: 0.15rem; accent-color: var(--coral-deep); cursor: pointer; }
+.form-check-text { font-size: 0.86rem; color: var(--muted); line-height: 1.5; }
+.form-actions { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+.form-success { margin-top: 1rem; font-size: 0.9rem; font-weight: 700; color: var(--coral-deep); display: none; }
+@media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+@media (max-width: 1000px) {
+  .cardgrid { grid-template-columns: repeat(2, 1fr); }
+  .cardgrid .card:nth-child(3n) { border-right: var(--rule); }
+  .cardgrid .card:nth-child(2n) { border-right: none; }
+  .cardgrid .card:nth-last-child(-n+3) { border-bottom: var(--rule); }
+  .cardgrid .card:nth-last-child(-n+2) { border-bottom: none; }
+  .weekgrid { grid-template-columns: repeat(2, 1fr); }
+  .weekgrid .week-card:nth-child(3n) { border-right: var(--rule); }
+  .weekgrid .week-card:nth-child(2n) { border-right: none; }
+}
+@media (max-width: 760px) {
+  .dsplit { grid-template-columns: 1fr; }
+  .dsplit .dcol + .dcol { border-left: none; border-top: 2px solid rgba(245,246,248,0.16); }
+  .cardgrid, .cardgrid.two { grid-template-columns: 1fr; }
+  .cardgrid .card { border-right: none !important; border-bottom: var(--rule) !important; }
+  .weekgrid { grid-template-columns: 1fr; }
+  .weekgrid .week-card { border-right: none !important; border-bottom: var(--rule) !important; }
+  .cohort-grid { grid-template-columns: 1fr; }
+  .cohort-card { border-right: none !important; border-bottom: var(--rule); }
+  .cohort-card:last-child { border-bottom: none; }
+  .faq-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+</style>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-By0ztJ4PY36DnzOcJW2cs.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<div class="announce" id="announcementBar">
+  <span class="live"><span class="blip"></span>Now open</span>
+  <span>Applications for Cohort 2 — EMEA — close midnight ET, Friday, September 4. <a href="wave2-application.html">Apply now &rarr;</a></span>
+  <button class="ab-x" onclick="document.getElementById('announcementBar').classList.add('hidden')" aria-label="Dismiss">&#10005;</button>
+</div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a class='nav-logo' href='/'><img src="project-c_lockup_color.png" alt="Project C — home"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
+      <li><a href='/community'>Community</a></li>
+      <li><a href='/directory'>Directory</a></li>
+      <li><a href='/going-solo'>Going Solo</a></li>
+      <li><a href='/coaching'>Coaching</a></li>
+      <li><a href='/press'>Research &amp; Press</a></li>
+      <li><a href='/about'>About</a></li>
+      <li><a class='nav-member' href='/members'>Member Login</a></li>
+      <li><a class='nav-cta' href='/community'>Join &rarr;</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- MASTHEAD (Level-2 editorial opener) -->
+<section class="masthead">
+  <div class="masthead-inner">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Project C × Google News Initiative</div>
+    <h1>Eight weeks to turn your creator journalism into a real business.</h1>
+    <p class="standfirst">The Journalism Creators Startup Lab pairs a free 8-week workshop with a full year of coaching and community — plus elective training straight from YouTube and Google's AI teams. No follower minimums. No experience requirements. Just journalists serious about the work.</p>
+    <div class="mast-cta">
+      <a href="wave2-application.html" class="btn btn-coral">Apply for the EMEA Cohort &rarr;</a>
+      <a href="#curriculum" class="mast-link">See the Curriculum</a>
+    </div>
+    <div class="mast-meta">
+      <span>Free</span>
+      <span>8-Week Workshop + Full Year of Support</span>
+      <span>Cohort 2 (EMEA): Apply by Sept 4</span>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNER BAR -->
+<section class="partner-bar">
+  <div class="partner-bar-inner">
+    <span class="partner-bar-label">In Partnership With</span>
+    <img src="https://storage.googleapis.com/media-newsinitiative/static/images/gni-logo.svg" alt="Google News Initiative">
+  </div>
+</section>
+
+<!-- OPENING NARRATIVE -->
+<section class="sec">
+  <div class="narrative reveal">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> About the Program</div>
+    <p class="big-line">Built for journalists <em>figuring it out</em> in public.</p>
+    <p>The creator journalism model is real, growing, and working for a generation of journalists who chose to build independent businesses around their work. But the infrastructure to support early-stage creators — real training, real community, real tools — is still catching up.</p>
+    <p>The Journalism Creators Startup Lab is designed to close that gap. Participants sign on for a full year of support: an 8-week workshop covering every major dimension of building a sustainable creator journalism business, elective sessions led directly by Google and YouTube teams, three months of post-cohort coaching, and a year-long membership in the Project C community.</p>
+  </div>
+</section>
+
+<!-- COHORTS -->
+<section class="sec" id="cohorts">
+  <div class="sec-head">
+    <div class="eyebrow magenta"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Cohorts</div>
+    <h2 class="h-display">Two regions. One program.</h2>
+  </div>
+  <div class="cohort-grid reveal">
+    <div class="cohort-card">
+      <span class="cohort-badge session">In Session</span>
+      <h3>Cohort 1 — North America</h3>
+      <div class="cohort-timing">&#9654; Launched June 2026</div>
+      <p>Our inaugural cohort is currently underway with a small, carefully selected group of early-stage creator journalists from across North America. Cohort 1 was invitation-only.</p>
+      <ul class="cohort-detail-list">
+        <li><span class="detail-dot">&#9679;</span> ~20 participants</li>
+        <li><span class="detail-dot">&#9679;</span> Invitation-based selection</li>
+        <li><span class="detail-dot">&#9679;</span> Hybrid: asynchronous learning with a weekly live lab</li>
+      </ul>
+    </div>
+    <div class="cohort-card">
+      <span class="cohort-badge open">Applications Open</span>
+      <h3>Cohort 2 — EMEA</h3>
+      <div class="cohort-timing">&#9654; Begins week of September 28</div>
+      <p>Our second cohort opens the program to early-stage creator journalists based in Europe, the Middle East, or Africa. Applications are open now and reviewed on a rolling basis.</p>
+      <ul class="cohort-detail-list">
+        <li><span class="detail-dot">&#9679;</span> Open application — no invitation required</li>
+        <li><span class="detail-dot">&#9679;</span> Apply by midnight ET, Friday, September 4</li>
+        <li><span class="detail-dot">&#9679;</span> Same free curriculum and year of support as Cohort 1</li>
+      </ul>
+      <a href="wave2-application.html" class="btn btn-coral">Apply Now &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<section class="sec" id="curriculum">
+  <div class="sec-head">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Curriculum</div>
+    <h2 class="h-display">Eight weeks. Every dimension of the business.</h2>
+    <p class="lede">Pre-recorded video lessons drop each week, followed by a live lab. Project C attends every session. Guest experts join for weeks focused on trust, revenue, and safety.</p>
+  </div>
+  <div class="weekgrid reveal">
+    <div class="week-card"><div class="week-number">Week 0</div><h4>Onboarding</h4><p>Platform orientation, community norms, tooling setup, and a diagnostic workshop to map where you are and where you want to go.</p></div>
+    <div class="week-card"><div class="week-number">Week 1</div><h4>Strategy &amp; Positioning</h4><p>Define your niche, sharpen your elevator pitch, and build the founder's mindset you need to treat your journalism like the business it is.</p></div>
+    <div class="week-card"><div class="week-number">Week 2</div><h4>Editorial Strategy</h4><p>Build a content calendar that actually works. Design an editorial system that keeps you consistent without burning you out.</p></div>
+    <div class="week-card"><div class="week-number">Week 3</div><h4>Trust &amp; Credibility</h4><p>Learn the Trusting News framework for building audience trust. Guest session with Trusting News on how to communicate your journalism's credibility.</p></div>
+    <div class="week-card"><div class="week-number">Week 4</div><h4>Growing Your Audience</h4><p>Audience personas, segmentation, calls to action, and the full reader funnel — from first-time visitor to loyal subscriber.</p></div>
+    <div class="week-card"><div class="week-number">Week 5</div><h4>Revenue Foundations</h4><p>Region-specific monetization lanes. Build a realistic revenue strategy and get at least one income stream live or in pilot by end of week.</p></div>
+    <div class="week-card"><div class="week-number">Week 6</div><h4>Owning Your Audience Data</h4><p>Google Analytics, platform analytics, and AI-assisted analysis. Build a quarterly review practice that tells you what's actually working.</p></div>
+    <div class="week-card"><div class="week-number">Week 7</div><h4>Safety, Legal &amp; Risk</h4><p>Guest session with CPJ on personal safety planning. Basic contracts, liability protection, and how to protect yourself and your work.</p></div>
+    <div class="week-card"><div class="week-number">Week 8</div><h4>Capstone &amp; Showcase</h4><p>Peer feedback and a live showcase panel with regional mentors to close out the cohort.</p></div>
+  </div>
+  <div class="electives-wrap reveal">
+    <div class="electives-label">+ Elective Labs</div>
+    <p class="electives-note">Beyond the core curriculum, participants get access to bonus live sessions taught directly by Google and YouTube's own teams — including a "Getting the Most Out of YouTube" session with YouTube's Partnerships team, and a hands-on walkthrough of Google's AI tools for newsrooms (Gemini, NotebookLM, Pinpoint, and Trends) with Google News Initiative trainers.</p>
+    <div class="elective-items">
+      <span class="elective-chip g">Getting the Most Out of YouTube</span>
+      <span class="elective-chip g">Google's AI Tools (Gemini, NotebookLM, Pinpoint, Trends)</span>
+      <span class="elective-chip">Building Your Own Site</span>
+      <span class="elective-chip">Vertical Video</span>
+      <span class="elective-chip">Sponsorship Lab</span>
+      <span class="elective-chip">Grant Seeking</span>
+      <span class="elective-chip">Custom Dashboards</span>
+    </div>
+  </div>
+  <p class="curriculum-footer-note"><strong>Format:</strong> Each week features async video content plus a live lab at the end of the week. The live sessions are where the real work happens — Q&amp;A, workshopping, and peer learning.</p>
+</section>
+
+<!-- OUTCOMES -->
+<section class="sec">
+  <div class="sec-head">
+    <div class="eyebrow magenta"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> What You'll Build</div>
+    <h2 class="h-display">Leave with more than a syllabus. Leave with a <em>real business.</em></h2>
+    <p class="lede">By the end of eight weeks, you'll have live work to show for it — not just knowledge, but systems, strategies, and at least one revenue stream in motion.</p>
+  </div>
+</section>
+<section class="sec" style="padding-bottom:0;">
+  <div class="cardgrid on-gray reveal">
+    <div class="card">
+      <svg class="ficon" viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="20" cy="20" r="11"/><line x1="20" y1="3" x2="20" y2="37"/><line x1="3" y1="20" x2="37" y2="20"/><circle cx="20" cy="20" r="4" fill="#FE6B41" stroke="none"/></svg>
+      <h3>A sharp positioning strategy</h3><p>A clear niche, a defined audience, and a pitch that actually says what you do and why it matters.</p>
+    </div>
+    <div class="card">
+      <svg class="ficon" viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="9" width="28" height="25" rx="2"/><path d="M6 16 H34"/><path d="M13 5 V11 M27 5 V11"/><rect x="11" y="20.5" width="5" height="5" fill="#FE6B41" stroke="none"/><rect x="20" y="20.5" width="5" height="5"/><rect x="11" y="27.5" width="5" height="5"/><rect x="20" y="27.5" width="5" height="5"/></svg>
+      <h3>A working editorial system</h3><p>A content calendar and publishing rhythm you can sustain — not one you'll abandon three weeks in.</p>
+    </div>
+    <div class="card">
+      <svg class="ficon" viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="20" r="14"/><path d="M20 12 V28" stroke="#FE6B41"/><path d="M24 15.5 C24 13.5 22.5 12.5 20 12.5 C17.5 12.5 16 13.7 16 15.5 C16 19 24 18 24 22.5 C24 24.7 22 26 20 26 C17.8 26 16 25 16 22.8" stroke="#FE6B41"/></svg>
+      <h3>A revenue lane in motion</h3><p>At least one monetization strategy live or piloted by Week 5, built around what actually makes sense for your audience and region.</p>
+    </div>
+    <div class="card">
+      <svg class="ficon" viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 6 V33 H34"/><path d="M11 27 L18 20 L23 24 L31 12" stroke="#FE6B41"/><path d="M26 12 H31 V17" stroke="#FE6B41"/></svg>
+      <h3>An analytics practice</h3><p>A quarterly review framework so you stop guessing and start making decisions based on what your audience is telling you.</p>
+    </div>
+    <div class="card">
+      <svg class="ficon" viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 5 L33 10 V19 C33 27 27.5 33 20 36 C12.5 33 7 27 7 19 V10 Z"/><path d="M14 20 L18.5 24.5 L27 14" stroke="#FE6B41"/></svg>
+      <h3>A safety and legal foundation</h3><p>A personal safety plan, a basic contracts framework, and the clarity to protect yourself and your work from the start.</p>
+    </div>
+    <div class="card">
+      <svg class="ficon" viewBox="0 0 40 40" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 22 L11 35 L20 30.5 L29 35 L26 22"/><circle cx="20" cy="15" r="9"/><path d="M20 10.5 L21.4 13.5 L24.7 14 L22.3 16.4 L22.9 19.7 L20 18.1 L17.1 19.7 L17.7 16.4 L15.3 14 L18.6 13.5 Z" fill="#FE6B41" stroke="none"/></svg>
+      <h3>Community and credibility</h3><p>Peer relationships that last beyond the cohort, plus eligibility for the Google Emerging News Voices list after program completion.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TRACK RECORD -->
+<section class="sec">
+  <div class="sec-head">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Proven Track Record</div>
+    <h2 class="h-display">We've done this before. <em>Many times.</em></h2>
+    <p class="lede">The Journalism Creators Startup Lab is built on years of Project C training programs that have helped journalists clarify their vision, grow their audiences, and build businesses that last.</p>
+  </div>
+</section>
+<section class="sec" style="padding-bottom:0;">
+  <div class="cardgrid reveal">
+    <div class="card"><div class="card-label">Ongoing Program</div><h3>Going Solo</h3><p>A six-session workshop for journalists who haven't launched yet. Graduates have launched newsletters and video channels, sharpened their audience focus, and built peer networks that are still active today.</p></div>
+    <div class="card"><div class="card-label">In Partnership with Medill</div><h3>Local News Accelerator</h3><p>A one-day intensive for newsroom leaders and solo founders, delivered with Medill's Local News Initiative at Northwestern University. Content strategy and media-kit reviews were the standout modules.</p></div>
+    <div class="card"><div class="card-label">Current Cohort</div><h3>Muslim American Creator Journalism Cohort</h3><p>An ongoing cohort co-led by the Going Solo team, designed with and for Muslim American creator journalists. Proof that the playbook works across communities, contexts, and regions.</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec">
+  <div class="sec-head">
+    <div class="eyebrow magenta"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> What Participants Say</div>
+    <h2 class="h-display">From the people who've been through it.</h2>
+  </div>
+</section>
+<div class="quotes four reveal" style="border-top: var(--rule);">
+  <div class="quote c"><div><div class="mark">&ldquo;</div><blockquote>It's the playbook on how to do this — and how to do it sustainably — from the people who actually understand the landscape, the data, and the strategies, with no fluff.</blockquote></div><div class="attr">Going Solo Alum &middot; Spring 2025</div></div>
+  <div class="quote m"><div><div class="mark">&ldquo;</div><blockquote>The feedback from this group has been incredibly helpful and validating. Doing the course homework has helped me make a lot of progress, especially around mapping out my audience and understanding how to pitch my business to others.</blockquote></div><div class="attr">Dan Wroclawski &middot; Going Solo Alum</div></div>
+  <div class="quote y"><div><div class="mark">&ldquo;</div><blockquote>Going Solo helped me let go of a ton of self-doubt and get direct answers on issues I was getting mixed information on during my own research.</blockquote></div><div class="attr">Jared Brown &middot; Truth to Power Northwest</div></div>
+  <div class="quote o" style="border-right:none;"><div><div class="mark">&ldquo;</div><blockquote>I've gained a lot of self-confidence here to stand up for myself and my brand.</blockquote></div><div class="attr">Kerstin Hasse &middot; Content Creator Journalist</div></div>
+</div>
+
+<!-- AFTER THE PROGRAM -->
+<section class="dband" id="after">
+  <div class="dsplit">
+    <div class="dcol reveal">
+      <div class="eyebrow">After the Program</div>
+      <h2>Three months of coaching. A year of <em style="color:var(--coral); font-style:normal;">community.</em></h2>
+      <p>The program doesn't stop at Week 8. Every participant stays connected through post-cohort coaching, long-term check-ins, and a full year of Project C community membership.</p>
+      <p>Participants also keep access to the elective YouTube and Google AI tool trainings from the live labs, and become eligible for the Google News Initiative's Emerging News Voices programs for emerging journalists.</p>
+    </div>
+    <div class="dcol reveal">
+      <div class="eyebrow">A Full Year of Support</div>
+      <ul class="included-list">
+        <li><span class="included-check">&#10003;</span> Three months of post-cohort coaching calls — 1 to 2 sessions per month</li>
+        <li><span class="included-check">&#10003;</span> One year of Project C community membership — 200+ journalists sharing resources and collaborating</li>
+        <li><span class="included-check">&#10003;</span> Trust and credibility assessment using the Trusting News framework</li>
+        <li><span class="included-check">&#10003;</span> Elective access to live YouTube and Google AI tool training sessions</li>
+        <li><span class="included-check">&#10003;</span> Eligibility for the Google Emerging News Voices list</li>
+        <li><span class="included-check">&#10003;</span> 90-day and 12-month follow-up check-ins to track your growth</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="faq-wrap">
+    <div class="faq-layout">
+      <div class="faq-left reveal">
+        <h2>FAQ</h2>
+        <p>Still have questions? <a href="mailto:info@projectc.biz">Email us</a> and we'll talk it through.</p>
+      </div>
+      <div class="faq-right reveal">
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1" onclick="toggleFaq(this)">
+            Who can apply?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-answer-1" hidden>
+            <div class="faq-answer-inner">No follower minimums, no experience requirements — just early-stage creator journalists who are serious about building a sustainable business around their work. Cohort 1 (North America) was invitation-only. Cohort 2 (EMEA) is open application for anyone based in Europe, the Middle East, or Africa.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-2" onclick="toggleFaq(this)">
+            Is it really free?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-answer-2" hidden>
+            <div class="faq-answer-inner">Yes. The program is free to participants, built by Project C in partnership with the Google News Initiative — including the elective YouTube and Google AI tool training sessions.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-3" onclick="toggleFaq(this)">
+            What happens after the 8 weeks?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-answer-3" hidden>
+            <div class="faq-answer-inner">The program continues for a full year. Participants get three months of post-cohort group coaching, ongoing access to the Project C community, and 90-day and 12-month check-ins to track growth after the cohort wraps.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4" onclick="toggleFaq(this)">
+            I'm not eligible for the current cohort. Can I still get involved?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-answer-4" hidden>
+            <div class="faq-answer-inner">This program is designed to grow. Drop your info below and we'll make sure you hear about future cohorts first — or subscribe to the Project C newsletter in the meantime.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-band">
+  <div class="inner reveal">
+    <h2>Applications for Cohort 2 — EMEA — close <span class="coral">September 4.</span></h2>
+    <p>Early-stage creator journalist based in Europe, the Middle East, or Africa? Applications are reviewed on a rolling basis, so the sooner you apply, the better.</p>
+    <div class="cta-actions">
+      <a href="wave2-application.html" class="btn btn-coral">Apply Now &rarr;</a>
+      <a href="#interest" class="mast-link">Not in EMEA? Get on the list &darr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- INTEREST FORM (future cohorts) -->
+<section class="sec" id="interest">
+  <div class="interest-wrap">
+    <div class="interest-head reveal">
+      <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Stay in the Loop</div>
+      <h2>Future cohorts are <em style="font-style:normal; color:var(--coral-deep);">open to all.</em></h2>
+      <p>This program is designed to grow — future cohorts will open to applicants from across the journalism creator community. Drop us a line and we'll make sure you hear about it first.</p>
+    </div>
+    <form class="reveal" id="interestForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fi-name">Name</label>
+          <input type="text" id="fi-name" name="name" placeholder="Your name" required>
+        </div>
+        <div class="form-group">
+          <label for="fi-email">Email</label>
+          <input type="email" id="fi-email" name="email" placeholder="your@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fi-pub">Publication / Outlet</label>
+          <input type="text" id="fi-pub" name="publication" placeholder="Where you publish or what you're building">
+        </div>
+        <div class="form-group">
+          <label for="fi-region">Region</label>
+          <select id="fi-region" name="region" required>
+            <option value="" disabled selected>Select your region</option>
+            <option value="North America">North America</option>
+            <option value="EMEA">EMEA (Europe, Middle East, Africa)</option>
+            <option value="Latin America">Latin America</option>
+            <option value="Asia Pacific">Asia Pacific</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-checks">
+        <label class="form-check">
+          <input type="checkbox" id="fi-comms" name="comms">
+          <span class="form-check-text">I'm comfortable being mentioned in external communications about this program</span>
+        </label>
+        <label class="form-check">
+          <input type="checkbox" id="fi-google-programs" name="googlePrograms">
+          <span class="form-check-text">I'm interested in learning more about Google's programs and resources for emerging news voices</span>
+        </label>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-coral" id="fi-submit">Submit Interest &rarr;</button>
+        <a href="https://newsletter.projectc.biz" class="btn" target="_blank">Subscribe to Project C</a>
+      </div>
+      <div id="fi-success" class="form-success">&#10003; Got it! We'll be in touch when applications open.</div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href='/press'>Research &amp; Press</a>
+    <a href='/news-ecosystem-map'>News Ecosystem Map</a>
+    <a href='/going-solo'>Going Solo Workshop</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href='/community'>Join the Community</a>
+    <a href='/directory'>Member Directory</a>
+    <a href='/coaching'>Coaching</a>
+    <a href='/members'>Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href='/about'>About Project C</a>
+    <a href='/about#founder'>Team</a>
+    <a href="mailto:liz@projectc.biz">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href='/style-guide'>Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C — independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
+  </div>
+</footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design.</span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const id = this.getAttribute('href'); if (id === '#') return;
+    const target = document.querySelector(id); if (!target) return;
+    e.preventDefault();
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior: reduce ? 'auto' : 'smooth' });
+  });
+});
+
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const open = item.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+  const answer = document.getElementById(btn.getAttribute('aria-controls'));
+  if (answer) answer.hidden = !open;
+}
+
+// ── Interest Form (future cohorts) ──────────────────────────────
+var INTEREST_FORM_URL = 'https://script.google.com/macros/s/AKfycbyf9ej-_oqRdZ2DW6H0phnX0vzrEwYUUxxqASKP2l59aD8VbEYFwzckTUxRJgUZJGMABA/exec';
+
+document.getElementById('interestForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var btn = document.getElementById('fi-submit');
+  var success = document.getElementById('fi-success');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  var data = {
+    name:           document.getElementById('fi-name').value,
+    email:          document.getElementById('fi-email').value,
+    publication:    document.getElementById('fi-pub').value,
+    region:         document.getElementById('fi-region').value,
+    comms:          document.getElementById('fi-comms').checked ? 'Yes' : 'No',
+    googlePrograms: document.getElementById('fi-google-programs').checked ? 'Yes' : 'No'
+  };
+
+  try {
+    await fetch(INTEREST_FORM_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    success.style.display = 'block';
+    this.reset();
+    btn.textContent = 'Submitted ✓';
+  } catch(err) {
+    btn.textContent = 'Submit Interest →';
+    btn.disabled = false;
+    alert('Something went wrong — please email liz@projectc.biz directly.');
+  }
+});
+</script>
+</body>
+</html>

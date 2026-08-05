@@ -192,6 +192,23 @@ const MEMBER_CONTENT = {
   ],
   replays: [
     {
+      title: 'Small Talk & Sparking Curiosity',
+      date: 'July 29, 2026',
+      guest: 'Megan Finnerty',
+      description:
+        'No pitches, no elevators. A hands-on exercise for using small talk to spark real interest in others through shared values — build a 90-second narrative about what you do and why it matters.',
+      links: [
+        {
+          label: 'Watch the recording',
+          url: 'https://us06web.zoom.us/rec/share/A1Z8xKG32KFRxvP04f06clilISxwa9gPUSvXKfj80EzZUszmw4-1qlNzBXaVtsWa.u8W3ym_KHc5Iw1vW',
+        },
+        {
+          label: 'Worksheet',
+          url: '/slides/small-talk-sparking-curiosity-worksheet.pdf',
+        },
+      ],
+    },
+    {
       title: 'Editory Video Tool Demo',
       date: 'June 10, 2026',
       guest: 'David Rodin',

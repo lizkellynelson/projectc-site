@@ -71,7 +71,7 @@
   .form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--coral); box-shadow: 0 0 0 3px rgba(254,107,65,0.18); }
   .form-field textarea { resize: vertical; min-height: 100px; line-height: 1.6; font-family: var(--sans); }
   .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(21,23,26,0.4); }
-  .form-field input.invalid, .form-field textarea.invalid, .opt-list.invalid, .opt-grid.invalid, .links-section.invalid { border-color: #B0241A !important; }
+  .form-field input.invalid, .form-field textarea.invalid, .opt-list.invalid, .opt-grid.invalid, .links-section.invalid, .opt-card.invalid { border-color: #B0241A !important; }
   .field-error { display: none; margin-top: 0.5rem; color: #B0241A; font-size: 0.82rem; font-weight: 600; }
   .field-error.show { display: block; }
 
@@ -353,6 +353,25 @@
         </div>
       </div>
 
+      <!-- SECTION 5: Data & Privacy — added per Alliaya Khan (Google EMEA), email 8/7/2026 -->
+      <div class="form-section-head">
+        <p class="form-section-label">Data & Privacy</p>
+        <h2 class="form-section-title">Consent</h2>
+      </div>
+
+      <!-- NOTE(Liz): link below assumes the policy is published at /privacy-policy.html —
+           update the href if your designer names/places it differently. -->
+      <div class="form-field">
+        <p class="help" style="margin-top:0;">Project C's <a href="https://projectc.biz/privacy-policy.html" target="_blank" rel="noopener" style="color:var(--coral-deep); text-decoration:underline;">Privacy Policy</a> explains how we collect and use your information.</p>
+      </div>
+
+      <div class="form-field">
+        <label class="opt-card" style="align-items:flex-start; cursor:pointer;">
+          <input type="checkbox" name="googleDataConsent" id="googleDataConsent" required style="margin-top:0.15rem;">
+          <span style="font-weight:400; text-transform:none; letter-spacing:0; font-size:0.92rem; line-height:1.55;">I understand my personal data will be shared with and processed by the Google News Initiative for the purpose of participating in this training program offered by Project C. Google processes your personal data in accordance with its <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener" style="color:var(--coral-deep); text-decoration:underline;">Privacy Policy</a>, which also describes how you can exercise your rights regarding this data. <span class="req">*</span></span>
+        </label>
+      </div>
+
       <div class="form-submit-wrap">
         <button type="submit" class="btn-primary" id="submitBtn">Submit application →</button>
         <p class="submit-note">By submitting, you confirm that the information above is accurate. Applications are reviewed on a rolling basis. Questions? Email <a href="mailto:liz@projectc.biz" style="color:var(--coral-deep); font-weight:700;">liz@projectc.biz</a>.</p>
@@ -508,6 +527,15 @@
       linksError.classList.remove('show');
     }
 
+    // Google data consent checkbox — required
+    const googleConsentBox = document.getElementById('googleDataConsent');
+    if (!googleConsentBox.checked) {
+      valid = false;
+      googleConsentBox.closest('.opt-card').classList.add('invalid');
+    } else {
+      googleConsentBox.closest('.opt-card').classList.remove('invalid');
+    }
+
     if (!valid) {
       alert('Please fill in all required fields before submitting.');
       return;
@@ -555,7 +583,8 @@
       acceptance: form.acceptance.value,
       pendingQuestion: form.pendingQuestion ? form.pendingQuestion.value : '',
       commsConsent: form.commsConsent ? [...form.querySelectorAll('input[name="commsConsent"]:checked')].map(r => r.value)[0] || '' : '',
-      googleProgramsInterest: form.googleProgramsInterest ? [...form.querySelectorAll('input[name="googleProgramsInterest"]:checked')].map(r => r.value)[0] || '' : ''
+      googleProgramsInterest: form.googleProgramsInterest ? [...form.querySelectorAll('input[name="googleProgramsInterest"]:checked')].map(r => r.value)[0] || '' : '',
+      googleDataConsent: form.googleDataConsent.checked ? 'Yes' : 'No'
     };
 
     submitBtn.disabled = true;
@@ -590,6 +619,11 @@
         document.getElementById('linksError').classList.remove('show');
       }
     });
+  });
+
+  // Clear invalid state on the Google data consent checkbox
+  document.getElementById('googleDataConsent').addEventListener('change', function () {
+    this.closest('.opt-card').classList.remove('invalid');
   });
 </script>
 

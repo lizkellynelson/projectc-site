@@ -309,6 +309,13 @@ const MEMBER_CONTENT = {
   ],
   resources: [
     {
+      title: 'Build Your Analytics Guru',
+      description:
+        'A field guide to auditing your own analytics, payments and membership plumbing. Fifteen checks, five phases, with a checklist that remembers where you left off.',
+      url: 'https://projectc.biz/analytics-guru',
+      image: 'members-art-analytics.jpg',
+    },
+    {
       title: 'Media Kit Builder',
       description:
         'Build a polished media kit in minutes. Fill in your numbers and get a shareable page for sponsors and partners.',

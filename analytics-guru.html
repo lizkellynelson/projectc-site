@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Your Analytics Guru — Project C</title>
+<meta name="description" content="15 things worth checking if you run a newsletter, a paid membership, or both. A Project C field guide to auditing your own analytics, payments and membership plumbing.">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://projectc.biz/analytics-guru">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build Your Analytics Guru">
+<meta property="og:description" content="15 things worth checking if you run a newsletter, a paid membership, or both. Most are invisible until someone goes looking, and several cannot be fixed retroactively.">
+<meta property="og:url" content="https://projectc.biz/analytics-guru">
+<meta property="og:site_name" content="Project C">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Build Your Analytics Guru">
+<meta name="twitter:description" content="15 things worth checking if you run a newsletter, a paid membership, or both.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
+<style>
+/* =========================================================
+   BUILD YOUR ANALYTICS GURU — Level-3 field guide
+   Press Room language: ruled full-bleed blocks, CMYK phase
+   markers, crop marks, one enormous type moment, square
+   ink checkboxes. New composition: the audit ledger.
+   ========================================================= */
+:root { --coral-display: #E5603A; --coral-text: #B74D2F; }
+
+/* ---------- MASTHEAD + DOCKET (new composition) ---------- */
+.guide-head { display: grid; grid-template-columns: 1.12fr 0.88fr; border-bottom: var(--rule); background: var(--white); }
+.gh-type { padding: clamp(2.4rem,5vw,4.2rem) 2rem clamp(2rem,3.6vw,3rem); border-right: var(--rule); display: flex; flex-direction: column; justify-content: center; }
+.gh-type h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(3rem,7.6vw,6.4rem); line-height: 1.02; letter-spacing: 0.005em; max-width: 12ch; }
+.gh-type h1 .coral { color: var(--coral-display); }
+.gh-standfirst { margin-top: 1.6rem; font-size: 1.1rem; line-height: 1.65; color: var(--muted); max-width: 50ch; }
+.gh-standfirst b { color: var(--ink); font-weight: 600; }
+.gh-docket { background: var(--porcelain); display: flex; align-items: center; padding: clamp(1.9rem,3.6vw,3rem) clamp(1.4rem,2.8vw,2.4rem); }
+.docket-panel { position: relative; width: 100%; background: var(--white); border: var(--rule); padding: 1.9rem 1.4rem 1.2rem; }
+.dp-tag { position: absolute; top: -13px; left: 20px; background: var(--ink); color: var(--white); border: var(--rule); font-size: 0.62rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; padding: 0.26rem 0.7rem; }
+.dp-row { display: grid; grid-template-columns: 44px 1fr auto; gap: 0.9rem; align-items: baseline; padding: 0.72rem 0.4rem; border-top: var(--rule-thin); transition: background 0.16s, padding-left 0.16s; }
+.dp-row:first-of-type { border-top: none; }
+.dp-row:hover { background: var(--tint); padding-left: 0.9rem; }
+.dpn { font-family: var(--display); font-size: 1.5rem; line-height: 1; }
+.dp-row:nth-of-type(1) .dpn { color: #0B6A8A; }
+.dp-row:nth-of-type(2) .dpn { color: var(--magenta); }
+.dp-row:nth-of-type(3) .dpn { color: #8F7100; }
+.dp-row:nth-of-type(4) .dpn { color: var(--coral-text); }
+.dp-row:nth-of-type(5) .dpn { color: var(--ink); }
+.dpt { font-family: var(--display); text-transform: uppercase; font-size: 1.1rem; line-height: 1.05; }
+.dpc { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+
+/* dateline strip */
+.dateline { border-bottom: var(--rule); background: var(--porcelain); }
+.dateline-inner { max-width: var(--maxw); margin: 0 auto; display: flex; flex-wrap: wrap; }
+.dateline .dl { padding: 0.8rem 1.5rem; border-right: var(--rule-thin); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 0.55rem; }
+.dateline .dl b { color: var(--ink); font-weight: 800; }
+.dateline .dl:last-child { border-right: none; margin-left: auto; }
+
+/* ---------- FIELD NOTES SPLIT ---------- */
+.fieldnotes { display: grid; grid-template-columns: 1.05fr 0.95fr; border-bottom: var(--rule); }
+.fn-copy { background: var(--ink); color: var(--porcelain); padding: clamp(2.2rem,4vw,3.4rem) clamp(1.6rem,3vw,2.6rem); border-right: var(--rule); }
+.fn-copy .eyebrow { color: var(--coral); }
+.fn-copy p { font-size: 1.02rem; line-height: 1.75; color: rgba(245,246,248,0.78); max-width: 46ch; }
+.fn-copy p + p { margin-top: 1.1rem; }
+.fn-copy p b { color: var(--porcelain); font-weight: 600; }
+.fn-found { background: var(--white); padding: clamp(2.2rem,4vw,3.4rem) clamp(1.6rem,3vw,2.6rem); }
+.fn-found h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.4rem,2.6vw,2rem); line-height: 1.02; margin-bottom: 1.4rem; }
+.found-row { display: grid; grid-template-columns: 46px 1fr; gap: 1rem; padding: 1rem 0; border-top: var(--rule-thin); align-items: start; }
+.found-row .fr-n { font-family: var(--display); font-size: 1.5rem; line-height: 1; }
+.found-row:nth-of-type(1) .fr-n { color: #0B6A8A; }
+.found-row:nth-of-type(2) .fr-n { color: var(--coral-text); }
+.found-row:nth-of-type(3) .fr-n { color: #8F7100; }
+.found-row p { font-size: 0.95rem; line-height: 1.6; color: var(--muted); }
+.found-row p b { color: var(--ink); font-weight: 700; }
+
+/* ---------- AUDIT PROGRESS STRIP (new composition) ---------- */
+.audit-bar { position: sticky; top: 76px; z-index: 900; background: var(--white); border-bottom: var(--rule); }
+.ab-inner { max-width: var(--maxw); margin: 0 auto; padding: 0.7rem 2rem; display: flex; align-items: center; gap: 1.1rem; }
+.ab-label { font-size: 0.67rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; white-space: nowrap; }
+.ab-track { display: flex; flex: 1; min-width: 90px; height: 20px; border: var(--rule); }
+.ab-track i { flex: 1; border-right: 1px solid var(--ink); background: var(--white); transition: background 0.2s; }
+.ab-track i:last-child { border-right: none; }
+.ab-track i.on { background: var(--coral); }
+.ab-count { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.ab-reset { font-family: var(--sans); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; padding: 0.45rem 0.85rem; border: var(--rule); background: var(--white); color: var(--ink); cursor: pointer; }
+.ab-reset:hover { background: var(--ink); color: var(--white); }
+.ab-reset:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
+
+/* ---------- PHASE BANDS ---------- */
+.phase { border-bottom: var(--rule); scroll-margin-top: 152px; }
+.phase-band { display: grid; grid-template-columns: 126px 1fr; border-bottom: var(--rule); }
+.pb-num { display: flex; align-items: center; justify-content: center; border-right: var(--rule); font-family: var(--display); font-size: clamp(2.3rem,5vw,3.6rem); line-height: 1; color: var(--ink); }
+.phase.p-c .pb-num { background: var(--cyan); }
+.phase.p-m .pb-num { background: var(--magenta); }
+.phase.p-y .pb-num { background: var(--yellow); }
+.phase.p-o .pb-num { background: var(--coral); }
+.phase.p-k .pb-num { background: var(--ink); color: var(--porcelain); }
+.pb-copy { padding: clamp(1.4rem,2.6vw,2rem) 2rem; }
+.pb-copy h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.6rem,3.4vw,2.5rem); line-height: 1.02; }
+.pb-copy p { margin-top: 0.85rem; font-size: 1rem; line-height: 1.68; color: var(--muted); max-width: 68ch; }
+
+/* ---------- THE AUDIT LEDGER (new composition) ---------- */
+.checks { max-width: 1180px; margin: 0 auto; border-left: var(--rule-thin); border-right: var(--rule-thin); }
+.check { display: grid; grid-template-columns: 78px 1fr; border-bottom: var(--rule-thin); transition: background 0.18s; }
+.check:last-child { border-bottom: none; }
+.check:hover { background: #FCFCFD; }
+.check-gutter { border-right: var(--rule-thin); display: flex; flex-direction: column; align-items: center; gap: 0.7rem; padding: 1.75rem 0 1.5rem; }
+.check-num { font-family: var(--display); font-size: 1.05rem; line-height: 1; color: var(--muted); }
+.cbox { appearance: none; -webkit-appearance: none; width: 27px; height: 27px; flex: none; border: var(--rule); background: var(--white); cursor: pointer; display: grid; place-content: center; transition: background 0.15s; }
+.cbox:hover { background: var(--tint); }
+.cbox:focus-visible { outline: 2px solid var(--coral); outline-offset: 3px; }
+.cbox:checked { background: var(--coral); }
+.cbox:checked::after { content: ""; width: 7px; height: 13px; border: solid var(--ink); border-width: 0 3px 3px 0; transform: rotate(43deg) translate(-1px,-2px); }
+.check-body { padding: 1.6rem 2rem 2rem; min-width: 0; }
+.check-body h3 { font-size: 1.3rem; font-weight: 700; line-height: 1.25; letter-spacing: -0.005em; max-width: 32ch; }
+.check.done .check-body h3 { color: var(--muted); text-decoration: line-through; text-decoration-thickness: 2px; }
+.check-body > p { margin-top: 0.6rem; font-size: 1rem; line-height: 1.65; color: var(--muted); max-width: 68ch; }
+
+/* note windows */
+.note { position: relative; margin-top: 1.7rem; border: var(--rule); background: var(--porcelain); padding: 1.5rem 1.5rem 1.35rem; max-width: 72ch; }
+.note-tag { position: absolute; top: -13px; left: 20px; border: var(--rule); background: var(--yellow); color: var(--ink); font-size: 0.62rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.26rem 0.7rem; }
+.note.t-coral .note-tag { background: var(--coral); }
+.note.t-cyan .note-tag { background: var(--cyan); }
+.note p { font-size: 0.99rem; line-height: 1.68; color: var(--ink); }
+.note p b { font-weight: 700; }
+
+/* how-to rail */
+.howto { margin-top: 1.3rem; border-left: 6px solid var(--coral); padding: 0.15rem 0 0.15rem 1.1rem; max-width: 72ch; }
+.howto .hl { display: block; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; color: var(--coral-text); margin-bottom: 0.4rem; }
+.howto p { font-size: 0.95rem; line-height: 1.62; color: var(--muted); }
+.howto p b { color: var(--ink); font-weight: 700; }
+.howto code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.87em; background: var(--white); border: 1px solid rgba(21,23,26,0.25); padding: 0.05rem 0.36rem; color: var(--ink); }
+
+/* ---------- CLOSER ---------- */
+.closer { background: var(--ink); color: var(--porcelain); border-bottom: var(--rule); }
+.closer-inner { max-width: var(--maxw); margin: 0 auto; padding: clamp(2.6rem,5vw,4rem) 2rem; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(1.6rem,4vw,3rem); align-items: start; }
+.closer .eyebrow { color: var(--coral); }
+.closer h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem,4.6vw,3.5rem); line-height: 0.96; }
+.closer p { font-size: 1.06rem; line-height: 1.72; color: rgba(245,246,248,0.76); max-width: 56ch; }
+.closer p + p { margin-top: 1.05rem; }
+.closer mark { background: var(--yellow); color: var(--ink); padding: 0 0.3rem; font-weight: 600; }
+.closer .btn { margin-top: 1.8rem; }
+
+/* ---------- COLOPHON ---------- */
+.colophon { border-bottom: var(--rule); background: var(--white); }
+.colophon-inner { max-width: var(--maxw); margin: 0 auto; padding: 2rem; display: grid; grid-template-columns: auto 1fr; gap: 1.6rem; align-items: start; }
+.colophon .cmyk-dots { padding-top: 0.35rem; }
+.colophon p { font-size: 0.85rem; line-height: 1.7; color: var(--muted); max-width: 78ch; }
+.colophon p + p { margin-top: 0.6rem; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1000px) {
+  .guide-head { grid-template-columns: 1fr; }
+  .gh-type { border-right: none; border-bottom: var(--rule); }
+  .fieldnotes { grid-template-columns: 1fr; }
+  .fn-copy { border-right: none; border-bottom: var(--rule); }
+  .closer-inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 760px) {
+  .phase { scroll-margin-top: 128px; }
+  .ab-inner { padding: 0.55rem 1.1rem; gap: 0.7rem; }
+  .ab-track { height: 17px; }
+  .ab-label { display: none; }
+  .gh-type, .pb-copy, .closer-inner, .colophon-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .dateline .dl { padding: 0.7rem 1.1rem; }
+  .dateline .dl:last-child { margin-left: 0; }
+  .phase-band { grid-template-columns: 1fr; }
+  .pb-num { border-right: none; border-bottom: var(--rule); padding: 0.8rem 1.25rem; justify-content: flex-start; }
+  .checks { border-left: none; border-right: none; }
+  .check { grid-template-columns: 60px 1fr; }
+  .check-body { padding: 1.4rem 1.25rem 1.7rem; }
+  .check-body h3 { font-size: 1.15rem; }
+  .note { padding: 1.35rem 1.1rem 1.2rem; }
+  .colophon-inner { grid-template-columns: 1fr; gap: 1rem; }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="project-c_lockup_color.png" alt="Project C — home"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="directory.html">Directory</a></li>
+      <li><a href="going-solo.html">Going Solo</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="press.html">Research &amp; Press</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="members.html" class="nav-member">Member Login</a></li>
+      <li><a href="community.html" class="nav-cta">Join &rarr;</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- MASTHEAD -->
+<header class="guide-head">
+  <div class="gh-type">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> A Project C field guide</div>
+    <h1>Build your <span class="coral">analytics guru</span></h1>
+    <p class="gh-standfirst">15 things worth checking if you run a newsletter, a paid membership, or both. <b>Most of them are invisible until someone goes looking</b>, and several of them can't be fixed retroactively at all.</p>
+  </div>
+  <div class="gh-docket">
+    <nav class="docket-panel crops" aria-label="Jump to a phase">
+      <span class="dp-tag">The docket</span>
+      <a class="dp-row" href="#phase-1"><span class="dpn">01</span><span class="dpt">Start the clock</span><span class="dpc">4 checks</span></a>
+      <a class="dp-row" href="#phase-2"><span class="dpn">02</span><span class="dpt">Follow the money</span><span class="dpc">4 checks</span></a>
+      <a class="dp-row" href="#phase-3"><span class="dpn">03</span><span class="dpt">Check the plumbing</span><span class="dpc">3 checks</span></a>
+      <a class="dp-row" href="#phase-4"><span class="dpn">04</span><span class="dpt">Who's finding you</span><span class="dpc">3 checks</span></a>
+      <a class="dp-row" href="#phase-5"><span class="dpn">05</span><span class="dpt">Set a rhythm</span><span class="dpc">1 check</span></a>
+    </nav>
+  </div>
+</header>
+
+<div class="dateline">
+  <div class="dateline-inner">
+    <span class="dl"><b>15</b> checks</span>
+    <span class="dl"><b>5</b> phases</span>
+    <span class="dl">By <b>Liz Kelly Nelson</b></span>
+    <span class="dl">August 2026</span>
+    <span class="dl"><span class="cmyk-dots"><i></i><i></i><i></i><i></i></span></span>
+  </div>
+</div>
+
+<!-- FIELD NOTES -->
+<section class="fieldnotes">
+  <div class="fn-copy">
+    <div class="eyebrow">Where this came from</div>
+    <p>I spent a day auditing every system Project C runs on: the newsletter, the website, the payments, the community database, the social accounts. I expected to tidy up some dashboards.</p>
+    <p>None of what I found was carelessness. <b>It's what happens when you wire together six services that each work fine on their own.</b> Nobody owns the seams between them. This is the checklist I wish I'd had.</p>
+  </div>
+  <div class="fn-found">
+    <h2>What turned up instead</h2>
+    <div class="found-row"><span class="fr-n">01</span><p>Membership records in four different systems that <b>quietly disagreed</b> with each other about who was a member.</p></div>
+    <div class="found-row"><span class="fr-n">02</span><p>A bank statement descriptor still naming a platform <b>we left more than a year ago</b>. Every member saw the old name.</p></div>
+    <div class="found-row"><span class="fr-n">03</span><p>Search data that <b>didn't exist</b>, because nobody had ever turned the reporting on. That history is gone for good.</p></div>
+  </div>
+</section>
+
+<!-- AUDIT PROGRESS -->
+<div class="audit-bar">
+  <div class="ab-inner">
+    <span class="ab-label">Audit progress</span>
+    <div class="ab-track" id="abTrack" aria-hidden="true"></div>
+    <span class="ab-count" id="abCount">0 / 15 done</span>
+    <button class="ab-reset" id="abReset" type="button">Reset</button>
+  </div>
+</div>
+
+<!-- PHASE 1 -->
+<section class="phase p-c" id="phase-1">
+  <div class="phase-band">
+    <div class="pb-num">01</div>
+    <div class="pb-copy">
+      <h2>Start the clock</h2>
+      <p>Do these first, today, even if you do nothing else on this list. Analytics tools do not reconstruct the past. They start recording the day you switch them on. Every week you wait is a week of history that never existed.</p>
+    </div>
+  </div>
+  <div class="checks">
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">01</span><input type="checkbox" class="cbox" id="c1" aria-labelledby="t1"></div>
+      <div class="check-body">
+        <h3 id="t1">Verify your site in Google Search Console</h3>
+        <p>It's free, it takes about ten minutes, and it's the only way to see what people actually type into a search box to find you.</p>
+        <div class="note t-coral"><span class="note-tag">What happened here</span>
+          <p>We had real, steady organic search traffic arriving every month and zero visibility into a single query behind it. Search Console had never been set up. That history is simply gone.</p>
+        </div>
+        <div class="howto"><span class="hl">How &rarr;</span>
+          <p>Add a <b>Domain</b> property, not a URL prefix, so it covers every subdomain including your newsletter. You'll add one DNS TXT record to verify. Then add a URL-prefix property too. It auto-verifies, and some integrations will only accept that kind.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">02</span><input type="checkbox" class="cbox" id="c2" aria-labelledby="t2"></div>
+      <div class="check-body">
+        <h3 id="t2">Put analytics on your website</h3>
+        <p>Any of them. A privacy-friendly one avoids the cookie-banner problem entirely.</p>
+        <div class="note t-cyan"><span class="note-tag">The trap</span>
+          <p>A freshly installed tool shows every metric as "+100%" because the previous period is empty. That looks like explosive growth and means nothing. Note your install date somewhere you'll find it again, and don't quote growth figures until you've cleared it.</p>
+        </div>
+        <div class="howto"><span class="hl">How &rarr;</span>
+          <p>One script tag in your site's head. If you're on a site builder, there's a settings field for it.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">03</span><input type="checkbox" class="cbox" id="c3" aria-labelledby="t3"></div>
+      <div class="check-body">
+        <h3 id="t3">Write down which sources have history and which don't</h3>
+        <p>Not every number you have goes back the same distance, and mixing them quietly produces nonsense.</p>
+        <div class="note"><span class="note-tag">Why it matters</span>
+          <p>Payment records may go back years. Newsletter platforms usually keep everything. But <b>social platforms only show rolling 30-to-90-day windows</b>, and you cannot retrieve last spring. If you want that history, you have to save it yourself, on a schedule.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">04</span><input type="checkbox" class="cbox" id="c4" aria-labelledby="t4"></div>
+      <div class="check-body">
+        <h3 id="t4">Route a weekly report into your email</h3>
+        <p>Most analytics tools will email you a summary. Turn it on and send it to the address you actually read.</p>
+        <div class="note"><span class="note-tag">The real reason</span>
+          <p>A dashboard requires you to remember it exists, be logged in, and be at the right computer. An email arrives whether or not you're paying attention, and it stays searchable forever. That makes it the cheapest permanent archive you will ever build.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHASE 2 -->
+<section class="phase p-m" id="phase-2">
+  <div class="phase-band">
+    <div class="pb-num">02</div>
+    <div class="pb-copy">
+      <h2>Follow the money</h2>
+      <p>If you take recurring payments, this is where the recoverable money usually is. Not in growth tactics. In subscriptions that lapse for technical reasons rather than deliberate ones, with nothing set up to flag it.</p>
+    </div>
+  </div>
+  <div class="checks">
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">05</span><input type="checkbox" class="cbox" id="c5" aria-labelledby="t5"></div>
+      <div class="check-body">
+        <h3 id="t5">Audit your failed payments</h3>
+        <p>Filter your payment processor for failed charges over the last few months, then group them by customer.</p>
+        <div class="note t-coral"><span class="note-tag">Why this one first</span>
+          <p>Cards expire. Banks block recurring charges. Processors retry a few times and then close the subscription automatically. None of that generates an alert. It is the cheapest revenue you will ever recover, because nobody involved decided to leave, and it stays completely invisible unless someone thinks to run the query.</p>
+        </div>
+        <div class="howto"><span class="hl">How &rarr;</span>
+          <p>A dozen failed charges is usually only a few people being retried over and over. Count <b>distinct customers</b>, not attempts.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">06</span><input type="checkbox" class="cbox" id="c6" aria-labelledby="t6"></div>
+      <div class="check-body">
+        <h3 id="t6">Learn the difference between "past due" and "canceled"</h3>
+        <p>They look identical from the outside and they need completely different emails.</p>
+        <div class="note"><span class="note-tag">Why it bites</span>
+          <p>A <b>past-due</b> member still has a live subscription. Send them a billing-portal link and updating their card fixes everything. A <b>canceled</b> member has nothing to update, and that same link is a dead end. Sending the wrong one makes you look disorganized at the exact moment you're asking for money.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">07</span><input type="checkbox" class="cbox" id="c7" aria-labelledby="t7"></div>
+      <div class="check-body">
+        <h3 id="t7">Read your own bank statement descriptor</h3>
+        <p>Find the field that controls what appears on your members' card statements, and check that it says what you think it says.</p>
+        <div class="note t-coral"><span class="note-tag">What happened here</span>
+          <p>Ours still named a platform we had <b>migrated away from more than a year earlier</b>. Every member saw the old name on their statement. It's set once when you open the account and nothing ever prompts you to revisit it, which is exactly why nobody does. Unrecognized descriptors are a leading cause of chargebacks.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">08</span><input type="checkbox" class="cbox" id="c8" aria-labelledby="t8"></div>
+      <div class="check-body">
+        <h3 id="t8">Confirm that people who signed up were actually charged</h3>
+        <p>Look for subscriptions that were created but never completed their first payment.</p>
+        <div class="note t-cyan"><span class="note-tag">The failure mode</span>
+          <p>A subscription can be created, fire its whole welcome sequence and grant access while its first invoice is <b>never attempted</b>. Not declined. Simply never charged, then quietly voided a day later. Every system downstream behaves as though payment succeeded, because from where they sit it did. It's rare, and precisely because it's rare nobody thinks to build a check for it.</p>
+        </div>
+        <div class="howto"><span class="hl">How &rarr;</span>
+          <p>In Stripe, look for subscription status <code>incomplete_expired</code>. Check it once a month. You're looking for a rare event with a permanent cost.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHASE 3 -->
+<section class="phase p-y" id="phase-3">
+  <div class="phase-band">
+    <div class="pb-num">03</div>
+    <div class="pb-copy">
+      <h2>Check the plumbing</h2>
+      <p>Nobody builds a broken system on purpose. You build one service at a time, each one sensible on its own, and the gaps appear in the joins between them, where no single tool is responsible for noticing.</p>
+    </div>
+  </div>
+  <div class="checks">
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">09</span><input type="checkbox" class="cbox" id="c9" aria-labelledby="t9"></div>
+      <div class="check-body">
+        <h3 id="t9">List every place that holds a copy of "who is a member"</h3>
+        <p>Write them down. Payment processor, member database, community platform, email list, course tool.</p>
+        <div class="note"><span class="note-tag">Why it matters</span>
+          <p>Here it was four separate systems, each holding a partial and slightly different answer. Nobody had ever asked them the same question on the same day. When we finally did, they disagreed.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">10</span><input type="checkbox" class="cbox" id="c10" aria-labelledby="t10"></div>
+      <div class="check-body">
+        <h3 id="t10">Find out whether those systems talk back</h3>
+        <p>Open your payment processor's webhook settings and look at the list.</p>
+        <div class="note t-coral"><span class="note-tag">What to look for</span>
+          <p>An empty list means data is only moving one way. Your signup form creates the subscription and nothing ever reports back. Billing status changes on one side and the other side never hears about it. That isn't a bug anyone wrote. It's a conversation nobody started.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">11</span><input type="checkbox" class="cbox" id="c11" aria-labelledby="t11"></div>
+      <div class="check-body">
+        <h3 id="t11">Reconcile the lists on a schedule</h3>
+        <p>Until the systems talk to each other, do it by hand or on a timer. Who's marked active but isn't paying, and who's paying but isn't marked active.</p>
+        <div class="note"><span class="note-tag">Be honest about scale</span>
+          <p>At a small membership, a weekly reconciliation catches almost everything a real-time integration would, for none of the engineering. Build the automation when the volume earns it, not because it sounds more professional.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHASE 4 -->
+<section class="phase p-o" id="phase-4">
+  <div class="phase-band">
+    <div class="pb-num">04</div>
+    <div class="pb-copy">
+      <h2>Who's finding you, and who's just taking</h2>
+      <p>Two questions most independent publishers have never asked about their own site. Both of them matter more now than they did two years ago.</p>
+    </div>
+  </div>
+  <div class="checks">
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">12</span><input type="checkbox" class="cbox" id="c12" aria-labelledby="t12"></div>
+      <div class="check-body">
+        <h3 id="t12">Separate reach from traffic from revenue</h3>
+        <p>Line up, for each platform: audience size, impressions, and the visitors it actually sent to your site.</p>
+        <div class="note t-coral"><span class="note-tag">The surprise here</span>
+          <p>The platform generating <b>vastly</b> more impressions sent almost nobody to the website. A quieter platform with a smaller audience sent <b>eight times more traffic</b>. Both numbers are real. They're just answering different questions, and only one of them feeds the thing you own.</p>
+        </div>
+        <div class="howto"><span class="hl">How &rarr;</span>
+          <p>Don't conclude the loud platform is worthless. It may be doing genuine discovery work. Test it instead. One month, one explicit call to action, then look again.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">13</span><input type="checkbox" class="cbox" id="c13" aria-labelledby="t13"></div>
+      <div class="check-body">
+        <h3 id="t13">Look at which bots are crawling your work</h3>
+        <p>Your host or newsletter platform may report this. Otherwise your server logs will.</p>
+        <div class="note t-cyan"><span class="note-tag">What we found</span>
+          <p>Crawler traffic was a meaningful share of all requests, none of it blocked, and <b>AI training crawlers slightly outnumbered search-engine crawlers</b>. The single heaviest crawler wasn't Google. It was a training crawler that sends no readers and appears in no results page.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">14</span><input type="checkbox" class="cbox" id="c14" aria-labelledby="t14"></div>
+      <div class="check-body">
+        <h3 id="t14">Make the AI-crawler decision on purpose</h3>
+        <p>Whatever you choose, choose it. Right now most publishers are allowing everything by default, having never looked.</p>
+        <div class="note"><span class="note-tag">Both cases are real</span>
+          <p>Training crawlers take your work and give nothing back. But being absent from AI answers removes you from a system that increasingly answers people's questions directly, and for independent journalism, invisibility has its own cost. <b>Blocking search crawlers is a different and much more damaging decision than blocking training crawlers.</b> Don't confuse the two.</p>
+        </div>
+        <div class="howto"><span class="hl">How &rarr;</span>
+          <p>A <code>robots.txt</code> rule per crawler. Compliance is voluntary and not all of them honor it, so treat it as a stated preference rather than a lock.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PHASE 5 -->
+<section class="phase p-k" id="phase-5">
+  <div class="phase-band">
+    <div class="pb-num">05</div>
+    <div class="pb-copy">
+      <h2>Set a rhythm you'll keep</h2>
+      <p>The last one is the one that decides whether any of the other fourteen survive past this week.</p>
+    </div>
+  </div>
+  <div class="checks">
+
+    <div class="check">
+      <div class="check-gutter"><span class="check-num">15</span><input type="checkbox" class="cbox" id="c15" aria-labelledby="t15"></div>
+      <div class="check-body">
+        <h3 id="t15">Check in less often than feels natural</h3>
+        <p>Write down a baseline today. Then pick a cadence and hold it.</p>
+        <div class="note"><span class="note-tag">The math of being small</span>
+          <p>When you have a few dozen paying members, one cancellation is a couple of percent of your revenue. One post that lands swings your social numbers entirely. Reviewing weekly means spending most weeks explaining variance that means nothing, and the reliable result of that is you stop reading the reviews at all. <b>A monthly review you actually act on beats four weekly ones you skim.</b></p>
+        </div>
+        <div class="howto"><span class="hl">How &rarr;</span>
+          <p>A quiet weekly check that only speaks up when something crosses a threshold. A real monthly review where decisions get made. A quarterly look at the slow movers like search position and retention.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CLOSER -->
+<section class="closer">
+  <div class="closer-inner">
+    <div>
+      <div class="eyebrow">Do this part today</div>
+      <h2>The one that can't wait</h2>
+      <a href="community.html" class="btn btn-coral">Join the community &rarr;</a>
+    </div>
+    <div>
+      <p>Almost everything on this list can wait until next month at no cost. Two things can't. <mark>Search analytics and site analytics don't backfill.</mark></p>
+      <p>Whatever you do with the rest of it, turn those two on today. Even badly. Even without a plan. In a month you'll have something. In a year you'll have a baseline. If you wait, you'll have neither, and no amount of effort later will get it back.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COLOPHON -->
+<div class="colophon">
+  <div class="colophon-inner">
+    <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+    <div>
+      <p>Written from a real audit of Project C's own systems in August 2026. Figures have been generalized and no individual account is described. The checks are what matter here, not our findings.</p>
+      <p>Your progress on this checklist is saved in your own browser and nowhere else. Nobody at Project C can see it.</p>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href="press.html">Research &amp; Press</a>
+    <a href="news-ecosystem-map.html">News Ecosystem Map</a>
+    <a href="going-solo.html">Going Solo Workshop</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href="community.html">Join the Community</a>
+    <a href="directory.html">Member Directory</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="members.html">Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href="about.html">About Project C</a>
+    <a href="about.html#founder">Team</a>
+    <a href="mailto:liz@projectc.biz">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href="style-guide.html">Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C — independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
+  </div>
+</footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design. <a href="privacy-policy.html">Privacy Policy</a></span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
+
+<script>
+(function () {
+  var KEY = 'pc-analytics-guru-v1';
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('.cbox'));
+  var track = document.getElementById('abTrack');
+  var count = document.getElementById('abCount');
+  var segs = [];
+
+  for (var i = 0; i < boxes.length; i++) {
+    var seg = document.createElement('i');
+    track.appendChild(seg);
+    segs.push(seg);
+  }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      return raw ? (JSON.parse(raw) || {}) : {};
+    } catch (e) { return {}; }
+  }
+  function save(state) {
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* private mode is fine */ }
+  }
+  function paint() {
+    var n = 0;
+    boxes.forEach(function (b, idx) {
+      var row = b.closest('.check');
+      if (b.checked) { n++; row.classList.add('done'); } else { row.classList.remove('done'); }
+      segs[idx].className = b.checked ? 'on' : '';
+    });
+    count.textContent = n + ' / ' + boxes.length + ' done';
+  }
+
+  var state = load();
+  boxes.forEach(function (b) {
+    if (state[b.id]) b.checked = true;
+    b.addEventListener('change', function () {
+      var s = load();
+      if (b.checked) { s[b.id] = 1; } else { delete s[b.id]; }
+      save(s);
+      paint();
+    });
+  });
+  paint();
+
+  document.getElementById('abReset').addEventListener('click', function () {
+    boxes.forEach(function (b) { b.checked = false; });
+    save({});
+    paint();
+  });
+
+  var nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', function () {
+    nav.classList.toggle('scrolled', window.scrollY > 8);
+  }, { passive: true });
+})();
+</script>
+
+</body>
+</html>

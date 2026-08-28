@@ -1,0 +1,37 @@
+# projectc.biz
+# Search engines and AI crawlers are currently allowed by default.
+# This is a deliberate choice, reviewed periodically.
+
+User-agent: *
+Allow: /
+
+# ---------------------------------------------------------------
+# AI TRAINING CRAWLERS — currently ALLOWED, deliberately.
+# These collect content to train models. They send no readers and
+# generate no referrals, but allowing them keeps Project C eligible
+# to appear inside AI-generated answers.
+#
+# To opt out of any of them, delete the "# " in front of its two lines.
+# Compliance with robots.txt is voluntary and not universally honoured.
+#
+# User-agent: Bytespider          # ByteDance / Doubao
+# Disallow: /
+#
+# User-agent: GPTBot              # OpenAI
+# Disallow: /
+#
+# User-agent: ClaudeBot           # Anthropic
+# Disallow: /
+#
+# User-agent: Meta-ExternalAgent  # Meta
+# Disallow: /
+#
+# User-agent: CCBot               # Common Crawl
+# Disallow: /
+#
+# NOTE: do NOT add Googlebot, Bingbot, Applebot or DuckDuckBot here.
+# Those are search crawlers — blocking them removes Project C from
+# search results entirely. That is a different and far costlier decision.
+# ---------------------------------------------------------------
+
+Sitemap: https://projectc.biz/sitemap.xml

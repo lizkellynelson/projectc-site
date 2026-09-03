@@ -98,6 +98,17 @@
 .replay-passcode { font-size: 0.76rem; color: var(--muted); margin-top: 0.45rem; }
 .replay-passcode code { font-family: monospace; background: var(--porcelain); border: 1px solid rgba(21,23,26,0.2); padding: 0.08rem 0.4rem; color: var(--ink); user-select: all; }
 .replay-links { display: flex; flex-direction: column; gap: 0.45rem; align-items: flex-start; }
+.replay-watch { appearance: none; background: none; border: 0; padding: 0; cursor: pointer; font: inherit; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--coral-deep); white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; }
+.replay-watch:hover { text-decoration: underline; text-underline-offset: 3px; }
+.replay-watch svg { width: 10px; height: 10px; }
+.replay-watch[aria-expanded="true"] svg { transform: rotate(90deg); }
+.replay-player { grid-column: 1 / -1; margin-top: 0.9rem; border: var(--rule); background: var(--ink); }
+.replay-player[hidden] { display: none; }
+.replay-player .frame { position: relative; aspect-ratio: 16 / 9; }
+.replay-player iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.replay-player .player-foot { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.6rem 1rem; background: var(--white); border-top: var(--rule); font-size: 0.72rem; color: var(--muted); }
+.replay-player .player-foot a { font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--coral-deep); }
+.replay-row.is-open:hover { padding-left: 2rem; }
 
 /* RESOURCES — bordered card grid */
 .resources-grid { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem clamp(2.5rem,4vw,3.5rem); display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
@@ -412,13 +423,37 @@
             (r.passcode ? '<div class="replay-passcode">Zoom passcode: <code>' + esc(r.passcode) + '</code></div>' : '') +
           '</div>' +
           '<div class="replay-links">' +
+            (r.youtube ? '<button type="button" class="replay-watch" data-yt="' + esc(r.youtube) + '" aria-expanded="false"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1l6 4-6 4z" fill="currentColor"/></svg>Watch the recording</button>' : '') +
             r.links.map(function (l) {
               return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + ' &rarr;</a>';
             }).join('') +
           '</div>' +
+          (r.youtube ? '<div class="replay-player" hidden><div class="frame"></div><div class="player-foot"><span>Hosted on YouTube as an unlisted video. Please don&rsquo;t share the link outside the community.</span><a href="https://www.youtube.com/watch?v=' + esc(r.youtube) + '" target="_blank" rel="noopener">Open on YouTube &rarr;</a></div></div>' : '') +
         '</article>'
       );
     }).join('');
+
+    grid.onclick = function (e) {
+      var btn = e.target.closest('.replay-watch');
+      if (!btn) return;
+      var row = btn.closest('.replay-row');
+      var player = row.querySelector('.replay-player');
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      if (open) {
+        player.hidden = true;
+        player.querySelector('.frame').innerHTML = '';
+        row.classList.remove('is-open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.lastChild.textContent = 'Watch the recording';
+        return;
+      }
+      var frame = player.querySelector('.frame');
+      frame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(btn.dataset.yt) + '?rel=0&modestbranding=1&autoplay=1" title="' + esc(row.querySelector('h3').textContent) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>';
+      player.hidden = false;
+      row.classList.add('is-open');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.lastChild.textContent = 'Hide the player';
+    };
 
     var list = document.getElementById('resourcesList');
     list.innerHTML = content.resources.map(function (res) {

@@ -192,6 +192,20 @@ const MEMBER_CONTENT = {
   ],
   replays: [
     {
+      title: 'Cracking PACER: Tips for Telling Stories with Federal Court Records',
+      date: 'September 3, 2026',
+      guest: 'Seamus Hughes',
+      description:
+        'The Court Watch founder walks through how he mines the federal docket for stories. He covers when to use PACER versus CourtListener, how to pull district-level ECF reports by charge or date, why searching by lawyer beats searching by defendant, and how to set up alerts so new filings come to you. Every link and search recipe from the session is on his tip sheet.',
+      youtube: 'ajHUKzotVSE',
+      links: [
+        {
+          label: 'Tip sheet',
+          url: '/slides/court-watch-tip-sheet.pdf',
+        },
+      ],
+    },
+    {
       title: 'Work Origin Story',
       date: 'August 5, 2026',
       guest: 'Megan Finnerty',

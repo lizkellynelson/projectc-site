@@ -192,6 +192,23 @@ const MEMBER_CONTENT = {
   ],
   replays: [
     {
+      title: 'Values That Speak: Your Core Values Story',
+      date: 'September 9, 2026',
+      guest: 'Megan Finnerty',
+      description:
+        'The third session in Megan\'s storytelling series. Name the values that drive your work, then build a true, first-person story around each one: who you are, what you do, why it matters, and the moment that taught you the value in the first place. You leave with the raw material for a keynote or a TED-style talk, one story per core value. The worksheet walks you through the exercise step by step.',
+      links: [
+        {
+          label: 'Watch the recording',
+          url: 'https://us06web.zoom.us/rec/share/QkSpJSd5MrGPrJZ3JBvi4kZES4vvj98MadJ3JIsapK395naTYQTWVh7XQCzTMbHV.7_g5R9w_w-mKr1Vi',
+        },
+        {
+          label: 'Worksheet',
+          url: '/slides/core-values-story-worksheet.pdf',
+        },
+      ],
+    },
+    {
       title: 'Cracking PACER: Tips for Telling Stories with Federal Court Records',
       date: 'September 3, 2026',
       guest: 'Seamus Hughes',

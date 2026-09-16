@@ -60,6 +60,8 @@
 .cohort-badge { display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.4rem 0.75rem; border: var(--rule); margin-bottom: 1.1rem; }
 .cohort-badge.open { background: var(--coral); color: var(--ink); }
 .cohort-badge.session { background: var(--ink); color: var(--white); }
+.cohort-badge.closed { background: var(--white); color: var(--ink); }
+.cohort-card .mast-link { display: inline-block; }
 .cohort-card h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.3rem,2vw,1.7rem); line-height: 1.05; color: var(--ink); margin-bottom: 0.5rem; }
 .cohort-timing { font-size: 0.78rem; font-weight: 700; color: var(--coral-deep); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 1rem; }
 .cohort-card > p { font-size: 0.95rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.1rem; }
@@ -200,8 +202,8 @@
 <div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
 
 <div class="announce" id="announcementBar">
-  <span class="live"><span class="blip"></span>Now open</span>
-  <span>Applications for Cohort 2 — EMEA — close midnight ET, Friday, September 4. <a href="wave2-application.html">Apply now &rarr;</a></span>
+  <span class="live">Update</span>
+  <span>Applications for the EMEA cohort are closed. The cohort begins September 28. <a href="#interest">Hear about the next one &rarr;</a></span>
   <button class="ab-x" onclick="document.getElementById('announcementBar').classList.add('hidden')" aria-label="Dismiss">&#10005;</button>
 </div>
 
@@ -232,15 +234,15 @@
   <div class="masthead-inner">
     <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Project C × Google News Initiative</div>
     <h1>Eight weeks to turn your creator journalism into a real business.</h1>
-    <p class="standfirst">The Journalism Creators Startup Lab pairs a free 8-week workshop with a full year of coaching and community — plus elective training straight from YouTube and Google's AI teams. No follower minimums. No experience requirements. Just journalists serious about the work.</p>
+    <p class="standfirst">The Journalism Creators Startup Lab pairs a free 8-week workshop with a full year of coaching and community, plus elective training straight from YouTube and Google's AI teams. No follower minimums. No experience requirements. Just journalists serious about the work.</p>
     <div class="mast-cta">
-      <a href="wave2-application.html" class="btn btn-coral">Apply for the EMEA Cohort &rarr;</a>
+      <a href="#interest" class="btn btn-coral">Get on the List for Future Cohorts &rarr;</a>
       <a href="#curriculum" class="mast-link">See the Curriculum</a>
     </div>
     <div class="mast-meta">
       <span>Free</span>
       <span>8-Week Workshop + Full Year of Support</span>
-      <span>Cohort 2 (EMEA): Apply by Sept 4</span>
+      <span>EMEA Cohort: Applications Closed</span>
     </div>
   </div>
 </section>
@@ -271,27 +273,27 @@
   </div>
   <div class="cohort-grid reveal">
     <div class="cohort-card">
-      <span class="cohort-badge session">In Session</span>
-      <h3>Cohort 1 — North America</h3>
-      <div class="cohort-timing">&#9654; Launched June 2026</div>
-      <p>Our inaugural cohort is currently underway with a small, carefully selected group of early-stage creator journalists from across North America. Cohort 1 was invitation-only.</p>
+      <span class="cohort-badge session">Graduated</span>
+      <h3>Cohort 1: North America</h3>
+      <div class="cohort-timing">&#9654; Summer 2026</div>
+      <p>Our first cohort spent the summer with 20 early-stage creator journalists from across North America. They used the eight weeks to build real pieces of their businesses, from sponsorship decks and safety plans to new newsletters and vertical video channels. Cohort 1 was invitation-only.</p>
       <ul class="cohort-detail-list">
-        <li><span class="detail-dot">&#9679;</span> ~20 participants</li>
+        <li><span class="detail-dot">&#9679;</span> 20 participants</li>
         <li><span class="detail-dot">&#9679;</span> Invitation-based selection</li>
         <li><span class="detail-dot">&#9679;</span> Hybrid: asynchronous learning with a weekly live lab</li>
       </ul>
     </div>
     <div class="cohort-card">
-      <span class="cohort-badge open">Applications Open</span>
-      <h3>Cohort 2 — EMEA</h3>
-      <div class="cohort-timing">&#9654; Begins week of September 28</div>
-      <p>Our second cohort opens the program to early-stage creator journalists based in Europe, the Middle East, or Africa. Applications are open now and reviewed on a rolling basis.</p>
+      <span class="cohort-badge closed">Applications Closed</span>
+      <h3>Cohort 2: EMEA</h3>
+      <div class="cohort-timing">&#9654; Begins September 28</div>
+      <p>Our second cohort brings the program to early-stage creator journalists based in Europe, the Middle East and Africa. Applications closed on September 4, and we're no longer accepting new ones for this round. Everyone who applied will hear from us by email before the cohort starts.</p>
       <ul class="cohort-detail-list">
-        <li><span class="detail-dot">&#9679;</span> Open application — no invitation required</li>
-        <li><span class="detail-dot">&#9679;</span> Apply by midnight ET, Friday, September 4</li>
+        <li><span class="detail-dot">&#9679;</span> Selected through an open application</li>
+        <li><span class="detail-dot">&#9679;</span> Applications closed September 4</li>
         <li><span class="detail-dot">&#9679;</span> Same free curriculum and year of support as Cohort 1</li>
       </ul>
-      <a href="wave2-application.html" class="btn btn-coral">Apply Now &rarr;</a>
+      <a href="#interest" class="mast-link">Missed it? Hear about the next cohort &darr;</a>
     </div>
   </div>
 </section>
@@ -432,11 +434,11 @@
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1" onclick="toggleFaq(this)">
-            Who can apply?
+            Can I still apply?
             <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
           <div class="faq-answer" id="faq-answer-1" hidden>
-            <div class="faq-answer-inner">No follower minimums, no experience requirements — just early-stage creator journalists who are serious about building a sustainable business around their work. Cohort 1 (North America) was invitation-only. Cohort 2 (EMEA) is open application for anyone based in Europe, the Middle East, or Africa.</div>
+            <div class="faq-answer-inner">Not right now. Applications for the EMEA cohort closed on September 4, and we aren't taking late applications. There are no follower minimums or experience requirements, though, so if you're an early-stage creator journalist serious about building a business around your work, add your name to the list below and you'll be the first to know when the next cohort opens.</div>
           </div>
         </div>
 
@@ -462,11 +464,11 @@
 
         <div class="faq-item">
           <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-4" onclick="toggleFaq(this)">
-            I'm not eligible for the current cohort. Can I still get involved?
+            I applied for the EMEA cohort. When will I hear back?
             <span class="faq-toggle" aria-hidden="true">+</span>
           </button>
           <div class="faq-answer" id="faq-answer-4" hidden>
-            <div class="faq-answer-inner">This program is designed to grow. Drop your info below and we'll make sure you hear about future cohorts first — or subscribe to the Project C newsletter in the meantime.</div>
+            <div class="faq-answer-inner">Every applicant will get a decision by email before the cohort begins on September 28. If you have a question in the meantime, <a href="mailto:liz@projectc.biz" style="color:var(--coral-deep); font-weight:700;">email Liz</a>.</div>
           </div>
         </div>
 
@@ -478,11 +480,11 @@
 <!-- FINAL CTA -->
 <section class="cta-band">
   <div class="inner reveal">
-    <h2>Applications for Cohort 2 — EMEA — close <span class="coral">September 4.</span></h2>
-    <p>Early-stage creator journalist based in Europe, the Middle East, or Africa? Applications are reviewed on a rolling basis, so the sooner you apply, the better.</p>
+    <h2>Applications for this round are <span class="coral">closed.</span></h2>
+    <p>The EMEA cohort starts September 28. If you missed the deadline, or you're somewhere else in the world, get on the list and we'll tell you when the next cohort opens.</p>
     <div class="cta-actions">
-      <a href="wave2-application.html" class="btn btn-coral">Apply Now &rarr;</a>
-      <a href="#interest" class="mast-link">Not in EMEA? Get on the list &darr;</a>
+      <a href="#interest" class="btn btn-coral">Join the Interest List &darr;</a>
+      <a href="https://newsletter.projectc.biz" class="mast-link" target="_blank" rel="noopener">Read the Newsletter &rarr;</a>
     </div>
   </div>
 </section>
@@ -492,8 +494,8 @@
   <div class="interest-wrap">
     <div class="interest-head reveal">
       <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Stay in the Loop</div>
-      <h2>Future cohorts are <em style="font-style:normal; color:var(--coral-deep);">open to all.</em></h2>
-      <p>This program is designed to grow — future cohorts will open to applicants from across the journalism creator community. Drop us a line and we'll make sure you hear about it first.</p>
+      <h2>Be first in line for the <em style="font-style:normal; color:var(--coral-deep);">next cohort.</em></h2>
+      <p>Applications for the current cohort are closed. Leave your details and we'll email you as soon as the next round opens, wherever you're based.</p>
     </div>
     <form class="reveal" id="interestForm">
       <div class="form-row">

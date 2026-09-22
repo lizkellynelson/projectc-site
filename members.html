@@ -142,6 +142,33 @@
 .members-note-inner { margin: 0 2rem clamp(2.5rem,4vw,3.5rem); border: var(--rule); background: var(--tint); padding: 1rem 1.4rem; font-size: 0.88rem; color: var(--ink); line-height: 1.6; }
 .members-note-inner strong { text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--coral-deep); }
 
+/* YOUR MEMBERSHIP — status ledger + billing window (Sept 2026) */
+.membership { border-bottom: var(--rule); background: var(--white); scroll-margin-top: 90px; }
+.membership[hidden] { display: none; }
+.ms-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; max-width: var(--maxw); margin: 0 auto; }
+.ms-status { padding: clamp(1.8rem,3.5vw,2.6rem) 2rem; border-right: var(--rule); }
+.ms-status .eyebrow { margin-bottom: 0.8rem; }
+.ms-plan { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.5rem,2.8vw,2.2rem); line-height: 1.02; color: var(--ink); max-width: 24ch; }
+.ms-billing { margin-top: 0.45rem; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.ms-billing[hidden] { display: none; }
+.ms-line { margin-top: 1rem; font-size: 1.05rem; font-weight: 700; color: var(--ink); line-height: 1.5; padding-left: 0.9rem; border-left: 4px solid var(--cyan); }
+.ms-line.is-canceled { border-left-color: var(--coral); }
+.ms-line.is-free { border-left-color: var(--yellow); }
+.ms-note { margin-top: 0.55rem; font-size: 0.92rem; color: var(--muted); line-height: 1.6; max-width: 56ch; }
+.ms-promo { display: inline-block; margin-top: 1rem; border: 2px dashed var(--coral-deep); padding: 0.4rem 0.8rem; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral-deep); }
+.ms-promo[hidden], .ms-note[hidden] { display: none; }
+.ms-action { background: var(--porcelain); padding: clamp(1.8rem,3.5vw,2.6rem) 2rem; display: flex; flex-direction: column; justify-content: center; gap: 0.9rem; }
+.ms-action .btn { align-self: flex-start; }
+.ms-action .btn[disabled] { opacity: 0.6; cursor: default; transform: none; }
+.ms-copy { font-size: 0.86rem; color: var(--muted); line-height: 1.6; max-width: 42ch; }
+.ms-msg { margin-top: 0.9rem; font-size: 0.88rem; padding: 0.8rem 1rem; border: 1px solid; line-height: 1.5; max-width: 42ch; }
+.ms-msg[hidden] { display: none; }
+.ms-msg.ok { background: var(--white); border-color: var(--ink); color: var(--ink); }
+.ms-msg.error { background: var(--tint); border-color: var(--coral-deep); color: var(--coral-deep); }
+.ms-contact { font-size: 0.92rem; color: var(--ink); line-height: 1.6; max-width: 42ch; }
+.ms-contact a { color: var(--coral-deep); font-weight: 700; }
+.ms-contact a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
 .loading-state { text-align: center; padding: 3.5rem 0; color: var(--muted); font-size: 0.95rem; display: none; }
 
 @media (max-width: 900px) {
@@ -154,6 +181,8 @@
   .resources-grid { grid-template-columns: 1fr; }
   .offer-card { grid-template-columns: 1fr; gap: 1.25rem; }
   .offer-code { align-items: flex-start; }
+  .ms-grid { grid-template-columns: 1fr; }
+  .ms-status { border-right: none; border-bottom: var(--rule); }
 }
 @media (max-width: 680px) {
   .replay-row { grid-template-columns: 1fr; gap: 0.5rem; }
@@ -230,6 +259,28 @@
       <button class="signout-btn" id="signoutBtn" type="button">Sign out &rarr;</button>
     </div>
   </div>
+
+  <!-- YOUR MEMBERSHIP (filled by members-billing.js; stays hidden for team logins) -->
+  <section class="membership" id="membership" aria-labelledby="msPlan" hidden>
+    <div class="ms-grid">
+      <div class="ms-status">
+        <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Your membership</div>
+        <h2 class="ms-plan" id="msPlan"></h2>
+        <p class="ms-billing" id="msBillingLine" hidden></p>
+        <p class="ms-line" id="msStatus"></p>
+        <p class="ms-note" id="msNote" hidden></p>
+        <span class="ms-promo" id="msPromo" hidden></span>
+      </div>
+      <div class="ms-action">
+        <div id="msBilling" hidden>
+          <button type="button" class="btn btn-fill" id="msManage">Manage billing &rarr;</button>
+          <p class="ms-copy" style="margin-top:0.9rem;">We&rsquo;ll email you a one-time link to your billing page, where you can update your card and grab receipts. You can also switch plans or cancel there. Cancellations take effect at the end of your current billing period, and you keep full access until then.</p>
+          <div class="ms-msg" id="msMsg" role="status" aria-live="polite" hidden></div>
+        </div>
+        <p class="ms-contact" id="msContact" hidden>Questions about your membership? <a href="mailto:liz@projectc.biz?subject=My%20Project%20C%20membership">Just email Liz.</a></p>
+      </div>
+    </div>
+  </section>
 
   <!-- COMING UP -->
   <section class="upcoming" id="upcomingSection">
@@ -553,12 +604,82 @@
   }
 
   function lock() {
+    if (msSection) msSection.hidden = true;
     localStorage.removeItem(TOKEN_KEY);
     localStorage.removeItem(NAME_KEY);
     memberArea.style.display = 'none';
     loadingState.style.display = 'none';
     gateSection.style.display = 'grid';
   }
+
+  // ---- Your membership panel (members-billing.js) ----
+  var BILLING_API = '/.netlify/functions/members-billing';
+  var msSection = document.getElementById('membership');
+
+  function setText(id, text) {
+    var el = document.getElementById(id);
+    if (text) { el.textContent = text; el.hidden = false; } else { el.textContent = ''; el.hidden = true; }
+  }
+
+  function renderMembership(m) {
+    if (!m) { msSection.hidden = true; return; }
+    document.getElementById('msPlan').textContent = m.plan;
+    setText('msBillingLine', m.billing);
+    var line = document.getElementById('msStatus');
+    line.textContent = m.status;
+    line.className = 'ms-line' + (/canceled|ended/i.test(m.status) ? ' is-canceled' : /^Free/.test(m.status) ? ' is-free' : '');
+    setText('msNote', m.note);
+    setText('msPromo', m.promo);
+    document.getElementById('msBilling').hidden = !m.canManageBilling;
+    document.getElementById('msContact').hidden = !!m.canManageBilling;
+    msSection.hidden = false;
+    if (location.hash === '#membership') {
+      setTimeout(function () { msSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50);
+    }
+  }
+
+  function fetchMembership(token) {
+    fetch(BILLING_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'status', token: token }),
+    })
+      .then(function (r) { return r.json(); })
+      .then(function (body) { renderMembership(body && body.ok ? body.membership : null); })
+      .catch(function () { renderMembership(null); });
+  }
+
+  var msManage = document.getElementById('msManage');
+  var msMsg = document.getElementById('msMsg');
+  function msShow(kind, text) { msMsg.className = 'ms-msg ' + kind; msMsg.textContent = text; msMsg.hidden = false; }
+
+  msManage.addEventListener('click', function () {
+    var token = localStorage.getItem(TOKEN_KEY);
+    if (!token) { lock(); return; }
+    msManage.disabled = true;
+    msManage.textContent = 'Sending your link…';
+    fetch(BILLING_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'send_link', token: token }),
+    })
+      .then(function (r) { return r.json().then(function (b) { return { status: r.status, body: b }; }); })
+      .then(function (res) {
+        msManage.disabled = false;
+        msManage.innerHTML = 'Send it again &rarr;';
+        if (res.status === 401) { lock(); showMsg('info', 'Your session expired. Enter your email to unlock again.'); return; }
+        if (res.body.ok) {
+          msShow('ok', 'Check your inbox. We sent a one-time link to ' + res.body.sentTo + '. It works for 15 minutes.');
+        } else {
+          msShow('error', res.body.message || res.body.error || 'Something went wrong on our end. Try again, or email liz@projectc.biz.');
+        }
+      })
+      .catch(function () {
+        msManage.disabled = false;
+        msManage.innerHTML = 'Manage billing &rarr;';
+        msShow('error', 'Couldn’t reach the billing service. Check your connection and try again.');
+      });
+  });
 
   function fetchContent(token, opts) {
     return fetch(API, {
@@ -571,6 +692,7 @@
         if (res.status === 200 && res.body.ok) {
           unlock(res.body.content);
           fetchUpcoming(token);
+          fetchMembership(token);
           return true;
         }
         lock();

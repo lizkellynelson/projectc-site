@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your billing page — Project C</title>
+<meta name="description" content="Open your Project C membership billing page.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
+<style>
+/* ---- Billing link landing page (L3, calm). The emailed one-time link lands here. ---- */
+.nav.scrolled { box-shadow: 0 4px 24px rgba(21,23,26,0.08); }
+.billhead { display: grid; grid-template-columns: 1.1fr 0.9fr; border-bottom: var(--rule); background: var(--white); }
+.billhead .bh-copy { padding: clamp(2.5rem,5vw,4.5rem) 2.5rem; border-right: var(--rule); display: flex; flex-direction: column; justify-content: center; }
+.billhead h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.4rem,5.5vw,4.6rem); line-height: 0.95; color: var(--ink); margin-bottom: 1.1rem; max-width: 11ch; }
+.billhead h1 .out { -webkit-text-stroke: 2px var(--ink); color: transparent; }
+.billhead .standfirst { font-size: 1.05rem; color: var(--muted); line-height: 1.65; max-width: 50ch; }
+.billhead .bh-act { background: var(--porcelain); display: flex; align-items: center; justify-content: center; padding: clamp(2rem,4vw,3.5rem) 2rem; }
+.bill-window { background: var(--white); border: var(--rule); padding: 2.2rem 2.2rem 2rem; width: 100%; max-width: 420px; position: relative; }
+.bill-window .bw-tag { position: absolute; top: -13px; left: 22px; background: var(--cyan); border: var(--rule); color: var(--ink); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
+.bill-window.is-error .bw-tag { background: var(--coral); }
+.bill-window h2 { font-family: var(--display); text-transform: uppercase; font-size: 1.45rem; line-height: 1.05; color: var(--ink); margin-bottom: 0.6rem; }
+.bill-window p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.3rem; }
+.bill-window form { margin: 0; }
+.bill-window .btn { width: 100%; justify-content: center; }
+.bill-window .btn[disabled] { opacity: 0.6; cursor: default; transform: none; }
+.bill-window .fine { font-size: 0.8rem; margin: 1.2rem 0 0; }
+.bill-window a.inline { color: var(--coral-deep); font-weight: 700; }
+.bill-window a.inline:hover { text-decoration: underline; text-underline-offset: 3px; }
+.state[hidden] { display: none; }
+@media (max-width: 900px) {
+  .billhead { grid-template-columns: 1fr; }
+  .billhead .bh-copy { border-right: none; border-bottom: var(--rule); }
+}
+</style>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-By0ztJ4PY36DnzOcJW2cs.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="project-c_lockup_color.png" alt="Project C — home"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="directory.html">Directory</a></li>
+      <li><a href="going-solo.html">Going Solo</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="press.html">Research &amp; Press</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="members.html" class="nav-member" aria-current="page">Member Login</a></li>
+      <li><a href="community.html" class="nav-cta">Join &rarr;</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<section class="billhead">
+  <div class="bh-copy">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Members / Billing</div>
+    <h1>Your <span class="out">billing</span> page</h1>
+    <p class="standfirst">Billing for Project C runs through Stripe. That&rsquo;s where you update your card and download receipts. You can switch between monthly and yearly there too, or cancel. If you cancel, you keep full access through the end of the period you&rsquo;ve paid for.</p>
+  </div>
+  <div class="bh-act">
+    <div class="bill-window crops" id="billWindow">
+      <span class="bw-tag" id="bwTag">One-time link</span>
+
+      <div class="state" id="stateReady" hidden>
+        <h2>You&rsquo;re all set</h2>
+        <p>This opens your billing page on Stripe. When you&rsquo;re done there, the &ldquo;Return to Project C&rdquo; link brings you back to the Replay Room.</p>
+        <form method="POST" action="/.netlify/functions/members-billing" id="openForm">
+          <input type="hidden" name="action" value="open">
+          <input type="hidden" name="t" id="tField" value="">
+          <button type="submit" class="btn btn-fill" id="openBtn">Open my billing page &rarr;</button>
+        </form>
+        <p class="fine">This link works once and expires 15 minutes after we sent it.</p>
+      </div>
+
+      <div class="state" id="stateError" hidden>
+        <h2 id="errTitle">That link has expired</h2>
+        <p id="errBody">Billing links work once and only for 15 minutes. Head back to the Replay Room and click Manage billing to get a fresh one.</p>
+        <a class="btn btn-fill" href="members.html#membership">Back to the Replay Room &rarr;</a>
+        <p class="fine">Stuck? <a class="inline" href="mailto:liz@projectc.biz?subject=Billing%20link">Just email Liz.</a></p>
+      </div>
+
+      <div class="state" id="stateNone" hidden>
+        <h2>Looking for billing?</h2>
+        <p>Log in to the Replay Room and click Manage billing. We&rsquo;ll email you a one-time link that brings you here.</p>
+        <a class="btn btn-fill" href="members.html#membership">Go to the Replay Room &rarr;</a>
+        <p class="fine">Questions about your membership? <a class="inline" href="mailto:liz@projectc.biz?subject=My%20Project%20C%20membership">Just email Liz.</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href="press.html">Research &amp; Press</a>
+    <a href="news-ecosystem-map.html">News Ecosystem Map</a>
+    <a href="going-solo.html">Going Solo Workshop</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href="community.html">Join the Community</a>
+    <a href="directory.html">Member Directory</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="members.html">Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href="about.html">About Project C</a>
+    <a href="about.html#founder">Team</a>
+    <a href="mailto:liz@projectc.biz">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href="style-guide.html">Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C — independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
+  </div>
+</footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design. <a href="privacy-policy.html">Privacy Policy</a></span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
+
+<script>
+(function () {
+  var nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', function () { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+  var ERRORS = {
+    expired: ['That link has expired', 'Billing links work once and only for 15 minutes. Head back to the Replay Room and click Manage billing to get a fresh one.'],
+    invalid: ['That link didn&rsquo;t come through whole', 'Some email apps chop long links. Try clicking the button in the email instead of copying the address, or get a fresh link from the Replay Room.'],
+    nobilling: ['We couldn&rsquo;t find billing for you', 'Your membership doesn&rsquo;t have a card on file with us. Email Liz and she&rsquo;ll help.'],
+    busy: ['Too many tries', 'Give it a minute, then get a fresh link from the Replay Room.'],
+    error: ['Something went wrong on our end', 'Stripe didn&rsquo;t answer us. Get a fresh link from the Replay Room and try again, or email Liz.'],
+  };
+
+  var hash = new URLSearchParams(location.hash.replace(/^#/, ''));
+  var t = hash.get('t');
+  var err = hash.get('error');
+
+  // Take the token out of the address bar so it doesn't linger in history.
+  if (t && history.replaceState) history.replaceState(null, '', location.pathname);
+
+  function show(id) { document.getElementById(id).hidden = false; }
+
+  if (t) {
+    document.getElementById('tField').value = t;
+    show('stateReady');
+    document.getElementById('openForm').addEventListener('submit', function () {
+      var b = document.getElementById('openBtn');
+      b.disabled = true;
+      b.textContent = 'Opening Stripe…';
+    });
+  } else if (err) {
+    var e = ERRORS[err] || ERRORS.error;
+    document.getElementById('errTitle').innerHTML = e[0];
+    document.getElementById('errBody').innerHTML = e[1];
+    document.getElementById('billWindow').classList.add('is-error');
+    document.getElementById('bwTag').textContent = 'Link problem';
+    show('stateError');
+  } else {
+    show('stateNone');
+  }
+
+  // Coming back via the browser Back button: re-enable the button.
+  window.addEventListener('pageshow', function (ev) {
+    if (ev.persisted) { var b = document.getElementById('openBtn'); b.disabled = false; b.innerHTML = 'Open my billing page &rarr;'; }
+  });
+})();
+</script>
+
+</body>
+</html>

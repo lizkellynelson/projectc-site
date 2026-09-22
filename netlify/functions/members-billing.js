@@ -150,7 +150,7 @@ function summarize(row, cohort) {
   }
 
   if (!out.canManageBilling) {
-    out.contact = 'Questions about your membership? Just email Liz at liz@projectc.biz.';
+    out.contact = 'Questions about your membership? Just email Liz at liz@projectc.com.';
   }
   return out;
 }
@@ -243,7 +243,7 @@ function billingEmailHtml(firstName, link) {
 <p style="margin:0 0 22px;font-size:14px;line-height:1.55;color:#4a3f38;">The link works once and expires in 15 minutes. If it runs out, just click Manage billing in the Replay Room again.</p>
 <p style="margin:0 0 26px;font-size:14px;line-height:1.55;color:#4a3f38;">Didn’t ask for this? You can ignore it. Nothing changes unless someone opens the link from your inbox.</p>
 </td></tr>
-<tr><td style="padding:14px 28px;border-top:2px solid #1a1410;font-family:'JetBrains Mono',Menlo,monospace;font-size:12px;color:#4a3f38;">Questions? Just reply or email liz@projectc.biz.</td></tr>
+<tr><td style="padding:14px 28px;border-top:2px solid #1a1410;font-family:'JetBrains Mono',Menlo,monospace;font-size:12px;color:#4a3f38;">Questions? Just reply or email liz@projectc.com.</td></tr>
 </table></td></tr></table></body></html>`;
 }
 
@@ -289,7 +289,7 @@ exports.handler = async (event) => {
   if (!SUPABASE_URL || !SUPABASE_SECRET_KEY || !SESSION_SECRET || !STRIPE_SECRET_KEY || !RESEND_API_KEY) {
     console.error('members-billing: missing env vars',
       { supabase: !!SUPABASE_URL && !!SUPABASE_SECRET_KEY, session: !!SESSION_SECRET, stripe: !!STRIPE_SECRET_KEY, resend: !!RESEND_API_KEY });
-    return json(500, { error: 'Billing isn’t set up yet. Email liz@projectc.biz and she’ll sort it out.' });
+    return json(500, { error: 'Billing isn’t set up yet. Email liz@projectc.com and she’ll sort it out.' });
   }
 
   const ip = String(event.headers['x-forwarded-for'] || event.headers['client-ip'] || 'unknown').split(',')[0].trim();
@@ -366,7 +366,7 @@ exports.handler = async (event) => {
     if (data.action === 'send_link') {
       if (!row || !row.stripe_customer_id || row.status !== 'active') {
         return json(200, { ok: false, reason: 'no_billing',
-          message: 'We don’t have card billing on file for you. Just email Liz at liz@projectc.biz.' });
+          message: 'We don’t have card billing on file for you. Just email Liz at liz@projectc.com.' });
       }
 
       const since = new Date(Date.now() - LINK_TTL_MS).toISOString();
@@ -401,7 +401,7 @@ exports.handler = async (event) => {
     return json(400, { error: 'Unknown action.' });
   } catch (err) {
     console.error('members-billing error:', err && err.message);
-    return json(500, { error: 'Something went wrong on our end. Try again, or email liz@projectc.biz.' });
+    return json(500, { error: 'Something went wrong on our end. Try again, or email liz@projectc.com.' });
   }
 };
 

@@ -128,7 +128,7 @@ exports.handler = async (event) => {
         ok: true,
         member: false,
         error:
-          "We couldn't find an active Project C membership for that email. Try the address you joined with, or email liz@projectc.biz and we'll sort it out.",
+          "We couldn't find an active Project C membership for that email. Try the address you joined with, or email liz@projectc.com and we'll sort it out.",
       });
     }
 

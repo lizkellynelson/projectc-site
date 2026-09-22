@@ -469,7 +469,7 @@ exports.handler = async (event) => {
     // rather than trying to unwind a partial state.
     return fail(
       500,
-      "We saved your card but couldn't save your application. Please email liz@projectc.biz and we'll sort it out."
+      "We saved your card but couldn't save your application. Please email liz@projectc.com and we'll sort it out."
     );
   }
 

@@ -47,7 +47,7 @@ exports.handler = async (event) => {
   const apiKey = process.env.BEEHIIV_API_KEY;
   if (!apiKey) {
     console.error('going-solo-waitlist: BEEHIIV_API_KEY not set');
-    return jsonResponse(500, { error: 'Waitlist is not configured. Please email info@projectc.biz.' });
+    return jsonResponse(500, { error: 'Waitlist is not configured. Please email info@projectc.com.' });
   }
 
   // Parse body
@@ -91,14 +91,14 @@ exports.handler = async (event) => {
 
     if (!subRes.ok) {
       console.error('Beehiiv subscription error:', subRes.status, subData);
-      return jsonResponse(500, { error: 'Something went wrong — please try again or email info@projectc.biz.' });
+      return jsonResponse(500, { error: 'Something went wrong — please try again or email info@projectc.com.' });
     }
 
     subscriptionId = subData?.data?.id;
     console.log(`going-solo-waitlist: subscribed ${email} → ${subscriptionId}`);
   } catch (err) {
     console.error('Beehiiv subscription fetch error:', err);
-    return jsonResponse(500, { error: 'Something went wrong — please try again or email info@projectc.biz.' });
+    return jsonResponse(500, { error: 'Something went wrong — please try again or email info@projectc.com.' });
   }
 
   // ── Step 2: Add to the Going Solo Waitlist segment ──

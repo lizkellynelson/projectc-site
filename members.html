@@ -142,32 +142,23 @@
 .members-note-inner { margin: 0 2rem clamp(2.5rem,4vw,3.5rem); border: var(--rule); background: var(--tint); padding: 1rem 1.4rem; font-size: 0.88rem; color: var(--ink); line-height: 1.6; }
 .members-note-inner strong { text-transform: uppercase; font-size: 0.72rem; letter-spacing: 0.08em; color: var(--coral-deep); }
 
-/* YOUR MEMBERSHIP — status ledger + billing window (Sept 2026) */
-.membership { border-bottom: var(--rule); background: var(--white); scroll-margin-top: 90px; }
+/* YOUR MEMBERSHIP: bold full-bleed strip (Sept 2026) */
+.membership { background: var(--cyan); border-bottom: var(--rule); scroll-margin-top: 90px; color: var(--ink); }
+.membership.is-canceled { background: var(--coral); }
+.membership.is-free { background: var(--yellow); }
 .membership[hidden] { display: none; }
-.ms-grid { display: grid; grid-template-columns: 1.25fr 0.75fr; max-width: var(--maxw); margin: 0 auto; }
-.ms-status { padding: clamp(1.8rem,3.5vw,2.6rem) 2rem; border-right: var(--rule); }
-.ms-status .eyebrow { margin-bottom: 0.8rem; }
-.ms-plan { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.5rem,2.8vw,2.2rem); line-height: 1.02; color: var(--ink); max-width: 24ch; }
-.ms-billing { margin-top: 0.45rem; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.ms-billing[hidden] { display: none; }
-.ms-line { margin-top: 1rem; font-size: 1.05rem; font-weight: 700; color: var(--ink); line-height: 1.5; padding-left: 0.9rem; border-left: 4px solid var(--cyan); }
-.ms-line.is-canceled { border-left-color: var(--coral); }
-.ms-line.is-free { border-left-color: var(--yellow); }
-.ms-note { margin-top: 0.55rem; font-size: 0.92rem; color: var(--muted); line-height: 1.6; max-width: 56ch; }
-.ms-promo { display: inline-block; margin-top: 1rem; border: 2px dashed var(--coral-deep); padding: 0.4rem 0.8rem; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral-deep); }
-.ms-promo[hidden], .ms-note[hidden] { display: none; }
-.ms-action { background: var(--porcelain); padding: clamp(1.8rem,3.5vw,2.6rem) 2rem; display: flex; flex-direction: column; justify-content: center; gap: 0.9rem; }
-.ms-action .btn { align-self: flex-start; }
-.ms-action .btn[disabled] { opacity: 0.6; cursor: default; transform: none; }
-.ms-copy { font-size: 0.86rem; color: var(--muted); line-height: 1.6; max-width: 42ch; }
-.ms-msg { margin-top: 0.9rem; font-size: 0.88rem; padding: 0.8rem 1rem; border: 1px solid; line-height: 1.5; max-width: 42ch; }
-.ms-msg[hidden] { display: none; }
-.ms-msg.ok { background: var(--white); border-color: var(--ink); color: var(--ink); }
-.ms-msg.error { background: var(--tint); border-color: var(--coral-deep); color: var(--coral-deep); }
-.ms-contact { font-size: 0.92rem; color: var(--ink); line-height: 1.6; max-width: 42ch; }
-.ms-contact a { color: var(--coral-deep); font-weight: 700; }
-.ms-contact a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.ms-strip { max-width: var(--maxw); margin: 0 auto; padding: 0.95rem 2rem; display: flex; align-items: center; gap: 0.6rem 1.4rem; flex-wrap: wrap; }
+.ms-label { flex: none; background: var(--ink); color: var(--white); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.7rem; }
+.ms-text { flex: 1 1 380px; font-size: 1rem; line-height: 1.45; }
+.ms-text .ms-plan { font-family: var(--display); text-transform: uppercase; font-size: 1.25rem; letter-spacing: 0.01em; margin-right: 0.35rem; }
+.ms-text .ms-status { font-weight: 700; }
+.ms-promo { display: inline-block; margin-left: 0.5rem; border: 2px dashed var(--ink); padding: 0.1rem 0.5rem; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; vertical-align: 2px; }
+.ms-promo[hidden], .ms-msg[hidden] { display: none; }
+.ms-cta { flex: none; display: inline-flex; align-items: center; gap: 0.5rem; background: var(--ink); color: var(--white); border: var(--rule); font-family: var(--sans); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.75rem 1.3rem; cursor: pointer; text-decoration: none; transition: background 0.18s, color 0.18s, transform 0.18s; }
+.ms-cta:hover { background: var(--white); color: var(--ink); transform: translateY(-2px); }
+.ms-cta[disabled] { opacity: 0.65; cursor: default; transform: none; }
+.ms-cta[hidden] { display: none; }
+.ms-msg { flex-basis: 100%; font-size: 0.9rem; font-weight: 600; line-height: 1.5; padding-top: 0.6rem; border-top: 2px solid var(--ink); }
 
 .loading-state { text-align: center; padding: 3.5rem 0; color: var(--muted); font-size: 0.95rem; display: none; }
 
@@ -181,8 +172,7 @@
   .resources-grid { grid-template-columns: 1fr; }
   .offer-card { grid-template-columns: 1fr; gap: 1.25rem; }
   .offer-code { align-items: flex-start; }
-  .ms-grid { grid-template-columns: 1fr; }
-  .ms-status { border-right: none; border-bottom: var(--rule); }
+  .ms-strip { padding: 0.9rem 1.25rem; }
 }
 @media (max-width: 680px) {
   .replay-row { grid-template-columns: 1fr; gap: 0.5rem; }
@@ -260,25 +250,14 @@
     </div>
   </div>
 
-  <!-- YOUR MEMBERSHIP (filled by members-billing.js; stays hidden for team logins) -->
-  <section class="membership" id="membership" aria-labelledby="msPlan" hidden>
-    <div class="ms-grid">
-      <div class="ms-status">
-        <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Your membership</div>
-        <h2 class="ms-plan" id="msPlan"></h2>
-        <p class="ms-billing" id="msBillingLine" hidden></p>
-        <p class="ms-line" id="msStatus"></p>
-        <p class="ms-note" id="msNote" hidden></p>
-        <span class="ms-promo" id="msPromo" hidden></span>
-      </div>
-      <div class="ms-action">
-        <div id="msBilling" hidden>
-          <button type="button" class="btn btn-fill" id="msManage">Manage billing &rarr;</button>
-          <p class="ms-copy" style="margin-top:0.9rem;">We&rsquo;ll email you a one-time link to your billing page, where you can update your card and grab receipts. You can also switch plans or cancel there. Cancellations take effect at the end of your current billing period, and you keep full access until then.</p>
-          <div class="ms-msg" id="msMsg" role="status" aria-live="polite" hidden></div>
-        </div>
-        <p class="ms-contact" id="msContact" hidden>Questions about your membership? <a href="mailto:liz@projectc.biz?subject=My%20Project%20C%20membership">Just email Liz.</a></p>
-      </div>
+  <!-- YOUR MEMBERSHIP strip (filled by members-billing.js; stays hidden for team logins) -->
+  <section class="membership" id="membership" aria-label="Your membership" hidden>
+    <div class="ms-strip">
+      <span class="ms-label">Your membership</span>
+      <p class="ms-text"><span class="ms-plan" id="msPlan"></span> <span class="ms-status" id="msStatus"></span><span class="ms-promo" id="msPromo" hidden></span></p>
+      <button type="button" class="ms-cta" id="msManage" hidden>Manage billing &rarr;</button>
+      <a class="ms-cta" id="msContact" href="mailto:liz@projectc.biz?subject=My%20Project%20C%20membership" hidden>Questions? Email Liz &rarr;</a>
+      <p class="ms-msg" id="msMsg" role="status" aria-live="polite" hidden></p>
     </div>
   </section>
 
@@ -624,13 +603,13 @@
   function renderMembership(m) {
     if (!m) { msSection.hidden = true; return; }
     document.getElementById('msPlan').textContent = m.plan;
-    setText('msBillingLine', m.billing);
-    var line = document.getElementById('msStatus');
-    line.textContent = m.status;
-    line.className = 'ms-line' + (/canceled|ended/i.test(m.status) ? ' is-canceled' : /^Free/.test(m.status) ? ' is-free' : '');
-    setText('msNote', m.note);
+    // One line: billing detail, then status (and the "changed your mind" note if canceled).
+    var canceled = /canceled|ended/i.test(m.status);
+    var status = [m.billing && !canceled ? m.billing + '.' : '', m.status].filter(Boolean).join(' ');
+    document.getElementById('msStatus').textContent = status;
     setText('msPromo', m.promo);
-    document.getElementById('msBilling').hidden = !m.canManageBilling;
+    msSection.className = 'membership' + (/canceled|ended/i.test(m.status) ? ' is-canceled' : /^Free/.test(m.status) ? ' is-free' : '');
+    document.getElementById('msManage').hidden = !m.canManageBilling;
     document.getElementById('msContact').hidden = !!m.canManageBilling;
     msSection.hidden = false;
     if (location.hash === '#membership') {
@@ -651,7 +630,7 @@
 
   var msManage = document.getElementById('msManage');
   var msMsg = document.getElementById('msMsg');
-  function msShow(kind, text) { msMsg.className = 'ms-msg ' + kind; msMsg.textContent = text; msMsg.hidden = false; }
+  function msShow(kind, text) { msMsg.textContent = text; msMsg.hidden = false; }
 
   msManage.addEventListener('click', function () {
     var token = localStorage.getItem(TOKEN_KEY);

@@ -78,7 +78,7 @@ function buildDay3EmailHtml(name) {
   <p style="margin-top: 2rem;">— Liz</p>
 
   <div style="background: linear-gradient(135deg, #FE6B41, #E09AC2); height: 4px; border-radius: 2px; margin-top: 2rem;"></div>
-  <p style="font-size: 0.75rem; color: #666; margin-top: 1rem;">Project C · projectc.biz</p>
+  <p style="font-size: 0.75rem; color: #666; margin-top: 1rem;">Project C · projectc.com</p>
 </body>
 </html>`.trim();
 }
@@ -104,7 +104,7 @@ function buildCohort2WeekReminderHtml(name, endsAt) {
 
   <p>I hope you've gotten a lot out of being part of this community. If you'd like to keep going, you can convert to a paid membership and nothing changes — same Slack, same people, same access. No interruption.</p>
 
-  <p><a href="https://projectc.biz/community" style="display: inline-block; background: #FE6B41; color: white; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin: 0.5rem 0;">Continue my membership &rarr;</a></p>
+  <p><a href="https://projectc.com/community" style="display: inline-block; background: #FE6B41; color: white; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin: 0.5rem 0;">Continue my membership &rarr;</a></p>
 
   <p>If now's not the right time, no worries at all. Your access will remain active through ${endDate}, and you're always welcome to come back later.</p>
 
@@ -113,7 +113,7 @@ function buildCohort2WeekReminderHtml(name, endsAt) {
   <p style="margin-top: 2rem;">— Liz</p>
 
   <div style="background: linear-gradient(135deg, #FE6B41, #E09AC2); height: 4px; border-radius: 2px; margin-top: 2rem;"></div>
-  <p style="font-size: 0.75rem; color: #666; margin-top: 1rem;">Project C · projectc.biz</p>
+  <p style="font-size: 0.75rem; color: #666; margin-top: 1rem;">Project C · projectc.com</p>
 </body>
 </html>`.trim();
 }
@@ -139,14 +139,14 @@ function buildCohort3DayReminderHtml(name, endsAt) {
 
   <p>If you want to stay, it takes about 60 seconds to convert to a paid membership:</p>
 
-  <p><a href="https://projectc.biz/community" style="display: inline-block; background: #FE6B41; color: white; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin: 0.5rem 0;">Keep my membership &rarr;</a></p>
+  <p><a href="https://projectc.com/community" style="display: inline-block; background: #FE6B41; color: white; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; font-weight: 600; margin: 0.5rem 0;">Keep my membership &rarr;</a></p>
 
   <p>Either way, it's been great having you here. Thank you for being part of this.</p>
 
   <p style="margin-top: 2rem;">— Liz</p>
 
   <div style="background: linear-gradient(135deg, #FE6B41, #E09AC2); height: 4px; border-radius: 2px; margin-top: 2rem;"></div>
-  <p style="font-size: 0.75rem; color: #666; margin-top: 1rem;">Project C · projectc.biz</p>
+  <p style="font-size: 0.75rem; color: #666; margin-top: 1rem;">Project C · projectc.com</p>
 </body>
 </html>`.trim();
 }

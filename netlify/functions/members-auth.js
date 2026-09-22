@@ -343,21 +343,21 @@ const MEMBER_CONTENT = {
       title: 'Build Your Analytics Guru',
       description:
         'A field guide to auditing your own analytics, payments and membership plumbing. Fifteen checks, five phases, with a checklist that remembers where you left off.',
-      url: 'https://projectc.biz/analytics-guru',
+      url: 'https://projectc.com/analytics-guru',
       image: 'members-art-analytics.jpg',
     },
     {
       title: 'Media Kit Builder',
       description:
         'Build a polished media kit in minutes. Fill in your numbers and get a shareable page for sponsors and partners.',
-      url: 'https://projectc.biz/media-kit-builder/',
+      url: 'https://projectc.com/media-kit-builder/',
       image: 'members-thumb-mediakit.jpg',
     },
     {
       title: 'Press Credential Generator',
       description:
         'Generate a Project C press credential with your name and outlet, ready to print or save.',
-      url: 'https://projectc.biz/credential-generator.html',
+      url: 'https://projectc.com/credential-generator.html',
       image: 'members-thumb-credential.jpg',
     },
     {

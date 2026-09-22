@@ -250,7 +250,7 @@ function buildWelcomeEmailHtml(name, tier, promoSummary) {
   <p>If you have any questions or just want to say hi, reply to this email or ping me in Slack. I'm so glad you're here.</p>
   <p style="margin-top: 2rem;">— Liz</p>
   <div style="background: linear-gradient(135deg, #FE6B41, #E09AC2); height: 4px; border-radius: 2px; margin-top: 2rem;"></div>
-  <p style="font-size: 0.75rem; color: #666; margin-top: 1rem;">Project C · projectc.biz</p>
+  <p style="font-size: 0.75rem; color: #666; margin-top: 1rem;">Project C · projectc.com</p>
 </body>
 </html>`.trim();
 }
@@ -286,7 +286,7 @@ function buildRejectionEmailHtml(name, reason, customNote) {
   <p>If you'd like to reapply in the future, you're absolutely welcome to. And in the meantime, our newsletter is a great way to stay connected: <a href="https://newsletter.projectc.biz">newsletter.projectc.biz</a></p>
   <p style="margin-top: 2rem;">Warmly,<br>Liz</p>
   <div style="background: linear-gradient(135deg, #FE6B41, #E09AC2); height: 4px; border-radius: 2px; margin-top: 2rem;"></div>
-  <p style="font-size: 0.75rem; color: #666; margin-top: 1rem;">Project C · projectc.biz</p>
+  <p style="font-size: 0.75rem; color: #666; margin-top: 1rem;">Project C · projectc.com</p>
 </body>
 </html>`.trim();
 }

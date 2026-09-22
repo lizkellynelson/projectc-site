@@ -233,7 +233,7 @@
         <div class="gate-msg" id="gateMsg" role="alert" aria-live="polite"></div>
         <button type="submit" class="btn btn-coral" id="gateSubmit">Unlock &rarr;</button>
       </form>
-      <p class="gate-help">Not a member yet? <a href="community.html">Apply to join.</a><br>Having trouble getting in? <a href="mailto:liz@projectc.biz?subject=Members%20page%20access">Email Liz.</a></p>
+      <p class="gate-help">Not a member yet? <a href="community.html">Apply to join.</a><br>Having trouble getting in? <a href="mailto:liz@projectc.com?subject=Members%20page%20access">Email Liz.</a></p>
     </div>
   </div>
 </section>
@@ -256,7 +256,7 @@
       <span class="ms-label">Your membership</span>
       <p class="ms-text"><span class="ms-plan" id="msPlan"></span> <span class="ms-status" id="msStatus"></span><span class="ms-promo" id="msPromo" hidden></span></p>
       <button type="button" class="ms-cta" id="msManage" hidden>Manage billing &rarr;</button>
-      <a class="ms-cta" id="msContact" href="mailto:liz@projectc.biz?subject=My%20Project%20C%20membership" hidden>Questions? Email Liz &rarr;</a>
+      <a class="ms-cta" id="msContact" href="mailto:liz@projectc.com?subject=My%20Project%20C%20membership" hidden>Questions? Email Liz &rarr;</a>
       <p class="ms-msg" id="msMsg" role="status" aria-live="polite" hidden></p>
     </div>
   </section>
@@ -342,7 +342,7 @@
     <h5>Connect</h5>
     <a href="about.html">About Project C</a>
     <a href="about.html#founder">Team</a>
-    <a href="mailto:liz@projectc.biz">Contact</a>
+    <a href="mailto:liz@projectc.com">Contact</a>
     <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
     <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
     <a href="style-guide.html">Brand Style Guide</a>
@@ -650,7 +650,7 @@
         if (res.body.ok) {
           msShow('ok', 'Check your inbox. We sent a one-time link to ' + res.body.sentTo + '. It works for 15 minutes.');
         } else {
-          msShow('error', res.body.message || res.body.error || 'Something went wrong on our end. Try again, or email liz@projectc.biz.');
+          msShow('error', res.body.message || res.body.error || 'Something went wrong on our end. Try again, or email liz@projectc.com.');
         }
       })
       .catch(function () {

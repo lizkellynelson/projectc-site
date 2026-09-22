@@ -12,3 +12,6 @@ https://www.projectc.biz/*  https://projectc.com/:splat  301!
 # Only takes effect once media-kit-builder.projectc.biz is added as a domain alias in Netlify
 # and its DNS record at Squarespace points to Netlify. Harmless until then.
 https://media-kit-builder.projectc.biz/*  https://projectc.com/media-kit-builder/  301!
+
+# Short address for the Top 50 list
+/top50  /top50creatorjournalists  301

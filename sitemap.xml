@@ -63,4 +63,8 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://projectc.com/top50creatorjournalists</loc>
+    <lastmod>2026-09-22</lastmod>
+  </url>
 </urlset>

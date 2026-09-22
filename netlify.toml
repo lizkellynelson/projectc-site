@@ -33,13 +33,8 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# Redirect pages that still live on Squarespace (temporary until rebuilt)
-# /community and /going-solo are now served from this site — their redirects were removed.
-# The Top 50 list is the last page still hosted on Squarespace (Sept 2026).
-[[redirects]]
-  from = "/top50creatorjournalists"
-  to = "https://chrysalis-orchid-ne7e.squarespace.com/top50creatorjournalists"
-  status = 302
+# All pages formerly on Squarespace (/community, /going-solo, /top50creatorjournalists)
+# are now served from this site. Their Squarespace redirects were removed.
 
 # Scheduled function: daily lifecycle emails (day-3 follow-up, cohort reminders)
 # Runs every day at 2pm UTC (10am Eastern)

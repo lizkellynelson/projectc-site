@@ -50,8 +50,8 @@ const PORTAL_CONFIG_SOLO = 'bpc_1S37jJBrD2t02jnpiTNwhGVG'; // solo: monthly <-> 
 const PORTAL_CONFIG_ORG = 'bpc_1UIVJYBrD2t02jnpnS1gHW4t';  // org: monthly <-> yearly
 // Members still inside a promo discount (e.g. FREEPROJECTC's free year) get a
 // portal with plan switching OFF. Otherwise switching to yearly mid-promo would
-// run a full year's invoice through the discount. Null until Liz OKs creating it.
-const PORTAL_CONFIG_PROMO = process.env.STRIPE_PORTAL_CONFIG_PROMO || null;
+// run a full year's invoice through the discount. Created Sept 22, 2026.
+const PORTAL_CONFIG_PROMO = 'bpc_1UIWTTBrD2t02jnp4aJ56YXn';
 const PAID_TIERS = ['solo_monthly', 'solo_yearly', 'org_monthly', 'org_yearly'];
 
 const LINK_TTL_MS = 15 * 60 * 1000;

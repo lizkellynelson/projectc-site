@@ -48,6 +48,11 @@ const SITE_URL = (process.env.SITE_URL || 'https://projectc.com').replace(/\/+$/
 // can never change what members see by surprise.
 const PORTAL_CONFIG_SOLO = 'bpc_1S37jJBrD2t02jnpiTNwhGVG'; // solo: monthly <-> yearly
 const PORTAL_CONFIG_ORG = 'bpc_1UIVJYBrD2t02jnpnS1gHW4t';  // org: monthly <-> yearly
+// Members still inside a promo discount (e.g. FREEPROJECTC's free year) get a
+// portal with plan switching OFF. Otherwise switching to yearly mid-promo would
+// run a full year's invoice through the discount. Null until Liz OKs creating it.
+const PORTAL_CONFIG_PROMO = process.env.STRIPE_PORTAL_CONFIG_PROMO || null;
+const PAID_TIERS = ['solo_monthly', 'solo_yearly', 'org_monthly', 'org_yearly'];
 
 const LINK_TTL_MS = 15 * 60 * 1000;
 const LINKS_PER_WINDOW = 3; // per member, per 15 minutes
@@ -93,15 +98,22 @@ function maskEmail(email) {
 
 // Builds the member-facing summary. Kept here (not in the page) so the copy
 // lives in one place and the page stays dumb.
+function discountActive(row) {
+  return !!(row.discount_ends_at && Date.parse(row.discount_ends_at) > Date.now());
+}
+
 function summarize(row, cohort) {
   const hasBilling = !!row.stripe_customer_id;
+  const paid = PAID_TIERS.includes(row.tier);
   const now = Date.now();
   const out = {
     plan: planLabel(row.tier)[0],
     billing: planLabel(row.tier)[1],
     status: 'Active.',
     note: null,
-    promo: row.promo_summary || null,
+    // Only paid members see a promo tag. Comp and legacy rows use
+    // promo_summary for internal notes, which should never reach the page.
+    promo: paid ? (row.promo_summary || null) : null,
     canManageBilling: hasBilling && row.status === 'active',
     contact: null,
   };
@@ -110,18 +122,29 @@ function summarize(row, cohort) {
     out.status = `Your membership ended${row.membership_ends_at ? ' on ' + fmtDate(row.membership_ends_at) : ''}.`;
     out.note = 'We’d love to have you back. You can reapply any time at projectc.com/community.';
     out.canManageBilling = false;
+    out.promo = null;
     return out;
   }
 
+  const pct = Number(row.discount_percent_off) || 0;
   if (row.tier === 'cohort') {
     const via = cohort ? (cohort.partner || cohort.name) : null;
     out.status = row.membership_ends_at
       ? `Free through ${fmtDate(row.membership_ends_at)}${via ? ` via ${via}` : ''}.`
       : `Free${via ? ` via ${via}` : ''}.`;
-    out.promo = null;
   } else if (row.canceled_at && row.membership_ends_at && Date.parse(row.membership_ends_at) > now) {
     out.status = `You’ve canceled. You keep everything through ${fmtDate(row.membership_ends_at)}.`;
     if (hasBilling) out.note = 'Changed your mind? You can renew from Manage billing before then.';
+  } else if (paid && discountActive(row) && pct >= 100) {
+    // e.g. FREEPROJECTC: card is on file but nothing is charged until the free period ends.
+    const after = out.billing ? out.billing.replace(/^Billed/, 'billed') : null;
+    out.status = `Free through ${fmtDate(row.discount_ends_at)} with your promo code.${after ? ` After that, ${after}.` : ''}`;
+    out.billing = null;
+    out.promo = null;
+  } else if (paid && discountActive(row) && pct > 0) {
+    out.status = `Active. ${pct}% off through ${fmtDate(row.discount_ends_at)}.` +
+      (row.current_period_end ? ` Next renewal on ${fmtDate(row.current_period_end)}.` : '');
+    out.promo = null;
   } else if (hasBilling && row.current_period_end) {
     out.status = `Active. Next renewal on ${fmtDate(row.current_period_end)}.`;
   }
@@ -195,7 +218,7 @@ function db() {
 async function findMembership(supabase, email) {
   const { data, error } = await supabase
     .from('memberships')
-    .select('id, name, email, tier, status, cohort_id, stripe_customer_id, membership_ends_at, canceled_at, current_period_end, promo_summary')
+    .select('id, name, email, tier, status, cohort_id, stripe_customer_id, membership_ends_at, canceled_at, current_period_end, promo_summary, discount_ends_at, discount_percent_off')
     .ilike('email', email)
     .order('created_at', { ascending: false })
     .limit(5);
@@ -298,7 +321,7 @@ exports.handler = async (event) => {
 
       const { data: rows, error: mErr } = await supabase
         .from('memberships')
-        .select('id, tier, status, stripe_customer_id')
+        .select('id, tier, status, stripe_customer_id, discount_ends_at')
         .eq('id', spent[0].membership_id)
         .limit(1);
       if (mErr) throw mErr;
@@ -308,7 +331,9 @@ exports.handler = async (event) => {
       const stripe = Stripe(STRIPE_SECRET_KEY);
       const session = await stripe.billingPortal.sessions.create({
         customer: row.stripe_customer_id,
-        configuration: String(row.tier || '').startsWith('org_') ? PORTAL_CONFIG_ORG : PORTAL_CONFIG_SOLO,
+        configuration: (discountActive(row) && PORTAL_CONFIG_PROMO)
+          ? PORTAL_CONFIG_PROMO
+          : String(row.tier || '').startsWith('org_') ? PORTAL_CONFIG_ORG : PORTAL_CONFIG_SOLO,
         return_url: `${SITE_URL}/members.html#membership`,
       });
       return redirect(session.url);

@@ -203,13 +203,33 @@ async function findRow(supabase, sub) {
   return data && data.length ? data[0] : null;
 }
 
+// Promo discounts (FREEPROJECTC's free year, 20%-off codes). Webhook payloads
+// carry discount ids only, so fetch the details when there is one.
+async function discountFields(stripe, sub) {
+  const list = sub.discounts || [];
+  if (!list.length) return { discount_ends_at: null, discount_percent_off: null };
+  let d = list[0];
+  if (typeof d === 'string') {
+    const full = await stripe.subscriptions.retrieve(sub.id, { expand: ['discounts'] });
+    d = (full.discounts || [])[0];
+    if (!d || typeof d === 'string') return {};
+  }
+  let coupon = d.coupon || (d.source && d.source.coupon);
+  if (typeof coupon === 'string') coupon = await stripe.coupons.retrieve(coupon);
+  return {
+    discount_ends_at: toIso(d.end),
+    discount_percent_off: coupon && coupon.percent_off != null ? coupon.percent_off : null,
+  };
+}
+
 // ---------------------------------------------------------------------------
 // Event handlers. Each returns a short outcome string for stripe_events.
 // ---------------------------------------------------------------------------
-async function onSubscriptionUpdated(supabase, sub) {
+async function onSubscriptionUpdated(supabase, stripe, sub) {
   const row = await findRow(supabase, sub);
   if (!row) return 'no matching member';
   const { patch, change } = planSubscriptionUpdate(row, sub);
+  Object.assign(patch, await discountFields(stripe, sub));
   if (!row.stripe_subscription_id) patch.stripe_subscription_id = sub.id;
   const { error } = await supabase.from('memberships').update(patch).eq('id', row.id);
   if (error) throw error;
@@ -253,7 +273,7 @@ async function onInvoicePaid(supabase, stripe, invoice) {
   const sub = await stripe.subscriptions.retrieve(typeof subId === 'string' ? subId : subId.id);
   const row = await findRow(supabase, sub);
   if (!row) return 'no matching member';
-  const patch = { current_period_end: periodEnd(sub) };
+  const patch = { current_period_end: periodEnd(sub), ...(await discountFields(stripe, sub)) };
   const pid = priceId(sub);
   if (pid) patch.stripe_price_id = pid;
   const { error } = await supabase.from('memberships').update(patch).eq('id', row.id);
@@ -310,7 +330,7 @@ exports.handler = async (event) => {
     let outcome = 'ignored';
     switch (evt.type) {
       case 'customer.subscription.updated':
-        outcome = await onSubscriptionUpdated(supabase, obj); break;
+        outcome = await onSubscriptionUpdated(supabase, stripe, obj); break;
       case 'customer.subscription.deleted':
         outcome = await onSubscriptionDeleted(supabase, obj); break;
       case 'invoice.paid':

@@ -1,9 +1,6 @@
 # Domain redirects: projectc.biz -> projectc.com (added Sept 2026 after acquiring the .com)
-# Netlify functions are excluded so Slack/webhook callbacks to the old host keep working.
+# Slack and Stripe callbacks now point at projectc.com, so no function exclusions are needed.
 # These rules take priority over the redirects in netlify.toml.
-
-https://projectc.biz/.netlify/*      /.netlify/:splat  200
-https://www.projectc.biz/.netlify/*  /.netlify/:splat  200
 
 https://projectc.biz/*      https://projectc.com/:splat  301!
 https://www.projectc.biz/*  https://projectc.com/:splat  301!

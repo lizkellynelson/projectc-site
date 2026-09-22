@@ -34,12 +34,8 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
 
 # Redirect pages that still live on Squarespace (temporary until rebuilt)
-# /community now served from community.html on this site — redirect removed
-[[redirects]]
-  from = "/going-solo"
-  to = "https://chrysalis-orchid-ne7e.squarespace.com/going-solo"
-  status = 302
-
+# /community and /going-solo are now served from this site — their redirects were removed.
+# The Top 50 list is the last page still hosted on Squarespace (Sept 2026).
 [[redirects]]
   from = "/top50creatorjournalists"
   to = "https://chrysalis-orchid-ne7e.squarespace.com/top50creatorjournalists"

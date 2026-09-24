@@ -52,6 +52,20 @@
 .thesis .big .coral { color: var(--coral); }
 .thesis p { margin-top: 1.6rem; max-width: 56ch; font-size: 1.05rem; color: var(--muted); line-height: 1.7; }
 
+/* CONTENTS — sticky index under the nav */
+.contents { position: sticky; top: 76px; z-index: 900; background: var(--white); border-top: var(--rule); border-bottom: var(--rule); }
+.contents-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; display: flex; align-items: stretch; overflow-x: auto; scrollbar-width: none; }
+.contents-inner::-webkit-scrollbar { display: none; }
+.contents .ci-label { flex: none; display: flex; align-items: center; padding: 0.75rem 1.2rem 0.75rem 0; margin-right: 0.4rem; border-right: var(--rule); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.contents a { flex: none; display: inline-flex; align-items: baseline; gap: 0.5rem; padding: 0.75rem 1.1rem; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink); border-bottom: 3px solid transparent; margin-bottom: -2px; white-space: nowrap; transition: color 0.18s, border-color 0.18s; }
+.contents a b { font-family: var(--display); font-size: 0.95rem; font-weight: 400; color: var(--coral-deep); letter-spacing: 0; }
+.contents a i { font-style: normal; font-size: 0.66rem; font-weight: 800; color: var(--muted); letter-spacing: 0.06em; }
+.contents a i:empty { display: none; }
+.contents a:hover { color: var(--coral-deep); }
+.contents a.is-here { border-bottom-color: var(--coral); }
+.contents a.is-off { display: none; }
+#memberArea .sec { scroll-margin-top: 130px; }
+
 /* COMING UP — compact rule strip */
 .upcoming { border-top: var(--rule); border-bottom: var(--rule); display: none; }
 .up-grid { display: grid; grid-template-columns: 200px repeat(auto-fit, minmax(220px, 1fr)); }
@@ -86,6 +100,41 @@
 .session-links { display: flex; gap: 1.4rem; flex-wrap: wrap; justify-content: flex-end; }
 .session-links a, .replay-links a { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--coral-deep); white-space: nowrap; }
 .session-links a:hover, .replay-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* LEGAL OFFICE HOURS — standing desk: next session + monthly notes ledger */
+/* LEGAL OFFICE HOURS — standing desk: next session + monthly notes ledger.
+   The whole section sits on a porcelain ground so it reads as one unit, distinct from the white replay ledger below. */
+#legalSection { background: var(--porcelain); }
+#legalSection .lede { max-width: none; font-size: 1.12rem; }
+.loh-grid { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem clamp(2rem,3.5vw,3rem); display: grid; grid-template-columns: 340px 1fr; gap: 1.75rem; align-items: start; }
+.loh-next { border: var(--rule); background: var(--yellow); color: var(--ink); padding: 1.6rem 1.7rem 1.7rem; position: relative; }
+.loh-next .ln-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; background: var(--ink); color: var(--white); padding: 0.3rem 0.65rem; margin-bottom: 1.1rem; }
+.loh-next .ln-tag .blip { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); animation: blip 1.6s ease infinite; }
+.loh-next .ln-date { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.9rem,2.6vw,2.4rem); line-height: 0.98; }
+.loh-next .ln-time { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 0.45rem; color: rgba(21,23,26,0.7); }
+.loh-next .ln-title { font-size: 0.95rem; font-weight: 700; line-height: 1.35; margin-top: 0.9rem; }
+.loh-next .ln-copy { font-size: 0.86rem; line-height: 1.55; color: rgba(21,23,26,0.78); margin-top: 0.5rem; }
+.loh-next .btn { margin-top: 1.2rem; background: var(--ink); color: var(--white); }
+.loh-next .btn:hover { background: var(--white); color: var(--ink); }
+.loh-next.is-tbd .ln-date { font-size: 1.6rem; }
+.loh-notes { border: var(--rule); background: var(--white); }
+.loh-notes-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1rem 1.5rem; border-bottom: var(--rule); background: var(--ink); color: var(--white); }
+.loh-notes-head h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.15rem; letter-spacing: 0.01em; }
+.loh-notes-head span { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+.loh-row { display: grid; grid-template-columns: 150px 1fr auto; gap: 1.5rem; align-items: baseline; padding: 1.25rem 1.5rem; border-bottom: var(--rule-thin); color: var(--ink); transition: background 0.18s, padding-left 0.18s; }
+.loh-row:last-child { border-bottom: none; }
+.loh-row:hover { background: var(--tint); padding-left: 2rem; }
+.loh-row .lr-month { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral-deep); }
+.loh-row h4 { font-size: 1.02rem; font-weight: 600; line-height: 1.3; }
+.loh-row p { font-size: 0.86rem; color: var(--muted); margin-top: 0.3rem; max-width: 60ch; line-height: 1.55; }
+.loh-row .lr-go { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.05em; text-transform: uppercase; color: var(--coral-deep); white-space: nowrap; }
+.loh-row:hover .lr-go { text-decoration: underline; text-underline-offset: 3px; }
+.loh-notes-foot { padding: 0.9rem 1.5rem; border-top: var(--rule-thin); font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+.loh-notes-foot a { color: var(--coral-deep); font-weight: 700; }
+.loh-notes-foot a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.loh-fine { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem clamp(2rem,3.5vw,3rem); }
+.loh-fine-inner { border-left: 6px solid var(--yellow); background: var(--white); border-top: var(--rule-thin); border-right: var(--rule-thin); border-bottom: var(--rule-thin); padding: 0.85rem 1.2rem; font-size: 0.82rem; line-height: 1.6; color: var(--ink); }
+.loh-fine-inner strong { text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.1em; margin-right: 0.4rem; }
 
 /* REPLAYS — ledger rows */
 .replays-list { max-width: var(--maxw); margin: 0 auto; border-top: var(--rule); }
@@ -170,12 +219,17 @@
   .up-item { border-right: none; border-bottom: var(--rule-thin); }
   .up-item:last-child { border-bottom: none; }
   .resources-grid { grid-template-columns: 1fr; }
+  .loh-grid { grid-template-columns: 1fr; }
   .offer-card { grid-template-columns: 1fr; gap: 1.25rem; }
   .offer-code { align-items: flex-start; }
   .ms-strip { padding: 0.9rem 1.25rem; }
+  .contents { top: 0; }
+  .contents-inner { padding: 0 1.25rem; }
+  #memberArea .sec { scroll-margin-top: 60px; }
 }
 @media (max-width: 680px) {
   .replay-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .loh-row { grid-template-columns: 1fr; gap: 0.4rem; }
   .replay-links { flex-direction: row; gap: 1.2rem; flex-wrap: wrap; }
   .session-row { grid-template-columns: 44px 1fr; padding-right: 1.2rem; }
   .session-links { grid-column: 2; justify-content: flex-start; }
@@ -278,18 +332,38 @@
     </div>
   </section>
 
-  <!-- SERIES -->
-  <section class="sec">
-    <div class="sec-head">
-      <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Binge</div>
-      <h2 class="h-display">Series</h2>
-      <p class="lede">Multi-session deep dives. Watch in order or jump to the part you need.</p>
+  <!-- CONTENTS — sticky index of what's in the room -->
+  <nav class="contents" id="roomIndex" aria-label="In this room">
+    <div class="contents-inner">
+      <span class="ci-label">In this room</span>
+      <a href="#legalSection" data-sec="legalSection"><b>01</b><span>Legal Office Hours</span><i id="ciLegal"></i></a>
+      <a href="#replaysSection" data-sec="replaysSection"><b>02</b><span>Event Replays</span><i id="ciReplays"></i></a>
+      <a href="#seriesSection" data-sec="seriesSection"><b>03</b><span>Series</span><i id="ciSeries"></i></a>
+      <a href="#resourcesSection" data-sec="resourcesSection"><b>04</b><span>Resources</span><i id="ciResources"></i></a>
+      <a href="#offersSection" data-sec="offersSection"><b>05</b><span>Member Offers</span><i id="ciOffers"></i></a>
     </div>
-    <div class="series-stack" id="seriesStack"></div>
+  </nav>
+
+  <!-- LEGAL OFFICE HOURS (standing desk; content from the members function) -->
+  <section class="sec" id="legalSection" style="display:none">
+    <div class="sec-head">
+      <div class="eyebrow ink"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Ask</div>
+      <h2 class="h-display">Legal Office Hours</h2>
+      <p class="lede" id="legalLede"></p>
+    </div>
+    <div class="loh-grid">
+      <aside class="loh-next" id="legalNext" aria-label="Next Legal Office Hours session"></aside>
+      <div class="loh-notes">
+        <div class="loh-notes-head"><h3>Session notes</h3><span>Anonymized, one per month</span></div>
+        <div id="legalNotes"></div>
+        <div class="loh-notes-foot" id="legalFoot"></div>
+      </div>
+    </div>
+    <div class="loh-fine"><div class="loh-fine-inner" id="legalFine"></div></div>
   </section>
 
   <!-- REPLAYS -->
-  <section class="sec">
+  <section class="sec" id="replaysSection">
     <div class="sec-head">
       <div class="eyebrow magenta"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Watch</div>
       <h2 class="h-display">Event Replays</h2>
@@ -298,8 +372,18 @@
     <div class="replays-list" id="replaysGrid"></div>
   </section>
 
+  <!-- SERIES -->
+  <section class="sec" id="seriesSection">
+    <div class="sec-head">
+      <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Binge</div>
+      <h2 class="h-display">Series</h2>
+      <p class="lede">Multi-session deep dives. Watch in order or jump to the part you need.</p>
+    </div>
+    <div class="series-stack" id="seriesStack"></div>
+  </section>
+
   <!-- RESOURCES -->
-  <section class="sec">
+  <section class="sec" id="resourcesSection">
     <div class="sec-head">
       <div class="eyebrow cyan"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Keep</div>
       <h2 class="h-display">Resources</h2>
@@ -309,7 +393,7 @@
   </section>
 
   <!-- OFFERS -->
-  <section class="sec">
+  <section class="sec" id="offersSection">
     <div class="sec-head">
       <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Perks</div>
       <h2 class="h-display">Member Offers</h2>
@@ -441,6 +525,8 @@
     }).join('');
     document.querySelector('#seriesStack').closest('.sec').style.display = seriesList.length ? 'block' : 'none';
 
+    renderLegal(content.legalOfficeHours);
+
     var grid = document.getElementById('replaysGrid');
     grid.innerHTML = content.replays.map(function (r) {
       return (
@@ -533,6 +619,85 @@
 
     document.getElementById('membersNote').innerHTML =
       '<strong>House rule</strong> &middot; ' + esc(content.note);
+
+    // Contents bar: counts + hide anything empty
+    function ci(id, n, word) { var el = document.getElementById(id); el.textContent = n ? n + ' ' + (n === 1 ? word : word + 's') : ''; el.parentNode.classList.toggle('is-off', !n); }
+    var loh = content.legalOfficeHours;
+    ci('ciLegal', loh && loh.notes ? loh.notes.length : 0, 'session');
+    ci('ciReplays', content.replays.length, 'recording');
+    ci('ciSeries', seriesList.length, 'series');
+    document.getElementById('ciSeries').textContent = seriesList.length ? seriesList.length + ' series' : '';
+    ci('ciResources', content.resources.length, 'tool');
+    ci('ciOffers', offerList.length, 'offer');
+    watchSections();
+  }
+
+  var spy = null;
+  function watchSections() {
+    if (spy) spy.disconnect();
+    var links = document.querySelectorAll('#roomIndex a[data-sec]');
+    var secs = Array.prototype.map.call(links, function (a) { return document.getElementById(a.getAttribute('data-sec')); });
+    if (!('IntersectionObserver' in window)) return;
+    spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { a.classList.toggle('is-here', a.getAttribute('data-sec') === en.target.id); });
+      });
+    }, { rootMargin: '-140px 0px -60% 0px', threshold: 0 });
+    secs.forEach(function (el) { if (el) spy.observe(el); });
+  }
+
+  // ---- Legal Office Hours: notes ledger + next-session card ----
+  var legalNextRendered = false;
+  function renderLegal(loh) {
+    var section = document.getElementById('legalSection');
+    if (!loh || !loh.notes || !loh.notes.length) { section.style.display = 'none'; return; }
+    document.getElementById('legalLede').textContent =
+      'Attorney ' + loh.counsel.name + ' takes questions from members once a month. We don\u2019t post the recordings. We post the notes, anonymized and written with ' + loh.counsel.name.split(' ')[0] + ' after each session.';
+    document.getElementById('legalNotes').innerHTML = loh.notes.map(function (n) {
+      return (
+        '<a class="loh-row" href="legal-office-hours.html?note=' + encodeURIComponent(n.slug) + '">' +
+          '<div class="lr-month">' + esc(n.month) + '</div>' +
+          '<div><h4>' + esc(n.title) + ' on ' + esc(n.sessionDate) + '</h4><p>' + esc(n.topics) + '</p></div>' +
+          '<span class="lr-go">Read the notes &rarr;</span>' +
+        '</a>'
+      );
+    }).join('');
+    document.getElementById('legalFoot').innerHTML =
+      esc(loh.whyNoRecording) + ' ' + esc(loh.houseRule);
+    document.getElementById('legalFine').innerHTML =
+      '<strong>Please note</strong>' + esc(loh.disclaimer);
+    if (!legalNextRendered) renderLegalNext([]);
+    section.style.display = 'block';
+  }
+
+  function renderLegalNext(events) {
+    var box = document.getElementById('legalNext');
+    var next = (events || []).filter(function (ev) { return /legal office hours/i.test(ev.title); })[0];
+    if (!next) {
+      box.className = 'loh-next is-tbd';
+      box.innerHTML =
+        '<span class="ln-tag">Next session</span>' +
+        '<div class="ln-date">Date coming soon</div>' +
+        '<p class="ln-copy">Legal Office Hours runs monthly. The next date will appear here as soon as it&rsquo;s on the calendar.</p>' +
+        '<a class="btn" href="https://luma.com/projectc" target="_blank" rel="noopener">See the calendar &rarr;</a>';
+      return;
+    }
+    var d = new Date(next.start);
+    var opts = { timeZone: 'America/New_York' };
+    var weekday = d.toLocaleDateString('en-US', Object.assign({ weekday: 'long' }, opts));
+    var mon = d.toLocaleDateString('en-US', Object.assign({ month: 'long' }, opts));
+    var day = d.toLocaleDateString('en-US', Object.assign({ day: 'numeric' }, opts));
+    var time = d.toLocaleTimeString('en-US', Object.assign({ hour: 'numeric', minute: '2-digit' }, opts));
+    box.className = 'loh-next';
+    box.innerHTML =
+      '<span class="ln-tag"><span class="blip"></span>Next session</span>' +
+      '<div class="ln-date">' + esc(mon) + ' ' + esc(day) + '</div>' +
+      '<div class="ln-time">' + esc(weekday) + ' &middot; ' + esc(time) + ' ET &middot; Zoom</div>' +
+      '<div class="ln-title">' + esc(next.title) + '</div>' +
+      '<p class="ln-copy">Open questions, group format. Bring the contract that&rsquo;s sitting in your inbox or the clause you&rsquo;ve been squinting at.</p>' +
+      '<a class="btn" href="' + esc(next.url) + '" target="_blank" rel="noopener">RSVP on Luma &rarr;</a>';
+    legalNextRendered = true;
   }
 
   function renderUpcoming(events) {
@@ -567,8 +732,8 @@
       body: JSON.stringify({ action: 'events', token: token }),
     })
       .then(function (r) { return r.json(); })
-      .then(function (body) { renderUpcoming(body.ok ? body.events : []); })
-      .catch(function () { renderUpcoming([]); });
+      .then(function (body) { var evs = body.ok ? body.events : []; renderUpcoming(evs); renderLegalNext(evs); })
+      .catch(function () { renderUpcoming([]); renderLegalNext([]); });
   }
 
   function unlock(content) {

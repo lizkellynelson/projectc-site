@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Legal Office Hours: What We Learned — Project C</title>
+<meta name="description" content="Notes from Project C's monthly Legal Office Hours with attorney Julian Sarafian. Members only.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
+<style>
+/* ---- Legal Office Hours: What We Learned — members-only Level-2 page ---- */
+.nav.scrolled { box-shadow: 0 4px 24px rgba(21,23,26,0.08); }
+
+/* CREDENTIAL CHECK (same composition as the Replay Room) */
+.gatehead { display: grid; grid-template-columns: 1.1fr 0.9fr; border-bottom: var(--rule); background: var(--white); }
+.gatehead .gh-copy { padding: clamp(2.5rem,5vw,4.5rem) 2.5rem; border-right: var(--rule); display: flex; flex-direction: column; justify-content: center; }
+.gatehead .gh-copy h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.4rem,5vw,4.2rem); line-height: 0.96; color: var(--ink); margin-bottom: 1.1rem; max-width: 12ch; }
+.gatehead .gh-copy h1 .out { -webkit-text-stroke: 2px var(--ink); color: transparent; }
+.gatehead .gh-copy .standfirst { font-size: 1.08rem; color: var(--muted); line-height: 1.65; max-width: 52ch; }
+.gatehead .gh-check { background: var(--porcelain); display: flex; align-items: center; justify-content: center; padding: clamp(2rem,4vw,3.5rem) 2rem; }
+.gate-window { background: var(--white); border: var(--rule); padding: 2.2rem 2.2rem 2rem; width: 100%; max-width: 420px; position: relative; }
+.gate-window .gw-tag { position: absolute; top: -13px; left: 22px; background: var(--yellow); border: var(--rule); color: var(--ink); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
+.gate-window h2 { font-family: var(--display); text-transform: uppercase; font-size: 1.45rem; line-height: 1.05; color: var(--ink); margin-bottom: 0.5rem; }
+.gate-window > p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.4rem; }
+.gate-form { display: flex; flex-direction: column; gap: 0.9rem; }
+.gate-form label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink); }
+.gate-form input { font-family: var(--sans); font-size: 1rem; padding: 0.85rem 1rem; border: var(--rule); background: var(--white); color: var(--ink); width: 100%; }
+.gate-form input:focus { outline: 2px solid var(--coral); outline-offset: 1px; }
+.gate-msg { font-size: 0.88rem; padding: 0.8rem 1rem; display: none; border: 1px solid; line-height: 1.5; }
+.gate-msg.error { display: block; background: var(--tint); color: var(--coral-deep); border-color: var(--coral-deep); }
+.gate-msg.info { display: block; background: var(--porcelain); color: var(--ink); border-color: rgba(21,23,26,0.3); }
+.gate-form .btn { justify-content: center; }
+.gate-help { margin-top: 1.3rem; font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+.gate-help a { color: var(--coral-deep); font-weight: 700; }
+.gate-help a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.loading-state { text-align: center; padding: 3.5rem 0; color: var(--muted); font-size: 0.95rem; display: none; }
+
+/* MEMBER BAR */
+#memberArea { display: none; }
+.member-bar { border-bottom: var(--rule); background: var(--porcelain); }
+.member-bar-inner { max-width: var(--maxw); margin: 0 auto; padding: 0.65rem 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.member-bar .who b { color: var(--ink); }
+.member-bar .mb-links { display: flex; gap: 1.4rem; align-items: center; }
+.member-bar a, .signout-btn { background: none; border: none; cursor: pointer; font-family: var(--sans); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral-deep); padding: 0.2rem 0; }
+.member-bar a:hover, .signout-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* MASTHEAD — case file */
+.mast { display: grid; grid-template-columns: 1.15fr 0.85fr; border-bottom: var(--rule); }
+.mast .m-copy { padding: clamp(2.4rem,5vw,4.2rem) 2.5rem clamp(2rem,4vw,3.4rem); border-right: var(--rule); }
+.mast .m-copy h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.8rem,6.4vw,5.4rem); line-height: 0.93; color: var(--ink); max-width: 12ch; }
+.mast .m-copy h1 .coral { color: var(--coral); }
+.mast .dateline { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 0.5rem 0; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.mast .dateline span { display: inline-flex; align-items: center; }
+.mast .dateline span + span::before { content: ''; display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--coral); margin: 0 0.8rem; }
+.mast .dateline b { color: var(--ink); }
+.mast .m-topics { margin-top: 1.3rem; font-family: var(--serif); font-style: italic; font-size: clamp(1.15rem,1.9vw,1.5rem); line-height: 1.3; color: var(--coral-deep); max-width: 40ch; }
+.mast .m-side { background: var(--porcelain); padding: clamp(2rem,4vw,3rem) 2.2rem; display: flex; flex-direction: column; gap: 1.25rem; justify-content: center; }
+.counsel { background: var(--white); border: var(--rule); padding: 1.5rem 1.6rem 1.5rem; position: relative; }
+.counsel .c-tag { position: absolute; top: -13px; left: 20px; background: var(--ink); color: var(--white); font-size: 0.64rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
+.counsel h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.5rem; line-height: 1.02; margin-top: 0.2rem; }
+.counsel .c-firm { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral-deep); margin-top: 0.3rem; }
+.counsel p { font-size: 0.86rem; color: var(--muted); line-height: 1.55; margin-top: 0.7rem; }
+.counsel .c-links { margin-top: 0.9rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.counsel .c-links a { font-family: monospace; font-size: 0.8rem; color: var(--ink); word-break: break-all; }
+.counsel .c-links a:hover { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; }
+.nextline { border: var(--rule); background: var(--yellow); padding: 1rem 1.3rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.nextline .nl-l { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; display: flex; align-items: center; gap: 0.5rem; }
+.nextline .nl-l .blip { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); animation: blip 1.6s ease infinite; }
+.nextline .nl-d { font-family: var(--display); text-transform: uppercase; font-size: 1.25rem; line-height: 1; }
+.nextline a { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; border-bottom: 2px solid var(--ink); }
+.nextline a:hover { color: var(--coral-deep); border-color: var(--coral-deep); }
+
+/* NOTICE BANDS — the disclaimer, non-dismissable, top and bottom of every note */
+.notice { background: var(--yellow); border-bottom: var(--rule); }
+.notice.bottom { border-top: var(--rule); border-bottom: none; }
+.notice-inner { max-width: var(--maxw); margin: 0 auto; padding: 1.1rem 2rem; display: grid; grid-template-columns: 170px 1fr; gap: 1.5rem; align-items: start; }
+.notice .n-label { font-family: var(--display); text-transform: uppercase; font-size: 1.15rem; line-height: 1; display: flex; align-items: center; gap: 0.6rem; padding-top: 0.15rem; }
+.notice .n-label svg { width: 22px; height: 22px; flex: none; }
+.notice .n-text { font-size: 0.95rem; font-weight: 600; line-height: 1.55; color: var(--ink); max-width: 90ch; }
+.notice .n-text a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* BODY — sidebar + reading column */
+.body { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 300px 1fr; }
+.side { border-right: var(--rule); }
+.side-in { position: sticky; top: 92px; padding: 2rem 1.6rem 2rem 2rem; display: flex; flex-direction: column; gap: 1.8rem; max-height: calc(100vh - 92px); overflow: auto; }
+.side h5 { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.7rem; padding-bottom: 0.5rem; border-bottom: var(--rule); }
+.toc { list-style: none; display: flex; flex-direction: column; }
+.toc a { display: grid; grid-template-columns: 26px 1fr; gap: 0.5rem; padding: 0.5rem 0; font-size: 0.85rem; line-height: 1.35; color: var(--ink); border-bottom: var(--rule-thin); }
+.toc a:hover { color: var(--coral-deep); }
+.toc a .n { font-family: var(--display); font-size: 1rem; color: var(--coral-deep); }
+.toc a.is-short { grid-template-columns: 1fr; font-weight: 700; }
+.archive { list-style: none; display: flex; flex-direction: column; }
+.archive a { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.55rem 0; font-size: 0.85rem; color: var(--ink); border-bottom: var(--rule-thin); }
+.archive a:hover { color: var(--coral-deep); }
+.archive a.is-current { font-weight: 800; color: var(--coral-deep); }
+.archive a .a-n { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.search { display: flex; flex-direction: column; gap: 0.5rem; }
+.search input { font-family: var(--sans); font-size: 0.92rem; padding: 0.7rem 0.9rem; border: var(--rule); background: var(--white); width: 100%; }
+.search input:focus { outline: 2px solid var(--coral); outline-offset: 1px; }
+.search small { font-size: 0.74rem; color: var(--muted); line-height: 1.45; }
+.side .back { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--coral-deep); }
+.side .back:hover { text-decoration: underline; text-underline-offset: 3px; }
+[hidden] { display: none !important; }
+
+.read { padding: clamp(2rem,4vw,3.5rem) clamp(1.5rem,4vw,4rem) clamp(3rem,5vw,4.5rem) clamp(1.5rem,4vw,3.5rem); min-width: 0; }
+.read .intro { font-size: 1.12rem; line-height: 1.7; color: var(--ink); max-width: 66ch; }
+.read .intro + .intro { margin-top: 1rem; color: var(--muted); }
+
+/* THE SHORT VERSION — six things, numbered like a docket */
+.short { margin-top: 2.5rem; border: var(--rule); }
+.short-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1rem 1.6rem; border-bottom: var(--rule); background: var(--ink); color: var(--white); }
+.short-head h2 { font-family: var(--display); text-transform: uppercase; font-size: 1.5rem; letter-spacing: 0.01em; }
+.short-head span { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+.short ol { list-style: none; counter-reset: sv; }
+.short li { counter-increment: sv; display: grid; grid-template-columns: 64px 1fr; border-bottom: var(--rule-thin); }
+.short li:last-child { border-bottom: none; }
+.short li::before { content: counter(sv, decimal-leading-zero); font-family: var(--display); font-size: 1.7rem; color: var(--coral-deep); padding: 1.05rem 0 0 1.2rem; line-height: 1; }
+.short li div { padding: 1.1rem 1.6rem 1.15rem 0.5rem; font-size: 0.98rem; line-height: 1.55; }
+.short li b { font-weight: 800; }
+
+/* THE QUESTIONS */
+.qs { margin-top: 3rem; }
+.qs-head { display: flex; align-items: baseline; gap: 1.2rem; border-bottom: var(--rule); padding-bottom: 0.8rem; margin-bottom: 0.5rem; }
+.qs-head h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.8rem,3vw,2.6rem); line-height: 1; }
+.qs-head span { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.q { display: grid; grid-template-columns: 84px 1fr; gap: 0 1.2rem; padding: 2.4rem 0 2.6rem; border-bottom: var(--rule-thin); scroll-margin-top: 100px; }
+.q:last-child { border-bottom: none; }
+.q .q-num { font-family: var(--display); font-size: clamp(2.6rem,4vw,3.6rem); line-height: 0.9; color: var(--coral); position: sticky; top: 100px; align-self: start; }
+.q .q-num small { display: block; font-family: var(--sans); font-size: 0.6rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem; }
+.q h3 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.45rem,2.4vw,1.95rem); line-height: 1.22; color: var(--ink); max-width: 30ch; }
+.q .tags { margin-top: 0.7rem; display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.q .tags span { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(21,23,26,0.3); padding: 0.18rem 0.5rem; color: var(--muted); }
+.beat { margin-top: 1.6rem; display: grid; grid-template-columns: 150px 1fr; gap: 1.2rem; }
+.beat .b-label { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); padding-top: 0.3rem; display: flex; align-items: flex-start; gap: 0.5rem; }
+.beat .b-label i { width: 10px; height: 10px; flex: none; margin-top: 0.15rem; }
+.beat.sit .b-label i { background: var(--cyan); }
+.beat.said .b-label i { background: var(--magenta); }
+.beat.todo .b-label i { background: var(--yellow); border: 1px solid var(--ink); }
+.beat .b-body { font-size: 0.98rem; line-height: 1.68; color: var(--ink); max-width: 66ch; }
+.beat.sit .b-body { font-family: var(--serif); font-style: italic; font-size: 1.08rem; color: rgba(21,23,26,0.8); }
+.beat.said .b-body p + p { margin-top: 0.9rem; }
+.beat.todo .b-body { border: var(--rule); background: var(--porcelain); padding: 1rem 1.3rem; }
+.beat.todo ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.beat.todo li { display: grid; grid-template-columns: 18px 1fr; gap: 0.7rem; font-size: 0.93rem; line-height: 1.5; }
+.beat.todo li::before { content: ''; width: 13px; height: 13px; border: var(--rule); background: var(--white); margin-top: 0.25rem; }
+
+/* WHO TO CALL — ruled table */
+.whocall { margin-top: 3rem; border: var(--rule); }
+.whocall-head { padding: 1.2rem 1.6rem 1rem; border-bottom: var(--rule); }
+.whocall-head h2 { font-family: var(--display); text-transform: uppercase; font-size: 1.6rem; line-height: 1; }
+.whocall-head p { font-size: 0.9rem; color: var(--muted); margin-top: 0.4rem; max-width: 60ch; line-height: 1.55; }
+.whocall table { width: 100%; border-collapse: collapse; }
+.whocall th { text-align: left; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.7rem 1.6rem; background: var(--porcelain); border-bottom: var(--rule); color: var(--muted); }
+.whocall td { padding: 0.95rem 1.6rem; font-size: 0.93rem; line-height: 1.5; border-bottom: var(--rule-thin); vertical-align: top; }
+.whocall tr:last-child td { border-bottom: none; }
+.whocall td:first-child { width: 52%; border-right: var(--rule-thin); }
+.whocall td:last-child { font-weight: 600; }
+
+/* COMING SOON — dashed ticket */
+.soon { margin-top: 2rem; border: 2px dashed var(--ink); padding: 1.3rem 1.6rem; display: grid; grid-template-columns: auto 1fr; gap: 1.4rem; align-items: center; }
+.soon .s-tag { background: var(--magenta); color: var(--ink); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.7rem; border: var(--rule); }
+.soon p { font-size: 0.92rem; line-height: 1.55; color: var(--ink); }
+
+/* CLOSE — house rule + counsel contact */
+.close { margin-top: 2.5rem; padding-top: 1.4rem; border-top: var(--rule); font-size: 0.88rem; line-height: 1.65; color: var(--muted); max-width: 70ch; }
+.close b { color: var(--ink); text-transform: uppercase; font-size: 0.68rem; letter-spacing: 0.1em; }
+.close a { color: var(--coral-deep); font-weight: 700; }
+.close a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* SEARCH RESULTS (appears once there is more than one note) */
+.results { padding: clamp(2rem,4vw,3.5rem) clamp(1.5rem,4vw,4rem); }
+.results h2 { font-family: var(--display); text-transform: uppercase; font-size: 1.8rem; margin-bottom: 0.3rem; }
+.results .r-count { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.4rem; }
+.r-item { display: block; border: var(--rule); padding: 1.2rem 1.4rem; margin-bottom: 1rem; color: var(--ink); transition: background 0.18s; }
+.r-item:hover { background: var(--tint); }
+.r-item .r-month { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); }
+.r-item h3 { font-family: var(--serif); font-weight: 500; font-size: 1.2rem; line-height: 1.25; margin-top: 0.3rem; }
+.r-item p { font-size: 0.86rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.5; }
+.r-item mark { background: var(--yellow); color: var(--ink); padding: 0 0.1em; }
+.r-empty { font-size: 0.95rem; color: var(--muted); }
+
+@media (max-width: 1000px) {
+  .body { grid-template-columns: 1fr; }
+  .side { border-right: none; border-bottom: var(--rule); }
+  .side-in { position: static; max-height: none; padding: 1.6rem 2rem; }
+}
+@media (max-width: 900px) {
+  .gatehead, .mast { grid-template-columns: 1fr; }
+  .gatehead .gh-copy, .mast .m-copy { border-right: none; border-bottom: var(--rule); }
+  .notice-inner { grid-template-columns: 1fr; gap: 0.6rem; }
+}
+@media (max-width: 680px) {
+  .q { grid-template-columns: 1fr; }
+  .q .q-num { position: static; font-size: 2.2rem; margin-bottom: 0.6rem; }
+  .beat { grid-template-columns: 1fr; gap: 0.5rem; }
+  .short li { grid-template-columns: 48px 1fr; }
+  .whocall td:first-child { width: auto; }
+  .soon { grid-template-columns: 1fr; gap: 0.8rem; }
+  .read { padding-left: 1.25rem; padding-right: 1.25rem; }
+}
+</style>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-By0ztJ4PY36DnzOcJW2cs.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="project-c_lockup_color.png" alt="Project C — home"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="directory.html">Directory</a></li>
+      <li><a href="going-solo.html">Going Solo</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="press.html">Research &amp; Press</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="members.html" class="nav-member">Member Login</a></li>
+      <li><a href="community.html" class="nav-cta">Join &rarr;</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- CREDENTIAL CHECK (locked state) -->
+<section class="gatehead" id="gateSection">
+  <div class="gh-copy">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Members Only</div>
+    <h1>Legal <span class="out">Office</span> Hours</h1>
+    <p class="standfirst">Once a month, attorney Julian Sarafian takes questions from Project C members about the legal side of running an independent journalism business. We don&rsquo;t post the recordings. We post the notes.</p>
+  </div>
+  <div class="gh-check">
+    <div class="gate-window crops">
+      <span class="gw-tag">Credential Check</span>
+      <h2>Members, come on in</h2>
+      <p>Enter the email you joined Project C with and we&rsquo;ll unlock the notes. No password needed.</p>
+      <form class="gate-form" id="gateForm" novalidate>
+        <label for="memberEmail">Your membership email</label>
+        <input type="email" id="memberEmail" name="email" autocomplete="email" placeholder="you@yournewsletter.com" required>
+        <div class="gate-msg" id="gateMsg" role="alert" aria-live="polite"></div>
+        <button type="submit" class="btn btn-coral" id="gateSubmit">Unlock &rarr;</button>
+      </form>
+      <p class="gate-help">Not a member yet? <a href="community.html">Apply to join.</a><br>Having trouble getting in? <a href="mailto:liz@projectc.com?subject=Members%20page%20access">Email Liz.</a></p>
+    </div>
+  </div>
+</section>
+
+<div class="loading-state" id="loadingState">Checking your credential&hellip;</div>
+
+<!-- MEMBER AREA (revealed after unlock) -->
+<div id="memberArea">
+
+  <div class="member-bar">
+    <div class="member-bar-inner">
+      <span class="who" id="memberWelcome">Checked in.</span>
+      <span class="mb-links">
+        <a href="members.html">&larr; The Replay Room</a>
+        <button class="signout-btn" id="signoutBtn" type="button">Sign out &rarr;</button>
+      </span>
+    </div>
+  </div>
+
+  <!-- MASTHEAD -->
+  <section class="mast">
+    <div class="m-copy">
+      <div class="eyebrow ink"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Legal Office Hours</div>
+      <h1>What we <span class="coral">learned</span></h1>
+      <div class="dateline" id="dateline"></div>
+      <p class="m-topics" id="mastTopics"></p>
+    </div>
+    <div class="m-side">
+      <div class="counsel crops" id="counsel"></div>
+      <div class="nextline" id="nextline"></div>
+    </div>
+  </section>
+
+  <!-- NOTICE (top) -->
+  <div class="notice" id="noticeTop">
+    <div class="notice-inner">
+      <div class="n-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 1.5 21h21L12 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="12" y1="9.5" x2="12" y2="14.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17.6" r="1.25" fill="currentColor"/></svg>Read this first</div>
+      <p class="n-text" id="noticeTopText"></p>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="body">
+    <aside class="side">
+      <div class="side-in">
+        <div class="search" id="searchBox" hidden>
+          <h5>Search every session</h5>
+          <input type="search" id="searchInput" placeholder="indemnification, releases, LLC&hellip;" aria-label="Search the notes">
+          <small>Looks across every question from every month.</small>
+        </div>
+        <div id="tocBox">
+          <h5>In this note</h5>
+          <ul class="toc" id="toc"></ul>
+        </div>
+        <div id="archiveBox" hidden>
+          <h5>All sessions</h5>
+          <ul class="archive" id="archive"></ul>
+        </div>
+        <a class="back" href="members.html">&larr; Back to the Replay Room</a>
+      </div>
+    </aside>
+
+    <article class="read" id="read"></article>
+    <div class="results" id="results" hidden></div>
+  </div>
+
+  <!-- NOTICE (bottom) -->
+  <div class="notice bottom" id="noticeBottom">
+    <div class="notice-inner">
+      <div class="n-label"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 1.5 21h21L12 2z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><line x1="12" y1="9.5" x2="12" y2="14.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17.6" r="1.25" fill="currentColor"/></svg>One more time</div>
+      <p class="n-text" id="noticeBottomText"></p>
+    </div>
+  </div>
+
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href="press.html">Research &amp; Press</a>
+    <a href="news-ecosystem-map.html">News Ecosystem Map</a>
+    <a href="going-solo.html">Going Solo Workshop</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href="community.html">Join the Community</a>
+    <a href="directory.html">Member Directory</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="members.html">Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href="about.html">About Project C</a>
+    <a href="about.html#founder">Team</a>
+    <a href="mailto:liz@projectc.com">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href="style-guide.html">Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C — independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
+  </div>
+</footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design. <a href="privacy-policy.html">Privacy Policy</a></span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
+
+<script>
+(function () {
+  var API = '/.netlify/functions/members-auth';
+  var TOKEN_KEY = 'pc_member_token';
+  var NAME_KEY = 'pc_member_name';
+
+  var gateSection = document.getElementById('gateSection');
+  var gateForm = document.getElementById('gateForm');
+  var gateMsg = document.getElementById('gateMsg');
+  var gateSubmit = document.getElementById('gateSubmit');
+  var memberArea = document.getElementById('memberArea');
+  var loadingState = document.getElementById('loadingState');
+
+  var nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', function () { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+  function showMsg(kind, text) { gateMsg.className = 'gate-msg ' + kind; gateMsg.textContent = text; }
+  function clearMsg() { gateMsg.className = 'gate-msg'; gateMsg.textContent = ''; }
+  function esc(s) { var d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+
+  // ---------------------------------------------------------------
+  // RENDER
+  // ---------------------------------------------------------------
+  var LOH = null;      // the legalOfficeHours object from the function
+  var current = null;  // the note being read
+
+  function noteFromQuery() {
+    var m = location.search.match(/[?&]note=([^&]+)/);
+    return m ? decodeURIComponent(m[1]) : null;
+  }
+
+  function renderShell(loh) {
+    var c = loh.counsel;
+    document.getElementById('counsel').innerHTML =
+      '<span class="c-tag">Counsel</span>' +
+      '<h3>' + esc(c.name) + '</h3>' +
+      '<div class="c-firm">' + esc(c.firm) + '</div>' +
+      '<p>' + esc(c.bio) + '</p>' +
+      '<div class="c-links">' +
+        (c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>' : '') +
+        (c.url ? '<a href="' + esc(c.url) + '" target="_blank" rel="noopener">' + esc(c.url.replace(/^https?:\/\//, '')) + '</a>' : '') +
+      '</div>';
+    renderNext([]);
+
+    // Archive + search only earn their place once there is more than one note.
+    var many = loh.notes.length > 1;
+    document.getElementById('archiveBox').hidden = !many;
+    document.getElementById('searchBox').hidden = !many;
+    document.getElementById('archive').innerHTML = loh.notes.map(function (n) {
+      return '<li><a href="?note=' + encodeURIComponent(n.slug) + '" data-slug="' + esc(n.slug) + '"><span>' + esc(n.month) + '</span><span class="a-n">' + n.questions.length + ' Qs</span></a></li>';
+    }).join('');
+  }
+
+  function renderNext(events) {
+    var box = document.getElementById('nextline');
+    var next = (events || []).filter(function (ev) { return /legal office hours/i.test(ev.title); })[0];
+    if (!next) {
+      box.innerHTML = '<span class="nl-l">Next session</span><span class="nl-d">Date coming soon</span><a href="https://luma.com/projectc" target="_blank" rel="noopener">Calendar &rarr;</a>';
+      return;
+    }
+    var d = new Date(next.start), o = { timeZone: 'America/New_York' };
+    var mon = d.toLocaleDateString('en-US', Object.assign({ month: 'short' }, o));
+    var day = d.toLocaleDateString('en-US', Object.assign({ day: 'numeric' }, o));
+    var time = d.toLocaleTimeString('en-US', Object.assign({ hour: 'numeric', minute: '2-digit' }, o));
+    box.innerHTML =
+      '<span class="nl-l"><span class="blip"></span>Next session</span>' +
+      '<span class="nl-d">' + esc(mon) + ' ' + esc(day) + ' &middot; ' + esc(time) + ' ET</span>' +
+      '<a href="' + esc(next.url) + '" target="_blank" rel="noopener">RSVP on Luma &rarr;</a>';
+  }
+
+  function renderNote(n) {
+    current = n;
+    var loh = LOH;
+    var c = loh.counsel;
+    document.title = 'Legal Office Hours: What We Learned, ' + n.month + ' — Project C';
+
+    document.getElementById('dateline').innerHTML =
+      '<span><b>' + esc(n.month) + '</b></span>' +
+      '<span>Session of ' + esc(n.sessionDate) + '</span>' +
+      '<span>Notes written with ' + esc(c.name) + '</span>' +
+      '<span>Members only</span>';
+    document.getElementById('mastTopics').textContent = n.topics;
+
+    var disc = loh.disclaimer.replace('each note reflects the law as of the date it was written', 'this note reflects the law as of ' + n.asOf);
+    document.getElementById('noticeTopText').textContent = disc;
+    document.getElementById('noticeBottomText').innerHTML =
+      esc(loh.houseRule) + ' None of this is legal advice, and ' + esc(c.name) + ' is not your attorney. If you would like to retain him, you can reach him at <a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>.';
+
+    // Sidebar: in this note
+    document.getElementById('toc').innerHTML =
+      '<li><a class="is-short" href="#short">The short version</a></li>' +
+      n.questions.map(function (q, i) {
+        return '<li><a href="#q' + (i + 1) + '"><span class="n">' + (i + 1) + '</span><span>' + esc(q.q) + '</span></a></li>';
+      }).join('') +
+      '<li><a class="is-short" href="#who">Who to call for what</a></li>';
+    document.querySelectorAll('#archive a').forEach(function (a) {
+      a.classList.toggle('is-current', a.getAttribute('data-slug') === n.slug);
+    });
+
+    // Reading column
+    var html = '';
+    html += '<p class="intro">' + esc(n.intro) + '</p>';
+    html += '<p class="intro">' + esc(loh.whyNoRecording) + '</p>';
+
+    html += '<section class="short" id="short"><div class="short-head"><h2>The short version</h2><span>If you only have a minute</span></div><ol>' +
+      n.shortVersion.map(function (s) { return '<li><div><b>' + esc(s.lead) + '</b> ' + esc(s.text) + '</div></li>'; }).join('') +
+      '</ol></section>';
+
+    html += '<section class="qs"><div class="qs-head"><h2>The questions</h2><span>' + n.questions.length + ' asked &middot; names and specifics removed</span></div>';
+    html += n.questions.map(function (q, i) {
+      return (
+        '<article class="q" id="q' + (i + 1) + '">' +
+          '<div class="q-num"><small>Q</small>' + (i + 1) + '</div>' +
+          '<div>' +
+            '<h3>' + esc(q.q) + '</h3>' +
+            (q.tags && q.tags.length ? '<div class="tags">' + q.tags.map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('') + '</div>' : '') +
+            '<div class="beat sit"><div class="b-label"><i></i>The situation</div><div class="b-body">' + esc(q.situation) + '</div></div>' +
+            '<div class="beat said"><div class="b-label"><i></i>What ' + esc(c.name.split(' ')[0]) + ' said</div><div class="b-body">' + q.said.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div></div>' +
+            '<div class="beat todo"><div class="b-label"><i></i>What to do</div><div class="b-body"><ul>' + q.todo.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></div></div>' +
+          '</div>' +
+        '</article>'
+      );
+    }).join('');
+    html += '</section>';
+
+    if (n.whoToCall) {
+      html += '<section class="whocall" id="who"><div class="whocall-head"><h2>Who to call for what</h2><p>' + esc(n.whoToCall.intro) + '</p></div>' +
+        '<table><thead><tr><th>The issue</th><th>Who to talk to</th></tr></thead><tbody>' +
+        n.whoToCall.rows.map(function (r) { return '<tr><td>' + esc(r.issue) + '</td><td>' + esc(r.who) + '</td></tr>'; }).join('') +
+        '</tbody></table></section>';
+    }
+
+    if (loh.comingSoon) {
+      html += '<div class="soon"><span class="s-tag">Coming soon</span><p>' + esc(loh.comingSoon) + '</p></div>';
+    }
+
+    html += '<p class="close"><b>Have a question for next time?</b> &middot; Bring it to the next session, or <a href="mailto:liz@projectc.com?subject=A%20question%20for%20Legal%20Office%20Hours">email it to Liz</a> ahead of time and she&rsquo;ll get it on the list. Questions about these notes go to Liz too.</p>';
+
+    document.getElementById('read').innerHTML = html;
+    showRead();
+  }
+
+  function showRead() {
+    document.getElementById('results').hidden = true;
+    document.getElementById('read').hidden = false;
+    document.getElementById('tocBox').hidden = false;
+  }
+
+  // ---- Search across every month (only shown when there is more than one note) ----
+  function runSearch(qstr) {
+    var q = qstr.trim().toLowerCase();
+    var results = document.getElementById('results');
+    if (!q) { showRead(); return; }
+    var hits = [];
+    LOH.notes.forEach(function (n) {
+      n.questions.forEach(function (qq, i) {
+        var hay = [qq.q, qq.situation].concat(qq.said, qq.todo, qq.tags || []).join(' ').toLowerCase();
+        var at = hay.indexOf(q);
+        if (at === -1) return;
+        var snip = hay.slice(Math.max(0, at - 90), at + 130);
+        hits.push({ note: n, i: i, q: qq, snip: snip });
+      });
+    });
+    var rx = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
+    results.innerHTML =
+      '<h2>Search</h2><div class="r-count">' + hits.length + (hits.length === 1 ? ' match' : ' matches') + ' for &ldquo;' + esc(qstr.trim()) + '&rdquo; across ' + LOH.notes.length + ' sessions</div>' +
+      (hits.length ? hits.map(function (h) {
+        return '<a class="r-item" href="?note=' + encodeURIComponent(h.note.slug) + '#q' + (h.i + 1) + '" data-slug="' + esc(h.note.slug) + '" data-q="' + (h.i + 1) + '">' +
+          '<div class="r-month">' + esc(h.note.month) + ' &middot; Q' + (h.i + 1) + '</div>' +
+          '<h3>' + esc(h.q.q).replace(rx, '<mark>$1</mark>') + '</h3>' +
+          '<p>&hellip;' + esc(h.snip).replace(rx, '<mark>$1</mark>') + '&hellip;</p>' +
+        '</a>';
+      }).join('') : '<p class="r-empty">Nothing yet under that word. Try a broader term, or bring it to the next session.</p>');
+    document.getElementById('read').hidden = true;
+    document.getElementById('tocBox').hidden = true;
+    results.hidden = false;
+  }
+
+  document.getElementById('searchInput').addEventListener('input', function (e) { runSearch(e.target.value); });
+
+  // In-page navigation between notes without a reload
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[data-slug]');
+    if (!a || !LOH) return;
+    var slug = a.getAttribute('data-slug');
+    var n = LOH.notes.filter(function (x) { return x.slug === slug; })[0];
+    if (!n) return;
+    e.preventDefault();
+    history.pushState(null, '', '?note=' + encodeURIComponent(slug) + (a.getAttribute('data-q') ? '#q' + a.getAttribute('data-q') : ''));
+    document.getElementById('searchInput').value = '';
+    renderNote(n);
+    var target = a.getAttribute('data-q') ? document.getElementById('q' + a.getAttribute('data-q')) : document.querySelector('.mast');
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  function unlock(content) {
+    var name = localStorage.getItem(NAME_KEY);
+    document.getElementById('memberWelcome').innerHTML = name ? 'Checked in as <b>' + esc(name) + '</b>' : 'Checked in';
+    LOH = content.legalOfficeHours;
+    if (!LOH || !LOH.notes || !LOH.notes.length) {
+      document.getElementById('read').innerHTML = '<p class="intro">The first set of notes is on its way. Check back after the next session.</p>';
+    } else {
+      renderShell(LOH);
+      var want = noteFromQuery();
+      var n = LOH.notes.filter(function (x) { return x.slug === want; })[0] || LOH.notes[0];
+      renderNote(n);
+    }
+    gateSection.style.display = 'none';
+    loadingState.style.display = 'none';
+    memberArea.style.display = 'block';
+    if (location.hash) {
+      var t = document.querySelector(location.hash);
+      if (t) setTimeout(function () { t.scrollIntoView({ block: 'start' }); }, 60);
+    }
+  }
+
+  function lock() {
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(NAME_KEY);
+    memberArea.style.display = 'none';
+    loadingState.style.display = 'none';
+    gateSection.style.display = 'grid';
+  }
+
+  function fetchUpcoming(token) {
+    fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'events', token: token }) })
+      .then(function (r) { return r.json(); })
+      .then(function (body) { renderNext(body.ok ? body.events : []); })
+      .catch(function () { renderNext([]); });
+  }
+
+  function fetchContent(token, opts) {
+    return fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'content', token: token }) })
+      .then(function (r) { return r.json().then(function (b) { return { status: r.status, body: b }; }); })
+      .then(function (res) {
+        if (res.status === 200 && res.body.ok) { unlock(res.body.content); fetchUpcoming(token); return true; }
+        lock();
+        if (opts && opts.silent) return false;
+        showMsg('info', 'Your session expired. Enter your email to unlock again.');
+        return false;
+      })
+      .catch(function () { lock(); return false; });
+  }
+
+  var saved = localStorage.getItem(TOKEN_KEY);
+  if (saved) {
+    gateSection.style.display = 'none';
+    loadingState.style.display = 'block';
+    fetchContent(saved, { silent: false });
+  }
+
+  gateForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    clearMsg();
+    var email = document.getElementById('memberEmail').value.trim();
+    if (!email || email.indexOf('@') === -1) { showMsg('error', 'That doesn’t look like an email address. Give it another go.'); return; }
+    gateSubmit.disabled = true;
+    gateSubmit.textContent = 'Checking…';
+    fetch(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action: 'login', email: email }) })
+      .then(function (r) { return r.json().then(function (b) { return { status: r.status, body: b }; }); })
+      .then(function (res) {
+        gateSubmit.disabled = false;
+        gateSubmit.innerHTML = 'Unlock &rarr;';
+        if (res.status === 429) { showMsg('error', res.body.error || 'Too many attempts. Wait a minute and try again.'); return; }
+        if (res.status !== 200) { showMsg('error', res.body.error || 'Something went wrong on our end. Try again in a moment.'); return; }
+        if (res.body.ok) {
+          localStorage.setItem(TOKEN_KEY, res.body.token);
+          if (res.body.firstName) localStorage.setItem(NAME_KEY, res.body.firstName);
+          fetchContent(res.body.token);
+        } else if (res.body.reason === 'invalid_email') {
+          showMsg('error', 'That doesn’t look like an email address. Give it another go.');
+        } else {
+          showMsg('error', 'We couldn’t find an active membership under that email. Try the email you applied with, or email Liz and she’ll sort it out.');
+        }
+      })
+      .catch(function () { gateSubmit.disabled = false; gateSubmit.innerHTML = 'Unlock &rarr;'; showMsg('error', 'Couldn’t reach the membership check. Check your connection and try again.'); });
+  });
+
+  document.getElementById('signoutBtn').addEventListener('click', function () { lock(); clearMsg(); window.scrollTo({ top: 0 }); });
+})();
+</script>
+
+</body>
+</html>

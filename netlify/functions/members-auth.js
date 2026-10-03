@@ -219,9 +219,9 @@ const MEMBER_CONTENT = {
   series: [
     {
       title: 'Step Forward on Sponsorships',
-      date: 'June & July 2026',
+      date: 'June to September 2026',
       description:
-        'A three-part series with media advisors Emily Dresslar and April Hinkle on landing sponsors: research your prospects, position your pitch, then price and close the deal.',
+        'A three-part series with media advisors Emily Dresslar and April Hinkle on landing sponsors: research your prospects, position your pitch, then price and close the deal. Sixty days later the cohort came back together to show off what they built and set a goal for the next 30 days.',
       sessions: [
         {
           title: 'The Partnership Approach',
@@ -262,6 +262,20 @@ const MEMBER_CONTENT = {
             {
               label: 'Slides',
               url: '/slides/sponsorships-session-3.pdf',
+            },
+          ],
+        },
+        {
+          title: '60-Day Check-in & Showcase',
+          date: 'September 29, 2026',
+          links: [
+            {
+              label: 'Watch the recording',
+              url: 'https://us06web.zoom.us/rec/share/ffAtyL0bIrwqHX8T-cAT1PTWD5t9dNHP2IOC47eF_HY-_62v-2oa_RZAtWbS5CKw.qe2Sz7Hzm5TblOr9',
+            },
+            {
+              label: 'Slides',
+              url: '/slides/sponsorships-60-day-check-in.pdf',
             },
           ],
         },

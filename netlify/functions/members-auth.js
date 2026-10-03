@@ -47,6 +47,16 @@ const CORS_HEADERS = {
 //   { type: 'single', title, date, guest?, description, passcode?, links }
 // To add a new replay: add an object to the top of the right array,
 // commit, push. Netlify redeploys automatically.
+//
+// JUST ADDED strip: the members page builds its "Just added" list on its
+// own by sorting every dated item (series sessions, replays, Legal Office
+// Hours notes, resources). Optional field on any of those items:
+//   added: 'YYYY-MM-DD'   the day it went up on the site
+// Use it when you post something days after the event (a recording that
+// lands a week later), and on resources, which have no date of their own.
+// Without it, the event date is used. Items with neither never show in
+// the strip. Anything added in the last 30 days that a member hasn't seen
+// yet gets a "New" tag.
 // ---------------------------------------------------------------------------
 const MEMBER_CONTENT = {
   note:
@@ -85,6 +95,7 @@ const MEMBER_CONTENT = {
         slug: '2026-09',
         month: 'September 2026',
         sessionDate: 'September 18, 2026',
+        added: '2026-09-24',
         asOf: 'September 2026',
         title: 'What We Learned',
         topics: 'Release forms, defamation risk, what an LLC does and doesn’t cover, indemnification clauses, and who owns the work.',
@@ -268,6 +279,7 @@ const MEMBER_CONTENT = {
         {
           title: '60-Day Check-in & Showcase',
           date: 'September 29, 2026',
+          added: '2026-10-03',
           links: [
             {
               label: 'Watch the recording',
@@ -525,6 +537,7 @@ const MEMBER_CONTENT = {
         'A field guide to auditing your own analytics, payments and membership plumbing. Fifteen checks, five phases, with a checklist that remembers where you left off.',
       url: 'https://projectc.com/analytics-guru',
       image: 'members-art-analytics.jpg',
+      added: '2026-08-28',
     },
     {
       title: 'Media Kit Builder',

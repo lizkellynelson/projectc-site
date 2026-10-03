@@ -78,6 +78,42 @@
 .up-item h4 { font-size: 0.9rem; font-weight: 700; color: var(--ink); line-height: 1.3; margin-bottom: 0.2rem; }
 .up-item .uh { font-size: 0.74rem; color: var(--muted); }
 
+/* JUST ADDED — right column of the thesis grid (Oct 2026), built like the
+   footer columns: a full-height rule on the left, a label cell over a
+   heavy rule, then rows split by thin rules. The grid runs full bleed so
+   the column meets the page edge; the copy cell's left padding lines up
+   with the rest of the page. Hidden under 900px. */
+.thesis.has-rail { max-width: none; margin: 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr) clamp(340px, 28vw, 430px); align-items: stretch; }
+.thesis.has-rail .thesis-copy { padding: clamp(2.6rem,5vw,4.5rem) 2.5rem clamp(2.6rem,5vw,4.5rem) max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)); display: flex; flex-direction: column; justify-content: center; }
+.thesis.has-rail .big { font-size: clamp(2.7rem, 6vw, 5.4rem); }
+.latest { border-left: var(--rule); background: var(--white); display: none; }
+.latest-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1rem 1.4rem; border-bottom: var(--rule); }
+.latest-head strong { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); }
+.latest-head span { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.latest-list { list-style: none; margin: 0; padding: 0; }
+.latest-list li { border-bottom: var(--rule-thin); }
+.latest-item { display: block; padding: 0.85rem 1.4rem 0.9rem; color: var(--ink); transition: background 0.18s, padding-left 0.18s; }
+.latest-item:hover, .latest-item:focus-visible { background: var(--tint); }
+.latest-item:hover .lt { color: var(--coral-deep); }
+.latest-item .lm { display: flex; justify-content: space-between; align-items: center; gap: 0.8rem; margin-bottom: 0.25rem; }
+.latest-item .lk { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+.latest-item .lk::before { content: ''; width: 8px; height: 8px; border: 1.5px solid var(--ink); flex: none; }
+.latest-item.k-replay .lk::before { background: var(--magenta); }
+.latest-item.k-series .lk::before { background: var(--coral); }
+.latest-item.k-legal .lk::before { background: var(--yellow); }
+.latest-item.k-resource .lk::before { background: var(--cyan); }
+.latest-item .ld { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral-deep); white-space: nowrap; }
+.latest-item .lt { display: block; font-size: 0.9rem; font-weight: 700; line-height: 1.3; }
+.latest-item .lc { display: block; font-size: 0.74rem; font-weight: 500; color: var(--muted); margin-top: 0.15rem; }
+/* "New" tag: on strip rows and on the matching item down in the archive */
+.new-tag { display: inline-block; margin-left: 0.55rem; padding: 0.1rem 0.42rem; background: var(--coral); border: 1.5px solid var(--ink); color: var(--ink); font-family: var(--sans); font-size: 0.58rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.4; vertical-align: 2px; white-space: nowrap; }
+/* Landing highlight after a jump from the strip */
+@keyframes landed { 0%, 35% { background: var(--yellow); box-shadow: inset 6px 0 0 var(--coral); } 100% { background: transparent; box-shadow: inset 6px 0 0 transparent; } }
+.is-landed { animation: landed 2.6s ease-out; }
+#memberArea [id^="item-"] { scroll-margin-top: 140px; }
+#memberArea [id^="item-"]:focus { outline: none; }
+@media (prefers-reduced-motion: reduce) { .is-landed { animation-duration: 0.01s; } }
+
 /* SERIES — color-blocked volumes (CMYK pops, ink text for AA) */
 .series-stack { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem clamp(2rem,3.5vw,3rem); display: flex; flex-direction: column; gap: 1.75rem; }
 .series-card { border: var(--rule); background: var(--white); }
@@ -218,6 +254,10 @@
   .up-label { border-right: none; border-bottom: var(--rule); padding: 1rem 2rem; }
   .up-item { border-right: none; border-bottom: var(--rule-thin); }
   .up-item:last-child { border-bottom: none; }
+  .thesis.has-rail { display: block; }
+  .thesis.has-rail .thesis-copy { padding: clamp(2.6rem,5vw,4.5rem) 2rem; }
+  .latest { display: none !important; }
+  #memberArea [id^="item-"] { scroll-margin-top: 70px; }
   .resources-grid { grid-template-columns: 1fr; }
   .loh-grid { grid-template-columns: 1fr; }
   .offer-card { grid-template-columns: 1fr; gap: 1.25rem; }
@@ -325,10 +365,17 @@
 
   <!-- THE ENORMOUS TYPE MOMENT -->
   <section class="sec">
-    <div class="thesis">
+    <div class="thesis has-rail">
+      <div class="thesis-copy">
       <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Replay Room</div>
       <h2 class="big">Missed it live? <span class="coral">It lives here.</span></h2>
       <p>Every session we've recorded, the decks that went with them, and the tools built for members. Watch in order, jump to what you need, or raid the archive at 2 a.m. It's your room.</p>
+      </div>
+      <!-- JUST ADDED rail (built in renderLatest from the dated content) -->
+      <aside class="latest" id="latestSection" aria-labelledby="latestTitle">
+        <div class="latest-head"><strong id="latestTitle">Just added</strong><span>Newest first</span></div>
+        <ol class="latest-list" id="latestList"></ol>
+      </aside>
     </div>
   </section>
 
@@ -505,7 +552,7 @@
           '<div class="series-sessions">' +
             s.sessions.map(function (sess, i) {
               return (
-                '<div class="session-row">' +
+                '<div class="session-row" id="' + itemId('series', s.title, sess.title) + '">' +
                   '<div class="session-num">' + (i + 1) + '</div>' +
                   '<div class="session-info">' +
                     '<h4>' + esc(sess.title) + '</h4>' +
@@ -530,7 +577,7 @@
     var grid = document.getElementById('replaysGrid');
     grid.innerHTML = content.replays.map(function (r) {
       return (
-        '<article class="replay-row">' +
+        '<article class="replay-row" id="' + itemId('replay', r.title) + '">' +
           '<div class="replay-date">' + esc(r.date) + '</div>' +
           '<div class="replay-main">' +
             '<h3>' + esc(r.title) + '</h3>' +
@@ -574,7 +621,7 @@
     var list = document.getElementById('resourcesList');
     list.innerHTML = content.resources.map(function (res) {
       return (
-        '<a class="resource-card" href="' + esc(res.url) + '" target="_blank" rel="noopener">' +
+        '<a class="resource-card" id="' + itemId('resource', res.title) + '" href="' + esc(res.url) + '" target="_blank" rel="noopener">' +
           (res.image
             ? '<span class="resource-thumb"><img src="' + esc(res.image) + '" alt="" loading="lazy"></span>'
             : '') +
@@ -629,7 +676,124 @@
     document.getElementById('ciSeries').textContent = seriesList.length ? seriesList.length + ' series' : '';
     ci('ciResources', content.resources.length, 'tool');
     ci('ciOffers', offerList.length, 'offer');
+    renderLatest(content, seriesList);
     watchSections();
+  }
+
+  // ---- Just added: newest items from anywhere in the room ----
+  // Sorts every dated item by `added` (the day it went up) or, failing that,
+  // its event date. Items with no usable date never appear. Anything added
+  // in the last 30 days that this member hasn't seen yet gets a New tag,
+  // here and on the item itself down in the archive.
+  var MONTH_IDX = { january: 0, february: 1, march: 2, april: 3, may: 4, june: 5, july: 6, august: 7, september: 8, october: 9, november: 10, december: 11 };
+  var DAY_MS = 86400000;
+  function parseDay(str) {
+    if (!str) return null;
+    str = String(str).trim();
+    var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(str);
+    if (m) return Date.UTC(+m[1], +m[2] - 1, +m[3]);
+    m = /^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/.exec(str);
+    if (m && MONTH_IDX[m[1].toLowerCase()] != null) return Date.UTC(+m[3], MONTH_IDX[m[1].toLowerCase()], +m[2]);
+    m = /^([A-Za-z]+)\s+(\d{4})$/.exec(str);
+    if (m && MONTH_IDX[m[1].toLowerCase()] != null) return Date.UTC(+m[2], MONTH_IDX[m[1].toLowerCase()], 1);
+    return null;
+  }
+  function slugify(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 70); }
+  function itemId(kind, a, b) { return 'item-' + kind + '-' + slugify(a + (b ? ' ' + b : '')); }
+  function shortDate(ms) { return new Date(ms).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', day: 'numeric', year: 'numeric' }); }
+
+  // When did this member last visit? A "visit" starts after 2 hours away,
+  // so reloading the page doesn't wipe the New tags. On a first visit
+  // (or the first visit after this feature shipped) we treat the last
+  // 14 days as new so there's something to see.
+  function lastSeen() {
+    var now = Date.now();
+    try {
+      var cur = +localStorage.getItem('pc_visit_cur') || 0;
+      var prev = +localStorage.getItem('pc_visit_prev') || 0;
+      if (!cur) { localStorage.setItem('pc_visit_cur', String(now)); return now - 14 * DAY_MS; }
+      if (now - cur > 2 * 3600000) {
+        prev = cur;
+        localStorage.setItem('pc_visit_prev', String(prev));
+        localStorage.setItem('pc_visit_cur', String(now));
+      }
+      return prev || now - 14 * DAY_MS;
+    } catch (e) { return now - 14 * DAY_MS; }
+  }
+
+  function renderLatest(content, seriesList) {
+    var section = document.getElementById('latestSection');
+    var list = document.getElementById('latestList');
+    var items = [];
+    function push(o, addedStr, dateStr) {
+      var when = parseDay(addedStr) || parseDay(dateStr);
+      if (!when) return;
+      o.when = when;
+      o.order = items.length;
+      items.push(o);
+    }
+    seriesList.forEach(function (s) {
+      (s.sessions || []).forEach(function (sess, i) {
+        push({ kind: 'series', label: 'Series', id: itemId('series', s.title, sess.title), title: sess.title,
+               context: s.title + ' \u00b7 Session ' + (i + 1), date: sess.date }, sess.added, sess.date);
+      });
+    });
+    (content.replays || []).forEach(function (r) {
+      push({ kind: 'replay', label: 'Replay', id: itemId('replay', r.title), title: r.title,
+             context: r.guest ? 'with ' + r.guest : '', date: r.date }, r.added, r.date);
+    });
+    var loh = content.legalOfficeHours;
+    ((loh && loh.notes) || []).forEach(function (n) {
+      push({ kind: 'legal', label: 'Legal notes', id: itemId('legal', n.slug), title: n.title + ': ' + n.month,
+             context: 'Legal Office Hours' + (loh.counsel ? ' with ' + loh.counsel.name : ''), date: n.sessionDate }, n.added, n.sessionDate);
+    });
+    (content.resources || []).forEach(function (res) {
+      if (!res.added) return; // resources only show once they carry an added date
+      push({ kind: 'resource', label: 'Resource', id: itemId('resource', res.title), title: res.title,
+             context: 'Members toolkit', date: '' }, res.added, null);
+    });
+
+    if (!items.length) { section.style.display = 'none'; return; }
+    items.sort(function (a, b) { return (b.when - a.when) || (a.order - b.order); });
+
+    var seen = lastSeen();
+    var now = Date.now();
+    function isNew(it) { return it.when + DAY_MS > seen && now - it.when <= 30 * DAY_MS; }
+
+    // New tags down in the archive
+    items.forEach(function (it) {
+      if (!isNew(it)) return;
+      var el = document.getElementById(it.id);
+      var h = el && el.querySelector('h3, h4');
+      if (h && !h.querySelector('.new-tag')) h.insertAdjacentHTML('beforeend', '<span class="new-tag">New</span>');
+    });
+
+    list.innerHTML = items.slice(0, 4).map(function (it) {
+      var shown = it.date ? shortDate(parseDay(it.date) || it.when) : ('Added ' + shortDate(it.when));
+      return (
+        '<li><a class="latest-item k-' + it.kind + '" href="#' + it.id + '" data-target="' + it.id + '">' +
+          '<span class="lm"><span class="lk">' + esc(it.label) + '</span><span class="ld">' + esc(shown) + '</span></span>' +
+          '<span class="lt">' + esc(it.title) + (isNew(it) ? '<span class="new-tag">New</span>' : '') + '</span>' +
+            (it.context ? '<span class="lc">' + esc(it.context) + '</span>' : '') +
+        '</a></li>'
+      );
+    }).join('');
+
+    list.onclick = function (e) {
+      var a = e.target.closest('.latest-item');
+      if (!a) return;
+      var el = document.getElementById(a.getAttribute('data-target'));
+      if (!el) return;
+      e.preventDefault();
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+      el.classList.remove('is-landed');
+      void el.offsetWidth; // restart the highlight if clicked twice
+      el.classList.add('is-landed');
+      if (!el.hasAttribute('tabindex') && !/^A$/.test(el.tagName)) el.setAttribute('tabindex', '-1');
+      el.focus({ preventScroll: true });
+    };
+    section.style.display = 'block';
   }
 
   var spy = null;
@@ -656,7 +820,7 @@
       'Attorney ' + loh.counsel.name + ' takes questions from members once a month. We don\u2019t post the recordings. We post the notes, anonymized and written with ' + loh.counsel.name.split(' ')[0] + ' after each session.';
     document.getElementById('legalNotes').innerHTML = loh.notes.map(function (n) {
       return (
-        '<a class="loh-row" href="legal-office-hours.html?note=' + encodeURIComponent(n.slug) + '">' +
+        '<a class="loh-row" id="' + itemId('legal', n.slug) + '" href="legal-office-hours.html?note=' + encodeURIComponent(n.slug) + '">' +
           '<div class="lr-month">' + esc(n.month) + '</div>' +
           '<div><h4>' + esc(n.title) + ' on ' + esc(n.sessionDate) + '</h4><p>' + esc(n.topics) + '</p></div>' +
           '<span class="lr-go">Read the notes &rarr;</span>' +

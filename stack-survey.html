@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What's in Your Stack? · The Project C Stack</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Tell us which tools you run your creator-journalism business on. Members only.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
+<style>
+.nav.scrolled { box-shadow: 0 4px 24px rgba(21,23,26,0.08); }
+
+/* ---------- MASTHEAD (L2 split) ---------- */
+.smast { display: grid; grid-template-columns: 1.35fr 1fr; border-bottom: var(--rule); }
+.smast-l { padding: clamp(2.4rem,4.5vw,3.8rem) 2rem clamp(2rem,3.5vw,2.8rem) max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)); border-right: var(--rule); }
+.smast h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.4rem,4.6vw,3.8rem); line-height: 0.98; letter-spacing: 0.01em; margin: 0.2rem 0 1.1rem; }
+.smast .lede { max-width: 54ch; }
+.facts { display: grid; grid-template-columns: repeat(4, auto); justify-content: start; margin-top: 2rem; border: var(--rule); width: fit-content; }
+.facts div { padding: 0.75rem 1.1rem; border-right: var(--rule); }
+.facts div:last-child { border-right: none; }
+.facts b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.15rem; text-transform: uppercase; line-height: 1; }
+.facts span { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.smast-r { background: var(--porcelain); padding: clamp(2.4rem,4.5vw,3.8rem) max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)) 2.4rem 2.2rem; position: relative; }
+.smast-r h2 { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding-bottom: 0.8rem; border-bottom: var(--rule); margin-bottom: 0.2rem; }
+.how { list-style: none; }
+.how li { display: grid; grid-template-columns: 2.6rem 1fr; gap: 0.6rem; padding: 0.95rem 0; border-bottom: var(--rule-thin); font-size: 0.93rem; line-height: 1.5; }
+.how li:last-child { border-bottom: none; }
+.how .n { font-family: var(--display); font-size: 1.5rem; line-height: 1; }
+.how li:nth-child(1) .n { color: #0B6A8A; } .how li:nth-child(2) .n { color: var(--magenta); }
+.how li:nth-child(3) .n { color: #8F7100; } .how li:nth-child(4) .n { color: var(--coral-deep); }
+
+/* ---------- THE ONE BIG TYPE MOMENT ---------- */
+.bigline { border-bottom: var(--rule); background: var(--white); overflow: hidden; }
+.bigline p { max-width: var(--maxw); margin: 0 auto; padding: clamp(2.4rem,5vw,4rem) 2rem; font-family: var(--display); text-transform: uppercase; font-size: clamp(2.8rem, 7.4vw, 6.4rem); line-height: 0.92; letter-spacing: 0.005em; }
+.bigline .coral { color: var(--coral); }
+
+/* ---------- PART HEADERS ---------- */
+.part { display: grid; grid-template-columns: 220px 1fr; border-bottom: var(--rule); background: var(--ink); color: var(--porcelain); }
+.part .pn { padding: 1.1rem 2rem; border-right: 2px solid rgba(245,246,248,0.25); font-family: var(--display); font-size: 1.6rem; text-transform: uppercase; line-height: 1; display: flex; align-items: center; gap: 0.7rem; }
+.part .pn i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.part .pt { padding: 1.1rem 2rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.part .pt h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.6rem; line-height: 1; }
+.part .pt span { font-size: 0.85rem; color: rgba(245,246,248,0.7); }
+
+/* ---------- FIELD BASICS ---------- */
+.block { max-width: var(--maxw); margin: 0 auto; padding: 2.2rem 2rem 2.4rem; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem 2rem; max-width: 980px; }
+.field > label, .field > .flabel { display: block; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; margin-bottom: 0.55rem; }
+.field .req { color: var(--coral-deep); margin-left: 0.2rem; }
+.field .opt { font-weight: 400; color: var(--muted); text-transform: none; letter-spacing: 0; }
+.field input[type="text"], .field input[type="email"], .field textarea {
+  width: 100%; font-family: var(--sans); font-size: 0.98rem; padding: 0.85rem 1rem; border: 2px solid var(--ink); background: var(--white); color: var(--ink); border-radius: 0;
+}
+.field input:focus, .field textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(254,107,65,0.35); }
+.field textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
+.field .help { font-size: 0.8rem; color: var(--muted); margin-top: 0.45rem; line-height: 1.5; }
+.ferr { display: none; margin-top: 0.4rem; color: #B0241A; font-size: 0.85rem; font-weight: 600; }
+.ferr.show { display: block; }
+
+/* chips: square toggles */
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip { position: relative; display: inline-flex; align-items: center; gap: 0.45rem; border: 1.5px solid var(--ink); background: var(--white); padding: 0.5rem 0.8rem; font-size: 0.84rem; font-weight: 600; cursor: pointer; user-select: none; transition: background 0.12s, color 0.12s; line-height: 1.2; }
+.chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chip::before { content: ""; width: 9px; height: 9px; border: 1.5px solid currentColor; flex: none; }
+.chip:hover { background: var(--tint); }
+.chip.on { background: var(--ink); color: var(--white); }
+.chip.on::before { background: var(--coral); border-color: var(--coral); }
+.chip.added { border-style: dashed; }
+.chip.on.added { border-style: solid; }
+.chip:focus-within { box-shadow: 0 0 0 3px rgba(254,107,65,0.45); }
+.radio-chips .chip::before { border-radius: 50%; }
+
+/* ---------- PROGRESS RAIL (sticky, CMYK segments) ---------- */
+.rail { position: sticky; top: 78px; z-index: 50; background: var(--white); border-bottom: var(--rule); }
+.rail-inner { max-width: var(--maxw); margin: 0 auto; padding: 0.7rem 2rem; display: flex; align-items: center; gap: 1.2rem; }
+.rail-label { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; min-width: 150px; }
+.rail-segs { flex: 1; display: grid; grid-template-columns: repeat(13, 1fr); gap: 4px; }
+.rail-segs a { height: 12px; border: 1.5px solid var(--ink); background: var(--white); display: block; transition: background 0.2s; }
+.rail-segs a.on.c { background: var(--cyan); } .rail-segs a.on.m { background: var(--magenta); }
+.rail-segs a.on.y { background: var(--yellow); } .rail-segs a.on.o { background: var(--coral); }
+
+/* ---------- THE LEDGER: one ruled row per category ---------- */
+.ledger { border-bottom: var(--rule); }
+.lrow { display: grid; grid-template-columns: 340px 1fr; border-bottom: var(--rule); scroll-margin-top: 140px; }
+.lrow:last-child { border-bottom: none; }
+.lhead { padding: 1.6rem 1.6rem 1.6rem max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)); border-right: var(--rule); position: relative; }
+.lhead .idx { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.lrow:nth-child(4n+1) .idx { color: #0B6A8A; } .lrow:nth-child(4n+2) .idx { color: var(--magenta); }
+.lrow:nth-child(4n+3) .idx { color: #8F7100; } .lrow:nth-child(4n+4) .idx { color: var(--coral-deep); }
+.lhead h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.75rem; line-height: 1; margin: 0.55rem 0 0.5rem; }
+.lhead p { font-size: 0.88rem; color: var(--muted); line-height: 1.5; max-width: 30ch; }
+.lhead .count { position: absolute; top: 1.6rem; right: 1.4rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.lrow.filled .lhead { background: var(--tint); }
+.lrow.filled .count { color: var(--ink); }
+.lbody { padding: 1.6rem max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)) 1.6rem 1.6rem; }
+.addtool { display: flex; margin-top: 0.9rem; max-width: 420px; }
+.addtool input { flex: 1; font-family: var(--sans); font-size: 0.86rem; padding: 0.55rem 0.8rem; border: 1.5px solid var(--ink); border-right: none; border-radius: 0; background: var(--white); min-width: 0; }
+.addtool input:focus { outline: none; box-shadow: 0 0 0 3px rgba(254,107,65,0.35); }
+.addtool button { font-family: var(--sans); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; padding: 0 0.9rem; border: 1.5px solid var(--ink); background: var(--white); cursor: pointer; }
+.addtool button:hover { background: var(--ink); color: var(--white); }
+
+/* ---------- PART 3: the good stuff ---------- */
+.good { display: grid; grid-template-columns: 1fr 1fr; border-bottom: var(--rule); }
+.good > .cell { padding: 2rem; border-right: var(--rule); border-bottom: var(--rule); }
+.good > .cell:nth-child(2n) { border-right: none; }
+.good > .cell:nth-last-child(-n+2) { border-bottom: none; }
+.good .cell:nth-child(1) { padding-left: max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)); }
+.good .cell:nth-child(3) { padding-left: max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)); }
+.good .cell:nth-child(2), .good .cell:nth-child(4) { padding-right: max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)); }
+.good .q { font-family: var(--serif); font-style: italic; font-size: 1.35rem; line-height: 1.25; margin-bottom: 0.9rem; color: var(--ink); text-transform: none; letter-spacing: 0; font-weight: 500; }
+
+/* ---------- PART 4: sharing + submit ---------- */
+.share { display: grid; grid-template-columns: 1.2fr 1fr; border-bottom: var(--rule); }
+.share-l { padding: 2rem 2rem 2.4rem max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)); border-right: var(--rule); }
+.share-r { padding: 2rem max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)) 2.4rem 2rem; background: var(--porcelain); display: flex; flex-direction: column; justify-content: center; gap: 1rem; }
+.opt-box { display: flex; gap: 0.85rem; align-items: flex-start; padding: 1rem 1.1rem; border: 2px solid var(--ink); background: var(--white); cursor: pointer; margin-top: 1rem; }
+.opt-box input { width: 18px; height: 18px; margin-top: 0.15rem; accent-color: var(--coral-deep); flex: none; }
+.opt-box span { font-size: 0.92rem; line-height: 1.55; }
+.opt-box b { display: block; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.15rem; }
+.privacy { font-size: 0.82rem; color: var(--muted); line-height: 1.55; max-width: 44ch; }
+.submit { display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem; background: var(--coral); color: var(--ink); border: var(--rule); font-family: var(--sans); font-weight: 800; font-size: 0.95rem; letter-spacing: 0.05em; text-transform: uppercase; padding: 1.1rem 1.8rem; cursor: pointer; transition: background 0.18s, color 0.18s, transform 0.18s; width: fit-content; }
+.submit:hover { background: var(--coral-deep); color: #fff; transform: translateY(-2px); }
+.submit:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+.banner { display: none; border: var(--rule); padding: 1rem 1.2rem; font-size: 0.92rem; line-height: 1.55; }
+.banner.show { display: block; }
+.banner.error { border-color: #B0241A; background: #FBECEA; color: #7A190F; }
+
+/* ---------- SUCCESS ---------- */
+.done { display: none; border-bottom: var(--rule); scroll-margin-top: 78px; }
+.done.show { display: grid; grid-template-columns: 1fr 1fr; }
+.done-l { padding: clamp(2.6rem,5vw,4.2rem) 2rem clamp(2.6rem,5vw,4.2rem) max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)); border-right: var(--rule); }
+.done-l h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(2.4rem,5vw,4rem); line-height: 0.95; margin: 0.4rem 0 1rem; }
+.done-l p { color: var(--muted); max-width: 46ch; line-height: 1.65; margin-bottom: 1.4rem; }
+.done-r { background: var(--yellow); display: flex; align-items: center; justify-content: center; padding: 2rem; }
+.done-r .stamp { border: 3px solid var(--ink); padding: 1.4rem 1.8rem; transform: rotate(-4deg); background: var(--white); text-align: center; }
+.done-r .stamp b { display: block; font-family: var(--display); font-weight: 400; font-size: 2.2rem; text-transform: uppercase; line-height: 1; }
+.done-r .stamp span { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.preview-note { display: none; margin-top: 1rem; font-size: 0.8rem; font-weight: 700; color: #7A190F; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1000px) {
+  .smast, .share, .done.show { grid-template-columns: 1fr; }
+  .smast-l, .share-l, .done-l { border-right: none; border-bottom: var(--rule); }
+  .lrow { grid-template-columns: 1fr; }
+  .lhead { border-right: none; border-bottom: var(--rule-thin); padding-bottom: 1rem; }
+  .lbody { padding-top: 1.1rem; }
+  .part { grid-template-columns: 1fr; }
+  .part .pn { border-right: none; border-bottom: 2px solid rgba(245,246,248,0.25); }
+}
+@media (max-width: 760px) {
+  .smast-l, .smast-r, .lhead, .lbody, .share-l, .share-r, .done-l, .good > .cell { padding-left: 1.2rem !important; padding-right: 1.2rem !important; }
+  .block, .bigline p, .rail-inner { padding-left: 1.2rem; padding-right: 1.2rem; }
+  .facts { grid-template-columns: 1fr 1fr; width: 100%; }
+  .facts div:nth-child(2) { border-right: none; }
+  .facts div:nth-child(-n+2) { border-bottom: var(--rule); }
+  .row2, .good { grid-template-columns: 1fr; }
+  .good > .cell { border-right: none !important; border-bottom: var(--rule) !important; }
+  .good > .cell:last-child { border-bottom: none !important; }
+  .rail-label { min-width: 0; }
+  .rail-segs { gap: 2px; }
+  .lhead .count { top: 1.2rem; right: 1.2rem; }
+}
+</style>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-By0ztJ4PY36DnzOcJW2cs.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="project-c_lockup_color.png" alt="Project C home"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="directory.html">Directory</a></li>
+      <li><a href="going-solo.html">Going Solo</a></li>
+      <li><a href="coaching.html">Coaching</a></li>
+      <li><a href="press.html">Research &amp; Press</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="members.html" class="nav-member">Member Login</a></li>
+      <li><a href="community.html" class="nav-cta">Join &rarr;</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<section class="smast" id="intro">
+  <div class="smast-l">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Project C Stack &middot; Member survey</div>
+    <h1>What's in your stack?</h1>
+    <p class="lede">We're building a guide to the tools creator-journalists actually run their businesses on, ranked by how many of you use them. Not an affiliate list. Not one person's favorites. It starts with what Project C members tell us here.</p>
+    <div class="facts">
+      <div><b>5 min</b><span>Mostly checkboxes</span></div>
+      <div><b>Members</b><span>Only you count</span></div>
+      <div><b>Edit</b><span>Resubmit anytime</span></div>
+      <div><b>Private</b><span>Email never shown</span></div>
+    </div>
+  </div>
+  <aside class="smast-r crops">
+    <h2>How the Stack works</h2>
+    <ol class="how">
+      <li><span class="n">01</span><span>You tell us what you use, from where your work lives to how you send invoices.</span></li>
+      <li><span class="n">02</span><span>We count. A tool's rank comes from how many members use it. Nobody pays to be on it.</span></li>
+      <li><span class="n">03</span><span>The Stack goes live on projectc.com, searchable by format, so a newcomer can see what people like them use.</span></li>
+      <li><span class="n">04</span><span>If you're in the member directory, your listing links to your stack. People who come for the tools find your work.</span></li>
+    </ol>
+  </aside>
+</section>
+
+<section class="bigline" aria-hidden="true">
+  <p>You learned it the hard way. <span class="coral">Pass it on.</span></p>
+</section>
+
+<form id="stackForm" novalidate>
+
+  <!-- PART 1 -->
+  <div class="part"><div class="pn"><i style="background:var(--cyan)"></i>Part 1</div><div class="pt"><h2>About you</h2><span>So we can match your answers to your membership.</span></div></div>
+  <div class="block">
+    <div class="row2">
+      <div class="field">
+        <label for="email">The email you joined Project C with<span class="req" aria-hidden="true">*</span></label>
+        <input type="email" id="email" required autocomplete="email">
+        <div class="ferr" id="emailErr" role="alert"></div>
+        <div class="help">It's the only credential we check. No password.</div>
+      </div>
+      <div class="field">
+        <label for="displayName">Your name<span class="req" aria-hidden="true">*</span></label>
+        <input type="text" id="displayName" required autocomplete="name">
+        <div class="ferr" id="nameErr" role="alert"></div>
+      </div>
+      <div class="field">
+        <label for="brandName">Your brand or project <span class="opt">(optional)</span></label>
+        <input type="text" id="brandName" placeholder="Leave blank if you publish under your own name">
+      </div>
+      <div class="field">
+        <span class="flabel">What do you make? <span class="opt">(check all that apply)</span></span>
+        <div class="chips" id="formatChips"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART 2 -->
+  <div class="part"><div class="pn"><i style="background:var(--magenta)"></i>Part 2</div><div class="pt"><h2>Your stack</h2><span>Check what you use now. Missing something? Add it. Skip anything that doesn't apply.</span></div></div>
+  <div class="rail" id="rail" aria-hidden="true">
+    <div class="rail-inner">
+      <div class="rail-label" id="railLabel">0 of 13 filled in</div>
+      <div class="rail-segs" id="railSegs"></div>
+    </div>
+  </div>
+  <div class="ledger" id="ledger"></div>
+  <div class="block" style="padding-top:0.6rem;padding-bottom:0.6rem;"><div class="ferr" id="toolsErr" role="alert"></div></div>
+
+  <!-- PART 3 -->
+  <div class="part"><div class="pn"><i style="background:var(--yellow)"></i>Part 3</div><div class="pt"><h2>The good stuff</h2><span>Short answers. This is the part nobody else can tell a newcomer.</span></div></div>
+  <div class="good">
+    <div class="cell field">
+      <label class="q" for="cantLive">The one tool you couldn't run your business without. Why?</label>
+      <textarea id="cantLive" maxlength="1000" placeholder="Name it, then tell us what it saves you from."></textarea>
+    </div>
+    <div class="cell field">
+      <label class="q" for="regret">A tool you paid for and regret.</label>
+      <textarea id="regret" maxlength="1000" placeholder="What was it, and what went wrong? Only shared without your name."></textarea>
+    </div>
+    <div class="cell field">
+      <span class="q flabel">Roughly what do you spend on tools each month?</span>
+      <div class="chips radio-chips" id="spendChips"></div>
+      <div class="help">Only ever reported as group totals.</div>
+    </div>
+    <div class="cell field">
+      <label class="q" for="gear">Gear <span class="opt" style="font-family:var(--sans);font-style:normal;font-size:0.8rem;">(optional)</span></label>
+      <textarea id="gear" maxlength="1000" placeholder="Mic, camera, lights, phone rig. Brand and model help."></textarea>
+    </div>
+  </div>
+
+  <!-- PART 4 -->
+  <div class="part"><div class="pn"><i style="background:var(--coral)"></i>Part 4</div><div class="pt"><h2>Sharing</h2><span>Your call.</span></div></div>
+  <div class="share">
+    <div class="share-l">
+      <span class="flabel" style="display:block;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:800;">On the public Stack page</span>
+      <label class="opt-box"><input type="radio" name="showName" value="yes"><span><b>Show my name next to my picks</b>So a newcomer can see that a real member uses it, and click through to your work.</span></label>
+      <label class="opt-box"><input type="radio" name="showName" value="no" checked><span><b>Count me anonymously</b>Your picks still count toward the rankings. Your name never appears.</span></label>
+      <label class="opt-box"><input type="checkbox" id="spotlight"><span><b>I'm up for a "My Stack" spotlight</b>A short Q&amp;A about your setup for the newsletter. We'll reach out first.</span></label>
+    </div>
+    <div class="share-r">
+      <div class="banner" id="banner"></div>
+      <button type="submit" class="submit" id="submitBtn">Send my stack &rarr;</button>
+      <p class="privacy">We never publish your email, your spending or your regrets with your name on them. Switch tools later? Submit again and it overwrites your old answers.</p>
+    </div>
+  </div>
+
+</form>
+
+<section class="done" id="done">
+  <div class="done-l">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Project C Stack</div>
+    <h2>Got it. Your stack is in.</h2>
+    <p>Thanks for saving the next person some guesswork. We'll share the first rankings with members before the Stack goes public. If you switch tools, come back and submit again.</p>
+    <a class="btn btn-fill" href="directory.html">Browse the member directory &rarr;</a>
+    <div class="preview-note" id="previewNote">Preview mode: this page was opened from your computer, so nothing was saved.</div>
+  </div>
+  <div class="done-r"><div class="stamp"><span>Filed</span><b>Stack received</b><span class="cmyk-dots" style="margin-top:0.6rem;justify-content:center;display:flex;"><i></i><i></i><i></i><i></i></span></div></div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href="press.html">Research &amp; Press</a>
+    <a href="news-ecosystem-map.html">News Ecosystem Map</a>
+    <a href="going-solo.html">Going Solo Workshop</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href="community.html">Join the Community</a>
+    <a href="directory.html">Member Directory</a>
+    <a href="coaching.html">Coaching</a>
+    <a href="members.html">Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href="about.html">About Project C</a>
+    <a href="about.html#founder">Team</a>
+    <a href="mailto:liz@projectc.com">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href="style-guide.html">Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C: independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
+  </div>
+</footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design. <a href="privacy-policy.html">Privacy Policy</a></span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+
+// ---- The categories. Kept in sync by hand with CATEGORY_KEYS in
+// netlify/functions/stack-submit.js (keys only; tool names are open). ----
+const STACK = [
+  { key: 'home', name: 'Home base', blurb: 'Where your work lives and gets delivered.',
+    tools: ['Substack', 'beehiiv', 'Ghost', 'Kit', 'Patreon', 'YouTube', 'TikTok', 'Instagram', 'A podcast host', 'My own website', 'Medium', 'LinkedIn newsletter'] },
+  { key: 'audience', name: 'Finding audience', blurb: 'Where you go to reach new people.',
+    tools: ['Instagram', 'TikTok', 'YouTube', 'LinkedIn', 'Bluesky', 'Threads', 'Facebook', 'X', 'Reddit', 'WhatsApp', 'Discord', 'Nextdoor', 'Newsletter recommendations', 'Podcast guesting'] },
+  { key: 'website', name: 'Website', blurb: 'The site people land on when they search for you.',
+    tools: ['Squarespace', 'WordPress', 'Webflow', 'Wix', 'Carrd', 'Framer', 'Ghost', 'My newsletter platform’s site', 'Linktree or link in bio', 'No website yet'] },
+  { key: 'payments', name: 'Getting paid', blurb: 'How money from your audience reaches your bank account.',
+    tools: ['Substack paid subscriptions', 'beehiiv paid subscriptions', 'Stripe', 'Patreon', 'Memberful', 'Ko-fi', 'Buy Me a Coffee', 'PayPal', 'Venmo', 'Supercast', 'YouTube memberships', 'Not charging yet'] },
+  { key: 'sponsors', name: 'Sponsors & ads', blurb: 'How you land sponsors and keep track of them.',
+    tools: ['beehiiv Ad Network', 'Passionfroot', 'Paved', 'Swapstack', 'Google AdSense', 'YouTube Partner Program', 'TikTok Creator Rewards', 'Meta monetization', 'Direct outreach', 'A spreadsheet', 'No sponsors yet'] },
+  { key: 'production', name: 'Recording & editing', blurb: 'What you record and cut with.',
+    tools: ['Descript', 'CapCut', 'Riverside', 'Adobe Premiere', 'Final Cut Pro', 'DaVinci Resolve', 'Audacity', 'Adobe Audition', 'GarageBand', 'Zoom', 'Edits (Instagram)', 'My phone’s camera app'] },
+  { key: 'design', name: 'Design', blurb: 'Anything visual, from thumbnails to your logo.',
+    tools: ['Canva', 'Figma', 'Adobe Photoshop', 'Adobe Illustrator', 'Adobe Express', 'Midjourney', 'ChatGPT images', 'Procreate'] },
+  { key: 'writing', name: 'Writing & editing', blurb: 'Where drafts happen, and who or what checks them.',
+    tools: ['Google Docs', 'Microsoft Word', 'Notion', 'Grammarly', 'Hemingway', 'Editory', 'Ulysses', 'A human editor', 'A fact-checker'] },
+  { key: 'ai', name: 'AI & transcription', blurb: 'The assistants and transcription tools in your workflow.',
+    tools: ['ChatGPT', 'Claude', 'Gemini', 'Perplexity', 'NotebookLM', 'Otter', 'Granola', 'Rev', 'Descript transcription', 'I don’t use AI'] },
+  { key: 'social', name: 'Scheduling', blurb: 'How posts get out the door on time.',
+    tools: ['Buffer', 'Later', 'Hootsuite', 'Metricool', 'Meta Business Suite', 'Typefully', 'Sprout Social', 'Each app’s own scheduler', 'I post in real time'] },
+  { key: 'analytics', name: 'Analytics', blurb: 'How you know what’s working.',
+    tools: ['Platform dashboards', 'Google Analytics', 'Plausible', 'Fathom', 'SparkToro', 'Social Blade', 'A spreadsheet'] },
+  { key: 'money', name: 'The money side', blurb: 'Bookkeeping, invoices and contracts. The unglamorous part.',
+    tools: ['QuickBooks', 'Wave', 'Xero', 'FreshBooks', 'BILL', 'HoneyBook', 'Bonsai', 'Stripe invoicing', 'DocuSign', 'Gusto', 'An accountant', 'A spreadsheet'] },
+  { key: 'organized', name: 'Staying organized', blurb: 'Whatever keeps the plates spinning.',
+    tools: ['Notion', 'Trello', 'Airtable', 'Asana', 'ClickUp', 'Todoist', 'Google Sheets', 'Google Calendar', 'Calendly', 'A paper notebook'] },
+];
+const FORMATS = ['Newsletter', 'Video', 'Podcast', 'Social-first posts', 'Website or blog', 'Live streams', 'Events', 'Something else'];
+const SPEND = ['Under $25', '$25 to $100', '$100 to $250', '$250 to $500', 'More than $500', 'Not sure'];
+const SEG_COLORS = ['c', 'm', 'y', 'o'];
+
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+function chipHtml(name, value, opts = {}) {
+  const type = opts.radio ? 'radio' : 'checkbox';
+  return `<label class="chip${opts.added ? ' added' : ''}${opts.on ? ' on' : ''}"><input type="${type}" name="${name}" value="${esc(value)}"${opts.on ? ' checked' : ''}><span>${esc(value)}</span></label>`;
+}
+
+function wireChips(container) {
+  container.addEventListener('change', (e) => {
+    const input = e.target;
+    if (!input.matches('input')) return;
+    if (input.type === 'radio') {
+      container.querySelectorAll('.chip').forEach((c) => c.classList.toggle('on', c.querySelector('input').checked));
+    } else {
+      input.closest('.chip').classList.toggle('on', input.checked);
+    }
+    updateProgress();
+  });
+}
+
+// Part 1 formats + Part 3 spend
+const formatChips = document.getElementById('formatChips');
+formatChips.innerHTML = FORMATS.map((f) => chipHtml('formats', f)).join('');
+wireChips(formatChips);
+const spendChips = document.getElementById('spendChips');
+spendChips.innerHTML = SPEND.map((s) => chipHtml('spend', s, { radio: true })).join('');
+wireChips(spendChips);
+
+// Part 2 ledger + rail
+const ledger = document.getElementById('ledger');
+ledger.innerHTML = STACK.map((cat, i) => `
+  <div class="lrow" id="cat-${cat.key}" data-key="${cat.key}">
+    <div class="lhead">
+      <div class="idx">${String(i + 1).padStart(2, '0')} / 13</div>
+      <h3>${esc(cat.name)}</h3>
+      <p>${esc(cat.blurb)}</p>
+      <div class="count" data-count></div>
+    </div>
+    <div class="lbody">
+      <div class="chips" data-chips>${cat.tools.map((t) => chipHtml('tool-' + cat.key, t)).join('')}</div>
+      <div class="addtool">
+        <input type="text" maxlength="80" placeholder="Add a tool we missed" aria-label="Add a tool to ${esc(cat.name)}">
+        <button type="button">Add</button>
+      </div>
+    </div>
+  </div>`).join('');
+
+ledger.querySelectorAll('.lrow').forEach((row) => {
+  const chips = row.querySelector('[data-chips]');
+  wireChips(chips);
+  const input = row.querySelector('.addtool input');
+  const btn = row.querySelector('.addtool button');
+  const add = () => {
+    const val = input.value.trim().slice(0, 80);
+    if (!val) return;
+    const existing = [...chips.querySelectorAll('input')].find((el) => el.value.toLowerCase() === val.toLowerCase());
+    if (existing) {
+      existing.checked = true;
+      existing.closest('.chip').classList.add('on');
+    } else {
+      chips.insertAdjacentHTML('beforeend', chipHtml('tool-' + row.dataset.key, val, { added: true, on: true }));
+    }
+    input.value = '';
+    updateProgress();
+  };
+  btn.addEventListener('click', add);
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); add(); } });
+});
+
+const railSegs = document.getElementById('railSegs');
+railSegs.innerHTML = STACK.map((cat, i) => `<a href="#cat-${cat.key}" class="${SEG_COLORS[i % 4]}" title="${esc(cat.name)}" tabindex="-1"></a>`).join('');
+
+function collectTools() {
+  const out = {};
+  STACK.forEach((cat) => {
+    const picked = [...document.querySelectorAll(`#cat-${cat.key} [data-chips] input:checked`)].map((el) => el.value);
+    if (picked.length) out[cat.key] = picked;
+  });
+  return out;
+}
+
+function updateProgress() {
+  const tools = collectTools();
+  let filled = 0;
+  STACK.forEach((cat, i) => {
+    const n = (tools[cat.key] || []).length;
+    const row = document.getElementById('cat-' + cat.key);
+    row.classList.toggle('filled', n > 0);
+    row.querySelector('[data-count]').textContent = n ? `${n} checked` : '';
+    railSegs.children[i].classList.toggle('on', n > 0);
+    if (n) filled++;
+  });
+  document.getElementById('railLabel').textContent = filled === 13 ? 'All 13 filled in' : `${filled} of 13 filled in`;
+}
+updateProgress();
+
+// ---- Submit ----
+function showErr(id, msg) { const el = document.getElementById(id); el.textContent = msg; el.classList.toggle('show', !!msg); }
+function showBanner(msg) { const b = document.getElementById('banner'); b.className = 'banner show error'; b.textContent = msg; }
+
+const form = document.getElementById('stackForm');
+const submitBtn = document.getElementById('submitBtn');
+
+function showDone(preview) {
+  form.style.display = 'none';
+  document.getElementById('done').classList.add('show');
+  document.getElementById('previewNote').style.display = preview ? 'block' : 'none';
+  document.querySelector('.bigline').style.display = 'none';
+  document.getElementById('done').scrollIntoView({ behavior: 'smooth' });
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  ['emailErr', 'nameErr', 'toolsErr'].forEach((id) => showErr(id, ''));
+  document.getElementById('banner').className = 'banner';
+
+  const email = document.getElementById('email').value.trim();
+  const displayName = document.getElementById('displayName').value.trim();
+  const tools = collectTools();
+
+  let bad = false;
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showErr('emailErr', 'Please enter a valid email address.'); bad = true; }
+  if (!displayName) { showErr('nameErr', 'Please enter your name.'); bad = true; }
+  if (!Object.keys(tools).length) { showErr('toolsErr', 'Check at least one tool in Part 2 so your answers count.'); bad = true; }
+  if (bad) {
+    showBanner('A couple of things need fixing before this can go. Look for the red notes above.');
+    return;
+  }
+
+  const payload = {
+    email,
+    displayName,
+    brandName: document.getElementById('brandName').value.trim(),
+    formats: [...formatChips.querySelectorAll('input:checked')].map((el) => el.value),
+    tools,
+    gear: document.getElementById('gear').value.trim(),
+    cantLiveWithout: document.getElementById('cantLive').value.trim(),
+    regret: document.getElementById('regret').value.trim(),
+    monthlySpend: (spendChips.querySelector('input:checked') || {}).value || null,
+    showName: (document.querySelector('input[name="showName"]:checked') || {}).value === 'yes',
+    spotlight: document.getElementById('spotlight').checked,
+  };
+
+  // Opened straight from disk (Liz's preview): there's no server to talk
+  // to, so show the success state without sending anything.
+  if (location.protocol === 'file:') { showDone(true); return; }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Sending…';
+  try {
+    const res = await fetch('/.netlify/functions/stack-submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok || data.ok === false) {
+      showBanner(data.error || 'Something went wrong. Please try again.');
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Send my stack &rarr;';
+      return;
+    }
+    if (window.plausible) plausible('Stack Survey Submitted');
+    showDone(false);
+  } catch (err) {
+    console.error('stack-submit error:', err);
+    showBanner("We couldn't reach the server. Check your connection and try again.");
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = 'Send my stack &rarr;';
+  }
+});
+</script>
+</body>
+</html>

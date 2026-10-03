@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://projectc.com/">
 <meta property="og:title" content="Project C — The Home of Creator Journalism">
-<meta property="og:description" content="Research, community, education, and tools for journalists building sustainable, independent media ventures. Home to 200+ creator journalists.">
+<meta property="og:description" content="Research, community, education, and tools for journalists building sustainable, independent media ventures. Home to 250+ creator journalists.">
 <meta property="og:image" content="https://projectc.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -23,21 +23,32 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="projectc-ds.css">
 <style>
-/* MUSLIM CREATOR SHOWCASE SPOTLIGHT — added 2026-07-28, time-limited feature.
-   To remove later: delete this <style> block, the #showcase-spotlight section below,
-   the second .announce-msg in the announcement bar, and the announcement rotator script. */
-.spotlight-showcase { background: var(--tint); border-top: var(--rule); border-bottom: var(--rule); }
-/* Poster strip — full, uncropped posters butted edge to edge, separated only by ink rules.
-   Shows each poster complete (same treatment as the showcase page's own .poster component)
-   instead of cropping into the artwork, which reads as intentional rather than accidental. */
-.poster-rail { display: flex; align-items: flex-end; gap: 0; overflow-x: auto; border-top: var(--rule); border-bottom: var(--rule); -webkit-overflow-scrolling: touch; }
-.poster-rail::-webkit-scrollbar { height: 8px; }
-.poster-rail::-webkit-scrollbar-track { background: transparent; }
-.poster-rail::-webkit-scrollbar-thumb { background: var(--ink); }
-.poster-card { position: relative; flex: 0 0 clamp(92px, 13vw, 128px); border-right: var(--rule); text-decoration: none; color: var(--ink); overflow: hidden; }
-.poster-card:last-child { border-right: none; }
-.poster-card img { display: block; width: 100%; height: auto; background: var(--white); transition: transform 0.25s ease; }
-.poster-card:hover img, .poster-card:focus-visible img { transform: scale(1.045); }
+/* FUNDED PROGRAMS BAND — added 2026-10-03. Permanent section for programs that outside
+   funders pay for, so participants attend free (vs. Going Solo, which people pay to join).
+   The CUNY card has date logic in the script at the bottom: it flips from "Now enrolling"
+   to "Applications closed" after Oct. 16, 2026. */
+.programs-band { background: var(--tint); }
+.programs { display: grid; grid-template-columns: 1fr 1fr; border-top: var(--rule); }
+.prog { display: flex; flex-direction: column; padding: 2.2rem 2rem 2.4rem; position: relative; }
+.prog + .prog { border-left: var(--rule); }
+.prog .tag { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.38rem 0.7rem; border: var(--rule); background: var(--white); }
+.prog .tag.live { background: var(--yellow); }
+.prog .tag .blip { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); animation: blip 1.6s ease infinite; }
+.prog .partner { margin-top: 1.5rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); }
+.prog h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.8rem, 2.8vw, 2.5rem); line-height: 0.98; margin: 0.55rem 0 0.9rem; }
+.prog > p { color: var(--muted); max-width: 48ch; }
+.prog .facts { list-style: none; margin: 1.5rem 0 1.8rem; border-top: var(--rule); flex: 1; }
+.prog .facts li { display: grid; grid-template-columns: 8.5rem 1fr; gap: 1rem; padding: 0.62rem 0; border-bottom: var(--rule-thin); font-size: 0.9rem; }
+.prog .facts b { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding-top: 0.18rem; }
+.prog .btn { align-self: flex-start; }
+@media (max-width: 1000px) {
+  .programs { grid-template-columns: 1fr; }
+  .prog + .prog { border-left: none; border-top: var(--rule); }
+}
+@media (max-width: 760px) {
+  .prog { padding: 1.8rem 1.25rem 2rem; }
+  .prog .facts li { grid-template-columns: 1fr; gap: 0.15rem; }
+}
 </style>
 <!-- Privacy-friendly analytics by Plausible -->
 <script async src="https://plausible.io/js/pa-By0ztJ4PY36DnzOcJW2cs.js"></script>
@@ -52,13 +63,15 @@
 <!-- TOP REGISTRATION STRIP (C M Y K + deep orange) -->
 <div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
 
-<!-- ANNOUNCEMENT — promotes the showcase spotlight. Time-limited: swap back to the coaching
-     promo (or anything else) whenever this is retired — see [[project_homepage_showcase_spotlight]]. -->
+<!-- ANNOUNCEMENT — CUNY AI Journalism Lab: Creators (applications close Oct. 16, 2026).
+     Removes itself automatically after Oct. 16 (see the inline script). Swap the message for
+     the next time-limited promo whenever you like. -->
 <div class="announce" id="announcementBar">
-  <span class="live"><span class="blip"></span>Cohort spotlight</span>
-  <span>Meet the Muslim Creator Journalism Accelerator. <a href="muslim-creator-showcase/">See the showcase &rarr;</a></span>
+  <span class="live"><span class="blip"></span>Now enrolling</span>
+  <span>Free AI training for independent journalists, from CUNY and Project C. <a href="https://www.journalism.cuny.edu/j-plus/ai-journalism-labs/" target="_blank" rel="noopener">Apply by Oct. 16 &rarr;</a></span>
   <button class="ab-x" onclick="document.getElementById('announcementBar').classList.add('hidden')" aria-label="Dismiss">&#10005;</button>
 </div>
+<script>if (Date.now() >= Date.parse('2026-10-17T04:00:00Z')) document.getElementById('announcementBar').remove();</script>
 
 <!-- NAV -->
 <nav class="nav" id="mainNav">
@@ -88,7 +101,7 @@
   <div class="hero-type">
     <img class="hero-logo" src="project-c_lockup_color.png" alt="Project C">
     <h1 class="h-display">The future of journalism is <span class="out">independent.</span></h1>
-    <p class="lede">Project C is the research hub, community, and strategic home for 200+ journalists building sustainable, audience-driven media ventures outside traditional institutions.</p>
+    <p class="lede">Project C is the research hub, community, and strategic home for 250+ journalists building sustainable, audience-driven media ventures outside traditional institutions.</p>
     <div class="hero-actions">
       <a href="https://newsletter.projectc.biz" target="_blank" class="btn btn-fill">Read the Newsletter &rarr;</a>
       <a href="#community" class="btn btn-ghost">Join the Community</a>
@@ -162,7 +175,7 @@
   <a class="mod dark" href="community.html">
     <div class="idx">02 / Community</div>
     <h3>The Community</h3>
-    <p>200+ working journalists, a members-only resource hub, and a Slack that actually stays open. By application.</p>
+    <p>250+ working journalists, a members-only resource hub, and a Slack that actually stays open. By application.</p>
     <div class="go">Apply to join &rarr;</div>
   </a>
   <a class="mod yellow" href="going-solo.html">
@@ -196,36 +209,40 @@
   </div>
 </section>
 
-<!-- MUSLIM CREATOR SHOWCASE SPOTLIGHT — time-limited feature, added 2026-07-28.
-     Safe to remove later: delete this whole <section id="showcase-spotlight">…</section> and
-     the .spotlight-showcase/.poster-rail CSS in <head>. The announcement bar above also currently
-     promotes the showcase — swap its message back to whatever's current (e.g. the coaching promo)
-     when this is retired. -->
-<section class="sec reveal spotlight-showcase" id="showcase-spotlight">
+<!-- FUNDED PROGRAMS — permanent. Programs underwritten by outside funders, free to participants. -->
+<section class="sec reveal programs-band" id="programs">
   <div class="sec-head">
-    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Cohort Spotlight</div>
-    <h2 class="h-display">Meet the Muslim Creator Journalism Accelerator</h2>
-    <p class="lede">Sixteen Muslim creator-journalists from across the U.S. — covering everything from immigration and foreign policy to sports and parenting wellness — building sustainable, audience-supported journalism on their own platforms.</p>
+    <div class="eyebrow cyan"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Funded Programs</div>
+    <h2 class="h-display">Free to the journalists in the room</h2>
+    <p class="lede">Some of our training is underwritten by partners like the Google News Initiative and Microsoft, so the people who get in pay nothing. Seats are limited and go by application.</p>
   </div>
-  <div class="poster-rail" id="posterRail">
-    <a class="poster-card" href="muslim-creator-showcase/#ameer-al-khatahtbeh"><img src="muslim-creator-showcase/posters/ameer-al-khatahtbeh.jpg" alt="Ameer Al-Khatahtbeh" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#rabia-chaudry"><img src="muslim-creator-showcase/posters/rabia-chaudry.jpg" alt="Rabia Chaudry" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#jennifer-chowdhury"><img src="muslim-creator-showcase/posters/jennifer-chowdhury.jpg" alt="Jennifer Chowdhury" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#ghada-dajani"><img src="muslim-creator-showcase/posters/ghada-dajani.jpg" alt="Ghada Dajani" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#yasmine-el-sabawi"><img src="muslim-creator-showcase/posters/yasmine-el-sabawi.jpg" alt="Yasmine El-Sabawi" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#farah-eltohamy"><img src="muslim-creator-showcase/posters/farah-eltohamy.jpg" alt="Farah Eltohamy" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#tahirah-folk"><img src="muslim-creator-showcase/posters/tahirah-folk.jpg" alt="Tahirah Folk" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#sahar-habib-ghazi"><img src="muslim-creator-showcase/posters/sahar-habib-ghazi.jpg" alt="Sahar Habib Ghazi" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#zineb-haddaji"><img src="muslim-creator-showcase/posters/zineb-haddaji.jpg" alt="Zineb Haddaji" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#ghazala-irshad"><img src="muslim-creator-showcase/posters/ghazala-irshad.jpg" alt="Ghazala Irshad" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#rahim-jessani"><img src="muslim-creator-showcase/posters/rahim-jessani.jpg" alt="Rahim Jessani" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#husam-kaid"><img src="muslim-creator-showcase/posters/husam-kaid.jpg" alt="Husam Kaid" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#hussain-khan"><img src="muslim-creator-showcase/posters/hussain-khan.jpg" alt="Hussain Khan" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#syeda-khaula-saad"><img src="muslim-creator-showcase/posters/syeda-khaula-saad.jpg" alt="Syeda Khaula Saad" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#karim-shamsi-basha"><img src="muslim-creator-showcase/posters/karim-shamsi-basha.jpg" alt="Karim Shamsi-Basha" loading="lazy"></a>
-    <a class="poster-card" href="muslim-creator-showcase/#zaineb-sharif"><img src="muslim-creator-showcase/posters/zaineb-sharif.jpg" alt="Zaineb Sharif" loading="lazy"></a>
+  <div class="programs">
+    <article class="prog" id="prog-cuny">
+      <span class="tag live" id="cunyTag"><span class="blip"></span><span id="cunyTagText">Now enrolling</span></span>
+      <div class="partner">With CUNY&rsquo;s Newmark J+ School</div>
+      <h3>AI Journalism Lab: Creators</h3>
+      <p>A semester-long lab for independent journalists who want AI working for their reporting and their business. Project C helped design the curriculum and teaches in it.</p>
+      <ul class="facts">
+        <li><b>Dates</b><span>Jan. 27 to May 13, 2027</span></li>
+        <li><b>Kickoff</b><span>Two days in New York, Feb. 8&ndash;9. Travel stipends available.</span></li>
+        <li><b>Sessions</b><span>Online, Thursdays 11 a.m. to 1 p.m. ET</span></li>
+        <li><b>Deadline</b><span id="cunyDeadline">Applications close Oct. 16, 2026</span></li>
+      </ul>
+      <a class="btn btn-coral" id="cunyCta" href="https://www.journalism.cuny.edu/j-plus/ai-journalism-labs/" target="_blank" rel="noopener">Apply by Oct. 16 &rarr;</a>
+    </article>
+    <article class="prog" id="prog-jcl">
+      <span class="tag">Cohort 2 in session</span>
+      <div class="partner">With the Google News Initiative</div>
+      <h3>Journalism Creators Startup Lab</h3>
+      <p>Eight weeks of hands-on business training for early-stage creator journalists, then a year of coaching and community. Our first cohort graduated this summer in North America. The second, in the EMEA region, is underway now.</p>
+      <ul class="facts">
+        <li><b>Format</b><span>Weekly video lessons plus a live lab</span></li>
+        <li><b>After</b><span>Three months of coaching and a year of Project C membership</span></li>
+        <li><b>Next cohort</b><span>Join the list to hear first</span></li>
+      </ul>
+      <a class="btn btn-fill" href="journalism-creators-lab.html">See the program &rarr;</a>
+    </article>
   </div>
-  <div class="sec-pad" style="padding-top:0.4rem;"><a href="muslim-creator-showcase/" class="btn btn-fill">Meet the Full Cohort &rarr;</a></div>
 </section>
 
 <!-- COMMUNITY -->
@@ -233,7 +250,7 @@
   <div class="sec-head">
     <div class="eyebrow magenta"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Community</div>
     <h2 class="h-display">Where creator journalists build together</h2>
-    <p class="lede">More than a chat. 200+ working journalists building independent media, with a members-only resource hub and a Slack that genuinely stays open at the top of your sidebar.</p>
+    <p class="lede">More than a chat. 250+ working journalists building independent media, with a Slack that genuinely stays open at the top of your sidebar. Members also get monthly legal office hours with an attorney who represents creators, plus a growing library of workshop replays.</p>
   </div>
   <div class="quotes">
     <div class="quote c"><div><div class="mark">&ldquo;</div><blockquote>The Project C Slack has been a huge win for me. It's now the top Slack channel in my right rail.</blockquote></div><div class="attr">Bryan Vance &middot; Stumptown Savings</div></div>
@@ -334,6 +351,22 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' });
   });
 });
+
+// ── CUNY LAB CARD: flip to "closed" after the Oct. 16, 2026 deadline (end of day ET) ──
+(function(){
+  const close = Date.parse('2026-10-17T04:00:00Z');
+  const now = Date.now();
+  const tag = document.getElementById('cunyTag'), dl = document.getElementById('cunyDeadline'), cta = document.getElementById('cunyCta');
+  if (!tag) return;
+  if (now >= close) {
+    tag.classList.remove('live'); tag.innerHTML = 'Applications closed';
+    dl.textContent = 'Applications closed Oct. 16. The 2027 cohort runs January to May.';
+    cta.innerHTML = 'About the lab &rarr;'; cta.classList.replace('btn-coral','btn-fill');
+  } else {
+    const days = Math.ceil((close - now) / 86400000);
+    document.getElementById('cunyTagText').textContent = days <= 1 ? 'Last day to apply' : 'Now enrolling \u00b7 ' + days + ' days left';
+  }
+})();
 
 // ── NEWSLETTER FEED (beehiiv RSS) ──
 const BEEHIIV_RSS_URL = 'https://rss.beehiiv.com/feeds/3nmhneFY2D.xml';

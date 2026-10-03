@@ -49,6 +49,10 @@
   .prog { padding: 1.8rem 1.25rem 2rem; }
   .prog .facts li { grid-template-columns: 1fr; gap: 0.15rem; }
 }
+/* Close off the community testimonials with a rule so they don't float into the CTA (2026-10-03).
+   On narrow screens each stacked quote already carries its own bottom rule, so skip the last one's. */
+#community .quotes { border-bottom: var(--rule); }
+@media (max-width: 1000px) { #community .quote:last-child { border-bottom: none; } }
 </style>
 <!-- Privacy-friendly analytics by Plausible -->
 <script async src="https://plausible.io/js/pa-By0ztJ4PY36DnzOcJW2cs.js"></script>
@@ -257,7 +261,7 @@
     <div class="quote m"><div><div class="mark">&ldquo;</div><blockquote>It helps me see that I'm far from alone. We're all struggling and succeeding in this weirdly complicated creator economy, at every stage of growth.</blockquote></div><div class="attr">Chris Hutton &middot; TTRPG Insider</div></div>
     <div class="quote y"><div><div class="mark">&ldquo;</div><blockquote>Finally hit 100 paid subs! Didn't think I'd be here till next year. This group and trying things Project C put out, like the indie media drive, was huge.</blockquote></div><div class="attr">Colin Alsheimer &middot; Kineticist</div></div>
   </div>
-  <div class="sec-pad" style="padding-top:1.5rem;"><a href="community.html" class="btn btn-fill">Apply to Join &rarr;</a></div>
+  <div class="sec-pad" style="padding-top:2rem;text-align:center;"><a href="community.html" class="btn btn-fill">Apply to Join &rarr;</a></div>
 </section>
 
 <!-- PRESS -->

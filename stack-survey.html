@@ -128,6 +128,12 @@
 .banner.show { display: block; }
 .banner.error { border-color: #B0241A; background: #FBECEA; color: #7A190F; }
 
+.ticket { border: 2px dashed var(--ink); background: var(--white); padding: 1rem 1.2rem 1.1rem; max-width: 46ch; position: relative; }
+.ticket .tk { display: inline-block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; background: var(--yellow); padding: 0.2rem 0.5rem; margin-bottom: 0.5rem; }
+.ticket b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.7rem; text-transform: uppercase; line-height: 1; margin-bottom: 0.45rem; }
+.ticket p { font-size: 0.86rem; line-height: 1.55; color: var(--ink); }
+.privacy.rules { font-size: 0.74rem; }
+
 /* ---------- SUCCESS ---------- */
 .done { display: none; border-bottom: var(--rule); scroll-margin-top: 78px; }
 .done.show { display: grid; grid-template-columns: 1fr 1fr; }
@@ -202,11 +208,11 @@
   <div class="smast-l">
     <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Project C Stack &middot; Member survey</div>
     <h1>What's in your stack?</h1>
-    <p class="lede">We're building a guide to the tools creator-journalists actually run their businesses on, ranked by how many of you use them. Not an affiliate list. Not one person's favorites. It starts with what Project C members tell us here.</p>
+    <p class="lede">We're building a guide to the tools creator-journalists actually run their businesses on, ranked by how many of you use them. Not an affiliate list. Not one person's favorites. It starts with what Project C members tell us here. Finish by Friday, Oct. 16 and you're in the drawing for a $100 gift card.</p>
     <div class="facts">
       <div><b>5 min</b><span>Mostly checkboxes</span></div>
       <div><b>Members</b><span>Only you count</span></div>
-      <div><b>Edit</b><span>Resubmit anytime</span></div>
+      <div><b>$100</b><span>Drawing Oct. 16</span></div>
       <div><b>Private</b><span>Email never shown</span></div>
     </div>
   </div>
@@ -292,13 +298,15 @@
     <div class="share-l">
       <span class="flabel" style="display:block;font-size:0.76rem;text-transform:uppercase;letter-spacing:0.08em;font-weight:800;">On the public Stack page</span>
       <label class="opt-box"><input type="radio" name="showName" value="yes"><span><b>Show my name next to my picks</b>So a newcomer can see that a real member uses it, and click through to your work.</span></label>
-      <label class="opt-box"><input type="radio" name="showName" value="no" checked><span><b>Count me anonymously</b>Your picks still count toward the rankings. Your name never appears.</span></label>
+      <label class="opt-box"><input type="radio" name="showName" value="no" checked><span><b>Keep my name off the public page</b>Your picks still count toward the rankings. Only the Project C team sees your name.</span></label>
       <label class="opt-box"><input type="checkbox" id="spotlight"><span><b>I'm up for a "My Stack" spotlight</b>A short Q&amp;A about your setup for the newsletter. We'll reach out first.</span></label>
     </div>
     <div class="share-r">
+      <div class="ticket"><span class="tk">The drawing</span><b>$100 gift card</b><p>Everyone who submits by Friday, Oct. 16 is entered, whether or not your name goes on the public page. The winner picks where the card comes from.</p></div>
       <div class="banner" id="banner"></div>
       <button type="submit" class="submit" id="submitBtn">Send my stack &rarr;</button>
       <p class="privacy">We never publish your email, your spending or your regrets with your name on them. Switch tools later? Submit again and it overwrites your old answers.</p>
+      <p class="privacy rules">No purchase necessary. One entry per member, however many times you resubmit. Entries close Friday, Oct. 16 at 11:59 p.m. ET. We'll draw one winner at random and notify them by email the following week.</p>
     </div>
   </div>
 
@@ -308,7 +316,7 @@
   <div class="done-l">
     <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> The Project C Stack</div>
     <h2>Got it. Your stack is in.</h2>
-    <p>Thanks for saving the next person some guesswork. We'll share the first rankings with members before the Stack goes public. If you switch tools, come back and submit again.</p>
+    <p>Thanks for saving the next person some guesswork. You're entered in the drawing for the $100 gift card. We'll pick a winner after Friday, Oct. 16 and let them know by email. If you switch tools, come back and submit again.</p>
     <a class="btn btn-fill" href="directory.html">Browse the member directory &rarr;</a>
     <div class="preview-note" id="previewNote">Preview mode: this page was opened from your computer, so nothing was saved.</div>
   </div>

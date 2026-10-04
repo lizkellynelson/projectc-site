@@ -532,6 +532,16 @@ const MEMBER_CONTENT = {
   ],
   resources: [
     {
+      // Stack survey launch, Oct. 5 2026. After the Oct. 16 drawing, change the
+      // description to an "update your stack anytime" line (resubmits still work).
+      title: "What's in your stack? (Member survey)",
+      description:
+        'Tell us which tools you run your business on, and help build the Project C Stack. Five minutes, mostly checkboxes. Finish by Friday, Oct. 16 to be entered in the $100 gift card drawing.',
+      url: 'https://projectc.com/stack-survey',
+      image: 'members-art-stack.jpg',
+      added: '2026-10-04',
+    },
+    {
       title: 'Build Your Analytics Guru',
       description:
         'A field guide to auditing your own analytics, payments and membership plumbing. Fifteen checks, five phases, with a checklist that remembers where you left off.',

@@ -84,7 +84,8 @@
 
 /* ---------- THE LEDGER: one ruled row per category ---------- */
 .ledger { border-bottom: var(--rule); }
-.lrow { display: grid; grid-template-columns: 340px 1fr; border-bottom: var(--rule); scroll-margin-top: 140px; }
+/* label column = page gutter + 300px, so wide screens don't squeeze it */
+.lrow { display: grid; grid-template-columns: calc(max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)) + 300px) minmax(0, 1fr); border-bottom: var(--rule); scroll-margin-top: 140px; }
 .lrow:last-child { border-bottom: none; }
 .lhead { padding: 1.6rem 1.6rem 1.6rem max(2rem, calc((100vw - var(--maxw)) / 2 + 2rem)); border-right: var(--rule); position: relative; }
 .lhead .idx { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }

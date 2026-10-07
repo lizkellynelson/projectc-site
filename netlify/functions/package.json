@@ -4,6 +4,7 @@
   "description": "Netlify serverless functions for Project C (RSS proxy, LizBot, community application flow)",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",
+    "@netlify/blobs": "~8.2.0",
     "@supabase/supabase-js": "^2.47.0",
     "stripe": "^17.5.0"
   }

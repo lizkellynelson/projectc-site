@@ -330,7 +330,7 @@
           <div class="lock" aria-hidden="true"><svg width="28" height="32" viewBox="0 0 28 32"><rect x="2" y="14" width="24" height="16" fill="none" stroke="#15171A" stroke-width="3"/><path d="M7 14V9a7 7 0 0 1 14 0v5" fill="none" stroke="#15171A" stroke-width="3"/></svg></div>
           <div>
             <h3>Opens Dec. 8</h3>
-            <p>Your packet will be right here: each category's proposed 10 plus about five alternates, roughly 150 names, each with a short evidence file. You'll get an email when it opens.</p>
+            <p>Your packet will be right here: each category's proposed 10 plus about five alternates, roughly 150 names, each with a short evidence file. You'll get an email when it opens.<span id="ballotRubric" hidden> Every cut needs a reason from <a id="ballotRubricLink" href="#" target="_blank" rel="noopener" style="color:var(--coral-deep);text-decoration:underline;text-underline-offset:3px">the rubric</a>, so it's worth a read before then.</span></p>
             <div class="keys" aria-label="Your three choices for each name"><span class="kk">Keep</span><span class="kc">Cut</span><span class="ks">Swap</span><span>+ Who's missing</span></div>
           </div>
         </div>
@@ -507,7 +507,7 @@
     $('roster').innerHTML = people;
 
     if (s.one_pager_url) $('onePager').href = s.one_pager_url; else $('onePager').hidden = true;
-    if (s.rubric_url) { $('rubricBtn').href = s.rubric_url; $('rubricBtn').hidden = false; $('rubricCard').href = s.rubric_url; $('rubricCard').hidden = false; }
+    if (s.rubric_url) { $('rubricBtn').href = s.rubric_url; $('rubricBtn').hidden = false; $('rubricCard').href = s.rubric_url; $('rubricCard').hidden = false; $('ballotRubricLink').href = s.rubric_url; $('ballotRubric').hidden = false; }
 
     // Chair's desk
     if (isChair && d.chair) {

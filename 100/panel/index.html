@@ -121,7 +121,7 @@
 .roster-note { margin-top: 0.9rem; font-size: 0.88rem; color: var(--muted); }
 
 /* resources */
-.res { display: grid; grid-template-columns: repeat(3, 1fr); border: var(--rule); background: var(--white); }
+.res { display: grid; grid-template-columns: repeat(4, 1fr); border: var(--rule); background: var(--white); }
 .res a { padding: 1.2rem 1.3rem 1.3rem; border-right: var(--rule); display: block; transition: background 0.15s; }
 .res a:last-child { border-right: none; }
 .res a:hover { background: var(--tint); }
@@ -152,6 +152,11 @@
 .preview-pill { position: fixed; left: 1rem; bottom: 1rem; z-index: 3000; background: var(--yellow); border: var(--rule); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.5rem 0.75rem; max-width: 24rem; line-height: 1.4; }
 
 /* ---------- RESPONSIVE ---------- */
+@media (max-width: 1100px) {
+  .res { grid-template-columns: 1fr 1fr; }
+  .res a:nth-child(2) { border-right: none; }
+  .res a:nth-child(-n+2) { border-bottom: var(--rule); }
+}
 @media (max-width: 900px) {
   .hq { grid-template-columns: 1fr; }
   .hq-plate { border-right: none; border-bottom: var(--rule); }
@@ -310,6 +315,7 @@
           <div class="rule-c"><div class="k">No fees, no sponsor say</div><p>There's no fee to be considered, ever. Sponsors fund the work, have no say in who's on the list and never see it early.</p></div>
         </div>
         <p class="vote-how"><b>How the vote works.</b> The panel votes on the final 100, and Liz chairs it with the final say. Your votes carry real weight: if most of the panel says cut someone, they're cut unless Liz has a reason she'd be comfortable putting in writing. The standard is <b>impact first, innovation second</b>: who is reaching people and changing how they think, and who is doing it in a way a newsroom wouldn't.</p>
+        <a class="btn btn-fill" id="rubricBtn" target="_blank" rel="noopener" style="margin-top:1.4rem" hidden>Read the full rubric &nearr;</a>
       </div>
     </div>
   </section>
@@ -351,6 +357,7 @@
       <div>
         <h2>Everything else</h2>
         <div class="res">
+          <a id="rubricCard" href="#" target="_blank" rel="noopener" hidden><div class="t">The rubric <span>&nearr;</span></div><div class="d">How we judge, and the edge cases.</div></a>
           <a id="onePager" href="#" target="_blank" rel="noopener"><div class="t">The one-pager <span>&nearr;</span></div><div class="d">The panel ask, in full.</div></a>
           <a href="../../top50creatorjournalists.html" target="_blank" rel="noopener"><div class="t">Last year's Top 50 <span>&nearr;</span></div><div class="d">Where this started.</div></a>
           <a href="mailto:liz@projectc.com"><div class="t">Email Liz <span>&rarr;</span></div><div class="d">liz@projectc.com, for anything.</div></a>
@@ -500,6 +507,7 @@
     $('roster').innerHTML = people;
 
     if (s.one_pager_url) $('onePager').href = s.one_pager_url; else $('onePager').hidden = true;
+    if (s.rubric_url) { $('rubricBtn').href = s.rubric_url; $('rubricBtn').hidden = false; $('rubricCard').href = s.rubric_url; $('rubricCard').hidden = false; }
 
     // Chair's desk
     if (isChair && d.chair) {
@@ -530,7 +538,7 @@
     render({
       me: { first: chair ? 'Liz' : 'Jon', role: chair ? 'chair' : 'panelist' },
       roster: [{ name: 'Jon Laurence', affiliation: 'VP of Production, Newpress' }],
-      settings: { welcome_note: 'Thank you for saying yes. This page is home base: the plan, the rules and, come December, your ballot.', one_pager_url: 'https://docs.google.com/', category_call: 'Week of Oct. 26 · time to come', settle_call: 'Dec. 15 or 16 · time to come', ballot_status: 'closed' },
+      settings: { welcome_note: 'Thank you for saying yes. This page is home base: the plan, the rules and, come December, your ballot.', one_pager_url: 'https://docs.google.com/', rubric_url: 'https://docs.google.com/', category_call: 'Week of Oct. 26 · time to come', settle_call: 'Dec. 15 or 16 · time to come', ballot_status: 'closed' },
       timeline: [
         { start: '2026-10-07', what: 'Panel invitations go out', who: 'Team', done: true },
         { start: '2026-10-19', what: 'The open call opens at projectc.com/100', who: 'Panel', details: 'Share it if you like.' },

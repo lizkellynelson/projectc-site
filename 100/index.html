@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Who are we missing? Nominate for the Project C 100 | Project C</title>
+<!-- PRE-LAUNCH: keep this noindex line until the call goes public on Mon, Oct. 19.
+     On launch day, delete it AND add https://projectc.com/100/ to sitemap.xml (both together). -->
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://projectc.com/100/">
+<meta name="description" content="Nominations are open for the Project C 100: Creators to Watch, 2027. Open to creator journalists anywhere. Closes Nov. 13.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Project C">
+<meta property="og:url" content="https://projectc.com/100/">
+<meta property="og:title" content="Who are we missing? Nominate for the Project C 100">
+<meta property="og:description" content="Nominations are open for the Project C 100: Creators to Watch, 2027. Open to creator journalists anywhere. Closes Nov. 13.">
+<meta property="og:image" content="https://projectc.com/100/p100-og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Who are we missing? The Project C 100. Nominations open.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Who are we missing? Nominate for the Project C 100">
+<meta name="twitter:description" content="Nominations are open for the Project C 100: Creators to Watch, 2027. Open to creator journalists anywhere. Closes Nov. 13.">
+<meta name="twitter:image" content="https://projectc.com/100/p100-og.png">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../projectc-ds.css">
+<style>
+/* ---- The Project C 100: open call (Oct. 19 to Nov. 13, 2026) ----
+   Campaign flagship. One job above the fold: get the nomination.
+   New compositions for the site: the misregistered "100" (four process-color
+   plates printed slightly out of register),
+   and the ballot-style entry form with a perforated tear line before Section 2.
+   One enormous type moment: the 100. ---- */
+.nav.scrolled { box-shadow: 0 4px 24px rgba(21,23,26,0.08); }
+
+/* ---------- HERO ---------- */
+.ph { display: grid; grid-template-columns: 1.08fr 0.92fr; border-bottom: var(--rule); }
+.ph-plate { position: relative; background: var(--porcelain); border-right: var(--rule); display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem,4vw,3.5rem) clamp(1.25rem,3vw,2.5rem) clamp(1.5rem,3vw,2.5rem); overflow: hidden; }
+.ph-slug { display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: clamp(0.75rem,2vw,1.5rem); }
+.ph-slug .cmyk-dots i { width: 9px; height: 9px; }
+.ph-slug .yr { display: none; }
+.big100 { display: grid; font-family: var(--display); font-size: clamp(9.5rem, 36vw, 36rem); line-height: 0.78; letter-spacing: -0.02em; user-select: none; }
+.big100 { padding-top: 0.05em; }
+.big100 span { grid-area: 1 / 1; mix-blend-mode: multiply; }
+.big100 .c { color: var(--cyan);    transform: translate(-0.018em, -0.010em); }
+.big100 .m { color: var(--magenta); transform: translate(0.016em, 0.006em); }
+.big100 .y { color: var(--yellow);  transform: translate(0.004em, 0.020em); }
+.big100 .k { color: var(--ink); }
+.ph-cap { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; margin-top: clamp(1rem,2.4vw,1.8rem); padding-top: 0.9rem; border-top: var(--rule); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.ph-cap .ed { font-family: var(--display); font-size: clamp(1.3rem,2.2vw,1.8rem); letter-spacing: 0.02em; line-height: 1; }
+
+.ph-copy { padding: clamp(2.25rem,4.5vw,4rem) clamp(1.25rem,3vw,2.75rem); display: flex; flex-direction: column; justify-content: center; }
+.status { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.7rem; border: var(--rule); background: var(--yellow); margin-bottom: 1.4rem; }
+.status .blip { width: 8px; height: 8px; border-radius: 50%; background: var(--ink); animation: blip 1.6s ease infinite; }
+.is-closed .status { background: var(--white); }
+.is-closed .status .blip { animation: none; opacity: 0.35; }
+.ph h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.8rem, 5.6vw, 5rem); line-height: 0.94; letter-spacing: 0.01em; margin-bottom: 1.2rem; }
+.ph h1 .q { color: var(--coral); }
+.ph .dek { font-size: 1.12rem; line-height: 1.6; color: var(--muted); max-width: 44ch; margin-bottom: 1.8rem; }
+.ph .dek b { color: var(--ink); font-weight: 600; }
+.ph-cta { align-self: flex-start; font-size: 0.9rem; padding: 1.05rem 1.7rem; }
+.ph-facts { display: grid; grid-template-columns: 1fr 1fr; margin-top: 2rem; border: var(--rule); }
+.ph-facts div { padding: 0.75rem 0.9rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.55rem; }
+.ph-facts div:nth-child(odd) { border-right: var(--rule); }
+.ph-facts div:nth-child(-n+2) { border-bottom: var(--rule); }
+.ph-facts i { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.ph-facts .fc i { background: var(--cyan); } .ph-facts .fm i { background: var(--magenta); }
+.ph-facts .fy i { background: var(--yellow); box-shadow: 0 0 0 1px rgba(21,23,26,0.3); } .ph-facts .fo i { background: var(--coral); }
+
+/* ---------- INTRO ---------- */
+.pi { border-bottom: var(--rule); }
+.pi-inner { max-width: 1060px; margin: 0 auto; padding: clamp(2.75rem,5vw,4.5rem) 2rem; display: grid; grid-template-columns: 9rem 1fr; gap: 2rem; }
+.pi .label { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); padding-top: 0.55rem; border-top: var(--rule); align-self: start; }
+.pi p { font-family: var(--serif); font-size: clamp(1.3rem, 2.3vw, 1.75rem); line-height: 1.42; }
+.pi a { color: var(--coral-deep); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.pi a:hover { color: var(--ink); }
+
+/* ---------- WHO / HOW ---------- */
+.pw { display: grid; grid-template-columns: 1fr 1fr; border-bottom: var(--rule); }
+.pw > div { padding: clamp(2.5rem,4.5vw,3.75rem) clamp(1.25rem,3vw,2.75rem); }
+.pw > div + div { border-left: var(--rule); background: var(--white); }
+.pw .who { background: var(--tint); }
+.pw h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem,3.6vw,3rem); line-height: 1; margin-bottom: 1.4rem; }
+.pw p { font-size: 1.02rem; line-height: 1.7; max-width: 54ch; margin-bottom: 1.05rem; }
+.pw p:last-of-type { margin-bottom: 0; }
+.pw .yes { font-weight: 600; }
+.tens { margin-top: 2rem; border: var(--rule); padding: 1rem 1rem 0.8rem; background: var(--white); max-width: 340px; }
+.tens-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+.tens-grid i { aspect-ratio: 1; display: block; border: 1.5px solid var(--ink); }
+.tens-cap { display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.75rem; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.structure { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.3rem,2vw,1.6rem); line-height: 1.08; margin-top: 1.4rem; max-width: 24ch; }
+.curators:empty { display: none; }
+.pw .cats { font-size: 0.95rem; color: var(--muted); margin-top: 0.6rem; }
+
+/* ---------- FINE PRINT ---------- */
+.pf { border-bottom: var(--rule); }
+.pf-bar { border-bottom: var(--rule); }
+.pf-head { max-width: var(--maxw); margin: 0 auto; padding: 1.1rem 2rem; display: flex; align-items: center; gap: 0.8rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.pf-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
+.pf-cell { padding: 1.5rem 1.6rem 1.7rem; border-right: var(--rule); }
+.pf-cell:last-child { border-right: none; }
+.pf-cell .k { font-family: var(--display); font-size: 1.35rem; text-transform: uppercase; line-height: 1; margin-bottom: 0.6rem; }
+.pf-cell p { font-size: 0.92rem; line-height: 1.55; }
+.pf-cell:nth-child(1) { box-shadow: inset 0 5px 0 var(--coral); }
+.pf-cell:nth-child(2) { box-shadow: inset 0 5px 0 var(--cyan); }
+.pf-cell:nth-child(3) { box-shadow: inset 0 5px 0 var(--magenta); }
+.pf-cell:nth-child(4) { box-shadow: inset 0 5px 0 var(--yellow); }
+
+/* ---------- THE BALLOT ---------- */
+.pb { border-bottom: var(--rule); background: var(--porcelain); padding: clamp(2.5rem,5vw,4.5rem) 2rem; scroll-margin-top: 76px; }
+.pb-head { max-width: 960px; margin: 0 auto 1.6rem; display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; }
+.pb-head h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.2rem,4.6vw,3.6rem); line-height: 0.95; }
+.pb-head p { font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.ballot { max-width: 960px; margin: 0 auto; background: var(--white); border: var(--rule); box-shadow: 8px 8px 0 var(--ink); }
+.b-sec { padding: 0; }
+.b-sechead { display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.5rem; border-bottom: var(--rule); background: var(--ink); color: var(--white); }
+.b-sechead .no { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral); border: 1.5px solid currentColor; padding: 0.3rem 0.5rem; white-space: nowrap; }
+.b-sechead h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.25rem,2.4vw,1.6rem); font-weight: 400; letter-spacing: 0.02em; line-height: 1; }
+
+.row { display: grid; grid-template-columns: 3.4rem 1fr; border-bottom: 1px solid rgba(21,23,26,0.16); }
+.row:last-child { border-bottom: none; }
+.row .n { font-family: var(--display); font-size: 1rem; color: var(--coral-deep); padding: 1.35rem 0 0 1.5rem; }
+.row .f { padding: 1.15rem 1.5rem 1.3rem 0.4rem; min-width: 0; }
+.row label.lb, .row legend.lb { display: block; font-weight: 700; font-size: 0.98rem; line-height: 1.4; margin-bottom: 0.6rem; padding: 0; }
+.row .hint { display: block; font-weight: 400; font-size: 0.86rem; color: var(--muted); margin-top: 0.15rem; }
+.row .req { color: var(--coral-deep); font-weight: 800; margin-left: 0.15rem; }
+.row .opt { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-left: 0.4rem; }
+fieldset.f { border: none; margin: 0; min-width: 0; }
+.row legend.lb { float: left; width: 100%; }
+.row legend.lb + * { clear: both; }
+.in { width: 100%; font-family: var(--sans); font-size: 1rem; color: var(--ink); background: var(--white); border: var(--rule); border-radius: 0; padding: 0.8rem 0.9rem; -webkit-appearance: none; appearance: none; }
+textarea.in { min-height: 7.5rem; resize: vertical; line-height: 1.55; }
+textarea.in.tall { min-height: 11rem; }
+select.in { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1l6 6 6-6' fill='none' stroke='%2315171A' stroke-width='2.2'/></svg>"); background-repeat: no-repeat; background-position: right 0.9rem center; padding-right: 2.6rem; cursor: pointer; }
+.in:focus, .chip input:focus-visible + span, .seg input:focus-visible + span, .optin input:focus-visible + .box { outline: 3px solid var(--coral); outline-offset: 2px; }
+.in::placeholder { color: rgba(21,23,26,0.38); }
+.row.bad .in { border-color: #B3261E; background: #FFF6F5; }
+.err { display: none; margin-top: 0.5rem; font-size: 0.84rem; font-weight: 700; color: #B3261E; }
+.row.bad .err { display: block; }
+.counter { margin-top: 0.45rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); text-align: right; }
+.counter.near { color: var(--coral-deep); }
+
+.chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.chip { position: relative; }
+.chip input, .seg input, .optin input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.chip span { display: inline-flex; align-items: center; gap: 0.45rem; border: 2px solid var(--ink); padding: 0.55rem 0.8rem; font-size: 0.8rem; font-weight: 700; cursor: pointer; background: var(--white); user-select: none; transition: background 0.15s; }
+.chip span::before { content: ""; width: 10px; height: 10px; border: 1.5px solid var(--ink); flex: none; }
+.chip span:hover { background: var(--tint); }
+.chip input:checked + span { background: var(--ink); color: var(--white); }
+.chip input:checked + span::before { background: var(--coral); border-color: var(--coral); }
+.row.bad .chip span, .row.bad .seg span { border-color: #B3261E; }
+
+.seg { display: inline-flex; border: var(--rule); }
+.seg label { position: relative; }
+.seg span { display: block; padding: 0.7rem 1.6rem; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; background: var(--white); }
+.seg label + label span { border-left: var(--rule); }
+.seg span:hover { background: var(--tint); }
+.seg input:checked + span { background: var(--ink); color: var(--white); }
+
+.optin { display: flex; gap: 0.85rem; align-items: flex-start; cursor: pointer; position: relative; font-size: 0.98rem; line-height: 1.45; font-weight: 600; }
+.optin .box { width: 26px; height: 26px; border: var(--rule); flex: none; display: flex; align-items: center; justify-content: center; background: var(--white); margin-top: -1px; }
+.optin .box svg { width: 15px; height: 15px; opacity: 0; }
+.optin input:checked + .box { background: var(--coral); }
+.optin input:checked + .box svg { opacity: 1; }
+.cond[hidden] { display: none; }
+.cond { margin-top: 0.8rem; }
+
+/* perforated tear line between the two sections */
+.perf { position: relative; height: 0; border-top: 2px dashed var(--ink); margin: 0; }
+.perf::before, .perf::after { content: ""; position: absolute; top: -13px; width: 24px; height: 24px; border-radius: 50%; background: var(--porcelain); border: var(--rule); }
+.perf::before { left: -13px; clip-path: inset(0 0 0 50%); }
+.perf::after { right: -13px; clip-path: inset(0 50% 0 0); }
+.perf svg { position: absolute; left: 2.2rem; top: -12px; width: 26px; height: 22px; background: var(--white); padding: 0 3px; }
+.b-sec.you { background: var(--tint); }
+.b-sec.you .b-sechead { background: var(--tint); color: var(--ink); border-bottom: var(--rule); }
+.b-sec.you .b-sechead .no { color: var(--coral-deep); }
+.b-sec.you .row { border-bottom-color: rgba(21,23,26,0.14); }
+
+.b-submit { border-top: var(--rule); padding: 1.4rem 1.5rem 1.6rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem 1.5rem; flex-wrap: wrap; background: var(--white); }
+.b-submit .btn { font-size: 0.92rem; padding: 1.05rem 1.8rem; }
+.b-submit .btn[disabled] { opacity: 0.6; cursor: progress; transform: none; }
+.b-submit small { font-size: 0.82rem; color: var(--muted); max-width: 40ch; line-height: 1.5; }
+.b-alert { display: none; margin: 0 1.5rem 1.4rem; border: 2px solid #B3261E; background: #FFF6F5; color: #7A1A14; padding: 0.95rem 1.1rem; font-size: 0.94rem; font-weight: 600; line-height: 1.5; }
+.b-alert.show { display: block; }
+.b-alert a { text-decoration: underline; text-underline-offset: 3px; }
+.hp { position: absolute !important; left: -9999px !important; width: 1px; height: 1px; overflow: hidden; }
+
+/* success + closed panels */
+.b-done { display: none; padding: clamp(2.2rem,5vw,3.5rem) clamp(1.5rem,4vw,3rem); text-align: left; }
+.b-done.show { display: block; }
+.b-done .stamp { display: inline-flex; align-items: center; gap: 0.5rem; border: var(--rule); background: var(--yellow); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.4rem 0.7rem; margin-bottom: 1.3rem; }
+.b-done h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.4rem,5vw,3.8rem); line-height: 0.95; margin-bottom: 0.7rem; }
+.b-done .q { font-size: clamp(1.15rem,2vw,1.4rem); font-weight: 600; margin-bottom: 1.6rem; }
+.b-done .after { margin-top: 1.6rem; padding-top: 1.2rem; border-top: var(--rule-thin); color: var(--muted); font-size: 0.98rem; line-height: 1.6; max-width: 54ch; }
+.b-done .tally { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral-deep); margin-top: 1rem; }
+.b-closed { display: none; padding: clamp(2.2rem,5vw,3.5rem) clamp(1.5rem,4vw,3rem); }
+.is-closed .b-closed { display: block; }
+.is-closed #nomForm, .is-closed .b-done, .is-closed .pb-head { display: none !important; }
+.b-closed h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.4rem,5vw,3.8rem); line-height: 0.95; margin-bottom: 1rem; }
+.b-closed p { font-size: 1.08rem; line-height: 1.65; max-width: 52ch; margin-bottom: 1.6rem; }
+
+/* ---------- SUBSCRIBE ---------- */
+.ps { border-bottom: var(--rule); background: var(--ink); color: var(--white); scroll-margin-top: 76px; }
+.ps-inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: 0.9fr 1.1fr; }
+.ps-copy { padding: clamp(2.4rem,4.5vw,3.6rem) clamp(1.25rem,3vw,2.5rem); border-right: 2px solid rgba(245,246,248,0.25); }
+.ps-copy .eyebrow { color: #FF8A66; }
+.ps-copy h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem,3.8vw,3.1rem); line-height: 0.98; margin-bottom: 1rem; }
+.ps-copy p { color: rgba(245,246,248,0.76); font-size: 1.02rem; line-height: 1.65; max-width: 44ch; }
+.ps-form { display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem,4vw,3rem) clamp(1.25rem,3vw,2.5rem); }
+.ps-field { display: grid; grid-template-columns: 1fr auto; border: 2px solid var(--white); }
+.ps-field input { min-width: 0; border: none; outline: none; background: transparent; color: var(--white); font-family: var(--display); text-transform: uppercase; font-size: clamp(1.4rem,3vw,2.4rem); padding: 0.85rem 1rem; border-radius: 0; }
+.ps-field input::placeholder { color: rgba(245,246,248,0.35); }
+.ps-field input:focus-visible { outline: 3px solid var(--coral); outline-offset: -3px; }
+.ps-field button { border: none; border-left: 2px solid var(--white); background: var(--coral); color: var(--ink); font-family: var(--sans); font-weight: 800; font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0 1.5rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.6rem; transition: background 0.18s; }
+.ps-field button:hover { background: #FF8A66; }
+.ps-field button[disabled] { opacity: 0.6; cursor: progress; }
+.ps-field button svg { width: 34px; height: 16px; }
+.ps-msg { min-height: 1.5rem; margin-top: 0.9rem; font-size: 0.95rem; font-weight: 600; color: rgba(245,246,248,0.86); }
+.ps-msg.bad { color: #FF9C8A; }
+.ps-msg a { color: var(--coral); text-decoration: underline; text-underline-offset: 3px; }
+.ps-fine { margin-top: 0.4rem; font-size: 0.76rem; color: rgba(245,246,248,0.5); }
+
+/* local preview notice (file:// only) */
+.preview-pill { position: fixed; left: 1rem; bottom: 1rem; z-index: 3000; background: var(--yellow); border: var(--rule); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.5rem 0.75rem; max-width: 22rem; line-height: 1.4; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 1000px) {
+  .pf-grid { grid-template-columns: 1fr 1fr; }
+  .pf-cell:nth-child(2) { border-right: none; }
+  .pf-cell:nth-child(-n+2) { border-bottom: var(--rule); }
+}
+@media (max-width: 900px) {
+  .ph { grid-template-columns: 1fr; }
+  .ph-plate { border-right: none; border-bottom: var(--rule); }
+  .big100 { font-size: clamp(8rem, 50vw, 24rem); }
+  .pw { grid-template-columns: 1fr; }
+  .pw > div + div { border-left: none; border-top: var(--rule); }
+  .ps-inner { grid-template-columns: 1fr; }
+  .ps-copy { border-right: none; border-bottom: 2px solid rgba(245,246,248,0.25); }
+}
+@media (max-width: 640px) {
+  .ph-plate { padding: 1.1rem 1.25rem 1.25rem; }
+  .ph-slug { margin-bottom: 0.6rem; }
+  .ph-cap { display: none; }
+  .ph-slug .yr { display: inline; }
+  .status { margin-bottom: 1rem; }
+  .ph h1 { margin-bottom: 0.9rem; }
+  .ph .dek { font-size: 1.02rem; margin-bottom: 1.3rem; }
+  .ph-copy { padding: 1.6rem 1.25rem 2.2rem; }
+  .ph-cta { align-self: stretch; justify-content: center; }
+  .ph-facts { margin-top: 1.4rem; }
+  .ph-facts div { font-size: 0.6rem; padding: 0.65rem 0.6rem; gap: 0.4rem; }
+  .pi-inner { grid-template-columns: 1fr; gap: 1rem; padding-left: 1.25rem; padding-right: 1.25rem; }
+  .pi .label { justify-self: start; }
+  .pf-head { padding: 1rem 1.25rem; }
+  .pf-grid { grid-template-columns: 1fr; }
+  .pf-cell { border-right: none; border-bottom: var(--rule); }
+  .pf-cell:last-child { border-bottom: none; }
+  .pb { padding: 2.2rem 0.75rem 2.8rem; }
+  .pb-head { padding: 0 0.5rem; }
+  .ballot { box-shadow: 5px 5px 0 var(--ink); }
+  .b-sechead { padding: 0.9rem 1rem; }
+  .row { grid-template-columns: 1fr; }
+  .row .n { padding: 1rem 1rem 0; font-size: 0.85rem; }
+  .row .f { padding: 0.35rem 1rem 1.15rem; }
+  .seg { display: flex; }
+  .seg label { flex: 1; }
+  .seg span { text-align: center; padding: 0.75rem 0.5rem; }
+  .b-submit { padding: 1.2rem 1rem 1.4rem; }
+  .b-submit .btn { width: 100%; justify-content: center; }
+  .b-alert { margin: 0 1rem 1.2rem; }
+  .perf svg { left: 1.2rem; }
+  .ps-field { grid-template-columns: 1fr; }
+  .ps-field button { border-left: none; border-top: 2px solid var(--white); padding: 1rem; justify-content: center; }
+  .tens { padding: 0.8rem 0.8rem 0.7rem; }
+  .tens-grid { gap: 3px; }
+  .tens-cap { flex-direction: column; gap: 0.2rem; }
+}
+</style>
+<!-- Privacy-friendly analytics by Plausible -->
+<script async src="https://plausible.io/js/pa-By0ztJ4PY36DnzOcJW2cs.js"></script>
+<script>
+  window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+  plausible.init()
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo"><img src="../project-c_lockup_color.png" alt="Project C home"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="https://newsletter.projectc.biz" target="_blank">Newsletter</a></li>
+      <li><a href="../community.html">Community</a></li>
+      <li><a href="../directory.html">Directory</a></li>
+      <li><a href="../going-solo.html">Going Solo</a></li>
+      <li><a href="../coaching.html">Coaching</a></li>
+      <li><a href="../press.html">Research &amp; Press</a></li>
+      <li><a href="../about.html">About</a></li>
+      <li><a href="../members.html" class="nav-member">Member Login</a></li>
+      <li><a href="../community.html" class="nav-cta">Join &rarr;</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- HERO -->
+<header class="ph">
+  <div class="ph-plate crops" aria-hidden="true">
+    <div class="ph-slug"><span>The Project C 100<span class="yr"> &middot; 2027</span></span><span class="cmyk-dots"><i></i><i></i><i></i><i></i></span></div>
+    <div class="big100"><span class="c">100</span><span class="m">100</span><span class="y">100</span><span class="k">100</span></div>
+    <div class="ph-cap"><span>Creators to Watch</span><span class="ed">2027</span></div>
+  </div>
+  <div class="ph-copy">
+    <span class="status" id="heroStatus"><span class="blip"></span><span id="heroStatusText">Nominations open</span></span>
+    <h1>Who are we<br>missing<span class="q">?</span></h1>
+    <p class="dek">Nominations are open for <b>the Project C 100: Creators to Watch, 2027.</b> Tell us who belongs on it. Nominations close November 13.</p>
+    <a href="#nominate" class="btn btn-coral ph-cta" id="heroCta">Nominate someone &darr;</a>
+    <div class="ph-facts" aria-label="Key facts">
+      <div class="fo"><i></i>Closes Nov. 13</div>
+      <div class="fc"><i></i>Open worldwide</div>
+      <div class="fm"><i></i>Self-nominations welcome</div>
+      <div class="fy"><i></i>List launches January</div>
+    </div>
+  </div>
+</header>
+
+<!-- INTRO -->
+<section class="pi">
+  <div class="pi-inner">
+    <div class="label">The open call</div>
+    <p>In January, Project C will publish the Project C 100, a list of the creator journalists people should know right now. Last year we published our first list, <a href="../top50creatorjournalists.html">the Top 50</a>. This year we&rsquo;re going bigger, and we want your help finding the people we&rsquo;d otherwise miss.</p>
+  </div>
+</section>
+
+<!-- WHO / HOW -->
+<section class="pw">
+  <div class="who">
+    <div class="eyebrow magenta"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Eligibility</div>
+    <h2>Who we&rsquo;re looking for</h2>
+    <p>Anyone building an audience as a trusted source of news and information. That includes reporters who left newsrooms to go independent. It also includes experts, practitioners, academics and people reporting on their own communities from lived experience.</p>
+    <p>It doesn&rsquo;t matter where they publish. TikTok, YouTube, a newsletter, a podcast, Instagram, a WhatsApp channel, a print zine. All of it counts. Free work counts as much as paid. And it&rsquo;s open to creators anywhere in the world.</p>
+    <p class="yes">Yes, you can nominate yourself. And you can nominate as many people as you like, one form per person.</p>
+  </div>
+  <div class="how">
+    <div class="eyebrow cyan"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Selection</div>
+    <h2>How we choose</h2>
+    <p>We look at impact first. Who&rsquo;s reaching people and changing how they think? That&rsquo;s about the quality of the audience, not the follower count.</p>
+    <p>Then innovation. Who&rsquo;s doing journalism in a way a newsroom wouldn&rsquo;t, or couldn&rsquo;t?</p>
+    <p>This isn&rsquo;t a popularity contest. Nominations help us find people we&rsquo;d otherwise miss, but they aren&rsquo;t votes. We&rsquo;re also looking at the data and asking people who know these beats to send us names. The final list isn&rsquo;t ranked.</p>
+    <!-- CURATORS LINE (pending, Liz decides by Oct. 16). To use it, put one
+         sentence between the tags below, e.g. <p class="curators">The list is curated by ...</p>
+         Left empty, it doesn't show. -->
+    <p class="curators"></p>
+  </div>
+</section>
+
+<!-- FINE PRINT -->
+<section class="pf" aria-labelledby="fpHead">
+  <div class="pf-bar"><div class="pf-head" id="fpHead"><span class="cmyk-dots"><i></i><i></i><i></i><i></i></span> The fine print</div></div>
+  <div class="pf-grid">
+    <div class="pf-cell"><div class="k">Deadline</div><p>Friday, November 13, at 11:59 p.m. ET.</p></div>
+    <div class="pf-cell"><div class="k">Launch</div><p>The list launches in January 2027.</p></div>
+    <div class="pf-cell"><div class="k">Privacy</div><p>We don&rsquo;t publish nominations. Only the final 100 goes public.</p></div>
+    <div class="pf-cell"><div class="k">Sponsors</div><p>Sponsors support Project C&rsquo;s work. They have no say in who&rsquo;s on the list.</p></div>
+  </div>
+</section>
+
+<!-- THE NOMINATION FORM -->
+<section class="pb" id="nominate" aria-labelledby="formTitle">
+  <div class="pb-head">
+    <h2 id="formTitle">Nominate someone</h2>
+    <p>One creator per form</p>
+  </div>
+
+  <div class="ballot crops">
+
+    <form id="nomForm" novalidate>
+      <!-- honeypot: hidden from people, irresistible to bots -->
+      <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+      <div class="b-sec">
+        <div class="b-sechead"><span class="no">Section 1</span><h3>Who are you nominating?</h3></div>
+
+        <div class="row" data-field="nominee_name">
+          <div class="n">01</div>
+          <div class="f">
+            <label class="lb" for="f_nominee_name">Nominee&rsquo;s name<span class="req" aria-hidden="true">*</span></label>
+            <input class="in" id="f_nominee_name" name="nominee_name" type="text" maxlength="200" autocomplete="off" required>
+            <div class="err" id="e_nominee_name"></div>
+          </div>
+        </div>
+
+        <div class="row" data-field="work_name">
+          <div class="n">02</div>
+          <div class="f">
+            <label class="lb" for="f_work_name">What&rsquo;s their work called?<span class="req" aria-hidden="true">*</span><span class="hint">Newsletter, channel, show or handle</span></label>
+            <input class="in" id="f_work_name" name="work_name" type="text" maxlength="300" autocomplete="off" required>
+            <div class="err" id="e_work_name"></div>
+          </div>
+        </div>
+
+        <div class="row" data-field="primary_link">
+          <div class="n">03</div>
+          <div class="f">
+            <label class="lb" for="f_primary_link">Best link to start with<span class="req" aria-hidden="true">*</span></label>
+            <input class="in" id="f_primary_link" name="primary_link" type="text" inputmode="url" autocapitalize="off" spellcheck="false" maxlength="600" placeholder="https://" required>
+            <div class="err" id="e_primary_link"></div>
+          </div>
+        </div>
+
+        <div class="row" data-field="other_links">
+          <div class="n">04</div>
+          <div class="f">
+            <label class="lb" for="f_other_links">Any other links?<span class="opt">Optional</span></label>
+            <textarea class="in" id="f_other_links" name="other_links" maxlength="2000" autocapitalize="off" spellcheck="false" placeholder="One per line"></textarea>
+            <div class="err" id="e_other_links"></div>
+          </div>
+        </div>
+
+        <div class="row" data-field="platforms">
+          <div class="n">05</div>
+          <fieldset class="f">
+            <legend class="lb">Where do they publish?<span class="req" aria-hidden="true">*</span><span class="hint">Pick all that apply.</span></legend>
+            <div class="chips" id="platformChips"></div>
+            <div class="err" id="e_platforms"></div>
+          </fieldset>
+        </div>
+
+        <div class="row" data-field="coverage">
+          <div class="n">06</div>
+          <div class="f">
+            <label class="lb" for="f_coverage">What do they cover?<span class="req" aria-hidden="true">*</span></label>
+            <input class="in" id="f_coverage" name="coverage" type="text" maxlength="300" required>
+            <div class="err" id="e_coverage"></div>
+          </div>
+        </div>
+
+        <div class="row" data-field="location">
+          <div class="n">07</div>
+          <div class="f">
+            <label class="lb" for="f_location">Where are they based?<span class="req" aria-hidden="true">*</span><span class="hint">Country, and city if you know it</span></label>
+            <input class="in" id="f_location" name="location" type="text" maxlength="200" required>
+            <div class="err" id="e_location"></div>
+          </div>
+        </div>
+
+        <div class="row" data-field="why">
+          <div class="n">08</div>
+          <div class="f">
+            <label class="lb" for="f_why">Why do they belong on the list?<span class="req" aria-hidden="true">*</span><span class="hint">Who are they reaching, how are they changing the way people think, and what are they doing that a newsroom wouldn&rsquo;t?</span></label>
+            <textarea class="in tall" id="f_why" name="why" maxlength="1500" aria-describedby="whyCount" required></textarea>
+            <div class="counter" id="whyCount" aria-live="polite">0 / 1,500</div>
+            <div class="err" id="e_why"></div>
+          </div>
+        </div>
+
+        <div class="row" data-field="example_link">
+          <div class="n">09</div>
+          <div class="f">
+            <label class="lb" for="f_example_link">Link to one piece of their work that shows it<span class="opt">Optional</span></label>
+            <input class="in" id="f_example_link" name="example_link" type="text" inputmode="url" autocapitalize="off" spellcheck="false" maxlength="600" placeholder="https://">
+            <div class="err" id="e_example_link"></div>
+          </div>
+        </div>
+
+        <div class="row" data-field="self_nomination">
+          <div class="n">10</div>
+          <fieldset class="f">
+            <legend class="lb">Are you nominating yourself?<span class="req" aria-hidden="true">*</span></legend>
+            <div class="seg">
+              <label><input type="radio" name="self_nomination" value="Yes" required><span>Yes</span></label>
+              <label><input type="radio" name="self_nomination" value="No"><span>No</span></label>
+            </div>
+            <div class="err" id="e_self_nomination"></div>
+          </fieldset>
+        </div>
+
+        <div class="row" data-field="nominee_email">
+          <div class="n">11</div>
+          <div class="f">
+            <label class="lb" for="f_nominee_email">Nominee&rsquo;s email, if you have it<span class="opt">Optional</span></label>
+            <input class="in" id="f_nominee_email" name="nominee_email" type="email" maxlength="254" autocomplete="off" autocapitalize="off" spellcheck="false">
+            <div class="err" id="e_nominee_email"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="perf" aria-hidden="true"><svg viewBox="0 0 26 22" fill="none" stroke="#15171A" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="5" r="3.5"/><circle cx="5" cy="17" r="3.5"/><path d="M7.8 7.2L24 18M7.8 14.8L24 4"/><circle cx="14.6" cy="11" r="1.4" fill="#FE6B41" stroke="none"/></svg></div>
+
+      <div class="b-sec you">
+        <div class="b-sechead"><span class="no">Section 2</span><h3>About you</h3></div>
+
+        <div class="row" data-field="nominator_name">
+          <div class="n">12</div>
+          <div class="f">
+            <label class="lb" for="f_nominator_name">Your name<span class="req" aria-hidden="true">*</span></label>
+            <input class="in" id="f_nominator_name" name="nominator_name" type="text" maxlength="200" autocomplete="name" required>
+            <div class="err" id="e_nominator_name"></div>
+          </div>
+        </div>
+
+        <div class="row" data-field="nominator_email">
+          <div class="n">13</div>
+          <div class="f">
+            <label class="lb" for="f_nominator_email">Your email<span class="req" aria-hidden="true">*</span><span class="hint">Only so we can follow up</span></label>
+            <input class="in" id="f_nominator_email" name="nominator_email" type="email" maxlength="254" autocomplete="email" autocapitalize="off" spellcheck="false" required>
+            <div class="err" id="e_nominator_email"></div>
+          </div>
+        </div>
+
+        <div class="row" data-field="heard_from">
+          <div class="n">14</div>
+          <div class="f">
+            <label class="lb" for="f_heard_from">How did you hear about the call?<span class="req" aria-hidden="true">*</span></label>
+            <select class="in" id="f_heard_from" name="heard_from" required>
+              <option value="">Choose one</option>
+              <option>Project C newsletter</option>
+              <option>Liz&rsquo;s social posts</option>
+              <option>Another newsletter or outlet</option>
+              <option>A friend or colleague</option>
+              <option>Other</option>
+            </select>
+            <div class="err" id="e_heard_from"></div>
+            <div class="cond" id="outletWrap" hidden>
+              <label class="lb" for="f_heard_from_outlet" style="margin-top:0.4rem;">Which newsletter or outlet?<span class="opt">Optional</span></label>
+              <input class="in" id="f_heard_from_outlet" name="heard_from_outlet" type="text" maxlength="200">
+            </div>
+          </div>
+        </div>
+
+        <div class="row" data-field="newsletter_opt_in">
+          <div class="n">15</div>
+          <div class="f">
+            <label class="optin">
+              <input type="checkbox" id="f_newsletter_opt_in" name="newsletter_opt_in" value="yes">
+              <span class="box" aria-hidden="true"><svg viewBox="0 0 15 15" fill="none" stroke="#15171A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8l3.5 3.5L13 3.5"/></svg></span>
+              <span>Add me to the Project C newsletter, so I get the list when it launches</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="b-submit">
+        <button type="submit" class="btn btn-coral" id="nomSubmit">Send nomination &rarr;</button>
+        <small>Fields marked <span style="color:var(--coral-deep);font-weight:800;">*</span> are required. We don&rsquo;t publish nominations.</small>
+      </div>
+      <div class="b-alert" id="nomAlert" role="alert"></div>
+    </form>
+
+    <!-- SUCCESS (replaces the form inline) -->
+    <div class="b-done" id="nomDone" tabindex="-1" aria-live="polite">
+      <span class="stamp">Nomination received</span>
+      <h3>Got it, thank you!</h3>
+      <p class="q">Know someone else who belongs on the list?</p>
+      <button type="button" class="btn btn-coral" id="nomAnother">Nominate another creator &rarr;</button>
+      <p class="tally" id="nomTally"></p>
+      <p class="after">The Project C 100 launches in January. If you checked the box, you&rsquo;ll get it in your inbox the day it goes live.</p>
+    </div>
+
+    <!-- CLOSED (after 11:59 p.m. ET, Nov. 13) -->
+    <div class="b-closed" id="nomClosed">
+      <span class="stamp" style="display:inline-flex;border:var(--rule);font-size:0.68rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:0.4rem 0.7rem;margin-bottom:1.3rem;">Nominations closed</span>
+      <h3>Nominations are closed.</h3>
+      <p>Thank you to everyone who sent names. The Project C 100 launches in January. Subscribe to get it first.</p>
+      <a href="#subscribe" class="btn btn-coral">Get the list first &darr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- SUBSCRIBE ONLY -->
+<section class="ps" id="subscribe" aria-labelledby="subTitle">
+  <div class="ps-inner">
+    <div class="ps-copy">
+      <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Just want the list?</div>
+      <h2 id="subTitle">Want to see who makes the cut?</h2>
+      <p>Subscribe to the Project C newsletter, and you&rsquo;ll get the list the day it launches.</p>
+    </div>
+    <form class="ps-form" id="subForm" novalidate>
+      <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="ps-field">
+        <input type="email" name="email" id="subEmail" placeholder="Your email" aria-label="Your email" autocomplete="email" autocapitalize="off" spellcheck="false" required>
+        <button type="submit" id="subBtn">Subscribe <svg viewBox="0 0 34 16" fill="none" stroke="currentColor" stroke-width="2"><line x1="0" y1="8" x2="31" y2="8"/><polyline points="24,2 32,8 24,14"/></svg></button>
+      </div>
+      <div class="ps-msg" id="subMsg" aria-live="polite"></div>
+      <div class="ps-fine">Free. One weekly email on the business of independent journalism.</div>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="blk f-col">
+    <h5>Explore</h5>
+    <a href="https://newsletter.projectc.biz">Newsletter</a>
+    <a href="../press.html">Research &amp; Press</a>
+    <a href="../news-ecosystem-map.html">News Ecosystem Map</a>
+    <a href="../going-solo.html">Going Solo Workshop</a>
+    <a href="../top50creatorjournalists.html">Top 50 Creator Journalists</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Community</h5>
+    <a href="../community.html">Join the Community</a>
+    <a href="../directory.html">Member Directory</a>
+    <a href="../coaching.html">Coaching</a>
+    <a href="../members.html">Member Login</a>
+  </div>
+  <div class="blk f-col">
+    <h5>Connect</h5>
+    <a href="../about.html">About Project C</a>
+    <a href="../about.html#founder">Team</a>
+    <a href="mailto:liz@projectc.com">Contact</a>
+    <a href="https://www.linkedin.com/company/the-project-c/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://www.instagram.com/this_is_project_c/" target="_blank" rel="noopener">Instagram</a>
+    <a href="../style-guide.html">Brand Style Guide</a>
+  </div>
+  <div class="blk f-mark">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C, independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
+  </div>
+</footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design. <a href="../privacy-policy.html">Privacy Policy</a></span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // ---- Settings ----
+  // Nominations close Fri, Nov. 13, 2026, 11:59:59 p.m. ET. The function enforces this too.
+  var CLOSES_AT = Date.parse('2026-11-14T04:59:59Z');
+  var ENDPOINT = '/.netlify/functions/p100-nominate';
+  var PLATFORMS = ['Newsletter', 'TikTok', 'YouTube', 'Instagram', 'Podcast', 'X / Threads / Bluesky', 'LinkedIn', 'WhatsApp or Telegram', 'Print', 'Website or blog', 'Other'];
+  var WHY_MAX = 1500;
+
+  var params = new URLSearchParams(location.search);
+  // Opened straight from a folder (file://): nothing can be sent, so the form
+  // simulates success and failure for previewing. Never happens on projectc.com.
+  var PREVIEW = location.protocol === 'file:';
+  var closed = Date.now() > CLOSES_AT || params.get('preview') === 'closed';
+  var renderedAt = Date.now();
+
+  var $ = function (id) { return document.getElementById(id); };
+  var nav = $('mainNav');
+  window.addEventListener('scroll', function () { nav.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true });
+
+  // ---- Tracking: UTMs from the URL (kept for the whole visit) + first referrer ----
+  var store = {
+    get: function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} }
+  };
+  var utm = {};
+  ['utm_source', 'utm_medium', 'utm_campaign'].forEach(function (k) {
+    var v = params.get(k);
+    if (v) store.set('p100_' + k, v);
+    utm[k] = v || store.get('p100_' + k) || '';
+  });
+  if (store.get('p100_referrer') === null) store.set('p100_referrer', document.referrer || '');
+  var referrer = store.get('p100_referrer') || document.referrer || '';
+
+  function track(name) {
+    try { window.plausible(name, { props: { utm_source: utm.utm_source || '(none)' } }); } catch (e) {}
+  }
+
+  // ---- Platform chips ----
+  $('platformChips').innerHTML = PLATFORMS.map(function (p, i) {
+    return '<label class="chip"><input type="checkbox" name="platforms" value="' + p + '" id="pl_' + i + '"><span>' + p + '</span></label>';
+  }).join('');
+
+  // ---- Status + countdown ----
+  function daysLeft() { return Math.max(0, Math.ceil((CLOSES_AT - Date.now()) / 86400000)); }
+  function applyClosed() {
+    closed = true;
+    document.body.classList.add('is-closed');
+    $('heroStatusText').textContent = 'Nominations closed';
+    $('heroCta').innerHTML = 'Get the list first &darr;';
+    $('heroCta').setAttribute('href', '#subscribe');
+    $('formTitle').textContent = 'The call is closed';
+    document.querySelector('.ph .dek').innerHTML = 'Nominations are closed. Thank you to everyone who sent names. <b>The Project C 100 launches in January.</b> Subscribe to get it first.';
+    document.querySelector('.ph-facts .fo').innerHTML = '<i></i>Closed Nov. 13';
+  }
+  if (closed) {
+    applyClosed();
+  } else {
+    var d = daysLeft();
+    $('heroStatusText').textContent = d <= 1 ? 'Nominations open · Last day' : 'Nominations open · ' + d + ' days left';
+  }
+
+  // ---- Nomination form ----
+  var form = $('nomForm');
+  var why = $('f_why');
+  var whyCount = $('whyCount');
+  function updateCount() {
+    var n = why.value.length;
+    whyCount.textContent = n.toLocaleString('en-US') + ' / 1,500';
+    whyCount.classList.toggle('near', n > WHY_MAX - 150);
+  }
+  why.addEventListener('input', updateCount);
+
+  var heard = $('f_heard_from');
+  function syncOutlet() { $('outletWrap').hidden = heard.value !== 'Another newsletter or outlet'; }
+  heard.addEventListener('change', syncOutlet);
+
+  var SECTION1 = ['nominee_name', 'work_name', 'primary_link', 'other_links', 'coverage', 'location', 'why', 'example_link', 'nominee_email'];
+
+  function val(name) { var el = form.elements[name]; return el && typeof el.value === 'string' ? el.value.trim() : ''; }
+  function isEmail(s) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s) && s.length < 254; }
+  function looksLikeUrl(s) {
+    if (!s) return false;
+    var u = /^https?:\/\//i.test(s) ? s : 'https://' + s;
+    try { var x = new URL(u); return x.hostname.indexOf('.') > 0 && !/\s/.test(s); } catch (e) { return false; }
+  }
+
+  function setErr(field, msg) {
+    var row = form.querySelector('.row[data-field="' + field + '"]');
+    var box = $('e_' + field);
+    if (!row || !box) return;
+    row.classList.toggle('bad', !!msg);
+    box.textContent = msg || '';
+    var input = $('f_' + field);
+    if (input) { if (msg) { input.setAttribute('aria-invalid', 'true'); input.setAttribute('aria-errormessage', 'e_' + field); } else { input.removeAttribute('aria-invalid'); } }
+  }
+  function clearErrs() { form.querySelectorAll('.row.bad').forEach(function (r) { setErr(r.getAttribute('data-field'), ''); }); }
+
+  function collect() {
+    var platforms = Array.prototype.slice.call(form.querySelectorAll('input[name="platforms"]:checked')).map(function (x) { return x.value; });
+    var self = form.querySelector('input[name="self_nomination"]:checked');
+    return {
+      mode: 'nominate',
+      nominee_name: val('nominee_name'), work_name: val('work_name'), primary_link: val('primary_link'),
+      other_links: val('other_links'), platforms: platforms, coverage: val('coverage'), location: val('location'),
+      why: val('why'), example_link: val('example_link'), self_nomination: self ? self.value : '',
+      nominee_email: val('nominee_email'), nominator_name: val('nominator_name'), nominator_email: val('nominator_email'),
+      heard_from: heard.value, heard_from_outlet: heard.value === 'Another newsletter or outlet' ? val('heard_from_outlet') : '',
+      newsletter_opt_in: $('f_newsletter_opt_in').checked,
+      utm_source: utm.utm_source, utm_medium: utm.utm_medium, utm_campaign: utm.utm_campaign, referrer: referrer,
+      website: form.elements.website.value, elapsed_ms: Date.now() - renderedAt
+    };
+  }
+
+  function validate(d) {
+    var e = {};
+    ['nominee_name', 'work_name', 'coverage', 'location', 'why', 'nominator_name'].forEach(function (k) { if (!d[k]) e[k] = 'This one is required.'; });
+    if (!d.primary_link) e.primary_link = 'This one is required.';
+    else if (!looksLikeUrl(d.primary_link)) e.primary_link = 'That link doesn’t look right.';
+    if (d.example_link && !looksLikeUrl(d.example_link)) e.example_link = 'That link doesn’t look right.';
+    if (!d.platforms.length) e.platforms = 'Pick at least one.';
+    if (d.why.length > WHY_MAX) e.why = 'Please keep this under 1,500 characters.';
+    if (!d.self_nomination) e.self_nomination = 'Please choose yes or no.';
+    if (d.nominee_email && !isEmail(d.nominee_email)) e.nominee_email = 'That email doesn’t look right.';
+    if (!d.nominator_email) e.nominator_email = 'This one is required.';
+    else if (!isEmail(d.nominator_email)) e.nominator_email = 'That email doesn’t look right.';
+    if (!d.heard_from) e.heard_from = 'Please pick one.';
+    return e;
+  }
+
+  function showErrors(e) {
+    var order = ['nominee_name', 'work_name', 'primary_link', 'platforms', 'coverage', 'location', 'why', 'example_link', 'self_nomination', 'nominee_email', 'nominator_name', 'nominator_email', 'heard_from'];
+    var first = null;
+    order.forEach(function (k) { if (e[k]) { setErr(k, e[k]); if (!first) first = k; } });
+    if (first) {
+      var row = form.querySelector('.row[data-field="' + first + '"]');
+      row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      var focusable = row.querySelector('input:not([type=hidden]), textarea, select');
+      if (focusable) setTimeout(function () { focusable.focus({ preventScroll: true }); }, 350);
+    }
+  }
+
+  // clear a field's error as soon as it's fixed
+  form.addEventListener('input', function (ev) {
+    var row = ev.target.closest('.row');
+    if (row && row.classList.contains('bad')) setErr(row.getAttribute('data-field'), '');
+  });
+  form.addEventListener('change', function (ev) {
+    var row = ev.target.closest('.row');
+    if (row && row.classList.contains('bad')) setErr(row.getAttribute('data-field'), '');
+  });
+
+  var alertBox = $('nomAlert');
+  var ERROR_MSG = 'Something went wrong on our end and your nomination didn’t go through. Please try again. If it keeps happening, email <a href="mailto:liz@projectc.com">liz@projectc.com</a>.';
+  function showAlert(html) { alertBox.innerHTML = html; alertBox.classList.add('show'); }
+  function hideAlert() { alertBox.classList.remove('show'); alertBox.innerHTML = ''; }
+
+  var sent = 0;
+  var submitBtn = $('nomSubmit');
+
+  function send(payload) {
+    if (PREVIEW) {
+      // Local preview only: type "fail" in the nominee's name to see the error state.
+      return new Promise(function (res) {
+        setTimeout(function () {
+          res(/fail/i.test(payload.nominee_name) ? { ok: false, status: 500, data: {} } : { ok: true, status: 200, data: { ok: true } });
+        }, 700);
+      });
+    }
+    return fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (data) { return { ok: r.ok, status: r.status, data: data }; }); });
+  }
+
+  form.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    hideAlert();
+    clearErrs();
+    var d = collect();
+    var e = validate(d);
+    if (Object.keys(e).length) { showErrors(e); return; }
+
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Sending&hellip;';
+
+    send(d).then(function (res) {
+      if (res.ok) { onSuccess(d); return; }
+      if (res.status === 410 || (res.data && res.data.closed)) { applyClosed(); $('nominate').scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+      if (res.status === 400 && res.data && res.data.fields) { showErrors(res.data.fields); return; }
+      if (res.status === 429 && res.data && res.data.error) { showAlert(res.data.error); return; }
+      showAlert(ERROR_MSG);
+    }).catch(function () {
+      showAlert(ERROR_MSG);
+    }).then(function () {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Send nomination &rarr;';
+    });
+  });
+
+  function onSuccess(d) {
+    sent++;
+    track('P100 Nomination');
+    form.style.display = 'none';
+    $('nomTally').textContent = sent > 1 ? 'You’ve sent ' + sent + ' nominations this visit.' : '';
+    var done = $('nomDone');
+    done.classList.add('show');
+    $('nominate').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function () { done.focus({ preventScroll: true }); }, 400);
+  }
+
+  // "Nominate another": blank Section 1, keep Section 2 exactly as it was.
+  $('nomAnother').addEventListener('click', function () {
+    SECTION1.forEach(function (k) { if (form.elements[k]) form.elements[k].value = ''; });
+    form.querySelectorAll('input[name="platforms"], input[name="self_nomination"]').forEach(function (x) { x.checked = false; });
+    updateCount();
+    clearErrs();
+    hideAlert();
+    $('nomDone').classList.remove('show');
+    form.style.display = '';
+    $('nominate').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function () { $('f_nominee_name').focus({ preventScroll: true }); }, 400);
+  });
+
+  // ---- Subscribe-only box ----
+  var subForm = $('subForm');
+  var subMsg = $('subMsg');
+  var subBtn = $('subBtn');
+  subForm.addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var email = $('subEmail').value.trim();
+    subMsg.classList.remove('bad');
+    if (!isEmail(email)) { subMsg.classList.add('bad'); subMsg.textContent = 'That email doesn’t look right.'; $('subEmail').focus(); return; }
+    subBtn.disabled = true;
+    subMsg.textContent = 'Signing you up…';
+    var payload = { mode: 'subscribe', email: email, website: subForm.elements.website.value, utm_source: utm.utm_source, utm_medium: utm.utm_medium, utm_campaign: utm.utm_campaign, referrer: referrer };
+    var p = PREVIEW
+      ? new Promise(function (res) { setTimeout(function () { res({ ok: true, status: 200, data: { status: 'subscribed' } }); }, 600); })
+      : fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+          .then(function (r) { return r.json().catch(function () { return {}; }).then(function (data) { return { ok: r.ok, status: r.status, data: data }; }); });
+    p.then(function (res) {
+      if (!res.ok) throw new Error('fail');
+      var s = res.data && res.data.status;
+      if (s === 'already_subscribed') subMsg.textContent = 'You’re already on the list. You’ll get the 100 the day it launches.';
+      else if (s === 'previously_unsubscribed') subMsg.innerHTML = 'It looks like you unsubscribed a while back, so we didn’t add you again. To come back, <a href="https://newsletter.projectc.biz" target="_blank" rel="noopener">sign up on the newsletter site</a>.';
+      else { subMsg.textContent = 'You’re in. Watch your inbox for a welcome email.'; track('P100 Subscribe'); }
+      $('subEmail').value = '';
+    }).catch(function () {
+      subMsg.classList.add('bad');
+      subMsg.textContent = 'Something went wrong on our end. Please try again.';
+    }).then(function () { subBtn.disabled = false; });
+  });
+
+  if (PREVIEW) {
+    var pill = document.createElement('div');
+    pill.className = 'preview-pill';
+    pill.textContent = 'Local preview · submissions are simulated' + (closed ? ' · closed state' : '');
+    document.body.appendChild(pill);
+  }
+})();
+</script>
+</body>
+</html>

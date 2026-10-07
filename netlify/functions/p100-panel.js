@@ -96,7 +96,7 @@ async function googleToken() {
     signal: AbortSignal.timeout(5000),
   });
   const d = await res.json().catch(() => ({}));
-  if (!res.ok || !d.access_token) throw new Error(`Google token error ${res.status}`);
+  if (!res.ok || !d.access_token) throw new Error(`Google token error ${res.status} ${d.error || ''}`);
   cachedToken = { token: d.access_token, exp: now + (d.expires_in || 3600) };
   return cachedToken.token;
 }
@@ -185,7 +185,10 @@ exports.handler = async (event) => {
     data = await readSheet();
   } catch (err) {
     console.error('p100-panel: sheet read failed', err && err.message);
-    return json(503, { error: 'unavailable' });
+    // A short, non-sensitive reason code helps diagnose setup problems.
+    const m = String(err && err.message || '');
+    const reason = /env vars not set/.test(m) ? 'config' : /token error/.test(m) ? 'auth' : (m.match(/Sheets read (\d+)/) || [])[1] || 'other';
+    return json(503, { error: 'unavailable', reason });
   }
 
   const me = data.panelists.find((p) => keyMatches(p.key, k));

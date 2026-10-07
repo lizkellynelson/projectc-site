@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel HQ · The Project C 100 | Project C</title>
+<!-- PRIVATE: the advisory panel's home. Never index, never add to sitemap.xml.
+     This file holds no private content; everything private comes from
+     /.netlify/functions/p100-panel, and only for a valid personal key. -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32.png">
+<link rel="apple-touch-icon" href="../../apple-touch-icon.png">
+<link rel="stylesheet" href="../../projectc-ds.css">
+<style>
+/* ---- Panel HQ: the Project C 100 advisory panel ----
+   Same system as /100 (the misregistered "100", hard rules, CMYK dots).
+   One job: tell a panelist what's next, and keep the plan in one place. ---- */
+.nav.scrolled { box-shadow: 0 4px 24px rgba(21,23,26,0.08); }
+.eyebrow-s { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* ---------- HERO ---------- */
+.hq { display: grid; grid-template-columns: 0.8fr 1.2fr; border-bottom: var(--rule); }
+.hq-plate { background: var(--porcelain); border-right: var(--rule); padding: clamp(1.75rem,3.5vw,3rem) clamp(1.25rem,3vw,2.5rem); display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem; overflow: hidden; }
+.hq-slug { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.hq-slug .cmyk-dots i { width: 9px; height: 9px; }
+.big100 { display: grid; font-family: var(--display); font-size: clamp(7rem, 22vw, 20rem); line-height: 0.78; letter-spacing: -0.02em; user-select: none; }
+.big100 span { grid-area: 1 / 1; mix-blend-mode: multiply; }
+.big100 .c { color: var(--cyan);    transform: translate(-0.018em, -0.010em); }
+.big100 .m { color: var(--magenta); transform: translate(0.016em, 0.006em); }
+.big100 .y { color: var(--yellow);  transform: translate(0.004em, 0.020em); }
+.big100 .k { color: var(--ink); }
+.hq-cap { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; padding-top: 0.9rem; border-top: var(--rule); }
+.hq-cap .ed { font-family: var(--display); font-size: clamp(1.3rem,2.2vw,1.8rem); line-height: 1; }
+
+.hq-copy { padding: clamp(2rem,4.5vw,3.75rem) clamp(1.25rem,3vw,2.75rem); display: flex; flex-direction: column; justify-content: center; }
+.badge { align-self: flex-start; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0.7rem; border: var(--rule); background: var(--yellow); margin-bottom: 1.3rem; }
+.badge.chair { background: var(--coral); }
+.hq h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.8rem, 6vw, 5.2rem); line-height: 0.94; letter-spacing: 0.01em; margin-bottom: 1.3rem; }
+.hq h1 .dot { color: var(--coral); }
+.note { font-family: var(--serif); font-size: clamp(1.1rem, 1.7vw, 1.3rem); line-height: 1.55; max-width: 52ch; }
+.note-sig { margin-top: 1rem; font-weight: 700; font-size: 0.95rem; }
+
+/* ---------- NEXT UP ---------- */
+.nx { border-bottom: var(--rule); background: var(--ink); color: var(--white); }
+.nx-inner { max-width: var(--maxw); margin: 0 auto; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: clamp(1rem,3vw,2.5rem); padding: clamp(1.5rem,3vw,2.25rem) clamp(1.25rem,3vw,2.75rem); }
+.nx .eyebrow-s { color: var(--coral); }
+.nx-count { font-family: var(--display); font-size: clamp(3rem,7vw,5.5rem); line-height: 0.85; text-align: center; min-width: 2ch; }
+.nx-count small { display: block; font-family: var(--sans); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 0.5rem; color: rgba(245,246,248,0.7); }
+.nx-what { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.6rem,3.2vw,2.6rem); line-height: 1; margin: 0.4rem 0 0.5rem; }
+.nx-when { color: rgba(245,246,248,0.78); font-size: 1rem; }
+.nx-go { color: var(--ink); }
+
+/* ---------- SECTIONS ---------- */
+.sec { border-bottom: var(--rule); }
+.sec-inner { max-width: 1120px; margin: 0 auto; padding: clamp(2.5rem,5vw,4.25rem) 2rem; display: grid; grid-template-columns: 11rem 1fr; gap: 2rem; }
+.sec-label { padding-top: 0.55rem; border-top: var(--rule); align-self: start; color: var(--coral-deep); }
+.sec h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem,4vw,3.2rem); line-height: 0.98; margin-bottom: 1.4rem; }
+.sec p.lede { font-size: 1.05rem; line-height: 1.65; max-width: 62ch; margin-bottom: 1.6rem; color: var(--muted); }
+.sec.tinted { background: var(--porcelain); }
+
+/* timeline */
+.tl { list-style: none; border-left: var(--rule); margin-left: 0.6rem; }
+.tl li { position: relative; padding: 0 0 1.5rem 1.6rem; }
+.tl li:last-child { padding-bottom: 0.25rem; }
+.tl li::before { content: ""; position: absolute; left: -9px; top: 0.25rem; width: 16px; height: 16px; border-radius: 50%; background: var(--white); border: var(--rule); }
+.tl li.panel::before { background: var(--cyan); }
+.tl li.team::before { background: var(--white); }
+.tl li.done { opacity: 0.5; }
+.tl li.done::before { background: var(--ink); }
+.tl li.now::before { background: var(--coral); box-shadow: 0 0 0 5px rgba(254,107,65,0.25); }
+.tl-date { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
+.tl-what { font-weight: 700; font-size: 1.08rem; margin-top: 0.2rem; }
+.tl-det { font-size: 0.95rem; line-height: 1.55; color: var(--muted); margin-top: 0.2rem; max-width: 60ch; }
+.tag { font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; padding: 0.15rem 0.4rem; border: 1.5px solid var(--ink); }
+.tag.you { background: var(--cyan); color: var(--ink); }
+.tag.here { background: var(--coral); }
+.tl-today { position: relative; padding: 0 0 1.5rem 1.6rem; }
+.tl li.tl-today::before { content: ""; width: auto; height: 0; border-radius: 0; background: none; border: none; position: absolute; left: -2px; right: 0; top: 0.55rem; border-top: 2px dashed var(--coral); }
+.tl-today span { position: relative; background: var(--white); padding-right: 0.6rem; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); }
+.sec.tinted .tl-today span { background: var(--porcelain); }
+.legend { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 1.6rem; font-size: 0.78rem; color: var(--muted); }
+.legend i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--ink); margin-right: 0.4rem; vertical-align: -1px; }
+
+/* calls */
+.calls { display: grid; grid-template-columns: 1fr 1fr; border: var(--rule); background: var(--white); }
+.call { padding: 1.5rem 1.6rem 1.7rem; }
+.call + .call { border-left: var(--rule); }
+.call:nth-child(1) { box-shadow: inset 0 5px 0 var(--cyan); }
+.call:nth-child(2) { box-shadow: inset 0 5px 0 var(--magenta); }
+.call h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.5rem; line-height: 1; margin: 0.6rem 0 0.5rem; font-weight: 400; }
+.call .when { font-weight: 700; }
+.call p { font-size: 0.95rem; line-height: 1.55; color: var(--muted); margin-top: 0.5rem; }
+.call a.btn { margin-top: 1rem; }
+
+/* rules */
+.rules { display: grid; grid-template-columns: 1fr 1fr; border: var(--rule); background: var(--white); }
+.rule-c { padding: 1.4rem 1.5rem 1.6rem; border-bottom: var(--rule); }
+.rule-c:nth-child(odd) { border-right: var(--rule); }
+.rule-c:nth-last-child(-n+2) { border-bottom: none; }
+.rule-c .k { font-family: var(--display); text-transform: uppercase; font-size: 1.3rem; line-height: 1.05; margin-bottom: 0.55rem; }
+.rule-c p { font-size: 0.95rem; line-height: 1.6; }
+.vote-how { margin-top: 1.6rem; font-size: 1rem; line-height: 1.65; max-width: 62ch; }
+
+/* ballot */
+.ballot-locked { border: var(--rule); background: var(--white); box-shadow: 8px 8px 0 var(--ink); padding: clamp(1.5rem,3vw,2.25rem); display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: center; max-width: 760px; }
+.ballot-locked .lock { width: 64px; height: 64px; border: var(--rule); display: grid; place-items: center; background: var(--yellow); }
+.ballot-locked h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.5rem,3vw,2.1rem); line-height: 1; font-weight: 400; margin-bottom: 0.5rem; }
+.ballot-locked p { line-height: 1.6; color: var(--muted); }
+.keys { display: flex; gap: 0.5rem; margin-top: 0.9rem; flex-wrap: wrap; }
+.keys span { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; border: 1.5px solid var(--ink); padding: 0.3rem 0.55rem; }
+.keys .kk { background: var(--cyan); } .keys .kc { background: var(--magenta); color: var(--white); } .keys .ks { background: var(--yellow); }
+
+/* roster */
+.roster { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 0; border: var(--rule); background: var(--white); }
+.person { padding: 1.1rem 1.2rem; border-right: var(--rule-thin); border-bottom: var(--rule-thin); }
+.person .n { font-weight: 800; }
+.person .a { font-size: 0.88rem; color: var(--muted); margin-top: 0.15rem; }
+.person.chair .n::after { content: " · Chair"; color: var(--coral-deep); font-size: 0.8rem; }
+.roster-note { margin-top: 0.9rem; font-size: 0.88rem; color: var(--muted); }
+
+/* resources */
+.res { display: grid; grid-template-columns: repeat(3, 1fr); border: var(--rule); background: var(--white); }
+.res a { padding: 1.2rem 1.3rem 1.3rem; border-right: var(--rule); display: block; transition: background 0.15s; }
+.res a:last-child { border-right: none; }
+.res a:hover { background: var(--tint); }
+.res .t { font-weight: 800; display: flex; justify-content: space-between; gap: 0.5rem; }
+.res .d { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.5; }
+
+/* chair-only */
+.chairbox { border: var(--rule); background: var(--white); }
+.chair-row { display: grid; grid-template-columns: 1fr auto auto; gap: 1rem; align-items: center; padding: 0.8rem 1.1rem; border-bottom: var(--rule-thin); }
+.chair-row:last-child { border-bottom: none; }
+.st { font-size: 0.64rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.45rem; border: 1.5px solid var(--ink); }
+.st.yes { background: var(--yellow); } .st.no { background: var(--porcelain); color: var(--muted); }
+.copy { font: inherit; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; background: var(--white); border: 1.5px solid var(--ink); padding: 0.35rem 0.6rem; cursor: pointer; }
+.copy:hover { background: var(--tint); }
+.chair-help { font-size: 0.9rem; color: var(--muted); margin-top: 1rem; line-height: 1.6; max-width: 70ch; }
+.chair-help a { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+/* gate */
+.gate { min-height: 62vh; display: grid; place-items: center; padding: 3rem 1.25rem; border-bottom: var(--rule); background: var(--porcelain); }
+.gate-card { max-width: 560px; border: var(--rule); background: var(--white); box-shadow: 8px 8px 0 var(--ink); padding: clamp(1.75rem,4vw,2.75rem); }
+.gate-card h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.2rem,5vw,3.2rem); line-height: 0.95; margin: 1rem 0 1rem; }
+.gate-card p { line-height: 1.65; }
+.gate-card p + p { margin-top: 0.8rem; }
+.gate-card a { color: var(--coral-deep); text-decoration: underline; text-underline-offset: 3px; }
+.loading { min-height: 50vh; display: grid; place-items: center; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+[hidden] { display: none !important; }
+
+.preview-pill { position: fixed; left: 1rem; bottom: 1rem; z-index: 3000; background: var(--yellow); border: var(--rule); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.5rem 0.75rem; max-width: 24rem; line-height: 1.4; }
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .hq { grid-template-columns: 1fr; }
+  .hq-plate { border-right: none; border-bottom: var(--rule); }
+  .big100 { font-size: clamp(6rem, 40vw, 14rem); }
+  .nx-inner { grid-template-columns: auto 1fr; }
+  .nx-go { grid-column: 1 / -1; justify-self: start; }
+  .sec-inner { grid-template-columns: 1fr; gap: 1rem; padding-left: 1.25rem; padding-right: 1.25rem; }
+  .sec-label { justify-self: start; }
+  .calls, .rules { grid-template-columns: 1fr; }
+  .call + .call { border-left: none; border-top: var(--rule); }
+  .rule-c:nth-child(odd) { border-right: none; }
+  .rule-c:nth-last-child(2) { border-bottom: var(--rule); }
+  .res { grid-template-columns: 1fr; }
+  .res a { border-right: none; border-bottom: var(--rule); }
+  .res a:last-child { border-bottom: none; }
+}
+@media (max-width: 640px) {
+  .hq-plate { padding: 1.1rem 1.25rem 1.25rem; gap: 0.8rem; }
+  .hq-cap { display: none; }
+  .hq-copy { padding: 1.75rem 1.25rem 2.2rem; }
+  .ballot-locked { grid-template-columns: 1fr; box-shadow: 5px 5px 0 var(--ink); }
+  .chair-row { grid-template-columns: 1fr auto; }
+  .chair-row .copy { grid-column: 1 / -1; justify-self: start; }
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <a href="../../index.html" class="nav-logo"><img src="../../project-c_lockup_color.png" alt="Project C home"></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#next">Next up</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#rules">The rules</a></li>
+      <li><a href="#ballot">Ballot</a></li>
+      <li><a href="#panel">The panel</a></li>
+      <li><a href="../" class="nav-cta">The open call &rarr;</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks" onclick="var n=document.getElementById('navLinks');var o=n.classList.toggle('show');this.setAttribute('aria-expanded',o);">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="loading" id="loading">Opening Panel HQ&hellip;</div>
+
+<!-- GATE: no key, a bad key, or a link that isn't active yet -->
+<section class="gate" id="gate" hidden>
+  <div class="gate-card">
+    <span class="eyebrow-s" style="color:var(--coral-deep)">The Project C 100 · Advisory panel</span>
+    <h1 id="gateTitle">This page is for the panel</h1>
+    <p id="gateBody">Panel HQ is the private home for the Project C 100 advisory panel. Use the personal link Liz sent you by email.</p>
+    <p>Looking for the open call? <a href="../">Nominate someone at projectc.com/100</a>.</p>
+    <p>Trouble with your link? Email <a href="mailto:liz@projectc.com">liz@projectc.com</a>.</p>
+  </div>
+</section>
+
+<div id="hqApp" hidden>
+
+  <!-- HERO -->
+  <header class="hq">
+    <div class="hq-plate" aria-hidden="true">
+      <div class="hq-slug eyebrow-s"><span>The Project C 100</span><span class="cmyk-dots"><i></i><i></i><i></i><i></i></span></div>
+      <div class="big100"><span class="c">100</span><span class="m">100</span><span class="y">100</span><span class="k">100</span></div>
+      <div class="hq-cap eyebrow-s"><span>Creator Journalists to Watch</span><span class="ed">2027</span></div>
+    </div>
+    <div class="hq-copy">
+      <span class="badge eyebrow-s" id="badge">Advisory panel · Panel HQ</span>
+      <h1>Welcome, <span id="firstName">friend</span><span class="dot">.</span></h1>
+      <p class="note" id="welcomeNote"></p>
+      <p class="note-sig">&mdash; Liz Kelly Nelson, Project C</p>
+    </div>
+  </header>
+
+  <!-- NEXT UP -->
+  <section class="nx" id="next" aria-label="Next up">
+    <div class="nx-inner">
+      <div class="nx-count" id="nxCount">&ndash;<small id="nxUnit">days</small></div>
+      <div>
+        <span class="eyebrow-s" id="nxEyebrow">Next for the panel</span>
+        <div class="nx-what" id="nxWhat"></div>
+        <div class="nx-when" id="nxWhen"></div>
+      </div>
+      <a href="#timeline" class="btn btn-coral nx-go">See the whole timeline &darr;</a>
+    </div>
+  </section>
+
+  <!-- CHAIR ONLY -->
+  <section class="sec" id="chair" hidden>
+    <div class="sec-inner">
+      <div class="sec-label eyebrow-s">Chair's desk</div>
+      <div>
+        <h2>Who's in</h2>
+        <p class="lede">Only you see this section. When someone says yes, change their status to <b>yes</b> in Panel HQ, then send them their link. Their name appears on everyone's page within a minute.</p>
+        <div class="chairbox" id="chairList"></div>
+        <p class="chair-help">Edit dates, call times and the welcome note in the <a href="https://docs.google.com/spreadsheets/d/1VB6Pgad_FufiksCE0hmTSCu2G1yQoXM70zC-Dh72-qg/edit" target="_blank" rel="noopener">Panel HQ sheet</a>. Team steps (white dots) only show to you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="sec tinted" id="timeline">
+    <div class="sec-inner">
+      <div class="sec-label eyebrow-s">Timeline</div>
+      <div>
+        <h2>How this unfolds</h2>
+        <p class="lede">If a date moves, it moves here first. Blue dots are yours; everything else is on us.</p>
+        <div class="legend" id="legend"><span><i style="background:var(--cyan)"></i>Panel</span><span><i style="background:var(--coral)"></i>Up next</span><span><i style="background:var(--ink)"></i>Done</span></div>
+        <ol class="tl" id="tl"></ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALLS -->
+  <section class="sec" id="calls">
+    <div class="sec-inner">
+      <div class="sec-label eyebrow-s">Your calls</div>
+      <div>
+        <h2>Two calls, that's it</h2>
+        <div class="calls">
+          <div class="call">
+            <span class="eyebrow-s">Call 1 · 45 min</span>
+            <h3>The categories</h3>
+            <div class="when" id="cat1When"></div>
+            <p>We react to the 10 categories before they lock. This is the cheapest place to catch a blind spot, before any names exist.</p>
+            <a class="btn btn-ghost" id="cat1Link" target="_blank" rel="noopener" hidden>Join the call &rarr;</a>
+          </div>
+          <div class="call">
+            <span class="eyebrow-s">Call 2 · 90 min</span>
+            <h3>Settle the close ones</h3>
+            <div class="when" id="cat2When"></div>
+            <p>After everyone has voted, we meet once to settle the names where the panel disagrees.</p>
+            <a class="btn btn-ghost" id="cat2Link" target="_blank" rel="noopener" hidden>Join the call &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RULES -->
+  <section class="sec tinted" id="rules">
+    <div class="sec-inner">
+      <div class="sec-label eyebrow-s">The rules</div>
+      <div>
+        <h2>How we'll work</h2>
+        <div class="rules">
+          <div class="rule-c"><div class="k">Sit out what you're close to</div><p>If you work with, for or alongside someone in the packet, you don't vote on them. Tell Liz and she'll note it. Everyone on this panel knows people in the field, so this will come up for all of us.</p></div>
+          <div class="rule-c"><div class="k">It stays confidential</div><p>Until the January release, that includes who's on the list, who isn't and how the votes went.</p></div>
+          <div class="rule-c"><div class="k">You can't be on the list</div><p>Serving on the panel takes you out of consideration this year.</p></div>
+          <div class="rule-c"><div class="k">No fees, no sponsor say</div><p>There's no fee to be considered, ever. Sponsors fund the work, have no say in who's on the list and never see it early.</p></div>
+        </div>
+        <p class="vote-how"><b>How the vote works.</b> The panel votes on the final 100, and Liz chairs it with the final say. Your votes carry real weight: if most of the panel says cut someone, they're cut unless Liz has a reason she'd be comfortable putting in writing. The standard is <b>impact first, innovation second</b>: who is reaching people and changing how they think, and who is doing it in a way a newsroom wouldn't.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BALLOT -->
+  <section class="sec" id="ballot">
+    <div class="sec-inner">
+      <div class="sec-label eyebrow-s">Your ballot</div>
+      <div>
+        <h2>Where you'll vote</h2>
+        <div class="ballot-locked" id="ballotLocked">
+          <div class="lock" aria-hidden="true"><svg width="28" height="32" viewBox="0 0 28 32"><rect x="2" y="14" width="24" height="16" fill="none" stroke="#15171A" stroke-width="3"/><path d="M7 14V9a7 7 0 0 1 14 0v5" fill="none" stroke="#15171A" stroke-width="3"/></svg></div>
+          <div>
+            <h3>Opens Dec. 8</h3>
+            <p>Your packet will be right here: each category's proposed 10 plus about five alternates, roughly 150 names, each with a short evidence file. You'll get an email when it opens.</p>
+            <div class="keys" aria-label="Your three choices for each name"><span class="kk">Keep</span><span class="kc">Cut</span><span class="ks">Swap</span><span>+ Who's missing</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL -->
+  <section class="sec tinted" id="panel">
+    <div class="sec-inner">
+      <div class="sec-label eyebrow-s">The panel</div>
+      <div>
+        <h2>Who you're working with</h2>
+        <div class="roster" id="roster"></div>
+        <p class="roster-note">More names appear here as people say yes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESOURCES -->
+  <section class="sec" id="resources">
+    <div class="sec-inner">
+      <div class="sec-label eyebrow-s">Handy links</div>
+      <div>
+        <h2>Everything else</h2>
+        <div class="res">
+          <a id="onePager" href="#" target="_blank" rel="noopener"><div class="t">The one-pager <span>&nearr;</span></div><div class="d">The panel ask, in full.</div></a>
+          <a href="../../top50creatorjournalists.html" target="_blank" rel="noopener"><div class="t">Last year's Top 50 <span>&nearr;</span></div><div class="d">Where this started.</div></a>
+          <a href="mailto:liz@projectc.com"><div class="t">Email Liz <span>&rarr;</span></div><div class="d">liz@projectc.com, for anything.</div></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</main>
+
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design. <a href="../../privacy-policy.html">Privacy Policy</a></span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var ENDPOINT = '/.netlify/functions/p100-panel';
+  var STORE_KEY = 'p100_panel_key';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var nav = $('mainNav');
+  window.addEventListener('scroll', function () { nav.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true });
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // —— The key: from the link (?k=...), then remembered on this device ——
+  var store = {
+    get: function () { try { return localStorage.getItem(STORE_KEY); } catch (e) { return null; } },
+    set: function (v) { try { localStorage.setItem(STORE_KEY, v); } catch (e) {} },
+    clear: function () { try { localStorage.removeItem(STORE_KEY); } catch (e) {} }
+  };
+  var params = new URLSearchParams(location.search);
+  var fromLink = params.get('k');
+  var key = fromLink || store.get();
+  if (fromLink) {
+    store.set(fromLink);
+    // Keep the key out of the address bar (screen shares, screenshots).
+    try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+  }
+
+  function showGate(title, body) {
+    $('loading').hidden = true;
+    $('hqApp').hidden = true;
+    $('gate').hidden = false;
+    if (title) $('gateTitle').textContent = title;
+    if (body) $('gateBody').textContent = body;
+  }
+
+  // —— Dates ——
+  var MONTHS = ['Jan.', 'Feb.', 'March', 'April', 'May', 'June', 'July', 'Aug.', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
+  var DAYS = ['Sun.', 'Mon.', 'Tue.', 'Wed.', 'Thu.', 'Fri.', 'Sat.'];
+  function parse(d) { if (!d) return null; var p = d.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function today() { var n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); }
+  function fmt(d) { return DAYS[d.getDay()] + ' ' + MONTHS[d.getMonth()] + ' ' + d.getDate(); }
+  function fmtShort(d) { return MONTHS[d.getMonth()] + ' ' + d.getDate(); }
+  function dateText(t) {
+    if (t.label) return t.label;
+    var s = parse(t.start), e = parse(t.end);
+    if (!s) return 'Date TBA';
+    if (!e) return fmt(s);
+    if (s.getMonth() === e.getMonth()) return MONTHS[s.getMonth()] + ' ' + s.getDate() + '–' + e.getDate();
+    return fmtShort(s) + ' – ' + fmtShort(e);
+  }
+  function endOf(t) { return parse(t.end) || parse(t.start); }
+
+  // —— Render ——
+  function render(d) {
+    var me = d.me, s = d.settings || {}, isChair = me.role === 'chair';
+    $('firstName').textContent = me.first || 'friend';
+    $('welcomeNote').textContent = s.welcome_note || '';
+    if (isChair) { $('badge').textContent = 'Chair · Panel HQ'; $('badge').classList.add('chair'); }
+
+    // Timeline: dated items in date order, undated (TBA) items last, as entered.
+    var items = (d.timeline || []).slice();
+    var dated = items.filter(function (t) { return t.start; }).sort(function (a, b) { return a.start < b.start ? -1 : a.start > b.start ? 1 : 0; });
+    var undated = items.filter(function (t) { return !t.start; });
+    items = dated.concat(undated);
+
+    var t0 = today();
+    var nextIdx = -1;
+    items.forEach(function (t, i) {
+      var end = endOf(t);
+      t._past = t.done || (end && end < t0);
+      if (nextIdx === -1 && !t._past && t.who === 'Panel') nextIdx = i;
+    });
+
+    var html = '', todayPlaced = false;
+    items.forEach(function (t, i) {
+      var s0 = parse(t.start);
+      if (!todayPlaced && (!s0 || s0 > t0) && !t._past) {
+        html += '<li class="tl-today" aria-hidden="true"><span>Today · ' + fmt(t0) + '</span></li>';
+        todayPlaced = true;
+      }
+      var cls = [t.who === 'Team' ? 'team' : 'panel'];
+      if (t._past) cls.push('done');
+      if (i === nextIdx) cls.push('now');
+      var tags = '';
+      if (t.who === 'Panel' && !t._past) tags += '<span class="tag you">You</span>';
+      if (i === nextIdx) tags += '<span class="tag here">Up next</span>';
+      if (t.who === 'Team' && isChair) tags += '<span class="tag">Team</span>';
+      html += '<li class="' + cls.join(' ') + '"><div class="tl-date">' + esc(dateText(t)) + tags + '</div>' +
+        '<div class="tl-what">' + esc(t.what) + '</div>' +
+        (t.details ? '<div class="tl-det">' + esc(t.details) + '</div>' : '') + '</li>';
+    });
+    $('tl').innerHTML = html;
+    if (isChair) $('legend').insertAdjacentHTML('afterbegin', '<span><i style="background:var(--white)"></i>Team (only you see these)</span>');
+
+    // Next up
+    var next = nextIdx > -1 ? items[nextIdx] : null;
+    if (next) {
+      var st = parse(next.start), en = endOf(next);
+      $('nxWhat').textContent = next.what;
+      $('nxWhen').textContent = dateText(next) + (next.details ? ' · ' + next.details : '');
+      if (st) {
+        var days = Math.round((st - t0) / 86400000);
+        if (days <= 0 && en >= t0) { $('nxCount').firstChild.nodeValue = 'Now'; $('nxUnit').textContent = 'happening'; }
+        else { $('nxCount').firstChild.nodeValue = String(days); $('nxUnit').textContent = days === 1 ? 'day away' : 'days away'; }
+      } else { $('nxCount').firstChild.nodeValue = '★'; $('nxUnit').textContent = 'date TBA'; }
+    } else {
+      $('nxWhat').textContent = 'The Project C 100 is live';
+      $('nxWhen').textContent = 'Thank you for everything.';
+      $('nxCount').firstChild.nodeValue = '✓'; $('nxUnit').textContent = 'done';
+    }
+
+    // Calls
+    $('cat1When').textContent = s.category_call || 'Time to come';
+    $('cat2When').textContent = s.settle_call || 'Time to come';
+    if (s.category_call_link) { $('cat1Link').href = s.category_call_link; $('cat1Link').hidden = false; }
+    if (s.settle_call_link) { $('cat2Link').href = s.settle_call_link; $('cat2Link').hidden = false; }
+
+    // Ballot (phase 2 replaces this block when ballot_status is "open")
+    var ballotItem = (d.timeline || []).filter(function (t) { return /vote/i.test(t.what) && t.start; })[0];
+    if (ballotItem) $('ballotLocked').querySelector('h3').textContent = 'Opens ' + fmtShort(parse(ballotItem.start));
+
+    // Roster
+    var people = '<div class="person chair"><div class="n">Liz Kelly Nelson</div><div class="a">Project C</div></div>';
+    (d.roster || []).forEach(function (p) {
+      people += '<div class="person"><div class="n">' + esc(p.name) + '</div>' + (p.affiliation ? '<div class="a">' + esc(p.affiliation) + '</div>' : '') + '</div>';
+    });
+    $('roster').innerHTML = people;
+
+    if (s.one_pager_url) $('onePager').href = s.one_pager_url; else $('onePager').hidden = true;
+
+    // Chair's desk
+    if (isChair && d.chair) {
+      $('chair').hidden = false;
+      $('chairList').innerHTML = d.chair.panelists.map(function (p, i) {
+        var st = (p.status || '').toLowerCase();
+        return '<div class="chair-row"><b>' + esc(p.name) + '</b><span class="st ' + esc(st) + '">' + esc(p.status) + '</span>' +
+          (p.link ? '<button class="copy" data-i="' + i + '">Copy their link</button>' : '<span></span>') + '</div>';
+      }).join('');
+      $('chairList').addEventListener('click', function (e) {
+        var b = e.target.closest('.copy'); if (!b) return;
+        var link = d.chair.panelists[+b.getAttribute('data-i')].link;
+        var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy their link'; }, 1600); };
+        if (navigator.clipboard) navigator.clipboard.writeText(link).then(done, function () { prompt('Copy this link:', link); });
+        else prompt('Copy this link:', link);
+      });
+    }
+
+    $('loading').hidden = true;
+    $('gate').hidden = true;
+    $('hqApp').hidden = false;
+  }
+
+  // —— Local preview (opened from a folder): sample data, never on projectc.com ——
+  if (location.protocol === 'file:') {
+    document.body.insertAdjacentHTML('beforeend', '<div class="preview-pill">Local preview · sample data. Add ?chair to see the chair view.</div>');
+    var chair = params.has('chair');
+    render({
+      me: { first: chair ? 'Liz' : 'Jon', role: chair ? 'chair' : 'panelist' },
+      roster: [{ name: 'Jon Laurence', affiliation: 'VP of Production, Newpress' }],
+      settings: { welcome_note: 'Thank you for saying yes. This page is home base: the plan, the rules and, come December, your ballot.', one_pager_url: 'https://docs.google.com/', category_call: 'Week of Oct. 26 · time to come', settle_call: 'Dec. 15 or 16 · time to come', ballot_status: 'closed' },
+      timeline: [
+        { start: '2026-10-07', what: 'Panel invitations go out', who: 'Team', done: true },
+        { start: '2026-10-19', what: 'The open call opens at projectc.com/100', who: 'Panel', details: 'Share it if you like.' },
+        { start: '2026-10-26', end: '2026-10-30', what: 'Category call (45 min)', who: 'Panel' },
+        { start: '2026-12-08', end: '2026-12-14', what: 'Review the packet and vote', who: 'Panel' },
+        { label: 'January 2027 (date TBA)', what: 'Launch', who: 'Panel' }
+      ],
+      chair: chair ? { panelists: [{ name: 'Jon Laurence', status: 'yes', link: 'https://projectc.com/100/panel/?k=example' }, { name: 'Joy Mayer', status: 'invited', link: 'https://projectc.com/100/panel/?k=example2' }] } : null
+    });
+    return;
+  }
+
+  if (!key) { showGate(); return; }
+
+  fetch(ENDPOINT + '?k=' + encodeURIComponent(key), { credentials: 'omit', cache: 'no-store' })
+    .then(function (r) { return r.json().then(function (j) { return { status: r.status, body: j }; }, function () { return { status: r.status, body: {} }; }); })
+    .then(function (res) {
+      if (res.status === 200 && res.body.pending) {
+        showGate('Almost there, ' + (res.body.me && res.body.me.first || 'friend'), 'Your link isn’t switched on yet. Once you’ve told Liz you’re in, it will open right up. Usually within a day.');
+        return;
+      }
+      if (res.status === 200) { render(res.body); return; }
+      if (res.status === 404) { store.clear(); showGate('That link didn’t work', 'The link may be mistyped or out of date. Use the personal link from Liz’s email, or ask her for a fresh one.'); return; }
+      if (res.status === 429) { showGate('Too many tries', 'Please wait a few minutes and try your link again.'); return; }
+      showGate('Panel HQ is having a moment', 'We couldn’t load the page just now. Please try again in a minute.');
+    })
+    .catch(function () { showGate('Panel HQ is having a moment', 'We couldn’t load the page just now. Please check your connection and try again.'); });
+})();
+</script>
+</body>
+</html>

@@ -4,6 +4,8 @@
 
 User-agent: *
 Allow: /
+# The Project C 100 advisory panel's private page. Never index.
+Disallow: /100/panel/
 
 # ---------------------------------------------------------------
 # AI TRAINING CRAWLERS — currently ALLOWED, deliberately.

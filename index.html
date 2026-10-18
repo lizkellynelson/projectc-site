@@ -23,6 +23,33 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="projectc-ds.css">
 <style>
+/* PROJECT C 100 OPEN CALL — added 2026-10-06. Announcement bar + homepage band for the
+   nomination call at /100. Both stay hidden except between 6 a.m. ET Mon, Oct. 19 and
+   11:59 p.m. ET Fri, Nov. 13, 2026 (see the inline script after the band). To preview them
+   before launch, open the homepage with ?p100=preview on the end of the address. */
+.p100-band { display: grid; grid-template-columns: auto 1fr auto; align-items: stretch; border-bottom: var(--rule); background: var(--ink); color: var(--white); }
+.p100-band[hidden], .announce[hidden] { display: none; }
+.p100-band .num { display: grid; font-family: var(--display); font-size: clamp(5.5rem, 11vw, 9.5rem); line-height: 0.78; letter-spacing: -0.02em; padding: 1.6rem 2rem 1.1rem; background: var(--porcelain); border-right: var(--rule); color: var(--ink); }
+.p100-band .num span { grid-area: 1 / 1; mix-blend-mode: multiply; }
+.p100-band .num .c { color: var(--cyan); transform: translate(-0.018em, -0.010em); }
+.p100-band .num .m { color: var(--magenta); transform: translate(0.016em, 0.006em); }
+.p100-band .num .y { color: var(--yellow); transform: translate(0.004em, 0.020em); }
+.p100-band .num .k { color: var(--ink); }
+.p100-band .txt { padding: 1.8rem 2.2rem; display: flex; flex-direction: column; justify-content: center; }
+.p100-band .kick { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #FF8A66; margin-bottom: 0.6rem; display: inline-flex; align-items: center; gap: 0.5rem; }
+.p100-band .kick .blip { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); animation: blip 1.6s ease infinite; }
+.p100-band h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem, 3.8vw, 3.2rem); line-height: 0.95; margin-bottom: 0.6rem; }
+.p100-band h2 .q { color: var(--coral); }
+.p100-band p { color: rgba(245,246,248,0.74); max-width: 56ch; }
+.p100-band .go { display: flex; align-items: center; padding: 1.8rem 2.2rem; border-left: 2px solid rgba(245,246,248,0.25); }
+@media (max-width: 860px) {
+  .p100-band { grid-template-columns: 1fr; }
+  .p100-band .num { border-right: none; border-bottom: var(--rule); font-size: clamp(5rem, 30vw, 8rem); padding: 1.2rem 1.25rem 0.9rem; }
+  .p100-band .txt { padding: 1.6rem 1.25rem 0.6rem; }
+  .p100-band .go { border-left: none; padding: 1rem 1.25rem 1.8rem; }
+  .p100-band .go .btn { width: 100%; justify-content: center; }
+}
+
 /* FUNDED PROGRAMS BAND — added 2026-10-03. Permanent section for programs that outside
    funders pay for, so participants attend free (vs. Going Solo, which people pay to join).
    The CUNY card has date logic in the script at the bottom: it flips from "Now enrolling"
@@ -76,6 +103,13 @@
   <button class="ab-x" onclick="document.getElementById('announcementBar').classList.add('hidden')" aria-label="Dismiss">&#10005;</button>
 </div>
 <script>if (Date.now() >= Date.parse('2026-10-17T04:00:00Z')) document.getElementById('announcementBar').remove();</script>
+
+<!-- ANNOUNCEMENT — Project C 100 open call. Shows only while nominations are open (see the band script below). -->
+<div class="announce" id="p100Bar" hidden>
+  <span class="live"><span class="blip"></span>Nominations open</span>
+  <span>The Project C 100: <a href="100/index.html">who are we missing? &rarr;</a></span>
+  <button class="ab-x" onclick="document.getElementById('p100Bar').hidden=true" aria-label="Dismiss">&#10005;</button>
+</div>
 
 <!-- NAV -->
 <nav class="nav" id="mainNav">
@@ -167,6 +201,37 @@
     <span>The Austin Chronicle previewed one member’s live screening and <b>ran her show as the lead image</b> of its October events roundup</span><span class="reg">&#10010;</span>
   </div>
 </div>
+
+<!-- PROJECT C 100 OPEN CALL — hidden except while nominations are open (Oct. 19 to Nov. 13, 2026). -->
+<section class="p100-band" id="p100Band" aria-labelledby="p100BandTitle" hidden>
+  <div class="num" aria-hidden="true"><span class="c">100</span><span class="m">100</span><span class="y">100</span><span class="k">100</span></div>
+  <div class="txt">
+    <div class="kick"><span class="blip"></span><span id="p100Kick">The Project C 100 &middot; Nominations open</span></div>
+    <h2 id="p100BandTitle">Who are we missing<span class="q">?</span></h2>
+    <p>Nominations are open for the Project C 100: Creator Journalists to Watch, 2027. Tell us who belongs on it. Nominations close November 13.</p>
+  </div>
+  <div class="go"><a href="100/index.html" class="btn btn-coral">Nominate someone &rarr;</a></div>
+</section>
+<script>
+(function () {
+  var opens = Date.parse('2026-10-19T10:00:00Z');   // 6 a.m. ET, Mon. Oct. 19
+  var closes = Date.parse('2026-11-14T04:59:59Z');  // 11:59 p.m. ET, Fri. Nov. 13
+  var now = Date.now();
+  var preview = /[?&]p100=preview/.test(location.search);
+  if (preview || (now >= opens && now <= closes)) {
+    document.getElementById('p100Band').hidden = false;
+    var bar = document.getElementById('p100Bar');
+    var cuny = document.getElementById('announcementBar');
+    if (bar && !(cuny && cuny.isConnected && !preview)) bar.hidden = false;
+    if (preview && cuny) cuny.remove();
+    var days = Math.max(0, Math.ceil((closes - now) / 86400000));
+    if (now >= opens && days <= 7) document.getElementById('p100Kick').textContent = days <= 1 ? 'The Project C 100 · Last day to nominate' : 'The Project C 100 · ' + days + ' days left';
+  } else {
+    var b = document.getElementById('p100Band'); if (b) b.remove();
+    var a = document.getElementById('p100Bar'); if (a) a.remove();
+  }
+})();
+</script>
 
 <!-- MODULES / PILLARS -->
 <section class="modules reveal">

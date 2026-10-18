@@ -67,4 +67,10 @@
     <loc>https://projectc.com/top50creatorjournalists</loc>
     <lastmod>2026-09-22</lastmod>
   </url>
+  <url>
+    <loc>https://projectc.com/100/</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

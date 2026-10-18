@@ -532,13 +532,13 @@ const MEMBER_CONTENT = {
   ],
   resources: [
     {
-      // Stack survey launch, Oct. 5 2026. After the Oct. 16 drawing, change the
-      // description to an "update your stack anytime" line (resubmits still work).
+      // Stack survey launched Oct. 5 2026; drawing closed Oct. 16 (winner drawn Oct. 17).
+      // Now evergreen: resubmitting overwrites a member's answers.
       title: "What's in your stack? (Member survey)",
       description:
-        'Tell us which tools you run your business on, and help build the Project C Stack. Five minutes, mostly checkboxes. Finish by Friday, Oct. 16 to be entered in the $100 gift card drawing.',
+        'Tell us which tools you run your business on, and help build the Project C Stack. Five minutes, mostly checkboxes. Already filled it out? Come back and update your stack whenever you switch tools.',
       url: 'https://projectc.com/stack-survey',
-      image: 'members-art-stack.jpg',
+      image: 'members-art-stack-v2.jpg',
       added: '2026-10-04',
     },
     {

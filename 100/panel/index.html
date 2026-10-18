@@ -287,6 +287,7 @@
             <h3>The categories</h3>
             <div class="when" id="cat1When"></div>
             <p>We react to the 10 categories before they lock. This is the cheapest place to catch a blind spot, before any names exist.</p>
+            <a class="btn btn-ghost" id="catDocBtn" target="_blank" rel="noopener" hidden>Read the draft categories &nearr;</a>
             <a class="btn btn-ghost" id="cat1Link" target="_blank" rel="noopener" hidden>Join the call &rarr;</a>
           </div>
           <div class="call">
@@ -505,6 +506,7 @@
     $('roster').innerHTML = people;
 
     if (s.one_pager_url) $('onePager').href = s.one_pager_url; else $('onePager').hidden = true;
+    if (s.categories_url) { $('catDocBtn').href = s.categories_url; $('catDocBtn').hidden = false; }
     if (s.rubric_url) { $('rubricBtn').href = s.rubric_url; $('rubricBtn').hidden = false; $('rubricCard').href = s.rubric_url; $('rubricCard').hidden = false; $('ballotRubricLink').href = s.rubric_url; $('ballotRubric').hidden = false; }
 
     // Chair's desk

@@ -32,7 +32,7 @@ const CACHE_MS = 60 * 1000;
 const SETTING_KEYS = [
   'welcome_note', 'one_pager_url', 'category_call', 'category_call_link',
   'settle_call', 'settle_call_link', 'ballot_status', 'launch_label',
-  'rubric_url',
+  'rubric_url', 'categories_url',
 ];
 
 function json(statusCode, body) {
@@ -214,6 +214,7 @@ exports.handler = async (event) => {
       welcome_note: s.welcome_note || '',
       one_pager_url: safeUrl(s.one_pager_url),
       rubric_url: safeUrl(s.rubric_url),
+      categories_url: safeUrl(s.categories_url),
       category_call: s.category_call || '',
       category_call_link: safeUrl(s.category_call_link),
       settle_call: s.settle_call || '',

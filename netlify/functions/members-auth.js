@@ -384,6 +384,20 @@ const MEMBER_CONTENT = {
   ],
   replays: [
     {
+      title: "Help, I'm Drowning: Let's Work on Capacity",
+      date: 'October 21, 2026',
+      added: '2026-10-22',
+      guest: 'Blair Hickman',
+      description:
+        'Blair skips the productivity hacks and goes back to the foundation of capacity: being clear on what actually matters. Working from Stephen Covey\'s big rocks, pebbles and sand, she has everyone name their big rocks for the rest of the year and for the week ahead, then runs an energy audit to find the leaks worth plugging. The back half is open Q&A on overcommitment and how to weigh the real cost of saying no.',
+      links: [
+        {
+          label: 'Watch the recording',
+          url: 'https://us06web.zoom.us/rec/share/5VL6bsAYRI3OfnGmQJxJpPjbFGoe8yJgBUr0wOzJznrNgpyuaQ2epiVLCuopHTe7.o9fvSX0g88oOQxkc',
+        },
+      ],
+    },
+    {
       title: 'Values That Speak: Your Core Values Story',
       date: 'September 9, 2026',
       guest: 'Megan Finnerty',

@@ -108,13 +108,14 @@ function reminderEmail(person, program, week) {
   const url = pageUrl(program.slug);
   return {
     subject: `Reminder: your week ${week.week_number} homework is due ${fmtET(week.due_at, { weekday: 'long' })} at noon ET`,
-    text: `Hi ${firstName(person.name)},\n\nQuick reminder: your week ${week.week_number} homework is due ${due} Eastern.\n\n${week.assignment || ''}\n\nTurn it in on your hub: ${url}\n\nLiz, Project C`,
+    text: `Hi ${firstName(person.name)},\n\nQuick reminder: your week ${week.week_number} homework is due ${due} Eastern.\n\n${week.assignment || ''}\n\nTurn it in on your hub: ${url}\n\nQuestions or trouble getting in? Email info@projectc.com.\n\nLiz, Project C`,
     html: emailShell(`
       <p style="margin:0 0 16px;">Hi ${esc(firstName(person.name))},</p>
       <p style="margin:0 0 16px;">Quick reminder: your week ${week.week_number} homework is due <strong>${esc(due)} Eastern</strong>.</p>
       ${week.assignment ? `<p style="margin:0 0 20px;border-left:4px solid #FE6B41;padding-left:12px;">${esc(week.assignment)}</p>` : ''}
       <p style="margin:0 0 24px;">Turn it in on your hub. It takes a minute.</p>
       <p style="margin:0 0 24px;"><a href="${esc(url)}" style="display:inline-block;background:#15171A;color:#ffffff;text-decoration:none;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;padding:14px 22px;">Turn in your homework</a></p>
+      <p style="margin:0 0 20px;font-size:13px;color:#5b5d60;">Questions or trouble getting in? Email <a href="mailto:info@projectc.com" style="color:#B74D2F;">info@projectc.com</a>.</p>
       <p style="margin:0;">Liz<br><span style="color:#5b5d60;">Project C</span></p>`),
   };
 }

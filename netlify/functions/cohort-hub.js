@@ -260,6 +260,8 @@ ${weeks.map((w) => fmtET(w.session_at, { weekday: 'short', month: 'short', day: 
 
 After the sign-in link expires, go to ${hubUrl} and sign in with this email address. We'll send you a code.
 
+Questions or trouble getting in? Email info@projectc.com and we'll sort it out.
+
 See you Wednesday,
 Liz Kelly Nelson
 Project C`,
@@ -278,6 +280,7 @@ Project C`,
       <p style="margin:0 0 20px;">Homework is due Tuesdays at 12 PM ET. We send a reminder Monday morning, and we meet Wednesdays at 2:30 PM ET.</p>
       <table style="border-collapse:collapse;width:100%;font-size:14px;margin:0 0 20px;">${rows}</table>
       <p style="margin:0 0 20px;font-size:13px;color:#5b5d60;">The button above signs you in for the next two weeks. After that, go to <a href="${esc(hubUrl)}" style="color:#B74D2F;">${esc(hubUrl.replace('https://', ''))}</a> and sign in with this email address. We'll send you a code.</p>
+      <p style="margin:0 0 20px;font-size:13px;color:#5b5d60;">Questions or trouble getting in? Email <a href="mailto:info@projectc.com" style="color:#B74D2F;">info@projectc.com</a> and we'll sort it out.</p>
       <p style="margin:0 0 4px;">See you Wednesday,</p>
       <p style="margin:0;">Liz Kelly Nelson<br><span style="color:#5b5d60;">Project C</span></p>`),
   };

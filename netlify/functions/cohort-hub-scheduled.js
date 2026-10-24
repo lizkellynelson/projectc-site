@@ -142,6 +142,30 @@ async function run() {
 
     const weeks = await loadWeeks(supabase, program.id);
 
+    // 1b. Automatic welcome emails (settings.autoWelcome). Anyone added to the roster who
+    // hasn't had a welcome yet gets one, until the final session ends.
+    const lastSession = weeks.length ? Date.parse(weeks[weeks.length - 1].session_at) + 60 * 60000 : 0;
+    if ((program.settings || {}).autoWelcome && now < lastSession) {
+      const { welcomeEmail, signToken, MAGIC_TTL_MS, pageUrl } = I();
+      const { data: unwelcomed } = await supabase.from('hub_people').select('*').eq('program_id', program.id)
+        .eq('status', 'active').eq('role', 'creator').is('welcome_sent_at', null).limit(90);
+      if (unwelcomed && unwelcomed.length) {
+        const ready = [];
+        for (let t of unwelcomed) {
+          t = await ensureZoomLink(supabase, program, t);
+          const link = signToken({ k: 'm', pid: t.id, x: Math.min(Date.now() + MAGIC_TTL_MS, Date.parse(program.access_ends_at)) });
+          ready.push({ id: t.id, msg: { to: t.email, ...welcomeEmail(t, program, weeks, `${pageUrl(program.slug)}#signin=${link}`) } });
+        }
+        try {
+          await sendEmailBatch(ready.map((r) => r.msg));
+          await supabase.from('hub_people').update({ welcome_sent_at: new Date().toISOString() }).in('id', ready.map((r) => r.id));
+          log.push(`${program.slug}: auto-welcomed ${ready.length}`);
+        } catch (e) {
+          log.push(`${program.slug}: auto-welcome failed (${e.message.slice(0, 120)})`);
+        }
+      }
+    }
+
     // 2. Attendance
     for (const w of weeks) {
       const ended = Date.parse(w.session_at) + 90 * 60000;

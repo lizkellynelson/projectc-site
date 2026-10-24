@@ -236,23 +236,56 @@ function welcomeEmail(person, program, weeks, magicUrl) {
   const h5Line = s.h5Url
     ? `If you'd like to get it done early, you can <a href="${esc(s.h5Url)}" style="color:#B74D2F;">sign the terms now</a>.`
     : '';
+  const fmtDay = (iso) => fmtET(iso, { weekday: 'long', month: 'short', day: 'numeric' });
+  const fmtDue = (iso) => fmtDay(iso) + ' at ' + fmtET(iso, { hour: 'numeric', minute: '2-digit' }) + ' ET';
+  const now = Date.now();
+  // Creators added after session 1 has started get a version that points at the next session
+  // and this week's homework instead of the pre-session-1 to-dos.
+  const late = !!(w1 && now > Date.parse(w1.session_at) + 60 * 60000);
+  const next = weeks.find((w) => Date.parse(w.session_at) + 60 * 60000 > now);
+  const dueNow = weeks.find((w) => w.due_at && w.assignment && Date.parse(w.due_at) > now);
+  const brandOrName = s.brandName ? `TikTok's ${s.brandName} News Creator Program` : program.name;
+  let subject, introText, introHtml, boxTitle, items;
+  if (!late) {
+    subject = s.brandName
+      ? `You're in: ${brandOrName} Starts ${w1 ? fmtDay(w1.session_at) : 'Soon'}`
+      : `You're in: ${program.name} starts ${w1 ? fmtDay(w1.session_at) : 'soon'}`;
+    introText = `${welcomeLine} We kick off ${firstDay} at 2:30 PM ET on Zoom.`;
+    introHtml = `${esc(welcomeLine)} We kick off <strong>${esc(firstDay)} at 2:30 PM ET</strong> on Zoom.`;
+    boxTitle = 'Before the first session';
+    items = [
+      { t: `Have your TikTok account ready. We'll sign the program terms together in the app during session 1.${s.h5Url ? ' To do it early, sign here: ' + s.h5Url : ''}`,
+        h: `<strong>Have your TikTok account ready.</strong> We'll sign the program terms together in the app during session 1. ${h5Line}` },
+      { t: `Share two TikTok creators who do news well, and tell us why. Submit them on your hub by ${prepDue}. We'll talk through some of your picks in session 1.`,
+        h: `<strong>Share two TikTok creators who do news well, and tell us why.</strong> Submit them on your hub by ${esc(prepDue)}. We'll talk through some of your picks in session 1.` },
+    ];
+  } else {
+    const nextDay = next ? fmtDay(next.session_at) : '';
+    subject = `You're in: ${brandOrName}${next ? `, Next Session ${nextDay}` : ''}`;
+    introText = `${welcomeLine} We're glad you're joining us. We meet Wednesdays at 2:30 PM ET on Zoom${next ? `, and the next session is ${nextDay}` : ''}. Replays of earlier sessions are on your hub.`;
+    introHtml = `${esc(welcomeLine)} We're glad you're joining us. We meet Wednesdays at 2:30 PM ET on Zoom${next ? `, and the next session is <strong>${esc(nextDay)}</strong>` : ''}. Replays of earlier sessions are on your hub.`;
+    boxTitle = 'To get started';
+    items = [
+      { t: `Sign the program terms in the TikTok app.${s.h5Url ? ' Sign here: ' + s.h5Url : ''}`,
+        h: `<strong>Sign the program terms in the TikTok app.</strong>${s.h5Url ? ` <a href="${esc(s.h5Url)}" style="color:#B74D2F;">Sign them here</a>.` : ''}` },
+    ];
+    if (dueNow) items.push({
+      t: `This week's homework: ${dueNow.assignment} Turn it in on your hub by ${fmtDue(dueNow.due_at)}.`,
+      h: `<strong>This week's homework:</strong> ${esc(dueNow.assignment)} Turn it in on your hub by ${esc(fmtDue(dueNow.due_at))}.` });
+  }
   return {
     // settings.brandName ("Inform the Feed") is the program name creators know from TikTok's invitations.
-    subject: s.brandName
-      ? `You're in: TikTok's ${s.brandName} News Creator Program Starts ${w1 ? fmtET(w1.session_at, { weekday: 'long', month: 'short', day: 'numeric' }) : 'Soon'}`
-      : `You're in: ${program.name} starts ${w1 ? fmtET(w1.session_at, { weekday: 'long', month: 'short', day: 'numeric' }) : 'soon'}`,
+    subject,
     text: `Hi ${first},
 
-${welcomeLine} We kick off ${firstDay} at 2:30 PM ET on Zoom.
+${introText}
 
 Everything for the program lives on one page, your Cohort Hub: your Zoom link, each week's homework, the schedule, replays and updates from us and TikTok. Open it here (this link signs you in):
 ${magicUrl}
 
-Two things to do before the first session:
+${boxTitle}:
 
-1. Have your TikTok account ready. We'll sign the program terms together in the app during session 1.${s.h5Url ? ' To do it early, sign here: ' + s.h5Url : ''}
-
-2. Share two TikTok creators who do news well, and tell us why. Submit them on your hub by ${prepDue}. We'll talk through some of your picks in session 1.
+${items.map((it, i) => (i + 1) + '. ' + it.t).join('\n\n')}
 
 ${person.zoom_join_url ? 'Your personal Zoom link (works for all five sessions, please don\'t share it):\n' + person.zoom_join_url + '\n\n' : ''}How each week works: Homework is due Tuesdays at 12 PM ET. We send a reminder Monday morning, and we meet Wednesdays at 2:30 PM ET.
 
@@ -267,13 +300,12 @@ Liz Kelly Nelson
 Project C`,
     html: emailShell(`
       <p style="margin:0 0 16px;">Hi ${esc(first)},</p>
-      <p style="margin:0 0 16px;">${esc(welcomeLine)} We kick off <strong>${esc(firstDay)} at 2:30 PM ET</strong> on Zoom.</p>
+      <p style="margin:0 0 16px;">${introHtml}</p>
       <p style="margin:0 0 20px;">Everything for the program lives on one page, your Cohort Hub: your Zoom link, each week's homework, the schedule, replays and updates from us and TikTok.</p>
       <p style="margin:0 0 28px;">${btn(magicUrl, 'Open your hub')}</p>
       <div style="border:2px solid #15171A;padding:18px 20px;margin:0 0 24px;">
-        <p style="margin:0 0 12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;">Before the first session</p>
-        <p style="margin:0 0 12px;"><strong>1. Have your TikTok account ready.</strong> We'll sign the program terms together in the app during session 1. ${h5Line}</p>
-        <p style="margin:0;"><strong>2. Share two TikTok creators who do news well, and tell us why.</strong> Submit them on your hub by ${esc(prepDue)}. We'll talk through some of your picks in session 1.</p>
+        <p style="margin:0 0 12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;">${esc(boxTitle)}</p>
+        ${items.map((it, i) => `<p style="margin:0 0 ${i === items.length - 1 ? 0 : 12}px;">${i + 1}. ${it.h}</p>`).join('')}
       </div>
       ${zoomHtml}
       <p style="margin:0 0 6px;font-weight:700;">How each week works</p>
@@ -807,4 +839,4 @@ exports.handler = async (event) => {
 };
 
 // Exposed for the scheduled function.
-module.exports.internals = { db, loadProgram, loadWeeks, ensureZoomLink, zoomToken, sendEmail, sendEmailBatch, emailShell, esc, firstName, fmtET, pageUrl };
+module.exports.internals = { db, loadProgram, loadWeeks, ensureZoomLink, zoomToken, sendEmail, sendEmailBatch, welcomeEmail, signToken, MAGIC_TTL_MS, emailShell, esc, firstName, fmtET, pageUrl };

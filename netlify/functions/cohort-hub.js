@@ -523,7 +523,7 @@ exports.handler = async (event) => {
     const canSeeTable = person.role === 'staff' || person.role === 'partner';
 
     if (action === 'hub') {
-      if (person.role === 'creator') person = await ensureZoomLink(supabase, program, person);
+      if (person.role !== 'staff' || !/^liz@/i.test(person.email)) person = await ensureZoomLink(supabase, program, person);
       const weeks = await loadWeeks(supabase, program.id);
       const mine = await loadMine(supabase, person.id, weeks.map((w) => w.id));
       // Featured videos: whatever staff have starred, newest week first.

@@ -131,8 +131,11 @@ async function run() {
     if (now < opens || now > Date.parse(program.access_ends_at)) continue;
 
     // 1. Zoom links
-    const { data: missing } = await supabase.from('hub_people').select('*').eq('program_id', program.id)
-      .eq('status', 'active').eq('role', 'creator').is('zoom_join_url', null).limit(25);
+    // TikTok partners and Project C staff get personal links too (except Liz, who hosts).
+    // Team first, so their links are ready for the calendar invites.
+    const { data: missingAll } = await supabase.from('hub_people').select('*').eq('program_id', program.id)
+      .eq('status', 'active').in('role', ['creator', 'partner', 'staff']).is('zoom_join_url', null).order('role', { ascending: false }).limit(40);
+    const missing = (missingAll || []).filter((p) => !(p.role === 'staff' && /^liz@/i.test(p.email))).slice(0, 25);
     for (const p of missing || []) await ensureZoomLink(supabase, program, p);
     if (missing && missing.length) log.push(`${program.slug}: zoom links attempted for ${missing.length}`);
 

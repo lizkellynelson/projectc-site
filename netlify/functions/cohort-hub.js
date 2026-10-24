@@ -202,6 +202,7 @@ function welcomeEmail(person, program, weeks, magicUrl) {
   const firstDay = w1 ? fmtET(w1.session_at, { weekday: 'long', month: 'long', day: 'numeric' }) : '';
   const prepDue = w1 && w1.due_at ? fmtET(w1.due_at, { weekday: 'long', month: 'short', day: 'numeric' }) + ' at ' + fmtET(w1.due_at, { hour: 'numeric', minute: '2-digit' }) + ' ET' : '';
   const hubUrl = pageUrl(program.slug);
+  const welcomeLine = s.brandName ? `Welcome to ${s.brandName}, TikTok x Project C's News Creator Cohort!` : `Welcome to the ${program.name}!`;
   const rows = weeks.map((w) => `
       <tr>
         <td style="padding:8px 10px 8px 0;border-bottom:1px solid #e3e4e6;white-space:nowrap;font-weight:700;vertical-align:top;">${esc(fmtET(w.session_at, { weekday: 'short', month: 'short', day: 'numeric' }))}</td>
@@ -216,10 +217,13 @@ function welcomeEmail(person, program, weeks, magicUrl) {
     ? `If you'd like to get it done early, you can <a href="${esc(s.h5Url)}" style="color:#B74D2F;">sign the terms now</a>.`
     : '';
   return {
-    subject: `You're in: ${program.name} starts ${w1 ? fmtET(w1.session_at, { weekday: 'long', month: 'short', day: 'numeric' }) : 'soon'}`,
+    // settings.brandName ("Inform the Feed") is the program name creators know from TikTok's invitations.
+    subject: s.brandName
+      ? `You're in: TikTok's ${s.brandName} News Creator Program Starts ${w1 ? fmtET(w1.session_at, { weekday: 'long', month: 'short', day: 'numeric' }) : 'Soon'}`
+      : `You're in: ${program.name} starts ${w1 ? fmtET(w1.session_at, { weekday: 'long', month: 'short', day: 'numeric' }) : 'soon'}`,
     text: `Hi ${first},
 
-Welcome to the ${program.name}! We kick off ${firstDay} at 2:30 PM ET on Zoom.
+${welcomeLine} We kick off ${firstDay} at 2:30 PM ET on Zoom.
 
 Everything for the program lives on one page, your Cohort Hub: your Zoom link, each week's homework, the schedule, replays and updates from us and TikTok. Open it here (this link signs you in):
 ${magicUrl}
@@ -241,7 +245,7 @@ Liz Kelly Nelson
 Project C`,
     html: emailShell(`
       <p style="margin:0 0 16px;">Hi ${esc(first)},</p>
-      <p style="margin:0 0 16px;">Welcome to the ${esc(program.name)}! We kick off <strong>${esc(firstDay)} at 2:30 PM ET</strong> on Zoom.</p>
+      <p style="margin:0 0 16px;">${esc(welcomeLine)} We kick off <strong>${esc(firstDay)} at 2:30 PM ET</strong> on Zoom.</p>
       <p style="margin:0 0 20px;">Everything for the program lives on one page, your Cohort Hub: your Zoom link, each week's homework, the schedule, replays and updates from us and TikTok.</p>
       <p style="margin:0 0 28px;">${btn(magicUrl, 'Open your hub')}</p>
       <div style="border:2px solid #15171A;padding:18px 20px;margin:0 0 24px;">

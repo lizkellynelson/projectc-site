@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cohort Hub · TikTok x Project C</title>
+<title>Inform the Feed · Cohort Hub · TikTok x Project C</title>
 <meta name="description" content="The private hub for the TikTok x Project C news creator cohort.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -308,6 +308,10 @@ table.prog tr.removed td { opacity: 0.45; }
 .pill-flag { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; border: 1.5px solid var(--ink); padding: 0.05rem 0.3rem; margin-left: 0.3rem; background: var(--coral); }
 
 /* ---------- SECTION MENU (sticky, under the site nav) ---------- */
+.brandband { background: var(--ink); color: var(--white); border-bottom: var(--rule); }
+.brandband-inner { max-width: var(--maxw); margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+.bb-name { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1; letter-spacing: 0.01em; }
+.bb-sub { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--yellow, #FFE800); }
 .secnav { position: sticky; top: 78px; z-index: 900; background: var(--white); border-bottom: var(--rule); }
 .secnav-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; display: flex; overflow-x: auto; scrollbar-width: none; }
 .secnav-inner::-webkit-scrollbar { display: none; }
@@ -507,7 +511,7 @@ table.prog tr.removed td { opacity: 0.45; }
   .upd { grid-template-columns: 1fr; }
   .upd-date { padding: 1rem 1.25rem 0; }
   .upd-body { padding: 0.3rem 1.25rem 1rem; }
-  .ledger, .ops-head, .stats-row, .table-tools, .table-scroll, .tools, .rv-weeks, .rv-bar, .rv-list, .prog-legend, .secnav-inner, .shead-inner, .sbody, .upd-row, .upnext-grid > div, .how-commit, .how-rhythm { padding-left: 1rem; padding-right: 1rem; }
+  .ledger, .ops-head, .stats-row, .table-tools, .table-scroll, .tools, .rv-weeks, .rv-bar, .rv-list, .prog-legend, .secnav-inner, .brandband-inner, .shead-inner, .sbody, .upd-row, .upnext-grid > div, .how-commit, .how-rhythm { padding-left: 1rem; padding-right: 1rem; }
   .rhythm { grid-template-columns: 1fr; }
   .rhythm li { border-right: none; border-bottom: var(--rule); }
   .rhythm li:last-child { border-bottom: none; }
@@ -555,9 +559,9 @@ table.prog tr.removed td { opacity: 0.45; }
 <!-- ============ SIGN IN ============ -->
 <section class="gatehead" id="gate" hidden>
   <div class="gh-copy">
-    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> TikTok x Project C &middot; Fall 2026 cohort</div>
-    <h1>The Cohort <span class="coral">Hub</span></h1>
-    <p class="standfirst">Your session link, this week's assignment and the place to turn in your homework. Everything for the program lives on this page, and it's built around you.</p>
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> TikTok x Project C &middot; News Creator Cohort</div>
+    <h1>Inform the <span class="coral">Feed</span></h1>
+    <p class="standfirst">Welcome to your Cohort Hub. Your session link, this week's assignment and the place to turn in your homework. Everything for the program lives on this page, and it's built around you.</p>
     <div class="factrow" aria-label="Program at a glance">
       <div><b>5</b><span>Live sessions</span></div>
       <div><b>Wed</b><span>2:30 PM Eastern</span></div>
@@ -588,7 +592,7 @@ table.prog tr.removed td { opacity: 0.45; }
           <button type="button" class="linkbtn" id="backToEmail">Use a different email or send a new code</button>
         </form>
       </div>
-      <p class="gate-help">Can't get in? <a href="mailto:liz@projectc.com?subject=Cohort%20hub%20access">Email Liz</a> and tell her the address you signed up with.</p>
+      <p class="gate-help">Can't get in? Email <a href="mailto:info@projectc.com?subject=Inform%20the%20Feed%20hub%20access">info@projectc.com</a> and tell us the address you signed up with.</p>
     </div>
   </div>
 </section>
@@ -624,6 +628,7 @@ table.prog tr.removed td { opacity: 0.45; }
 
   <!-- ===== HUB VIEW ===== -->
   <div id="viewHub">
+    <div class="brandband"><div class="brandband-inner"><span class="bb-name">Inform the Feed</span><span class="bb-sub">TikTok x Project C News Creator Cohort &middot; Fall 2026</span></div></div>
     <nav class="secnav" id="secnav" aria-label="Sections of this page"><div class="secnav-inner">
       <a href="#upnext"><i class="c-coral"></i>To-do</a>
       <a href="#how"><i class="c-yellow"></i>How it works</a>
@@ -868,7 +873,7 @@ table.prog tr.removed td { opacity: 0.45; }
 
 <footer class="hub-foot">
   <div class="blk">
-    <p>The Cohort Hub is run by <a href="https://projectc.com">Project C</a> in partnership with the TikTok News Creator team. Trouble with the page? Email <a href="mailto:liz@projectc.com">liz@projectc.com</a>.</p>
+    <p>The Cohort Hub is run by <a href="https://projectc.com">Project C</a> in partnership with the TikTok News Creator team. Trouble with the page? Email <a href="mailto:info@projectc.com">info@projectc.com</a>.</p>
   </div>
   <div class="blk">
     <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C, independent by design, est. 2024">

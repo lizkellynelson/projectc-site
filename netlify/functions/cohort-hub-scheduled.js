@@ -120,7 +120,7 @@ function reminderEmail(person, program, week) {
 }
 
 async function run() {
-  const { db, loadWeeks, ensureZoomLink, sendEmail } = I();
+  const { db, loadWeeks, ensureZoomLink, sendEmailBatch } = I();
   const supabase = db();
   const now = Date.now();
   const log = [];
@@ -164,15 +164,15 @@ async function run() {
       const { data: subs } = await supabase.from('hub_submissions').select('person_id').eq('week_id', w.id);
       const { data: sent } = await supabase.from('hub_reminders_sent').select('person_id').eq('week_id', w.id).eq('kind', 'due');
       const skip = new Set([...(subs || []).map((s) => s.person_id), ...(sent || []).map((s) => s.person_id)]);
+      const due = (creators || []).filter((c) => !skip.has(c.id));
       let n = 0;
-      for (const c of creators || []) {
-        if (skip.has(c.id)) continue;
+      if (due.length) {
         try {
-          await sendEmail({ to: c.email, ...reminderEmail(c, program, w) });
-          await supabase.from('hub_reminders_sent').insert({ person_id: c.id, week_id: w.id, kind: 'due' });
-          n += 1;
+          await sendEmailBatch(due.map((c) => ({ to: c.email, ...reminderEmail(c, program, w) })));
+          await supabase.from('hub_reminders_sent').insert(due.map((c) => ({ person_id: c.id, week_id: w.id, kind: 'due' })));
+          n = due.length;
         } catch (e) {
-          console.error('reminder failed', c.email, e.message);
+          console.error('reminder batch failed', e.message);
         }
       }
       log.push(`${program.slug} week ${w.week_number}: ${n} reminders sent`);

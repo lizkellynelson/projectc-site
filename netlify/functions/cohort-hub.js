@@ -166,6 +166,26 @@ async function sendEmail({ to, subject, html, text }) {
   return data;
 }
 
+// Resend's batch endpoint takes up to 100 emails in one request, which keeps big sends
+// (85 welcome emails, Monday reminders) inside Netlify's time limit and Resend's rate limit.
+async function sendEmailBatch(list) {
+  if (!RESEND_API_KEY) throw new Error('RESEND_API_KEY missing');
+  const results = [];
+  for (let i = 0; i < list.length; i += 100) {
+    const chunk = list.slice(i, i + 100);
+    const res = await fetch('https://api.resend.com/emails/batch', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(chunk.map(({ to, subject, html, text }) => ({ from: FROM_EMAIL, to: [to], reply_to: 'liz@projectc.com', subject, html, text }))),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.error) throw new Error('Resend batch: ' + JSON.stringify(data.error || data));
+    results.push(...(data.data || []));
+    if (i + 100 < list.length) await new Promise((r) => setTimeout(r, 600));
+  }
+  return results;
+}
+
 function emailShell(inner) {
   return `<!DOCTYPE html><html><head><meta charset="utf-8"></head>
 <body style="margin:0;padding:0;background:#ffffff;">
@@ -707,22 +727,21 @@ exports.handler = async (event) => {
       q = body.personId ? q.eq('id', body.personId) : q.is('welcome_sent_at', null);
       const { data: targets } = await q;
       const weeks = await loadWeeks(supabase, program.id);
-      let sent = 0;
-      const failed = [];
+      const ready = [];
       for (let t of targets || []) {
         t = await ensureZoomLink(supabase, program, t);
         const link = signToken({ k: 'm', pid: t.id, x: Math.min(Date.now() + MAGIC_TTL_MS, Date.parse(program.access_ends_at)) });
-        const magicUrl = `${pageUrl(program.slug)}#signin=${link}`;
-        try {
-          await sendEmail({ to: t.email, ...welcomeEmail(t, program, weeks, magicUrl) });
-          await supabase.from('hub_people').update({ welcome_sent_at: new Date().toISOString() }).eq('id', t.id);
-          sent += 1;
-        } catch (e) {
-          console.error('welcome failed', t.email, e.message);
-          failed.push(t.email);
-        }
+        ready.push({ person: t, msg: { to: t.email, ...welcomeEmail(t, program, weeks, `${pageUrl(program.slug)}#signin=${link}`) } });
       }
-      return json(200, { ok: true, sent, failed });
+      if (!ready.length) return json(200, { ok: true, sent: 0, failed: [] });
+      try {
+        await sendEmailBatch(ready.map((r) => r.msg));
+      } catch (e) {
+        console.error('welcome batch failed', e.message);
+        return json(200, { ok: true, sent: 0, failed: ready.map((r) => r.person.email) });
+      }
+      await supabase.from('hub_people').update({ welcome_sent_at: new Date().toISOString() }).in('id', ready.map((r) => r.person.id));
+      return json(200, { ok: true, sent: ready.length, failed: [] });
     }
 
     if (action === 'post_todo' || action === 'delete_todo') {
@@ -785,4 +804,4 @@ exports.handler = async (event) => {
 };
 
 // Exposed for the scheduled function.
-module.exports.internals = { db, loadProgram, loadWeeks, ensureZoomLink, zoomToken, sendEmail, emailShell, esc, firstName, fmtET, pageUrl };
+module.exports.internals = { db, loadProgram, loadWeeks, ensureZoomLink, zoomToken, sendEmail, sendEmailBatch, emailShell, esc, firstName, fmtET, pageUrl };

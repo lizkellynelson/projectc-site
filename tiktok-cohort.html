@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cohort Hub · TikTok x Project C</title>
+<meta name="description" content="The private hub for the TikTok x Project C news creator cohort.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="projectc-ds.css">
+<script defer data-domain="projectc.com" src="https://plausible.io/js/script.js"></script>
+<style>
+/* =====================================================================
+   COHORT HUB (L2 program page, private)
+   New compositions on this page: the INDEX (a four-cell table of
+   contents that says what the hub is for), the HOMEWORK TRACKER (week
+   tabs that carry each week's status) and the DESK (assignment on the
+   left, checklist on the right, one rule between them).
+   ===================================================================== */
+.nav.slim .nav-inner { justify-content: space-between; }
+.hub-label { display: flex; align-items: center; gap: 0.8rem; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); }
+.hub-label .x { color: var(--coral-deep); }
+[hidden] { display: none !important; }
+
+/* ---------- GATE: split masthead + sign-in window ---------- */
+.gatehead { display: grid; grid-template-columns: 1.15fr 0.85fr; border-bottom: var(--rule); }
+.gh-copy { padding: clamp(2.6rem,5vw,4.6rem) 2.5rem; border-right: var(--rule); display: flex; flex-direction: column; justify-content: center; }
+.gh-copy h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.6rem,5.2vw,4.4rem); line-height: 0.95; margin-bottom: 1.1rem; max-width: 11ch; }
+.gh-copy h1 .coral { color: var(--coral); }
+.gh-copy .standfirst { font-size: 1.08rem; color: var(--muted); line-height: 1.65; max-width: 50ch; }
+.factrow { display: flex; flex-wrap: wrap; margin-top: 2rem; border: var(--rule); max-width: 560px; }
+.factrow div { flex: 1 1 140px; padding: 0.8rem 1rem; border-right: var(--rule); }
+.factrow div:last-child { border-right: none; }
+.factrow b { display: block; font-family: var(--display); font-size: 1.5rem; font-weight: 400; line-height: 1; }
+.factrow span { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.gh-check { background: var(--porcelain); display: flex; align-items: center; justify-content: center; padding: clamp(2rem,4vw,3.5rem) 2rem; }
+.gate-window { background: var(--white); border: var(--rule); padding: 2.2rem 2.2rem 2rem; width: 100%; max-width: 430px; position: relative; }
+.gw-tag { position: absolute; top: -13px; left: 22px; background: var(--cyan); border: var(--rule); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
+.gate-window h2 { font-family: var(--display); text-transform: uppercase; font-size: 1.5rem; line-height: 1.05; margin-bottom: 0.5rem; }
+.gate-window > p, .gate-window > div > p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.3rem; }
+.form { display: flex; flex-direction: column; gap: 0.85rem; }
+.form label, .lbl { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
+.form input, .form textarea, .form select { font-family: var(--sans); font-size: 1rem; padding: 0.8rem 0.95rem; border: var(--rule); background: var(--white); color: var(--ink); width: 100%; border-radius: 0; }
+.form textarea { min-height: 80px; resize: vertical; }
+.form input:focus, .form textarea:focus, .form select:focus { outline: 2px solid var(--coral); outline-offset: 1px; }
+#codeInput { font-family: var(--display); font-size: 2rem; letter-spacing: 0.4em; text-align: center; padding: 0.6rem; }
+.msg { font-size: 0.88rem; padding: 0.75rem 0.95rem; border: 1px solid; line-height: 1.5; }
+.msg.error { background: var(--tint); color: var(--coral-deep); border-color: var(--coral-deep); }
+.msg.info { background: var(--porcelain); border-color: rgba(21,23,26,0.3); }
+.msg.ok { background: #E6F7FD; border-color: #0B6A8A; color: #0B5570; }
+.form .btn { justify-content: center; }
+.linkbtn { background: none; border: none; padding: 0; font: inherit; font-size: 0.8rem; font-weight: 700; color: var(--coral-deep); cursor: pointer; text-align: left; }
+.linkbtn:hover { text-decoration: underline; text-underline-offset: 3px; }
+.gate-help { margin-top: 1.2rem; font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+.gate-help a { color: var(--coral-deep); font-weight: 700; }
+.loading { padding: 5rem 2rem; text-align: center; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+/* ---------- consent ---------- */
+.consent { max-width: 760px; margin: clamp(2.5rem,5vw,4rem) auto; padding: 0 2rem; }
+.consent-card { border: var(--rule); padding: 2.2rem; position: relative; }
+.consent-card .gw-tag { background: var(--yellow); }
+.consent-card h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.8rem,3.4vw,2.4rem); line-height: 1; margin-bottom: 1rem; }
+.consent-card p { color: var(--muted); line-height: 1.7; margin-bottom: 1rem; max-width: 60ch; }
+.checkrow { display: flex; gap: 0.8rem; align-items: flex-start; padding: 1rem; border: var(--rule); background: var(--porcelain); margin: 1.4rem 0; cursor: pointer; font-weight: 600; line-height: 1.5; }
+.checkrow input { width: 22px; height: 22px; accent-color: var(--ink); flex: none; margin-top: 1px; }
+
+/* ---------- bar under nav ---------- */
+.hub-bar { border-bottom: var(--rule); background: var(--porcelain); }
+.hub-bar-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: stretch; gap: 1rem; flex-wrap: wrap; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.hub-bar .who { padding: 0.7rem 0; }
+.hub-bar .who b { color: var(--ink); }
+.tabs { display: flex; align-items: stretch; }
+.tabs button { white-space: nowrap; background: none; border: none; border-left: var(--rule-thin); padding: 0.7rem 1rem; font: inherit; color: var(--ink); cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+.tabs button[aria-selected="true"] { border-bottom-color: var(--coral); background: var(--white); }
+.tabs button.signout { color: var(--coral-deep); }
+
+/* ---------- MASTHEAD: next session + due panel ---------- */
+.mast { display: grid; grid-template-columns: 1.25fr 0.75fr; border-bottom: var(--rule); }
+.mast-main { padding: clamp(2.4rem,4.5vw,4rem) 2.5rem; border-right: var(--rule); }
+.mast-main h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.3rem,4.6vw,3.9rem); line-height: 0.96; margin: 0.2rem 0 1rem; max-width: 16ch; }
+.mast-when { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+.mast-who { color: var(--muted); font-size: 0.98rem; line-height: 1.6; max-width: 58ch; }
+.mast-actions { display: flex; flex-wrap: wrap; margin-top: 1.8rem; border: var(--rule); width: fit-content; max-width: 100%; }
+.mast-actions .btn { border: none; }
+.mast-actions .btn + .btn { border-left: var(--rule); }
+.live-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--ink); animation: blip 1.4s ease infinite; }
+@keyframes blip { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+.mast-note { margin-top: 0.9rem; font-size: 0.8rem; color: var(--muted); max-width: 52ch; line-height: 1.55; }
+.due-panel { display: flex; flex-direction: column; }
+.due-head { background: var(--coral); border-bottom: var(--rule); padding: 1rem 1.6rem; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; display: flex; justify-content: space-between; gap: 1rem; }
+.due-body { padding: 1.6rem; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.due-count { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.2rem,4vw,3.4rem); line-height: 0.95; }
+.due-date { font-weight: 700; margin-top: 0.5rem; }
+.due-status { margin-top: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.4rem 0.7rem; border: var(--rule); width: fit-content; }
+.due-status.in { background: var(--cyan); }
+.due-status.todo { background: var(--white); }
+.due-panel.done .due-head { background: var(--cyan); }
+
+/* ---------- INTRO: what this page is (one-stop index) ---------- */
+.intro { display: grid; grid-template-columns: 0.95fr 1.05fr; border-bottom: var(--rule); }
+.intro-copy { padding: clamp(2.2rem,4vw,3.4rem) 2.5rem; border-right: var(--rule); display: flex; flex-direction: column; justify-content: center; }
+.intro-copy h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.2rem,4.2vw,3.5rem); line-height: 0.96; margin-bottom: 0.9rem; max-width: 14ch; }
+.intro-copy h1 .coral { color: var(--coral); }
+.intro-copy p { color: var(--muted); font-size: 1.02rem; line-height: 1.65; max-width: 48ch; }
+.intro-index { list-style: none; display: grid; grid-template-columns: 1fr 1fr; }
+.intro-index li { border-bottom: var(--rule); }
+.intro-index li:nth-child(odd) { border-right: var(--rule); }
+.intro-index li:nth-last-child(-n+2) { border-bottom: none; }
+.intro-index a { display: flex; flex-direction: column; gap: 0.35rem; height: 100%; padding: 1.4rem 1.5rem 1.3rem; transition: background 0.18s; position: relative; }
+.intro-index a:hover, .intro-index a:focus-visible { background: var(--tint); }
+.intro-index .ix-no { display: flex; justify-content: space-between; align-items: center; font-family: var(--display); font-size: 1.05rem; }
+.intro-index .ix-no i { width: 14px; height: 14px; border: 2px solid var(--ink); display: block; }
+.intro-index li:nth-child(1) .ix-no i { background: var(--cyan); }
+.intro-index li:nth-child(2) .ix-no i { background: var(--coral); }
+.intro-index li:nth-child(3) .ix-no i { background: var(--yellow); }
+.intro-index li:nth-child(4) .ix-no i { background: var(--magenta); }
+.intro-index b { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.5rem,2.4vw,2rem); line-height: 1; font-weight: 400; }
+.intro-index span.ix-d { font-size: 0.88rem; color: var(--muted); line-height: 1.45; }
+.intro-index .ix-badge { position: absolute; top: 1.3rem; right: 3rem; font-size: 0.58rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; background: var(--magenta); border: 1.5px solid var(--ink); padding: 0.1rem 0.4rem; }
+
+/* ---------- UPDATES feed ---------- */
+.updates { display: grid; grid-template-columns: 240px 1fr; border-bottom: var(--rule); }
+.updates-label { background: var(--magenta); border-right: var(--rule); padding: 1.6rem; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
+.updates-label b { font-family: var(--display); text-transform: uppercase; font-size: 1.9rem; line-height: 1; font-weight: 400; }
+.updates-label span { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.upd-list { list-style: none; }
+.upd { display: grid; grid-template-columns: 120px 1fr; border-bottom: var(--rule-thin); }
+.upd:last-child { border-bottom: none; }
+.upd-date { padding: 1.2rem 1rem 1.2rem 1.6rem; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral-deep); }
+.upd-date .new-tag { display: inline-block; margin-top: 0.4rem; background: var(--yellow); border: 1.5px solid var(--ink); color: var(--ink); padding: 0.05rem 0.35rem; font-size: 0.56rem; }
+.upd-body { padding: 1.1rem 1.6rem 1.2rem 0; }
+.upd-body h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.25rem; line-height: 1.3; }
+.upd-body p { color: var(--ink); line-height: 1.6; font-size: 0.95rem; white-space: pre-line; max-width: 72ch; }
+.upd-body p a { color: var(--coral-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; word-break: break-all; }
+.upd-more { padding: 0.9rem 1.6rem; border-top: var(--rule-thin); }
+.upd-empty { padding: 1.4rem 1.6rem; color: var(--muted); font-size: 0.95rem; }
+
+/* ---------- HOMEWORK: header + week tracker (tabs) ---------- */
+.homework { border-bottom: var(--rule); scroll-margin-top: 80px; }
+.hw-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; padding: clamp(2.2rem,4vw,3.2rem) 2.5rem 1.4rem; background: var(--coral); border-bottom: var(--rule); }
+.hw-head .eyebrow { color: var(--ink); }
+.hw-head h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.4rem,5vw,4rem); line-height: 0.92; }
+.hw-head p { margin-top: 0.6rem; max-width: 56ch; line-height: 1.55; font-weight: 500; }
+.hw-tally { font-family: var(--display); font-size: clamp(1.6rem,3vw,2.4rem); line-height: 1; text-align: right; }
+.hw-tally span { display: block; font-family: var(--sans); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem; }
+.hw-tabs { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); border-bottom: var(--rule); }
+.hw-tab { background: var(--porcelain); border: none; border-right: var(--rule); padding: 1rem 1.1rem 0.95rem; text-align: left; font: inherit; color: var(--ink); cursor: pointer; display: flex; flex-direction: column; gap: 0.3rem; position: relative; transition: background 0.15s; }
+.hw-tab:last-child { border-right: none; }
+.hw-tab:hover { background: var(--tint); }
+.hw-tab[aria-selected="true"] { background: var(--white); box-shadow: inset 0 -5px 0 var(--ink); }
+.hw-tab:focus-visible { outline: 3px solid var(--magenta); outline-offset: -3px; }
+.hw-tab .tw { font-family: var(--display); text-transform: uppercase; font-size: 1.35rem; line-height: 1; }
+.hw-tab .td { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.hw-tab .ts { align-self: flex-start; margin-top: 0.35rem; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.45rem; border: 2px solid var(--ink); background: var(--white); }
+.hw-tab.s-in .ts { background: var(--cyan); }
+.hw-tab.s-late .ts { background: var(--yellow); }
+.hw-tab.s-due .ts { background: var(--coral); }
+.hw-tab.s-missed .ts { background: var(--ink); color: #fff; }
+.hw-tab.s-upcoming .ts { border-style: dashed; color: var(--muted); }
+.hw-tab.s-none .ts { border-color: rgba(21,23,26,0.35); color: var(--muted); }
+.lattend { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 0.55rem; font-size: 0.64rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.lattend i { width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--ink); display: block; }
+.lattend.yes i { background: var(--ink); }
+.lattend.no { color: var(--muted); }
+
+/* ---------- THE DESK: assignment + checklist (new composition) ---------- */
+.desk { display: grid; grid-template-columns: 1.2fr 0.8fr; border-bottom: var(--rule); }
+.desk-left { padding: clamp(2.2rem,4vw,3.4rem) 2.5rem; border-right: var(--rule); }
+.desk-right { padding: clamp(2.2rem,4vw,3.4rem) 2rem; background: var(--porcelain); }
+.desk h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.9rem,3.2vw,2.7rem); line-height: 1; margin-bottom: 0.4rem; }
+.desk .wk { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); }
+.assignment { font-family: var(--serif); font-size: clamp(1.15rem,1.8vw,1.4rem); line-height: 1.5; margin: 1.2rem 0 1.6rem; padding-left: 1.1rem; border-left: 6px solid var(--coral); max-width: 52ch; }
+.submit-box { border: var(--rule); padding: 1.4rem; background: var(--white); max-width: 620px; position: relative; }
+.submit-box .gw-tag { background: var(--coral); }
+.subrow { display: flex; gap: 0; }
+.subrow input { border-right: none !important; }
+.subrow .btn { flex: none; }
+.sub-done { display: flex; flex-direction: column; gap: 0.5rem; }
+.sub-done a { font-weight: 700; color: var(--coral-deep); word-break: break-all; }
+.sub-meta { font-size: 0.78rem; color: var(--muted); }
+.review-note { margin-top: 0.6rem; padding: 0.8rem 1rem; background: var(--tint); border-left: 4px solid var(--coral); font-size: 0.9rem; }
+.checklist { list-style: none; border: var(--rule); background: var(--white); }
+.checklist li { border-bottom: var(--rule-thin); }
+.checklist li:last-child { border-bottom: none; }
+.checklist label { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.95rem 1rem; cursor: pointer; line-height: 1.45; font-size: 0.94rem; }
+.checklist input { width: 20px; height: 20px; flex: none; accent-color: var(--ink); margin-top: 1px; }
+.checklist li.done label span { text-decoration: line-through; text-decoration-thickness: 2px; color: var(--muted); }
+.checklist .auto { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: block; margin-top: 0.15rem; text-decoration: none; }
+.desk-right h3 { font-size: 0.74rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.9rem; display: flex; justify-content: space-between; }
+.meter { height: 10px; border: 2px solid var(--ink); background: var(--white); margin-bottom: 1.1rem; }
+.meter span { display: block; height: 100%; background: var(--ink); width: 0; transition: width 0.3s; }
+.week-pick { margin-top: 1.4rem; font-size: 0.8rem; color: var(--muted); }
+
+/* ---------- ENORMOUS MOMENT: the commitment ---------- */
+.commit { display: grid; grid-template-columns: 1.1fr 0.9fr; border-bottom: var(--rule); }
+.commit-big { padding: clamp(2.6rem,5vw,4.6rem) 2.5rem; border-right: var(--rule); display: flex; align-items: center; }
+.commit-big p { font-family: var(--display); text-transform: uppercase; font-size: clamp(3.2rem,8.4vw,7.2rem); line-height: 0.88; }
+.commit-big p .coral { color: var(--coral); }
+.commit-list { list-style: none; counter-reset: c; }
+.commit-list li { counter-increment: c; display: grid; grid-template-columns: 64px 1fr; border-bottom: var(--rule); }
+.commit-list li:last-child { border-bottom: none; }
+.commit-list li::before { content: '0' counter(c); font-family: var(--display); font-size: 1.6rem; display: flex; align-items: center; justify-content: center; border-right: var(--rule); background: var(--yellow); }
+.commit-list li > div { padding: 1.3rem 1.5rem; line-height: 1.6; }
+.commit-list li.lead > div { font-weight: 600; }
+.commit-list li.note::before { background: var(--porcelain); content: '+'; }
+
+/* ---------- schedule ledger ---------- */
+.sec-head .h-display { margin-bottom: 0.6rem; }
+.ledger { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem clamp(2.4rem,4vw,3.4rem); }
+.ledger-wrap { border: var(--rule); }
+.lrow { display: grid; grid-template-columns: 120px 1fr 240px; border-bottom: var(--rule); }
+.lrow:last-child { border-bottom: none; }
+.lrow.is-next { box-shadow: inset 8px 0 0 var(--coral); }
+.ldate { padding: 1.2rem; border-right: var(--rule); }
+.ldate b { display: block; font-family: var(--display); font-size: 2rem; line-height: 1; font-weight: 400; }
+.ldate span { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.lbody { padding: 1.2rem 1.4rem; }
+.lbody .lno { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); }
+.lbody h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.45rem; line-height: 1.05; margin: 0.25rem 0 0.35rem; }
+.lbody .lwho { font-size: 0.84rem; font-weight: 600; margin-bottom: 0.4rem; }
+.lbody p { font-size: 0.92rem; color: var(--muted); line-height: 1.6; max-width: 70ch; }
+.llinks { padding: 1.2rem; border-left: var(--rule); display: flex; flex-direction: column; gap: 0.5rem; justify-content: center; background: var(--porcelain); }
+.llinks a, .llinks span { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; display: flex; align-items: center; gap: 0.45rem; }
+.llinks a { color: var(--ink); }
+.llinks a:hover { color: var(--coral-deep); }
+.llinks span { color: var(--muted); }
+.llinks a::before { content: ''; width: 9px; height: 9px; border: 2px solid currentColor; flex: none; }
+.ledger-foot { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between; margin-top: 1rem; font-size: 0.84rem; color: var(--muted); }
+
+/* ---------- incentives + featured ---------- */
+.band { border-bottom: var(--rule); display: grid; grid-template-columns: 240px 1fr; }
+.band-label { background: var(--yellow); border-right: var(--rule); padding: 1.6rem; font-family: var(--display); text-transform: uppercase; font-size: 1.7rem; line-height: 1; display: flex; align-items: center; }
+.band-body { padding: 1.6rem 2rem; line-height: 1.7; }
+.band-body p + p { margin-top: 0.6rem; }
+.feat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px,1fr)); }
+.feat { padding: 1.2rem 1.4rem; border-right: var(--rule-thin); border-bottom: var(--rule-thin); display: block; }
+.feat:hover { background: var(--tint); }
+.feat b { display: block; font-weight: 700; }
+.feat span { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral-deep); }
+
+/* ---------- resources + contacts ---------- */
+.two { display: grid; grid-template-columns: 1fr 1fr; border-bottom: var(--rule); }
+.two > div { padding: clamp(2rem,3.5vw,3rem) 2.5rem; }
+.two > div + div { border-left: var(--rule); background: var(--porcelain); }
+.two h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.6rem,2.6vw,2.1rem); line-height: 1; margin-bottom: 1.2rem; }
+.rlist { list-style: none; border-top: var(--rule); }
+.rlist li { border-bottom: var(--rule-thin); padding: 0.9rem 0; }
+.rlist b { display: block; font-weight: 700; }
+.rlist a b { color: var(--coral-deep); }
+.rlist span { font-size: 0.88rem; color: var(--muted); line-height: 1.5; display: block; margin-top: 0.15rem; }
+.slack-cta { margin-top: 1.4rem; }
+
+/* ---------- certificate ---------- */
+.cert-band { border-bottom: var(--rule); background: var(--cyan); padding: 1.6rem 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.cert-band p { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.5rem,3vw,2.2rem); line-height: 1; }
+.cert-overlay { position: fixed; inset: 0; background: rgba(21,23,26,0.82); z-index: 3000; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem; gap: 1rem; overflow: auto; }
+.cert { background: #fff; width: min(1000px, 100%); aspect-ratio: 11 / 8.5; border: 2px solid var(--ink); position: relative; padding: 5% 6%; display: flex; flex-direction: column; justify-content: space-between; }
+.cert .regstrip { height: 10px; position: absolute; left: 0; right: 0; top: 0; }
+.cert .c-kick { font-size: clamp(0.6rem,1.2vw,0.85rem); font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--coral-deep); }
+.cert .c-name { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem,6vw,4.6rem); line-height: 0.95; margin: 0.4em 0 0.2em; }
+.cert .c-line { font-family: var(--serif); font-size: clamp(0.9rem,1.8vw,1.35rem); line-height: 1.45; max-width: 46ch; }
+.cert .c-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; border-top: 2px solid var(--ink); padding-top: 0.8em; font-size: clamp(0.6rem,1.1vw,0.85rem); font-weight: 700; }
+.cert .c-foot img { height: clamp(26px,4vw,44px); width: auto; }
+.cert-actions { display: flex; gap: 0; border: 2px solid #fff; }
+.cert-actions .btn { border: none; }
+.cert-actions .btn + .btn { border-left: 2px solid var(--ink); }
+
+/* ---------- partner + staff: progress ---------- */
+.ops-head { max-width: var(--maxw); margin: 0 auto; padding: clamp(2.4rem,4vw,3.4rem) 2rem 1.4rem; display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; }
+.ops-head h1 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.2rem,4.4vw,3.6rem); line-height: 0.95; }
+.ops-head p { color: var(--muted); max-width: 60ch; margin-top: 0.6rem; line-height: 1.6; }
+.stats-row { max-width: var(--maxw); margin: 0 auto 1.4rem; padding: 0 2rem; }
+.stats-row .inner { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); border: var(--rule); }
+.stat { padding: 1rem 1.2rem; border-right: var(--rule); }
+.stat:last-child { border-right: none; }
+.stat b { display: block; font-family: var(--display); font-size: 2.2rem; line-height: 1; font-weight: 400; }
+.stat span { font-size: 0.64rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.stat:nth-child(1) { background: var(--yellow); }
+.table-tools { max-width: var(--maxw); margin: 0 auto 0.8rem; padding: 0 2rem; display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+.table-tools input { font-family: var(--sans); font-size: 0.92rem; padding: 0.65rem 0.85rem; border: var(--rule); min-width: 240px; }
+.table-scroll { max-width: var(--maxw); margin: 0 auto clamp(2.4rem,4vw,3.4rem); padding: 0 2rem; overflow-x: auto; }
+table.prog { border-collapse: collapse; width: 100%; min-width: 860px; border: var(--rule); font-size: 0.86rem; }
+table.prog th { background: var(--ink); color: #fff; text-align: left; padding: 0.7rem 0.8rem; font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 800; vertical-align: bottom; }
+table.prog th small { display: block; font-weight: 600; letter-spacing: 0.04em; text-transform: none; opacity: 0.75; font-size: 0.7rem; margin-top: 0.2rem; }
+table.prog td { border-top: var(--rule-thin); padding: 0.65rem 0.8rem; vertical-align: top; }
+table.prog td.person { border-right: var(--rule); min-width: 190px; }
+table.prog td.person b { display: block; }
+table.prog td.person span { font-size: 0.76rem; color: var(--muted); display: block; }
+table.prog tr.removed td { opacity: 0.45; }
+.cell { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.6rem; font-size: 0.78rem; align-items: center; min-width: 150px; }
+.cell .k { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.cell .v { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 700; white-space: nowrap; }
+.cell .v i { width: 11px; height: 11px; border: 2px solid var(--ink); display: block; flex: none; }
+.cell .v.yes i { background: var(--cyan); }
+.cell .v.part i { background: var(--yellow); }
+.cell .v.no i { background: var(--ink); }
+.cell .v.wait { color: var(--muted); font-weight: 600; }
+.cell .v.wait i { border-style: dashed; border-color: rgba(21,23,26,0.45); }
+.cell .v.na { color: var(--muted); font-weight: 500; }
+.cell .v.na i { display: none; }
+.cell a { color: var(--coral-deep); font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
+.cell .late { font-size: 0.56rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; border: 1.5px solid var(--ink); background: var(--yellow); padding: 0 0.25rem; }
+.prog-legend { max-width: var(--maxw); margin: 0 auto 0.8rem; padding: 0 2rem; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; font-size: 0.74rem; color: var(--muted); }
+.prog-legend span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.prog-legend i { width: 11px; height: 11px; border: 2px solid var(--ink); display: block; }
+.pill-flag { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; border: 1.5px solid var(--ink); padding: 0.05rem 0.3rem; margin-left: 0.3rem; background: var(--coral); }
+
+/* ---------- SECTION MENU (sticky, under the site nav) ---------- */
+.secnav { position: sticky; top: 78px; z-index: 900; background: var(--white); border-bottom: var(--rule); }
+.secnav-inner { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem; display: flex; overflow-x: auto; scrollbar-width: none; }
+.secnav-inner::-webkit-scrollbar { display: none; }
+.secnav a { flex: none; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.05rem; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); border-bottom: 4px solid transparent; margin-bottom: -2px; white-space: nowrap; }
+.secnav a:first-child { padding-left: 0; }
+.secnav a i { width: 11px; height: 11px; border: 2px solid var(--ink); display: block; }
+.secnav a:hover { color: var(--coral-deep); }
+.secnav a.is-here { border-bottom-color: var(--ink); }
+.c-coral { background: var(--coral); } .c-yellow { background: var(--yellow); } .c-cyan { background: var(--cyan); } .c-magenta { background: var(--magenta); } .c-ink { background: var(--ink); } .c-white { background: var(--white); }
+
+/* ---------- SECTION HEADER (one per section, same everywhere) ---------- */
+.hsec { border-bottom: var(--rule); scroll-margin-top: 130px; }
+.shead { border-bottom: var(--rule); background: var(--porcelain); }
+.shead-inner { max-width: var(--maxw); margin: 0 auto; padding: 1.6rem 2rem 1.4rem; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr) auto; gap: 1rem 2.5rem; align-items: end; }
+.shead-k { display: inline-flex; align-items: center; gap: 0.55rem; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.35rem; }
+.shead-k i { width: 14px; height: 14px; border: 2px solid var(--ink); display: block; }
+.shead h2 { font-family: var(--display); text-transform: uppercase; font-size: clamp(2rem,3.8vw,3rem); line-height: 0.95; }
+.shead p { color: var(--ink); font-size: 0.98rem; line-height: 1.55; max-width: 56ch; }
+.shead .hw-tally { text-align: right; }
+.sbody { max-width: var(--maxw); margin: 0 auto; padding: clamp(1.8rem,3.5vw,2.8rem) 2rem; }
+
+/* ---------- UP NEXT: to-dos + next session + updates ---------- */
+.upnext-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; border-bottom: var(--rule); }
+.upnext-grid > div { padding: clamp(1.6rem,3vw,2.4rem) 2rem; min-width: 0; }
+.upnext-grid > div + div { border-left: var(--rule); background: var(--white); }
+.col-h { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.9rem; display: flex; justify-content: space-between; gap: 1rem; }
+.todos { list-style: none; border: var(--rule); }
+.todo { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 0.9rem; align-items: start; padding: 1rem 1.1rem; border-bottom: var(--rule-thin); }
+.todo:last-child { border-bottom: none; }
+.todo .tbox { width: 30px; height: 30px; border: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 1rem; background: var(--white); }
+.todo.is-done .tbox { background: var(--cyan); }
+.todo.is-urgent .tbox { background: var(--coral); }
+.todo b { display: block; font-size: 1rem; line-height: 1.35; }
+.todo .tnote { display: block; font-size: 0.88rem; color: var(--muted); line-height: 1.5; margin-top: 0.2rem; }
+.todo .tdue { display: inline-block; margin-top: 0.4rem; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--coral-deep); }
+.todo.is-done .tdue { color: #0B6A8A; }
+.todo .btn { padding: 0.6rem 0.9rem; font-size: 0.72rem; white-space: nowrap; }
+.todo-empty { padding: 1.2rem; color: var(--muted); }
+.ns-k { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); display: flex; align-items: center; gap: 0.5rem; }
+.ns-title { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.7rem,3vw,2.4rem); line-height: 0.98; margin: 0.4rem 0 0.7rem; }
+.ns-when { font-weight: 700; }
+.ns-who { color: var(--muted); font-size: 0.92rem; line-height: 1.5; margin-top: 0.2rem; }
+.ns-actions { display: flex; flex-direction: column; border: var(--rule); margin-top: 1.2rem; }
+.ns-actions .btn { border: none; justify-content: center; }
+.ns-actions .btn + .btn { border-top: var(--rule); }
+.ns-note { margin-top: 0.8rem; font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+.upd-row { padding: clamp(1.4rem,2.6vw,2rem) 2rem; max-width: var(--maxw); margin: 0 auto; }
+.upd-row .upd-list { border: var(--rule); }
+.upd-row .upd { grid-template-columns: 110px 1fr; }
+.upd-row .upd-date { padding-left: 1.2rem; }
+
+/* ---------- HOW IT WORKS: commitment + weekly rhythm ---------- */
+.how-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; }
+.how-commit { padding: clamp(1.8rem,3.5vw,2.8rem) 2rem; border-right: var(--rule); }
+.how-commit .big { font-family: var(--display); text-transform: uppercase; font-size: clamp(2.6rem,5.6vw,4.6rem); line-height: 0.9; margin-bottom: 1.2rem; }
+.how-commit .big .coral { color: var(--coral); }
+.how-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+.how-list li { display: grid; grid-template-columns: 14px 1fr; gap: 0.7rem; line-height: 1.55; }
+.how-list li::before { content: ''; width: 10px; height: 10px; border: 2px solid var(--ink); background: var(--yellow); margin-top: 0.42rem; }
+.how-list li.note { color: var(--muted); font-size: 0.92rem; }
+.how-list li.note::before { background: var(--white); }
+.how-rhythm { padding: clamp(1.8rem,3.5vw,2.8rem) 2rem; background: var(--white); }
+.rhythm { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); border: var(--rule); position: relative; }
+.rhythm li { padding: 1.1rem 1rem 1.2rem; border-right: var(--rule); display: flex; flex-direction: column; gap: 0.35rem; }
+.rhythm li:last-child { border-right: none; background: var(--magenta); }
+.rhythm li:nth-child(2) { background: var(--cyan); }
+.rhythm .rd { font-family: var(--display); text-transform: uppercase; font-size: 1.6rem; line-height: 1; }
+.rhythm .rt { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.rhythm .rw { font-size: 0.9rem; line-height: 1.45; margin-top: 0.2rem; }
+.rhythm-foot { margin-top: 0.9rem; font-size: 0.84rem; color: var(--muted); }
+
+/* ---------- INCENTIVES ---------- */
+.tiers { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); border: var(--rule); }
+.tier { border-right: var(--rule); display: flex; flex-direction: column; min-width: 0; }
+.tier:last-child { border-right: none; }
+.tier-h { padding: 1.1rem 1.2rem; border-bottom: var(--rule); }
+.tier:nth-child(1) .tier-h { background: var(--cyan); }
+.tier:nth-child(2) .tier-h { background: var(--yellow); }
+.tier:nth-child(3) .tier-h { background: var(--coral); }
+.tier-h h3 { font-family: var(--display); text-transform: uppercase; font-size: 1.5rem; line-height: 1; }
+.tier-h p { font-size: 0.8rem; font-weight: 600; margin-top: 0.4rem; line-height: 1.45; }
+.tier ul { list-style: none; }
+.tier li { padding: 0.95rem 1.2rem; border-bottom: var(--rule-thin); line-height: 1.5; font-size: 0.9rem; }
+.tier li:last-child { border-bottom: none; }
+.tier li b { display: block; font-size: 0.98rem; margin-bottom: 0.15rem; }
+
+/* ---------- link-type homework (creator picks) ---------- */
+.picks { display: flex; flex-direction: column; gap: 0.5rem; }
+.picks a { font-weight: 700; color: var(--coral-deep); word-break: break-all; }
+
+/* ---------- REVIEW (staff): votes, notes, final pick ---------- */
+.rv-weeks { max-width: var(--maxw); margin: 0 auto 1.2rem; padding: 0 2rem; }
+.rv-weeks .hw-tabs { border: var(--rule); grid-template-columns: repeat(5, minmax(0,1fr)); }
+.rv-bar { max-width: var(--maxw); margin: 0 auto 1rem; padding: 0 2rem; display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: space-between; align-items: center; }
+.rv-filters { display: flex; border: var(--rule); flex-wrap: wrap; }
+.rv-filters button { background: var(--white); border: none; border-right: var(--rule-thin); padding: 0.55rem 0.9rem; font: inherit; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; color: var(--ink); }
+.rv-filters button:last-child { border-right: none; }
+.rv-filters button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.rv-bar select { font-family: var(--sans); font-size: 0.84rem; padding: 0.5rem 0.6rem; border: var(--rule); background: var(--white); }
+.rv-list { max-width: var(--maxw); margin: 0 auto clamp(2.4rem,4vw,3.4rem); padding: 0 2rem; display: flex; flex-direction: column; gap: 1.1rem; }
+.rv-card { border: var(--rule); display: grid; grid-template-columns: 1fr 1.25fr 0.9fr; background: var(--white); }
+.rv-card.is-picked { box-shadow: inset 8px 0 0 var(--coral); }
+.rv-card > div { padding: 1.2rem 1.3rem; }
+.rv-card > div + div { border-left: var(--rule); }
+.rv-who h3 { font-size: 1.05rem; font-weight: 800; line-height: 1.25; }
+.rv-who .h { font-size: 0.82rem; color: var(--coral-deep); font-weight: 700; }
+.rv-who .meta { font-size: 0.76rem; color: var(--muted); margin-top: 0.35rem; }
+.rv-who blockquote { margin: 0.8rem 0 0; padding: 0.6rem 0.8rem; background: var(--porcelain); border-left: 4px solid var(--ink); font-size: 0.86rem; line-height: 1.5; }
+.rv-who .btn { margin-top: 0.9rem; padding: 0.6rem 0.9rem; }
+.rv-lbl { font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.45rem; display: block; }
+.rv-votes { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+.chip { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; border: 2px solid var(--ink); padding: 0.18rem 0.5rem; background: var(--white); }
+.chip.on { background: var(--yellow); }
+.chip.off { border-style: dashed; color: var(--muted); border-color: rgba(21,23,26,0.4); }
+.vote-btn { display: inline-flex; align-items: center; gap: 0.5rem; border: var(--rule); background: var(--white); padding: 0.6rem 0.9rem; font: inherit; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; margin-bottom: 0.9rem; }
+.vote-btn[aria-pressed="true"] { background: var(--yellow); }
+.vote-btn i { width: 12px; height: 12px; border: 2px solid var(--ink); display: block; }
+.vote-btn[aria-pressed="true"] i { background: var(--ink); }
+.rv-card textarea { width: 100%; font-family: var(--sans); font-size: 0.88rem; padding: 0.6rem 0.7rem; border: var(--rule); min-height: 74px; resize: vertical; }
+.rv-card textarea:focus { outline: 2px solid var(--coral); outline-offset: 1px; }
+.rv-others { margin-top: 0.8rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.rv-others div { font-size: 0.86rem; line-height: 1.5; padding: 0.55rem 0.7rem; background: var(--porcelain); }
+.rv-others b { font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; margin-right: 0.4rem; }
+.rv-decide { background: var(--porcelain); display: flex; flex-direction: column; gap: 0.8rem; }
+.pick-toggle { display: flex; gap: 0.7rem; align-items: center; border: var(--rule); background: var(--white); padding: 0.85rem 0.9rem; cursor: pointer; font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.pick-toggle input { width: 22px; height: 22px; accent-color: var(--coral-deep); flex: none; }
+.rv-card.is-picked .pick-toggle { background: var(--coral); }
+.feat-toggle { display: flex; gap: 0.5rem; align-items: center; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+.rv-decide details summary { cursor: pointer; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+.rv-decide details textarea { margin-top: 0.5rem; background: var(--white); }
+.rv-decide .warn { font-size: 0.74rem; color: var(--coral-deep); font-weight: 600; margin-top: 0.3rem; }
+.rv-empty { border: var(--rule); padding: 2rem; color: var(--muted); }
+.saved { font-size: 0.66rem; color: #0B6A8A; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-left: 0.4rem; }
+
+/* ---------- staff tools ---------- */
+.tools { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem clamp(2.4rem,4vw,3.4rem); display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+.tool { border: var(--rule); position: relative; }
+.tool.wide { grid-column: 1 / -1; }
+.tool h3 { background: var(--porcelain); border-bottom: var(--rule); padding: 0.85rem 1.2rem; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; display: flex; justify-content: space-between; gap: 1rem; align-items: center; }
+.tool .tb { padding: 1.2rem; }
+.tool .tb p.hint { font-size: 0.84rem; color: var(--muted); margin-bottom: 0.9rem; line-height: 1.55; }
+.tool .form { gap: 0.7rem; }
+.tool .form .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+.tool select { font-family: var(--sans); font-size: 0.9rem; padding: 0.55rem 0.7rem; border: var(--rule); background: var(--white); }
+.roster { list-style: none; max-height: 360px; overflow: auto; border-top: var(--rule-thin); }
+.roster li { display: flex; justify-content: space-between; gap: 0.8rem; align-items: center; padding: 0.6rem 0; border-bottom: var(--rule-thin); font-size: 0.86rem; }
+.roster li span { color: var(--muted); font-size: 0.76rem; display: block; }
+.roster .acts { display: flex; gap: 0.8rem; flex: none; }
+.queue { list-style: none; }
+.queue li { display: grid; grid-template-columns: 1fr auto; gap: 0.6rem 1rem; padding: 0.8rem 0; border-bottom: var(--rule-thin); }
+.queue li a { color: var(--coral-deep); font-weight: 700; word-break: break-all; font-size: 0.84rem; }
+.queue .qn { font-weight: 700; }
+.queue .qtoggles { display: flex; gap: 0.9rem; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; align-items: center; }
+.queue .qtoggles label { display: flex; gap: 0.35rem; align-items: center; cursor: pointer; }
+.queue textarea { grid-column: 1 / -1; font-family: var(--sans); font-size: 0.86rem; padding: 0.5rem 0.6rem; border: var(--rule-thin); min-height: 40px; }
+.small { font-size: 0.78rem; color: var(--muted); }
+.toast { position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 0.8rem 1.2rem; font-size: 0.84rem; font-weight: 700; z-index: 4000; border: 2px solid var(--yellow); max-width: 90vw; }
+
+/* ---------- footer (slim) ---------- */
+.hub-foot { display: grid; grid-template-columns: 1fr auto; border-bottom: var(--rule); }
+.hub-foot .blk { padding: 1.8rem 2.5rem; }
+.hub-foot .blk + .blk { border-left: var(--rule); display: flex; align-items: center; justify-content: center; }
+.hub-foot p { font-size: 0.86rem; color: var(--muted); line-height: 1.6; max-width: 60ch; }
+.hub-foot a { color: var(--coral-deep); font-weight: 700; }
+.hub-foot .reg-mark { width: 120px; height: 120px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 1000px) {
+  .gatehead, .mast, .desk, .commit, .two, .intro, .updates { grid-template-columns: 1fr; }
+  .gh-copy, .mast-main, .desk-left, .commit-big, .intro-copy { border-right: none; border-bottom: var(--rule); }
+  .updates-label { border-right: none; border-bottom: var(--rule); flex-direction: row; align-items: baseline; }
+  .two > div + div { border-left: none; border-top: var(--rule); }
+  .hw-tabs { grid-template-columns: repeat(5, minmax(140px,1fr)); overflow-x: auto; }
+  .tools { grid-template-columns: 1fr; }
+  .upnext-grid, .how-grid { grid-template-columns: 1fr; }
+  .upnext-grid > div + div { border-left: none; border-top: var(--rule); }
+  .how-commit { border-right: none; border-bottom: var(--rule); }
+  .tiers { grid-template-columns: 1fr; }
+  .tier { border-right: none; border-bottom: var(--rule); }
+  .tier:last-child { border-bottom: none; }
+  .shead-inner { grid-template-columns: 1fr; }
+  .shead .hw-tally { text-align: left; }
+  .rv-card { grid-template-columns: 1fr; }
+  .rv-card > div + div { border-left: none; border-top: var(--rule); }
+  .rv-weeks .hw-tabs { grid-template-columns: repeat(5, minmax(130px,1fr)); overflow-x: auto; }
+  .band { grid-template-columns: 1fr; }
+  .band-label { border-right: none; border-bottom: var(--rule); }
+}
+@media (max-width: 760px) {
+  .gh-copy, .mast-main, .desk-left, .desk-right, .commit-big, .two > div { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .gh-check { padding: 2rem 1rem; }
+  .gate-window { padding: 1.8rem 1.3rem 1.5rem; }
+  .hw-head, .intro-copy { padding-left: 1.25rem; padding-right: 1.25rem; }
+  .intro-index { grid-template-columns: 1fr; }
+  .intro-index li:nth-child(odd) { border-right: none; }
+  .intro-index li:nth-last-child(2) { border-bottom: var(--rule); }
+  .upd { grid-template-columns: 1fr; }
+  .upd-date { padding: 1rem 1.25rem 0; }
+  .upd-body { padding: 0.3rem 1.25rem 1rem; }
+  .ledger, .ops-head, .stats-row, .table-tools, .table-scroll, .tools, .rv-weeks, .rv-bar, .rv-list, .prog-legend, .secnav-inner, .shead-inner, .sbody, .upd-row, .upnext-grid > div, .how-commit, .how-rhythm { padding-left: 1rem; padding-right: 1rem; }
+  .rhythm { grid-template-columns: 1fr; }
+  .rhythm li { border-right: none; border-bottom: var(--rule); }
+  .rhythm li:last-child { border-bottom: none; }
+  .todo { grid-template-columns: 30px minmax(0,1fr); }
+  .todo .btn { grid-column: 2; justify-self: start; }
+  .upd-row .upd { grid-template-columns: 1fr; }
+  .lrow { grid-template-columns: 84px 1fr; }
+  .llinks { grid-column: 1 / -1; border-left: none; border-top: var(--rule); flex-direction: row; flex-wrap: wrap; gap: 0.9rem; }
+  .hub-bar-inner { padding: 0 1rem; }
+  .tabs { width: 100%; overflow-x: auto; }
+  .tabs button:first-child { border-left: none; }
+  .subrow { flex-direction: column; }
+  .subrow input { border-right: var(--rule) !important; border-bottom: none !important; }
+  .mast-actions { width: 100%; flex-direction: column; }
+  .mast-actions .btn + .btn { border-left: none; border-top: var(--rule); }
+  .mast-actions .btn { justify-content: center; }
+  .hub-foot { grid-template-columns: 1fr; }
+  .hub-foot .blk + .blk { border-left: none; border-top: var(--rule); }
+  .tool .form .grid2 { grid-template-columns: 1fr; }
+  .commit-list li { grid-template-columns: 48px 1fr; }
+}
+@media print {
+  body > *:not(.cert-overlay) { display: none !important; }
+  .cert-overlay { position: static; background: none; padding: 0; }
+  .cert-actions { display: none; }
+  .cert { width: 100%; border: none; }
+  @page { size: letter landscape; margin: 0.4in; }
+}
+@media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } .hw-tab { transition: none; } }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+
+<nav class="nav slim" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="project-c_lockup_color.png" alt="Project C home"></a>
+    <div class="hub-label">TikTok <span class="x">&times;</span> Project C <span class="cmyk-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ SIGN IN ============ -->
+<section class="gatehead" id="gate" hidden>
+  <div class="gh-copy">
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> TikTok x Project C &middot; Fall 2026 cohort</div>
+    <h1>The Cohort <span class="coral">Hub</span></h1>
+    <p class="standfirst">Your session link, this week's assignment and the place to turn in your video. Everything for the program lives on this page, and it's built around you.</p>
+    <div class="factrow" aria-label="Program at a glance">
+      <div><b>5</b><span>Live sessions</span></div>
+      <div><b>Wed</b><span>2:30 PM Eastern</span></div>
+      <div><b>Oct 28</b><span>Through Nov 25</span></div>
+    </div>
+  </div>
+  <div class="gh-check">
+    <div class="gate-window crops">
+      <span class="gw-tag">Sign in</span>
+      <div id="stepEmail">
+        <h2>Creators, come on in</h2>
+        <p>Use the email address you registered with. We'll send you a six-digit code. No password.</p>
+        <form class="form" id="emailForm" novalidate>
+          <label for="emailInput">Your email</label>
+          <input type="email" id="emailInput" autocomplete="email" placeholder="you@example.com" required>
+          <div class="msg" id="emailMsg" role="alert" hidden></div>
+          <button type="submit" class="btn btn-coral" id="emailBtn">Send my code &rarr;</button>
+        </form>
+      </div>
+      <div id="stepCode" hidden>
+        <h2>Check your inbox</h2>
+        <p id="codeSentTo">We sent a code. It works for 15 minutes.</p>
+        <form class="form" id="codeForm" novalidate>
+          <label for="codeInput">Six-digit code</label>
+          <input type="text" id="codeInput" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" required>
+          <div class="msg" id="codeMsg" role="alert" hidden></div>
+          <button type="submit" class="btn btn-fill" id="codeBtn">Sign in &rarr;</button>
+          <button type="button" class="linkbtn" id="backToEmail">Use a different email or send a new code</button>
+        </form>
+      </div>
+      <p class="gate-help">Can't get in? <a href="mailto:liz@projectc.com?subject=Cohort%20hub%20access">Email Liz</a> and tell her the address you signed up with.</p>
+    </div>
+  </div>
+</section>
+
+<div class="loading" id="loading">Opening your hub&hellip;</div>
+
+<!-- ============ CONSENT ============ -->
+<section class="consent" id="consentView" hidden>
+  <div class="consent-card crops">
+    <span class="gw-tag">One thing first</span>
+    <h2>Your progress is shared with TikTok</h2>
+    <p id="consentText"></p>
+    <p>Project C runs this hub. If you have questions about how your information is used, email <a href="mailto:liz@projectc.com" style="color:var(--coral-deep);font-weight:700">liz@projectc.com</a>.</p>
+    <label class="checkrow"><input type="checkbox" id="consentBox"> I understand that my progress in this program is shared with TikTok.</label>
+    <button class="btn btn-fill" id="consentBtn" disabled>Continue to my hub &rarr;</button>
+  </div>
+</section>
+
+<!-- ============ SIGNED IN ============ -->
+<div id="app" hidden>
+  <div class="hub-bar">
+    <div class="hub-bar-inner">
+      <span class="who" id="whoLine"></span>
+      <div class="tabs" role="tablist" id="tabs">
+        <button role="tab" data-view="hub" aria-selected="true">My hub</button>
+        <button role="tab" data-view="progress" aria-selected="false" hidden>Cohort progress</button>
+        <button role="tab" data-view="review" aria-selected="false" hidden>Review homework</button>
+        <button role="tab" data-view="tools" aria-selected="false" hidden>Tools</button>
+        <button class="signout" id="signoutBtn" type="button">Sign out</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HUB VIEW ===== -->
+  <div id="viewHub">
+    <nav class="secnav" id="secnav" aria-label="Sections of this page"><div class="secnav-inner">
+      <a href="#upnext"><i class="c-coral"></i>To-do</a>
+      <a href="#how"><i class="c-yellow"></i>How it works</a>
+      <a href="#homework"><i class="c-cyan"></i>Homework</a>
+      <a href="#scheduleSec"><i class="c-magenta"></i>Sessions</a>
+      <a href="#incentivesSec"><i class="c-yellow"></i>Incentives</a>
+      <a href="#resources"><i class="c-ink"></i>Resources</a>
+    </div></nav>
+
+    <section class="hsec" id="upnext">
+      <header class="shead"><div class="shead-inner">
+        <div><span class="shead-k"><i class="c-coral"></i>Start here</span><h2>Up next</h2></div>
+        <p id="upnextLede">Your to-dos and deadlines, the next session and the latest updates. Check here first.</p>
+      </div></header>
+      <div class="upnext-grid">
+        <div><h3 class="col-h"><span>Your to-dos</span><span id="todoCount"></span></h3><ul class="todos" id="todoList"></ul></div>
+        <div id="nextSession"></div>
+      </div>
+      <div class="upd-row" id="updates">
+        <h3 class="col-h"><span>Updates from Project C and TikTok</span><span id="updCount"></span></h3>
+        <ul class="upd-list" id="updList"></ul>
+        <div class="upd-more" id="updMore" hidden><button type="button" class="linkbtn" id="updMoreBtn">Show older updates</button></div>
+      </div>
+    </section>
+
+    <section class="cert-band" id="certBand" hidden>
+      <p>You finished the program.</p>
+      <button class="btn btn-fill" id="certBtn" type="button">Get your certificate &rarr;</button>
+    </section>
+
+    <section class="hsec" id="how">
+      <header class="shead"><div class="shead-inner">
+        <div><span class="shead-k"><i class="c-yellow"></i>The program</span><h2>How it works</h2></div>
+        <p id="howLede">Five live sessions and one piece of homework a week. The same rhythm repeats every week.</p>
+      </div></header>
+      <div class="how-grid">
+        <div class="how-commit"><p class="big">One video <span class="coral">a week.</span></p><ul class="how-list" id="commitList"></ul></div>
+        <div class="how-rhythm"><h3 class="col-h"><span>Every week</span></h3><ol class="rhythm" id="rhythm"></ol><p class="rhythm-foot">Each week&rsquo;s homework is discussed in that Wednesday&rsquo;s session.</p></div>
+      </div>
+    </section>
+
+    <section class="hsec homework" id="homework">
+      <header class="shead"><div class="shead-inner">
+        <div><span class="shead-k"><i class="c-cyan"></i>Turn in your homework</span><h2>Homework</h2></div>
+        <p id="hwLede">Due Tuesdays at 12 PM ET. Pick a week to see the assignment and its to-do list.</p><div class="hw-tally" id="hwTally"></div>
+      </div></header>
+      <div class="hw-tabs" id="hwTabs" role="tablist" aria-label="Homework by week"></div>
+      <div class="desk" id="desk"></div>
+    </section>
+
+    <section class="hsec" id="scheduleSec">
+      <header class="shead"><div class="shead-inner">
+        <div><span class="shead-k"><i class="c-magenta"></i>Your Zoom link and replays</span><h2>Sessions</h2></div>
+        <p id="sessionTime"></p>
+      </div></header>
+      <div class="ledger" style="padding-top:clamp(1.8rem,3.5vw,2.6rem)">
+        <div class="ledger-wrap" id="ledger"></div>
+        <div class="ledger-foot">
+          <span>Replays and slides show up here a day or two after each session.</span>
+          <button class="btn" id="icsBtn" type="button">Add all five to my calendar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="hsec" id="featuredSec" hidden>
+      <header class="shead"><div class="shead-inner">
+        <div><span class="shead-k"><i class="c-magenta"></i>From the cohort</span><h2>Worth a look</h2></div>
+        <p id="featLede">Videos the team flagged as strong examples.</p>
+      </div></header>
+      <div class="feat-grid" id="featGrid"></div>
+    </section>
+
+    <section class="hsec" id="incentivesSec" hidden>
+      <header class="shead"><div class="shead-inner">
+        <div><span class="shead-k"><i class="c-yellow"></i>From TikTok</span><h2>Incentives</h2></div>
+        <p id="incLede"></p>
+      </div></header>
+      <div class="sbody"><div class="tiers" id="tiers"></div></div>
+    </section>
+
+    <section class="hsec" id="resources">
+      <header class="shead"><div class="shead-inner">
+        <div><span class="shead-k"><i class="c-ink"></i>Help and materials</span><h2>Resources and contacts</h2></div>
+        <p id="resLede">Session materials, the cohort Slack room and who to ask when you&rsquo;re stuck.</p>
+      </div></header>
+      <div class="two" style="border-bottom:none">
+        <div>
+          <h2>Resources</h2>
+          <ul class="rlist" id="resList"></ul>
+          <div class="slack-cta" id="slackCta"></div>
+        </div>
+        <div>
+          <h2>Who to ask</h2>
+          <ul class="rlist" id="contactList"></ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===== PROGRESS VIEW (partner + staff) ===== -->
+  <div id="viewProgress" hidden>
+    <div class="ops-head">
+      <div>
+        <div class="eyebrow cyan">Partner view</div>
+        <h1>Cohort progress</h1>
+        <p id="progressNote">Every creator, week by week.</p>
+      </div>
+      <button class="btn btn-fill" id="csvBtn" type="button">Download spreadsheet</button>
+    </div>
+    <div class="stats-row"><div class="inner" id="statsRow"></div></div>
+    <div class="table-tools">
+      <input type="search" id="tableSearch" placeholder="Find a creator" aria-label="Find a creator">
+      <span class="small">Click a creator&rsquo;s handle to open their TikTok.</span>
+    </div>
+    <div class="prog-legend" aria-hidden="true">
+      <span><i style="background:var(--cyan)"></i>Yes or done</span>
+      <span><i style="background:var(--yellow)"></i>Partly done or late</span>
+      <span><i style="background:var(--ink)"></i>No or missed</span>
+      <span><i style="border-style:dashed;border-color:rgba(21,23,26,.45)"></i>Not yet</span>
+    </div>
+    <div class="table-scroll"><table class="prog" id="progTable"></table></div>
+  </div>
+
+  <!-- ===== REVIEW VIEW (staff) ===== -->
+  <div id="viewReview" hidden>
+    <div class="ops-head">
+      <div>
+        <div class="eyebrow">Project C only</div>
+        <h1>Review homework</h1>
+        <p>Open each submission, vote for the ones you&rsquo;d pick for live critique and leave notes for each other. Votes and notes stay between Project C staff. When you&rsquo;ve decided, turn on &ldquo;Picked for live critique.&rdquo;</p>
+      </div>
+    </div>
+    <div class="rv-weeks"><div class="hw-tabs" id="rvWeeks" role="tablist" aria-label="Homework week to review"></div></div>
+    <div class="stats-row"><div class="inner" id="rvStats"></div></div>
+    <div class="rv-bar">
+      <div class="rv-filters" id="rvFilters" role="group" aria-label="Show">
+        <button type="button" data-f="all" aria-pressed="true">All</button>
+        <button type="button" data-f="mine" aria-pressed="false">Not reviewed by me</button>
+        <button type="button" data-f="voted" aria-pressed="false">Has votes</button>
+        <button type="button" data-f="picked" aria-pressed="false">Picked</button>
+      </div>
+      <label class="small">Order <select id="rvSort"><option value="time">First turned in</option><option value="votes">Most votes</option></select></label>
+    </div>
+    <div class="rv-list" id="rvList"></div>
+  </div>
+
+  <!-- ===== TOOLS VIEW (staff) ===== -->
+  <div id="viewTools" hidden>
+    <div class="ops-head">
+      <div>
+        <div class="eyebrow">Project C only</div>
+        <h1>Run the cohort</h1>
+        <p>The behind-the-scenes controls for running the cohort. TikTok can&rsquo;t see this tab.</p>
+      </div>
+    </div>
+    <div class="tools">
+      <div class="tool">
+        <h3>Add someone</h3>
+        <div class="tb">
+          <p class="hint">They can sign in right away. Creators also get a personal Zoom link automatically.</p>
+          <form class="form" id="addForm">
+            <div class="grid2">
+              <div><label class="lbl" for="addName">Name</label><input id="addName" required></div>
+              <div><label class="lbl" for="addEmail">Email</label><input id="addEmail" type="email" required></div>
+            </div>
+            <div class="grid2">
+              <div><label class="lbl" for="addHandle">TikTok handle</label><input id="addHandle" placeholder="@handle"></div>
+              <div><label class="lbl" for="addRole">Role</label>
+                <select id="addRole"><option value="creator">Creator</option><option value="partner">TikTok partner</option><option value="staff">Project C staff</option></select></div>
+            </div>
+            <button class="btn btn-coral" type="submit">Add to the roster</button>
+          </form>
+        </div>
+      </div>
+      <div class="tool wide">
+        <h3>Post an update <span id="updToolCount" class="small"></span></h3>
+        <div class="tb">
+          <p class="hint">Shows at the top of every creator&rsquo;s hub, newest first. Links you paste become clickable. TikTok partners see updates too.</p>
+          <form class="form" id="updForm">
+            <div><label class="lbl" for="updTitle">Headline</label><input id="updTitle" maxlength="140" placeholder="Session 2 slides are up"></div>
+            <div><label class="lbl" for="updBody">Message</label><textarea id="updBody" maxlength="4000"></textarea></div>
+            <button class="btn btn-coral" type="submit">Post update</button>
+          </form>
+          <ul class="roster" id="updAdmin" style="margin-top:1rem"></ul>
+        </div>
+      </div>
+      <div class="tool">
+        <h3>To-dos at the top of the hub <span id="todoToolCount" class="small"></span></h3>
+        <div class="tb">
+          <p class="hint">Pinned items show in every creator&rsquo;s &ldquo;Your to-dos&rdquo; list until their due date passes. Each week&rsquo;s homework shows up there on its own.</p>
+          <form class="form" id="todoForm">
+            <div><label class="lbl" for="tdText">To-do</label><input id="tdText" maxlength="200" placeholder="Fill out the end-of-program survey"></div>
+            <div><label class="lbl" for="tdNote">Details <span class="small" style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="tdNote" maxlength="600"></div>
+            <div class="grid2">
+              <div><label class="lbl" for="tdDue">Due</label><input id="tdDue" type="datetime-local"></div>
+              <div><label class="lbl" for="tdLink">Link <span class="small" style="text-transform:none;letter-spacing:0">(optional)</span></label><input id="tdLink" type="url" placeholder="https://"></div>
+            </div>
+            <div><label class="lbl" for="tdLabel">Button text</label><input id="tdLabel" maxlength="60" placeholder="Open the survey"></div>
+            <button class="btn btn-coral" type="submit">Pin to-do</button>
+          </form>
+          <ul class="roster" id="todoAdmin" style="margin-top:1rem"></ul>
+        </div>
+      </div>
+      <div class="tool">
+        <h3>Welcome email <span id="welcomeCount" class="small"></span></h3>
+        <div class="tb">
+          <p class="hint">This is the first email creators get. It has a one-click sign-in link, their personal Zoom link, the two things to do before session 1 and the schedule. Send yourself a test first. The real send only goes to people who haven&rsquo;t had one, so it&rsquo;s safe to press again after a new batch is added.</p>
+          <div style="display:flex;gap:.7rem;flex-wrap:wrap">
+            <button class="btn" id="welcomeTestBtn" type="button">Send me a test</button>
+            <button class="btn btn-fill" id="welcomeBtn" type="button">Send welcome emails</button>
+          </div>
+        </div>
+      </div>
+      <div class="tool">
+        <h3>Edit a week <select id="editWeek" aria-label="Week to edit"></select></h3>
+        <div class="tb">
+          <form class="form" id="weekForm">
+            <div><label class="lbl" for="wfReplay">Replay link</label><input id="wfReplay" type="url" placeholder="https://"></div>
+            <div><label class="lbl" for="wfSlides">Slides link</label><input id="wfSlides" type="url" placeholder="https://"></div>
+            <div><label class="lbl" for="wfAssignment">Assignment</label><textarea id="wfAssignment"></textarea></div>
+            <div><label class="lbl" for="wfGuests">Guests</label><input id="wfGuests"></div>
+            <button class="btn btn-coral" type="submit">Save week</button>
+          </form>
+        </div>
+      </div>
+      <div class="tool">
+        <h3>Roster <span id="rosterCount" class="small"></span></h3>
+        <div class="tb">
+          <p class="hint">Removing someone locks them out of the hub and cancels their Zoom registration. Attendance pulls from Zoom on its own; use the button to re-pull a week.</p>
+          <div style="display:flex;gap:.6rem;align-items:center;margin-bottom:.8rem;flex-wrap:wrap">
+            <select id="attWeek" aria-label="Week to re-pull attendance for"></select>
+            <button class="btn" id="attBtn" type="button" style="padding:.55rem .9rem">Re-pull attendance</button>
+          </div>
+          <ul class="roster" id="roster"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer class="hub-foot">
+  <div class="blk">
+    <p>The Cohort Hub is run by <a href="https://projectc.com">Project C</a> in partnership with the TikTok News Creator team. Trouble with the page? Email <a href="mailto:liz@projectc.com">liz@projectc.com</a>.</p>
+  </div>
+  <div class="blk">
+    <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C, independent by design, est. 2024">
+      <defs><path id="rmring" d="M100,100 m -80,0 a 80,80 0 1,1 160,0 a 80,80 0 1,1 -160,0"/></defs>
+      <g class="spin">
+        <g transform="translate(-4.5,-3.5)">
+          <path d="M100,100 L100,48 A52,52 0 0,1 152,100 Z" fill="#EC008C"/>
+          <path d="M100,100 L152,100 A52,52 0 0,1 100,152 Z" fill="#15171A"/>
+          <path d="M100,100 L100,152 A52,52 0 0,1 48,100 Z" fill="#FFE800"/>
+          <path d="M100,100 L48,100 A52,52 0 0,1 100,48 Z" fill="#00AEEF"/>
+        </g>
+        <text class="rm-ring" font-size="13" font-weight="800" letter-spacing="5"><textPath href="#rmring" startOffset="0%">PROJECT C&nbsp;&nbsp;&bull;&nbsp;&nbsp;INDEPENDENT BY DESIGN&nbsp;&nbsp;&bull;&nbsp;&nbsp;</textPath></text>
+      </g>
+      <circle cx="100" cy="100" r="52" fill="none" stroke="#15171A" stroke-width="3"/>
+      <line x1="100" y1="26" x2="100" y2="174" stroke="#15171A" stroke-width="2.5"/>
+      <line x1="26" y1="100" x2="174" y2="100" stroke="#15171A" stroke-width="2.5"/>
+      <circle cx="100" cy="100" r="21" fill="#FFFFFF" stroke="#15171A" stroke-width="1.5"/>
+      <text class="rm-ctr" x="100" y="97" text-anchor="middle" font-size="8.5">EST.</text>
+      <text class="rm-ctr" x="100" y="111.5" text-anchor="middle" font-size="12">2024</text>
+    </svg>
+  </div>
+</footer>
+<div class="legal">
+  <span>&copy; 2026 Project C &middot; Independent by design. <a href="privacy-policy.html">Privacy Policy</a></span>
+  <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
+</div>
+
+<div class="cert-overlay" id="certOverlay" hidden>
+  <div class="cert" id="cert">
+    <div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
+    <div>
+      <div class="c-kick">Certificate of completion</div>
+      <div class="c-name" id="certName"></div>
+      <p class="c-line" id="certLine"></p>
+    </div>
+    <div class="c-foot">
+      <img src="project-c_lockup_color.png" alt="Project C">
+      <span id="certDate"></span>
+      <span>TikTok News Creator Program</span>
+    </div>
+  </div>
+  <div class="cert-actions">
+    <button class="btn btn-coral" id="certPrint" type="button">Print or save as PDF</button>
+    <button class="btn" id="certClose" type="button">Close</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var PROGRAM = 'tiktok-q4-2026';
+  var API = '/.netlify/functions/cohort-hub';
+  var TOKEN_KEY = 'pc_hub_token_' + PROGRAM;
+  var TZ = 'America/New_York';
+  var COLORS = 5;
+
+  var state = { token: null, hub: null, progress: null, viewWeekId: null, email: '' };
+  var $ = function (id) { return document.getElementById(id); };
+
+  // ---------- storage (never trust it to exist) ----------
+  function store(k, v) { try { if (v === null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) {} }
+  function read(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+  // ---------- api ----------
+  function api(action, data) {
+    var body = Object.assign({ action: action, program: PROGRAM }, data || {});
+    if (state.token && !body.token) body.token = state.token;
+    var fetcher = window.__hubFetch || function (u, o) { return fetch(u, o); };
+    return fetcher(API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (r.status === 401) { var e = new Error(j.error || 'expired'); e.auth = true; throw e; }
+          if (!r.ok) throw new Error(j.error || 'Something went wrong. Try again in a minute.');
+          return j;
+        });
+      });
+  }
+
+  // ---------- formatting ----------
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function f(iso, o) { return new Date(iso).toLocaleString('en-US', Object.assign({ timeZone: TZ }, o)); }
+  function day(iso) { return f(iso, { weekday: 'long', month: 'long', day: 'numeric' }); }
+  function shortDay(iso) { return f(iso, { month: 'short', day: 'numeric' }); }
+  function time(iso) { return f(iso, { hour: 'numeric', minute: '2-digit' }) + ' ET'; }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function now() { return window.__hubNow ? window.__hubNow() : Date.now(); }
+  function toast(t) {
+    var el = document.createElement('div'); el.className = 'toast'; el.setAttribute('role', 'status'); el.textContent = t;
+    document.body.appendChild(el); setTimeout(function () { el.remove(); }, 3400);
+  }
+  function handleUrl(h) { return h ? 'https://www.tiktok.com/@' + encodeURIComponent(h.replace(/^@/, '')) : null; }
+  function untilText(ms) {
+    if (ms <= 0) return 'Past due';
+    var h = Math.floor(ms / 3600000), d = Math.floor(h / 24);
+    if (d >= 2) return d + ' days left';
+    if (h >= 2) return h + ' hours left';
+    return 'Due very soon';
+  }
+
+  // ---------- views ----------
+  function show(which) {
+    $('loading').hidden = which !== 'loading';
+    $('gate').hidden = which !== 'gate';
+    $('consentView').hidden = which !== 'consent';
+    $('app').hidden = which !== 'app';
+  }
+
+  // ---------- sign in ----------
+  function msg(el, text, kind) { el.textContent = text; el.className = 'msg ' + (kind || 'error'); el.hidden = !text; }
+
+  $('emailForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var email = $('emailInput').value.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return msg($('emailMsg'), 'That doesn’t look like an email address.');
+    $('emailBtn').disabled = true; msg($('emailMsg'), 'Sending your code…', 'info');
+    api('request_code', { email: email }).then(function (r) {
+      $('emailBtn').disabled = false;
+      if (r.ok) {
+        state.email = email;
+        $('codeSentTo').textContent = 'We sent a six-digit code to ' + email + '. It works for 15 minutes. Check spam if you don’t see it.';
+        $('stepEmail').hidden = true; $('stepCode').hidden = false; msg($('emailMsg'), '');
+        $('codeInput').value = ''; $('codeInput').focus();
+      } else if (r.reason === 'not_found') {
+        msg($('emailMsg'), 'We don’t have that address on the cohort list. Try the one you registered with, or email Liz.');
+      } else if (r.reason === 'closed') {
+        msg($('emailMsg'), 'The program has ended and the hub is closed. Thanks for being part of it.');
+      } else msg($('emailMsg'), 'That doesn’t look like an email address.');
+    }).catch(function (err) { $('emailBtn').disabled = false; msg($('emailMsg'), err.message); });
+  });
+
+  $('codeForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var code = $('codeInput').value.replace(/\D/g, '');
+    if (code.length !== 6) return msg($('codeMsg'), 'The code is six digits.');
+    $('codeBtn').disabled = true;
+    api('verify_code', { email: state.email, code: code }).then(function (r) {
+      $('codeBtn').disabled = false;
+      if (r.ok) { setToken(r.token); load(); return; }
+      var m = { bad_code: 'That code isn’t right. Check the newest email from us.', expired_code: 'That code has expired. Send yourself a new one.', too_many: 'Too many tries. Send yourself a new code.', not_found: 'We couldn’t find you on the cohort list.' };
+      msg($('codeMsg'), m[r.reason] || 'That didn’t work. Try again.');
+    }).catch(function (err) { $('codeBtn').disabled = false; msg($('codeMsg'), err.message); });
+  });
+  $('codeInput').addEventListener('input', function () { if (this.value.replace(/\D/g, '').length === 6) $('codeForm').requestSubmit ? $('codeForm').requestSubmit() : null; });
+  $('backToEmail').addEventListener('click', function () { $('stepCode').hidden = true; $('stepEmail').hidden = false; msg($('codeMsg'), ''); $('emailInput').focus(); });
+
+  function setToken(t) { state.token = t; store(TOKEN_KEY, t); }
+  function signOut() { state.token = null; store(TOKEN_KEY, null); state.hub = null; $('stepCode').hidden = true; $('stepEmail').hidden = false; show('gate'); }
+  $('signoutBtn').addEventListener('click', signOut);
+
+  // ---------- consent ----------
+  $('consentBox').addEventListener('change', function () { $('consentBtn').disabled = !this.checked; });
+  $('consentBtn').addEventListener('click', function () {
+    this.disabled = true;
+    api('consent').then(function () { state.hub.me.consented = true; render(); }).catch(onErr);
+  });
+
+  // ---------- load ----------
+  function onErr(err) {
+    if (err && err.auth) { signOut(); if (err.message === 'closed') msg($('emailMsg'), 'The program has ended and the hub is closed.'); return; }
+    toast(err && err.message ? err.message : 'Something went wrong.');
+  }
+
+  function load() {
+    show('loading');
+    return api('hub').then(function (r) { state.hub = r; render(); }).catch(function (e) { if (e.auth) signOut(); else { show('gate'); msg($('emailMsg'), e.message); } });
+  }
+
+  function weekById(id) { return state.hub.weeks.filter(function (w) { return w.id === id; })[0]; }
+  function assignmentWeeks() { return state.hub.weeks.filter(function (w) { return !!w.assignment; }); }
+  function dueWeek() {
+    var t = now();
+    var aw = assignmentWeeks();
+    for (var i = 0; i < aw.length; i++) if (Date.parse(aw[i].dueAt) > t) return aw[i];
+    return null;
+  }
+  function nextSession() {
+    var t = now();
+    for (var i = 0; i < state.hub.weeks.length; i++) {
+      var w = state.hub.weeks[i];
+      if (Date.parse(w.sessionAt) + 65 * 60000 > t) return w;
+    }
+    return null;
+  }
+  function weekState(w) {
+    var t = now();
+    if (!w.assignment) {
+      if (Date.parse(w.sessionAt) + 65 * 60000 < t) return w.attendedMinutes ? 'in' : 'session';
+      return 'upcoming';
+    }
+    if (w.submission) return w.submission.late ? 'late' : 'in';
+    if (Date.parse(w.dueAt) < t) return 'missed';
+    var d = dueWeek();
+    if (d && d.id === w.id) return 'due';
+    return 'upcoming';
+  }
+  function stampText(w, s) {
+    if (s === 'in') return 'Turned in';
+    if (s === 'late') return 'In, late';
+    if (s === 'missed') return 'Missed';
+    if (s === 'due') return 'Due ' + f(w.dueAt, { weekday: 'short' });
+    return 'Not open yet';
+  }
+  function completed() {
+    var aw = assignmentWeeks();
+    var need = state.hub.program.completionMin || aw.length;
+    var got = aw.filter(function (w) { return !!w.submission; }).length;
+    return { got: got, need: need, done: got >= need };
+  }
+
+  // ---------- render: shell ----------
+  function render() {
+    var h = state.hub, me = h.me;
+    if (!me.consented && me.role === 'creator') {
+      $('consentText').textContent = h.program.consentText || '';
+      $('consentBox').checked = false; $('consentBtn').disabled = true;
+      show('consent'); return;
+    }
+    show('app');
+    $('whoLine').innerHTML = 'Signed in as <b>' + esc(me.name) + '</b>' + (me.tiktokHandle ? ' &middot; @' + esc(me.tiktokHandle.replace(/^@/, '')) : '') + (me.role !== 'creator' ? ' &middot; ' + (me.role === 'staff' ? 'Project C staff' : 'TikTok partner') : '');
+    var tabs = $('tabs').querySelectorAll('button[data-view]');
+    tabs[1].hidden = me.role === 'creator';
+    tabs[2].hidden = me.role !== 'staff';
+    tabs[3].hidden = me.role !== 'staff';
+    if (me.role !== 'creator') tabs[0].textContent = 'Creator view';
+    renderHub();
+    if (me.role !== 'creator' && !state.tabInit) { state.tabInit = true; setTab('progress'); }
+  }
+
+  function setTab(v) {
+    $('tabs').querySelectorAll('button[data-view]').forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-view') === v ? 'true' : 'false'); });
+    $('viewHub').hidden = v !== 'hub'; $('viewProgress').hidden = v !== 'progress'; $('viewTools').hidden = v !== 'tools'; $('viewReview').hidden = v !== 'review';
+    if (v === 'progress' || v === 'tools') loadProgress();
+    if (v === 'review') loadReview();
+    window.scrollTo(0, 0);
+  }
+  $('tabs').addEventListener('click', function (e) { var b = e.target.closest('button[data-view]'); if (b) setTab(b.getAttribute('data-view')); });
+
+  // ---------- render: creator hub ----------
+  function renderHub() {
+    var h = state.hub, p = h.program, me = h.me;
+    var ns = nextSession(), dw = dueWeek();
+    var t = now();
+
+    // up next: next session
+    var ns_html = '';
+    if (ns) {
+      var start = Date.parse(ns.sessionAt), live = t > start - 15 * 60000 && t < start + 65 * 60000;
+      ns_html = '<div class="ns-k">' + (live ? '<span class="live-dot"></span> Happening now' : 'Next session') + ' &middot; Session ' + ns.number + ' of ' + h.weeks.length + '</div>' +
+        '<div class="ns-title">' + esc(ns.title) + '</div>' +
+        '<div class="ns-when">' + esc(day(ns.sessionAt)) + ', ' + esc(time(ns.sessionAt)) + '</div>' +
+        '<div class="ns-who">' + esc(ns.presenters || '') + (ns.guests ? '. Guests: ' + esc(ns.guests) : '') + '</div>' +
+        '<div class="ns-actions">' +
+          (me.zoomJoinUrl ? '<a class="btn ' + (live ? 'btn-coral' : 'btn-fill') + '" href="' + esc(me.zoomJoinUrl) + '" target="_blank" rel="noopener">' + (live ? 'Join now' : 'Join on Zoom') + ' &rarr;</a>'
+                          : me.role === 'creator' ? '<span class="btn" aria-disabled="true">Your Zoom link is on its way</span>' : '') +
+          '<a class="btn" href="' + gcalUrl(ns) + '" target="_blank" rel="noopener">Add to Google Calendar</a>' +
+        '</div>' +
+        '<p class="ns-note">' + (me.role === 'creator' ? 'This Zoom link is yours alone and works for all five sessions. Please don&rsquo;t share it. You&rsquo;ll wait in a waiting room until we let everyone in.' : 'Partners and staff join from the host invite. Each creator sees their own personal link here.') + '</p>';
+    } else {
+      ns_html = '<div class="ns-k">That&rsquo;s a wrap</div><div class="ns-title">Thanks for five good weeks</div><div class="ns-who">Replays and resources stay up here until ' + esc(day(p.accessEndsAt)) + '.</div>';
+    }
+    $('nextSession').innerHTML = ns_html;
+
+    // up next: to-dos (pinned by staff, plus the homework that's due)
+    var todos = [];
+    (p.todos || []).forEach(function (td) {
+      if (td.due && Date.parse(td.due) < t) return;
+      todos.push({ text: td.text, note: td.note, due: td.due, linkUrl: td.linkUrl, linkLabel: td.linkLabel, external: true, urgent: td.due && Date.parse(td.due) - t < 3 * 86400000 });
+    });
+    if (dw) {
+      var isLinks = dw.kind === 'links';
+      todos.push({
+        text: 'Week ' + dw.number + ' homework: ' + (isLinks ? 'share two creators who do news well' : (dw.number === 2 ? 'submit a video that underperformed' : 'post a video and submit the link')),
+        note: dw.submission ? 'Turned in ' + shortDay(dw.submission.submittedAt) + '. You can still change it before the deadline.' : null,
+        due: dw.dueAt, linkUrl: '#homework', linkLabel: dw.submission ? 'See it' : 'Turn it in', done: !!dw.submission,
+        urgent: !dw.submission && Date.parse(dw.dueAt) - t < 2 * 86400000
+      });
+    }
+    todos.sort(function (x, y) { return (x.done ? 1 : 0) - (y.done ? 1 : 0) || (Date.parse(x.due || '2100-01-01') - Date.parse(y.due || '2100-01-01')); });
+    var openN = todos.filter(function (x) { return !x.done; }).length;
+    $('todoCount').textContent = openN ? openN + ' to do' : 'All set';
+    $('todoList').innerHTML = todos.length ? todos.map(function (x, i) {
+      return '<li class="todo' + (x.done ? ' is-done' : '') + (x.urgent ? ' is-urgent' : '') + '"><span class="tbox" aria-hidden="true">' + (x.done ? '&#10003;' : (i + 1)) + '</span>' +
+        '<div><b>' + esc(x.text) + '</b>' + (x.note ? '<span class="tnote">' + esc(x.note) + '</span>' : '') +
+        (x.due ? '<span class="tdue">' + (x.done ? 'Done' : 'Due ' + esc(f(x.due, { weekday: 'short', month: 'short', day: 'numeric' })) + ', ' + esc(time(x.due))) + '</span>' : '') + '</div>' +
+        (x.linkUrl ? '<a class="btn ' + (x.done ? '' : 'btn-coral') + '" href="' + esc(x.linkUrl) + '"' + (x.external && !/^#/.test(x.linkUrl) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(x.linkLabel || 'Open') + (/^#/.test(x.linkUrl) ? ' &darr;' : ' &nearr;') + '</a>' : '') + '</li>';
+    }).join('') : '<li class="todo-empty">Nothing on your list right now.</li>';
+    renderUpdates();
+
+    // homework tracker (week tabs)
+    var tb = '', inCount = 0;
+    h.weeks.forEach(function (w) {
+      var s = weekState(w);
+      if (w.assignment && (s === 'in' || s === 'late')) inCount++;
+      var cls = w.assignment ? s : 'none';
+      var stamp = w.assignment ? stampText(w, s) : 'No homework';
+      tb += '<button type="button" role="tab" class="hw-tab s-' + cls + '" data-week="' + w.id + '" aria-selected="false" aria-label="Week ' + w.number + ' homework. ' + esc(stamp) + '">' +
+        '<span class="tw">Week ' + w.number + '</span>' +
+        '<span class="td">' + (w.dueAt ? 'Due ' + esc(f(w.dueAt, { weekday: 'short', month: 'short', day: 'numeric' })) + ', noon' : 'Final session') + '</span>' +
+        '<span class="ts">' + esc(stamp) + '</span></button>';
+    });
+    $('hwTabs').innerHTML = tb;
+    $('hwTally').innerHTML = inCount + ' of ' + assignmentWeeks().length + '<span>Turned in</span>';
+
+    // desk
+    if (!state.viewWeekId || !weekById(state.viewWeekId)) state.viewWeekId = (dw || assignmentWeeks()[assignmentWeeks().length - 1] || h.weeks[0]).id;
+    renderDesk();
+
+    // certificate
+    var cp = completed(), last = h.weeks[h.weeks.length - 1];
+    $('certBand').hidden = !(me.role === 'creator' && cp.done && Date.parse(last.sessionAt) < t);
+
+    // incentives (structured: intro + tiers)
+    var inc = p.incentives;
+    if (inc && inc.tiers) {
+      $('incentivesSec').hidden = false;
+      $('incLede').textContent = inc.intro || '';
+      $('tiers').innerHTML = inc.tiers.map(function (tr) {
+        return '<div class="tier"><div class="tier-h"><h3>' + esc(tr.name) + '</h3>' + (tr.when ? '<p>' + esc(tr.when) + '</p>' : '') + '</div><ul>' +
+          (tr.items || []).map(function (it) { return '<li><b>' + esc(it.name) + '</b>' + esc(it.desc || '') + '</li>'; }).join('') + '</ul></div>';
+      }).join('');
+    } else $('incentivesSec').hidden = true;
+
+    // how it works
+    var cl = '';
+    (p.commitment || []).forEach(function (c) { cl += '<li>' + esc(c) + '</li>'; });
+    if (p.whatItCanLeadTo) cl += '<li class="note">' + esc(p.whatItCanLeadTo) + ' See the incentives below.</li>';
+    $('commitList').innerHTML = cl;
+    $('rhythm').innerHTML = (p.rhythm || []).map(function (r) { return '<li><span class="rd">' + esc(r.day) + '</span><span class="rt">' + esc(r.time) + '</span><span class="rw">' + esc(r.what) + '</span></li>'; }).join('');
+
+    // schedule
+    $('sessionTime').textContent = (p.sessionTime || '') + '. Your personal Zoom link works for all five.';
+    var lg = '';
+    h.weeks.forEach(function (w) {
+      var isNext = ns && ns.id === w.id;
+      var links = [];
+      if (w.replayUrl) links.push('<a href="' + esc(w.replayUrl) + '" target="_blank" rel="noopener">Watch the replay</a>');
+      if (w.slidesUrl) links.push('<a href="' + esc(w.slidesUrl) + '" target="_blank" rel="noopener">Slides</a>');
+      (w.resources || []).forEach(function (r) { if (r && r.url) links.push('<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.title || 'Resource') + '</a>'); });
+      if (!links.length) links.push('<span>' + (Date.parse(w.sessionAt) < t ? 'Replay coming soon' : 'Replay after the session') + '</span>');
+      links.push('<a href="' + gcalUrl(w) + '" target="_blank" rel="noopener">Google Calendar</a>');
+      lg += '<div class="lrow' + (isNext ? ' is-next' : '') + '">' +
+        '<div class="ldate"><b>' + esc(f(w.sessionAt, { month: 'short', day: 'numeric' })) + '</b><span>' + esc(f(w.sessionAt, { weekday: 'short' })) + ' &middot; ' + esc(time(w.sessionAt)) + '</span></div>' +
+        '<div class="lbody"><div class="lno">Session ' + w.number + (isNext ? ' &middot; Up next' : '') + '</div><h3>' + esc(w.title) + '</h3>' +
+        '<div class="lwho">' + esc(w.presenters || '') + (w.guests ? ' &middot; Guests: ' + esc(w.guests) : '') + '</div>' +
+        '<p>' + esc(w.summary || '') + '</p>' + attendMark(w) + '</div>' +
+        '<div class="llinks">' + links.join('') + '</div></div>';
+    });
+    $('ledger').innerHTML = lg;
+
+    // featured
+    var feat = h.featured || [];
+    $('featuredSec').hidden = !feat.length;
+    $('featGrid').innerHTML = feat.map(function (x) {
+      return '<a class="feat" href="' + esc(x.url) + '" target="_blank" rel="noopener"><span>Week ' + esc(x.week) + '</span><b>' + esc(x.name) + '</b>' + (x.tiktokHandle ? '<small class="small">@' + esc(x.tiktokHandle.replace(/^@/, '')) + '</small>' : '') + '</a>';
+    }).join('');
+
+    // resources + contacts
+    $('resList').innerHTML = (p.resources || []).map(function (r) {
+      var inner = '<b>' + esc(r.title) + '</b>' + (r.note ? '<span>' + esc(r.note) + '</span>' : '');
+      return '<li>' + (r.url ? '<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + inner + '</a>' : inner) + '</li>';
+    }).join('');
+    $('slackCta').innerHTML = p.slackUrl ? '<a class="btn btn-coral" href="' + esc(p.slackUrl) + '" target="_blank" rel="noopener">Open the cohort Slack room &rarr;</a>' : '<p class="small">The cohort Slack room link will appear here before the first session.</p>';
+    $('contactList').innerHTML = (p.contacts || []).map(function (c) {
+      return '<li><span style="margin:0 0 .25rem">' + esc(c.role) + '</span><b>' + esc(c.name) + '</b>' + (c.email ? '<a href="mailto:' + esc(c.email) + '" style="color:var(--coral-deep);font-weight:700;font-size:.9rem">' + esc(c.email) + '</a>' : '') + '</li>';
+    }).join('');
+  }
+
+  function attendMark(w) {
+    if (state.hub.me.role !== 'creator' || Date.parse(w.sessionAt) + 90 * 60000 > now()) return '';
+    if (w.attendedMinutes > 0) return '<span class="lattend yes"><i></i>You attended</span>';
+    if (w.attendedMinutes === 0 || w.attendedMinutes == null) return '<span class="lattend no"><i></i>' + (w.replayUrl ? 'Missed it? Watch the replay' : 'Attendance not recorded yet') + '</span>';
+    return '';
+  }
+  $('hwTabs').addEventListener('click', function (e) {
+    var b = e.target.closest('.hw-tab'); if (!b) return;
+    state.viewWeekId = b.getAttribute('data-week'); renderDesk();
+  });
+  $('hwTabs').addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    var tabs = [].slice.call(this.querySelectorAll('.hw-tab')), i = tabs.indexOf(document.activeElement);
+    if (i < 0) return; var n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); n.click();
+  });
+
+  function linkify(t) {
+    return esc(t).replace(/(https?:\/\/[^\s<]+[^\s<.,;:!?)\]'"])/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+  }
+  function renderUpdates() {
+    var ups = state.hub.program.updates || [], t = now();
+    var fresh = ups.filter(function (u) { return t - Date.parse(u.at) < 7 * 86400000; }).length;
+    $('updCount').textContent = fresh ? fresh + ' new' : (ups.length ? ups.length + (ups.length === 1 ? ' post' : ' posts') : '');
+    var show = state.allUpdates ? ups : ups.slice(0, 2);
+    $('updList').innerHTML = ups.length ? show.map(function (u) {
+      var isNew = t - Date.parse(u.at) < 7 * 86400000;
+      return '<li class="upd"><div class="upd-date">' + esc(f(u.at, { month: 'short', day: 'numeric' })) + (isNew ? '<br><span class="new-tag">New</span>' : '') + '</div>' +
+        '<div class="upd-body">' + (u.title ? '<h3>' + esc(u.title) + '</h3>' : '') + (u.body ? '<p>' + linkify(u.body) + '</p>' : '') + '</div></li>';
+    }).join('') : '<li class="upd-empty">Reminders, schedule changes and news from Project C and TikTok will show up here.</li>';
+    $('updMore').hidden = state.allUpdates || ups.length <= 2;
+  }
+  $('updMoreBtn').addEventListener('click', function () { state.allUpdates = true; renderUpdates(); });
+
+  function renderDesk() {
+    var h = state.hub, w = weekById(state.viewWeekId), me = h.me, t = now();
+    var items = w.items || [];
+    var doneN = items.filter(function (i) { return i.done; }).length;
+    [].forEach.call($('hwTabs').querySelectorAll('.hw-tab'), function (t) { t.setAttribute('aria-selected', t.getAttribute('data-week') === w.id ? 'true' : 'false'); });
+    var left = '<div class="wk">Week ' + w.number + ' homework &middot; discussed in session ' + w.number + ', ' + esc(f(w.sessionAt, { weekday: 'short', month: 'short', day: 'numeric' })) + '</div><h2>' + esc(w.title) + '</h2>';
+    if (w.assignment) {
+      left += '<p class="assignment">' + esc(w.assignment) + '</p>';
+      var past = Date.parse(w.dueAt) < t;
+      left += '<div class="submit-box crops"><span class="gw-tag">Turn in your homework &middot; due ' + esc(f(w.dueAt, { weekday: 'short', month: 'short', day: 'numeric' })) + ', ' + esc(time(w.dueAt)) + '</span>';
+      if (w.submission) {
+        left += '<div class="sub-done">' + (w.kind === 'links'
+          ? '<span class="lbl">Your picks</span><div class="picks">' + (w.submission.links || []).map(function (l) { return '<a href="' + esc(l) + '" target="_blank" rel="noopener">' + esc(l) + '</a>'; }).join('') + '</div>' + (w.submission.note ? '<span class="sub-meta" style="color:var(--ink)">Why: ' + esc(w.submission.note) + '</span>' : '')
+          : '<span class="lbl">Your homework video</span><a href="' + esc(w.submission.url) + '" target="_blank" rel="noopener">' + esc(w.submission.url) + '</a>') +
+          '<span class="sub-meta">Turned in ' + esc(f(w.submission.submittedAt, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET' + (w.submission.late ? ', after the deadline' : '') + (w.submission.critiquePick ? '. Picked for live critique.' : '') + '</span>' +
+          (w.submission.reviewerNote ? '<div class="review-note"><b>Note from the team:</b> ' + esc(w.submission.reviewerNote) + '</div>' : '') +
+          (me.role === 'creator' ? '<button type="button" class="linkbtn" id="changeSub" style="margin-top:.4rem">' + (w.kind === 'links' ? 'Change your picks' : 'Replace this link') + '</button>' : '') + '</div>';
+        left += '<form class="form" id="subForm" hidden style="margin-top:1rem">' + subFields(w) + '</form>';
+      } else if (me.role === 'creator') {
+        left += (past ? '<div class="msg info" style="margin-bottom:.9rem">The deadline has passed, but you can still turn it in. It will be marked late.</div>' : '') +
+          '<form class="form" id="subForm">' + subFields(w) + '</form>';
+      } else {
+        left += '<p class="small">' + (w.kind === 'links' ? 'Creators share two TikTok profiles here and say why.' : 'Creators paste their TikTok link here.') + '</p>';
+      }
+      left += '</div>';
+    } else {
+      left += '<p class="assignment">No homework this week. Bring your strongest video from the program to the final session.</p><p class="small">' + esc(w.summary || '') + '</p>';
+    }
+    var right = '<h3><span>Week ' + w.number + ' to-do list</span><span>' + doneN + ' / ' + items.length + '</span></h3><div class="meter" aria-hidden="true"><span style="width:' + (items.length ? Math.round(doneN / items.length * 100) : 0) + '%"></span></div>';
+    right += '<ul class="checklist">' + items.map(function (i) {
+      var auto = i.kind === 'submit';
+      return '<li class="' + (i.done ? 'done' : '') + '"><label><input type="checkbox" data-item="' + i.id + '"' + (i.done ? ' checked' : '') + (auto || me.role !== 'creator' ? ' disabled' : '') + '><span>' + (i.link ? '<a href="' + esc(i.link) + '" target="_blank" rel="noopener" style="text-decoration:underline">' + esc(i.label) + '</a>' : esc(i.label)) + (auto ? '<em class="auto">Checks itself when you submit</em>' : '') + '</span></label></li>';
+    }).join('') + '</ul>';
+    right += '<p class="week-pick">Looking for another week? Use the week tabs above.</p>';
+    $('desk').id = 'desk';
+    $('desk').innerHTML = '<div class="desk-left">' + left + '</div><div class="desk-right">' + right + '</div>';
+
+    var sf = $('subForm');
+    if (sf) sf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var m = $('subMsg'), note = $('subNote').value.trim(), payload = { weekId: w.id, note: note };
+      if (w.kind === 'links') {
+        var ls = [].map.call(sf.querySelectorAll('[data-pick-link]'), function (x) { return x.value.trim(); }).filter(Boolean);
+        if (!ls.length || ls.some(function (l) { return !/tiktok\.com/i.test(l); })) return msg(m, 'Paste links to TikTok profiles or videos. They should have tiktok.com in them.');
+        if (!note) return msg(m, 'Tell us why you picked them. A sentence or two is plenty.');
+        payload.links = ls;
+      } else {
+        payload.url = $('subUrl').value.trim();
+        if (!/tiktok\.com/i.test(payload.url)) return msg(m, 'Paste the link to your TikTok video. It should have tiktok.com in it.');
+      }
+      sf.querySelector('button[type=submit]').disabled = true; msg(m, 'Saving…', 'info');
+      api('submit', payload).then(function (r) {
+        if (!r.ok) { sf.querySelector('button[type=submit]').disabled = false; return msg(m, r.reason === 'need_why' ? 'Tell us why you picked them.' : 'That link didn’t work. Copy it from the Share button in TikTok and try again.'); }
+        w.submission = r.submission;
+        w.items.forEach(function (i) { if (i.kind === 'submit') i.done = true; });
+        toast('Got it. Your week ' + w.number + ' homework is in.');
+        renderHub();
+      }).catch(function (err) { sf.querySelector('button[type=submit]').disabled = false; msg(m, err.message); if (err.auth) signOut(); });
+    });
+    var cs = $('changeSub'); if (cs) cs.addEventListener('click', function () { $('subForm').hidden = false; cs.hidden = true; var fi = $('subForm').querySelector('input'); if (fi) fi.focus(); });
+  }
+
+  function subFields(w) {
+    var opt = '<span style="text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)">Optional</span>';
+    if (w.kind === 'links') {
+      var cur = (w.submission && w.submission.links) || [];
+      return '<label class="lbl" for="pick1">First creator: link to their TikTok profile or a video</label>' +
+        '<input id="pick1" data-pick-link type="url" inputmode="url" placeholder="https://www.tiktok.com/@creator" value="' + esc(cur[0] || '') + '" required>' +
+        '<label class="lbl" for="pick2">Second creator</label>' +
+        '<input id="pick2" data-pick-link type="url" inputmode="url" placeholder="https://www.tiktok.com/@creator" value="' + esc(cur[1] || '') + '">' +
+        '<label class="lbl" for="subNote">Why they do news well</label>' +
+        '<textarea id="subNote" placeholder="What do they do that makes you trust them, or keep watching?" required>' + esc(w.submission && w.submission.note || '') + '</textarea>' +
+        '<button class="btn btn-coral" type="submit">' + (w.submission ? 'Update my picks' : 'Turn in homework') + '</button>' +
+        '<div class="msg" id="subMsg" hidden></div>';
+    }
+    return '<label class="lbl" for="subUrl">Link to your TikTok video</label>' +
+      '<div class="subrow"><input id="subUrl" type="url" inputmode="url" placeholder="https://www.tiktok.com/@you/video/…" value="' + esc(w.submission ? w.submission.url : '') + '" required>' +
+      '<button class="btn btn-coral" type="submit">' + (w.submission ? 'Update' : 'Turn in homework') + '</button></div>' +
+      '<label class="lbl" for="subNote">Anything you want us to know? ' + opt + '</label>' +
+      '<textarea id="subNote" placeholder="What you tried, what you want feedback on">' + esc(w.submission && w.submission.note || '') + '</textarea>' +
+      '<div class="msg" id="subMsg" hidden></div>';
+  }
+
+  $('desk').addEventListener('change', function (e) {
+    var cb = e.target.closest('input[data-item]'); if (!cb) return;
+    var id = cb.getAttribute('data-item'), done = cb.checked;
+    var w = weekById(state.viewWeekId);
+    w.items.forEach(function (i) { if (i.id === id) i.done = done; });
+    renderDesk();
+    api('check', { itemId: id, done: done }).catch(function (err) { onErr(err); w.items.forEach(function (i) { if (i.id === id) i.done = !done; }); renderDesk(); });
+  });
+
+  // ---------- section menu: highlight where you are ----------
+  (function () {
+    var links = [].slice.call(document.querySelectorAll('#secnav a'));
+    function spy() {
+      if ($('viewHub').hidden) return;
+      var y = window.scrollY + 160, cur = null;
+      links.forEach(function (a) { var el = document.querySelector(a.getAttribute('href')); if (el && !el.hidden && el.offsetTop <= y) cur = a; });
+      links.forEach(function (a) { a.classList.toggle('is-here', a === cur); });
+    }
+    window.addEventListener('scroll', spy, { passive: true });
+    links.forEach(function (a) { a.addEventListener('click', function () { setTimeout(spy, 400); }); });
+  })();
+
+  // ---------- calendar ----------
+  function gcalStamp(iso) { return new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
+  function gcalUrl(w) {
+    var s = gcalStamp(w.sessionAt), e = gcalStamp(new Date(Date.parse(w.sessionAt) + 3600000).toISOString());
+    var details = 'TikTok x Project C, session ' + w.number + '.\n' + (state.hub.me.zoomJoinUrl ? 'Your Zoom link: ' + state.hub.me.zoomJoinUrl + '\n' : '') + 'Hub: https://projectc.com/tiktok-cohort';
+    return 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent('Cohort session ' + w.number + ': ' + w.title) + '&dates=' + s + '/' + e + '&details=' + encodeURIComponent(details) + (state.hub.me.zoomJoinUrl ? '&location=' + encodeURIComponent(state.hub.me.zoomJoinUrl) : '');
+  }
+  $('icsBtn').addEventListener('click', function () {
+    var h = state.hub, lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Project C//Cohort Hub//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+    h.weeks.forEach(function (w) {
+      var desc = ('TikTok x Project C, session ' + w.number + '. ' + (w.summary || '') + (h.me.zoomJoinUrl ? ' Your Zoom link: ' + h.me.zoomJoinUrl : '') + ' Hub: https://projectc.com/tiktok-cohort').replace(/[,;]/g, function (c) { return '\\' + c; });
+      lines.push('BEGIN:VEVENT', 'UID:' + w.id + '@projectc.com', 'DTSTAMP:' + gcalStamp(new Date().toISOString()), 'DTSTART:' + gcalStamp(w.sessionAt), 'DTEND:' + gcalStamp(new Date(Date.parse(w.sessionAt) + 3600000).toISOString()),
+        'SUMMARY:' + ('Cohort session ' + w.number + ': ' + w.title).replace(/[,;]/g, function (c) { return '\\' + c; }), 'DESCRIPTION:' + desc, h.me.zoomJoinUrl ? 'LOCATION:' + h.me.zoomJoinUrl : 'LOCATION:Zoom', 'END:VEVENT');
+    });
+    lines.push('END:VCALENDAR');
+    var blob = new Blob([lines.join('\r\n')], { type: 'text/calendar' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'tiktok-project-c-cohort.ics'; document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  // ---------- certificate ----------
+  $('certBtn').addEventListener('click', function () {
+    var h = state.hub;
+    $('certName').textContent = h.me.name;
+    $('certLine').textContent = 'completed the ' + h.program.name + ', five weeks of training in short-form video for news, ' + f(h.program.startsOn + 'T12:00:00Z', { month: 'long', day: 'numeric' }) + ' to ' + f(h.program.endsOn + 'T12:00:00Z', { month: 'long', day: 'numeric', year: 'numeric' }) + '.';
+    $('certDate').textContent = f(h.program.endsOn + 'T12:00:00Z', { month: 'long', day: 'numeric', year: 'numeric' });
+    $('certOverlay').hidden = false;
+  });
+  $('certClose').addEventListener('click', function () { $('certOverlay').hidden = true; });
+  $('certPrint').addEventListener('click', function () { window.print(); });
+
+  // ---------- progress (partner + staff) ----------
+  function loadProgress() {
+    return api('progress').then(function (r) { state.progress = r; renderProgress(); if (state.hub.me.role === 'staff') renderTools(); }).catch(onErr);
+  }
+  function attendState(w, c) {
+    if (c.attendedMinutes != null && c.attendedMinutes > 0) return 'yes';
+    if (Date.parse(w.sessionAt) > now()) return 'future';
+    if (w.attendancePulled) return 'no';
+    return 'pending';
+  }
+  function checklistState(c) {
+    if (!c.checklist || !c.checklist.total) return 'na';
+    if (c.checklist.done >= c.checklist.total) return 'done';
+    return c.checklist.done ? 'part' : 'none';
+  }
+  function cellState(w, c) {
+    if (!w.hasAssignment) return null;
+    if (c.submission) return c.submission.late ? 'late' : 'in';
+    if (Date.parse(w.dueAt) < now()) return 'missed';
+    return 'open';
+  }
+  function renderProgress() {
+    var pr = state.progress, staff = state.hub.me.role === 'staff';
+    var q = ($('tableSearch').value || '').toLowerCase();
+    var active = pr.rows.filter(function (r) { return r.status === 'active'; });
+    var dw = dueWeek(), last = null;
+    pr.weeks.forEach(function (w) { if (w.hasAssignment && Date.parse(w.dueAt) < now()) last = w; });
+    var focus = dw ? pr.weeks.filter(function (w) { return w.id === dw.id; })[0] : last;
+    var subFocus = focus ? active.filter(function (r) { return r.weeks[focus.id] && r.weeks[focus.id].submission; }).length : 0;
+    var signedIn = active.filter(function (r) { return !!r.lastLoginAt || r.consented; }).length;
+    var pastSessions = pr.weeks.filter(function (w) { return Date.parse(w.sessionAt) + 90 * 60000 < now(); });
+    var attTotal = 0, attSeats = 0;
+    pastSessions.forEach(function (w) { active.forEach(function (r) { attSeats++; if (r.weeks[w.id] && r.weeks[w.id].attendedMinutes > 0) attTotal++; }); });
+    $('statsRow').innerHTML =
+      '<div class="stat"><b>' + active.length + '</b><span>Creators enrolled</span></div>' +
+      '<div class="stat"><b>' + signedIn + '</b><span>Have signed in</span></div>' +
+      '<div class="stat"><b>' + (focus ? subFocus + '/' + active.length : '0') + '</b><span>' + (focus ? 'Week ' + focus.number + ' homework in' : 'Homework in') + '</span></div>' +
+      '<div class="stat"><b>' + (attSeats ? Math.round(attTotal / attSeats * 100) + '%' : '–') + '</b><span>Session attendance</span></div>';
+    var th = '<thead><tr><th>Creator</th>' + pr.weeks.map(function (w) { return '<th>Week ' + w.number + '<small>' + esc(f(w.sessionAt, { month: 'short', day: 'numeric' })) + (w.hasAssignment ? ' &middot; due ' + esc(f(w.dueAt, { month: 'short', day: 'numeric' })) : '') + '</small></th>'; }).join('') + '</tr></thead>';
+    var rows = pr.rows.filter(function (r) { return !q || (r.name + ' ' + (r.tiktokHandle || '') + ' ' + (r.email || '')).toLowerCase().indexOf(q) > -1; });
+    var tb = '<tbody>' + rows.map(function (r) {
+      var hu = handleUrl(r.tiktokHandle);
+      var who = '<td class="person"><b>' + esc(r.name) + (r.status !== 'active' ? ' <span class="pill-flag">Removed</span>' : '') + '</b>' +
+        (r.tiktokHandle ? '<span><a href="' + hu + '" target="_blank" rel="noopener" style="color:var(--coral-deep)">@' + esc(r.tiktokHandle.replace(/^@/, '')) + '</a></span>' : '') +
+        (staff ? '<span>' + esc(r.email) + '</span><span>' + (r.consented ? 'Signed in' : 'Not signed in yet') + (r.welcomeSent ? ' &middot; welcomed' : '') + (r.zoomLinked ? '' : ' &middot; no Zoom link') + '</span>' : '<span>' + (r.consented ? 'Signed in' : 'Not signed in yet') + '</span>') + '</td>';
+      var cells = pr.weeks.map(function (w) {
+        var c = r.weeks[w.id] || {};
+        var att = attendState(w, c), hw = cellState(w, c), cl = checklistState(c);
+        var out = '<div class="cell">';
+        out += '<span class="k">Attended</span>' + (
+          att === 'yes' ? '<span class="v yes"><i></i>Yes, ' + c.attendedMinutes + ' min</span>'
+          : att === 'no' ? '<span class="v no"><i></i>No</span>'
+          : att === 'pending' ? '<span class="v wait"><i></i>Checking Zoom</span>'
+          : '<span class="v wait"><i></i>Not yet</span>');
+        out += '<span class="k">Homework</span>' + (
+          hw === 'in' || hw === 'late' ? '<span class="v ' + (hw === 'late' ? 'part' : 'yes') + '"><i></i><a href="' + esc(c.submission.url) + '" target="_blank" rel="noopener">' + (w.kind === 'links' ? 'View picks' : 'View video') + '</a>' + (hw === 'late' ? ' <span class="late">Late</span>' : '') + (c.submission.critiquePick ? ' <span class="pill-flag">Critique</span>' : '') + '</span>'
+          : hw === 'missed' ? '<span class="v no"><i></i>Missed</span>'
+          : hw === 'open' ? '<span class="v wait"><i></i>Not yet</span>'
+          : '<span class="v na">None this week</span>');
+        out += '<span class="k">Checklist</span>' + (
+          cl === 'done' ? '<span class="v yes"><i></i>All ' + c.checklist.total + ' done</span>'
+          : cl === 'part' ? '<span class="v part"><i></i>' + c.checklist.done + ' of ' + c.checklist.total + '</span>'
+          : cl === 'none' ? '<span class="v ' + (Date.parse(w.sessionAt) < now() ? 'no' : 'wait') + '"><i></i>0 of ' + c.checklist.total + '</span>'
+          : '<span class="v na">No checklist</span>');
+        return '<td>' + out + '</div></td>';
+      }).join('');
+      return '<tr class="' + (r.status !== 'active' ? 'removed' : '') + '">' + who + cells + '</tr>';
+    }).join('') + '</tbody>';
+    $('progTable').innerHTML = th + (rows.length ? tb : '<tbody><tr><td colspan="' + (pr.weeks.length + 1) + '" style="padding:1.4rem">No creators on the roster yet.</td></tr></tbody>');
+    $('progressNote').textContent = staff ? 'Every creator, week by week. You see emails and setup status. TikTok sees names and handles only.' : 'Every creator, week by week. Homework and checklists update the moment a creator acts. Attendance comes in from Zoom about an hour after each session.';
+  }
+  $('tableSearch').addEventListener('input', function () { if (state.progress) renderProgress(); });
+
+  $('csvBtn').addEventListener('click', function () {
+    var pr = state.progress; if (!pr) return;
+    var staff = state.hub.me.role === 'staff';
+    var head = ['Name', 'TikTok handle'].concat(staff ? ['Email', 'Status', 'Date added'] : []).concat(['Signed in']);
+    pr.weeks.forEach(function (w) { var n = 'Week ' + w.number + ' '; head.push(n + 'attended', n + 'minutes', n + 'homework link', n + 'homework status', n + 'checklist complete', n + 'checklist items done'); });
+    var rows = pr.rows.filter(function (r) { return staff || r.status === 'active'; }).map(function (r) {
+      var row = [r.name, r.tiktokHandle ? '@' + r.tiktokHandle.replace(/^@/, '') : ''].concat(staff ? [r.email, r.status, r.dateAdded || ''] : []).concat([r.consented ? 'yes' : 'no']);
+      pr.weeks.forEach(function (w) {
+        var c = r.weeks[w.id] || {}, s = cellState(w, c), a = attendState(w, c), k = checklistState(c);
+        row.push(a === 'yes' ? 'yes' : a === 'no' ? 'no' : a === 'pending' ? 'pending' : 'not yet',
+          c.attendedMinutes != null ? c.attendedMinutes : '',
+          c.submission ? ((c.submission.links && c.submission.links.length) ? c.submission.links.join(' ') : c.submission.url) : '',
+          s === 'in' ? 'on time' : s === 'late' ? 'late' : s === 'missed' ? 'missed' : s === 'open' ? 'not yet' : 'no homework',
+          k === 'done' ? 'yes' : k === 'na' ? '' : 'no',
+          c.checklist && c.checklist.total ? c.checklist.done + ' of ' + c.checklist.total : '');
+      });
+      return row;
+    });
+    var csv = [head].concat(rows).map(function (r) { return r.map(function (v) { v = String(v == null ? '' : v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }).join(','); }).join('\r\n');
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + csv], { type: 'text/csv' }));
+    a.download = 'tiktok-project-c-cohort-progress-' + new Date(now()).toISOString().slice(0, 10) + '.csv'; document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  // ---------- tools (staff) ----------
+  function weekOptions(sel, pickDefault) {
+    var cur = sel.value;
+    sel.innerHTML = state.hub.weeks.map(function (w) { return '<option value="' + w.id + '">Week ' + w.number + '</option>'; }).join('');
+    if (cur) sel.value = cur; else if (pickDefault) sel.value = pickDefault;
+  }
+  function renderTools() {
+    var pr = state.progress, h = state.hub;
+    var dw = dueWeek(), lastDue = null;
+    assignmentWeeks().forEach(function (w) { if (Date.parse(w.dueAt) < now()) lastDue = w; });
+    weekOptions($('editWeek'), (nextSession() || h.weeks[0]).id); weekOptions($('attWeek'), (lastDue || h.weeks[0]).id);
+    fillWeekForm();
+    var tds = h.program.todos || [];
+    $('todoToolCount').textContent = tds.length + ' pinned';
+    $('todoAdmin').innerHTML = tds.map(function (td) {
+      var gone = td.due && Date.parse(td.due) < now();
+      return '<li><div><b>' + esc(td.text) + '</b><span>' + (td.due ? (gone ? 'Expired ' : 'Due ') + esc(f(td.due, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET' : 'No due date') + '</span></div><div class="acts"><button class="linkbtn" data-deltodo="' + esc(td.id) + '">Delete</button></div></li>';
+    }).join('');
+    var ups = h.program.updates || [];
+    $('updToolCount').textContent = ups.length + ' posted';
+    $('updAdmin').innerHTML = ups.map(function (u) {
+      return '<li><div><b>' + esc(u.title || '(no headline)') + '</b><span>' + esc(f(u.at, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET' + (u.by ? ' &middot; ' + esc(u.by) : '') + '</span></div><div class="acts"><button class="linkbtn" data-delupd="' + esc(u.id) + '">Delete</button></div></li>';
+    }).join('');
+    var creators = pr.rows.filter(function (r) { return r.status === 'active'; });
+    var unsent = creators.filter(function (r) { return !r.welcomeSent; }).length;
+    $('welcomeCount').textContent = unsent + ' not sent yet';
+    $('welcomeBtn').disabled = !unsent;
+    $('rosterCount').textContent = creators.length + ' creators';
+    var rosterRows = pr.rows.slice().sort(function (a, b) { return String(b.dateAdded || '').localeCompare(String(a.dateAdded || '')) || a.name.localeCompare(b.name); });
+    $('roster').innerHTML = rosterRows.map(function (r) {
+      return '<li><div><b>' + esc(r.name) + '</b><span>' + esc(r.email) + (r.dateAdded ? ' &middot; added ' + esc(f(r.dateAdded + 'T12:00:00Z', { month: 'short', day: 'numeric' })) : '') + (r.welcomeSent ? ' &middot; welcomed' : ' &middot; not welcomed yet') + (r.status !== 'active' ? ' &middot; removed' : '') + '</span></div><div class="acts">' +
+        (r.status === 'active' ? '<button class="linkbtn" data-resend="' + r.id + '">Resend welcome</button><button class="linkbtn" data-remove="' + r.id + '">Remove</button>' : '<button class="linkbtn" data-restore="' + r.id + '">Restore</button>') + '</div></li>';
+    }).join('') || '<li>No creators yet.</li>';
+  }
+  // ---------- review (staff) ----------
+  var rv = { weekId: null, data: null, filter: 'all', sort: 'time' };
+  function defaultReviewWeek() {
+    var lastDue = null;
+    assignmentWeeks().forEach(function (w) { if (Date.parse(w.dueAt) < now()) lastDue = w; });
+    return (lastDue || dueWeek() || assignmentWeeks()[0]).id;
+  }
+  function loadReview() {
+    if (!rv.weekId) rv.weekId = defaultReviewWeek();
+    renderReviewWeeks();
+    $('rvList').innerHTML = '<div class="loading" style="padding:2rem">Loading the week&rsquo;s homework&hellip;</div>';
+    return api('review_queue', { weekId: rv.weekId }).then(function (r) { rv.data = r; renderReview(); }).catch(onErr);
+  }
+  function renderReviewWeeks() {
+    $('rvWeeks').innerHTML = assignmentWeeks().map(function (w) {
+      var past = Date.parse(w.dueAt) < now();
+      return '<button type="button" role="tab" class="hw-tab ' + (past ? 's-in' : 's-upcoming') + '" data-week="' + w.id + '" aria-selected="' + (w.id === rv.weekId) + '">' +
+        '<span class="tw">Week ' + w.number + '</span><span class="td">Due ' + esc(f(w.dueAt, { weekday: 'short', month: 'short', day: 'numeric' })) + '</span>' +
+        '<span class="ts">' + (past ? 'Ready to review' : 'Still open') + '</span>' +
+        '<span class="td">For session ' + w.number + '</span></button>';
+    }).join('');
+  }
+  $('rvWeeks').addEventListener('click', function (e) { var b = e.target.closest('.hw-tab'); if (!b) return; rv.weekId = b.getAttribute('data-week'); loadReview(); });
+  $('rvFilters').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-f]'); if (!b) return; rv.filter = b.getAttribute('data-f');
+    [].forEach.call(this.querySelectorAll('button'), function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+    renderReview();
+  });
+  $('rvSort').addEventListener('change', function () { rv.sort = this.value; renderReview(); });
+  function myReview(it) { return it.reviews.filter(function (r) { return r.reviewerId === rv.data.meId; })[0] || null; }
+  function voteCount(it) { return it.reviews.filter(function (r) { return r.vote; }).length; }
+  function renderReview() {
+    var d = rv.data; if (!d) return;
+    var items = d.items.slice();
+    var mineDone = items.filter(function (it) { var m = myReview(it); return m && (m.vote || m.note); }).length;
+    var picked = items.filter(function (it) { return it.critiquePick; }).length;
+    var voted = items.filter(function (it) { return voteCount(it) > 0; }).length;
+    $('rvStats').innerHTML =
+      '<div class="stat"><b>' + items.length + '/' + d.creators + '</b><span>Turned in</span></div>' +
+      '<div class="stat" style="background:var(--white)"><b>' + mineDone + '/' + items.length + '</b><span>Reviewed by you</span></div>' +
+      '<div class="stat"><b>' + voted + '</b><span>Have at least one vote</span></div>' +
+      '<div class="stat" style="background:var(--coral)"><b>' + picked + '</b><span>Picked for live critique</span></div>';
+    var slidesBy = new Date(Date.parse(d.week.dueAt) + 5 * 3600000).toISOString();
+    $('rvStats').insertAdjacentHTML('beforeend', '<div class="stat" style="background:var(--porcelain)"><b style="font-size:1.3rem;line-height:1.2">' + esc(f(slidesBy, { weekday: 'short', month: 'short', day: 'numeric' })) + '<br>' + esc(time(slidesBy)) + '</b><span>Slides to TikTok</span></div>');
+    if (rv.filter === 'mine') items = items.filter(function (it) { var m = myReview(it); return !(m && (m.vote || m.note)); });
+    if (rv.filter === 'voted') items = items.filter(function (it) { return voteCount(it) > 0; });
+    if (rv.filter === 'picked') items = items.filter(function (it) { return it.critiquePick; });
+    if (rv.sort === 'votes') items.sort(function (a, b) { return voteCount(b) - voteCount(a) || Date.parse(a.submittedAt) - Date.parse(b.submittedAt); });
+    if (!items.length) {
+      $('rvList').innerHTML = '<div class="rv-empty">' + (d.items.length ? 'Nothing matches this filter.' : 'No homework turned in for week ' + d.week.number + ' yet. It&rsquo;s due ' + esc(f(d.week.dueAt, { weekday: 'long', month: 'short', day: 'numeric' })) + ' at ' + esc(time(d.week.dueAt)) + '.') + '</div>';
+      return;
+    }
+    $('rvList').innerHTML = items.map(function (it) {
+      var mine = myReview(it) || { vote: false, note: '' };
+      var chips = d.reviewers.map(function (p) {
+        var r = it.reviews.filter(function (x) { return x.reviewerId === p.id; })[0];
+        return '<span class="chip ' + (r && r.vote ? 'on' : 'off') + '">' + esc(p.id === d.meId ? 'You' : p.name) + (r && r.vote ? ': pick' : ': no vote') + '</span>';
+      }).join('');
+      var others = it.reviews.filter(function (r) { return r.reviewerId !== d.meId && r.note; }).map(function (r) { return '<div><b>' + esc(r.name) + '</b>' + esc(r.note) + '</div>'; }).join('');
+      var hu = handleUrl(it.creator.tiktokHandle);
+      return '<article class="rv-card' + (it.critiquePick ? ' is-picked' : '') + '" data-sub="' + it.id + '">' +
+        '<div class="rv-who"><h3>' + esc(it.creator.name) + (it.late ? ' <span class="late" style="vertical-align:2px">Late</span>' : '') + '</h3>' +
+          (it.creator.tiktokHandle ? '<a class="h" href="' + hu + '" target="_blank" rel="noopener">@' + esc(it.creator.tiktokHandle.replace(/^@/, '')) + '</a>' : '') +
+          '<div class="meta">Turned in ' + esc(f(it.submittedAt, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET</div>' +
+          (it.note ? '<blockquote><span class="rv-lbl" style="margin-bottom:.2rem">' + (d.week.kind === 'links' ? 'Why they picked them' : 'From the creator') + '</span>' + esc(it.note) + '</blockquote>' : '') +
+          (d.week.kind === 'links' ? '<div class="picks" style="margin-top:.8rem"><span class="rv-lbl" style="margin-bottom:0">Their picks</span>' + (it.links || []).map(function (l) { return '<a href="' + esc(l) + '" target="_blank" rel="noopener">' + esc(l.replace(/^https?:\/\/(www\.)?/, '')) + ' &nearr;</a>'; }).join('') + '</div>'
+            : '<a class="btn btn-fill" href="' + esc(it.url) + '" target="_blank" rel="noopener">Watch the video &nearr;</a>') + '</div>' +
+        '<div class="rv-team"><span class="rv-lbl">Team votes</span><div class="rv-votes">' + chips + '</div>' +
+          '<button type="button" class="vote-btn" data-vote aria-pressed="' + (mine.vote ? 'true' : 'false') + '"><i></i>I&rsquo;d pick this for critique</button>' +
+          '<label class="rv-lbl" for="rvn-' + it.id + '">Your notes <span style="text-transform:none;letter-spacing:0;font-weight:500">(staff only)</span> <span class="saved" hidden>Saved</span></label>' +
+          '<textarea id="rvn-' + it.id + '" data-mynote placeholder="What works, what to talk about live">' + esc(mine.note || '') + '</textarea>' +
+          (others ? '<div class="rv-others">' + others + '</div>' : '') + '</div>' +
+        '<div class="rv-decide"><span class="rv-lbl">Final call</span>' +
+          '<label class="pick-toggle"><input type="checkbox" data-pick' + (it.critiquePick ? ' checked' : '') + '> Picked for live critique</label>' +
+          '<label class="feat-toggle"><input type="checkbox" data-feat' + (it.featured ? ' checked' : '') + '> Feature it on everyone&rsquo;s hub</label>' +
+          '<details' + (it.reviewerNote ? ' open' : '') + '><summary>Note to the creator</summary><textarea data-cnote placeholder="Optional. ' + esc(it.creator.name.split(' ')[0]) + ' will see this on their hub.">' + esc(it.reviewerNote || '') + '</textarea><div class="warn">The creator sees this note. Keep private thoughts in your notes.</div></details>' +
+        '</div></article>';
+    }).join('');
+  }
+  function rvItem(el) { var c = el.closest('.rv-card'); return c && rv.data.items.filter(function (x) { return x.id === c.getAttribute('data-sub'); })[0]; }
+  function rvMine(it) {
+    var m = myReview(it);
+    if (!m) { m = { reviewerId: rv.data.meId, name: 'You', vote: false, note: '' }; it.reviews.push(m); }
+    return m;
+  }
+  $('rvList').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-vote]'); if (!b) return;
+    var it = rvItem(b), m = rvMine(it); m.vote = !m.vote;
+    renderReview();
+    api('review_vote', { submissionId: it.id, vote: m.vote }).catch(function (err) { m.vote = !m.vote; renderReview(); onErr(err); });
+  });
+  $('rvList').addEventListener('change', function (e) {
+    var it = rvItem(e.target); if (!it) return;
+    if (e.target.matches('[data-pick]')) {
+      it.critiquePick = e.target.checked; renderReview();
+      api('review', { submissionId: it.id, critiquePick: it.critiquePick }).then(function () { toast(it.critiquePick ? it.creator.name + ' is picked for live critique.' : 'Unpicked.'); }).catch(onErr);
+    } else if (e.target.matches('[data-feat]')) {
+      it.featured = e.target.checked;
+      api('review', { submissionId: it.id, featured: it.featured }).then(function () { toast(it.featured ? 'Featured on every creator’s hub.' : 'No longer featured.'); }).catch(onErr);
+    }
+  });
+  $('rvList').addEventListener('focusout', function (e) {
+    var ta = e.target; if (!ta.matches || !ta.matches('textarea')) return;
+    var it = rvItem(ta); if (!it || ta.value === ta.defaultValue) return;
+    if (ta.matches('[data-mynote]')) {
+      rvMine(it).note = ta.value;
+      api('review_vote', { submissionId: it.id, note: ta.value }).then(function () {
+        ta.defaultValue = ta.value;
+        var sv = ta.previousElementSibling && ta.previousElementSibling.querySelector('.saved');
+        if (sv) { sv.hidden = false; setTimeout(function () { sv.hidden = true; }, 1800); }
+      }).catch(onErr);
+    }
+    if (ta.matches('[data-cnote]')) {
+      it.reviewerNote = ta.value;
+      api('review', { submissionId: it.id, reviewerNote: ta.value }).then(function () { ta.defaultValue = ta.value; toast('Note to ' + it.creator.name.split(' ')[0] + ' saved. They’ll see it on their hub.'); }).catch(onErr);
+    }
+  });
+
+  function fillWeekForm() {
+    var w = weekById($('editWeek').value); if (!w) return;
+    $('wfReplay').value = w.replayUrl || ''; $('wfSlides').value = w.slidesUrl || ''; $('wfAssignment').value = w.assignment || ''; $('wfGuests').value = w.guests || '';
+  }
+  $('editWeek').addEventListener('change', fillWeekForm);
+  $('weekForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var id = $('editWeek').value;
+    api('week_update', { weekId: id, fields: { replay_url: $('wfReplay').value, slides_url: $('wfSlides').value, assignment: $('wfAssignment').value, guests: $('wfGuests').value } })
+      .then(function () { toast('Week saved. Creators see it now.'); return api('hub'); }).then(function (r) { state.hub = r; renderHub(); fillWeekForm(); }).catch(onErr);
+  });
+  $('updForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var title = $('updTitle').value.trim(), body = $('updBody').value.trim();
+    if (!title && !body) return toast('Write a headline or a message first.');
+    api('post_update', { title: title, body: body }).then(function (r) {
+      state.hub.program.updates = r.updates; $('updForm').reset(); toast('Posted. Creators see it now.'); renderUpdates(); renderTools();
+    }).catch(onErr);
+  });
+  $('updAdmin').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-delupd]'); if (!b) return;
+    if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = 'Confirm delete'; return; }
+    api('delete_update', { updateId: b.getAttribute('data-delupd') }).then(function (r) { state.hub.program.updates = r.updates; toast('Deleted.'); renderUpdates(); renderTools(); }).catch(onErr);
+  });
+  $('todoForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = { text: $('tdText').value.trim(), note: $('tdNote').value.trim(), linkUrl: $('tdLink').value.trim(), linkLabel: $('tdLabel').value.trim() };
+    if (!d.text) return toast('Write the to-do first.');
+    if ($('tdDue').value) d.due = zonedToIso($('tdDue').value);
+    api('post_todo', d).then(function (r) { state.hub.program.todos = r.todos; $('todoForm').reset(); toast('Pinned. Creators see it now.'); renderHub(); renderTools(); }).catch(onErr);
+  });
+  $('todoAdmin').addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-deltodo]'); if (!b) return;
+    if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = 'Confirm delete'; return; }
+    api('delete_todo', { todoId: b.getAttribute('data-deltodo') }).then(function (r) { state.hub.program.todos = r.todos; toast('Deleted.'); renderHub(); renderTools(); }).catch(onErr);
+  });
+  // A datetime-local value is read as Eastern time, whatever the staff member's own time zone.
+  function zonedToIso(v) {
+    var guess = new Date(v + ':00Z');
+    var et = new Date(guess.toLocaleString('en-US', { timeZone: TZ }));
+    var utc = new Date(guess.toLocaleString('en-US', { timeZone: 'UTC' }));
+    return new Date(guess.getTime() + (utc - et)).toISOString();
+  }
+  $('welcomeTestBtn').addEventListener('click', function () {
+    var b = this; b.disabled = true;
+    api('send_welcome_test').then(function (r) { b.disabled = false; toast('Test sent to ' + r.to + '. Check your inbox.'); }).catch(function (e) { b.disabled = false; onErr(e); });
+  });
+  $('addForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = { name: $('addName').value.trim(), email: $('addEmail').value.trim(), tiktokHandle: $('addHandle').value.trim(), role: $('addRole').value };
+    if (!d.name || !/@/.test(d.email)) return toast('Name and email, please.');
+    api('roster_add', d).then(function (r) {
+      if (!r.ok) return toast('Name and email, please.');
+      toast(r.person.name + ' added' + (d.role === 'creator' ? (r.person.zoomLinked ? ' with a Zoom link.' : '. Zoom link will follow within the hour.') : '.'));
+      $('addForm').reset(); loadProgress();
+    }).catch(onErr);
+  });
+  $('welcomeBtn').addEventListener('click', function () {
+    var n = state.progress.rows.filter(function (r) { return r.status === 'active' && !r.welcomeSent; }).length;
+    if (!window.__hubConfirm) { if (this.dataset.armed !== '1') { this.dataset.armed = '1'; this.textContent = 'Press again to send ' + n + ' emails'; var b = this; setTimeout(function () { b.dataset.armed = ''; b.textContent = 'Send welcome emails'; }, 5000); return; } }
+    this.dataset.armed = ''; this.disabled = true; this.textContent = 'Sending…';
+    var btn = this;
+    api('send_welcome').then(function (r) { btn.textContent = 'Send welcome emails'; toast(r.sent + ' welcome emails sent' + (r.failed.length ? '. Failed: ' + r.failed.join(', ') : '.')); loadProgress(); }).catch(function (e) { btn.textContent = 'Send welcome emails'; btn.disabled = false; onErr(e); });
+  });
+  $('roster').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.remove) {
+      if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = 'Confirm remove'; return; }
+      api('roster_remove', { personId: b.dataset.remove }).then(function () { toast('Removed. Their access and Zoom link are cancelled.'); loadProgress(); }).catch(onErr);
+    } else if (b.dataset.restore) {
+      api('roster_restore', { personId: b.dataset.restore }).then(function () { toast('Restored.'); loadProgress(); }).catch(onErr);
+    } else if (b.dataset.resend) {
+      api('send_welcome', { personId: b.dataset.resend }).then(function (r) { toast(r.sent ? 'Welcome email sent again.' : 'That didn’t send. Try again.'); loadProgress(); }).catch(onErr);
+    }
+  });
+  $('attBtn').addEventListener('click', function () {
+    var b = this; b.disabled = true; b.textContent = 'Pulling…';
+    api('pull_attendance', { weekId: $('attWeek').value }).then(function (r) {
+      b.disabled = false; b.textContent = 'Re-pull attendance';
+      toast(r.note ? r.note : r.matched + ' matched' + (r.unmatched.length ? '. Couldn’t match: ' + r.unmatched.slice(0, 5).join(', ') + (r.unmatched.length > 5 ? '…' : '') : '.'));
+      loadProgress();
+    }).catch(function (e) { b.disabled = false; b.textContent = 'Re-pull attendance'; onErr(e); });
+  });
+
+  // ---------- boot ----------
+  function boot() {
+    var m = location.hash.match(/signin=([A-Za-z0-9._-]+)/);
+    if (m) {
+      history.replaceState(null, '', location.pathname + location.search);
+      show('loading');
+      api('magic', { link: m[1] }).then(function (r) {
+        if (r.ok) { setToken(r.token); load(); }
+        else { show('gate'); msg($('emailMsg'), r.reason === 'closed' ? 'The program has ended and the hub is closed.' : 'That sign-in link has expired. Enter your email and we’ll send you a code.', 'info'); }
+      }).catch(function (e) { show('gate'); msg($('emailMsg'), e.message); });
+      return;
+    }
+    var t = read(TOKEN_KEY);
+    if (t) { state.token = t; load(); } else show('gate');
+  }
+  window.__hubBoot = boot;
+  if (!window.__hubDeferBoot) boot();
+})();
+</script>
+</body>
+</html>

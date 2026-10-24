@@ -25,14 +25,6 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# The Project C 100 advisory panel's private page: never index, never cache.
-[[headers]]
-  for = "/100/panel/*"
-  [headers.values]
-    X-Robots-Tag = "noindex, nofollow"
-    Cache-Control = "no-store"
-    Referrer-Policy = "no-referrer"
-
 # Security headers
 [[headers]]
   for = "/*"
@@ -48,6 +40,11 @@
 # Runs every day at 2pm UTC (10am Eastern)
 [functions."community-scheduled-emails"]
 schedule = "0 14 * * *"
+
+# Scheduled function: cohort hub chores (Zoom links, attendance, deadline reminders)
+# Runs every hour at :17. Reminders only go out on the 10am Eastern run.
+[functions."cohort-hub-scheduled"]
+schedule = "17 * * * *"
 
 # Install function-level dependencies automatically
 [[plugins]]

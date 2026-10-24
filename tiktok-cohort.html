@@ -557,7 +557,7 @@ table.prog tr.removed td { opacity: 0.45; }
   <div class="gh-copy">
     <div class="eyebrow"><svg class="target" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> TikTok x Project C &middot; Fall 2026 cohort</div>
     <h1>The Cohort <span class="coral">Hub</span></h1>
-    <p class="standfirst">Your session link, this week's assignment and the place to turn in your video. Everything for the program lives on this page, and it's built around you.</p>
+    <p class="standfirst">Your session link, this week's assignment and the place to turn in your homework. Everything for the program lives on this page, and it's built around you.</p>
     <div class="factrow" aria-label="Program at a glance">
       <div><b>5</b><span>Live sessions</span></div>
       <div><b>Wed</b><span>2:30 PM Eastern</span></div>
@@ -1015,7 +1015,7 @@ table.prog tr.removed td { opacity: 0.45; }
   $('backToEmail').addEventListener('click', function () { $('stepCode').hidden = true; $('stepEmail').hidden = false; msg($('codeMsg'), ''); $('emailInput').focus(); });
 
   function setToken(t) { state.token = t; store(TOKEN_KEY, t); }
-  function signOut() { state.token = null; store(TOKEN_KEY, null); state.hub = null; $('stepCode').hidden = true; $('stepEmail').hidden = false; show('gate'); }
+  function signOut() { state.token = null; store(TOKEN_KEY, null); state.hub = null; state.tabInit = false; setTab('hub'); $('stepCode').hidden = true; $('stepEmail').hidden = false; show('gate'); }
   $('signoutBtn').addEventListener('click', signOut);
 
   // ---------- consent ----------
@@ -1092,9 +1092,10 @@ table.prog tr.removed td { opacity: 0.45; }
     tabs[1].hidden = me.role === 'creator';
     tabs[2].hidden = me.role !== 'staff';
     tabs[3].hidden = me.role !== 'staff';
-    if (me.role !== 'creator') tabs[0].textContent = 'Creator view';
+    tabs[0].textContent = me.role !== 'creator' ? 'Creator view' : 'My hub';
     renderHub();
-    if (me.role !== 'creator' && !state.tabInit) { state.tabInit = true; setTab('progress'); }
+    if (me.role === 'creator') { if ($('viewHub').hidden) setTab('hub'); }
+    else if (!state.tabInit) { state.tabInit = true; setTab('progress'); }
   }
 
   function setTab(v) {

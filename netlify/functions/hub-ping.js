@@ -1,7 +1,10 @@
 // Temporary diagnostic for the cohort hub launch. Safe to delete.
-// Reports only sizes, never values.
-exports.handler = async () => {
-  const env = process.env;
-  const total = Object.keys(env).reduce((n, k) => n + k.length + String(env[k]).length, 0);
-  return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ok: true, envBytes: total, node: process.version }) };
+exports.handler = async (event) => {
+  let load = 'ok', run = null;
+  try {
+    const hub = require('./cohort-hub.js');
+    const r = await hub.handler({ httpMethod: 'OPTIONS', headers: {}, body: null });
+    run = { status: r.statusCode, headerTypes: Object.fromEntries(Object.entries(r.headers || {}).map(([k, v]) => [k, typeof v])) };
+  } catch (e) { load = String(e && e.stack || e).slice(0, 1500); }
+  return { statusCode: 200, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ load, run, node: process.version }) };
 };

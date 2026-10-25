@@ -404,6 +404,11 @@ table.prog tr.removed td { opacity: 0.45; }
 
 /* ---------- REVIEW (staff): votes, notes, final pick ---------- */
 .rv-weeks { max-width: var(--maxw); margin: 0 auto 1.2rem; padding: 0 2rem; }
+.rv-prompt { max-width: var(--maxw); margin: 0 auto 1.2rem; padding: 0 2rem; }
+.rv-prompt .rvp-box { border: var(--rule); border-left: 8px solid var(--coral); background: var(--porcelain); padding: 1.1rem 1.4rem; }
+.rv-prompt .rvp-k { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 0.4rem; }
+.rv-prompt .rvp-t { font-family: var(--serif); font-size: 1.25rem; line-height: 1.4; color: var(--ink); }
+.rv-prompt .rvp-m { margin-top: 0.5rem; font-size: 0.8rem; color: var(--muted); }
 .rv-weeks .hw-tabs { border: var(--rule); grid-template-columns: repeat(5, minmax(0,1fr)); }
 .rv-bar { max-width: var(--maxw); margin: 0 auto 1rem; padding: 0 2rem; display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: space-between; align-items: center; }
 .rv-filters { display: flex; border: var(--rule); flex-wrap: wrap; }
@@ -762,6 +767,7 @@ table.prog tr.removed td { opacity: 0.45; }
       </div>
     </div>
     <div class="rv-weeks"><div class="hw-tabs" id="rvWeeks" role="tablist" aria-label="Homework week to review"></div></div>
+    <div class="rv-prompt" id="rvPrompt" hidden></div>
     <div class="stats-row"><div class="inner" id="rvStats"></div></div>
     <div class="rv-bar">
       <div class="rv-filters" id="rvFilters" role="group" aria-label="Show">
@@ -1577,6 +1583,8 @@ table.prog tr.removed td { opacity: 0.45; }
     var mineDone = items.filter(function (it) { var m = myReview(it); return m && (m.vote || m.note); }).length;
     var picked = items.filter(function (it) { return it.critiquePick; }).length;
     var voted = items.filter(function (it) { return voteCount(it) > 0; }).length;
+    $('rvPrompt').hidden = !d.week.assignment;
+    $('rvPrompt').innerHTML = d.week.assignment ? '<div class="rvp-box"><div class="rvp-k">Week ' + d.week.number + ' homework prompt</div><div class="rvp-t">' + esc(d.week.assignment) + '</div><div class="rvp-m">' + esc(d.week.title || '') + ' &middot; due ' + esc(f(d.week.dueAt, { weekday: 'short', month: 'short', day: 'numeric' })) + ' at ' + esc(time(d.week.dueAt)) + '</div></div>' : '';
     $('rvStats').innerHTML =
       '<div class="stat"><b>' + items.length + '/' + d.creators + '</b><span>Turned in</span></div>' +
       '<div class="stat" style="background:var(--white)"><b>' + mineDone + '/' + items.length + '</b><span>Reviewed by you</span></div>' +

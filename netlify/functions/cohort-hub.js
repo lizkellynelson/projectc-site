@@ -587,7 +587,7 @@ exports.handler = async (event) => {
       const mine = await loadMine(supabase, person.id, weeks.map((w) => w.id));
       // Featured videos: whatever staff have starred, newest week first.
       const { data: feat } = await supabase.from('hub_submissions')
-        .select('video_url, week_id, hub_people!inner(name, tiktok_handle, program_id, status)')
+        .select('video_url, week_id, hub_people!hub_submissions_person_id_fkey!inner(name, tiktok_handle, program_id, status)')
         .eq('featured', true).eq('hub_people.program_id', program.id).eq('hub_people.status', 'active');
       const weekNo = new Map(weeks.map((w) => [w.id, w.week_number]));
       const featured = (feat || [])
@@ -699,7 +699,7 @@ exports.handler = async (event) => {
       const { data: week } = await supabase.from('hub_weeks').select('*').eq('id', body.weekId).eq('program_id', program.id).maybeSingle();
       if (!week) return json(404, { error: 'Not found' });
       const { data: subs } = await supabase.from('hub_submissions')
-        .select('*, hub_people!inner(id, name, tiktok_handle, status, program_id)')
+        .select('*, hub_people!hub_submissions_person_id_fkey!inner(id, name, tiktok_handle, status, program_id)')
         .eq('week_id', week.id).eq('hub_people.program_id', program.id);
       const live = (subs || []).filter((x) => x.hub_people.status === 'active');
       const ids = live.map((x) => x.id);
@@ -722,7 +722,7 @@ exports.handler = async (event) => {
     }
 
     if (action === 'review_vote') {
-      const { data: sub } = await supabase.from('hub_submissions').select('id, hub_people!inner(program_id)').eq('id', body.submissionId).maybeSingle();
+      const { data: sub } = await supabase.from('hub_submissions').select('id, hub_people!hub_submissions_person_id_fkey!inner(program_id)').eq('id', body.submissionId).maybeSingle();
       if (!sub || sub.hub_people.program_id !== program.id) return json(404, { error: 'Not found' });
       const { data: existing } = await supabase.from('hub_reviews').select('*').eq('submission_id', sub.id).eq('reviewer_id', person.id).maybeSingle();
       const row = {
@@ -741,7 +741,7 @@ exports.handler = async (event) => {
       if (typeof body.critiquePick === 'boolean') patch.critique_pick = body.critiquePick;
       if (typeof body.featured === 'boolean') patch.featured = body.featured;
       if (typeof body.reviewerNote === 'string') patch.reviewer_note = body.reviewerNote.slice(0, 2000) || null;
-      const { data: sub } = await supabase.from('hub_submissions').select('id, hub_people!inner(program_id)').eq('id', body.submissionId).maybeSingle();
+      const { data: sub } = await supabase.from('hub_submissions').select('id, hub_people!hub_submissions_person_id_fkey!inner(program_id)').eq('id', body.submissionId).maybeSingle();
       if (!sub || sub.hub_people.program_id !== program.id) return json(404, { error: 'Not found' });
       await supabase.from('hub_submissions').update(patch).eq('id', sub.id);
       return json(200, { ok: true });

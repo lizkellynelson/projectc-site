@@ -299,6 +299,11 @@ table.prog tr.removed td { opacity: 0.45; }
 .cell .v.wait { color: var(--muted); font-weight: 600; }
 .cell .v.wait i { border-style: dashed; border-color: rgba(21,23,26,0.45); }
 .cell .v.na { color: var(--muted); font-weight: 500; }
+.guest-h { color: var(--coral-deep); font-weight: 700; }
+.cell .v .pk-list { display: flex; flex-direction: column; gap: 0.15rem; }
+.cell .v .pk-list a { white-space: nowrap; }
+.cell .v:has(.pk-list) { align-items: flex-start; }
+.cell .v:has(.pk-list) i { margin-top: 0.2rem; }
 .cell .v.na i { display: none; }
 .cell a { color: var(--coral-deep); font-weight: 800; text-decoration: underline; text-underline-offset: 2px; }
 .cell .late { font-size: 0.56rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; border: 1.5px solid var(--ink); background: var(--yellow); padding: 0 0.25rem; }
@@ -971,6 +976,15 @@ table.prog tr.removed td { opacity: 0.45; }
     document.body.appendChild(el); setTimeout(function () { el.remove(); }, 3400);
   }
   function handleUrl(h) { return h ? 'https://www.tiktok.com/@' + encodeURIComponent(h.replace(/^@/, '')) : null; }
+  // Guest names with any @handles turned into links to their TikTok.
+  function guestsHtml(g) { return esc(g).replace(/@([A-Za-z0-9._]+[A-Za-z0-9_])/g, function (m, h) { return '<a href="' + handleUrl(h) + '" target="_blank" rel="noopener" class="guest-h">@' + h + '</a>'; }); }
+  // A readable name for a homework pick: the @handle when the link has one, otherwise "Pick 1", "Pick 2".
+  function pickLabel(l, i) {
+    var path = '';
+    try { path = decodeURIComponent(new URL(l).pathname); } catch (e) { path = String(l); }
+    var m = path.match(/^\/@?\s*([A-Za-z0-9._]+)\/?$/) || path.match(/^\/@\s*([A-Za-z0-9._]+)/);
+    return m && !/^(t|v|video)$/i.test(m[1]) ? '@' + m[1] : 'Pick ' + (i + 1);
+  }
   function untilText(ms) {
     if (ms <= 0) return 'Past due';
     var h = Math.floor(ms / 3600000), d = Math.floor(h / 24);
@@ -1131,7 +1145,7 @@ table.prog tr.removed td { opacity: 0.45; }
       ns_html = '<div class="ns-k">' + (live ? '<span class="live-dot"></span> Happening now' : 'Next session') + ' &middot; Session ' + ns.number + ' of ' + h.weeks.length + '</div>' +
         '<div class="ns-title">' + esc(ns.title) + '</div>' +
         '<div class="ns-when">' + esc(day(ns.sessionAt)) + ', ' + esc(time(ns.sessionAt)) + '</div>' +
-        '<div class="ns-who">' + esc(ns.presenters || '') + (ns.guests ? '. Guests: ' + esc(ns.guests) : '') + '</div>' +
+        '<div class="ns-who">' + esc(ns.presenters || '') + (ns.guests ? '. Guests: ' + guestsHtml(ns.guests) : '') + '</div>' +
         '<div class="ns-actions">' +
           (me.zoomJoinUrl ? '<a class="btn ' + (live ? 'btn-coral' : 'btn-fill') + '" href="' + esc(me.zoomJoinUrl) + '" target="_blank" rel="noopener">' + (live ? 'Join now' : 'Join on Zoom') + ' &rarr;</a>'
                           : me.role === 'creator' ? '<span class="btn" aria-disabled="true">Your Zoom link is on its way</span>' : '') +
@@ -1224,7 +1238,7 @@ table.prog tr.removed td { opacity: 0.45; }
       lg += '<div class="lrow' + (isNext ? ' is-next' : '') + '">' +
         '<div class="ldate"><b>' + esc(f(w.sessionAt, { month: 'short', day: 'numeric' })) + '</b><span>' + esc(f(w.sessionAt, { weekday: 'short' })) + ' &middot; ' + esc(time(w.sessionAt)) + '</span></div>' +
         '<div class="lbody"><div class="lno">Session ' + w.number + (isNext ? ' &middot; Up next' : '') + '</div><h3>' + esc(w.title) + '</h3>' +
-        '<div class="lwho">' + esc(w.presenters || '') + (w.guests ? ' &middot; Guests: ' + esc(w.guests) : '') + '</div>' +
+        '<div class="lwho">' + esc(w.presenters || '') + (w.guests ? ' &middot; Guests: ' + guestsHtml(w.guests) : '') + '</div>' +
         '<p>' + esc(w.summary || '') + '</p>' + attendMark(w) + '</div>' +
         '<div class="llinks">' + links.join('') + '</div></div>';
     });
@@ -1471,7 +1485,9 @@ table.prog tr.removed td { opacity: 0.45; }
           : att === 'pending' ? '<span class="v wait"><i></i>Checking Zoom</span>'
           : '<span class="v wait"><i></i>Not yet</span>');
         out += '<span class="k">Homework</span>' + (
-          hw === 'in' || hw === 'late' ? '<span class="v ' + (hw === 'late' ? 'part' : 'yes') + '"><i></i><a href="' + esc(c.submission.url) + '" target="_blank" rel="noopener">' + (w.kind === 'links' ? 'View picks' : 'View video') + '</a>' + (hw === 'late' ? ' <span class="late">Late</span>' : '') + (c.submission.critiquePick ? ' <span class="pill-flag">Critique</span>' : '') + '</span>'
+          hw === 'in' || hw === 'late' ? '<span class="v ' + (hw === 'late' ? 'part' : 'yes') + '"><i></i>' + (w.kind === 'links'
+            ? '<span class="pk-list">' + ((c.submission.links && c.submission.links.length) ? c.submission.links : [c.submission.url]).map(function (l, i) { return '<a href="' + esc(l) + '" target="_blank" rel="noopener">' + esc(pickLabel(l, i)) + '</a>'; }).join('') + '</span>'
+            : '<a href="' + esc(c.submission.url) + '" target="_blank" rel="noopener">View video</a>') + (hw === 'late' ? ' <span class="late">Late</span>' : '') + (c.submission.critiquePick ? ' <span class="pill-flag">Critique</span>' : '') + '</span>'
           : hw === 'missed' ? '<span class="v no"><i></i>Missed</span>'
           : hw === 'open' ? '<span class="v wait"><i></i>Not yet</span>'
           : '<span class="v na">None this week</span>');

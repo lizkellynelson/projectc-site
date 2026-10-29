@@ -551,6 +551,54 @@ table.prog tr.removed td { opacity: 0.45; }
   @page { size: letter landscape; margin: 0.4in; }
 }
 @media (prefers-reduced-motion: reduce) { .live-dot { animation: none; } .hw-tab { transition: none; } }
+/* ---- Q&A ---- */
+.qa-teaser { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.95rem 2rem; border-bottom: var(--rule); background: var(--cyan); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); }
+.qa-teaser:hover { background: var(--yellow); }
+.qa-teaser .qt-go { white-space: nowrap; }
+.qa-tools { max-width: var(--maxw); margin: 0 auto 1rem; padding: 0 2rem; display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap; }
+.qa-tools input { font-family: var(--sans); font-size: 0.95rem; padding: 0.7rem 0.9rem; border: var(--rule); min-width: 280px; }
+.qa-wrap { max-width: var(--maxw); margin: 0 auto clamp(2.4rem,4vw,3.4rem); padding: 0 2rem; }
+.qa-group { border: var(--rule); margin-bottom: 1.6rem; }
+.qa-group > h2 { background: var(--porcelain); border-bottom: var(--rule); padding: 0.9rem 1.2rem; display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; flex-wrap: wrap; }
+.qa-group > h2 b { font-family: var(--display); text-transform: uppercase; font-size: 1.4rem; font-weight: 400; line-height: 1; }
+.qa-group > h2 span { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.qa-item { border-bottom: var(--rule-thin); scroll-margin-top: 140px; }
+.qa-item:last-child { border-bottom: none; }
+.qa-item summary { list-style: none; cursor: pointer; padding: 1rem 1.2rem; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; font-weight: 800; font-size: 1.02rem; line-height: 1.4; }
+.qa-item summary::-webkit-details-marker { display: none; }
+.qa-item summary::after { content: '+'; font-family: var(--sans); font-weight: 800; font-size: 1.25rem; line-height: 1; width: 28px; height: 28px; border: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; }
+.qa-item[open] summary::after { content: '\2013'; background: var(--yellow); }
+.qa-item summary:hover { background: var(--tint); }
+.qa-item[open] summary { border-bottom: var(--rule-thin); }
+.qa-a { padding: 1.1rem 1.2rem 1.3rem; max-width: 76ch; line-height: 1.65; }
+.qa-a p { margin-bottom: 0.85rem; }
+.qa-a ul { margin: 0 0 0.9rem 1.2rem; }
+.qa-a li { margin-bottom: 0.45rem; }
+.qa-a h4 { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin: 1rem 0 0.4rem; }
+.qa-a a { color: var(--coral-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; word-break: break-word; }
+.qa-copy { font-size: 0.72rem; }
+.qa-empty { border: var(--rule); padding: 1.6rem; color: var(--muted); }
+/* ---- email composer ---- */
+.mail-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 1.4rem; align-items: start; }
+.form textarea.mail-body { min-height: 420px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace !important; font-size: 0.86rem !important; line-height: 1.55; }
+.mail-help { font-size: 0.82rem; color: var(--muted); }
+.mail-help summary { cursor: pointer; font-weight: 700; color: var(--ink); }
+.mail-help ul { margin: 0.6rem 0 0 1.1rem; line-height: 1.55; }
+.mail-help code, .tool .hint code { font-size: 0.78rem; background: var(--porcelain); padding: 0 0.25rem; border: 1px solid rgba(21,23,26,.15); }
+.mail-acts { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+.mail-acts .btn { justify-content: center; }
+.mail-status { font-size: 0.84rem; line-height: 1.5; }
+.mail-status b { font-weight: 800; }
+.mail-status.sent { background: var(--cyan); border: var(--rule); padding: 0.8rem 1rem; }
+.mail-preview { border: var(--rule); background: var(--white); min-height: 300px; }
+.mail-preview .mp-tabs { display: flex; border-bottom: var(--rule); flex-wrap: wrap; }
+.mail-preview .mp-tabs button { background: var(--porcelain); border: none; border-right: var(--rule-thin); padding: 0.6rem 0.8rem; font: inherit; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; text-align: left; }
+.mail-preview .mp-tabs button[aria-selected="true"] { background: var(--yellow); }
+.mail-preview .mp-subj { padding: 0.7rem 1rem; border-bottom: var(--rule-thin); font-size: 0.86rem; }
+.mail-preview .mp-subj span { color: var(--muted); }
+.mail-preview iframe { width: 100%; height: 640px; border: 0; display: block; }
+.mail-preview .mp-empty { padding: 2rem 1.4rem; color: var(--muted); font-size: 0.9rem; }
+@media (max-width: 900px) { .mail-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -628,6 +676,7 @@ table.prog tr.removed td { opacity: 0.45; }
       <span class="who" id="whoLine"></span>
       <div class="tabs" role="tablist" id="tabs">
         <button role="tab" data-view="hub" aria-selected="true">My hub</button>
+        <button role="tab" data-view="qa" aria-selected="false">Q&amp;A</button>
         <button role="tab" data-view="progress" aria-selected="false" hidden>Cohort progress</button>
         <button role="tab" data-view="review" aria-selected="false" hidden>Review homework</button>
         <button role="tab" data-view="tools" aria-selected="false" hidden>Tools</button>
@@ -644,6 +693,7 @@ table.prog tr.removed td { opacity: 0.45; }
       <a href="#how"><i class="c-yellow"></i>How it works</a>
       <a href="#homework"><i class="c-cyan"></i>Homework</a>
       <a href="#scheduleSec"><i class="c-magenta"></i>Sessions</a>
+      <a href="#qa" data-go="qa"><i class="c-cyan"></i>Q&amp;A</a>
       <a href="#incentivesSec"><i class="c-yellow"></i>Incentives</a>
       <a href="#resources"><i class="c-ink"></i>Resources</a>
     </div></nav>
@@ -657,6 +707,7 @@ table.prog tr.removed td { opacity: 0.45; }
         <div><h3 class="col-h"><span>Your to-dos</span><span id="todoCount"></span></h3><ul class="todos" id="todoList"></ul></div>
         <div id="nextSession"></div>
       </div>
+      <a class="qa-teaser" id="qaTeaser" href="#qa" data-go="qa" hidden></a>
       <div class="upd-row" id="updates">
         <h3 class="col-h"><span>Updates from Project C and TikTok</span><span id="updCount"></span></h3>
         <ul class="upd-list" id="updList"></ul>
@@ -738,6 +789,21 @@ table.prog tr.removed td { opacity: 0.45; }
     </section>
   </div>
 
+  <!-- ===== Q&A VIEW (everyone) ===== -->
+  <div id="viewQA" hidden>
+    <div class="brandband"><div class="brandband-inner"><span class="bb-name">Inform the Feed</span><span class="bb-sub">TikTok x Project C News Creator Cohort &middot; Fall 2026</span></div></div>
+    <div class="ops-head">
+      <div>
+        <div class="eyebrow cyan">Your questions, answered</div>
+        <h1>Q&amp;A</h1>
+        <p>Answers from TikTok and Project C to questions that came up in the sessions, newest session first. Click a question to open the answer.</p>
+      </div>
+      <button class="btn" type="button" data-backhub>&larr; Back to my hub</button>
+    </div>
+    <div class="qa-tools" id="qaTools" hidden><input type="search" id="qaSearch" placeholder="Search the questions" aria-label="Search the questions"><span class="small" id="qaCount"></span></div>
+    <div class="qa-wrap" id="qaList"></div>
+  </div>
+
   <!-- ===== PROGRESS VIEW (partner + staff) ===== -->
   <div id="viewProgress" hidden>
     <div class="ops-head">
@@ -812,6 +878,60 @@ table.prog tr.removed td { opacity: 0.45; }
             </div>
             <button class="btn btn-coral" type="submit">Add to the roster</button>
           </form>
+        </div>
+      </div>
+      <div class="tool wide" id="mailTool">
+        <h3>Email the cohort <span id="mailToolCount" class="small"></span></h3>
+        <div class="tb">
+          <p class="hint">For recaps and reminders. Each creator gets their own copy, with their name, their personal Zoom link and a one-click sign-in link to the hub. Nothing goes out until you press Send twice. Save as you go, preview both versions, and send yourself a test first.</p>
+          <div class="mail-grid">
+            <form class="form" id="mailForm">
+              <div><label class="lbl" for="mailDraft">Draft</label><select id="mailDraft"></select></div>
+              <div><label class="lbl" for="mailSubject">Subject</label><input id="mailSubject" maxlength="200" placeholder="Session 1 recap: replay, your questions answered and this week's homework"></div>
+              <div><label class="lbl" for="mailBody">Message</label><textarea id="mailBody" class="mail-body" spellcheck="true"></textarea></div>
+              <details class="mail-help"><summary>Formatting and fill-ins</summary>
+                <ul>
+                  <li>A blank line starts a new paragraph.</li>
+                  <li><code>## Heading</code> makes a small section label.</li>
+                  <li>Lines starting with <code>- </code> become a bulleted list.</li>
+                  <li><code>**bold**</code> and <code>[link text](https://...)</code> work. Plain links become clickable.</li>
+                  <li><code>[button: Watch the replay](https://...)</code> on its own line makes a black button.</li>
+                  <li><code>{first}</code> is the creator&rsquo;s first name.</li>
+                  <li><code>{hub_link}</code> and <code>{qa_link}</code> are their one-click sign-in links to the hub and to the Q&amp;A.</li>
+                  <li><code>{homework}</code> on its own line shows this week&rsquo;s homework with a Turn it in button, or a thank-you if they&rsquo;ve already turned it in.</li>
+                  <li><code>{zoom}</code> on its own line shows their personal Zoom link.</li>
+                </ul>
+              </details>
+              <div class="mail-acts">
+                <button class="btn btn-coral" type="submit" id="mailSave">Save draft</button>
+                <button class="btn" type="button" id="mailPreviewBtn">Preview</button>
+                <button class="btn" type="button" id="mailTestBtn">Send me a test</button>
+                <button class="btn btn-fill" type="button" id="mailSendBtn">Send to the cohort</button>
+                <button class="linkbtn" type="button" id="mailDelete">Delete draft</button>
+              </div>
+              <div class="mail-status" id="mailStatus"></div>
+            </form>
+            <div class="mail-preview" id="mailPreview"><div class="mp-empty">Press Preview to see the email the way creators will.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tool wide" id="qaTool">
+        <h3>Q&amp;A <span id="qaToolCount" class="small"></span></h3>
+        <div class="tb">
+          <p class="hint">Shows on the Q&amp;A tab for everyone, grouped by session, newest first. Uses the same formatting as the email: blank lines for paragraphs, <code>- </code> for bullets, <code>**bold**</code> and links.</p>
+          <div class="mail-grid">
+            <form class="form" id="qaForm">
+              <input type="hidden" id="qaId">
+              <div class="grid2">
+                <div><label class="lbl" for="qaWeek">From session</label><select id="qaWeek"></select></div>
+                <div></div>
+              </div>
+              <div><label class="lbl" for="qaQ">Question</label><input id="qaQ" maxlength="300" placeholder="Where can I find my TikTok analytics?"></div>
+              <div><label class="lbl" for="qaA">Answer</label><textarea id="qaA" class="mail-body" style="min-height:220px"></textarea></div>
+              <div class="mail-acts"><button class="btn btn-coral" type="submit" id="qaSave">Add to Q&amp;A</button><button class="linkbtn" type="button" id="qaCancel" hidden>Cancel editing</button></div>
+            </form>
+            <ul class="roster" id="qaAdmin" style="max-height:520px"></ul>
+          </div>
         </div>
       </div>
       <div class="tool wide">
@@ -1113,19 +1233,37 @@ table.prog tr.removed td { opacity: 0.45; }
     }
     show('app');
     $('whoLine').innerHTML = 'Signed in as <b>' + esc(me.name) + '</b>' + (me.tiktokHandle ? ' &middot; @' + esc(me.tiktokHandle.replace(/^@/, '')) : '') + (me.role !== 'creator' ? ' &middot; ' + (me.role === 'staff' ? 'Project C staff' : 'TikTok partner') : '');
-    var tabs = $('tabs').querySelectorAll('button[data-view]');
-    tabs[1].hidden = me.role === 'creator';
-    tabs[2].hidden = me.role !== 'staff';
-    tabs[3].hidden = me.role !== 'staff';
-    tabs[0].textContent = me.role !== 'creator' ? 'Creator view' : 'My hub';
+    var tab = function (v) { return $('tabs').querySelector('button[data-view="' + v + '"]'); };
+    tab('progress').hidden = me.role === 'creator';
+    tab('review').hidden = me.role !== 'staff';
+    tab('tools').hidden = me.role !== 'staff';
+    tab('hub').textContent = me.role !== 'creator' ? 'Creator view' : 'My hub';
     renderHub();
-    if (me.role === 'creator') { if ($('viewHub').hidden) setTab('hub'); }
+    renderQA();
+    if (state.go) { var g = state.go; state.go = null; state.tabInit = true; goTo(g); return; }
+    if (me.role === 'creator') { if ($('viewHub').hidden && $('viewQA').hidden) setTab('hub'); }
     else if (!state.tabInit) { state.tabInit = true; setTab('progress'); }
   }
 
+  // Deep links: #go=qa, #go=qa-<id>, #go=homework (also plain #qa / #qa-<id>), used by emails.
+  function goTo(g) {
+    if (/^qa/.test(g)) {
+      setTab('qa');
+      var id = g.replace(/^qa-?/, '');
+      if (id) { var el = $('qa-' + id); if (el) { el.open = true; setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 60); } }
+    } else if (g === 'homework') {
+      setTab('hub'); setTimeout(function () { var el = $('homework'); if (el) el.scrollIntoView({ block: 'start' }); }, 60);
+    } else setTab('hub');
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('[data-go]');
+    if (a) { e.preventDefault(); goTo(a.getAttribute('data-go')); return; }
+    if (e.target.closest('[data-backhub]')) setTab('hub');
+  });
+
   function setTab(v) {
     $('tabs').querySelectorAll('button[data-view]').forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-view') === v ? 'true' : 'false'); });
-    $('viewHub').hidden = v !== 'hub'; $('viewProgress').hidden = v !== 'progress'; $('viewTools').hidden = v !== 'tools'; $('viewReview').hidden = v !== 'review';
+    $('viewHub').hidden = v !== 'hub'; $('viewQA').hidden = v !== 'qa'; $('viewProgress').hidden = v !== 'progress'; $('viewTools').hidden = v !== 'tools'; $('viewReview').hidden = v !== 'review';
     if (v === 'progress' || v === 'tools') loadProgress();
     if (v === 'review') loadReview();
     window.scrollTo(0, 0);
@@ -1182,6 +1320,14 @@ table.prog tr.removed td { opacity: 0.45; }
         (x.linkUrl ? '<a class="btn ' + (x.done ? '' : 'btn-coral') + '" href="' + esc(x.linkUrl) + '"' + (x.external && !/^#/.test(x.linkUrl) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(x.linkLabel || 'Open') + (/^#/.test(x.linkUrl) ? ' &darr;' : ' &nearr;') + '</a>' : '') + '</li>';
     }).join('') : '<li class="todo-empty">Nothing on your list right now.</li>';
     renderUpdates();
+
+    // Q&A teaser: one line pointing at the newest session's answers
+    var qa = p.qa || [];
+    if (qa.length) {
+      var newest = qa[0].week, inNewest = qa.filter(function (x) { return x.week === newest; }).length;
+      $('qaTeaser').innerHTML = '<span>' + (newest ? 'New in Q&amp;A: ' + inNewest + (inNewest === 1 ? ' answer' : ' answers') + ' from session ' + newest : qa.length + ' questions answered') + '</span><span class="qt-go">Open Q&amp;A &rarr;</span>';
+      $('qaTeaser').hidden = false;
+    } else $('qaTeaser').hidden = true;
 
     // homework tracker (week tabs)
     var tb = '', inCount = 0;
@@ -1294,6 +1440,51 @@ table.prog tr.removed td { opacity: 0.45; }
     $('updMore').hidden = state.allUpdates || ups.length <= 2;
   }
   $('updMoreBtn').addEventListener('click', function () { state.allUpdates = true; renderUpdates(); });
+
+  // ---------- Q&A ----------
+  // Same light format staff use in emails: blank line = paragraph, "- " = bullets, ## = label, **bold**, [text](url), bare links.
+  function inlineMd(t) {
+    var out = esc(t).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    out = out.replace(/(^|[\s(])(https?:\/\/[^\s<)]+[^\s<.,;:!?)'"])/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+    return out;
+  }
+  function md(src) {
+    var html = [];
+    String(src || '').replace(/\r\n/g, '\n').split(/\n\s*\n/).forEach(function (chunk) {
+      var lines = chunk.split('\n').map(function (l) { return l.trim(); }).filter(Boolean), i = 0;
+      while (i < lines.length) {
+        if (/^##\s+/.test(lines[i])) { html.push('<h4>' + inlineMd(lines[i].replace(/^##\s+/, '')) + '</h4>'); i++; continue; }
+        if (/^[-*]\s+/.test(lines[i])) {
+          var items = [];
+          while (i < lines.length && /^[-*]\s+/.test(lines[i])) { items.push('<li>' + inlineMd(lines[i].replace(/^[-*]\s+/, '')) + '</li>'); i++; }
+          html.push('<ul>' + items.join('') + '</ul>'); continue;
+        }
+        var para = [lines[i]]; i++;
+        while (i < lines.length && !/^(##\s+|[-*]\s+)/.test(lines[i])) { para.push(lines[i]); i++; }
+        html.push('<p>' + para.map(inlineMd).join('<br>') + '</p>');
+      }
+    });
+    return html.join('');
+  }
+  function renderQA() {
+    var qa = state.hub.program.qa || [], q = ($('qaSearch').value || '').trim().toLowerCase();
+    $('qaTools').hidden = qa.length < 7;
+    var list = q ? qa.filter(function (x) { return (x.q + ' ' + x.a).toLowerCase().indexOf(q) > -1; }) : qa;
+    $('qaCount').textContent = q ? list.length + ' of ' + qa.length + ' questions' : '';
+    if (!qa.length) { $('qaList').innerHTML = '<div class="qa-empty">Answers to questions from the sessions will show up here, usually the day after each session.</div>'; return; }
+    if (!list.length) { $('qaList').innerHTML = '<div class="qa-empty">No questions match &ldquo;' + esc(q) + '.&rdquo;</div>'; return; }
+    var groups = [], byWeek = {};
+    list.forEach(function (x) { var k = x.week || 0; if (!byWeek[k]) { byWeek[k] = []; groups.push(k); } byWeek[k].push(x); });
+    $('qaList').innerHTML = groups.map(function (k) {
+      var w = state.hub.weeks.filter(function (x) { return x.number === k; })[0];
+      return '<section class="qa-group"><h2><b>' + (k ? 'Session ' + k + (w ? ': ' + esc(w.title) : '') : 'General') + '</b><span>' + (w ? esc(shortDay(w.sessionAt)) + ' &middot; ' : '') + byWeek[k].length + (byWeek[k].length === 1 ? ' question' : ' questions') + '</span></h2>' +
+        byWeek[k].map(function (x) {
+          return '<details class="qa-item" id="qa-' + esc(x.id) + '"' + (q ? ' open' : '') + '><summary>' + esc(x.q) + '</summary><div class="qa-a">' + md(x.a) + '</div></details>';
+        }).join('') + '</section>';
+    }).join('');
+  }
+  $('qaSearch').addEventListener('input', renderQA);
 
   function renderDesk() {
     var h = state.hub, w = weekById(state.viewWeekId), me = h.me, t = now();
@@ -1546,6 +1737,8 @@ table.prog tr.removed td { opacity: 0.45; }
       var gone = td.due && Date.parse(td.due) < now();
       return '<li><div><b>' + esc(td.text) + '</b><span>' + (td.due ? (gone ? 'Expired ' : 'Due ') + esc(f(td.due, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET' : 'No due date') + '</span></div><div class="acts"><button class="linkbtn" data-deltodo="' + esc(td.id) + '">Delete</button></div></li>';
     }).join('');
+    renderQaAdmin();
+    renderMailTool();
     var ups = h.program.updates || [];
     $('updToolCount').textContent = ups.length + ' posted';
     $('updAdmin').innerHTML = ups.map(function (u) {
@@ -1729,6 +1922,126 @@ table.prog tr.removed td { opacity: 0.45; }
     var b = this; b.disabled = true;
     api('send_welcome_test').then(function (r) { b.disabled = false; toast('Test sent to ' + r.to + '. Check your inbox.'); }).catch(function (e) { b.disabled = false; onErr(e); });
   });
+  // ---------- Q&A admin (staff) ----------
+  function renderQaAdmin() {
+    var h = state.hub, qa = h.program.qa || [];
+    var sel = $('qaWeek'), cur = sel.value;
+    sel.innerHTML = h.weeks.map(function (w) { return '<option value="' + w.number + '">Session ' + w.number + ': ' + esc(w.title) + '</option>'; }).join('') + '<option value="0">General (not tied to a session)</option>';
+    var last = null; h.weeks.forEach(function (w) { if (Date.parse(w.sessionAt) < now()) last = w; });
+    sel.value = cur || String((last || h.weeks[0]).number);
+    $('qaToolCount').textContent = qa.length + (qa.length === 1 ? ' question' : ' questions');
+    $('qaAdmin').innerHTML = qa.map(function (x) {
+      return '<li><div><b>' + esc(x.q) + '</b><span>' + (x.week ? 'Session ' + x.week : 'General') + '</span></div><div class="acts"><button class="linkbtn" data-qaedit="' + esc(x.id) + '">Edit</button><button class="linkbtn" data-qadel="' + esc(x.id) + '">Delete</button></div></li>';
+    }).join('') || '<li><div><span>No questions yet.</span></div></li>';
+  }
+  function qaReset() { $('qaForm').reset(); $('qaId').value = ''; $('qaSave').textContent = 'Add to Q&A'; $('qaCancel').hidden = true; renderQaAdmin(); }
+  $('qaForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = { id: $('qaId').value || null, week: $('qaWeek').value, q: $('qaQ').value.trim(), a: $('qaA').value.trim() };
+    if (!d.q || !d.a) return toast('Write the question and the answer first.');
+    api('qa_save', d).then(function (r) { state.hub.program.qa = r.qa; toast(d.id ? 'Saved. Everyone sees the change now.' : 'Added to the Q&A.'); qaReset(); renderHub(); renderQA(); }).catch(onErr);
+  });
+  $('qaCancel').addEventListener('click', qaReset);
+  $('qaAdmin').addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.qaedit) {
+      var x = (state.hub.program.qa || []).filter(function (y) { return y.id === b.dataset.qaedit; })[0]; if (!x) return;
+      $('qaId').value = x.id; $('qaWeek').value = String(x.week || 0); $('qaQ').value = x.q; $('qaA').value = x.a;
+      $('qaSave').textContent = 'Save changes'; $('qaCancel').hidden = false; $('qaQ').focus();
+    } else if (b.dataset.qadel) {
+      if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = 'Confirm delete'; return; }
+      api('qa_delete', { id: b.dataset.qadel }).then(function (r) { state.hub.program.qa = r.qa; toast('Deleted.'); qaReset(); renderHub(); renderQA(); }).catch(onErr);
+    }
+  });
+
+  // ---------- email the cohort (staff) ----------
+  var mail = { id: null, previews: null, pv: 0 };
+  function mailDrafts() { return state.hub.emails || []; }
+  function mailCurrent() { return mailDrafts().filter(function (d) { return d.id === mail.id; })[0] || null; }
+  function creatorCount() { return state.progress ? state.progress.rows.filter(function (r) { return r.status === 'active'; }).length : 0; }
+  function renderMailTool() {
+    var ds = mailDrafts();
+    if (mail.id && !mailCurrent()) mail.id = null;
+    if (mail.id === null && ds.length && !mail.blank) mail.id = (ds.filter(function (d) { return !d.sentAt; })[0] || ds[0]).id;
+    $('mailDraft').innerHTML = '<option value="">+ New email</option>' + ds.map(function (d) {
+      return '<option value="' + esc(d.id) + '">' + (d.sentAt ? 'Sent ' + esc(shortDay(d.sentAt)) + ': ' : 'Draft: ') + esc(d.subject) + '</option>';
+    }).join('');
+    $('mailDraft').value = mail.id || '';
+    var d = mailCurrent();
+    if (!mail.dirty) { $('mailSubject').value = d ? d.subject : ''; $('mailBody').value = d ? d.body : ''; }
+    var sent = !!(d && d.sentAt), n = creatorCount();
+    ['mailSubject', 'mailBody'].forEach(function (id) { $(id).readOnly = sent; });
+    $('mailSave').disabled = sent; $('mailDelete').hidden = !d || sent;
+    $('mailPreviewBtn').disabled = !d; $('mailTestBtn').disabled = !d;
+    $('mailSendBtn').disabled = !d || sent || mail.dirty || !n;
+    $('mailSendBtn').textContent = 'Send to all ' + n + ' creators';
+    $('mailSendBtn').dataset.armed = '';
+    $('mailToolCount').textContent = ds.filter(function (x) { return !x.sentAt; }).length + ' draft' + (ds.filter(function (x) { return !x.sentAt; }).length === 1 ? '' : 's') + ' · ' + ds.filter(function (x) { return x.sentAt; }).length + ' sent';
+    var st = $('mailStatus');
+    if (sent) { st.className = 'mail-status sent'; st.innerHTML = '<b>Sent ' + esc(f(d.sentAt, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET</b> to ' + d.sentCount + ' creators' + (d.sentBy ? ' by ' + esc(d.sentBy) : '') + '.' + (d.failed && d.failed.length ? ' Didn&rsquo;t reach: ' + esc(d.failed.join(', ')) + '.' : '') + ' Sent emails can&rsquo;t be edited or sent again. Pick &ldquo;+ New email&rdquo; to write another.'; }
+    else if (mail.dirty) { st.className = 'mail-status'; st.innerHTML = 'Unsaved changes. Save the draft before you preview or send.'; }
+    else if (d) { st.className = 'mail-status'; st.innerHTML = 'Draft saved ' + esc(f(d.updatedAt, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET. Nothing has been sent.'; }
+    else { st.className = 'mail-status'; st.innerHTML = ''; }
+  }
+  function renderMailPreview() {
+    var box = $('mailPreview'), pv = mail.previews;
+    if (!pv || !pv.length) { box.innerHTML = '<div class="mp-empty">Press Preview to see the email the way creators will.</div>'; return; }
+    var cur = pv[mail.pv] || pv[0];
+    box.innerHTML = '<div class="mp-tabs" role="tablist">' + pv.map(function (x, i) { return '<button type="button" role="tab" data-pv="' + i + '" aria-selected="' + (i === mail.pv) + '">' + esc(x.label) + '</button>'; }).join('') + '</div>' +
+      '<div class="mp-subj"><span>To:</span> ' + esc(cur.name) + ' (sample) &nbsp; <span>Subject:</span> <b>' + esc(cur.subject) + '</b></div><iframe title="Email preview" sandbox=""></iframe>';
+    box.querySelector('iframe').srcdoc = cur.html;
+  }
+  $('mailPreview').addEventListener('click', function (e) { var b = e.target.closest('[data-pv]'); if (!b) return; mail.pv = +b.dataset.pv; renderMailPreview(); });
+  $('mailDraft').addEventListener('change', function () {
+    if (mail.dirty && !window.confirm('Drop your unsaved changes?')) { this.value = mail.id || ''; return; }
+    mail.id = this.value || null; mail.blank = !this.value; mail.dirty = false; mail.previews = null; renderMailTool(); renderMailPreview();
+  });
+  ['mailSubject', 'mailBody'].forEach(function (id) { $(id).addEventListener('input', function () { if (this.readOnly) return; mail.dirty = true; renderMailTool(); }); });
+  $('mailForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var d = { id: mail.id, subject: $('mailSubject').value.trim(), body: $('mailBody').value };
+    if (!d.subject || !d.body.trim()) return toast('Write a subject and a message first.');
+    $('mailSave').disabled = true;
+    api('email_save', d).then(function (r) {
+      if (!r.ok) { $('mailSave').disabled = false; return toast(r.reason === 'already_sent' ? 'That email has already gone out.' : 'Write a subject and a message first.'); }
+      state.hub.emails = r.emails; mail.id = r.id; mail.dirty = false; mail.blank = false; toast('Draft saved. Nothing has been sent.');
+      renderMailTool(); $('mailPreviewBtn').click();
+    }).catch(function (err) { $('mailSave').disabled = false; onErr(err); });
+  });
+  $('mailPreviewBtn').addEventListener('click', function () {
+    if (!mail.id) return;
+    $('mailPreview').innerHTML = '<div class="mp-empty">Building the preview&hellip;</div>';
+    api('email_preview', { id: mail.id }).then(function (r) { mail.previews = r.previews; mail.pv = 0; renderMailPreview(); }).catch(onErr);
+  });
+  $('mailTestBtn').addEventListener('click', function () {
+    var b = this; if (!mail.id) return; b.disabled = true;
+    api('email_test', { id: mail.id }).then(function (r) { b.disabled = false; toast('Test sent to ' + r.to + '. Only you got it.'); }).catch(function (e) { b.disabled = false; onErr(e); });
+  });
+  $('mailDelete').addEventListener('click', function () {
+    var b = this; if (!mail.id) return;
+    if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = 'Confirm delete'; setTimeout(function () { b.dataset.armed = ''; b.textContent = 'Delete draft'; }, 5000); return; }
+    api('email_delete', { id: mail.id }).then(function (r) { state.hub.emails = r.emails; mail.id = null; mail.blank = true; mail.previews = null; b.dataset.armed = ''; b.textContent = 'Delete draft'; toast('Draft deleted.'); renderMailTool(); renderMailPreview(); }).catch(onErr);
+  });
+  $('mailSendBtn').addEventListener('click', function () {
+    var b = this, n = creatorCount(), d = mailCurrent();
+    if (!d || d.sentAt || mail.dirty) return;
+    if (b.dataset.armed !== '1') {
+      b.dataset.armed = '1'; b.textContent = 'Press again to email ' + n + ' creators now';
+      setTimeout(function () { if (b.dataset.armed === '1') { b.dataset.armed = ''; b.textContent = 'Send to all ' + n + ' creators'; } }, 6000);
+      return;
+    }
+    b.dataset.armed = ''; b.disabled = true; b.textContent = 'Sending…';
+    api('email_send', { id: d.id, expect: n }).then(function (r) {
+      if (!r.ok) {
+        var why = { already_sent: 'That email already went out.', sending: 'It’s already sending. Give it a minute and reload.', count_changed: 'The roster changed (now ' + r.recipients + ' creators). Reload and try again.', send_failed: 'The email service didn’t take it. Nothing was sent. Try again in a minute.' };
+        toast(why[r.reason] || 'That didn’t send.'); return loadProgress();
+      }
+      state.hub.emails = r.emails;
+      toast('Sent to ' + r.sent + ' creators' + (r.failed && r.failed.length ? '. ' + r.failed.length + ' didn’t go through.' : '.'));
+      renderMailTool();
+    }).catch(function (e) { onErr(e); loadProgress(); });
+  });
+
   $('addForm').addEventListener('submit', function (e) {
     e.preventDefault();
     var d = { name: $('addName').value.trim(), email: $('addEmail').value.trim(), tiktokHandle: $('addHandle').value.trim(), role: $('addRole').value };
@@ -1768,7 +2081,10 @@ table.prog tr.removed td { opacity: 0.45; }
 
   // ---------- boot ----------
   function boot() {
+    var g = location.hash.match(/(?:^#|&)go=([A-Za-z0-9-]+)/) || location.hash.match(/^#(qa(?:-[A-Za-z0-9-]+)?)$/);
+    if (g) state.go = g[1];
     var m = location.hash.match(/signin=([A-Za-z0-9._-]+)/);
+    if (g && !m) history.replaceState(null, '', location.pathname + location.search);
     if (m) {
       history.replaceState(null, '', location.pathname + location.search);
       show('loading');

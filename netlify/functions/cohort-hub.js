@@ -319,6 +319,120 @@ Project C`,
 }
 
 // ---------------------------------------------------------------------------
+// Cohort emails written in Tools (recaps, reminders)
+// ---------------------------------------------------------------------------
+// Staff write these in a light plain-text format so nobody has to touch HTML:
+//   ## Heading                     a small all-caps section label
+//   - item                         bullet list (consecutive lines)
+//   **bold**, [link text](https://...), bare https:// links
+//   [button: Label](https://...)   a black button, on its own line
+// And these fill in per person:
+//   {first}       first name
+//   {hub_link}    one-click sign-in link to their hub
+//   {qa_link}     same, but opens the Q&A tab
+//   {homework}    on its own line: this week's homework with a button, or a thank-you if they've turned it in
+//   {zoom}        on its own line: their personal Zoom link
+const EMAIL_LINK = 'color:#B74D2F;';
+function inlineHtml(s) {
+  let out = esc(s);
+  out = out.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  out = out.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (m, t, u) => `<a href="${u}" style="${EMAIL_LINK}">${t}</a>`);
+  // Bare links that aren't already inside an href.
+  out = out.replace(/(^|[\s(])(https?:\/\/[^\s<)]+[^\s<.,;:!?)'"])/g, (m, pre, u) => `${pre}<a href="${u}" style="${EMAIL_LINK}word-break:break-all;">${u}</a>`);
+  return out;
+}
+function inlineText(s) {
+  return String(s).replace(/\*\*([^*]+)\*\*/g, '$1').replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '$1 ($2)');
+}
+function emailButton(href, label) {
+  return `<a href="${esc(href)}" style="display:inline-block;background:#15171A;color:#ffffff;text-decoration:none;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px;padding:14px 22px;border:2px solid #15171A;">${esc(label)}</a>`;
+}
+
+// Turns the staff-written body into { html, text } for one person. blocks maps
+// {homework} / {zoom} to ready-made { html, text } pieces.
+function renderMarkup(body, vars, blocks) {
+  const fill = (s) => s.replace(/\{(first|hub_link|qa_link)\}/g, (m, k) => vars[k] || '');
+  const chunks = String(body || '').replace(/\r\n/g, '\n').split(/\n\s*\n/);
+  const html = [];
+  const text = [];
+  for (const raw of chunks) {
+    const lines = raw.split('\n').map((l) => l.trimEnd()).filter((l) => l.trim());
+    if (!lines.length) continue;
+    let i = 0;
+    while (i < lines.length) {
+      const line = lines[i].trim();
+      const block = line.match(/^\{(homework|zoom)\}$/);
+      if (block) {
+        const b = blocks[block[1]];
+        if (b) { html.push(b.html); text.push(b.text); }
+        i++; continue;
+      }
+      const btn = fill(line).match(/^\[button:\s*([^\]]+)\]\((https?:\/\/[^)\s]+)\)$/i);
+      if (btn) {
+        html.push(`<p style="margin:0 0 22px;">${emailButton(btn[2], btn[1].trim())}</p>`);
+        text.push(`${btn[1].trim()}: ${btn[2]}`);
+        i++; continue;
+      }
+      if (/^##\s+/.test(line)) {
+        const h = fill(line.replace(/^##\s+/, ''));
+        html.push(`<p style="margin:26px 0 8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;border-top:2px solid #15171A;padding-top:12px;">${inlineHtml(h)}</p>`);
+        text.push(h.toUpperCase());
+        i++; continue;
+      }
+      if (/^[-*]\s+/.test(line)) {
+        const items = [];
+        while (i < lines.length && /^[-*]\s+/.test(lines[i].trim())) { items.push(fill(lines[i].trim().replace(/^[-*]\s+/, ''))); i++; }
+        html.push(`<ul style="margin:0 0 16px;padding-left:20px;">${items.map((it) => `<li style="margin:0 0 8px;">${inlineHtml(it)}</li>`).join('')}</ul>`);
+        text.push(items.map((it) => '- ' + inlineText(it)).join('\n'));
+        continue;
+      }
+      // Paragraph: this line plus any following plain lines in the same chunk.
+      const para = [fill(line)];
+      i++;
+      while (i < lines.length && !/^(##\s+|[-*]\s+|\{(homework|zoom)\}$|\[button:)/i.test(lines[i].trim())) { para.push(fill(lines[i].trim())); i++; }
+      html.push(`<p style="margin:0 0 16px;">${para.map(inlineHtml).join('<br>')}</p>`);
+      text.push(para.map(inlineText).join('\n'));
+    }
+  }
+  return { html: html.join('\n'), text: text.join('\n\n') };
+}
+
+// One cohort email for one person. `subs` is the set of week ids they've turned in.
+function cohortEmail(draft, person, program, weeks, subs, magicUrl) {
+  const now = Date.now();
+  const due = weeks.find((w) => w.due_at && w.assignment && Date.parse(w.due_at) > now);
+  const fmtDue = (iso) => fmtET(iso, { weekday: 'long', month: 'short', day: 'numeric' }) + ' at ' + fmtET(iso, { hour: 'numeric', minute: '2-digit' }) + ' ET';
+  const hubLink = magicUrl;
+  const qaLink = magicUrl.includes('#') ? magicUrl + '&go=qa' : magicUrl + '#go=qa';
+  const blocks = {};
+  if (due) {
+    const done = subs.has(due.id);
+    blocks.homework = done
+      ? { html: `<div style="border:2px solid #15171A;padding:16px 18px;margin:0 0 22px;background:#F4F6F5;"><p style="margin:0;"><strong>Week ${due.week_number} homework: you're all set.</strong> Thanks for turning it in. You can still change it on your hub until ${esc(fmtDue(due.due_at))}.</p></div>`,
+          text: `Week ${due.week_number} homework: you're all set. Thanks for turning it in. You can still change it on your hub until ${fmtDue(due.due_at)}.` }
+      : { html: `<div style="border:2px solid #15171A;padding:16px 18px;margin:0 0 22px;"><p style="margin:0 0 6px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;">Week ${due.week_number} homework &middot; due ${esc(fmtDue(due.due_at))}</p><p style="margin:0 0 14px;">${esc(due.assignment)}</p>${emailButton(hubLink + (hubLink.includes('#') ? '&go=homework' : '#go=homework'), 'Turn it in')}</div>`,
+          text: `WEEK ${due.week_number} HOMEWORK, due ${fmtDue(due.due_at)}\n${due.assignment}\nTurn it in: ${hubLink}` };
+  }
+  blocks.zoom = person.zoom_join_url
+    ? { html: `<p style="margin:0 0 16px;">Your personal Zoom link works for every session. It's tied to you, so please don't share it:<br><a href="${esc(person.zoom_join_url)}" style="${EMAIL_LINK}word-break:break-all;">${esc(person.zoom_join_url)}</a></p>`,
+        text: `Your personal Zoom link works for every session (please don't share it):\n${person.zoom_join_url}` }
+    : { html: `<p style="margin:0 0 16px;">Your personal Zoom link is on your hub.</p>`, text: 'Your personal Zoom link is on your hub.' };
+  const vars = { first: firstName(person.name), hub_link: hubLink, qa_link: qaLink };
+  const r = renderMarkup(draft.body, vars, blocks);
+  const subject = String(draft.subject || '').replace(/\{first\}/g, vars.first);
+  const footHtml = `<p style="margin:24px 0 0;font-size:13px;color:#5b5d60;">Questions or trouble getting in? Email <a href="mailto:info@projectc.com" style="${EMAIL_LINK}">info@projectc.com</a> and we'll sort it out.</p>`;
+  return {
+    subject,
+    html: emailShell(r.html + footHtml),
+    text: r.text + '\n\nQuestions or trouble getting in? Email info@projectc.com and we\'ll sort it out.',
+  };
+}
+
+function shapeDraft(d) {
+  return { id: d.id, subject: d.subject, body: d.body, updatedAt: d.updatedAt, createdAt: d.createdAt, sentAt: d.sentAt || null, sentCount: d.sentCount || 0, sentBy: d.sentBy || null, sending: !!d.sending, failed: d.failed || [] };
+}
+
+// ---------------------------------------------------------------------------
 // Zoom
 // ---------------------------------------------------------------------------
 let zoomTokenCache = { token: null, exp: 0 };
@@ -420,7 +534,14 @@ function publicProgram(program) {
     todos: s.todos || [], rhythm: s.rhythm || [],
     completionMin: s.completionMin || null,
     updates: (s.updates || []).slice().sort((a, b) => Date.parse(b.at) - Date.parse(a.at)),
+    qa: sortQa(s.qa || []),
   };
+}
+
+// Q&A: newest session first, then the order they were added.
+function sortQa(list) {
+  return list.slice().sort((a, b) => (b.week || 0) - (a.week || 0) || (a.order || 0) - (b.order || 0) || Date.parse(a.at) - Date.parse(b.at))
+    .map((x) => ({ id: x.id, week: x.week, q: x.q, a: x.a, at: x.at }));
 }
 
 async function loadWeeks(supabase, programId) {
@@ -600,6 +721,7 @@ exports.handler = async (event) => {
         program: publicProgram(program),
         weeks: weeks.map((w) => shapeWeek(w, mine)),
         featured,
+        emails: person.role === 'staff' ? ((program.settings || {}).emails || []).map(shapeDraft).sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt)) : undefined,
         now: new Date().toISOString(),
       });
     }
@@ -825,6 +947,133 @@ exports.handler = async (event) => {
       return json(200, { ok: true, updates: updates.slice().sort((a, b) => Date.parse(b.at) - Date.parse(a.at)) });
     }
 
+    if (action === 'qa_save' || action === 'qa_delete') {
+      // Q&A lives in hub_programs.settings.qa as [{ id, week, q, a, order, at }].
+      const { data: fresh } = await supabase.from('hub_programs').select('settings').eq('id', program.id).single();
+      const settings = fresh.settings || {};
+      let qa = Array.isArray(settings.qa) ? settings.qa : [];
+      if (action === 'qa_save') {
+        const q = String(body.q || '').trim().slice(0, 300);
+        const a = String(body.a || '').trim().slice(0, 8000);
+        const week = parseInt(body.week, 10) || null;
+        if (!q || !a) return json(200, { ok: false, reason: 'empty' });
+        const existing = body.id ? qa.find((x) => x.id === body.id) : null;
+        if (existing) Object.assign(existing, { q, a, week, editedAt: new Date().toISOString() });
+        else qa.push({ id: crypto.randomUUID().slice(0, 8), week, q, a, order: qa.filter((x) => x.week === week).length, at: new Date().toISOString(), by: firstName(person.name) });
+      } else {
+        qa = qa.filter((x) => x.id !== body.id);
+      }
+      await supabase.from('hub_programs').update({ settings: { ...settings, qa } }).eq('id', program.id);
+      return json(200, { ok: true, qa: sortQa(qa) });
+    }
+
+    // ---------------- cohort emails (draft, preview, test, send) ----------------
+    if (['email_save', 'email_delete', 'email_preview', 'email_test', 'email_send'].includes(action)) {
+      const { data: fresh } = await supabase.from('hub_programs').select('settings').eq('id', program.id).single();
+      const settings = fresh.settings || {};
+      let emails = Array.isArray(settings.emails) ? settings.emails : [];
+      // Re-read before writing so a send that takes a few seconds can't undo an update or Q&A posted meanwhile.
+      const saveAll = async (list) => {
+        const { data: now2 } = await supabase.from('hub_programs').select('settings').eq('id', program.id).single();
+        await supabase.from('hub_programs').update({ settings: { ...(now2.settings || {}), emails: list } }).eq('id', program.id);
+      };
+      const list = () => emails.map(shapeDraft).sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
+
+      if (action === 'email_save') {
+        const subject = String(body.subject || '').trim().slice(0, 200);
+        const text = String(body.body || '').slice(0, 20000);
+        if (!subject || !text.trim()) return json(200, { ok: false, reason: 'empty' });
+        const nowIso = new Date().toISOString();
+        let d = body.id ? emails.find((x) => x.id === body.id) : null;
+        if (d && (d.sentAt || d.sending)) return json(200, { ok: false, reason: 'already_sent' });
+        if (d) Object.assign(d, { subject, body: text, updatedAt: nowIso, editedBy: firstName(person.name) });
+        else { d = { id: crypto.randomUUID(), subject, body: text, createdAt: nowIso, updatedAt: nowIso, createdBy: firstName(person.name) }; emails.push(d); }
+        await saveAll(emails);
+        return json(200, { ok: true, id: d.id, emails: list() });
+      }
+
+      const d = emails.find((x) => x.id === body.id);
+      if (!d) return json(404, { error: 'That draft is gone. Reload the page.' });
+
+      if (action === 'email_delete') {
+        if (d.sentAt) return json(200, { ok: false, reason: 'already_sent' });
+        emails = emails.filter((x) => x.id !== d.id);
+        await saveAll(emails);
+        return json(200, { ok: true, emails: list() });
+      }
+
+      const weeks = await loadWeeks(supabase, program.id);
+      const subsFor = async (ids) => {
+        const { data } = ids.length ? await supabase.from('hub_submissions').select('person_id, week_id').in('person_id', ids) : { data: [] };
+        const m = new Map();
+        for (const s of data || []) { if (!m.has(s.person_id)) m.set(s.person_id, new Set()); m.get(s.person_id).add(s.week_id); }
+        return m;
+      };
+      const magicFor = (p) => `${pageUrl(program.slug)}#signin=${signToken({ k: 'm', pid: p.id, x: Math.min(Date.now() + MAGIC_TTL_MS, Date.parse(program.access_ends_at)) })}`;
+      const { data: creators } = await supabase.from('hub_people').select('*').eq('program_id', program.id).eq('role', 'creator').eq('status', 'active');
+      const roster = creators || [];
+
+      if (action === 'email_preview') {
+        // Two versions so staff can see both homework states: someone who hasn't turned in
+        // this week's homework, and someone who has (if anyone has yet).
+        const due = weeks.find((w) => w.due_at && w.assignment && Date.parse(w.due_at) > Date.now());
+        const subs = await subsFor(roster.map((p) => p.id));
+        const turnedIn = due ? roster.filter((p) => (subs.get(p.id) || new Set()).has(due.id)) : [];
+        const notYet = due ? roster.filter((p) => !(subs.get(p.id) || new Set()).has(due.id)) : roster;
+        const pick = (arr) => arr.find((p) => p.zoom_join_url) || arr[0];
+        const samples = [];
+        const a = pick(notYet); if (a) samples.push({ label: due ? "Hasn't turned in week " + due.week_number + ' yet (' + notYet.length + ')' : 'Everyone', person: a });
+        const b = pick(turnedIn); if (b) samples.push({ label: 'Already turned in week ' + due.week_number + ' (' + turnedIn.length + ')', person: b });
+        const out = samples.map((s) => {
+          const m = cohortEmail(d, s.person, program, weeks, subs.get(s.person.id) || new Set(), `${pageUrl(program.slug)}#signin=PREVIEW`);
+          return { label: s.label, name: s.person.name, subject: m.subject, html: m.html };
+        });
+        return json(200, { ok: true, recipients: roster.length, previews: out });
+      }
+
+      if (action === 'email_test') {
+        const subs = await subsFor([person.id]);
+        const sample = { ...person, zoom_join_url: person.zoom_join_url || 'https://us06web.zoom.us/w/82615123795?tk=EACH-CREATOR-GETS-THEIR-OWN-LINK' };
+        const m = cohortEmail(d, sample, program, weeks, subs.get(person.id) || new Set(), magicFor(person));
+        await sendEmail({ to: person.email, subject: '[Test] ' + m.subject, html: m.html, text: m.text });
+        return json(200, { ok: true, to: person.email });
+      }
+
+      if (action === 'email_send') {
+        // Goes once, to every active creator. The page asks twice before calling this,
+        // and the count it showed has to match what we'd send now.
+        if (d.sentAt) return json(200, { ok: false, reason: 'already_sent', sentAt: d.sentAt });
+        if (d.sending && Date.now() - Date.parse(d.sendingAt) < 10 * 60000) return json(200, { ok: false, reason: 'sending' });
+        if (parseInt(body.expect, 10) !== roster.length) return json(200, { ok: false, reason: 'count_changed', recipients: roster.length });
+        d.sending = true; d.sendingAt = new Date().toISOString();
+        await saveAll(emails);
+        const subs = await subsFor(roster.map((p) => p.id));
+        const msgs = roster.map((p) => ({ to: p.email, ...cohortEmail(d, p, program, weeks, subs.get(p.id) || new Set(), magicFor(p)) }));
+        // Send in chunks of 100 and keep track, so a failure partway through never leads to a double send.
+        let sent = 0;
+        let failed = [];
+        for (let i = 0; i < msgs.length; i += 100) {
+          const chunk = msgs.slice(i, i + 100);
+          try {
+            await sendEmailBatch(chunk);
+            sent += chunk.length;
+          } catch (e) {
+            console.error('cohort email send failed', e.message);
+            failed = msgs.slice(i).map((m) => m.to);
+            break;
+          }
+        }
+        if (!sent) {
+          d.sending = false;
+          await saveAll(emails);
+          return json(200, { ok: false, reason: 'send_failed' });
+        }
+        Object.assign(d, { sending: false, sentAt: new Date().toISOString(), sentCount: sent, sentBy: firstName(person.name), failed });
+        await saveAll(emails);
+        return json(200, { ok: true, sent, failed, emails: list() });
+      }
+    }
+
     if (action === 'pull_attendance') {
       const { pullAttendanceForWeek } = require('./cohort-hub-scheduled.js');
       const result = await pullAttendanceForWeek(supabase, program, body.weekId);
@@ -839,4 +1088,4 @@ exports.handler = async (event) => {
 };
 
 // Exposed for the scheduled function.
-module.exports.internals = { db, loadProgram, loadWeeks, ensureZoomLink, zoomToken, sendEmail, sendEmailBatch, welcomeEmail, signToken, MAGIC_TTL_MS, emailShell, esc, firstName, fmtET, pageUrl };
+module.exports.internals = { cohortEmail, renderMarkup, db, loadProgram, loadWeeks, ensureZoomLink, zoomToken, sendEmail, sendEmailBatch, welcomeEmail, signToken, MAGIC_TTL_MS, emailShell, esc, firstName, fmtET, pageUrl };

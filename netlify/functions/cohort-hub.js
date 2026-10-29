@@ -398,7 +398,7 @@ function renderMarkup(body, vars, blocks) {
 }
 
 // One cohort email for one person. `subs` is the set of week ids they've turned in.
-function cohortEmail(draft, person, program, weeks, subs, magicUrl) {
+function cohortEmail(draft, person, program, weeks, subs, magicUrl, copyNote) {
   const now = Date.now();
   const due = weeks.find((w) => w.due_at && w.assignment && Date.parse(w.due_at) > now);
   const fmtDue = (iso) => fmtET(iso, { weekday: 'long', month: 'short', day: 'numeric' }) + ' at ' + fmtET(iso, { hour: 'numeric', minute: '2-digit' }) + ' ET';
@@ -423,13 +423,13 @@ function cohortEmail(draft, person, program, weeks, subs, magicUrl) {
   const footHtml = `<p style="margin:24px 0 0;font-size:13px;color:#5b5d60;">Questions or trouble getting in? Email <a href="mailto:info@projectc.com" style="${EMAIL_LINK}">info@projectc.com</a> and we'll sort it out.</p>`;
   return {
     subject,
-    html: emailShell(r.html + footHtml),
-    text: r.text + '\n\nQuestions or trouble getting in? Email info@projectc.com and we\'ll sort it out.',
+    html: emailShell((copyNote ? `<div style="background:#FFE800;border:2px solid #15171A;padding:12px 14px;margin:0 0 22px;font-size:13px;line-height:1.5;">${esc(copyNote)}</div>` : '') + r.html + footHtml),
+    text: (copyNote ? copyNote + '\n\n----\n\n' : '') + r.text + '\n\nQuestions or trouble getting in? Email info@projectc.com and we\'ll sort it out.',
   };
 }
 
 function shapeDraft(d) {
-  return { id: d.id, subject: d.subject, body: d.body, updatedAt: d.updatedAt, createdAt: d.createdAt, sentAt: d.sentAt || null, sentCount: d.sentCount || 0, sentBy: d.sentBy || null, sending: !!d.sending, failed: d.failed || [] };
+  return { id: d.id, subject: d.subject, body: d.body, updatedAt: d.updatedAt, createdAt: d.createdAt, sentAt: d.sentAt || null, sentCount: d.sentCount || 0, sentBy: d.sentBy || null, sending: !!d.sending, failed: d.failed || [], copies: d.copies || [] };
 }
 
 // ---------------------------------------------------------------------------
@@ -1028,7 +1028,8 @@ exports.handler = async (event) => {
           const m = cohortEmail(d, s.person, program, weeks, subs.get(s.person.id) || new Set(), `${pageUrl(program.slug)}#signin=PREVIEW`);
           return { label: s.label, name: s.person.name, subject: m.subject, html: m.html };
         });
-        return json(200, { ok: true, recipients: roster.length, previews: out });
+        const { data: partners } = await supabase.from('hub_people').select('name').eq('program_id', program.id).eq('role', 'partner').eq('status', 'active');
+        return json(200, { ok: true, recipients: roster.length, copiesTo: (partners || []).map((p) => p.name), previews: out });
       }
 
       if (action === 'email_test') {
@@ -1068,9 +1069,22 @@ exports.handler = async (event) => {
           await saveAll(emails);
           return json(200, { ok: false, reason: 'send_failed' });
         }
-        Object.assign(d, { sending: false, sentAt: new Date().toISOString(), sentCount: sent, sentBy: firstName(person.name), failed });
+        // One copy for each TikTok partner on the roster, so they see what went out.
+        // It uses a stand-in Zoom link and the partner's own sign-in link, never a creator's.
+        let copies = [];
+        try {
+          const { data: partners } = await supabase.from('hub_people').select('*').eq('program_id', program.id).eq('role', 'partner').eq('status', 'active');
+          const when = fmtET(new Date().toISOString(), { weekday: 'short', month: 'short', day: 'numeric' }) + ' at ' + fmtET(new Date().toISOString(), { hour: 'numeric', minute: '2-digit' }) + ' ET';
+          const note = `Copy for the TikTok team: this went to ${sent} creators on ${when}. Each creator's version has their own name, personal Zoom link and one-click sign-in link. Creators who had already turned in this week's homework saw a thank-you in place of the homework box.`;
+          const pm = (partners || []).map((p) => {
+            const m = cohortEmail(d, { name: p.name, zoom_join_url: 'https://us06web.zoom.us/w/82615123795?tk=EACH-CREATOR-GETS-THEIR-OWN-LINK' }, program, weeks, new Set(), magicFor(p), note);
+            return { to: p.email, subject: '[TikTok copy] ' + m.subject, html: m.html, text: m.text };
+          });
+          if (pm.length) { await sendEmailBatch(pm); copies = pm.map((m) => m.to); }
+        } catch (e) { console.error('partner copies failed', e.message); }
+        Object.assign(d, { sending: false, sentAt: new Date().toISOString(), sentCount: sent, sentBy: firstName(person.name), failed, copies });
         await saveAll(emails);
-        return json(200, { ok: true, sent, failed, emails: list() });
+        return json(200, { ok: true, sent, failed, copies, emails: list() });
       }
     }
 

@@ -883,7 +883,7 @@ table.prog tr.removed td { opacity: 0.45; }
       <div class="tool wide" id="mailTool">
         <h3>Email the cohort <span id="mailToolCount" class="small"></span></h3>
         <div class="tb">
-          <p class="hint">For recaps and reminders. Each creator gets their own copy, with their name, their personal Zoom link and a one-click sign-in link to the hub. Nothing goes out until you press Send twice. Save as you go, preview both versions, and send yourself a test first.</p>
+          <p class="hint">For recaps and reminders. Each creator gets their own copy, with their name, their personal Zoom link and a one-click sign-in link to the hub. TikTok partners on the roster each get one copy marked as TikTok&rsquo;s, without any creator&rsquo;s links. Nothing goes out until you press Send twice. Save as you go, preview both versions, and send yourself a test first.</p>
           <div class="mail-grid">
             <form class="form" id="mailForm">
               <div><label class="lbl" for="mailDraft">Draft</label><select id="mailDraft"></select></div>
@@ -1978,7 +1978,7 @@ table.prog tr.removed td { opacity: 0.45; }
     $('mailSendBtn').dataset.armed = '';
     $('mailToolCount').textContent = ds.filter(function (x) { return !x.sentAt; }).length + ' draft' + (ds.filter(function (x) { return !x.sentAt; }).length === 1 ? '' : 's') + ' · ' + ds.filter(function (x) { return x.sentAt; }).length + ' sent';
     var st = $('mailStatus');
-    if (sent) { st.className = 'mail-status sent'; st.innerHTML = '<b>Sent ' + esc(f(d.sentAt, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET</b> to ' + d.sentCount + ' creators' + (d.sentBy ? ' by ' + esc(d.sentBy) : '') + '.' + (d.failed && d.failed.length ? ' Didn&rsquo;t reach: ' + esc(d.failed.join(', ')) + '.' : '') + ' Sent emails can&rsquo;t be edited or sent again. Pick &ldquo;+ New email&rdquo; to write another.'; }
+    if (sent) { st.className = 'mail-status sent'; st.innerHTML = '<b>Sent ' + esc(f(d.sentAt, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET</b> to ' + d.sentCount + ' creators' + (d.sentBy ? ' by ' + esc(d.sentBy) : '') + '.' + (d.copies && d.copies.length ? ' TikTok copies went to ' + esc(d.copies.join(', ')) + '.' : '') + (d.failed && d.failed.length ? ' Didn&rsquo;t reach: ' + esc(d.failed.join(', ')) + '.' : '') + ' Sent emails can&rsquo;t be edited or sent again. Pick &ldquo;+ New email&rdquo; to write another.'; }
     else if (mail.dirty) { st.className = 'mail-status'; st.innerHTML = 'Unsaved changes. Save the draft before you preview or send.'; }
     else if (d) { st.className = 'mail-status'; st.innerHTML = 'Draft saved ' + esc(f(d.updatedAt, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET. Nothing has been sent.'; }
     else { st.className = 'mail-status'; st.innerHTML = ''; }
@@ -2011,7 +2011,7 @@ table.prog tr.removed td { opacity: 0.45; }
   $('mailPreviewBtn').addEventListener('click', function () {
     if (!mail.id) return;
     $('mailPreview').innerHTML = '<div class="mp-empty">Building the preview&hellip;</div>';
-    api('email_preview', { id: mail.id }).then(function (r) { mail.previews = r.previews; mail.pv = 0; renderMailPreview(); }).catch(onErr);
+    api('email_preview', { id: mail.id }).then(function (r) { mail.previews = r.previews; mail.pv = 0; renderMailPreview(); if (r.copiesTo && r.copiesTo.length && !mailCurrent().sentAt) $('mailStatus').innerHTML += ' When you send, TikTok copies go to ' + esc(r.copiesTo.join(', ')) + '.'; }).catch(onErr);
   });
   $('mailTestBtn').addEventListener('click', function () {
     var b = this; if (!mail.id) return; b.disabled = true;
@@ -2037,7 +2037,7 @@ table.prog tr.removed td { opacity: 0.45; }
         toast(why[r.reason] || 'That didn’t send.'); return loadProgress();
       }
       state.hub.emails = r.emails;
-      toast('Sent to ' + r.sent + ' creators' + (r.failed && r.failed.length ? '. ' + r.failed.length + ' didn’t go through.' : '.'));
+      toast('Sent to ' + r.sent + ' creators' + (r.failed && r.failed.length ? '. ' + r.failed.length + ' didn’t go through' : '') + (r.copies && r.copies.length ? '. TikTok copies sent to ' + r.copies.length + '.' : '.'));
       renderMailTool();
     }).catch(function (e) { onErr(e); loadProgress(); });
   });

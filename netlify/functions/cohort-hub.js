@@ -429,7 +429,23 @@ function cohortEmail(draft, person, program, weeks, subs, magicUrl, copyNote) {
 }
 
 function shapeDraft(d) {
-  return { id: d.id, subject: d.subject, body: d.body, updatedAt: d.updatedAt, createdAt: d.createdAt, sentAt: d.sentAt || null, sentCount: d.sentCount || 0, sentBy: d.sentBy || null, sending: !!d.sending, failed: d.failed || [], copies: d.copies || [] };
+  return { id: d.id, subject: d.subject, body: d.body, updatedAt: d.updatedAt, createdAt: d.createdAt, sentAt: d.sentAt || null, sentCount: d.sentCount || 0, sentBy: d.sentBy || null, sending: !!d.sending, failed: d.failed || [], copies: d.copies || [], audience: d.audience || 'all' };
+}
+
+// Who a cohort email goes to. 'all' = every active creator. 'missed:N' = active creators
+// who were already on the roster when session N started and didn't attend it.
+function audienceLabel(a) {
+  const m = /^missed:(\d)$/.exec(a || '');
+  return m ? `creators who missed session ${m[1]}` : 'all creators';
+}
+async function audienceRoster(supabase, roster, weeks, audience) {
+  const m = /^missed:(\d)$/.exec(audience || '');
+  if (!m) return roster;
+  const w = weeks.find((x) => x.week_number === Number(m[1]));
+  if (!w) return [];
+  const { data: att } = await supabase.from('hub_attendance').select('person_id, minutes').eq('week_id', w.id);
+  const came = new Set((att || []).filter((a) => a.minutes > 0).map((a) => a.person_id));
+  return roster.filter((p) => !came.has(p.id) && Date.parse(p.added_at) < Date.parse(w.session_at));
 }
 
 // ---------------------------------------------------------------------------
@@ -986,8 +1002,9 @@ exports.handler = async (event) => {
         const nowIso = new Date().toISOString();
         let d = body.id ? emails.find((x) => x.id === body.id) : null;
         if (d && (d.sentAt || d.sending)) return json(200, { ok: false, reason: 'already_sent' });
-        if (d) Object.assign(d, { subject, body: text, updatedAt: nowIso, editedBy: firstName(person.name) });
-        else { d = { id: crypto.randomUUID(), subject, body: text, createdAt: nowIso, updatedAt: nowIso, createdBy: firstName(person.name) }; emails.push(d); }
+        const audience = /^missed:\d$/.test(body.audience || '') ? body.audience : 'all';
+        if (d) Object.assign(d, { subject, body: text, audience, updatedAt: nowIso, editedBy: firstName(person.name) });
+        else { d = { id: crypto.randomUUID(), subject, body: text, audience, createdAt: nowIso, updatedAt: nowIso, createdBy: firstName(person.name) }; emails.push(d); }
         await saveAll(emails);
         return json(200, { ok: true, id: d.id, emails: list() });
       }
@@ -1011,7 +1028,7 @@ exports.handler = async (event) => {
       };
       const magicFor = (p) => `${pageUrl(program.slug)}#signin=${signToken({ k: 'm', pid: p.id, x: Math.min(Date.now() + MAGIC_TTL_MS, Date.parse(program.access_ends_at)) })}`;
       const { data: creators } = await supabase.from('hub_people').select('*').eq('program_id', program.id).eq('role', 'creator').eq('status', 'active');
-      const roster = creators || [];
+      const roster = await audienceRoster(supabase, creators || [], weeks, d.audience);
 
       if (action === 'email_preview') {
         // Two versions so staff can see both homework states: someone who hasn't turned in
@@ -1029,7 +1046,7 @@ exports.handler = async (event) => {
           return { label: s.label, name: s.person.name, subject: m.subject, html: m.html };
         });
         const { data: partners } = await supabase.from('hub_people').select('name').eq('program_id', program.id).eq('role', 'partner').eq('status', 'active');
-        return json(200, { ok: true, recipients: roster.length, copiesTo: (partners || []).map((p) => p.name), previews: out });
+        return json(200, { ok: true, recipients: roster.length, audience: d.audience || 'all', audienceLabel: audienceLabel(d.audience), copiesTo: (partners || []).map((p) => p.name), previews: out });
       }
 
       if (action === 'email_test') {
@@ -1045,6 +1062,7 @@ exports.handler = async (event) => {
         // and the count it showed has to match what we'd send now.
         if (d.sentAt) return json(200, { ok: false, reason: 'already_sent', sentAt: d.sentAt });
         if (d.sending && Date.now() - Date.parse(d.sendingAt) < 10 * 60000) return json(200, { ok: false, reason: 'sending' });
+        if (!roster.length) return json(200, { ok: false, reason: 'nobody' });
         if (parseInt(body.expect, 10) !== roster.length) return json(200, { ok: false, reason: 'count_changed', recipients: roster.length });
         d.sending = true; d.sendingAt = new Date().toISOString();
         await saveAll(emails);
@@ -1075,7 +1093,7 @@ exports.handler = async (event) => {
         try {
           const { data: partners } = await supabase.from('hub_people').select('*').eq('program_id', program.id).eq('role', 'partner').eq('status', 'active');
           const when = fmtET(new Date().toISOString(), { weekday: 'short', month: 'short', day: 'numeric' }) + ' at ' + fmtET(new Date().toISOString(), { hour: 'numeric', minute: '2-digit' }) + ' ET';
-          const note = `Copy for the TikTok team: this went to ${sent} creators on ${when}. Each creator's version has their own name, personal Zoom link and one-click sign-in link. Creators who had already turned in this week's homework saw a thank-you in place of the homework box.`;
+          const note = `Copy for the TikTok team: this went to ${sent} ${audienceLabel(d.audience)} on ${when}. Each creator's version has their own name, personal Zoom link and one-click sign-in link. Creators who had already turned in this week's homework saw a thank-you in place of the homework box.`;
           const pm = (partners || []).map((p) => {
             const m = cohortEmail(d, { name: p.name, zoom_join_url: 'https://us06web.zoom.us/w/82615123795?tk=EACH-CREATOR-GETS-THEIR-OWN-LINK' }, program, weeks, new Set(), magicFor(p), note);
             return { to: p.email, subject: '[TikTok copy] ' + m.subject, html: m.html, text: m.text };

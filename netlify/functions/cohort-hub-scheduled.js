@@ -196,6 +196,18 @@ async function run() {
           await sendEmailBatch(due.map((c) => ({ to: c.email, ...reminderEmail(c, program, w) })));
           await supabase.from('hub_reminders_sent').insert(due.map((c) => ({ person_id: c.id, week_id: w.id, kind: 'due' })));
           n = due.length;
+          // One copy to Liz (or settings.reminderCopyTo) so there's a record of what went out and to how many.
+          try {
+            const copyTo = (program.settings && program.settings.reminderCopyTo) || ['liz@projectc.com'];
+            const sample = reminderEmail({ name: 'Liz' }, program, w);
+            const note = `<div style="background:#FFE800;border:2px solid #15171A;padding:12px 14px;margin:0 0 22px;font-size:13px;line-height:1.5;">Your copy: this reminder went to ${n} creators who hadn't turned in week ${w.week_number} homework yet. Each one was addressed to that creator by first name.</div>`;
+            await sendEmailBatch(copyTo.map((to) => ({
+              to,
+              subject: `[Copy] ${sample.subject} (sent to ${n})`,
+              html: sample.html.replace('<p style="margin:0 0 16px;">Hi', note + '<p style="margin:0 0 16px;">Hi'),
+              text: `Your copy: this reminder went to ${n} creators who hadn't turned in week ${w.week_number} homework yet.\n\n----\n\n${sample.text}`,
+            })));
+          } catch (e) { console.error('reminder copy failed', e.message); }
         } catch (e) {
           console.error('reminder batch failed', e.message);
         }

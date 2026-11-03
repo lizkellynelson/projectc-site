@@ -887,6 +887,7 @@ table.prog tr.removed td { opacity: 0.45; }
           <div class="mail-grid">
             <form class="form" id="mailForm">
               <div><label class="lbl" for="mailDraft">Draft</label><select id="mailDraft"></select></div>
+              <div><label class="lbl" for="mailAudience">Send to</label><select id="mailAudience"></select></div>
               <div><label class="lbl" for="mailSubject">Subject</label><input id="mailSubject" maxlength="200" placeholder="Session 1 recap: replay, your questions answered and this week's homework"></div>
               <div><label class="lbl" for="mailBody">Message</label><textarea id="mailBody" class="mail-body" spellcheck="true"></textarea></div>
               <details class="mail-help"><summary>Formatting and fill-ins</summary>
@@ -1968,17 +1969,23 @@ table.prog tr.removed td { opacity: 0.45; }
     }).join('');
     $('mailDraft').value = mail.id || '';
     var d = mailCurrent();
-    if (!mail.dirty) { $('mailSubject').value = d ? d.subject : ''; $('mailBody').value = d ? d.body : ''; }
-    var sent = !!(d && d.sentAt), n = creatorCount();
+    var opts = '<option value="all">All creators</option>';
+    state.hub.weeks.forEach(function (w) { if (Date.parse(w.sessionAt) + 90 * 60000 < now()) opts += '<option value="missed:' + w.number + '">Creators who missed session ' + w.number + '</option>'; });
+    $('mailAudience').innerHTML = opts;
+    if (!mail.dirty) { $('mailSubject').value = d ? d.subject : ''; $('mailBody').value = d ? d.body : ''; $('mailAudience').value = (d && d.audience) || 'all'; }
+    if (mail.recipientsFor !== (d && d.id + '|' + d.audience + '|' + d.updatedAt)) mail.recipients = null;
+    var sent = !!(d && d.sentAt), n = d && d.audience && d.audience !== 'all' ? mail.recipients : (mail.recipients != null ? mail.recipients : creatorCount());
     ['mailSubject', 'mailBody'].forEach(function (id) { $(id).readOnly = sent; });
+    $('mailAudience').disabled = sent;
     $('mailSave').disabled = sent; $('mailDelete').hidden = !d || sent;
     $('mailPreviewBtn').disabled = !d; $('mailTestBtn').disabled = !d;
+    var who = d && d.audience && d.audience !== 'all' ? 'creators who missed session ' + d.audience.split(':')[1] : 'creators';
     $('mailSendBtn').disabled = !d || sent || mail.dirty || !n;
-    $('mailSendBtn').textContent = 'Send to all ' + n + ' creators';
+    $('mailSendBtn').textContent = n == null ? 'Preview to see who gets it' : (d && d.audience && d.audience !== 'all' ? 'Send to ' + n + ' ' + who : 'Send to all ' + n + ' creators');
     $('mailSendBtn').dataset.armed = '';
     $('mailToolCount').textContent = ds.filter(function (x) { return !x.sentAt; }).length + ' draft' + (ds.filter(function (x) { return !x.sentAt; }).length === 1 ? '' : 's') + ' · ' + ds.filter(function (x) { return x.sentAt; }).length + ' sent';
     var st = $('mailStatus');
-    if (sent) { st.className = 'mail-status sent'; st.innerHTML = '<b>Sent ' + esc(f(d.sentAt, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET</b> to ' + d.sentCount + ' creators' + (d.sentBy ? ' by ' + esc(d.sentBy) : '') + '.' + (d.copies && d.copies.length ? ' TikTok copies went to ' + esc(d.copies.join(', ')) + '.' : '') + (d.failed && d.failed.length ? ' Didn&rsquo;t reach: ' + esc(d.failed.join(', ')) + '.' : '') + ' Sent emails can&rsquo;t be edited or sent again. Pick &ldquo;+ New email&rdquo; to write another.'; }
+    if (sent) { st.className = 'mail-status sent'; st.innerHTML = '<b>Sent ' + esc(f(d.sentAt, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET</b> to ' + d.sentCount + ' ' + esc(d.audience && d.audience !== 'all' ? 'creators who missed session ' + d.audience.split(':')[1] : 'creators') + (d.sentBy ? ' by ' + esc(d.sentBy) : '') + '.' + (d.copies && d.copies.length ? ' TikTok copies went to ' + esc(d.copies.join(', ')) + '.' : '') + (d.failed && d.failed.length ? ' Didn&rsquo;t reach: ' + esc(d.failed.join(', ')) + '.' : '') + ' Sent emails can&rsquo;t be edited or sent again. Pick &ldquo;+ New email&rdquo; to write another.'; }
     else if (mail.dirty) { st.className = 'mail-status'; st.innerHTML = 'Unsaved changes. Save the draft before you preview or send.'; }
     else if (d) { st.className = 'mail-status'; st.innerHTML = 'Draft saved ' + esc(f(d.updatedAt, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET. Nothing has been sent.'; }
     else { st.className = 'mail-status'; st.innerHTML = ''; }
@@ -1997,9 +2004,10 @@ table.prog tr.removed td { opacity: 0.45; }
     mail.id = this.value || null; mail.blank = !this.value; mail.dirty = false; mail.previews = null; renderMailTool(); renderMailPreview();
   });
   ['mailSubject', 'mailBody'].forEach(function (id) { $(id).addEventListener('input', function () { if (this.readOnly) return; mail.dirty = true; renderMailTool(); }); });
+  $('mailAudience').addEventListener('change', function () { mail.dirty = true; renderMailTool(); });
   $('mailForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    var d = { id: mail.id, subject: $('mailSubject').value.trim(), body: $('mailBody').value };
+    var d = { id: mail.id, subject: $('mailSubject').value.trim(), body: $('mailBody').value, audience: $('mailAudience').value };
     if (!d.subject || !d.body.trim()) return toast('Write a subject and a message first.');
     $('mailSave').disabled = true;
     api('email_save', d).then(function (r) {
@@ -2011,7 +2019,7 @@ table.prog tr.removed td { opacity: 0.45; }
   $('mailPreviewBtn').addEventListener('click', function () {
     if (!mail.id) return;
     $('mailPreview').innerHTML = '<div class="mp-empty">Building the preview&hellip;</div>';
-    api('email_preview', { id: mail.id }).then(function (r) { mail.previews = r.previews; mail.pv = 0; renderMailPreview(); if (r.copiesTo && r.copiesTo.length && !mailCurrent().sentAt) $('mailStatus').innerHTML += ' When you send, TikTok copies go to ' + esc(r.copiesTo.join(', ')) + '.'; }).catch(onErr);
+    api('email_preview', { id: mail.id }).then(function (r) { var cd = mailCurrent(); mail.recipients = r.recipients; mail.recipientsFor = cd.id + '|' + cd.audience + '|' + cd.updatedAt; mail.previews = r.previews; mail.pv = 0; renderMailTool(); renderMailPreview(); $('mailStatus').innerHTML += ' Goes to ' + r.recipients + ' ' + esc(r.audienceLabel) + '.'; if (r.copiesTo && r.copiesTo.length && !mailCurrent().sentAt) $('mailStatus').innerHTML += ' When you send, TikTok copies go to ' + esc(r.copiesTo.join(', ')) + '.'; }).catch(onErr);
   });
   $('mailTestBtn').addEventListener('click', function () {
     var b = this; if (!mail.id) return; b.disabled = true;
@@ -2023,17 +2031,17 @@ table.prog tr.removed td { opacity: 0.45; }
     api('email_delete', { id: mail.id }).then(function (r) { state.hub.emails = r.emails; mail.id = null; mail.blank = true; mail.previews = null; b.dataset.armed = ''; b.textContent = 'Delete draft'; toast('Draft deleted.'); renderMailTool(); renderMailPreview(); }).catch(onErr);
   });
   $('mailSendBtn').addEventListener('click', function () {
-    var b = this, n = creatorCount(), d = mailCurrent();
-    if (!d || d.sentAt || mail.dirty) return;
+    var b = this, d = mailCurrent(), n = mail.recipients;
+    if (!d || d.sentAt || mail.dirty || !n) return;
     if (b.dataset.armed !== '1') {
       b.dataset.armed = '1'; b.textContent = 'Press again to email ' + n + ' creators now';
-      setTimeout(function () { if (b.dataset.armed === '1') { b.dataset.armed = ''; b.textContent = 'Send to all ' + n + ' creators'; } }, 6000);
+      setTimeout(function () { if (b.dataset.armed === '1') { b.dataset.armed = ''; renderMailTool(); } }, 6000);
       return;
     }
     b.dataset.armed = ''; b.disabled = true; b.textContent = 'Sending…';
     api('email_send', { id: d.id, expect: n }).then(function (r) {
       if (!r.ok) {
-        var why = { already_sent: 'That email already went out.', sending: 'It’s already sending. Give it a minute and reload.', count_changed: 'The roster changed (now ' + r.recipients + ' creators). Reload and try again.', send_failed: 'The email service didn’t take it. Nothing was sent. Try again in a minute.' };
+        var why = { already_sent: 'That email already went out.', sending: 'It’s already sending. Give it a minute and reload.', count_changed: 'The list changed (now ' + r.recipients + ' creators). Press Preview and try again.', nobody: 'Nobody matches who this is going to.', send_failed: 'The email service didn’t take it. Nothing was sent. Try again in a minute.' };
         toast(why[r.reason] || 'That didn’t send.'); return loadProgress();
       }
       state.hub.emails = r.emails;

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Coaching — Project C</title>
 <link rel="canonical" href="https://projectc.com/coaching">
-<meta name="description" content="1-on-1 coaching for creator journalists. Work directly with Blair Hickman to grow your audience, your revenue, and your confidence as an independent.">
+<meta name="description" content="1-on-1 coaching for creator journalists with Blair Hickman. New clients start again in January. Join the waitlist.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://projectc.com/coaching">
 <meta property="og:title" content="1-on-1 Coaching — Project C">
@@ -122,6 +122,33 @@
 .cta-band h2 .coral { color: var(--coral); }
 .cta-band p { color: rgba(245,246,248,0.65); line-height: 1.7; margin-bottom: 1.9rem; }
 
+/* WAITLIST FORM (dark band) */
+.waitlist-band .eyebrow { color: var(--coral); justify-content: center; }
+.wl-form { margin: 0 auto; max-width: 620px; text-align: left; border: 2px solid var(--porcelain); background: rgba(245,246,248,0.04); }
+.wl-row { display: grid; grid-template-columns: 1fr 1fr; }
+.wl-row .wl-field + .wl-field { border-left: 2px solid var(--porcelain); }
+.wl-field { display: block; padding: 0.85rem 1.1rem 0.95rem; border-bottom: 2px solid var(--porcelain); cursor: text; }
+.wl-field span { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,246,248,0.7); margin-bottom: 0.35rem; }
+.wl-field span em { font-style: normal; font-weight: 600; color: rgba(245,246,248,0.5); text-transform: none; letter-spacing: 0.02em; }
+.wl-field input, .wl-field textarea { width: 100%; border: none; background: transparent; color: var(--porcelain); font-family: var(--sans); font-size: 1.02rem; line-height: 1.5; outline: none; resize: vertical; }
+.wl-field input::placeholder, .wl-field textarea::placeholder { color: rgba(245,246,248,0.38); }
+.wl-field:focus-within { background: rgba(254,107,65,0.1); }
+.wl-field:focus-within span { color: var(--coral); }
+.wl-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.wl-submit { display: block; width: 100%; border: none; background: var(--coral); color: var(--ink); font-family: var(--sans); font-weight: 800; font-size: 0.86rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 1.1rem 1.5rem; cursor: pointer; transition: background 0.18s; }
+.wl-submit:hover { background: var(--porcelain); }
+.wl-submit:focus-visible { outline: 3px solid var(--porcelain); outline-offset: -6px; }
+.wl-submit[disabled] { opacity: 0.6; cursor: wait; }
+.wl-error { margin: 1rem auto 0 !important; max-width: 620px; color: var(--coral) !important; font-weight: 700; font-size: 0.92rem; }
+.wl-success { margin: 0 auto; max-width: 620px; border: 2px solid var(--coral); padding: 1.6rem 1.4rem; }
+.wl-success strong { display: block; font-family: var(--display); text-transform: uppercase; font-size: 1.6rem; letter-spacing: 0.01em; color: var(--coral); margin-bottom: 0.4rem; font-weight: 400; }
+.wl-success p { margin: 0 !important; }
+.wl-note { margin: 1.1rem 0 0 !important; font-size: 0.78rem; color: rgba(245,246,248,0.5) !important; }
+@media (max-width: 760px) {
+  .wl-row { grid-template-columns: 1fr; }
+  .wl-row .wl-field + .wl-field { border-left: none; }
+}
+
 /* buttons */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: none; }
@@ -157,8 +184,8 @@
 <div class="regstrip"><span class="c"></span><span class="m"></span><span class="y"></span><span class="k"></span><span class="o"></span></div>
 
 <div class="announce" id="announcementBar">
-  <span class="live"><span class="blip"></span>Now open</span>
-  <span>1-on-1 coaching with Blair Hickman. Spots are limited. <a href="#included">See what's included &rarr;</a></span>
+  <span class="live"><span class="blip"></span>Waitlist open</span>
+  <span>New coaching clients start again in January. <a href="#waitlist">Join the waitlist &rarr;</a></span>
   <button class="ab-x" onclick="document.getElementById('announcementBar').classList.add('hidden')" aria-label="Dismiss">&#10005;</button>
 </div>
 
@@ -191,14 +218,14 @@
     <h1>A thought partner for the business side of going independent.</h1>
     <p class="standfirst">Coaching with Project C pairs you with a senior media strategist who helps you grow the business without becoming the bottleneck in your own operation.</p>
     <div class="mast-cta">
-      <a href="https://calendly.com/hickman-blair/initial-chat-coaching?month=2026-08" class="btn btn-coral" target="_blank" rel="noopener">Book a discovery call &rarr;</a>
+      <a href="#waitlist" class="btn btn-coral">Join the waitlist &darr;</a>
       <a href="#coach" class="mast-link">Meet Blair</a>
     </div>
     <div class="mast-meta">
       <span>Four months</span>
       <span>Two sessions a month</span>
       <span>$1,000 / month</span>
-      <span>By application</span>
+      <span>Next openings: January</span>
     </div>
   </div>
 </section>
@@ -287,8 +314,8 @@
   </div>
   <div class="included-footer reveal">
     <p class="price-line">Investment: $1,000 / month for four months</p>
-    <p class="selectivity-note">We're selective about who we work with. This is a significant investment, and we want to make sure it's worth your time. The people who get the most out of this are ambitious, self-aware, and ready to do the work. The first step is a call to see if we're a good fit for each other.</p>
-    <a href="https://calendly.com/hickman-blair/initial-chat-coaching?month=2026-08" class="btn btn-coral" target="_blank" rel="noopener">Book a Discovery Call &rarr;</a>
+    <p class="selectivity-note">We're selective about who we work with. This is a significant investment, and we want to make sure it's worth your time. The people who get the most out of this are ambitious, self-aware, and ready to do the work. Blair is taking on new clients again in January. Join the waitlist and you'll be first in line for a discovery call when spots open.</p>
+    <a href="#waitlist" class="btn btn-coral">Join the Waitlist &darr;</a>
   </div>
 </section>
 
@@ -340,6 +367,16 @@
       <div class="faq-right reveal">
 
         <div class="faq-item">
+          <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-0" onclick="toggleFaq(this)">
+            When can I start?
+            <span class="faq-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="faq-answer" id="faq-answer-0" hidden>
+            <div class="faq-answer-inner">Blair has paused new clients until January so she can give the people she's working with right now her full attention. Join the waitlist at the bottom of this page and you'll be first in line when spots open. If you're already working with Blair, nothing changes for you.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
           <button class="faq-question" aria-expanded="false" aria-controls="faq-answer-1" onclick="toggleFaq(this)">
             What are the sessions actually like?
             <span class="faq-toggle" aria-hidden="true">+</span>
@@ -384,12 +421,37 @@
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="cta-band">
+<!-- WAITLIST (replaces the discovery-call CTA while Blair pauses new clients, Nov 2026) -->
+<section class="cta-band waitlist-band" id="waitlist">
   <div class="inner reveal">
-    <h2>The next version of your business starts with <span class="coral">one conversation.</span></h2>
-    <p>We'll chat about where you are and where you want to go. Sometimes it makes sense for us to peek at your work during the call (we call it a First Impression Audit). But mostly this is an honest conversation to figure out if we're a good fit for each other.</p>
-    <a href="https://calendly.com/hickman-blair/initial-chat-coaching?month=2026-08" class="btn btn-coral" target="_blank" rel="noopener">Let's talk &rarr;</a>
+    <div class="eyebrow"><svg class="target" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Coaching Waitlist</div>
+    <h2>Coaching opens back up <span class="coral">in January.</span></h2>
+    <p>Blair isn't taking on new clients for the rest of the year. Leave your name and you'll be the first to hear when spots open. The first step after that is a discovery call, an honest conversation about where your business is and whether we're a good fit for each other.</p>
+
+    <form class="wl-form" id="waitlistForm" novalidate>
+      <div class="wl-row">
+        <label class="wl-field">
+          <span>Name</span>
+          <input type="text" name="name" autocomplete="name" placeholder="Your name">
+        </label>
+        <label class="wl-field">
+          <span>Email <em>(required)</em></span>
+          <input type="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+        </label>
+      </div>
+      <label class="wl-field wl-wide">
+        <span>What are you working on? <em>(optional)</em></span>
+        <textarea name="note" rows="3" placeholder="A sentence or two about your project and what feels stuck."></textarea>
+      </label>
+      <label class="wl-hp" aria-hidden="true">Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+      <button type="submit" class="wl-submit">Join the waitlist &rarr;</button>
+    </form>
+    <p class="wl-error" id="waitlistError" role="alert" hidden></p>
+    <div class="wl-success" id="waitlistSuccess" role="status" hidden>
+      <strong>You're on the list.</strong>
+      <p>We'll be in touch in January when coaching spots open. Keep an eye on your inbox.</p>
+    </div>
+    <p class="wl-note">We'll only email you about coaching and related Project C programs.</p>
   </div>
 </section>
 
@@ -464,6 +526,46 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 90, behavior: reduce ? 'auto' : 'smooth' });
   });
 });
+
+// Coaching waitlist
+(function () {
+  const form = document.getElementById('waitlistForm');
+  if (!form) return;
+  const err = document.getElementById('waitlistError');
+  const ok = document.getElementById('waitlistSuccess');
+  const btn = form.querySelector('.wl-submit');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    err.hidden = true;
+    const data = Object.fromEntries(new FormData(form).entries());
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((data.email || '').trim())) {
+      err.textContent = 'Please enter a valid email address.';
+      err.hidden = false;
+      form.querySelector('input[name="email"]').focus();
+      return;
+    }
+    btn.disabled = true;
+    const label = btn.innerHTML;
+    btn.textContent = 'Adding you\u2026';
+    try {
+      const res = await fetch('/.netlify/functions/coaching-waitlist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(out.error || 'Something went wrong. Please try again or email info@projectc.com.');
+      form.hidden = true;
+      ok.hidden = false;
+      if (window.plausible) window.plausible('Coaching Waitlist Signup');
+    } catch (ex) {
+      err.textContent = ex.message;
+      err.hidden = false;
+      btn.disabled = false;
+      btn.innerHTML = label;
+    }
+  });
+})();
 
 function toggleFaq(btn) {
   const item = btn.parentElement;

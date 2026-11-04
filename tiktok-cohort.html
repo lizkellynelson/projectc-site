@@ -415,6 +415,7 @@ table.prog tr.removed td { opacity: 0.45; }
 .rv-prompt .rvp-t { font-family: var(--serif); font-size: 1.25rem; line-height: 1.4; color: var(--ink); }
 .rv-prompt .rvp-m { margin-top: 0.5rem; font-size: 0.8rem; color: var(--muted); }
 .rv-guide .rvp-box { border-left-color: var(--ink); background: var(--white); }
+#rvPrompt:not([hidden]) { margin-bottom: 0.6rem; }
 .rv-weeks .hw-tabs { border: var(--rule); grid-template-columns: repeat(5, minmax(0,1fr)); }
 .rv-bar { max-width: var(--maxw); margin: 0 auto 1rem; padding: 0 2rem; display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: space-between; align-items: center; }
 .rv-filters { display: flex; border: var(--rule); flex-wrap: wrap; }
@@ -838,9 +839,9 @@ table.prog tr.removed td { opacity: 0.45; }
         <p>Open each submission, vote for the ones you&rsquo;d pick for live critique and leave notes for each other. Votes and notes stay between Project C staff. When you&rsquo;ve decided, turn on &ldquo;Picked for live critique.&rdquo;</p>
       </div>
     </div>
-    <div class="rv-prompt rv-guide"><div class="rvp-box"><div class="rvp-k">How we pick &middot; from the TikTok team</div><div class="rvp-t">Lead with the harder news examples first. Explainers and commentary pieces come after.</div><div class="rvp-m">TikTok asked for this after session 2 (Nov 4). It applies to every review from week 3 on.</div></div></div>
     <div class="rv-weeks"><div class="hw-tabs" id="rvWeeks" role="tablist" aria-label="Homework week to review"></div></div>
     <div class="rv-prompt" id="rvPrompt" hidden></div>
+    <div class="rv-prompt rv-guide"><div class="rvp-box"><div class="rvp-k">How we pick &middot; from the TikTok team</div><div class="rvp-t">Lead with the harder news examples first. Explainers and commentary pieces come after.</div><div class="rvp-m">TikTok asked for this after session 2 (Nov 4). It applies to every review from week 3 on.</div></div></div>
     <div class="stats-row"><div class="inner" id="rvStats"></div></div>
     <div class="rv-bar">
       <div class="rv-filters" id="rvFilters" role="group" aria-label="Show">

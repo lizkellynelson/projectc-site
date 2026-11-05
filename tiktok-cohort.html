@@ -426,6 +426,8 @@ table.prog tr.removed td { opacity: 0.45; }
 .rv-list { max-width: var(--maxw); margin: 0 auto clamp(2.4rem,4vw,3.4rem); padding: 0 2rem; display: flex; flex-direction: column; gap: 1.1rem; }
 .rv-card { border: var(--rule); display: grid; grid-template-columns: 1fr 1.25fr 0.9fr; background: var(--white); }
 .rv-card.is-picked { box-shadow: inset 8px 0 0 var(--coral); }
+.rv-done { display: none; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); background: var(--porcelain); border: var(--rule-thin); padding: 0.2rem 0.5rem; margin-bottom: 0.55rem; }
+.rv-card.is-mine .rv-done { display: inline-block; }
 .rv-card > div { padding: 1.2rem 1.3rem; }
 .rv-card > div + div { border-left: var(--rule); }
 .rv-who h3 { font-size: 1.05rem; font-weight: 800; line-height: 1.25; }
@@ -1790,14 +1792,13 @@ table.prog tr.removed td { opacity: 0.45; }
   $('rvSort').addEventListener('change', function () { rv.sort = this.value; renderReview(); });
   function myReview(it) { return it.reviews.filter(function (r) { return r.reviewerId === rv.data.meId; })[0] || null; }
   function voteCount(it) { return it.reviews.filter(function (r) { return r.vote; }).length; }
-  function renderReview() {
+  function isMine(it) { var m = myReview(it); return !!(m && (m.vote || (m.note && String(m.note).trim()))); }
+  function renderRvStats() {
     var d = rv.data; if (!d) return;
-    var items = d.items.slice();
-    var mineDone = items.filter(function (it) { var m = myReview(it); return m && (m.vote || m.note); }).length;
+    var items = d.items;
+    var mineDone = items.filter(isMine).length;
     var picked = items.filter(function (it) { return it.critiquePick; }).length;
     var voted = items.filter(function (it) { return voteCount(it) > 0; }).length;
-    $('rvPrompt').hidden = !d.week.assignment;
-    $('rvPrompt').innerHTML = d.week.assignment ? '<div class="rvp-box"><div class="rvp-k">Week ' + d.week.number + ' homework prompt</div><div class="rvp-t">' + esc(d.week.assignment) + '</div><div class="rvp-m">' + esc(d.week.title || '') + ' &middot; due ' + esc(f(d.week.dueAt, { weekday: 'short', month: 'short', day: 'numeric' })) + ' at ' + esc(time(d.week.dueAt)) + '</div></div>' : '';
     $('rvStats').innerHTML =
       '<div class="stat"><b>' + items.length + '/' + d.creators + '</b><span>Turned in</span></div>' +
       '<div class="stat" style="background:var(--white)"><b>' + mineDone + '/' + items.length + '</b><span>Reviewed by you</span></div>' +
@@ -1805,7 +1806,16 @@ table.prog tr.removed td { opacity: 0.45; }
       '<div class="stat" style="background:var(--coral)"><b>' + picked + '</b><span>Picked for live critique</span></div>';
     var slidesBy = new Date(Date.parse(d.week.dueAt) + 5 * 3600000).toISOString();
     $('rvStats').insertAdjacentHTML('beforeend', '<div class="stat" style="background:var(--porcelain)"><b style="font-size:1.3rem;line-height:1.2">' + esc(f(slidesBy, { weekday: 'short', month: 'short', day: 'numeric' })) + '<br>' + esc(time(slidesBy)) + '</b><span>Slides to TikTok</span></div>');
-    if (rv.filter === 'mine') items = items.filter(function (it) { var m = myReview(it); return !(m && (m.vote || m.note)); });
+    var fb = document.querySelector('#rvFilters [data-f="mine"]');
+    if (fb) fb.textContent = 'Not reviewed by me (' + (items.length - mineDone) + ')';
+  }
+  function renderReview() {
+    var d = rv.data; if (!d) return;
+    var items = d.items.slice();
+    $('rvPrompt').hidden = !d.week.assignment;
+    $('rvPrompt').innerHTML = d.week.assignment ? '<div class="rvp-box"><div class="rvp-k">Week ' + d.week.number + ' homework prompt</div><div class="rvp-t">' + esc(d.week.assignment) + '</div><div class="rvp-m">' + esc(d.week.title || '') + ' &middot; due ' + esc(f(d.week.dueAt, { weekday: 'short', month: 'short', day: 'numeric' })) + ' at ' + esc(time(d.week.dueAt)) + '</div></div>' : '';
+    renderRvStats();
+    if (rv.filter === 'mine') items = items.filter(function (it) { return !isMine(it); });
     if (rv.filter === 'voted') items = items.filter(function (it) { return voteCount(it) > 0; });
     if (rv.filter === 'picked') items = items.filter(function (it) { return it.critiquePick; });
     if (rv.sort === 'votes') items.sort(function (a, b) { return voteCount(b) - voteCount(a) || Date.parse(a.submittedAt) - Date.parse(b.submittedAt); });
@@ -1821,8 +1831,8 @@ table.prog tr.removed td { opacity: 0.45; }
       }).join('');
       var others = it.reviews.filter(function (r) { return r.reviewerId !== d.meId && r.note; }).map(function (r) { return '<div><b>' + esc(r.name) + '</b>' + esc(r.note) + '</div>'; }).join('');
       var hu = handleUrl(it.creator.tiktokHandle);
-      return '<article class="rv-card' + (it.critiquePick ? ' is-picked' : '') + '" data-sub="' + it.id + '">' +
-        '<div class="rv-who"><h3>' + esc(it.creator.name) + (it.late ? ' <span class="late" style="vertical-align:2px">Late</span>' : '') + '</h3>' +
+      return '<article class="rv-card' + (it.critiquePick ? ' is-picked' : '') + (isMine(it) ? ' is-mine' : '') + '" data-sub="' + it.id + '">' +
+        '<div class="rv-who"><span class="rv-done">&#10003; Reviewed by you</span><h3>' + esc(it.creator.name) + (it.late ? ' <span class="late" style="vertical-align:2px">Late</span>' : '') + '</h3>' +
           (it.creator.tiktokHandle ? '<a class="h" href="' + hu + '" target="_blank" rel="noopener">@' + esc(it.creator.tiktokHandle.replace(/^@/, '')) + '</a>' : '') +
           '<div class="meta">Turned in ' + esc(f(it.submittedAt, { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })) + ' ET</div>' +
           (it.note ? '<blockquote><span class="rv-lbl" style="margin-bottom:.2rem">' + (d.week.kind === 'links' ? 'Why they picked them' : 'From the creator') + '</span>' + esc(it.note) + '</blockquote>' : '') +
@@ -1867,6 +1877,8 @@ table.prog tr.removed td { opacity: 0.45; }
     var it = rvItem(ta); if (!it || ta.value === ta.defaultValue) return;
     if (ta.matches('[data-mynote]')) {
       rvMine(it).note = ta.value;
+      var card = ta.closest('.rv-card'); if (card) card.classList.toggle('is-mine', isMine(it));
+      renderRvStats();
       api('review_vote', { submissionId: it.id, note: ta.value }).then(function () {
         ta.defaultValue = ta.value;
         var sv = ta.previousElementSibling && ta.previousElementSibling.querySelector('.saved');

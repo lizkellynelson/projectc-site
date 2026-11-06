@@ -70,6 +70,29 @@
 .cw-ask .btn { font-size: 0.86rem; padding: 1rem 1.8rem; }
 .cw-ask .btn svg { width: 18px; height: 12px; }
 
+/* ---------- email signup ---------- */
+.cw-sign { width: 100%; max-width: 560px; }
+.cw-sign-lbl { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.5rem; }
+.cw-sign-row { display: flex; border: var(--rule); background: var(--white); }
+.cw-sign-row input { flex: 1; min-width: 0; border: none; outline: none; background: transparent; font-family: var(--sans); font-size: 1.05rem; padding: 0.95rem 1rem; color: var(--ink); border-radius: 0; }
+.cw-sign-row input::placeholder { color: rgba(21,23,26,0.4); }
+.cw-sign-row:focus-within { outline: 2px solid var(--coral); outline-offset: 2px; }
+.cw-sign-row .btn { border: none; border-left: var(--rule); white-space: nowrap; }
+.cw-sign-row .btn:hover { transform: none; }
+.cw-sign-row .btn[disabled] { opacity: 0.6; cursor: wait; }
+.cw-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.cw-sign-msg { font-size: 0.88rem; margin: 0.7rem 0 0 !important; min-height: 1.2em; color: var(--coral-deep) !important; font-weight: 600; }
+.cw-sign-msg:empty { min-height: 0; margin: 0 !important; }
+.cw-sign-fine { font-size: 0.78rem !important; margin: 0.8rem 0 0 !important; color: var(--muted); }
+.cw-done { border: var(--rule); padding: 1.3rem 1.4rem 1.2rem; position: relative; background: var(--white); width: 100%; max-width: 560px; margin-top: 0.4rem; }
+.cw-done-tag { position: absolute; top: -13px; left: 18px; background: var(--cyan); border: var(--rule); font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.28rem 0.7rem; }
+.cw-done p { margin: 0.3rem 0 0 !important; color: var(--ink) !important; }
+[hidden] { display: none !important; }
+@media (max-width: 520px) {
+  .cw-sign-row { flex-direction: column; }
+  .cw-sign-row .btn { border-left: none; border-top: var(--rule); justify-content: center; }
+}
+
 /* ---------- footer ---------- */
 .cw-foot { display: grid; grid-template-columns: 1fr auto; border-bottom: var(--rule); }
 .cw-foot .blk { padding: 1.8rem 2.5rem; display: flex; align-items: center; }
@@ -144,10 +167,23 @@
 
 <section class="cw-asks" aria-label="Get involved">
   <div class="cw-ask attend">
-    <div class="idx">01 &middot; Attend</div>
-    <h2>Want to be in the room?</h2>
-    <p>This day is for anyone who wants to understand how Americans are learning about Washington right now. Journalists and creators will be there. So will the people on the other side of the story, from Hill staff and campaign communicators to policy wonks. Tell us you're interested and we'll keep you posted as the program comes together.</p>
-    <a class="btn btn-fill" href="mailto:info@projectc.com?subject=Covering%20Washington%20%C2%B7%20Interested%20in%20attending">Contact us <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+    <div class="idx">01 &middot; Stay in the loop</div>
+    <h2>Be the first to know</h2>
+    <p>This day is for anyone who wants to understand how Americans are learning about Washington right now. Journalists and creators will be there. So will the people on the other side of the story, from Hill staff and campaign communicators to policy wonks. Leave your email and we'll let you know the moment the program and speakers are set.</p>
+    <form class="cw-sign" id="cwSign" novalidate>
+      <label for="cwEmail" class="cw-sign-lbl">Your email</label>
+      <div class="cw-sign-row">
+        <input id="cwEmail" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+        <button type="submit" class="btn btn-fill" id="cwBtn">Keep me posted <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+      </div>
+      <div class="cw-hp" aria-hidden="true"><label for="cwWebsite">Leave this empty</label><input id="cwWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <p class="cw-sign-msg" id="cwMsg" role="status" aria-live="polite"></p>
+      <p class="cw-sign-fine">Updates about this event only. No spam, and you can ask us to drop you anytime.</p>
+    </form>
+    <div class="cw-done" id="cwDone" hidden>
+      <span class="cw-done-tag">You're on the list</span>
+      <p>Thanks. We'll be in touch as the program comes together.</p>
+    </div>
   </div>
   <div class="cw-ask sponsor">
     <div class="idx">02 &middot; Sponsor</div>
@@ -188,5 +224,47 @@
   <span>&copy; 2026 Project C &middot; Independent by design. <a href="privacy-policy.html">Privacy Policy</a></span>
   <span class="cmyk-dots"><i></i><i></i><i></i><i></i></span>
 </div>
+<script>
+(function () {
+  var form = document.getElementById('cwSign');
+  if (!form) return;
+  var started = Date.now();
+  var input = document.getElementById('cwEmail');
+  var btn = document.getElementById('cwBtn');
+  var msg = document.getElementById('cwMsg');
+  var params = new URLSearchParams(location.search);
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    msg.textContent = '';
+    var email = (input.value || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { msg.textContent = 'Please enter a valid email address.'; input.focus(); return; }
+    btn.disabled = true;
+    fetch('https://projectc.com/.netlify/functions/event-signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event: 'covering-washington-2027',
+        email: email,
+        website: document.getElementById('cwWebsite').value,
+        elapsed: Date.now() - started,
+        source: document.referrer ? document.referrer.slice(0, 200) : 'direct',
+        utm_source: params.get('utm_source'),
+        utm_medium: params.get('utm_medium'),
+        utm_campaign: params.get('utm_campaign')
+      })
+    }).then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.d && res.d.error);
+        form.hidden = true;
+        document.getElementById('cwDone').hidden = false;
+        if (window.plausible) window.plausible('Covering Washington signup');
+      })
+      .catch(function (err) {
+        msg.textContent = (err && err.message) || 'Something went wrong. Please try again or email info@projectc.com.';
+        btn.disabled = false;
+      });
+  });
+})();
+</script>
 </body>
 </html>

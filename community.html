@@ -603,6 +603,21 @@ function updateCardFieldVisibility() {
 }
 cohortCodeInput.addEventListener('input', updateCardFieldVisibility);
 
+// Invite links can carry the cohort code: /community?code=TIKTOK-2026#apply
+// opens the cohort panel with the code filled in, so partner invitees
+// skip the tier and card steps without typing anything.
+(function () {
+  var c = '';
+  try { c = (new URLSearchParams(location.search).get('code') || '').trim(); } catch (e) {}
+  if (!/^[A-Za-z0-9-]{3,40}$/.test(c)) return;
+  cohortPanel.classList.add('is-open');
+  cohortToggle.setAttribute('aria-expanded', 'true');
+  cohortToggle.textContent = '\u2212 I\'m joining through a partner cohort';
+  cohortCodeInput.value = c.toUpperCase();
+  updateCardFieldVisibility();
+  if (!location.hash) { var ap = document.getElementById('apply'); if (ap) setTimeout(function () { ap.scrollIntoView(); }, 50); }
+})();
+
 // ----- Promo code: live validation against Stripe -----
 // promoState tracks the last checked code so submit can warn on a known-bad
 // code without having to re-check. null = unchecked/empty.

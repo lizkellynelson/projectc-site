@@ -434,15 +434,24 @@ function shapeDraft(d) {
 
 // Who a cohort email goes to. 'all' = every active creator. 'missed:N' = active creators
 // who were already on the roster when session N started and didn't attend it.
+// 'nohw:N' = active creators who haven't turned in week N's homework yet (worked out
+// at send time, so anyone who turns it in after the draft is saved is skipped).
+const AUDIENCE_RE = /^(missed|nohw):(\d)$/;
 function audienceLabel(a) {
-  const m = /^missed:(\d)$/.exec(a || '');
-  return m ? `creators who missed session ${m[1]}` : 'all creators';
+  const m = AUDIENCE_RE.exec(a || '');
+  if (!m) return 'all creators';
+  return m[1] === 'missed' ? `creators who missed session ${m[2]}` : `creators who haven't turned in week ${m[2]} homework`;
 }
 async function audienceRoster(supabase, roster, weeks, audience) {
-  const m = /^missed:(\d)$/.exec(audience || '');
+  const m = AUDIENCE_RE.exec(audience || '');
   if (!m) return roster;
-  const w = weeks.find((x) => x.week_number === Number(m[1]));
+  const w = weeks.find((x) => x.week_number === Number(m[2]));
   if (!w) return [];
+  if (m[1] === 'nohw') {
+    const { data: subs } = await supabase.from('hub_submissions').select('person_id').eq('week_id', w.id);
+    const done = new Set((subs || []).map((x) => x.person_id));
+    return roster.filter((p) => !done.has(p.id));
+  }
   const { data: att } = await supabase.from('hub_attendance').select('person_id, minutes').eq('week_id', w.id);
   const came = new Set((att || []).filter((a) => a.minutes > 0).map((a) => a.person_id));
   return roster.filter((p) => !came.has(p.id) && Date.parse(p.added_at) < Date.parse(w.session_at));
@@ -1002,7 +1011,7 @@ exports.handler = async (event) => {
         const nowIso = new Date().toISOString();
         let d = body.id ? emails.find((x) => x.id === body.id) : null;
         if (d && (d.sentAt || d.sending)) return json(200, { ok: false, reason: 'already_sent' });
-        const audience = /^missed:\d$/.test(body.audience || '') ? body.audience : 'all';
+        const audience = AUDIENCE_RE.test(body.audience || '') ? body.audience : 'all';
         if (d) Object.assign(d, { subject, body: text, audience, updatedAt: nowIso, editedBy: firstName(person.name) });
         else { d = { id: crypto.randomUUID(), subject, body: text, audience, createdAt: nowIso, updatedAt: nowIso, createdBy: firstName(person.name) }; emails.push(d); }
         await saveAll(emails);

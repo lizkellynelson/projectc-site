@@ -1975,6 +1975,11 @@ table.prog tr.removed td { opacity: 0.45; }
   function mailDrafts() { return state.hub.emails || []; }
   function mailCurrent() { return mailDrafts().filter(function (d) { return d.id === mail.id; })[0] || null; }
   function creatorCount() { return state.progress ? state.progress.rows.filter(function (r) { return r.status === 'active'; }).length : 0; }
+  function audText(a) {
+    var m = /^(missed|nohw):(\d)$/.exec(a || '');
+    if (!m) return 'All creators';
+    return m[1] === 'missed' ? 'Creators who missed session ' + m[2] : 'Creators who haven\'t turned in week ' + m[2] + ' homework';
+  }
   function renderMailTool() {
     var ds = mailDrafts();
     if (mail.id && !mailCurrent()) mail.id = null;
@@ -1986,6 +1991,9 @@ table.prog tr.removed td { opacity: 0.45; }
     var d = mailCurrent();
     var opts = '<option value="all">All creators</option>';
     state.hub.weeks.forEach(function (w) { if (Date.parse(w.sessionAt) + 90 * 60000 < now()) opts += '<option value="missed:' + w.number + '">Creators who missed session ' + w.number + '</option>'; });
+    state.hub.weeks.forEach(function (w) { if (w.assignment && w.dueAt && Date.parse(w.dueAt) > now() - 2 * 86400000 && Date.parse(w.dueAt) < now() + 9 * 86400000) opts += '<option value="nohw:' + w.number + '">Creators who haven\'t turned in week ' + w.number + ' homework</option>'; });
+    var cur = d && d.audience;
+    if (cur && cur !== 'all' && opts.indexOf('value="' + cur + '"') < 0) opts += '<option value="' + esc(cur) + '">' + esc(audText(cur)) + '</option>';
     $('mailAudience').innerHTML = opts;
     if (!mail.dirty) { $('mailSubject').value = d ? d.subject : ''; $('mailBody').value = d ? d.body : ''; $('mailAudience').value = (d && d.audience) || 'all'; }
     if (mail.recipientsFor !== (d && d.id + '|' + d.audience + '|' + d.updatedAt)) mail.recipients = null;
@@ -1994,7 +2002,7 @@ table.prog tr.removed td { opacity: 0.45; }
     $('mailAudience').disabled = sent;
     $('mailSave').disabled = sent; $('mailDelete').hidden = !d || sent;
     $('mailPreviewBtn').disabled = !d; $('mailTestBtn').disabled = !d;
-    var who = d && d.audience && d.audience !== 'all' ? 'creators who missed session ' + d.audience.split(':')[1] : 'creators';
+    var who = d && d.audience && d.audience !== 'all' ? audText(d.audience).replace(/^Creators/, 'creators') : 'creators';
     $('mailSendBtn').disabled = !d || sent || mail.dirty || !n;
     $('mailSendBtn').textContent = n == null ? 'Preview to see who gets it' : (d && d.audience && d.audience !== 'all' ? 'Send to ' + n + ' ' + who : 'Send to all ' + n + ' creators');
     $('mailSendBtn').dataset.armed = '';

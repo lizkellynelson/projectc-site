@@ -415,6 +415,8 @@ table.prog tr.removed td { opacity: 0.45; }
 .rv-prompt .rvp-t { font-family: var(--serif); font-size: 1.25rem; line-height: 1.4; color: var(--ink); }
 .rv-prompt .rvp-m { margin-top: 0.5rem; font-size: 0.8rem; color: var(--muted); }
 .rv-guide .rvp-box { border-left-color: var(--ink); background: var(--white); }
+.rv-cheat { display: inline-block; margin-top: 0.65rem; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); background: var(--yellow); border: 2px solid var(--ink); padding: 0.45rem 0.75rem; text-decoration: none; }
+.rv-cheat:hover { background: var(--ink); color: var(--yellow); }
 #rvPrompt:not([hidden]) { margin-bottom: 0.6rem; }
 .rv-weeks .hw-tabs { border: var(--rule); grid-template-columns: repeat(5, minmax(0,1fr)); }
 .rv-bar { max-width: var(--maxw); margin: 0 auto 1rem; padding: 0 2rem; display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: space-between; align-items: center; }
@@ -843,7 +845,7 @@ table.prog tr.removed td { opacity: 0.45; }
     </div>
     <div class="rv-weeks"><div class="hw-tabs" id="rvWeeks" role="tablist" aria-label="Homework week to review"></div></div>
     <div class="rv-prompt" id="rvPrompt" hidden></div>
-    <div class="rv-prompt rv-guide"><div class="rvp-box"><div class="rvp-k">How we pick &middot; from the TikTok team</div><div class="rvp-t">Lead with the harder news examples first. Explainers and commentary pieces come after.</div><div class="rvp-m">TikTok asked for this after session 2 (Nov 4). It applies to every review from week 3 on.</div></div></div>
+    <div class="rv-prompt rv-guide"><div class="rvp-box"><div class="rvp-k">How we pick &middot; from the TikTok team</div><div class="rvp-t">Lead with the harder news examples first. Explainers and commentary pieces come after.</div><div class="rvp-m">TikTok asked for this after session 2 (Nov 4). It applies to every review from week 3 on.</div><a class="rv-cheat" href="tiktok-cohort-checklist.html" target="pcChecklist" onclick="var w=window.open(this.href,'pcChecklist','width=500,height=900,left=40,top=40');if(w){w.focus();return false;}">Open the review checklist in its own window &#8599;</a></div></div>
     <div class="stats-row"><div class="inner" id="rvStats"></div></div>
     <div class="rv-bar">
       <div class="rv-filters" id="rvFilters" role="group" aria-label="Show">

@@ -21,8 +21,8 @@
 <style>
 /* =====================================================================
    COVERING WASHINGTON · save-the-date (L2 event page, public)
-   Mirrors the summit deck cover: a split "presented by / hosted by"
-   masthead, one enormous navy title, a ruled date bar, then two asks.
+   Split presenter masthead, sticky section nav, then a split hero
+   (title left, what-it-is right) and the event sections in order.
    Event navy and GW gold are local to this page.
    ===================================================================== */
 :root { --navy: #003A5D; --gw-gold: #8A7444; }
@@ -46,7 +46,7 @@
 .cw-title .inner { max-width: var(--maxw); margin: 0 auto; padding: clamp(3rem, 7vw, 6.5rem) clamp(2rem, 6vw, 5.5rem); }
 .cw-kick { display: block; font-size: clamp(1rem, 1.5vw, 1.3rem); font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink); margin-bottom: clamp(1.4rem, 2.5vw, 2.2rem); }
 .cw-kick .target { display: inline-block; width: 0.95em; height: 0.95em; vertical-align: -0.08em; margin-right: 0.55em; color: var(--coral-deep); }
-.cw-title h1 { font-family: var(--display); font-weight: 400; text-transform: uppercase; color: var(--navy); font-size: clamp(3.6rem, 13.5vw, 12.5rem); line-height: 0.88; letter-spacing: 0.005em; }
+.cw-title h1 { font-family: var(--display); font-weight: 400; text-transform: uppercase; color: var(--navy); font-size: clamp(3.4rem, 7.4vw, 7.6rem); line-height: 0.88; letter-spacing: 0.005em; }
 .cw-title h1 span { display: block; }
 .cw-title h1 span + span { margin-top: 0.07em; }
 .cw-era { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--coral-deep); font-size: clamp(2rem, 5.6vw, 4.9rem); line-height: 1; margin-top: clamp(0.6rem, 1.4vw, 1.1rem); }
@@ -128,6 +128,120 @@
 .cw-support .knight img { width: 230px; }
 .cw-support .delaski img { width: 260px; }
 
+
+/* ---------- section nav (sticky) ---------- */
+.cw-nav { position: sticky; top: 0; z-index: 50; background: var(--white); border-bottom: var(--rule); }
+.cw-nav .in { display: flex; align-items: stretch; overflow-x: auto; scrollbar-width: none; }
+.cw-nav .in::-webkit-scrollbar { display: none; }
+.cw-nav a { flex: none; display: flex; align-items: center; padding: 0 1.4rem; height: 52px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-right: var(--rule-thin); position: relative; }
+.cw-nav a:first-child { padding-left: 2.5rem; }
+.cw-nav a:hover { background: var(--porcelain); }
+.cw-nav a.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 5px; background: var(--coral); }
+.cw-nav a.on:first-child::after { left: 2.5rem; right: 1.4rem; }
+.cw-nav .sp { flex: 1; border-right: none; }
+.cw-nav a.cta { background: var(--ink); color: var(--white); border-left: var(--rule); border-right: none; padding: 0 1.6rem; gap: 0.6rem; }
+.cw-nav a.cta:hover { background: var(--coral); color: var(--ink); }
+.cw-nav a.cta svg { width: 16px; height: 11px; }
+section[id] { scroll-margin-top: 56px; }
+
+/* ---------- hero: title left, what-it-is right ---------- */
+.cw-hero { display: grid; grid-template-columns: 1.05fr 0.95fr; border-bottom: var(--rule); }
+.cw-hero .cw-title { border-bottom: none; border-right: var(--rule); display: flex; align-items: center; }
+.cw-hero .cw-title .inner { padding: clamp(2.6rem, 4.5vw, 4.2rem) clamp(2rem, 4vw, 3.6rem); margin: 0; }
+.cw-hero .cw-era { font-size: clamp(1.8rem, 3.3vw, 3.2rem); }
+.cw-hero .cw-kick { font-size: clamp(0.9rem, 1.15vw, 1.05rem); }
+.cw-what { padding: clamp(2.4rem, 4vw, 3.6rem) clamp(2rem, 3.4vw, 3rem); display: flex; flex-direction: column; justify-content: center; background: var(--white); }
+.cw-what .lede { font-family: var(--serif); font-size: clamp(1.3rem, 1.8vw, 1.6rem); line-height: 1.32; color: var(--ink); margin-bottom: 1rem; }
+.cw-what p { font-size: 1rem; line-height: 1.65; color: var(--muted); max-width: 56ch; }
+.cw-what p em { color: var(--ink); }
+.cw-facts { display: grid; grid-template-columns: repeat(4, 1fr); border: var(--rule); margin-top: 1.8rem; }
+.cw-facts div { padding: 0.8rem 0.9rem; border-right: var(--rule); }
+.cw-facts div:last-child { border-right: none; }
+.cw-facts b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1; color: var(--navy); }
+.cw-facts span { display: block; margin-top: 0.3rem; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.35; }
+.cw-ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.6rem; }
+.cw-ctas .btn svg { width: 18px; height: 12px; }
+
+/* ---------- shared section head ---------- */
+.cw-sec-head { display: grid; grid-template-columns: minmax(260px, 0.9fr) 1.1fr; border-bottom: var(--rule); }
+.cw-sec-head > div { padding: clamp(2.2rem, 4vw, 3.2rem) 2.5rem; }
+.cw-sec-head > div + div { border-left: var(--rule); display: flex; align-items: flex-end; }
+.cw-sec-head .idx { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 1rem; }
+.cw-sec-head h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(2.4rem, 4.6vw, 4rem); line-height: 0.95; color: var(--navy); }
+.cw-sec-head p { font-size: 1.02rem; color: var(--muted); line-height: 1.65; max-width: 54ch; }
+.cw-sec-head p em { color: var(--ink); }
+
+/* ---------- why now: the numbers ---------- */
+.cw-why { border-bottom: var(--rule); display: grid; grid-template-columns: 1fr 1fr 1.25fr; }
+.cw-why > div { padding: clamp(2.2rem, 4vw, 3.4rem) 2.5rem; }
+.cw-why > div + div { border-left: var(--rule); }
+.cw-why .big { font-family: var(--display); font-weight: 400; font-size: clamp(4.4rem, 8vw, 7rem); line-height: 0.85; color: var(--navy); }
+.cw-why .big.coral { color: var(--coral-deep); }
+.cw-why .cap { margin-top: 0.9rem; font-size: 0.95rem; line-height: 1.5; color: var(--ink); max-width: 26ch; }
+.cw-why .src { margin-top: 0.6rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.cw-why .q .idx { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 1rem; }
+.cw-why .q p { font-size: 1rem; line-height: 1.65; color: var(--muted); }
+.cw-why .q p + p { margin-top: 0.9rem; }
+.cw-why .q .ask { font-family: var(--serif); font-style: italic; font-size: clamp(1.25rem, 1.7vw, 1.5rem); line-height: 1.35; color: var(--ink); }
+
+/* ---------- the day ---------- */
+.cw-day { border-bottom: var(--rule); }
+.cw-tl { display: grid; grid-template-columns: repeat(4, 1fr); }
+.cw-tl > div { padding: 2rem 2rem 2.3rem; border-right: var(--rule); }
+.cw-tl > div:last-child { border-right: none; }
+.cw-tl h3 { display: flex; align-items: center; gap: 0.6rem; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.3rem; }
+.cw-tl h3 i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--ink); }
+.cw-tl > div:nth-child(1) h3 i { background: var(--cyan); }
+.cw-tl > div:nth-child(2) h3 i { background: var(--magenta); }
+.cw-tl > div:nth-child(3) h3 i { background: var(--yellow); }
+.cw-tl > div:nth-child(4) h3 i { background: var(--coral); }
+.cw-tl ul { list-style: none; margin: 0; padding: 0; }
+.cw-tl li { padding: 0.85rem 0; border-top: var(--rule-thin); }
+.cw-tl li:first-child { border-top: none; padding-top: 0; }
+.cw-tl li b { display: block; font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.3rem; line-height: 1.05; margin-bottom: 0.3rem; }
+.cw-tl li span { display: block; font-size: 0.88rem; line-height: 1.5; color: var(--muted); }
+.cw-tl li.star { background: var(--tint); margin: 0 -0.8rem; padding: 0.85rem 0.8rem; border-top: none; }
+.cw-report { display: grid; grid-template-columns: auto 1fr; border-top: var(--rule); background: var(--porcelain); }
+.cw-report > div { padding: 1.5rem 2.5rem; }
+.cw-report > div + div { border-left: var(--rule); }
+.cw-report b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.5rem; line-height: 1; white-space: nowrap; }
+.cw-report p { font-size: 0.95rem; line-height: 1.6; color: var(--muted); max-width: 80ch; }
+
+/* ---------- partners ---------- */
+.cw-partners { border-bottom: var(--rule); }
+.cw-ptier { display: grid; grid-template-columns: 220px 1fr; border-bottom: var(--rule); }
+.cw-ptier:last-child { border-bottom: none; }
+.cw-ptier > .lbl { padding: 1.6rem 2.5rem; border-right: var(--rule); font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; display: flex; align-items: center; }
+.cw-ptier .logos { display: flex; flex-wrap: wrap; }
+.cw-ptier .logos > a, .cw-ptier .logos > div { flex: 1 1 260px; padding: 2rem 2.5rem; display: flex; align-items: center; justify-content: center; border-right: var(--rule-thin); min-height: 130px; }
+.cw-ptier .logos > :last-child { border-right: none; }
+.cw-ptier img { display: block; height: auto; }
+.cw-ptier .more { font-size: 0.82rem; color: var(--muted); font-style: italic; justify-content: flex-start !important; }
+
+/* ---------- press ---------- */
+.cw-press { border-bottom: var(--rule); }
+.cw-pr { display: grid; grid-template-columns: 1.4fr 0.6fr; }
+.cw-pr > div { padding: clamp(2rem, 3.6vw, 3rem) 2.5rem; }
+.cw-pr > div + div { border-left: var(--rule); background: var(--porcelain); }
+.cw-pr .date { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
+.cw-pr h3 { font-family: var(--serif); font-weight: 600; font-size: clamp(1.4rem, 2.1vw, 1.9rem); line-height: 1.22; margin-bottom: 0.8rem; max-width: 34ch; }
+.cw-pr .dek { font-size: 1rem; line-height: 1.6; color: var(--muted); max-width: 64ch; }
+.cw-pr details { margin-top: 1.4rem; border: var(--rule); background: var(--white); }
+.cw-pr summary { cursor: pointer; list-style: none; padding: 0.9rem 1.1rem; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; }
+.cw-pr summary::-webkit-details-marker { display: none; }
+.cw-pr summary::after { content: "+"; font-size: 1.3rem; line-height: 1; }
+.cw-pr details[open] summary::after { content: "\2013"; }
+.cw-pr details[open] summary { border-bottom: var(--rule); }
+.cw-pr .body { padding: 1.4rem 1.4rem 1.6rem; }
+.cw-pr .body p { font-size: 0.96rem; line-height: 1.7; color: var(--ink); max-width: 72ch; }
+.cw-pr .body p + p { margin-top: 0.95rem; }
+.cw-pr .body h4 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin: 1.6rem 0 0.5rem; }
+.cw-pr .body .tail { color: var(--muted); font-size: 0.9rem; }
+.cw-pr .contact h4 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.cw-pr .contact p { font-size: 0.95rem; line-height: 1.55; }
+.cw-pr .contact p + h4 { margin-top: 1.4rem; }
+.cw-pr .contact a { color: var(--coral-deep); font-weight: 700; }
+
 /* ---------- footer ---------- */
 .cw-foot { display: grid; grid-template-columns: 1fr auto; border-bottom: var(--rule); }
 .cw-foot .blk { padding: 1.8rem 2.5rem; display: flex; align-items: center; }
@@ -136,6 +250,47 @@
 .cw-foot a { color: var(--coral-deep); font-weight: 700; }
 .cw-foot .reg-mark { width: 120px; height: 120px; }
 
+@media (max-width: 1100px) {
+  .cw-hero { grid-template-columns: 1fr; }
+  .cw-hero .cw-title { border-right: none; border-bottom: var(--rule); }
+  .cw-hero .cw-title h1 { font-size: clamp(3.4rem, 11vw, 7.6rem); }
+  .cw-tl { grid-template-columns: 1fr 1fr; }
+  .cw-tl > div:nth-child(2) { border-right: none; }
+  .cw-tl > div:nth-child(-n+2) { border-bottom: var(--rule); }
+  .cw-why { grid-template-columns: 1fr 1fr; }
+  .cw-why .q { grid-column: 1 / -1; border-left: none !important; border-top: var(--rule); }
+}
+@media (max-width: 860px) {
+  .cw-nav a { padding: 0 1rem; height: 48px; }
+  .cw-nav a:first-child { padding-left: 1.5rem; }
+  .cw-nav .sp { display: none; }
+  .cw-what { padding: 2.2rem 1.5rem 2.4rem; }
+  .cw-facts { grid-template-columns: 1fr 1fr; }
+  .cw-facts div:nth-child(2) { border-right: none; }
+  .cw-facts div:nth-child(-n+2) { border-bottom: var(--rule); }
+  .cw-sec-head { grid-template-columns: 1fr; }
+  .cw-sec-head > div { padding: 2.2rem 1.5rem; }
+  .cw-sec-head > div + div { border-left: none; border-top: var(--rule); padding-top: 1.6rem; }
+  .cw-why > div { padding: 2rem 1.5rem; }
+  .cw-tl > div { padding: 1.8rem 1.5rem 2rem; }
+  .cw-report { grid-template-columns: 1fr; }
+  .cw-report > div { padding: 1.3rem 1.5rem; }
+  .cw-report > div + div { border-left: none; border-top: var(--rule-thin); }
+  .cw-ptier { grid-template-columns: 1fr; }
+  .cw-ptier > .lbl { padding: 1.1rem 1.5rem; border-right: none; border-bottom: var(--rule-thin); }
+  .cw-pr { grid-template-columns: 1fr; }
+  .cw-pr > div { padding: 2rem 1.5rem; }
+  .cw-pr > div + div { border-left: none; border-top: var(--rule); }
+}
+@media (max-width: 600px) {
+  .cw-why { grid-template-columns: 1fr; }
+  .cw-why > div + div { border-left: none; border-top: var(--rule); }
+  .cw-tl { grid-template-columns: 1fr; }
+  .cw-tl > div { border-right: none !important; border-bottom: var(--rule); }
+  .cw-tl > div:last-child { border-bottom: none; }
+  .cw-ptier .logos > a, .cw-ptier .logos > div { flex-basis: 100%; border-right: none; border-bottom: var(--rule-thin); padding: 1.6rem 1.5rem; min-height: 0; }
+  .cw-ptier .logos > :last-child { border-bottom: none; }
+}
 @media (max-width: 1000px) {
   .cw-roster { grid-template-columns: 1fr 1fr; }
   .cw-roster li { border-right: var(--rule) !important; border-bottom: var(--rule) !important; }
@@ -210,31 +365,119 @@
   </div>
 </header>
 
+<nav class="cw-nav" aria-label="On this page">
+  <div class="in">
+    <a href="#about">About</a>
+    <a href="#program">The day</a>
+    <a href="#speakers">Speakers</a>
+    <a href="#partners">Partners</a>
+    <a href="#press">Press</a>
+    <span class="sp"></span>
+    <a class="cta" href="#updates">Get updates <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+  </div>
+</nav>
+
 <main id="main">
 
-<section class="cw-title crops" aria-labelledby="cw-h1">
+<section class="cw-hero" id="top" aria-labelledby="cw-h1">
+  <div class="cw-title crops">
   <div class="inner">
     <div class="cw-kick"><svg class="target" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="none" stroke="currentColor" stroke-width="1"/><line x1="7" y1="0" x2="7" y2="14" stroke="currentColor" stroke-width="1"/><line x1="0" y1="7" x2="14" y2="7" stroke="currentColor" stroke-width="1"/></svg> Save the date &middot; Tuesday, March 30, 2027</div>
     <h1 id="cw-h1"><span>Covering</span><span>Washington</span></h1>
     <p class="cw-era">in the creator era</p>
   </div>
+</div>
+  <div class="cw-what">
+    <p class="lede">A full-day summit on how Americans learn about Washington now, and who they trust to tell them.</p>
+    <p>Creator journalists covering Congress, the White House and the road to 2028 share the room with the platforms and funders that shape their work, and with the Hill staffers and campaign communicators who now go direct to audiences themselves. Co-hosted by Project C and GW's School of Media and Public Affairs at Jack Morton Auditorium, the former home of CNN's <em>Crossfire</em>.</p>
+    <div class="cw-facts" role="list">
+      <div role="listitem"><b>Mar 30</b><span>Tuesday, 2027</span></div>
+      <div role="listitem"><b>1 day</b><span>Morning to reception</span></div>
+      <div role="listitem"><b>~200</b><span>In the room</span></div>
+      <div role="listitem"><b>GW</b><span>Jack Morton Auditorium, D.C.</span></div>
+    </div>
+    <div class="cw-ctas">
+      <a class="btn btn-fill" href="#updates">Get updates <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+      <a class="btn" href="#program">See the day <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+    </div>
+  </div>
 </section>
 
-<div class="cw-bar" role="list" aria-label="Event details">
-  <div role="listitem">George Washington University &middot; Washington, D.C.</div>
-  <div role="listitem" class="soon">Full lineup announced in January</div>
-  <div role="listitem" aria-hidden="true"><span class="cmyk-dots"><i></i><i></i><i></i><i></i></span></div>
-</div>
 
+<section class="cw-why" id="about" aria-label="Why now">
+  <div>
+    <div class="big">64%</div>
+    <p class="cap">of U.S. adults say they got information about the 2026 midterms from online creators.</p>
+    <p class="src">SaySo/YouGov, Sept. 2026</p>
+  </div>
+  <div>
+    <div class="big coral">77%</div>
+    <p class="cap">of adults ages 18 to 29 say the same.</p>
+    <p class="src">SaySo/YouGov, Sept. 2026</p>
+  </div>
+  <div class="q">
+    <div class="idx">Why now</div>
+    <p class="ask">Who does Washington trust now, and who does America trust to tell it about Washington?</p>
+    <p>The last presidential election was called the creator election. The next one will be the creator journalism election. With the midterms decided and the 2028 field taking shape, spring 2027 is the moment to bring this field together in the city it covers.</p>
+  </div>
+</section>
 
-<section class="cw-line" aria-labelledby="cw-line-h">
-  <div class="cw-line-head">
+<section class="cw-day" id="program" aria-labelledby="cw-day-h">
+  <div class="cw-sec-head">
+    <div>
+      <div class="idx">The shape of the day</div>
+      <h2 id="cw-day-h">The day</h2>
+    </div>
+    <div>
+      <p>The morning sets the stakes. A live podcast taping anchors lunch. The afternoon turns practical before a closing showdown and an evening reception. The full schedule, with times, comes in January.</p>
+    </div>
+  </div>
+  <div class="cw-tl">
+    <div>
+      <h3><i></i>Morning</h3>
+      <ul>
+        <li><b>Opening</b><span>SMPA Director Peter Loge and Project C founder Liz Kelly Nelson set the day's question.</span></li>
+        <li><b>Covering power from outside the building</b><span>A featured conversation with Aaron Parnas on covering Congress and the administration without a newsroom behind him.</span></li>
+        <li><b>The reveal</b><span>New research on creators and political news, released on this stage, with working creators reacting live.</span></li>
+        <li><b>Who America listens to</b><span>Julia Angwin moderates a conversation on who Americans actually listen to about Washington, and why.</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3><i></i>Midday</h3>
+      <ul>
+        <li><b>Follow the money</b><span>Who pays political creators, and who has to say so.</span></li>
+        <li><b>Creator spotlights</b><span>Working creators take the stage for a few minutes each on who they are and what they cover.</span></li>
+        <li><b>Lunch: live podcast taping</b><span>A live taping of <em>Group Chat</em>, the podcast from the Independent Journalism Atlas team.</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3><i></i>Afternoon</h3>
+      <ul>
+        <li><b>Caucuses</b><span>Small, facilitated breakouts where attendees set the agenda: revenue, platforms, legal and safety questions, standards and more.</span></li>
+        <li class="star"><b>Crossfire, Reloaded</b><span>Two creator journalists from the left and right go head to head on the stage where cable punditry was born. Frank Sesno referees, with questions drawn from the afternoon's caucuses.</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3><i></i>Evening</h3>
+      <ul>
+        <li><b>Reception</b><span>Time built for the thing creators say they need most: meeting each other in person.</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="cw-report">
+    <div><b>After the day</b></div>
+    <div><p>Project C and SMPA will publish a field report documenting the discussions, identifying what creator journalists need and tracking how the field is changing. It's built to be a citable resource for researchers, funders, journalists and institutions.</p></div>
+  </div>
+</section>
+
+<section class="cw-line" id="speakers" aria-labelledby="cw-line-h">
+  <div class="cw-sec-head">
     <div>
       <div class="idx">The lineup, so far</div>
       <h2 id="cw-line-h">Who's on stage</h2>
     </div>
     <div>
-      <p>A full day at GW's Jack Morton Auditorium, the former home of CNN's <em>Crossfire</em>, bringing Washington's journalism establishment together with the creators remaking it. The day closes with <em>Crossfire, Reloaded</em>.</p>
+      <p>Washington's journalism establishment on stage alongside the creators remaking it. More names to come in January.</p>
     </div>
   </div>
   <ul class="cw-roster">
@@ -272,7 +515,7 @@
   <div class="cw-more"><span>More speakers to be announced in January</span><span class="cmyk-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
 </section>
 
-<section class="cw-asks" aria-label="Get involved">
+<section class="cw-asks" id="updates" aria-label="Get involved">
   <div class="cw-ask attend">
     <div class="idx">01 &middot; Stay in the loop</div>
     <h2>Be the first to know</h2>
@@ -300,10 +543,75 @@
   </div>
 </section>
 
-<section class="cw-support" aria-label="Supporters">
-  <div class="lbl"><b>Supported by</b><span>Additional partners will be announced in the coming months.</span></div>
-  <div class="knight"><a href="https://knightfoundation.org"><img src="sponsor-knight-foundation.png" alt="John S. and James L. Knight Foundation"></a></div>
-  <div class="delaski"><a href="https://delaskifamilyfoundation.org"><img src="sponsor-delaski-family-foundation.png" alt="deLaski Family Foundation"></a></div>
+<section class="cw-partners" id="partners" aria-labelledby="cw-part-h">
+  <div class="cw-sec-head">
+    <div>
+      <div class="idx">Who's making it happen</div>
+      <h2 id="cw-part-h">Partners</h2>
+    </div>
+    <div>
+      <p>Additional partners will be announced in the coming months. Interested in joining them? <a href="mailto:info@projectc.com?subject=Covering%20Washington%20%C2%B7%20Sponsorship%20inquiry" style="color:var(--coral-deep);font-weight:700">Get in touch</a>.</p>
+    </div>
+  </div>
+  <div class="cw-ptier">
+    <div class="lbl">Presented by</div>
+    <div class="logos">
+      <a href="index.html"><img src="project-c_lockup_color.png" alt="Project C" style="width:150px"></a>
+      <a href="https://smpa.gwu.edu"><img src="gw-smpa-logo.png" alt="The George Washington University School of Media and Public Affairs" style="width:104px"></a>
+    </div>
+  </div>
+  <div class="cw-ptier">
+    <div class="lbl">Supported by</div>
+    <div class="logos">
+      <a href="https://knightfoundation.org"><img src="sponsor-knight-foundation.png" alt="John S. and James L. Knight Foundation" style="width:230px"></a>
+      <a href="https://delaskifamilyfoundation.org"><img src="sponsor-delaski-family-foundation.png" alt="deLaski Family Foundation" style="width:260px"></a>
+    </div>
+  </div>
+</section>
+
+<section class="cw-press" id="press" aria-labelledby="cw-press-h">
+  <div class="cw-sec-head">
+    <div>
+      <div class="idx">News</div>
+      <h2 id="cw-press-h">Press</h2>
+    </div>
+    <div>
+      <p>The latest announcements about the summit, plus who to contact for interviews and credentials.</p>
+    </div>
+  </div>
+  <div class="cw-pr">
+    <div>
+      <div class="date">Press release &middot; Nov. 16, 2026</div>
+      <h3>Project C and GW Bring Creator Journalists to the Former <em>Crossfire</em> Stage for Washington Summit</h3>
+      <p class="dek">Project C and GW's School of Media and Public Affairs will convene creator journalists, platforms, funders, researchers and policymakers on March 30, 2027, to discuss the rise of creator journalism and its impact on political news.</p>
+      <details>
+        <summary>Read the full release</summary>
+        <div class="body">
+          <p><b>WASHINGTON, D.C.</b> &ndash; Creator journalists are reshaping how Americans get their political news. On Tuesday, March 30, 2027, Project C, the home for creator journalists, and George Washington University's School of Media and Public Affairs (SMPA) will bring the emerging field together for <em>Covering Washington in the Creator Era</em>, a full-day summit at GW's Jack Morton Auditorium, the former home of CNN's <em>Crossfire</em>.</p>
+          <p>According to a September 2026 SaySo/YouGov survey, 64% of U.S. adults said they got information about the 2026 midterm elections from online creators, including 77% of adults ages 18 to 29.</p>
+          <p>The day's lineup brings together Washington's journalism establishment and the creators remaking it. Independent journalist Aaron Parnas, whose political news coverage reaches millions on TikTok and Substack, will join a featured conversation on the main stage. Award-winning investigative journalist and New York Times Opinion columnist Julia Angwin will moderate a main-stage conversation on who Americans actually listen to about Washington, and why they trust them. Also joining the program are V Spehar, the award-winning creator behind <em>Under the Desk News</em>; veteran Washington journalist and GW professor Steve Roberts; and Chris Cillizza, the former CNN and Washington Post political analyst who now covers politics independently. The day closes with <em>Crossfire, Reloaded,</em> refereed by former CNN anchor and Washington bureau chief Frank Sesno. The full lineup will be announced in January.</p>
+          <p>&ldquo;Washington used to decide who it trusted to tell its story. Now audiences decide, and a lot of the time they pick a person over a masthead,&rdquo; said Project C founder Liz Kelly Nelson. &ldquo;We want the people covering politics and the people they cover in one room, figuring out what that means before 2028.&rdquo;</p>
+          <p>The summit's setting is deliberate. SMPA teaches journalism and political communication under one roof, a few blocks from the White House, and its graduates go on to cover Washington and to work in it. Creator journalism is changing both of those jobs at once, which makes SMPA a natural place to bring the field together.</p>
+          <p>&ldquo;Our students learn how to study, shape, and tell the stories that matter,&rdquo; said SMPA Director Peter Loge. &ldquo;Those stories are increasingly told by independent creators, many of whom are our current and former students. I can think of no better place for this convening.&rdquo;</p>
+          <p><em>Covering Washington in the Creator Era</em> is supported by the John S. and James L. Knight Foundation and the deLaski Family Foundation. Additional partners will be announced in the coming months.</p>
+          <p>&ldquo;As more people turn to independent creators for news and information, Knight Foundation is increasingly focused on understanding this evolving ecosystem and supporting creators who are reaching audiences in new ways,&rdquo; said Amalie Nash, vice president of journalism at Knight Foundation. &ldquo;This convening will bring important perspectives together to explore the challenges ahead and what they mean for the future of political journalism.&rdquo;</p>
+          <p>Project C and SMPA will also publish a post-event field report documenting the discussions, identifying the needs of creator journalists, and examining how the field is evolving. The report will serve as a citable resource for researchers, funders, journalists, and institutions.</p>
+          <h4>About Project C</h4>
+          <p class="tail">Project C is helping journalism survive society's tectonic shifts so the next generation can access trustworthy, useful information. We believe in a future where creators, communities, and newsrooms can thrive, even as the landscape keeps changing. Through a newsletter, courses, original research, and a private 250+ member Slack, Project C offers insights, tools, and guidance for journalists building sustainable, audience-driven businesses. We also work with newsrooms, media companies, and journalism support organizations to make sense of the creator space &ndash; and develop smart strategies for engaging with it.</p>
+          <h4>About GW's School of Media and Public Affairs</h4>
+          <p class="tail">The George Washington University's School of Media and Public Affairs (SMPA), part of the Columbian College of Arts and Sciences, explores how ideas and information are communicated and how people inform and influence policy and politics. Located in the heart of Washington, D.C., SMPA offers undergraduate and graduate programs in journalism and political communication and hosts public events, including the Sesno Series. Learn more at smpa.gwu.edu.</p>
+        </div>
+      </details>
+    </div>
+    <div class="contact">
+      <h4>Press</h4>
+      <p><a href="mailto:anna@projectc.com?subject=Covering%20Washington%20%C2%B7%20Press">anna@projectc.com</a></p>
+      <h4>Project C</h4>
+      <p><a href="mailto:info@projectc.com">info@projectc.com</a></p>
+      <h4>Event questions</h4>
+      <p><a href="mailto:coveringwashington@projectc.com">coveringwashington@projectc.com</a></p>
+    </div>
+  </div>
 </section>
 
 
@@ -378,6 +686,23 @@
         btn.disabled = false;
       });
   });
+})();
+</script>
+<script>
+(function () {
+  var links = document.querySelectorAll('.cw-nav a[href^="#"]:not(.cta)');
+  if (!('IntersectionObserver' in window) || !links.length) return;
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting && map[e.target.id]) {
+        links.forEach(function (a) { a.classList.remove('on'); });
+        map[e.target.id].classList.add('on');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  Object.keys(map).forEach(function (id) { var el = document.getElementById(id); if (el) io.observe(el); });
 })();
 </script>
 </body>

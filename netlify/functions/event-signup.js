@@ -64,7 +64,7 @@ exports.handler = async (event) => {
 
   if (!SUPABASE_URL || !SUPABASE_SECRET_KEY) {
     console.error('event-signup: Supabase env vars not set');
-    return json(500, { error: 'Signups are not working right now. Please email info@projectc.com.' });
+    return json(500, { error: 'Signups are not working right now. Please email coveringwashington@projectc.com.' });
   }
 
   let p;
@@ -97,7 +97,7 @@ exports.handler = async (event) => {
 
   if (error) {
     console.error('event-signup: insert failed', error);
-    return json(500, { error: 'Something went wrong. Please try again or email info@projectc.com.' });
+    return json(500, { error: 'Something went wrong. Please try again or email coveringwashington@projectc.com.' });
   }
 
   console.log(`event-signup: ${slug} signup saved`);

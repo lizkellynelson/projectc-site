@@ -154,10 +154,10 @@ section[id] { scroll-margin-top: 56px; }
 .cw-what .lede { font-family: var(--serif); font-size: clamp(1.3rem, 1.8vw, 1.6rem); line-height: 1.32; color: var(--ink); margin-bottom: 1rem; }
 .cw-what p { font-size: 1rem; line-height: 1.65; color: var(--muted); max-width: 56ch; }
 .cw-what p em { color: var(--ink); }
-.cw-facts { display: grid; grid-template-columns: repeat(4, 1fr); border: var(--rule); margin-top: 1.8rem; }
-.cw-facts div { padding: 0.8rem 0.9rem; border-right: var(--rule); }
+.cw-facts { display: grid; grid-template-columns: 1fr 1fr; border: var(--rule); margin-top: 1.8rem; }
+.cw-facts div { padding: 0.95rem 1.1rem; border-right: var(--rule); }
 .cw-facts div:last-child { border-right: none; }
-.cw-facts b { display: block; font-family: var(--display); font-weight: 400; font-size: 1.6rem; line-height: 1; color: var(--navy); }
+.cw-facts b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(1.25rem, 1.6vw, 1.5rem); text-transform: uppercase; line-height: 1; color: var(--navy); }
 .cw-facts span { display: block; margin-top: 0.3rem; font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.35; }
 .cw-ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.6rem; }
 .cw-ctas .btn svg { width: 18px; height: 12px; }
@@ -220,7 +220,7 @@ section[id] { scroll-margin-top: 56px; }
 
 /* ---------- press ---------- */
 .cw-press { border-bottom: var(--rule); }
-.cw-pr { display: grid; grid-template-columns: 1.4fr 0.6fr; }
+.cw-pr { display: grid; grid-template-columns: 1fr; }
 .cw-pr > div { padding: clamp(2rem, 3.6vw, 3rem) 2.5rem; }
 .cw-pr > div + div { border-left: var(--rule); background: var(--porcelain); }
 .cw-pr .date { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
@@ -265,9 +265,6 @@ section[id] { scroll-margin-top: 56px; }
   .cw-nav a:first-child { padding-left: 1.5rem; }
   .cw-nav .sp { display: none; }
   .cw-what { padding: 2.2rem 1.5rem 2.4rem; }
-  .cw-facts { grid-template-columns: 1fr 1fr; }
-  .cw-facts div:nth-child(2) { border-right: none; }
-  .cw-facts div:nth-child(-n+2) { border-bottom: var(--rule); }
   .cw-sec-head { grid-template-columns: 1fr; }
   .cw-sec-head > div { padding: 2.2rem 1.5rem; }
   .cw-sec-head > div + div { border-left: none; border-top: var(--rule); padding-top: 1.6rem; }
@@ -283,6 +280,9 @@ section[id] { scroll-margin-top: 56px; }
   .cw-pr > div + div { border-left: none; border-top: var(--rule); }
 }
 @media (max-width: 600px) {
+  .cw-facts { grid-template-columns: 1fr; }
+  .cw-facts div { border-right: none; }
+  .cw-facts div:first-child { border-bottom: var(--rule); }
   .cw-why { grid-template-columns: 1fr; }
   .cw-why > div + div { border-left: none; border-top: var(--rule); }
   .cw-tl { grid-template-columns: 1fr; }
@@ -368,7 +368,6 @@ section[id] { scroll-margin-top: 56px; }
 <nav class="cw-nav" aria-label="On this page">
   <div class="in">
     <a href="#about">About</a>
-    <a href="#program">The day</a>
     <a href="#speakers">Speakers</a>
     <a href="#partners">Partners</a>
     <a href="#press">Press</a>
@@ -389,16 +388,14 @@ section[id] { scroll-margin-top: 56px; }
 </div>
   <div class="cw-what">
     <p class="lede">A full-day summit on how Americans learn about Washington now, and who they trust to tell them.</p>
-    <p>Creator journalists covering Congress, the White House and the road to 2028 share the room with the platforms and funders that shape their work, and with the Hill staffers and campaign communicators who now go direct to audiences themselves. Co-hosted by Project C and GW's School of Media and Public Affairs at Jack Morton Auditorium, the former home of CNN's <em>Crossfire</em>.</p>
+    <p><em>Covering Washington in the Creator Era</em> brings the most serious practitioners of creator-style political and public-affairs journalism into one room with the platforms, funders, researchers and institutions that shape their work. The morning sets the stakes; a live podcast taping over lunch anchors the middle of the day and the afternoon turns to practical, roll-up-your-sleeves sessions before a marquee closing conversation.</p>
     <div class="cw-facts" role="list">
-      <div role="listitem"><b>Mar 30</b><span>Tuesday, 2027</span></div>
-      <div role="listitem"><b>1 day</b><span>Morning to reception</span></div>
-      <div role="listitem"><b>~200</b><span>In the room</span></div>
-      <div role="listitem"><b>GW</b><span>Jack Morton Auditorium, D.C.</span></div>
+      <div role="listitem"><b>Tuesday, March 30, 2027</b><span>Full day, ending with a reception</span></div>
+      <div role="listitem"><b>Jack Morton Auditorium</b><span>George Washington University, Washington, D.C.</span></div>
     </div>
     <div class="cw-ctas">
       <a class="btn btn-fill" href="#updates">Get updates <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
-      <a class="btn" href="#program">See the day <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+      <a class="btn" href="#speakers">See who's speaking <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
     </div>
   </div>
 </section>
@@ -419,56 +416,10 @@ section[id] { scroll-margin-top: 56px; }
     <div class="idx">Why now</div>
     <p class="ask">Who does Washington trust now, and who does America trust to tell it about Washington?</p>
     <p>The last presidential election was called the creator election. The next one will be the creator journalism election. With the midterms decided and the 2028 field taking shape, spring 2027 is the moment to bring this field together in the city it covers.</p>
+    <p>After the summit, Project C and SMPA will publish a field report on what was said, what creator journalists need and how the field is changing.</p>
   </div>
 </section>
 
-<section class="cw-day" id="program" aria-labelledby="cw-day-h">
-  <div class="cw-sec-head">
-    <div>
-      <div class="idx">The shape of the day</div>
-      <h2 id="cw-day-h">The day</h2>
-    </div>
-    <div>
-      <p>The morning sets the stakes. A live podcast taping anchors lunch. The afternoon turns practical before a closing showdown and an evening reception. The full schedule, with times, comes in January.</p>
-    </div>
-  </div>
-  <div class="cw-tl">
-    <div>
-      <h3><i></i>Morning</h3>
-      <ul>
-        <li><b>Opening</b><span>SMPA Director Peter Loge and Project C founder Liz Kelly Nelson set the day's question.</span></li>
-        <li><b>Covering power from outside the building</b><span>A featured conversation with Aaron Parnas on covering Congress and the administration without a newsroom behind him.</span></li>
-        <li><b>The reveal</b><span>New research on creators and political news, released on this stage, with working creators reacting live.</span></li>
-        <li><b>Who America listens to</b><span>Julia Angwin moderates a conversation on who Americans actually listen to about Washington, and why.</span></li>
-      </ul>
-    </div>
-    <div>
-      <h3><i></i>Midday</h3>
-      <ul>
-        <li><b>Follow the money</b><span>Who pays political creators, and who has to say so.</span></li>
-        <li><b>Creator spotlights</b><span>Working creators take the stage for a few minutes each on who they are and what they cover.</span></li>
-        <li><b>Lunch: live podcast taping</b><span>A live taping of <em>Group Chat</em>, the podcast from the Independent Journalism Atlas team.</span></li>
-      </ul>
-    </div>
-    <div>
-      <h3><i></i>Afternoon</h3>
-      <ul>
-        <li><b>Caucuses</b><span>Small, facilitated breakouts where attendees set the agenda: revenue, platforms, legal and safety questions, standards and more.</span></li>
-        <li class="star"><b>Crossfire, Reloaded</b><span>Two creator journalists from the left and right go head to head on the stage where cable punditry was born. Frank Sesno referees, with questions drawn from the afternoon's caucuses.</span></li>
-      </ul>
-    </div>
-    <div>
-      <h3><i></i>Evening</h3>
-      <ul>
-        <li><b>Reception</b><span>Time built for the thing creators say they need most: meeting each other in person.</span></li>
-      </ul>
-    </div>
-  </div>
-  <div class="cw-report">
-    <div><b>After the day</b></div>
-    <div><p>Project C and SMPA will publish a field report documenting the discussions, identifying what creator journalists need and tracking how the field is changing. It's built to be a citable resource for researchers, funders, journalists and institutions.</p></div>
-  </div>
-</section>
 
 <section class="cw-line" id="speakers" aria-labelledby="cw-line-h">
   <div class="cw-sec-head">
@@ -502,7 +453,7 @@ section[id] { scroll-margin-top: 56px; }
       <p>Veteran Washington journalist and GW professor.</p>
     </li>
     <li>
-      <span class="role c">Speaker</span>
+      <span class="role y">Speaker</span>
       <h3>Chris Cillizza</h3>
       <p>Former CNN and <em>Washington Post</em> political analyst who now covers politics independently.</p>
     </li>
@@ -539,7 +490,7 @@ section[id] { scroll-margin-top: 56px; }
     <div class="idx">02 &middot; Sponsor</div>
     <h2>Back the day</h2>
     <p>We're partnering with a small group of organizations that care about who Americans turn to for news about Washington, and what it takes to earn that trust. If yours is one of them, let's talk.</p>
-    <a class="btn btn-coral" href="mailto:info@projectc.com?subject=Covering%20Washington%20%C2%B7%20Sponsorship%20inquiry">Sponsor inquiry <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+    <a class="btn btn-coral" href="mailto:coveringwashington@projectc.com?subject=Covering%20Washington%20%C2%B7%20Sponsorship%20inquiry">Sponsor inquiry <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
   </div>
 </section>
 
@@ -550,14 +501,7 @@ section[id] { scroll-margin-top: 56px; }
       <h2 id="cw-part-h">Partners</h2>
     </div>
     <div>
-      <p>Additional partners will be announced in the coming months. Interested in joining them? <a href="mailto:info@projectc.com?subject=Covering%20Washington%20%C2%B7%20Sponsorship%20inquiry" style="color:var(--coral-deep);font-weight:700">Get in touch</a>.</p>
-    </div>
-  </div>
-  <div class="cw-ptier">
-    <div class="lbl">Presented by</div>
-    <div class="logos">
-      <a href="index.html"><img src="project-c_lockup_color.png" alt="Project C" style="width:150px"></a>
-      <a href="https://smpa.gwu.edu"><img src="gw-smpa-logo.png" alt="The George Washington University School of Media and Public Affairs" style="width:104px"></a>
+      <p>Additional partners will be announced in the coming months. Interested in joining them? <a href="mailto:coveringwashington@projectc.com?subject=Covering%20Washington%20%C2%B7%20Sponsorship%20inquiry" style="color:var(--coral-deep);font-weight:700">Get in touch</a>.</p>
     </div>
   </div>
   <div class="cw-ptier">
@@ -576,7 +520,7 @@ section[id] { scroll-margin-top: 56px; }
       <h2 id="cw-press-h">Press</h2>
     </div>
     <div>
-      <p>The latest announcements about the summit, plus who to contact for interviews and credentials.</p>
+      <p>The latest announcements about the summit.</p>
     </div>
   </div>
   <div class="cw-pr">
@@ -602,14 +546,6 @@ section[id] { scroll-margin-top: 56px; }
           <p class="tail">The George Washington University's School of Media and Public Affairs (SMPA), part of the Columbian College of Arts and Sciences, explores how ideas and information are communicated and how people inform and influence policy and politics. Located in the heart of Washington, D.C., SMPA offers undergraduate and graduate programs in journalism and political communication and hosts public events, including the Sesno Series. Learn more at smpa.gwu.edu.</p>
         </div>
       </details>
-    </div>
-    <div class="contact">
-      <h4>Press</h4>
-      <p><a href="mailto:anna@projectc.com?subject=Covering%20Washington%20%C2%B7%20Press">anna@projectc.com</a></p>
-      <h4>Project C</h4>
-      <p><a href="mailto:info@projectc.com">info@projectc.com</a></p>
-      <h4>Event questions</h4>
-      <p><a href="mailto:coveringwashington@projectc.com">coveringwashington@projectc.com</a></p>
     </div>
   </div>
 </section>

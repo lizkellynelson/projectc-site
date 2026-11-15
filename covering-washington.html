@@ -93,6 +93,45 @@
   .cw-sign-row .btn { border-left: none; border-top: var(--rule); justify-content: center; }
 }
 
+
+/* ---------- lineup ---------- */
+.cw-line { border-bottom: var(--rule); }
+.cw-line-head { display: grid; grid-template-columns: minmax(260px, 0.9fr) 1.1fr; border-bottom: var(--rule); }
+.cw-line-head > div { padding: clamp(2.2rem, 4vw, 3.2rem) 2.5rem; }
+.cw-line-head > div + div { border-left: var(--rule); display: flex; align-items: flex-end; }
+.cw-line-head .idx { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 1rem; }
+.cw-line-head h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(2.4rem, 4.6vw, 4rem); line-height: 0.95; color: var(--navy); }
+.cw-line-head p { font-size: 1.02rem; color: var(--muted); line-height: 1.65; max-width: 54ch; }
+.cw-line-head p em { color: var(--ink); }
+.cw-roster { display: grid; grid-template-columns: repeat(3, 1fr); list-style: none; margin: 0; padding: 0; }
+.cw-roster li { padding: 2rem 2.5rem 2.2rem; border-right: var(--rule); border-bottom: var(--rule); display: flex; flex-direction: column; min-height: 210px; }
+.cw-roster li:nth-child(3n) { border-right: none; }
+.cw-roster li:nth-last-child(-n+3) { border-bottom: none; }
+.cw-roster .role { align-self: flex-start; font-size: 0.64rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; border: var(--rule); padding: 0.25rem 0.6rem; margin-bottom: 1.1rem; background: var(--white); }
+.cw-roster .role.c { background: var(--cyan); }
+.cw-roster .role.m { background: var(--magenta); }
+.cw-roster .role.y { background: var(--yellow); }
+.cw-roster h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(1.9rem, 2.6vw, 2.4rem); line-height: 0.95; margin-bottom: 0.7rem; }
+.cw-roster p { font-size: 0.93rem; color: var(--muted); line-height: 1.55; max-width: 34ch; }
+.cw-roster p em { font-style: italic; color: var(--ink); }
+.cw-roster li.ref { background: var(--navy); color: var(--white); }
+.cw-roster li.ref h3 { color: var(--white); }
+.cw-roster li.ref p { color: rgba(255,255,255,0.78); }
+.cw-roster li.ref p em { color: var(--white); }
+.cw-roster li.ref .role { background: var(--coral); }
+.cw-more { border-top: var(--rule); padding: 1rem 2.5rem; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+
+/* ---------- supporters ---------- */
+.cw-support { display: grid; grid-template-columns: auto 1fr 1fr; border-bottom: var(--rule); background: var(--white); }
+.cw-support > div { padding: 2.2rem 2.5rem; display: flex; align-items: center; justify-content: center; }
+.cw-support > div + div { border-left: var(--rule); }
+.cw-support .lbl { flex-direction: column; align-items: flex-start; justify-content: center; }
+.cw-support .lbl b { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 1.9rem; line-height: 1; }
+.cw-support .lbl span { font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; max-width: 24ch; line-height: 1.5; }
+.cw-support img { display: block; height: auto; }
+.cw-support .knight img { width: 230px; }
+.cw-support .delaski img { width: 260px; }
+
 /* ---------- footer ---------- */
 .cw-foot { display: grid; grid-template-columns: 1fr auto; border-bottom: var(--rule); }
 .cw-foot .blk { padding: 1.8rem 2.5rem; display: flex; align-items: center; }
@@ -101,6 +140,32 @@
 .cw-foot a { color: var(--coral-deep); font-weight: 700; }
 .cw-foot .reg-mark { width: 120px; height: 120px; }
 
+@media (max-width: 1000px) {
+  .cw-roster { grid-template-columns: 1fr 1fr; }
+  .cw-roster li { border-right: var(--rule) !important; border-bottom: var(--rule) !important; }
+  .cw-roster li:nth-child(2n) { border-right: none !important; }
+  .cw-roster li:nth-last-child(-n+2) { border-bottom: none !important; }
+  .cw-support { grid-template-columns: 1fr 1fr; }
+  .cw-support .lbl { grid-column: 1 / -1; border-bottom: var(--rule); }
+  .cw-support > div:nth-child(2) { border-left: none; }
+}
+@media (max-width: 860px) {
+  .cw-line-head { grid-template-columns: 1fr; }
+  .cw-line-head > div { padding: 2.2rem 1.5rem; }
+  .cw-line-head > div + div { border-left: none; border-top: var(--rule); padding-top: 1.6rem; }
+  .cw-more { padding: 1rem 1.5rem; }
+  .cw-support > div { padding: 1.8rem 1.5rem; }
+}
+@media (max-width: 600px) {
+  .cw-roster { grid-template-columns: 1fr; }
+  .cw-roster li { border-right: none !important; border-bottom: var(--rule) !important; min-height: 0; padding: 1.7rem 1.5rem 1.9rem; }
+  .cw-roster li:last-child { border-bottom: none !important; }
+  .cw-support { grid-template-columns: 1fr; }
+  .cw-support > div + div { border-left: none; border-top: var(--rule); }
+  .cw-support .lbl { border-bottom: none; }
+  .cw-support .knight img { width: 200px; }
+  .cw-support .delaski img { width: 230px; }
+}
 @media (max-width: 1000px) {
   .cw-bar > div { padding: 1rem 1.5rem; }
 }
@@ -161,15 +226,61 @@
 
 <div class="cw-bar" role="list" aria-label="Event details">
   <div role="listitem">George Washington University &middot; Washington, D.C.</div>
-  <div role="listitem" class="soon">Program and speakers coming soon</div>
+  <div role="listitem" class="soon">Full lineup announced in January</div>
   <div role="listitem" aria-hidden="true"><span class="cmyk-dots"><i></i><i></i><i></i><i></i></span></div>
 </div>
+
+
+<section class="cw-line" aria-labelledby="cw-line-h">
+  <div class="cw-line-head">
+    <div>
+      <div class="idx">The lineup, so far</div>
+      <h2 id="cw-line-h">Who's on stage</h2>
+    </div>
+    <div>
+      <p>A full day at GW's Jack Morton Auditorium, the former home of CNN's <em>Crossfire</em>, bringing Washington's journalism establishment together with the creators remaking it. The day closes with <em>Crossfire, Reloaded</em>.</p>
+    </div>
+  </div>
+  <ul class="cw-roster">
+    <li>
+      <span class="role c">Featured conversation</span>
+      <h3>Aaron Parnas</h3>
+      <p>Independent journalist whose political news coverage reaches millions on TikTok and Substack.</p>
+    </li>
+    <li>
+      <span class="role m">Moderator</span>
+      <h3>Julia Angwin</h3>
+      <p>Award-winning investigative journalist and <em>New York Times</em> Opinion columnist.</p>
+    </li>
+    <li>
+      <span class="role y">Speaker</span>
+      <h3>V Spehar</h3>
+      <p>Award-winning creator behind <em>Under the Desk News</em>.</p>
+    </li>
+    <li>
+      <span class="role y">Speaker</span>
+      <h3>Steve Roberts</h3>
+      <p>Veteran Washington journalist and GW professor.</p>
+    </li>
+    <li>
+      <span class="role c">Speaker</span>
+      <h3>Chris Cillizza</h3>
+      <p>Former CNN and <em>Washington Post</em> political analyst who now covers politics independently.</p>
+    </li>
+    <li class="ref">
+      <span class="role">Referee &middot; <em>Crossfire, Reloaded</em></span>
+      <h3>Frank Sesno</h3>
+      <p>Former CNN anchor and Washington bureau chief.</p>
+    </li>
+  </ul>
+  <div class="cw-more"><span>More speakers to be announced in January</span><span class="cmyk-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+</section>
 
 <section class="cw-asks" aria-label="Get involved">
   <div class="cw-ask attend">
     <div class="idx">01 &middot; Stay in the loop</div>
     <h2>Be the first to know</h2>
-    <p>This day is for anyone who wants to understand how Americans are learning about Washington right now. Journalists and creators will be there. So will the people on the other side of the story, from Hill staff and campaign communicators to policy wonks. Leave your email and we'll let you know the moment the program and speakers are set.</p>
+    <p>This day is for anyone who wants to understand how Americans are learning about Washington right now. Journalists and creators will be there. So will the people on the other side of the story, from Hill staff and campaign communicators to policy wonks. Leave your email and we'll let you know the moment the full program is set.</p>
     <form class="cw-sign" id="cwSign" novalidate>
       <label for="cwEmail" class="cw-sign-lbl">Your email</label>
       <div class="cw-sign-row">
@@ -193,11 +304,18 @@
   </div>
 </section>
 
+<section class="cw-support" aria-label="Supporters">
+  <div class="lbl"><b>Supported by</b><span>Additional partners will be announced in the coming months.</span></div>
+  <div class="knight"><a href="https://knightfoundation.org"><img src="sponsor-knight-foundation.png" alt="John S. and James L. Knight Foundation"></a></div>
+  <div class="delaski"><a href="https://delaskifamilyfoundation.org"><img src="sponsor-delaski-family-foundation.png" alt="deLaski Family Foundation"></a></div>
+</section>
+
+
 </main>
 
 <footer class="cw-foot">
   <div class="blk">
-    <p>Covering Washington in the Creator Era is presented by <a href="index.html">Project C</a> and hosted by <a href="https://smpa.gwu.edu">GW's School of Media and Public Affairs</a>. Questions about the event: <a href="mailto:coveringwashington@projectc.com">coveringwashington@projectc.com</a>. Press inquiries: <a href="mailto:info@projectc.com?subject=Covering%20Washington%20%C2%B7%20Press">info@projectc.com</a>.</p>
+    <p>Covering Washington in the Creator Era is presented by <a href="index.html">Project C</a> and hosted by <a href="https://smpa.gwu.edu">GW's School of Media and Public Affairs</a>. Questions about the event: <a href="mailto:coveringwashington@projectc.com">coveringwashington@projectc.com</a>. Press inquiries: <a href="mailto:anna@projectc.com?subject=Covering%20Washington%20%C2%B7%20Press">anna@projectc.com</a>.</p>
   </div>
   <div class="blk">
     <svg class="reg-mark" viewBox="0 0 200 200" role="img" aria-label="Project C, independent by design, est. 2024">

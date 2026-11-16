@@ -172,11 +172,16 @@ section[id] { scroll-margin-top: 56px; }
 .cw-sec-head p em { color: var(--ink); }
 
 /* ---------- why now: the numbers ---------- */
-.cw-why { border-bottom: var(--rule); display: grid; grid-template-columns: 1fr 1fr 1.25fr; }
-.cw-why > div { padding: clamp(2.2rem, 4vw, 3.4rem) 2.5rem; }
+.cw-why { border-bottom: var(--rule); display: grid; grid-template-columns: 1.45fr 1fr 1fr 1fr; }
+.cw-why > div { padding: clamp(2.2rem, 4vw, 3.4rem) clamp(1.5rem, 2.4vw, 2.5rem); }
 .cw-why > div + div { border-left: var(--rule); }
-.cw-why .big { font-family: var(--display); font-weight: 400; font-size: clamp(4.4rem, 8vw, 7rem); line-height: 0.85; color: var(--navy); }
+.cw-why .big { font-family: var(--display); font-weight: 400; font-size: clamp(4rem, 6vw, 6rem); line-height: 0.85; color: var(--navy); }
 .cw-why .big.coral { color: var(--coral-deep); }
+.cw-why .pair { display: flex; gap: 1.1rem; align-items: flex-end; }
+.cw-why .pair > div { display: flex; flex-direction: column; }
+.cw-why .pair .big { color: var(--ink); font-size: clamp(3rem, 4.2vw, 4.2rem); }
+.cw-why .pair .who { margin-top: 0.4rem; font-size: 0.64rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.cw-why .pair .sl { font-family: var(--display); font-size: clamp(2.2rem, 3vw, 3rem); line-height: 1; color: var(--muted); padding-bottom: 1.3rem; }
 .cw-why .cap { margin-top: 0.9rem; font-size: 0.95rem; line-height: 1.5; color: var(--ink); max-width: 26ch; }
 .cw-why .src { margin-top: 0.6rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
 .cw-why .q .idx { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 1rem; }
@@ -257,8 +262,9 @@ section[id] { scroll-margin-top: 56px; }
   .cw-tl { grid-template-columns: 1fr 1fr; }
   .cw-tl > div:nth-child(2) { border-right: none; }
   .cw-tl > div:nth-child(-n+2) { border-bottom: var(--rule); }
-  .cw-why { grid-template-columns: 1fr 1fr; }
-  .cw-why .q { grid-column: 1 / -1; border-left: none !important; border-top: var(--rule); }
+  .cw-why { grid-template-columns: 1fr 1fr 1fr; }
+  .cw-why .q { grid-column: 1 / -1; border-bottom: var(--rule); }
+  .cw-why .q + div { border-left: none; }
 }
 @media (max-width: 860px) {
   .cw-nav a { padding: 0 1rem; height: 48px; }
@@ -402,6 +408,12 @@ section[id] { scroll-margin-top: 56px; }
 
 
 <section class="cw-why" id="about" aria-label="Why now">
+  <div class="q">
+    <div class="idx">Why now</div>
+    <p class="ask">Who does Washington trust now, and who does America trust to tell it about Washington?</p>
+    <p>The last presidential election was called the creator election. The next one will be the creator journalism election. With the midterms decided and the 2028 field taking shape, spring 2027 is the moment to bring this field together in the city it covers.</p>
+    <p>After the summit, Project C and SMPA will publish a field report on what was said, what creator journalists need and how the field is changing.</p>
+  </div>
   <div>
     <div class="big">64%</div>
     <p class="cap">of U.S. adults say they got information about the 2026 midterms from online creators.</p>
@@ -412,11 +424,14 @@ section[id] { scroll-margin-top: 56px; }
     <p class="cap">of adults ages 18 to 29 say the same.</p>
     <p class="src">SaySo/YouGov, Sept. 2026</p>
   </div>
-  <div class="q">
-    <div class="idx">Why now</div>
-    <p class="ask">Who does Washington trust now, and who does America trust to tell it about Washington?</p>
-    <p>The last presidential election was called the creator election. The next one will be the creator journalism election. With the midterms decided and the 2028 field taking shape, spring 2027 is the moment to bring this field together in the city it covers.</p>
-    <p>After the summit, Project C and SMPA will publish a field report on what was said, what creator journalists need and how the field is changing.</p>
+  <div>
+    <div class="pair">
+      <div><span class="big">21%</span><span class="who">Republicans</span></div>
+      <span class="sl" aria-hidden="true">/</span>
+      <div><span class="big">22%</span><span class="who">Democrats</span></div>
+    </div>
+    <p class="cap">regularly get news from news influencers. The habit crosses party lines almost evenly.</p>
+    <p class="src">Pew Research Center, Aug. 2025 &middot; Includes leaners</p>
   </div>
 </section>
 

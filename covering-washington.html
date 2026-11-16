@@ -375,6 +375,33 @@ section[id] { scroll-margin-top: 56px; }
 .cw-ask.sponsor .btn { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .cw-ask.sponsor .btn:hover { background: var(--white); color: var(--ink); }
 .cw-sign-row:focus-within { outline-color: var(--ink); }
+
+/* ---------- tickets (Nov 16) ---------- */
+.cw-tix { display: grid; grid-template-columns: auto 1fr auto; border-bottom: var(--rule); background: var(--ink); color: var(--white); }
+.cw-tix .price { padding: 2rem 2.4rem; background: var(--magenta); color: var(--ink); border-right: var(--rule); display: flex; flex-direction: column; justify-content: center; }
+.cw-tix .price .lbl { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
+.cw-tix .price b { font-family: var(--display); font-weight: 400; font-size: clamp(4.4rem, 7vw, 6.4rem); line-height: 0.9; }
+.cw-tix .info { padding: 2rem 2.4rem; display: flex; flex-direction: column; justify-content: center; }
+.cw-tix h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 0.95; margin-bottom: 0.7rem; }
+.cw-tix p { color: rgba(245,246,248,0.82); max-width: 60ch; font-size: 0.98rem; line-height: 1.6; }
+.cw-tix p.note { margin-top: 0.6rem; font-size: 0.88rem; color: rgba(245,246,248,0.7); }
+.cw-tix p.note a { color: var(--white); font-weight: 700; }
+.cw-tix .go { display: flex; align-items: center; padding: 2rem 2.4rem; border-left: 2px solid rgba(245,246,248,0.25); }
+.cw-tix .go .btn { font-size: 0.9rem; padding: 1.05rem 1.9rem; }
+.cw-tix .go .btn svg { width: 18px; height: 12px; }
+.cw-confirm[hidden] { display: none; }
+.cw-confirm { display: flex; align-items: center; gap: 1rem; padding: 1rem 3.4rem 1rem 2.5rem; background: var(--yellow); border-bottom: var(--rule); position: relative; }
+.cw-confirm .tag { flex: none; background: var(--ink); color: var(--white); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.7rem; }
+.cw-confirm p { font-size: 0.95rem; color: var(--ink); }
+.cw-confirm button { position: absolute; right: 1.2rem; top: 50%; transform: translateY(-50%); background: none; border: none; font-size: 1rem; cursor: pointer; color: var(--ink); }
+@media (max-width: 1000px) {
+  .cw-tix { grid-template-columns: 1fr; }
+  .cw-tix .price { border-right: none; border-bottom: var(--rule); padding: 1.6rem 1.5rem; flex-direction: row; align-items: baseline; justify-content: space-between; }
+  .cw-tix .info { padding: 1.8rem 1.5rem 0.6rem; }
+  .cw-tix .go { border-left: none; padding: 1.2rem 1.5rem 2rem; }
+  .cw-tix .go .btn { width: 100%; justify-content: center; }
+  .cw-confirm { padding: 1rem 3rem 1rem 1.5rem; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}
 </style>
 </head>
 <body>
@@ -405,9 +432,22 @@ section[id] { scroll-margin-top: 56px; }
     <a href="#speakers">Speakers</a>
     <a href="#partners">Partners</a>
     <span class="sp"></span>
-    <a class="cta" href="#updates">Get updates <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+    <a class="cta" href="https://buy.stripe.com/bJe4gyezU32m0kl1qb4Ja08">Get tickets <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
   </div>
 </nav>
+<div class="cw-confirm" id="cwConfirm" role="status" hidden>
+  <span class="tag">You're in</span>
+  <p>Thanks for getting a ticket. Your receipt is on its way from Stripe, and we'll send event details as March 30 gets closer.</p>
+  <button type="button" aria-label="Dismiss" onclick="document.getElementById('cwConfirm').hidden=true">&#10005;</button>
+</div>
+<script>
+(function () {
+  if (!/[?&]ticket=confirmed/.test(location.search)) return;
+  document.getElementById('cwConfirm').hidden = false;
+  if (window.plausible) window.plausible('Covering Washington ticket');
+  try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+})();
+</script>
 
 <main id="main">
 
@@ -427,8 +467,8 @@ section[id] { scroll-margin-top: 56px; }
       <div role="listitem"><b>Jack Morton Auditorium</b><span>George Washington University, Washington, D.C.</span></div>
     </div>
     <div class="cw-ctas">
-      <a class="btn btn-fill" href="#updates">Get updates <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
-      <a class="btn" href="#speakers">See who's speaking <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+      <a class="btn btn-fill" href="https://buy.stripe.com/bJe4gyezU32m0kl1qb4Ja08">Get tickets &middot; $50 <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+      <a class="btn" href="#updates">Get updates <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
     </div>
   </div>
 </section>
@@ -511,6 +551,16 @@ section[id] { scroll-margin-top: 56px; }
     </li>
   </ul>
   <div class="cw-more"><span>More speakers to be announced in January</span><span class="cmyk-dots" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+</section>
+
+<section class="cw-tix" id="tickets" aria-labelledby="cw-tix-h">
+  <div class="price"><span class="lbl">General admission</span><b>$50</b></div>
+  <div class="info">
+    <h2 id="cw-tix-h">Tickets are on sale</h2>
+    <p>A full day at GW's Jack Morton Auditorium on Tuesday, March 30, 2027. Seats are limited. Full refunds until March 1, and you can transfer your ticket to a colleague anytime.</p>
+    <p class="note">Students attend free. Email <a href="mailto:coveringwashington@projectc.com?subject=Covering%20Washington%20%C2%B7%20Student%20ticket">coveringwashington@projectc.com</a> for a student code.</p>
+  </div>
+  <div class="go"><a class="btn btn-coral" href="https://buy.stripe.com/bJe4gyezU32m0kl1qb4Ja08">Get your ticket <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></div>
 </section>
 
 <section class="cw-asks" id="updates" aria-label="Get involved">

@@ -21,6 +21,10 @@
 //   customer.updated
 //     - if the email on the Stripe customer changed, Liz gets a heads-up.
 //       Login email is never changed automatically.
+//   checkout.session.completed  (Nov 2026)
+//     - event ticket payment links (metadata.event set) -> row in event_tickets.
+//   charge.refunded  (Nov 2026)
+//     - full refund of an event ticket -> event_tickets.refunded_at.
 //
 // Every event id is recorded in stripe_events first, so a replayed or
 // duplicate delivery is a no-op. If processing throws, the record is
@@ -296,6 +300,63 @@ async function onCustomerUpdated(supabase, customer, previous) {
 // ---------------------------------------------------------------------------
 // Handler
 // ---------------------------------------------------------------------------
+// ---------- Event tickets (added Nov 2026, Covering Washington) ----------
+// Payment links for events carry metadata.event (e.g. covering-washington-2027).
+// A completed checkout writes one row to public.event_tickets; a full refund
+// stamps refunded_at. Membership checkouts have no metadata.event and are ignored.
+function fieldValue(session, key) {
+  const f = (session.custom_fields || []).find((x) => x.key === key);
+  if (!f) return null;
+  if (f.text && f.text.value) return f.text.value;
+  if (f.dropdown && f.dropdown.value) return f.dropdown.value;
+  return null;
+}
+
+async function onCheckoutCompleted(supabase, stripe, session) {
+  const eventSlug = session.metadata && session.metadata.event;
+  if (!eventSlug) return 'ignored (not an event checkout)';
+  const cd = session.customer_details || {};
+  let promoCode = null;
+  let promoKind = null;
+  const disc = (session.discounts || [])[0];
+  if (disc && disc.promotion_code) {
+    try {
+      const pc = await stripe.promotionCodes.retrieve(typeof disc.promotion_code === 'string' ? disc.promotion_code : disc.promotion_code.id);
+      promoCode = pc.code;
+      promoKind = pc.metadata && pc.metadata.kind;
+    } catch (e) { /* keep going without the code */ }
+  }
+  const amount = session.amount_total || 0;
+  const name = (session.collected_information && session.collected_information.individual_name) || cd.individual_name || cd.name || null;
+  const row = {
+    event: eventSlug,
+    checkout_session_id: session.id,
+    payment_intent_id: typeof session.payment_intent === 'string' ? session.payment_intent : (session.payment_intent && session.payment_intent.id) || null,
+    stripe_customer_id: typeof session.customer === 'string' ? session.customer : null,
+    name,
+    email: cd.email ? cd.email.toLowerCase() : null,
+    organization: fieldValue(session, 'organization'),
+    title: fieldValue(session, 'title'),
+    attending_as: fieldValue(session, 'attendingas'),
+    amount_paid: amount,
+    currency: session.currency || 'usd',
+    promo_code: promoCode,
+    ticket_type: amount > 0 ? 'paid' : (promoKind || 'comp'),
+  };
+  const { error } = await supabase.from('event_tickets').upsert(row, { onConflict: 'checkout_session_id' });
+  if (error) throw new Error('event_tickets insert: ' + error.message);
+  return `ticket saved (${eventSlug}, ${row.ticket_type})`;
+}
+
+async function onChargeRefunded(supabase, charge) {
+  if (!charge.refunded) return 'partial refund, ignored';
+  const pi = typeof charge.payment_intent === 'string' ? charge.payment_intent : charge.payment_intent && charge.payment_intent.id;
+  if (!pi) return 'ignored (no payment intent)';
+  const { data, error } = await supabase.from('event_tickets').update({ refunded_at: new Date().toISOString() }).eq('payment_intent_id', pi).select('id');
+  if (error) throw new Error('event_tickets refund: ' + error.message);
+  return data && data.length ? 'ticket marked refunded' : 'ignored (not an event ticket)';
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') return { statusCode: 405, body: 'Method not allowed' };
   if (!STRIPE_SECRET_KEY || !STRIPE_WEBHOOK_SECRET || !SUPABASE_URL || !SUPABASE_SECRET_KEY) {
@@ -337,6 +398,10 @@ exports.handler = async (event) => {
         outcome = await onInvoicePaid(supabase, stripe, obj); break;
       case 'customer.updated':
         outcome = await onCustomerUpdated(supabase, obj, evt.data.previous_attributes); break;
+      case 'checkout.session.completed':
+        outcome = await onCheckoutCompleted(supabase, stripe, obj); break;
+      case 'charge.refunded':
+        outcome = await onChargeRefunded(supabase, obj); break;
       default:
         break;
     }

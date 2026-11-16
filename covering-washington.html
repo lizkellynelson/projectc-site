@@ -172,9 +172,21 @@ section[id] { scroll-margin-top: 56px; }
 .cw-sec-head p em { color: var(--ink); }
 
 /* ---------- why now: the numbers ---------- */
-.cw-why { border-bottom: var(--rule); display: grid; grid-template-columns: 1.45fr 1fr 1fr 1fr; }
-.cw-why > div { padding: clamp(2.2rem, 4vw, 3.4rem) clamp(1.5rem, 2.4vw, 2.5rem); }
-.cw-why > div + div { border-left: var(--rule); }
+.cw-why { border-bottom: var(--rule); display: grid; grid-template-columns: 1fr 1.3fr; }
+.cw-why .q { padding: clamp(2.2rem, 4vw, 3.4rem) clamp(1.5rem, 2.6vw, 2.5rem); border-right: var(--rule); display: flex; flex-direction: column; justify-content: center; }
+.cw-why .q .idx { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 1rem; }
+.cw-why .q p { font-size: 1rem; line-height: 1.65; color: var(--muted); }
+.cw-why .q p + p { margin-top: 0.9rem; }
+.cw-why .q .ask { font-family: var(--serif); font-style: italic; font-size: clamp(1.25rem, 1.7vw, 1.5rem); line-height: 1.35; color: var(--ink); }
+.cw-why .stats { display: grid; grid-template-columns: 1fr 1fr; }
+.cw-why .stats, .cw-why .stats p { text-align: left; }
+.cw-why .st { align-items: flex-start; }
+.cw-why .st p { margin-left: 0; margin-right: 0; }
+.cw-why .st { padding: clamp(2rem, 3.4vw, 3rem) clamp(1.5rem, 2.4vw, 2.5rem); display: flex; flex-direction: column; justify-content: center; }
+.cw-why .st + .st { border-left: var(--rule); }
+.cw-why .st.wide { grid-column: 1 / -1; border-left: none; border-top: var(--rule); flex-direction: row; align-items: center; gap: clamp(1.4rem, 2.6vw, 2.4rem); background: var(--porcelain); }
+.cw-why .st.wide .cap { max-width: 40ch; font-size: 1.02rem; }
+.cw-why .st.wide { justify-content: flex-start; }
 .cw-why .big { font-family: var(--display); font-weight: 400; font-size: clamp(4rem, 6vw, 6rem); line-height: 0.85; color: var(--navy); }
 .cw-why .big.coral { color: var(--coral-deep); }
 .cw-why .pair { display: flex; gap: 1.1rem; align-items: flex-end; }
@@ -182,12 +194,11 @@ section[id] { scroll-margin-top: 56px; }
 .cw-why .pair .big { color: var(--ink); font-size: clamp(3rem, 4.2vw, 4.2rem); }
 .cw-why .pair .who { margin-top: 0.4rem; font-size: 0.64rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .cw-why .pair .sl { font-family: var(--display); font-size: clamp(2.2rem, 3vw, 3rem); line-height: 1; color: var(--muted); padding-bottom: 1.3rem; }
-.cw-why .cap { margin-top: 0.9rem; font-size: 0.95rem; line-height: 1.5; color: var(--ink); max-width: 26ch; }
+.cw-why .cap { margin-top: 0.9rem; font-size: 0.95rem; line-height: 1.5; color: var(--ink); max-width: 30ch; }
+.cw-why .st.wide .cap { margin-top: 0; }
+.cw-why .sub { margin-top: 0.7rem; padding-top: 0.7rem; border-top: var(--rule-thin); font-size: 0.9rem; color: var(--ink); max-width: 30ch; }
+.cw-why .sub b { font-family: var(--display); font-weight: 400; font-size: 1.6rem; color: var(--coral-deep); margin-right: 0.3rem; vertical-align: -0.12em; }
 .cw-why .src { margin-top: 0.6rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
-.cw-why .q .idx { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--coral-deep); margin-bottom: 1rem; }
-.cw-why .q p { font-size: 1rem; line-height: 1.65; color: var(--muted); }
-.cw-why .q p + p { margin-top: 0.9rem; }
-.cw-why .q .ask { font-family: var(--serif); font-style: italic; font-size: clamp(1.25rem, 1.7vw, 1.5rem); line-height: 1.35; color: var(--ink); }
 
 /* ---------- the day ---------- */
 .cw-day { border-bottom: var(--rule); }
@@ -262,9 +273,8 @@ section[id] { scroll-margin-top: 56px; }
   .cw-tl { grid-template-columns: 1fr 1fr; }
   .cw-tl > div:nth-child(2) { border-right: none; }
   .cw-tl > div:nth-child(-n+2) { border-bottom: var(--rule); }
-  .cw-why { grid-template-columns: 1fr 1fr 1fr; }
-  .cw-why .q { grid-column: 1 / -1; border-bottom: var(--rule); }
-  .cw-why .q + div { border-left: none; }
+  .cw-why { grid-template-columns: 1fr; }
+  .cw-why .q { border-right: none; border-bottom: var(--rule); }
 }
 @media (max-width: 860px) {
   .cw-nav a { padding: 0 1rem; height: 48px; }
@@ -274,7 +284,7 @@ section[id] { scroll-margin-top: 56px; }
   .cw-sec-head { grid-template-columns: 1fr; }
   .cw-sec-head > div { padding: 2.2rem 1.5rem; }
   .cw-sec-head > div + div { border-left: none; border-top: var(--rule); padding-top: 1.6rem; }
-  .cw-why > div { padding: 2rem 1.5rem; }
+  .cw-why .q, .cw-why .st { padding: 2rem 1.5rem; }
   .cw-tl > div { padding: 1.8rem 1.5rem 2rem; }
   .cw-report { grid-template-columns: 1fr; }
   .cw-report > div { padding: 1.3rem 1.5rem; }
@@ -289,8 +299,9 @@ section[id] { scroll-margin-top: 56px; }
   .cw-facts { grid-template-columns: 1fr; }
   .cw-facts div { border-right: none; }
   .cw-facts div:first-child { border-bottom: var(--rule); }
-  .cw-why { grid-template-columns: 1fr; }
-  .cw-why > div + div { border-left: none; border-top: var(--rule); }
+  .cw-why .stats { grid-template-columns: 1fr; }
+  .cw-why .st + .st { border-left: none; border-top: var(--rule); }
+  .cw-why .st.wide { flex-direction: column; align-items: flex-start; gap: 0.9rem; }
   .cw-tl { grid-template-columns: 1fr; }
   .cw-tl > div { border-right: none !important; border-bottom: var(--rule); }
   .cw-tl > div:last-child { border-bottom: none; }
@@ -410,28 +421,33 @@ section[id] { scroll-margin-top: 56px; }
 <section class="cw-why" id="about" aria-label="Why now">
   <div class="q">
     <div class="idx">Why now</div>
-    <p class="ask">Who does Washington trust now, and who does America trust to tell it about Washington?</p>
+    <p class="ask">Where Americans find and follow political news &ndash; and who they trust to guide their political choices &ndash; is changing.</p>
     <p>The last presidential election was called the creator election. The next one will be the creator journalism election. With the midterms decided and the 2028 field taking shape, spring 2027 is the moment to bring this field together in the city it covers.</p>
     <p>After the summit, Project C and SMPA will publish a field report on what was said, what creator journalists need and how the field is changing.</p>
   </div>
-  <div>
-    <div class="big">64%</div>
-    <p class="cap">of U.S. adults say they got information about the 2026 midterms from online creators.</p>
-    <p class="src">SaySo/YouGov, Sept. 2026</p>
-  </div>
-  <div>
-    <div class="big coral">77%</div>
-    <p class="cap">of adults ages 18 to 29 say the same.</p>
-    <p class="src">SaySo/YouGov, Sept. 2026</p>
-  </div>
-  <div>
-    <div class="pair">
-      <div><span class="big">21%</span><span class="who">Republicans</span></div>
-      <span class="sl" aria-hidden="true">/</span>
-      <div><span class="big">22%</span><span class="who">Democrats</span></div>
+  <div class="stats">
+    <div class="st">
+      <div class="big">64%</div>
+      <p class="cap">of U.S. adults got information about the 2026 midterms from online creators.</p>
+      <p class="sub"><b>77%</b> of those ages 18 to 29</p>
+      <p class="src">SaySo/YouGov, Sept. 2026</p>
     </div>
-    <p class="cap">regularly get news from news influencers. The habit crosses party lines almost evenly.</p>
-    <p class="src">Pew Research Center, Aug. 2025 &middot; Includes leaners</p>
+    <div class="st">
+      <div class="pair">
+        <div><span class="big">21%</span><span class="who">Republicans</span></div>
+        <span class="sl" aria-hidden="true">/</span>
+        <div><span class="big">22%</span><span class="who">Democrats</span></div>
+      </div>
+      <p class="cap">regularly get news from news influencers. The habit crosses party lines almost evenly.</p>
+      <p class="src">Pew Research Center, Aug. 2025 &middot; Includes leaners</p>
+    </div>
+    <div class="st wide">
+      <div class="big coral">61%</div>
+      <div>
+        <p class="cap">of U.S. adults trust a well-known independent news creator as much as a major news organization.</p>
+        <p class="src">Syracuse University Center for the Creator Economy, Sept. 2026</p>
+      </div>
+    </div>
   </div>
 </section>
 

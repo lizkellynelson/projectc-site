@@ -357,6 +357,24 @@ section[id] { scroll-margin-top: 56px; }
   .cw-bar > div { border-right: none !important; border-bottom: var(--rule-thin) !important; letter-spacing: 0.14em; }
   .cw-bar > div:last-child { border-bottom: none !important; }
 }
+
+/* ---------- color pass (Nov 16) ---------- */
+.cw-nav { background: var(--navy); }
+.cw-nav a { color: var(--white); border-right-color: rgba(255,255,255,0.22); }
+.cw-nav a:hover { background: rgba(255,255,255,0.1); }
+.cw-nav a.on::after { bottom: 0; }
+.cw-nav a.cta { background: var(--coral); color: var(--ink); border-left: var(--rule); }
+.cw-nav a.cta:hover { background: var(--yellow); color: var(--ink); }
+.cw-ask.attend { background: var(--cyan); box-shadow: none; }
+.cw-ask.sponsor { background: var(--yellow); box-shadow: none; }
+.cw-ask.attend .idx, .cw-ask.sponsor .idx { color: var(--ink); }
+.cw-ask.attend p, .cw-ask.sponsor p { color: var(--ink); }
+.cw-ask.attend .cw-sign-fine { color: var(--ink); opacity: 0.8; }
+.cw-ask.attend .cw-sign-msg { color: var(--ink) !important; }
+.cw-ask.attend .cw-done-tag { background: var(--yellow); }
+.cw-ask.sponsor .btn { background: var(--ink); color: var(--white); border-color: var(--ink); }
+.cw-ask.sponsor .btn:hover { background: var(--white); color: var(--ink); }
+.cw-sign-row:focus-within { outline-color: var(--ink); }
 </style>
 </head>
 <body>

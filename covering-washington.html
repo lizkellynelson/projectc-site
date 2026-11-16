@@ -375,6 +375,10 @@ section[id] { scroll-margin-top: 56px; }
 .cw-ask.sponsor .btn { background: var(--ink); color: var(--white); border-color: var(--ink); }
 .cw-ask.sponsor .btn:hover { background: var(--white); color: var(--ink); }
 .cw-sign-row:focus-within { outline-color: var(--ink); }
+
+/* newsletter opt-in (Nov 16) */
+.cw-nl { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.9rem; font-size: 0.9rem; font-weight: 600; color: var(--ink); cursor: pointer; }
+.cw-nl input { width: 18px; height: 18px; margin: 0; accent-color: var(--ink); flex: none; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -524,9 +528,10 @@ section[id] { scroll-margin-top: 56px; }
         <input id="cwEmail" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
         <button type="submit" class="btn btn-fill" id="cwBtn">Keep me posted <svg viewBox="0 0 18 12" aria-hidden="true"><path d="M0 6h16M11 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
       </div>
+      <label class="cw-nl"><input type="checkbox" id="cwNewsletter" name="newsletter" value="yes"><span>Also send me the Project C newsletter</span></label>
       <div class="cw-hp" aria-hidden="true"><label for="cwWebsite">Leave this empty</label><input id="cwWebsite" name="website" type="text" tabindex="-1" autocomplete="off"></div>
       <p class="cw-sign-msg" id="cwMsg" role="status" aria-live="polite"></p>
-      <p class="cw-sign-fine">Updates about this event only. No spam, and you can ask us to drop you anytime.</p>
+      <p class="cw-sign-fine">We&rsquo;ll only email you about this event unless you tick the newsletter box. No spam, and you can unsubscribe anytime.</p>
     </form>
     <div class="cw-done" id="cwDone" hidden>
       <span class="cw-done-tag">You're on the list</span>
@@ -612,6 +617,7 @@ section[id] { scroll-margin-top: 56px; }
         event: 'covering-washington-2027',
         email: email,
         website: document.getElementById('cwWebsite').value,
+        newsletter: document.getElementById('cwNewsletter').checked,
         elapsed: Date.now() - started,
         source: document.referrer ? document.referrer.slice(0, 200) : 'direct',
         utm_source: params.get('utm_source'),

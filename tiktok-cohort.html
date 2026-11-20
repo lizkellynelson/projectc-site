@@ -462,6 +462,41 @@ table.prog tr.removed td { opacity: 0.45; }
 .rv-empty { border: var(--rule); padding: 2rem; color: var(--muted); }
 .saved { font-size: 0.66rem; color: #0B6A8A; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; margin-left: 0.4rem; }
 
+/* ---------- AWARDS (partner + staff) ---------- */
+.aw-grid { max-width: var(--maxw); margin: 0 auto clamp(2.4rem,4vw,3.4rem); padding: 0 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; align-items: start; }
+.aw-col { border: var(--rule); background: var(--white); }
+.aw-col > h2 { background: var(--ink); color: #fff; padding: 0.95rem 1.2rem; font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; }
+.aw-col > h2 span { font-size: 0.66rem; letter-spacing: 0.08em; color: var(--yellow); }
+.aw-col.c-improved > h2 span { color: var(--cyan); }
+.aw-status { padding: 0.75rem 1.2rem; border-bottom: var(--rule); background: var(--porcelain); font-size: 0.8rem; line-height: 1.5; }
+.aw-status b { font-weight: 800; }
+.aw-nom { padding: 1.1rem 1.2rem; border-bottom: var(--rule-thin); }
+.aw-nom:last-of-type { border-bottom: none; }
+.aw-nom.is-winner { box-shadow: inset 8px 0 0 var(--coral); background: #fff6f2; }
+.aw-top { display: flex; justify-content: space-between; gap: 0.8rem; align-items: flex-start; }
+.aw-top h3 { font-size: 1.02rem; font-weight: 800; line-height: 1.25; }
+.aw-top .h { font-size: 0.8rem; color: var(--coral-deep); font-weight: 700; }
+.aw-tally { flex: none; text-align: center; border: var(--rule); min-width: 3.2rem; padding: 0.25rem 0.4rem; }
+.aw-tally b { display: block; font-family: var(--serif); font-size: 1.4rem; line-height: 1; }
+.aw-tally small { font-size: 0.58rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.aw-why { margin-top: 0.6rem; font-size: 0.86rem; line-height: 1.5; }
+.aw-why textarea { width: 100%; font-family: var(--sans); font-size: 0.86rem; padding: 0.5rem 0.6rem; border: var(--rule-thin); min-height: 64px; resize: vertical; background: var(--porcelain); }
+.aw-vids { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.7rem; }
+.aw-vids a { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; border: 2px solid var(--ink); padding: 0.25rem 0.55rem; color: var(--ink); text-decoration: none; background: var(--white); }
+.aw-vids a:hover { background: var(--ink); color: #fff; }
+.aw-vids a.pk { background: var(--yellow); }
+.aw-acts { display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; margin-top: 0.8rem; }
+.aw-acts .vote-btn { margin-bottom: 0; }
+.aw-win { display: inline-flex; gap: 0.45rem; align-items: center; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; border: var(--rule); padding: 0.55rem 0.8rem; cursor: pointer; background: var(--white); }
+.aw-win input { width: 18px; height: 18px; accent-color: var(--coral-deep); }
+.aw-nom.is-winner .aw-win { background: var(--coral); }
+.aw-rm { margin-left: auto; font-size: 0.72rem; }
+.aw-voters { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.6rem; }
+.aw-add { padding: 1rem 1.2rem; border-top: var(--rule); background: var(--porcelain); display: flex; flex-direction: column; gap: 0.5rem; }
+.aw-add select, .aw-add input { font-family: var(--sans); font-size: 0.86rem; padding: 0.5rem 0.6rem; border: var(--rule); background: var(--white); width: 100%; }
+.aw-add .btn { align-self: flex-start; }
+.aw-key { font-size: 0.72rem; color: var(--muted); padding: 0 1.2rem 1rem; }
+
 /* ---------- staff tools ---------- */
 .tools { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem clamp(2.4rem,4vw,3.4rem); display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
 .tool { border: var(--rule); position: relative; }
@@ -511,6 +546,7 @@ table.prog tr.removed td { opacity: 0.45; }
   .shead-inner { grid-template-columns: 1fr; }
   .shead .hw-tally { text-align: left; }
   .rv-card { grid-template-columns: 1fr; }
+  .aw-grid { grid-template-columns: 1fr; padding: 0 1rem; }
   .rv-card > div + div { border-left: none; border-top: var(--rule); }
   .rv-weeks .hw-tabs { grid-template-columns: repeat(5, minmax(130px,1fr)); overflow-x: auto; }
   .band { grid-template-columns: 1fr; }
@@ -685,6 +721,7 @@ table.prog tr.removed td { opacity: 0.45; }
         <button role="tab" data-view="qa" aria-selected="false">Q&amp;A</button>
         <button role="tab" data-view="progress" aria-selected="false" hidden>Cohort progress</button>
         <button role="tab" data-view="review" aria-selected="false" hidden>Review homework</button>
+        <button role="tab" data-view="awards" aria-selected="false" hidden>Awards</button>
         <button role="tab" data-view="tools" aria-selected="false" hidden>Tools</button>
         <button class="signout" id="signoutBtn" type="button">Sign out</button>
       </div>
@@ -857,6 +894,18 @@ table.prog tr.removed td { opacity: 0.45; }
       <label class="small">Order <select id="rvSort"><option value="time">First turned in</option><option value="votes">Most votes</option></select></label>
     </div>
     <div class="rv-list" id="rvList"></div>
+  </div>
+
+  <!-- ===== AWARDS VIEW (partner + staff) ===== -->
+  <div id="viewAwards" hidden>
+    <div class="ops-head">
+      <div>
+        <div class="eyebrow cyan">Project C + TikTok</div>
+        <h1>Final session awards</h1>
+        <p>Project C&rsquo;s shortlist of seven finalists in each category, drawn from every video turned in so far. Watch their videos, then pick your top two in each category. When the team agrees, mark the two winners. Creators can&rsquo;t see this tab.</p>
+      </div>
+    </div>
+    <div class="aw-grid" id="awGrid"><div class="loading" style="padding:2rem">Loading the shortlists&hellip;</div></div>
   </div>
 
   <!-- ===== TOOLS VIEW (staff) ===== -->
@@ -1244,6 +1293,7 @@ table.prog tr.removed td { opacity: 0.45; }
     var tab = function (v) { return $('tabs').querySelector('button[data-view="' + v + '"]'); };
     tab('progress').hidden = me.role === 'creator';
     tab('review').hidden = me.role !== 'staff';
+    tab('awards').hidden = me.role === 'creator';
     tab('tools').hidden = me.role !== 'staff';
     tab('hub').textContent = me.role !== 'creator' ? 'Creator view' : 'My hub';
     renderHub();
@@ -1261,7 +1311,8 @@ table.prog tr.removed td { opacity: 0.45; }
       if (id) { var el = $('qa-' + id); if (el) { el.open = true; setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 60); } }
     } else if (g === 'homework') {
       setTab('hub'); setTimeout(function () { var el = $('homework'); if (el) el.scrollIntoView({ block: 'start' }); }, 60);
-    } else setTab('hub');
+    } else if (g === 'awards' && state.hub.me.role !== 'creator') setTab('awards');
+    else setTab('hub');
   }
   document.addEventListener('click', function (e) {
     var a = e.target.closest('[data-go]');
@@ -1271,8 +1322,9 @@ table.prog tr.removed td { opacity: 0.45; }
 
   function setTab(v) {
     $('tabs').querySelectorAll('button[data-view]').forEach(function (b) { b.setAttribute('aria-selected', b.getAttribute('data-view') === v ? 'true' : 'false'); });
-    $('viewHub').hidden = v !== 'hub'; $('viewQA').hidden = v !== 'qa'; $('viewProgress').hidden = v !== 'progress'; $('viewTools').hidden = v !== 'tools'; $('viewReview').hidden = v !== 'review';
+    $('viewHub').hidden = v !== 'hub'; $('viewQA').hidden = v !== 'qa'; $('viewProgress').hidden = v !== 'progress'; $('viewTools').hidden = v !== 'tools'; $('viewReview').hidden = v !== 'review'; $('viewAwards').hidden = v !== 'awards';
     if (v === 'progress' || v === 'tools') loadProgress();
+    if (v === 'awards') loadAwards();
     if (v === 'review') loadReview();
     window.scrollTo(0, 0);
   }
@@ -1770,6 +1822,98 @@ table.prog tr.removed td { opacity: 0.45; }
     assignmentWeeks().forEach(function (w) { if (Date.parse(w.dueAt) < now()) lastDue = w; });
     return (lastDue || dueWeek() || assignmentWeeks()[0]).id;
   }
+
+  // ---------- awards (partner + staff) ----------
+  var aw = { data: null };
+  function loadAwards() {
+    return api('awards').then(function (r) { aw.data = r; renderAwards(); }).catch(onErr);
+  }
+  function renderAwards() {
+    var d = aw.data; if (!d) return;
+    var L = d.limits;
+    $('awGrid').innerHTML = d.categories.map(function (c) {
+      var mine = c.nominees.filter(function (n) { return n.votes.some(function (v) { return v.voterId === d.meId; }); }).length;
+      var winners = c.nominees.filter(function (n) { return n.winner; });
+      var notVoted = d.team.filter(function (t) { return !c.nominees.some(function (n) { return n.votes.some(function (v) { return v.voterId === t.id; }); }); });
+      var status = '<b>Your picks: ' + mine + ' of ' + L.picks + '.</b> ' +
+        (winners.length ? 'Winners: ' + winners.map(function (n) { return esc(n.name); }).join(' and ') + '. ' : 'No winners marked yet. ') +
+        (notVoted.length ? 'Still to pick: ' + notVoted.map(function (t) { return esc(t.id === d.meId ? 'you' : t.name.split(' ')[0]); }).join(', ') + '.' : 'Everyone has picked.');
+      var noms = c.nominees.map(function (n) {
+        var me = n.votes.some(function (v) { return v.voterId === d.meId; });
+        var hu = handleUrl(n.tiktokHandle);
+        return '<div class="aw-nom' + (n.winner ? ' is-winner' : '') + '" data-nom="' + n.id + '">' +
+          '<div class="aw-top"><div><h3>' + esc(n.name) + '</h3>' + (n.tiktokHandle ? '<a class="h" href="' + hu + '" target="_blank" rel="noopener">@' + esc(n.tiktokHandle.replace(/^@/, '')) + '</a>' : '') + '</div>' +
+            '<div class="aw-tally" title="Team picks"><b>' + n.votes.length + '</b><small>pick' + (n.votes.length === 1 ? '' : 's') + '</small></div></div>' +
+          '<div class="aw-why">' + (d.canEdit ? '<label class="rv-lbl" for="aww-' + n.id + '">Why they&rsquo;re here <span class="saved" hidden>Saved</span></label><textarea id="aww-' + n.id + '" data-awwhy>' + esc(n.why) + '</textarea>' : esc(n.why)) + '</div>' +
+          '<div class="aw-vids">' + (n.videos.length ? n.videos.map(function (v) { return '<a href="' + esc(v.url) + '" target="_blank" rel="noopener"' + (v.picked ? ' class="pk" title="Picked for live critique"' : '') + '>Week ' + v.week + (v.picked ? ' &#9733;' : '') + ' &nearr;</a>'; }).join('') : '<span class="small">No videos turned in</span>') + '</div>' +
+          (n.votes.length ? '<div class="aw-voters">' + n.votes.map(function (v) { return '<span class="chip on">' + esc(v.voterId === d.meId ? 'You' : v.name) + '</span>'; }).join('') + '</div>' : '') +
+          '<div class="aw-acts"><button type="button" class="vote-btn" data-awvote aria-pressed="' + (me ? 'true' : 'false') + '"><i></i>My pick</button>' +
+            '<label class="aw-win"><input type="checkbox" data-awwin' + (n.winner ? ' checked' : '') + '> Winner</label>' +
+            (n.winner && n.winnerBy ? '<span class="small">Marked by ' + esc(n.winnerBy) + '</span>' : '') +
+            (d.canEdit ? '<button type="button" class="linkbtn aw-rm" data-awrm>Remove</button>' : '') + '</div>' +
+        '</div>';
+      }).join('') || '<div class="aw-nom small">No finalists yet.</div>';
+      var add = '';
+      if (d.canEdit && c.nominees.length < L.shortlist) {
+        var taken = c.nominees.map(function (n) { return n.personId; });
+        add = '<div class="aw-add" data-cat="' + c.key + '"><span class="rv-lbl" style="margin:0">Add a finalist (' + c.nominees.length + ' of ' + L.shortlist + ')</span>' +
+          '<select data-awwho><option value="">Choose a creator</option>' + d.creators.filter(function (p) { return taken.indexOf(p.id) < 0; }).map(function (p) { return '<option value="' + p.id + '">' + esc(p.name) + '</option>'; }).join('') + '</select>' +
+          '<input type="text" data-awnewwhy placeholder="Why they belong on the list" maxlength="600">' +
+          '<button type="button" class="btn" data-awadd>Add to the shortlist</button></div>';
+      }
+      return '<section class="aw-col c-' + c.key + '" data-cat="' + c.key + '"><h2>' + esc(c.label) + '<span>' + c.nominees.length + ' finalists &middot; pick ' + L.picks + '</span></h2>' +
+        '<div class="aw-status">' + status + '</div>' + noms + add +
+        '<div class="aw-key">&#9733; marks a video picked for live critique.</div></section>';
+    }).join('');
+  }
+  function awNom(el) { var c = el.closest('[data-nom]'); if (!c) return null; var id = c.getAttribute('data-nom'), hit = null; aw.data.categories.forEach(function (cat) { cat.nominees.forEach(function (n) { if (n.id === id) hit = n; }); }); return hit; }
+  $('awGrid').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-awvote]');
+    if (b) {
+      var n = awNom(b), on = b.getAttribute('aria-pressed') !== 'true';
+      b.disabled = true;
+      api('award_vote', { nomineeId: n.id, on: on }).then(function (r) {
+        if (r.ok === false && r.reason === 'max_picks') toast('You already have two picks in this category. Unpick one first.');
+        return loadAwards();
+      }).catch(onErr);
+      return;
+    }
+    var rm = e.target.closest('[data-awrm]');
+    if (rm) {
+      var n2 = awNom(rm);
+      if (!rm.classList.contains('confirm')) { rm.classList.add('confirm'); rm.textContent = 'Click again to remove ' + n2.name.split(' ')[0]; setTimeout(function () { if (rm.isConnected) { rm.classList.remove('confirm'); rm.textContent = 'Remove'; } }, 4000); return; }
+      api('award_remove', { nomineeId: n2.id }).then(loadAwards).catch(onErr);
+      return;
+    }
+    var add = e.target.closest('[data-awadd]');
+    if (add) {
+      var box = add.closest('.aw-add'), who = box.querySelector('[data-awwho]').value;
+      if (!who) { toast('Choose a creator first.'); return; }
+      add.disabled = true;
+      api('award_add', { category: box.getAttribute('data-cat'), personId: who, why: box.querySelector('[data-awnewwhy]').value }).then(function (r) {
+        if (r.ok === false) toast(r.reason === 'list_full' ? 'That shortlist already has seven.' : 'They\u2019re already on this list.');
+        return loadAwards();
+      }).catch(onErr);
+    }
+  });
+  $('awGrid').addEventListener('change', function (e) {
+    var cb = e.target.closest('[data-awwin]');
+    if (!cb) return;
+    var n = awNom(cb);
+    api('award_winner', { nomineeId: n.id, on: cb.checked }).then(function (r) {
+      if (r.ok === false && r.reason === 'max_winners') toast('This category already has two winners. Clear one first.');
+      return loadAwards();
+    }).catch(onErr);
+  });
+  $('awGrid').addEventListener('focusout', function (e) {
+    var ta = e.target.closest('[data-awwhy]');
+    if (!ta) return;
+    var n = awNom(ta);
+    if (ta.value.trim() === (n.why || '').trim()) return;
+    n.why = ta.value.trim();
+    api('award_why', { nomineeId: n.id, why: n.why }).then(function () { var s = ta.closest('.aw-why').querySelector('.saved'); if (s) { s.hidden = false; setTimeout(function () { s.hidden = true; }, 1600); } }).catch(onErr);
+  });
+
   function loadReview() {
     if (!rv.weekId) rv.weekId = defaultReviewWeek();
     renderReviewWeeks();

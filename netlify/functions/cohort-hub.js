@@ -802,6 +802,102 @@ exports.handler = async (event) => {
       return json(200, { ok: true, weeks: weeks.map((w) => ({ id: w.id, number: w.week_number, title: w.title, dueAt: w.due_at, sessionAt: w.session_at, items: w.items.length, hasAssignment: !!w.assignment, kind: w.kind || 'video', attendancePulled: !!w.attendance_pulled_at })), rows });
     }
 
+    // ---------------- awards: shortlists + picks (partner + staff) ----------------
+    // Two categories, up to 7 finalists each. Project C staff manage the shortlist;
+    // staff and TikTok partners each pick up to 2 per category, and anyone on the
+    // team can mark the 2 winners. Creators never see any of this.
+    if (action.startsWith('award')) {
+      if (!canSeeTable) return json(403, { error: 'Not allowed' });
+      const CATS = { quality: 'Highest-quality videos', improved: 'Most improved' };
+      const SHORT = 7, PICKS = 2, WINNERS = 2;
+      const loadNom = async (id) => {
+        const { data } = await supabase.from('hub_award_nominees').select('*').eq('id', id).eq('program_id', program.id).maybeSingle();
+        return data;
+      };
+
+      if (action === 'award_vote') {
+        const nom = await loadNom(body.nomineeId);
+        if (!nom) return json(404, { error: 'Not found' });
+        if (body.on) {
+          const { data: same } = await supabase.from('hub_award_nominees').select('id').eq('program_id', program.id).eq('category', nom.category);
+          const { data: mine } = await supabase.from('hub_award_votes').select('nominee_id').eq('voter_id', person.id).in('nominee_id', (same || []).map((x) => x.id));
+          if ((mine || []).length >= PICKS && !(mine || []).some((m) => m.nominee_id === nom.id)) return json(200, { ok: false, reason: 'max_picks' });
+          await supabase.from('hub_award_votes').upsert({ nominee_id: nom.id, voter_id: person.id });
+        } else {
+          await supabase.from('hub_award_votes').delete().eq('nominee_id', nom.id).eq('voter_id', person.id);
+        }
+        return json(200, { ok: true });
+      }
+
+      if (action === 'award_winner') {
+        const nom = await loadNom(body.nomineeId);
+        if (!nom) return json(404, { error: 'Not found' });
+        if (body.on) {
+          const { count } = await supabase.from('hub_award_nominees').select('id', { count: 'exact', head: true }).eq('program_id', program.id).eq('category', nom.category).eq('winner', true).neq('id', nom.id);
+          if ((count || 0) >= WINNERS) return json(200, { ok: false, reason: 'max_winners' });
+        }
+        await supabase.from('hub_award_nominees').update({ winner: !!body.on, winner_by: body.on ? person.id : null }).eq('id', nom.id);
+        return json(200, { ok: true });
+      }
+
+      if (action === 'award_add' || action === 'award_remove' || action === 'award_why') {
+        if (!isStaff) return json(403, { error: 'Only Project C can change the shortlist.' });
+        if (action === 'award_add') {
+          if (!CATS[body.category]) return json(400, { error: 'Bad category' });
+          const { data: who } = await supabase.from('hub_people').select('id').eq('id', body.personId).eq('program_id', program.id).eq('role', 'creator').maybeSingle();
+          if (!who) return json(404, { error: 'Not found' });
+          const { count } = await supabase.from('hub_award_nominees').select('id', { count: 'exact', head: true }).eq('program_id', program.id).eq('category', body.category);
+          if ((count || 0) >= SHORT) return json(200, { ok: false, reason: 'list_full' });
+          const { error } = await supabase.from('hub_award_nominees').insert({ program_id: program.id, category: body.category, person_id: who.id, why: String(body.why || '').trim().slice(0, 600) || null, added_by: person.id });
+          if (error && error.code === '23505') return json(200, { ok: false, reason: 'already' });
+          if (error) throw error;
+          return json(200, { ok: true });
+        }
+        const nom = await loadNom(body.nomineeId);
+        if (!nom) return json(404, { error: 'Not found' });
+        if (action === 'award_remove') await supabase.from('hub_award_nominees').delete().eq('id', nom.id);
+        else await supabase.from('hub_award_nominees').update({ why: String(body.why || '').trim().slice(0, 600) || null }).eq('id', nom.id);
+        return json(200, { ok: true });
+      }
+
+      if (action === 'awards') {
+        const weeks = await loadWeeks(supabase, program.id);
+        const weekNo = new Map(weeks.map((w) => [w.id, w.week_number]));
+        const { data: noms } = await supabase.from('hub_award_nominees').select('*').eq('program_id', program.id).order('created_at');
+        const ids = (noms || []).map((n) => n.id);
+        const pids = [...new Set((noms || []).map((n) => n.person_id))];
+        const { data: votes } = ids.length ? await supabase.from('hub_award_votes').select('*').in('nominee_id', ids) : { data: [] };
+        const { data: team } = await supabase.from('hub_people').select('id, name, role').eq('program_id', program.id).eq('status', 'active').in('role', ['staff', 'partner']);
+        const { data: people } = pids.length ? await supabase.from('hub_people').select('id, name, tiktok_handle').in('id', pids) : { data: [] };
+        const { data: subs } = pids.length ? await supabase.from('hub_submissions').select('person_id, week_id, video_url, critique_pick').in('person_id', pids) : { data: [] };
+        const nameOf = new Map((team || []).map((t) => [t.id, t.name]));
+        const pById = new Map((people || []).map((p) => [p.id, p]));
+        const shape = (n) => {
+          const p = pById.get(n.person_id) || {};
+          return {
+            id: n.id, personId: n.person_id, name: p.name, tiktokHandle: p.tiktok_handle, why: n.why || '',
+            winner: n.winner, winnerBy: n.winner_by ? (nameOf.get(n.winner_by) || '') : '',
+            votes: (votes || []).filter((v) => v.nominee_id === n.id).map((v) => ({ voterId: v.voter_id, name: nameOf.get(v.voter_id) || '' })),
+            videos: (subs || []).filter((s) => s.person_id === n.person_id && s.video_url && weekNo.get(s.week_id) > 1)
+              .map((s) => ({ week: weekNo.get(s.week_id), url: s.video_url, picked: !!s.critique_pick }))
+              .sort((a, b) => a.week - b.week),
+          };
+        };
+        let creators;
+        if (isStaff) {
+          const { data: cr } = await supabase.from('hub_people').select('id, name').eq('program_id', program.id).eq('status', 'active').eq('role', 'creator').order('name');
+          creators = cr || [];
+        }
+        return json(200, {
+          ok: true, meId: person.id, canEdit: isStaff, limits: { shortlist: SHORT, picks: PICKS, winners: WINNERS },
+          team: (team || []).map((t) => ({ id: t.id, name: t.name, role: t.role })),
+          categories: Object.keys(CATS).map((k) => ({ key: k, label: CATS[k], nominees: (noms || []).filter((n) => n.category === k).map(shape) })),
+          creators,
+        });
+      }
+      return json(400, { error: 'Unknown action' });
+    }
+
     // ---------------- staff only ----------------
     if (!isStaff) return json(403, { error: 'Not allowed' });
 

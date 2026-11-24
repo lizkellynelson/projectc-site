@@ -1438,7 +1438,7 @@ table.prog tr.removed td { opacity: 0.45; }
       var links = [];
       if (w.replayUrl) links.push('<a href="' + esc(w.replayUrl) + '" target="_blank" rel="noopener">Watch the replay</a>');
       if (w.slidesUrl) links.push('<a href="' + esc(w.slidesUrl) + '" target="_blank" rel="noopener">Slides</a>');
-      (w.resources || []).forEach(function (r) { if (r && r.url) links.push('<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.title || 'Resource') + '</a>'); });
+      (w.resources || []).forEach(function (r) { if (r && !r.url && r.note) links.push('<span>' + esc(r.note) + '</span>'); if (r && r.url) links.push('<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.title || 'Resource') + '</a>'); });
       if (!links.length) links.push('<span>' + (Date.parse(w.sessionAt) < t ? 'Replay coming soon' : 'Replay after the session') + '</span>');
       links.push('<a href="' + gcalUrl(w) + '" target="_blank" rel="noopener">Google Calendar</a>');
       lg += '<div class="lrow' + (isNext ? ' is-next' : '') + '">' +

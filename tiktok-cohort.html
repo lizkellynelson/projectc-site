@@ -1812,15 +1812,11 @@ table.prog tr.removed td { opacity: 0.45; }
     $('qaCount').textContent = q ? list.length + ' of ' + qa.length + ' questions' : '';
     if (!qa.length) { $('qaList').innerHTML = '<div class="qa-empty">Answers to questions from the sessions will show up here, usually the day after each session.</div>'; return; }
     if (!list.length) { $('qaList').innerHTML = '<div class="qa-empty">No questions match &ldquo;' + esc(q) + '.&rdquo;</div>'; return; }
-    var groups = [], byWeek = {};
-    list.forEach(function (x) { var k = x.week || 0; if (!byWeek[k]) { byWeek[k] = []; groups.push(k); } byWeek[k].push(x); });
-    $('qaList').innerHTML = groups.map(function (k) {
-      var w = state.hub.weeks.filter(function (x) { return x.number === k; })[0];
-      return '<section class="qa-group"><h2><b>' + (k ? 'Session ' + k + (w ? ': ' + esc(w.title) : '') : 'General') + '</b><span>' + (w ? esc(shortDay(w.sessionAt)) + ' &middot; ' : '') + byWeek[k].length + (byWeek[k].length === 1 ? ' question' : ' questions') + '</span></h2>' +
-        byWeek[k].map(function (x) {
-          return '<details class="qa-item" id="qa-' + esc(x.id) + '"' + (q ? ' open' : '') + '><summary>' + esc(x.q) + '</summary><div class="qa-a">' + md(x.a) + '</div></details>';
-        }).join('') + '</section>';
-    }).join('');
+    // one list, newest first (the server sorts by session, latest first)
+    $('qaList').innerHTML = '<section class="qa-group"><h2><b>' + (q ? 'Matching questions' : 'Newest first') + '</b><span>' + list.length + (list.length === 1 ? ' question' : ' questions') + '</span></h2>' +
+      list.map(function (x) {
+        return '<details class="qa-item" id="qa-' + esc(x.id) + '"' + (q ? ' open' : '') + '><summary>' + esc(x.q) + '</summary><div class="qa-a">' + md(x.a) + '</div></details>';
+      }).join('') + '</section>';
   }
   $('qaSearch').addEventListener('input', renderQA);
 

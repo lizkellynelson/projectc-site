@@ -555,7 +555,7 @@ function publicProgram(program) {
     startsOn: program.starts_on, endsOn: program.ends_on, accessEndsAt: program.access_ends_at,
     kicker: s.kicker, welcome: s.welcome, commitment: s.commitment || [], whatItCanLeadTo: s.whatItCanLeadTo,
     consentText: s.consentText, sessionTime: s.sessionTime, slackUrl: s.slackUrl, h5Url: s.h5Url,
-    incentives: s.incentives, nextSteps: s.nextSteps || null, contacts: s.contacts || [], resources: s.resources || [],
+    incentives: s.incentives, nextSteps: s.nextSteps || null, winners: s.winners || null, contacts: s.contacts || [], resources: s.resources || [],
     todos: s.todos || [], rhythm: s.rhythm || [],
     completionMin: s.completionMin || null,
     updates: (s.updates || []).slice().sort((a, b) => Date.parse(b.at) - Date.parse(a.at)),
@@ -587,6 +587,7 @@ function shapeWeek(w, mine) {
     items: w.items.map((i) => ({ id: i.id, label: i.label, link: i.link_url, kind: i.kind, done: !!(mine && mine.done.has(i.id)) })),
     submission: mine && mine.subs.get(w.id) ? shapeSub(mine.subs.get(w.id), w) : null,
     attendedMinutes: mine && mine.att.has(w.id) ? mine.att.get(w.id) : null,
+    attendancePulled: !!w.attendance_pulled_at,
   };
 }
 

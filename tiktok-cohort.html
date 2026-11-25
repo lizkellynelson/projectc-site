@@ -400,6 +400,76 @@ table.prog tr.removed td { opacity: 0.45; }
   .nx-rules-col, .nx-prize { padding: 1.3rem 1.1rem 1.4rem; }
 }
 
+/* ---------- LOOK BACK: your five weeks ---------- */
+.lb-stats { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)) minmax(0,1.3fr); border-bottom: var(--rule); background: var(--white); }
+.lb-stat { padding: 1.3rem 1.6rem; border-right: var(--rule); }
+.lb-stat b { display: block; font-family: var(--display); font-weight: 400; font-size: clamp(2.4rem,4.4vw,3.4rem); line-height: 0.9; }
+.lb-stat b small { font-size: 0.5em; color: var(--muted); }
+.lb-stat span { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.lb-cert { padding: 1.3rem 1.6rem; display: flex; flex-direction: column; justify-content: center; gap: 0.7rem; background: var(--yellow); }
+.lb-cert p { font-weight: 700; line-height: 1.4; }
+.lb-cert.is-locked { background: var(--porcelain); }
+.lb-cert.is-locked p { font-weight: 500; color: var(--muted); font-size: 0.92rem; }
+.lb-cert .btn { align-self: flex-start; }
+.lb-list { max-width: var(--maxw); margin: 0 auto; padding: clamp(1.6rem,3vw,2.4rem) 2rem; display: grid; gap: 1rem; }
+.lb-row { display: grid; grid-template-columns: 150px minmax(0,1fr) 170px; border: var(--rule); background: var(--white); }
+.lb-row.is-picked { box-shadow: 6px 6px 0 var(--coral); }
+.lb-wk { padding: 1.1rem 1.2rem; border-right: var(--rule); background: var(--porcelain); }
+.lb-wk .n { font-family: var(--display); font-size: 1.9rem; line-height: 0.9; display: block; }
+.lb-wk .tt { display: block; font-size: 0.82rem; font-weight: 700; line-height: 1.35; margin-top: 0.4rem; }
+.lb-wk .dt { display: block; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 0.4rem; }
+.lb-work { padding: 1.1rem 1.4rem; min-width: 0; }
+.lb-work .lb-k { font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center; }
+.lb-badge { background: var(--coral); color: var(--ink); border: 2px solid var(--ink); padding: 0.12rem 0.5rem; letter-spacing: 0.08em; }
+.lb-work a.vid { font-weight: 700; color: var(--coral-deep); text-decoration: underline; text-underline-offset: 2px; word-break: break-word; }
+.lb-work .none { color: var(--muted); }
+.lb-fb { margin-top: 0.8rem; padding: 0.8rem 1rem; background: var(--tint); border-left: 4px solid var(--coral); font-size: 0.92rem; line-height: 1.55; }
+.lb-fb b { display: block; font-size: 0.66rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.25rem; }
+.lb-att { padding: 1.1rem 1.2rem; border-left: var(--rule); display: flex; flex-direction: column; gap: 0.5rem; justify-content: center; font-size: 0.84rem; }
+.lb-chip { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.68rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+.lb-chip i { width: 12px; height: 12px; border: 2px solid var(--ink); display: block; }
+.lb-chip.yes i { background: var(--cyan); }
+.lb-att a { font-weight: 700; color: var(--coral-deep); }
+
+/* ---------- WINNERS spotlight ---------- */
+.win-wrap { max-width: var(--maxw); margin: 0 auto; padding: clamp(1.6rem,3vw,2.4rem) 2rem; }
+.win-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.win-cat { border: var(--rule); background: var(--white); }
+.win-cat > h3 { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.8rem 1.2rem; border-bottom: var(--rule); background: var(--yellow); }
+.win-cat.c2 > h3 { background: var(--cyan); }
+.win-p { display: grid; grid-template-columns: 56px minmax(0,1fr) auto; gap: 1rem; align-items: center; padding: 1.1rem 1.2rem; }
+.win-p + .win-p { border-top: var(--rule-thin); }
+.win-p .av { width: 56px; height: 56px; border: var(--rule); background: var(--ink); color: var(--white); font-family: var(--display); font-size: 1.4rem; display: flex; align-items: center; justify-content: center; }
+.win-p b { display: block; font-size: 1.1rem; }
+.win-p .hd { font-size: 0.86rem; color: var(--coral-deep); font-weight: 700; }
+.win-p .btn { padding: 0.6rem 0.9rem; font-size: 0.72rem; white-space: nowrap; }
+.win-prizes { margin-top: 1.4rem; border: var(--rule); display: grid; grid-template-columns: auto repeat(4, minmax(0,1fr)); background: var(--porcelain); }
+.win-prizes > div { padding: 1rem 1.2rem; border-right: var(--rule-thin); font-size: 0.86rem; line-height: 1.45; color: var(--muted); }
+.win-prizes > div:last-child { border-right: none; }
+.win-prizes > div b { display: block; color: var(--ink); font-size: 0.95rem; margin-bottom: 0.15rem; }
+.win-prizes > .wp-k { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); display: flex; align-items: center; background: var(--white); border-right: var(--rule); }
+@media (max-width: 900px) {
+  .lb-stats { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .lb-cert { grid-column: 1 / -1; border-top: var(--rule); }
+  .lb-stat:nth-child(3) { border-right: none; }
+  .lb-row { grid-template-columns: 110px minmax(0,1fr); }
+  .lb-att { grid-column: 1 / -1; border-left: none; border-top: var(--rule-thin); flex-direction: row; flex-wrap: wrap; justify-content: flex-start; align-items: center; gap: 0.5rem 1.2rem; padding: 0.8rem 1.2rem; }
+  .win-cats { grid-template-columns: 1fr; }
+  .win-prizes { grid-template-columns: 1fr 1fr; }
+  .win-prizes > .wp-k { grid-column: 1 / -1; border-right: none; border-bottom: var(--rule); }
+  .win-prizes > div { border-bottom: var(--rule-thin); }
+}
+@media (max-width: 600px) {
+  .lb-list, .win-wrap { padding-left: 1rem; padding-right: 1rem; }
+  .lb-stat { padding: 1rem 0.8rem; } .lb-stat span { font-size: 0.6rem; }
+  .lb-row { grid-template-columns: 1fr; }
+  .lb-wk { border-right: none; border-bottom: var(--rule); display: flex; gap: 0.8rem; align-items: baseline; flex-wrap: wrap; padding: 0.8rem 1rem; }
+  .lb-wk .tt, .lb-wk .dt { margin-top: 0; }
+  .lb-work { padding: 1rem; }
+  .win-p { grid-template-columns: 44px minmax(0,1fr); } .win-p .av { width: 44px; height: 44px; font-size: 1.1rem; }
+  .win-p .btn { grid-column: 1 / -1; justify-content: center; }
+}
+
 /* ---------- UP NEXT: to-dos + next session + updates ---------- */
 .upnext-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; border-bottom: var(--rule); }
 .upnext-grid > div { padding: clamp(1.6rem,3vw,2.4rem) 2rem; min-width: 0; }
@@ -794,11 +864,13 @@ table.prog tr.removed td { opacity: 0.45; }
   <div id="viewHub">
     <div class="brandband"><div class="brandband-inner"><span class="bb-name">Inform the Feed</span><span class="bb-sub">TikTok x Project C News Creator Cohort &middot; Fall 2026</span></div></div>
     <nav class="secnav" id="secnav" aria-label="Sections of this page"><div class="secnav-inner">
-      <a href="#nextsteps" id="nxNav" hidden><i class="c-coral"></i>Next steps</a>
-      <a href="#upnext"><i class="c-coral"></i>To-do</a>
-      <a href="#how"><i class="c-yellow"></i>How it works</a>
-      <a href="#homework"><i class="c-cyan"></i>Homework</a>
-      <a href="#scheduleSec"><i class="c-magenta"></i>Sessions</a>
+      <a href="#nextsteps" id="nxNav" hidden><i class="c-coral"></i>Challenge</a>
+      <a href="#lookback" data-wrap="show" hidden><i class="c-cyan"></i>Your five weeks</a>
+      <a href="#winnersSec" data-wrap="show" hidden><i class="c-yellow"></i>Winners</a>
+      <a href="#upnext" id="upnextNav"><i class="c-coral"></i>To-do</a>
+      <a href="#how" data-wrap="hide"><i class="c-yellow"></i>How it works</a>
+      <a href="#homework" data-wrap="hide"><i class="c-cyan"></i>Homework</a>
+      <a href="#scheduleSec" id="schedNav"><i class="c-magenta"></i>Sessions</a>
       <a href="#qa" data-go="qa"><i class="c-cyan"></i>Q&amp;A</a>
       <a href="#incentivesSec"><i class="c-yellow"></i>Incentives</a>
       <a href="#resources"><i class="c-ink"></i>Resources</a>
@@ -806,9 +878,26 @@ table.prog tr.removed td { opacity: 0.45; }
 
     <section class="nx" id="nextsteps" hidden aria-labelledby="nxTitle"></section>
 
+    <section class="hsec" id="lookback" hidden>
+      <header class="shead"><div class="shead-inner">
+        <div><span class="shead-k"><i class="c-cyan"></i>Look back</span><h2>Your five weeks</h2></div>
+        <p>Everything you turned in, the feedback you got from the team and the sessions you made. It stays here until the hub closes on <span id="lbClose"></span>.</p>
+      </div></header>
+      <div class="lb-stats" id="lbStats"></div>
+      <div class="lb-list" id="lbList"></div>
+    </section>
+
+    <section class="hsec" id="winnersSec" hidden>
+      <header class="shead"><div class="shead-inner">
+        <div><span class="shead-k"><i class="c-yellow"></i>Congratulations</span><h2 id="winTitle">Our standouts</h2></div>
+        <p id="winLede"></p>
+      </div></header>
+      <div class="win-wrap" id="winWrap"></div>
+    </section>
+
     <section class="hsec" id="upnext">
       <header class="shead"><div class="shead-inner">
-        <div><span class="shead-k"><i class="c-coral"></i>Start here</span><h2>Up next</h2></div>
+        <div><span class="shead-k" id="upnextK"><i class="c-coral"></i>Start here</span><h2 id="upnextH">Up next</h2></div>
         <p id="upnextLede">Your to-dos and deadlines, the next session and the latest updates. Check here first.</p>
       </div></header>
       <div class="upnext-grid">
@@ -850,12 +939,12 @@ table.prog tr.removed td { opacity: 0.45; }
 
     <section class="hsec" id="scheduleSec">
       <header class="shead"><div class="shead-inner">
-        <div><span class="shead-k"><i class="c-magenta"></i>Your Zoom link and replays</span><h2>Sessions</h2></div>
+        <div><span class="shead-k" id="schedK"><i class="c-magenta"></i>Your Zoom link and replays</span><h2 id="schedH">Sessions</h2></div>
         <p id="sessionTime"></p>
       </div></header>
       <div class="ledger" style="padding-top:clamp(1.8rem,3.5vw,2.6rem)">
         <div class="ledger-wrap" id="ledger"></div>
-        <div class="ledger-foot">
+        <div class="ledger-foot" id="ledgerFoot">
           <span>Replays and slides show up here a day or two after each session.</span>
           <button class="btn" id="icsBtn" type="button">Add all five to my calendar</button>
         </div>
@@ -1208,6 +1297,7 @@ table.prog tr.removed td { opacity: 0.45; }
   // ---------- formatting ----------
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function f(iso, o) { return new Date(iso).toLocaleString('en-US', Object.assign({ timeZone: TZ }, o)); }
+  function prettyUrl(u) { try { var x = new URL(u); var m = x.pathname.match(/@([^/]+)\/video\/(\d+)/); if (m) return '@' + m[1] + ' video'; return (x.hostname.replace(/^www\./, '') + x.pathname).replace(/\/$/, ''); } catch (e) { return u; } }
   function day(iso) { return f(iso, { weekday: 'long', month: 'long', day: 'numeric' }); }
   function shortDay(iso) { return f(iso, { month: 'short', day: 'numeric' }); }
   function time(iso) { return f(iso, { hour: 'numeric', minute: '2-digit' }) + ' ET'; }
@@ -1464,6 +1554,83 @@ table.prog tr.removed td { opacity: 0.45; }
         '</div>';
     })();
 
+    // ---------- wrapped mode: once the last session is over, the page turns into a look back ----------
+    var lastWk = h.weeks[h.weeks.length - 1];
+    var wrapped = !!lastWk && Date.parse(lastWk.sessionAt) + 65 * 60000 < t;
+    state.wrapped = wrapped;
+    [].forEach.call(document.querySelectorAll('#secnav [data-wrap]'), function (a) {
+      var mode = a.getAttribute('data-wrap');
+      a.hidden = mode === 'show' ? !wrapped : wrapped;
+    });
+    $('how').hidden = wrapped;
+    $('homework').hidden = wrapped;
+    document.querySelector('#upnext .upnext-grid').hidden = wrapped;
+    $('upnextK').innerHTML = wrapped ? '<i class="c-coral"></i>From Project C and TikTok' : '<i class="c-coral"></i>Start here';
+    $('upnextH').textContent = wrapped ? 'Updates' : 'Up next';
+    $('upnextLede').textContent = wrapped ? 'News and announcements from the program, newest first.' : 'Your to-dos and deadlines, the next session and the latest updates. Check here first.';
+    $('upnextNav').innerHTML = wrapped ? '<i class="c-coral"></i>Updates' : '<i class="c-coral"></i>To-do';
+    $('schedK').innerHTML = wrapped ? '<i class="c-magenta"></i>Watch them again' : '<i class="c-magenta"></i>Your Zoom link and replays';
+    $('schedH').textContent = wrapped ? 'Replay library' : 'Sessions';
+    $('schedNav').innerHTML = wrapped ? '<i class="c-magenta"></i>Replays' : '<i class="c-magenta"></i>Sessions';
+    $('ledgerFoot').hidden = wrapped;
+    var updH = document.querySelector('#updates > .col-h'); if (updH) updH.hidden = wrapped;
+
+    // look back (creators only)
+    (function renderLookBack() {
+      var sec = $('lookback');
+      if (!wrapped || me.role !== 'creator') { sec.hidden = true; return; }
+      sec.hidden = false;
+      $('lbClose').textContent = day(p.accessEndsAt);
+      var aw = assignmentWeeks();
+      var turned = aw.filter(function (w) { return !!w.submission; }).length;
+      var attended = h.weeks.filter(function (w) { return w.attendedMinutes > 0; }).length;
+      var picks = aw.filter(function (w) { return w.submission && w.submission.critiquePick; }).length;
+      var cp = completed();
+      $('lbStats').innerHTML =
+        '<div class="lb-stat"><b>' + turned + '<small>/' + aw.length + '</small></b><span>Homework turned in</span></div>' +
+        '<div class="lb-stat"><b>' + attended + '<small>/' + h.weeks.length + '</small></b><span>Sessions attended</span></div>' +
+        '<div class="lb-stat"><b>' + picks + '</b><span>Picked for live critique</span></div>' +
+        (cp.done ? '<div class="lb-cert"><p>You finished Inform the Feed. Your certificate is ready.</p><button class="btn btn-fill" type="button" data-cert>Get your certificate &rarr;</button></div>'
+                 : '<div class="lb-cert is-locked"><p>The certificate goes to creators who turned in ' + cp.need + ' of ' + aw.length + ' homework assignments. You turned in ' + cp.got + '.</p></div>');
+      $('lbList').innerHTML = h.weeks.map(function (w) {
+        var sb = w.submission, isLinks = w.kind === 'links', work;
+        if (!w.assignment) work = '<div class="lb-k">Homework</div><span class="none">No homework this week.</span>';
+        else if (sb) {
+          var items = isLinks ? (sb.links || []).filter(Boolean) : [sb.url];
+          work = '<div class="lb-k">' + (isLinks ? 'Your picks' : 'Your video') + (sb.critiquePick ? '<span class="lb-badge">Picked for live critique</span>' : '') + '</div>' +
+            items.map(function (u) { return '<a class="vid" href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(prettyUrl(u)) + ' &nearr;</a>'; }).join('<br>') +
+            (sb.reviewerNote ? '<div class="lb-fb"><b>Feedback from the team</b>' + esc(sb.reviewerNote) + '</div>' : '');
+        } else work = '<div class="lb-k">' + (isLinks ? 'Your picks' : 'Your video') + '</div><span class="none">Nothing turned in this week.</span>';
+        var att = w.attendedMinutes > 0 ? '<span class="lb-chip yes"><i></i>You were there</span>'
+                : w.attendancePulled ? '<span class="lb-chip"><i></i>Missed it</span>' : '';
+        var rep = w.replayUrl ? '<a href="' + esc(w.replayUrl) + '" target="_blank" rel="noopener">Watch the replay &nearr;</a>' : (Date.parse(w.sessionAt) < t ? '<span class="none" style="color:var(--muted)">No recording</span>' : '');
+        return '<div class="lb-row' + (sb && sb.critiquePick ? ' is-picked' : '') + '">' +
+          '<div class="lb-wk"><span class="n">Week ' + w.number + '</span><span class="tt">' + esc(w.title || '') + '</span><span class="dt">' + esc(f(w.sessionAt, { month: 'short', day: 'numeric' })) + '</span></div>' +
+          '<div class="lb-work">' + work + '</div>' +
+          '<div class="lb-att">' + att + rep + '</div></div>';
+      }).join('');
+    })();
+
+    // winners spotlight: settings.winners = { title, lede, categories:[{label, people:[{name, handle, url}]}], prizes:[{name, desc}] }
+    (function renderWinners() {
+      var wn = p.winners, sec = $('winnersSec');
+      if (!wrapped || !wn || !(wn.categories || []).length) { sec.hidden = true; return; }
+      sec.hidden = false;
+      $('winTitle').textContent = wn.title || 'Our standouts';
+      $('winLede').textContent = wn.lede || '';
+      var initials = function (n) { return String(n || '').split(/\s+/).map(function (x) { return x.charAt(0); }).slice(0, 2).join('').toUpperCase(); };
+      var out = '<div class="win-cats">' + wn.categories.map(function (c, ci) {
+        return '<div class="win-cat c' + (ci + 1) + '"><h3>' + esc(c.label) + '</h3>' + (c.people || []).map(function (pp) {
+          return '<div class="win-p"><div class="av" aria-hidden="true">' + esc(initials(pp.name)) + '</div><div><b>' + esc(pp.name) + '</b>' +
+            (pp.handle ? '<a class="hd" href="https://www.tiktok.com/@' + esc(pp.handle) + '" target="_blank" rel="noopener">@' + esc(pp.handle) + '</a>' : '') + '</div>' +
+            (pp.url ? '<a class="btn" href="' + esc(pp.url) + '" target="_blank" rel="noopener">Watch &nearr;</a>' : '') + '</div>';
+        }).join('') + '</div>';
+      }).join('') + '</div>';
+      if ((wn.prizes || []).length) out += '<div class="win-prizes"><div class="wp-k">What they won</div>' + wn.prizes.map(function (z) { return '<div><b>' + esc(z.name) + '</b>' + esc(z.desc || '') + '</div>'; }).join('') + '</div>';
+      $('winWrap').innerHTML = out;
+    })();
+
+
     // up next: to-dos (pinned by staff, plus the homework that's due)
     var todos = [];
     (p.todos || []).forEach(function (td) {
@@ -1519,7 +1686,7 @@ table.prog tr.removed td { opacity: 0.45; }
 
     // certificate
     var cp = completed(), last = h.weeks[h.weeks.length - 1];
-    $('certBand').hidden = !(me.role === 'creator' && cp.done && Date.parse(last.sessionAt) < t);
+    $('certBand').hidden = state.wrapped || !(me.role === 'creator' && cp.done && Date.parse(last.sessionAt) < t);
 
     // incentives (structured: intro + tiers)
     var inc = p.incentives;
@@ -1540,7 +1707,7 @@ table.prog tr.removed td { opacity: 0.45; }
     $('rhythm').innerHTML = (p.rhythm || []).map(function (r) { return '<li><span class="rd">' + esc(r.day) + '</span><span class="rt">' + esc(r.time) + '</span><span class="rw">' + esc(r.what) + '</span></li>'; }).join('');
 
     // schedule
-    $('sessionTime').textContent = (p.sessionTime || '') + '. Your personal Zoom link works for all five.';
+    $('sessionTime').textContent = state.wrapped ? 'All five sessions, with the replay for every one we recorded.' : (p.sessionTime || '') + '. Your personal Zoom link works for all five.';
     var lg = '';
     h.weeks.forEach(function (w) {
       var isNext = ns && ns.id === w.id;
@@ -1549,7 +1716,7 @@ table.prog tr.removed td { opacity: 0.45; }
       if (w.slidesUrl) links.push('<a href="' + esc(w.slidesUrl) + '" target="_blank" rel="noopener">Slides</a>');
       (w.resources || []).forEach(function (r) { if (r && !r.url && r.note) links.push('<span>' + esc(r.note) + '</span>'); if (r && r.url) links.push('<a href="' + esc(r.url) + '" target="_blank" rel="noopener">' + esc(r.title || 'Resource') + '</a>'); });
       if (!links.length) links.push('<span>' + (Date.parse(w.sessionAt) < t ? 'Replay coming soon' : 'Replay after the session') + '</span>');
-      links.push('<a href="' + gcalUrl(w) + '" target="_blank" rel="noopener">Google Calendar</a>');
+      if (!state.wrapped) links.push('<a href="' + gcalUrl(w) + '" target="_blank" rel="noopener">Google Calendar</a>');
       lg += '<div class="lrow' + (isNext ? ' is-next' : '') + '">' +
         '<div class="ldate"><b>' + esc(f(w.sessionAt, { month: 'short', day: 'numeric' })) + '</b><span>' + esc(f(w.sessionAt, { weekday: 'short' })) + ' &middot; ' + esc(time(w.sessionAt)) + '</span></div>' +
         '<div class="lbody"><div class="lno">Session ' + w.number + (isNext ? ' &middot; Up next' : '') + '</div><h3>' + esc(w.title) + '</h3>' +
@@ -1780,6 +1947,7 @@ table.prog tr.removed td { opacity: 0.45; }
   });
 
   // ---------- certificate ----------
+  $('lbStats').addEventListener('click', function (e) { if (e.target.closest('[data-cert]')) $('certBtn').click(); });
   $('certBtn').addEventListener('click', function () {
     var h = state.hub;
     $('certName').textContent = h.me.name;

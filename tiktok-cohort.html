@@ -338,6 +338,52 @@ table.prog tr.removed td { opacity: 0.45; }
 .shead .hw-tally { text-align: right; }
 .sbody { max-width: var(--maxw); margin: 0 auto; padding: clamp(1.8rem,3.5vw,2.8rem) 2rem; }
 
+/* ---------- NEXT STEPS (after the program): survey + posting challenge ---------- */
+.nx-grid { display: grid; grid-template-columns: 1.35fr 0.65fr; border-bottom: var(--rule); }
+.nx-grid > div { min-width: 0; }
+.nx-chal { border-right: var(--rule); }
+.nx-strip { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; background: var(--ink); color: var(--white); padding: 0.75rem 2rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.nx-strip .nx-left { color: var(--yellow); }
+.nx-top { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 1.6rem 2.2rem; align-items: center; padding: clamp(1.8rem,3.5vw,2.8rem) 2rem 1.6rem; border-bottom: var(--rule); }
+.nx-big { font-family: var(--display); text-transform: uppercase; line-height: 0.86; font-size: clamp(4.2rem,9vw,7.4rem); }
+.nx-big small { display: block; font-size: 0.3em; letter-spacing: 0.02em; line-height: 1; margin-top: 0.35rem; color: var(--coral-deep); }
+.nx-top p { font-size: 1.05rem; line-height: 1.6; max-width: 44ch; }
+.nx-top p b { font-weight: 800; }
+.nx-top p a, .nx-prize p a { color: var(--coral-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
+.nx-rules { list-style: none; counter-reset: r; }
+.nx-rules li { counter-increment: r; display: grid; grid-template-columns: 56px 1fr; border-bottom: var(--rule-thin); }
+.nx-rules li::before { content: '0' counter(r); font-family: var(--display); font-size: 1.3rem; display: flex; align-items: center; justify-content: center; border-right: var(--rule); background: var(--yellow); }
+.nx-rules li > div { padding: 0.95rem 1.4rem; line-height: 1.5; }
+.nx-rules li > div b { display: block; }
+.nx-rules li > div span { color: var(--muted); font-size: 0.9rem; }
+.nx-prize { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 1.2rem 1.6rem; align-items: center; padding: 1.5rem 2rem 1.8rem; background: var(--porcelain); border-top: var(--rule); }
+.nx-prize .nx-n { font-family: var(--display); font-size: 3.2rem; line-height: 0.9; width: 88px; height: 88px; display: flex; align-items: center; justify-content: center; background: var(--cyan); border: var(--rule); }
+.nx-prize .nx-k { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.nx-prize p { line-height: 1.55; margin-top: 0.2rem; }
+.nx-prize p b { font-weight: 800; }
+.nx-survey { background: var(--white); display: flex; flex-direction: column; }
+.nx-survey .nx-strip { background: var(--cyan); color: var(--ink); }
+.nx-survey .nx-strip .nx-left { color: var(--ink); }
+.nx-sbody { padding: clamp(1.8rem,3.5vw,2.6rem) 2rem; display: flex; flex-direction: column; gap: 1.1rem; flex: 1; }
+.nx-sbody h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.8rem,3vw,2.4rem); line-height: 0.95; }
+.nx-sbody p { color: var(--muted); line-height: 1.6; }
+.nx-sbody .btn { justify-content: center; }
+.nx-qr { margin-top: auto; display: grid; grid-template-columns: 112px 1fr; gap: 1rem; align-items: center; border: var(--rule); padding: 0.8rem; background: var(--white); }
+.nx-qr img { width: 112px; height: 112px; display: block; image-rendering: pixelated; }
+.nx-qr span { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+.nx-survey.is-done .nx-strip { background: var(--porcelain); }
+@media (max-width: 900px) {
+  .nx-grid { grid-template-columns: 1fr; }
+  .nx-chal { border-right: none; border-bottom: var(--rule); }
+  .nx-survey { order: -1; }
+  .nx-qr { display: none; }
+}
+@media (max-width: 600px) {
+  .nx-top { grid-template-columns: 1fr; padding-left: 1rem; padding-right: 1rem; }
+  .nx-strip, .nx-prize, .nx-sbody { padding-left: 1rem; padding-right: 1rem; }
+  .nx-prize .nx-n { width: 68px; height: 68px; font-size: 2.4rem; }
+}
+
 /* ---------- UP NEXT: to-dos + next session + updates ---------- */
 .upnext-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; border-bottom: var(--rule); }
 .upnext-grid > div { padding: clamp(1.6rem,3vw,2.4rem) 2rem; min-width: 0; }
@@ -732,6 +778,7 @@ table.prog tr.removed td { opacity: 0.45; }
   <div id="viewHub">
     <div class="brandband"><div class="brandband-inner"><span class="bb-name">Inform the Feed</span><span class="bb-sub">TikTok x Project C News Creator Cohort &middot; Fall 2026</span></div></div>
     <nav class="secnav" id="secnav" aria-label="Sections of this page"><div class="secnav-inner">
+      <a href="#nextsteps" id="nxNav" hidden><i class="c-coral"></i>Next steps</a>
       <a href="#upnext"><i class="c-coral"></i>To-do</a>
       <a href="#how"><i class="c-yellow"></i>How it works</a>
       <a href="#homework"><i class="c-cyan"></i>Homework</a>
@@ -740,6 +787,14 @@ table.prog tr.removed td { opacity: 0.45; }
       <a href="#incentivesSec"><i class="c-yellow"></i>Incentives</a>
       <a href="#resources"><i class="c-ink"></i>Resources</a>
     </div></nav>
+
+    <section class="hsec" id="nextsteps" hidden>
+      <header class="shead"><div class="shead-inner">
+        <div><span class="shead-k"><i class="c-coral"></i>After the program</span><h2>Your next steps</h2></div>
+        <p id="nxLede"></p>
+      </div></header>
+      <div class="nx-grid" id="nxGrid"></div>
+    </section>
 
     <section class="hsec" id="upnext">
       <header class="shead"><div class="shead-inner">
@@ -1354,6 +1409,40 @@ table.prog tr.removed td { opacity: 0.45; }
       ns_html = '<div class="ns-k">That&rsquo;s a wrap</div><div class="ns-title">Thanks for five good weeks</div><div class="ns-who">Replays and resources stay up here until ' + esc(day(p.accessEndsAt)) + '.</div>';
     }
     $('nextSession').innerHTML = ns_html;
+
+    // next steps (after the program): settings.nextSteps = { lede, survey:{url,questions,title,note,qr}, challenge:{name,start,end,count,lede,rules:[{b,s}],winners,prize} }
+    (function renderNextSteps() {
+      var nx = p.nextSteps, sec = $('nextsteps');
+      if (!nx || (!nx.survey && !nx.challenge)) { sec.hidden = true; $('nxNav').hidden = true; return; }
+      sec.hidden = false; $('nxNav').hidden = false;
+      $('nxLede').textContent = nx.lede || '';
+      var out = '', c = nx.challenge, sv = nx.survey;
+      if (c) {
+        var endT = Date.parse(c.end), startT = Date.parse(c.start);
+        var daysLeft = Math.ceil((endT - t) / 86400000);
+        var status = t < startT ? 'Starts ' + f(c.start, { weekday: 'short', month: 'short', day: 'numeric' })
+                   : t > endT ? 'Challenge closed'
+                   : daysLeft <= 1 ? 'Last day' : daysLeft + ' days left';
+        out += '<div class="nx-chal">' +
+          '<div class="nx-strip"><span class="nx-left">' + esc(c.name || 'Posting challenge') + '</span><span>' + esc(f(c.start, { month: 'short', day: 'numeric' })) + ' to ' + esc(f(c.end, { month: 'short', day: 'numeric' })) + ' &middot; ' + esc(status) + '</span></div>' +
+          '<div class="nx-top"><div class="nx-big">' + esc(String(c.count)) + ' videos<small>by ' + esc(f(c.end, { month: 'long', day: 'numeric' })) + '</small></div>' +
+          '<p>' + (c.lede || '') + '</p></div>' +
+          '<ol class="nx-rules">' + (c.rules || []).map(function (r) { return '<li><div><b>' + esc(r.b) + '</b>' + (r.s ? '<span>' + esc(r.s) + '</span>' : '') + '</div></li>'; }).join('') + '</ol>' +
+          '<div class="nx-prize"><div class="nx-n" aria-hidden="true">' + esc(String(c.winners || '')) + '</div><div><div class="nx-k">The prize</div><p>' + (c.prize || '') + '</p></div></div>' +
+        '</div>';
+      }
+      if (sv) {
+        out += '<div class="nx-survey">' +
+          '<div class="nx-strip"><span class="nx-left">Do this first</span><span>' + esc(String(sv.questions || '')) + (sv.questions ? ' questions' : '') + '</span></div>' +
+          '<div class="nx-sbody"><h3>' + esc(sv.title || 'Tell TikTok how it went') + '</h3>' +
+          '<p>' + esc(sv.note || '') + '</p>' +
+          '<a class="btn btn-coral" href="' + esc(sv.url) + '" target="_blank" rel="noopener">Take the survey &nearr;</a>' +
+          (sv.qr ? '<div class="nx-qr"><img src="' + esc(sv.qr) + '" alt="QR code that opens the survey" width="112" height="112"><span>On a laptop? Scan this with your phone camera to take it there.</span></div>' : '') +
+          '</div></div>';
+      }
+      $('nxGrid').innerHTML = out;
+      $('nxGrid').style.gridTemplateColumns = (c && sv) ? '' : '1fr';
+    })();
 
     // up next: to-dos (pinned by staff, plus the homework that's due)
     var todos = [];

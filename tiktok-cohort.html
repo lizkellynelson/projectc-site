@@ -338,50 +338,66 @@ table.prog tr.removed td { opacity: 0.45; }
 .shead .hw-tally { text-align: right; }
 .sbody { max-width: var(--maxw); margin: 0 auto; padding: clamp(1.8rem,3.5vw,2.8rem) 2rem; }
 
-/* ---------- NEXT STEPS (after the program): survey + posting challenge ---------- */
-.nx-grid { display: grid; grid-template-columns: 1.35fr 0.65fr; border-bottom: var(--rule); }
-.nx-grid > div { min-width: 0; }
-.nx-chal { border-right: var(--rule); }
-.nx-strip { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; background: var(--ink); color: var(--white); padding: 0.75rem 2rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
-.nx-strip .nx-left { color: var(--yellow); }
-.nx-top { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 1.6rem 2.2rem; align-items: center; padding: clamp(1.8rem,3.5vw,2.8rem) 2rem 1.6rem; border-bottom: var(--rule); }
-.nx-big { font-family: var(--display); text-transform: uppercase; line-height: 0.86; font-size: clamp(4.2rem,9vw,7.4rem); }
-.nx-big small { display: block; font-size: 0.3em; letter-spacing: 0.02em; line-height: 1; margin-top: 0.35rem; color: var(--coral-deep); }
-.nx-top p { font-size: 1.05rem; line-height: 1.6; max-width: 44ch; }
-.nx-top p b { font-weight: 800; }
-.nx-top p a, .nx-prize p a { color: var(--coral-deep); font-weight: 700; text-decoration: underline; text-underline-offset: 2px; }
-.nx-rules { list-style: none; counter-reset: r; }
-.nx-rules li { counter-increment: r; display: grid; grid-template-columns: 56px 1fr; border-bottom: var(--rule-thin); }
-.nx-rules li::before { content: '0' counter(r); font-family: var(--display); font-size: 1.3rem; display: flex; align-items: center; justify-content: center; border-right: var(--rule); background: var(--yellow); }
-.nx-rules li > div { padding: 0.95rem 1.4rem; line-height: 1.5; }
-.nx-rules li > div b { display: block; }
-.nx-rules li > div span { color: var(--muted); font-size: 0.9rem; }
-.nx-prize { display: grid; grid-template-columns: auto minmax(0,1fr); gap: 1.2rem 1.6rem; align-items: center; padding: 1.5rem 2rem 1.8rem; background: var(--porcelain); border-top: var(--rule); }
-.nx-prize .nx-n { font-family: var(--display); font-size: 3.2rem; line-height: 0.9; width: 88px; height: 88px; display: flex; align-items: center; justify-content: center; background: var(--cyan); border: var(--rule); }
-.nx-prize .nx-k { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
-.nx-prize p { line-height: 1.55; margin-top: 0.2rem; }
+/* ---------- NEXT STEPS: the posting challenge as one framed moment, survey as a follow-on bar ---------- */
+.nx { border-bottom: var(--rule); background: var(--porcelain); scroll-margin-top: 130px; }
+.nx-hero { background: var(--ink); color: var(--white); padding: clamp(2.4rem,5vw,4rem) 2rem clamp(6rem,10vw,7.5rem); position: relative; overflow: hidden; }
+.nx-hero::after { content: ''; position: absolute; right: -60px; top: -60px; width: 260px; height: 260px; border: 26px solid var(--coral); border-radius: 50%; opacity: 0.9; }
+.nx-hero-in { max-width: var(--maxw); margin: 0 auto; position: relative; z-index: 1; }
+.nx-kick { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem; margin-bottom: 1.1rem; }
+.nx-chip { background: var(--yellow); color: var(--ink); border: 2px solid var(--white); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.3rem 0.7rem; }
+.nx-when { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.75); }
+.nx-when b { color: var(--white); }
+.nx-title { font-family: var(--display); text-transform: uppercase; font-weight: 400; font-size: clamp(2.6rem,6.6vw,5.6rem); line-height: 0.9; }
+.nx-title span { color: var(--coral); display: block; }
+.nx-dek { margin-top: 1.2rem; font-size: 1.08rem; line-height: 1.6; max-width: 56ch; color: rgba(255,255,255,0.86); }
+.nx-dek b { color: var(--white); }
+.nx-dek a { color: var(--yellow); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.nx-wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 2rem clamp(2.2rem,4vw,3rem); }
+.nx-card { margin-top: clamp(-5rem,-8vw,-4rem); position: relative; z-index: 2; background: var(--white); border: var(--rule); box-shadow: 10px 10px 0 var(--ink); }
+.nx-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: var(--rule); }
+.nx-stat { padding: 1.2rem 1.5rem 1.1rem; display: flex; align-items: baseline; gap: 0.8rem; }
+.nx-stat + .nx-stat { border-left: var(--rule); }
+.nx-stat b { font-family: var(--display); font-weight: 400; font-size: clamp(2.8rem,5vw,3.8rem); line-height: 0.9; }
+.nx-stat span { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.35; }
+.nx-stat span small { display: block; font-weight: 600; letter-spacing: 0.02em; text-transform: none; font-size: 0.82rem; color: var(--muted); }
+.nx-stat.s1 { background: var(--yellow); } .nx-stat.s3 { background: var(--cyan); }
+.nx-body { display: grid; grid-template-columns: 1.25fr 0.75fr; }
+.nx-rules-col { padding: 1.6rem 1.8rem 1.8rem; }
+.nx-h { font-size: 0.72rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.9rem; }
+.nx-checks { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+.nx-checks li { display: grid; grid-template-columns: 30px 1fr; gap: 0.8rem; align-items: start; padding: 0.9rem; border: var(--rule-thin); background: var(--porcelain); }
+.nx-checks li::before { content: '\2713'; width: 30px; height: 30px; border: 2px solid var(--ink); background: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem; }
+.nx-checks b { display: block; line-height: 1.3; }
+.nx-checks span { display: block; color: var(--muted); font-size: 0.86rem; line-height: 1.45; margin-top: 0.2rem; }
+.nx-prize { border-left: var(--rule); padding: 1.6rem 1.8rem 1.8rem; background: var(--tint); display: flex; flex-direction: column; gap: 0.7rem; }
+.nx-prize .nx-trophy { width: 54px; height: 54px; border: var(--rule); background: var(--coral); display: flex; align-items: center; justify-content: center; }
+.nx-prize .nx-trophy svg { width: 28px; height: 28px; }
+.nx-prize p { line-height: 1.6; font-size: 1.02rem; }
 .nx-prize p b { font-weight: 800; }
-.nx-survey { background: var(--white); display: flex; flex-direction: column; }
-.nx-survey .nx-strip { background: var(--cyan); color: var(--ink); }
-.nx-survey .nx-strip .nx-left { color: var(--ink); }
-.nx-sbody { padding: clamp(1.8rem,3.5vw,2.6rem) 2rem; display: flex; flex-direction: column; gap: 1.1rem; flex: 1; }
-.nx-sbody h3 { font-family: var(--display); text-transform: uppercase; font-size: clamp(1.8rem,3vw,2.4rem); line-height: 0.95; }
-.nx-sbody p { color: var(--muted); line-height: 1.6; }
-.nx-sbody .btn { justify-content: center; }
-.nx-qr { margin-top: auto; display: grid; grid-template-columns: 112px 1fr; gap: 1rem; align-items: center; border: var(--rule); padding: 0.8rem; background: var(--white); }
-.nx-qr img { width: 112px; height: 112px; display: block; image-rendering: pixelated; }
-.nx-qr span { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
-.nx-survey.is-done .nx-strip { background: var(--porcelain); }
+.nx-survey { margin-top: 1.6rem; border: var(--rule); background: var(--white); display: grid; grid-template-columns: auto minmax(0,1fr) auto auto; align-items: center; gap: 1rem 1.6rem; padding: 1rem 1.2rem; }
+.nx-survey .nx-sn { font-family: var(--display); font-size: 1.1rem; width: 44px; height: 44px; border: var(--rule); background: var(--cyan); display: flex; align-items: center; justify-content: center; }
+.nx-survey b { display: block; font-size: 1.05rem; }
+.nx-survey span { color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+.nx-survey .btn { white-space: nowrap; }
+.nx-survey img { width: 76px; height: 76px; display: block; image-rendering: pixelated; border: var(--rule-thin); padding: 4px; background: var(--white); }
 @media (max-width: 900px) {
-  .nx-grid { grid-template-columns: 1fr; }
-  .nx-chal { border-right: none; border-bottom: var(--rule); }
-  .nx-survey { order: -1; }
-  .nx-qr { display: none; }
+  .nx-body { grid-template-columns: 1fr; }
+  .nx-prize { border-left: none; border-top: var(--rule); }
+  .nx-survey { grid-template-columns: auto minmax(0,1fr); }
+  .nx-survey .btn { grid-column: 1 / -1; justify-content: center; }
+  .nx-survey img { display: none; }
 }
-@media (max-width: 600px) {
-  .nx-top { grid-template-columns: 1fr; padding-left: 1rem; padding-right: 1rem; }
-  .nx-strip, .nx-prize, .nx-sbody { padding-left: 1rem; padding-right: 1rem; }
-  .nx-prize .nx-n { width: 68px; height: 68px; font-size: 2.4rem; }
+@media (max-width: 640px) {
+  .nx-hero { padding-left: 1rem; padding-right: 1rem; }
+  .nx-hero::after { display: none; }
+  .nx-wrap { padding-left: 1rem; padding-right: 1rem; }
+  .nx-card { box-shadow: 6px 6px 0 var(--ink); }
+  .nx-stat { flex-direction: column; gap: 0.35rem; padding: 0.9rem 0.8rem; }
+  .nx-stat b { font-size: 2.4rem; }
+  .nx-stat span { font-size: 0.62rem; }
+  .nx-stat span small { display: none; }
+  .nx-checks { grid-template-columns: 1fr; }
+  .nx-rules-col, .nx-prize { padding: 1.3rem 1.1rem 1.4rem; }
 }
 
 /* ---------- UP NEXT: to-dos + next session + updates ---------- */
@@ -788,13 +804,7 @@ table.prog tr.removed td { opacity: 0.45; }
       <a href="#resources"><i class="c-ink"></i>Resources</a>
     </div></nav>
 
-    <section class="hsec" id="nextsteps" hidden>
-      <header class="shead"><div class="shead-inner">
-        <div><span class="shead-k"><i class="c-coral"></i>After the program</span><h2>Your next steps</h2></div>
-        <p id="nxLede"></p>
-      </div></header>
-      <div class="nx-grid" id="nxGrid"></div>
-    </section>
+    <section class="nx" id="nextsteps" hidden aria-labelledby="nxTitle"></section>
 
     <section class="hsec" id="upnext">
       <header class="shead"><div class="shead-inner">
@@ -1413,35 +1423,45 @@ table.prog tr.removed td { opacity: 0.45; }
     // next steps (after the program): settings.nextSteps = { lede, survey:{url,questions,title,note,qr}, challenge:{name,start,end,count,lede,rules:[{b,s}],winners,prize} }
     (function renderNextSteps() {
       var nx = p.nextSteps, sec = $('nextsteps');
-      if (!nx || (!nx.survey && !nx.challenge)) { sec.hidden = true; $('nxNav').hidden = true; return; }
+      if (!nx || !nx.challenge) { sec.hidden = true; $('nxNav').hidden = true; return; }
       sec.hidden = false; $('nxNav').hidden = false;
-      $('nxLede').textContent = nx.lede || '';
-      var out = '', c = nx.challenge, sv = nx.survey;
-      if (c) {
-        var endT = Date.parse(c.end), startT = Date.parse(c.start);
-        var daysLeft = Math.ceil((endT - t) / 86400000);
-        var status = t < startT ? 'Starts ' + f(c.start, { weekday: 'short', month: 'short', day: 'numeric' })
-                   : t > endT ? 'Challenge closed'
-                   : daysLeft <= 1 ? 'Last day' : daysLeft + ' days left';
-        out += '<div class="nx-chal">' +
-          '<div class="nx-strip"><span class="nx-left">' + esc(c.name || 'Posting challenge') + '</span><span>' + esc(f(c.start, { month: 'short', day: 'numeric' })) + ' to ' + esc(f(c.end, { month: 'short', day: 'numeric' })) + ' &middot; ' + esc(status) + '</span></div>' +
-          '<div class="nx-top"><div class="nx-big">' + esc(String(c.count)) + ' videos<small>by ' + esc(f(c.end, { month: 'long', day: 'numeric' })) + '</small></div>' +
-          '<p>' + (c.lede || '') + '</p></div>' +
-          '<ol class="nx-rules">' + (c.rules || []).map(function (r) { return '<li><div><b>' + esc(r.b) + '</b>' + (r.s ? '<span>' + esc(r.s) + '</span>' : '') + '</div></li>'; }).join('') + '</ol>' +
-          '<div class="nx-prize"><div class="nx-n" aria-hidden="true">' + esc(String(c.winners || '')) + '</div><div><div class="nx-k">The prize</div><p>' + (c.prize || '') + '</p></div></div>' +
+      var c = nx.challenge, sv = nx.survey;
+      var endT = Date.parse(c.end), startT = Date.parse(c.start);
+      var days = Math.round((endT - startT) / 86400000);
+      var left = Math.ceil((endT - t) / 86400000);
+      var status = t < startT ? 'Starts <b>' + esc(f(c.start, { weekday: 'long', month: 'short', day: 'numeric' })) + '</b>'
+                 : t > endT ? '<b>The challenge has closed</b>'
+                 : left <= 1 ? '<b>Last day</b>' : '<b>' + left + ' days left</b>';
+      var name = c.name || 'Posting Challenge', split = name.lastIndexOf('Posting');
+      var title = split > 0 ? esc(name.slice(0, split).trim()) + ' <span>' + esc(name.slice(split)) + '</span>' : esc(name);
+      var range = esc(f(c.start, { month: 'short', day: 'numeric' })) + ' to ' + esc(f(c.end, { month: 'short', day: 'numeric' }));
+      var trophy = '<svg viewBox="0 0 24 24" fill="none" stroke="#15171A" stroke-width="2.2" stroke-linecap="square" aria-hidden="true"><path d="M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M7 6H4v2a3 3 0 0 0 3 3M17 6h3v2a3 3 0 0 1-3 3M12 14v4M8 20h8"/></svg>';
+      sec.innerHTML =
+        '<div class="nx-hero"><div class="nx-hero-in">' +
+          '<div class="nx-kick"><span class="nx-chip">Your next step</span><span class="nx-when">' + status + (t < startT ? '' : ' &middot; ' + range) + '</span></div>' +
+          '<h2 class="nx-title" id="nxTitle">' + title + '</h2>' +
+          (c.lede ? '<p class="nx-dek">' + c.lede + '</p>' : '') +
+        '</div></div>' +
+        '<div class="nx-wrap">' +
+          '<div class="nx-card">' +
+            '<div class="nx-stats">' +
+              '<div class="nx-stat s1"><b>' + esc(String(c.count)) + '</b><span>Videos to post<small>News, made for TikTok</small></span></div>' +
+              '<div class="nx-stat s2"><b>' + days + '</b><span>Days to do it<small>' + range + '</small></span></div>' +
+              '<div class="nx-stat s3"><b>' + esc(String(c.winners)) + '</b><span>Winners<small>Picked by TikTok</small></span></div>' +
+            '</div>' +
+            '<div class="nx-body">' +
+              '<div class="nx-rules-col"><h3 class="nx-h">The rules for every video</h3><ul class="nx-checks">' +
+                (c.rules || []).map(function (r) { return '<li><div><b>' + esc(r.b) + '</b>' + (r.s ? '<span>' + esc(r.s) + '</span>' : '') + '</div></li>'; }).join('') +
+              '</ul></div>' +
+              '<div class="nx-prize"><div class="nx-trophy">' + trophy + '</div><h3 class="nx-h" style="margin:0">What you can win</h3><p>' + (c.prize || '') + '</p></div>' +
+            '</div>' +
+          '</div>' +
+          (sv ? '<div class="nx-survey"><div class="nx-sn" aria-hidden="true">' + esc(String(sv.questions || '?')) + 'Q</div>' +
+            '<div><b>' + esc(sv.title || 'Tell TikTok how it went') + '</b><span>' + esc(sv.note || '') + '</span></div>' +
+            '<a class="btn btn-fill" href="' + esc(sv.url) + '" target="_blank" rel="noopener">Take the survey &nearr;</a>' +
+            (sv.qr ? '<img src="' + esc(sv.qr) + '" alt="QR code that opens the survey on your phone" width="76" height="76">' : '') +
+          '</div>' : '') +
         '</div>';
-      }
-      if (sv) {
-        out += '<div class="nx-survey">' +
-          '<div class="nx-strip"><span class="nx-left">Do this first</span><span>' + esc(String(sv.questions || '')) + (sv.questions ? ' questions' : '') + '</span></div>' +
-          '<div class="nx-sbody"><h3>' + esc(sv.title || 'Tell TikTok how it went') + '</h3>' +
-          '<p>' + esc(sv.note || '') + '</p>' +
-          '<a class="btn btn-coral" href="' + esc(sv.url) + '" target="_blank" rel="noopener">Take the survey &nearr;</a>' +
-          (sv.qr ? '<div class="nx-qr"><img src="' + esc(sv.qr) + '" alt="QR code that opens the survey" width="112" height="112"><span>On a laptop? Scan this with your phone camera to take it there.</span></div>' : '') +
-          '</div></div>';
-      }
-      $('nxGrid').innerHTML = out;
-      $('nxGrid').style.gridTemplateColumns = (c && sv) ? '' : '1fr';
     })();
 
     // up next: to-dos (pinned by staff, plus the homework that's due)

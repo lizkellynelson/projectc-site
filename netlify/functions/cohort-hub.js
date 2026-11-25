@@ -332,6 +332,8 @@ Project C`,
 //   {qa_link}     same, but opens the Q&A tab
 //   {homework}    on its own line: this week's homework with a button, or a thank-you if they've turned it in
 //   {zoom}        on its own line: their personal Zoom link
+//   {challenge}   on its own line: the posting challenge card (from settings.nextSteps.challenge)
+//   {survey}      on its own line: the feedback survey card with button and QR code (from settings.nextSteps.survey)
 const EMAIL_LINK = 'color:#B74D2F;';
 function inlineHtml(s) {
   let out = esc(s);
@@ -361,7 +363,7 @@ function renderMarkup(body, vars, blocks) {
     let i = 0;
     while (i < lines.length) {
       const line = lines[i].trim();
-      const block = line.match(/^\{(homework|zoom)\}$/);
+      const block = line.match(/^\{(homework|zoom|challenge|survey)\}$/);
       if (block) {
         const b = blocks[block[1]];
         if (b) { html.push(b.html); text.push(b.text); }
@@ -389,7 +391,7 @@ function renderMarkup(body, vars, blocks) {
       // Paragraph: this line plus any following plain lines in the same chunk.
       const para = [fill(line)];
       i++;
-      while (i < lines.length && !/^(##\s+|[-*]\s+|\{(homework|zoom)\}$|\[button:)/i.test(lines[i].trim())) { para.push(fill(lines[i].trim())); i++; }
+      while (i < lines.length && !/^(##\s+|[-*]\s+|\{(homework|zoom|challenge|survey)\}$|\[button:)/i.test(lines[i].trim())) { para.push(fill(lines[i].trim())); i++; }
       html.push(`<p style="margin:0 0 16px;">${para.map(inlineHtml).join('<br>')}</p>`);
       text.push(para.map(inlineText).join('\n'));
     }
@@ -417,6 +419,42 @@ function cohortEmail(draft, person, program, weeks, subs, magicUrl, copyNote) {
     ? { html: `<p style="margin:0 0 16px;">Your personal Zoom link works for every session. It's tied to you, so please don't share it:<br><a href="${esc(person.zoom_join_url)}" style="${EMAIL_LINK}word-break:break-all;">${esc(person.zoom_join_url)}</a></p>`,
         text: `Your personal Zoom link works for every session (please don't share it):\n${person.zoom_join_url}` }
     : { html: `<p style="margin:0 0 16px;">Your personal Zoom link is on your hub.</p>`, text: 'Your personal Zoom link is on your hub.' };
+  const nx = (program.settings && program.settings.nextSteps) || {};
+  if (nx.challenge) {
+    const c = nx.challenge;
+    const strip = (h) => String(h || '').replace(/<[^>]+>/g, '');
+    const range = fmtET(c.start, { month: 'short', day: 'numeric' }) + ' to ' + fmtET(c.end, { month: 'short', day: 'numeric' });
+    const days = Math.round((Date.parse(c.end) - Date.parse(c.start)) / 86400000);
+    const cell = (bg, n, label) => `<td width="33%" style="background:${bg};border:2px solid #15171A;padding:12px 10px;vertical-align:top;"><div style="font-family:Impact,'Arial Black',sans-serif;font-size:34px;line-height:1;color:#15171A;">${n}</div><div style="font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-top:6px;color:#15171A;">${label}</div></td>`;
+    const rules = (c.rules || []).map((r) => `<tr><td width="26" style="vertical-align:top;padding:0 0 8px;font-weight:800;">&#10003;</td><td style="padding:0 0 8px;"><strong>${esc(r.b)}</strong>${r.s ? `<br><span style="color:#5b5d60;font-size:14px;">${esc(r.s)}</span>` : ''}</td></tr>`).join('');
+    blocks.challenge = {
+      html: `<div style="border:3px solid #15171A;margin:0 0 24px;">` +
+        `<div style="background:#15171A;color:#ffffff;padding:18px 20px;"><div style="display:inline-block;background:#FFE800;color:#15171A;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;margin-bottom:10px;">${esc(range)}</div>` +
+        `<div style="font-family:Impact,'Arial Black',sans-serif;font-size:30px;line-height:1.05;text-transform:uppercase;">${esc(c.name || 'Posting Challenge')}</div></div>` +
+        `<div style="padding:18px 20px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;margin:0 0 16px;"><tr>${cell('#FFE800', esc(String(c.count)), 'Videos to post')}${cell('#ffffff', days, 'Days to do it')}${cell('#00AEEF', esc(String(c.winners)), 'Winners')}</tr></table>` +
+        `<p style="margin:0 0 10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;">The rules for every video</p>` +
+        `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 0 12px;">${rules}</table>` +
+        `<div style="background:#FBEEE9;border-left:4px solid #FF6B3D;padding:12px 14px;margin:0 0 16px;"><strong>What you can win:</strong> ${esc(strip(c.prize))}</div>` +
+        `${emailButton(hubLink, 'See the challenge on your hub')}</div></div>`,
+      text: `${(c.name || 'POSTING CHALLENGE').toUpperCase()} (${range})\n${c.count} videos, ${days} days, ${c.winners} winners.\nThe rules for every video:\n` + (c.rules || []).map((r) => '- ' + r.b + (r.s ? ': ' + r.s : '')).join('\n') + `\nWhat you can win: ${strip(c.prize)}\nSee it on your hub: ${hubLink}`,
+    };
+  }
+  if (nx.survey && nx.survey.url) {
+    const sv = nx.survey;
+    const qr = nx.survey.qrPng || (pageUrl(program.slug).replace(/\/[^/]*$/, '') + '/tiktok-cohort-survey-qr.png');
+    blocks.survey = {
+      html: `<div style="border:3px solid #15171A;margin:0 0 24px;background:#E5F7FD;padding:18px 20px;">` +
+        `<p style="margin:0 0 4px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:12px;">${sv.questions ? esc(String(sv.questions)) + ' quick questions' : 'Quick survey'}</p>` +
+        `<p style="margin:0 0 8px;font-family:Impact,'Arial Black',sans-serif;font-size:24px;line-height:1.1;text-transform:uppercase;">${esc(sv.title || 'Tell TikTok how it went')}</p>` +
+        `<p style="margin:0 0 14px;">${esc(sv.note || '')}</p>` +
+        `<a href="${esc(sv.url)}" style="display:inline-block;background:#FF6B3D;color:#15171A;text-decoration:none;font-weight:800;letter-spacing:.08em;text-transform:uppercase;font-size:13px;padding:14px 22px;border:2px solid #15171A;">Take the survey &rarr;</a>` +
+        `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:16px 0 0;border-collapse:collapse;"><tr>` +
+        `<td style="padding:6px;background:#ffffff;border:2px solid #15171A;"><img src="${esc(qr)}" width="96" height="96" alt="QR code for the survey" style="display:block;width:96px;height:96px;"></td>` +
+        `<td style="padding:0 0 0 14px;font-size:13px;color:#3d3f42;line-height:1.45;vertical-align:middle;">Reading this on a laptop?<br>Scan the code with your phone camera.</td>` +
+        `</tr></table></div>`,
+      text: `${(sv.title || 'Tell TikTok how it went').toUpperCase()}\n${sv.note || ''}\nTake the survey: ${sv.url}`,
+    };
+  }
   const vars = { first: firstName(person.name), hub_link: hubLink, qa_link: qaLink };
   const r = renderMarkup(draft.body, vars, blocks);
   const subject = String(draft.subject || '').replace(/\{first\}/g, vars.first);
